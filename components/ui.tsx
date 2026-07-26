@@ -150,7 +150,7 @@ export function Eyebrow({
   tone?: "copper" | "paper" | "slate";
 }) {
   const colour =
-    tone === "paper" ? "text-paper/60" : tone === "slate" ? "text-slate" : "text-copper";
+    tone === "paper" ? "text-copper-on-ink" : tone === "slate" ? "text-slate" : "text-copper";
   return <p className={`t-eyebrow mb-3 ${colour}`}>{children}</p>;
 }
 
@@ -192,7 +192,7 @@ export function StatBand({
   return (
     <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
       {items.map((s) => (
-        <div key={s.label} className={`border-t-2 pt-5 ${dark ? "border-copper" : "border-ink/20"}`}>
+        <div key={s.label} className={`border-t-2 pt-5 ${dark ? "border-copper-on-ink" : "border-ink/20"}`}>
           <p className={`t-num text-[2.5rem] font-medium leading-none ${dark ? "text-paper" : "text-ink"}`}>
             {s.value}
           </p>
@@ -273,7 +273,7 @@ export function TickList({
       {items.map((i) => (
         <li key={i} className="flex items-start gap-3">
           <Tick
-            className={`mt-1 h-4 w-4 shrink-0 ${tone === "paper" ? "text-copper-bright" : "text-copper"}`}
+            className={`mt-1 h-4 w-4 shrink-0 ${tone === "paper" ? "text-copper-on-ink" : "text-copper"}`}
           />
           <span className={tone === "paper" ? "text-paper/85" : "text-ink"}>{i}</span>
         </li>

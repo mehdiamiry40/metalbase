@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/sustainability",
     "/locations",
     "/about",
-    "/insights",
     "/contact",
     "/legal",
   ];

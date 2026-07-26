@@ -440,29 +440,3 @@ export const locations: Location[] = [];
    ------------------------------------------------------------------ */
 
 export const stats: { value: string; label: string }[] = [];
-
-/* ------------------------------ insights ---------------------------- */
-
-export const insights = [
-  {
-    tag: "Market",
-    title: "What a softening copper price means for your quarterly rebate",
-    excerpt:
-      "How index movement flows through to yard rates in Brisbane, and why segregation matters more when the market is flat.",
-    href: "/insights",
-  },
-  {
-    tag: "Compliance",
-    title: "The paperwork your waste management plan actually needs",
-    excerpt:
-      "Green Star and Infrastructure Sustainability submissions get knocked back for the same few gaps. A checklist for site managers.",
-    href: "/insights",
-  },
-  {
-    tag: "Operations",
-    title: "Five metres of separation that changed a fabricator's return",
-    excerpt:
-      "Moving four bins and relabelling them. No capital, no new process, a materially better cheque.",
-    href: "/insights",
-  },
-];

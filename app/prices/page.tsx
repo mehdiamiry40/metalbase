@@ -35,14 +35,7 @@ const grading = [
   },
 ];
 
-export default async function PricesPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ grade?: string }>;
-}) {
-  const { grade } = await searchParams;
-  const selected = grade?.toLowerCase();
-
+export default function PricesPage() {
   return (
     <>
       <PageHeader
@@ -101,12 +94,8 @@ export default async function PricesPage({
             </thead>
             <tbody>
               {group.rows.map((r) => {
-                const hit = selected === r.grade.toLowerCase();
                 return (
-                  <tr
-                    key={r.grade}
-                    className={`border-b border-line ${hit ? "bg-copper/10" : ""}`}
-                  >
+                  <tr key={r.grade} className="border-b border-line">
                     <td className="py-5 pr-6 align-top">
                       <p className="text-[1.05rem] font-semibold">{r.grade}</p>
                       <p className="mt-1 text-[0.9rem] text-slate md:hidden">{r.spec}</p>

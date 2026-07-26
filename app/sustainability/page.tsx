@@ -97,7 +97,7 @@ export default function SustainabilityPage() {
             authority.
           </p>
           <div className="mt-8 border-2 border-dashed border-white/25 p-7">
-            <p className="t-eyebrow text-copper-bright">Not yet published</p>
+            <p className="t-eyebrow text-copper-on-ink">Not yet published</p>
             <p className="mt-3 text-[0.98rem] leading-relaxed text-paper/70">
               Licence numbers, environmental authority references and any
               management-system certifications will be listed here once issued.

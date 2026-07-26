@@ -10,7 +10,7 @@ import {
   StatBand,
   TickList,
 } from "@/components/ui";
-import { company, insights, priceGroups, services, stats } from "@/lib/site";
+import { company, priceGroups, services, stats } from "@/lib/site";
 
 const gradeCount = priceGroups.reduce((n, g) => n + g.rows.length, 0);
 
@@ -33,14 +33,14 @@ export default function Home() {
             sizes="100vw"
             alt="A material handler working a pile of mixed scrap steel at a recycling yard"
           />
-          <span aria-hidden="true" className="absolute inset-0 bg-ink/78" />
+          <span aria-hidden="true" className="absolute inset-0 bg-ink/85" />
         </div>
 
         <div className="shell py-20 lg:py-28">
           <div className="max-w-3xl">
             <Eyebrow tone="paper">Scrap metal recycling · Brisbane</Eyebrow>
             <h1>Your metal is worth more than the bin it&rsquo;s sitting in</h1>
-            <p className="t-lead mt-6 max-w-xl text-paper/75">
+            <p className="t-lead mt-6 max-w-xl text-paper">
               {company.name} buys, processes and remarkets ferrous and
               non-ferrous scrap across greater Brisbane. Graded in front of you,
               weighed on a certified bridge, paid by EFT.
@@ -51,7 +51,7 @@ export default function Home() {
                 See what we buy
               </Button>
             </div>
-            <p className="mt-7 text-[0.9rem] text-paper/55">
+            <p className="mt-7 text-[0.9rem] text-paper/85">
               No minimum load · Graded before it&rsquo;s tipped · Paid by EFT, never cash
             </p>
           </div>
@@ -187,36 +187,6 @@ export default function Home() {
         </div>
       </Split>
 
-      {/* ------------------------------------------------------- insights */}
-      <section className="bg-paper-deep py-16 lg:py-24">
-        <div className="shell">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div className="rule">
-              <h2>Notes from the weighbridge</h2>
-            </div>
-            <ArrowLink href="/insights">All insights</ArrowLink>
-          </div>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {insights.map((post, i) => (
-              <Link key={post.title} href={post.href} className="group block">
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <Photo
-                    name={(["mixed-parts", "stainless", "swarf"] as const)[i]}
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </div>
-                <p className="t-eyebrow mt-5 text-copper">{post.tag}</p>
-                <h3 className="mt-2 text-[1.2rem] group-hover:text-copper">
-                  {post.title}
-                </h3>
-                <p className="mt-2.5 text-[0.95rem] leading-relaxed text-slate">
-                  {post.excerpt}
-                </p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <CtaBand
         title="Tell us what you've got and we'll price it"

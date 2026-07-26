@@ -24,10 +24,18 @@
   --color-paper-deep: #e8e3d8; /* subtle banding on paper */
 
   /* Accent — copper, the highest-value metal over the weighbridge.
-     Darkened from the first pass: #b2542f only reached 4.39:1 on paper,
-     which fails WCAG AA for body-size text. These clear it. */
+     ONE accent needs TWO values, because a copper dark enough to pass
+     on paper is far too dark to pass on ink. Verified with axe:
+     --copper on ink measured 3.07:1 across 18 nodes.
+
+       on paper → --color-copper        5.2:1
+       on ink   → --color-copper-on-ink 5.7:1
+
+     Use `text-copper` on light surfaces and `text-copper-on-ink` on
+     dark ones. Never the other way round. */
   --color-copper: #a34a28; /* 5.2:1 on paper · 5.9:1 white-on-copper */
-  --color-copper-bright: #bd5730; /* hover · 4.6:1 white-on-copper */
+  --color-copper-bright: #bd5730; /* hover fill · 4.6:1 white-on-copper */
+  --color-copper-on-ink: #d9773f; /* 5.7:1 on ink · do not use on paper */
 
   /* text */
   --color-slate: #5c636e;
@@ -201,16 +209,8 @@
   margin-bottom: 1.25rem;
 }
 
-.mega:hover > .mega-panel,
-.mega:focus-within > .mega-panel {
-  opacity: 1;
-  visibility: visible;
-}
-
-.mega-panel {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.15s ease, visibility 0.15s;
+.on-ink .rule::before {
+  background: var(--color-copper-on-ink);
 }
 
 @media (prefers-reduced-motion: reduce) {
