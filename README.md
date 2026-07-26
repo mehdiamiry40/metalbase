@@ -1,110 +1,121 @@
 # MetalBase — scrap metal recycling, Brisbane
 
-Next.js 15 marketing site built to the Randstad Australia design system.
+Next.js 15 marketing site. App Router, TypeScript, Tailwind v4.
 
 ```bash
 npm install
 npm run dev        # http://localhost:3000
 ```
 
-Node 18.18+. Verified on Node 22 — clean `next build`, 19 routes.
+Node 18.18+. Verified on Node 22 — clean `next build`, 22 routes.
 
-## Security
+## ⚠️ Before this goes live
 
-Pinned to `next@15.5.22` to remediate React2Shell (CVE-2025-55182 /
-CVE-2025-66478, CVSS 10.0) and the related RSC advisories, plus `sharp` and
-`postcss` overrides for two vulnerable packages Next.js still vendors.
-`npm audit`: 0 vulnerabilities. See [SECURITY.md](./SECURITY.md) before
-upgrading Next.js — the overrides need re-checking each time.
+This site is **not launch-ready**, deliberately. `LAUNCH_READY` in
+`lib/site.ts` is `false` and several values are `null`.
 
-## The design system
+An earlier version carried an invented ABN, an invented Queensland second-hand
+dealer licence number, invented ISO/ERA certifications, invented staff, invented
+tonnage claims and 29 invented prices. On a live commercial site those are not
+placeholder copy — they are false representations, and holding out that you are
+a licensed second-hand dealer when you are not is an offence under the
+**Second-hand Dealers and Pawnbrokers Act 2003 (Qld)**.
 
-Version one of this build was guessed from a text scrape and got the fundamentals
-wrong. These values are now measured directly off randstad.com.au with
-`getComputedStyle`:
+They have been removed. Nothing invents a number on your behalf. Fill in:
+
+| Where | What |
+|---|---|
+| `company` in `lib/site.ts` | ABN, licence number, phone, email, address |
+| `locations` | Yard addresses and hours (currently empty → page shows an honest "not yet published" panel) |
+| `stats` | Any figure you can defend (currently empty → the band doesn't render) |
+| `priceGroups` | Real rates, then set `PUBLISH_RATES = true` |
+| `/legal` | Draft wording — have a lawyer review it |
+
+Unfilled values render as a dashed "to be confirmed" chip rather than silently
+disappearing, so you can see what's outstanding.
+
+## Design system
+
+Built for MetalBase, not borrowed. The previous version copied Randstad's navy
+`#0F1941`, blue `#2175D9`, cream, and their lowercase-heading-with-a-full-stop
+mannerism. All three are gone.
 
 | Token | Value |
 |---|---|
-| Page background | `#F7F5F0` — warm cream, not white |
-| Navy | `#0F1941` |
-| Blue | `#2175D9` |
-| Muted text | `#656C85` |
-| Display type | **weight 400**, `-0.05em` tracking, 1.0 leading |
-| h1 / hero | 60px |
-| h2 | 40px |
-| Eyebrow | 26px lowercase — an oversized label, not a small tracked-out cap |
-| Buttons | 18px, weight 400, 4px radius, 2px border, 30px side padding |
-| Content column | 1088px |
+| Ink | `#14171A` — near-black steel, dark sections |
+| Paper | `#F4F1EA` — warm off-white, default surface |
+| Copper | `#A34A28` — single accent, 5.2:1 on paper |
+| Slate | `#5C636E` — muted text, 5.05:1 on paper |
+| Display | Archivo, weight 500, `-0.03em`, **sentence case** |
+| Buttons | 2px radius, solid or 2px outline |
 
-Three colours, no shadows, no pill buttons, no rounded cards. Headings are
-lowercase and end in a full stop. The dominant layout unit is a **full-bleed
-50/50 split** — colour block on one half, edge-to-edge photograph on the other.
+Three colours. No drop shadows, no rounded cards, no hover lifts. The dominant
+layout unit is a full-bleed 50/50 split. Everything composes from
+`components/sections.tsx` so pages can't drift apart.
 
-Graphik is licensed, so the site uses **Hanken Grotesk** — the closest free
-match for a low-contrast humanist grotesque that holds up at 60px with tight
-tracking. Swap it in `app/layout.tsx` and `--font-sans` if you license Graphik.
+**Base styles live in `@layer base`.** Tailwind v4 emits utilities inside a
+cascade layer, and unlayered rules beat layered ones regardless of specificity —
+an unlayered `h2 { font-size }` silently overrides every `text-[…]` utility.
+Keep new element rules inside the layer.
+
+## Enquiry form
+
+`components/QuoteForm.tsx` → `POST /api/enquiry`. Server-side validation,
+honeypot, per-instance rate limiting. Delivery is configured by environment:
+
+```bash
+RESEND_API_KEY=...        # + ENQUIRY_TO, optionally ENQUIRY_FROM
+# or
+ENQUIRY_WEBHOOK_URL=...   # Zapier, Make, CRM
+```
+
+With neither set the endpoint returns `delivered: false` and the UI tells the
+user their enquiry was logged but not sent, and to phone instead. It never
+pretends an enquiry got through.
+
+The rate limiter is per-instance memory only — put Vercel Firewall or Upstash in
+front if this gets real traffic.
 
 ## Photography
 
-`lib/photos.ts` is the manifest: 14 free-licence Unsplash photos, keyed, with
-credits and alt text.
-
-By default they load from the Unsplash CDN. To vendor them locally:
+`lib/photos.ts` — 14 free-licence Unsplash photos, keyed, with credits and alt
+text. Served from the Unsplash CDN by default.
 
 ```bash
-npm run photos              # downloads into public/photos
+npm run photos            # download into public/photos
 # then set USE_LOCAL = true in lib/photos.ts
 ```
 
-To use your own yard photography, keep the keys and drop your files in
-`public/photos/<key>.jpg` with `USE_LOCAL = true`.
+For your own yard photography, keep the keys and drop files in
+`public/photos/<key>.jpg`.
 
 Credits: Yasin Hemmati, Zoshua Colah, Load It Up Dumpster Rental, Daniel Fazio,
 Karthik Srinivas, Jessica Palomo, Pop & Zebra, Jay Alexander, Elena Mozhvilo,
-Harry Dona, Johnny Sanchez, Evan Demicoli, Pavel Neznanov. Unsplash licence —
-free for commercial use, attribution appreciated. Photo pages are listed in the
-manifest.
+Harry Dona, Johnny Sanchez, Evan Demicoli, Pavel Neznanov.
 
-## Status
+## SEO & accessibility
 
-**The homepage is rebuilt to the corrected spec.** The other eleven pages pick
-up the new tokens automatically (cream background, light type, square buttons,
-real photography) but still carry version-one layout in places — rounded cards,
-drop shadows, hover lifts. They need the same treatment as the homepage: strip
-the cards, go to full-bleed splits.
+- `RecyclingCenter` JSON-LD in `app/layout.tsx`, which **omits** fields with no
+  real value rather than inventing them
+- Favicon and OG image generated at build (`app/icon.tsx`, `app/opengraph-image.tsx`)
+- `sitemap.xml`, `robots.txt`
+- Skip link, visible focus rings on both surfaces, labelled form controls with
+  `aria-invalid` / `aria-describedby`, `prefers-reduced-motion` respected
+- Body text and accent both clear WCAG AA on paper
 
-`components/Scene.tsx` is a shim that maps the old illustration names onto
-photographs so those pages keep working. New work should use
-`<Photo name="..." />` directly.
+## Security
 
-## Pages
+Pinned to `next@15.5.22` (React2Shell — CVE-2025-55182 / CVE-2025-66478) plus
+`sharp` and `postcss` overrides. `npm audit`: 0 vulnerabilities. See
+[SECURITY.md](./SECURITY.md) before upgrading Next.js.
 
-| Route | |
-|---|---|
-| `/` | **rebuilt** — navy hero + lookup, price-board split, audience cards, blue materials split, rate table, stats, sustainability split, testimonial, insights |
-| `/what-we-buy` | Non-ferrous / ferrous / specialty streams, prep guide, excluded materials |
-| `/prices` | 29-grade board, grading process, contract pricing, plain-English fine print |
-| `/services` + `/services/[slug]` | Four service models (SSG) |
-| `/sustainability` | Diversion reporting, Scope 3, certificates of destruction, ISO, 2030 targets |
-| `/locations` | Four yards, weigh-in walkthrough, ID, why QLD prohibits cash |
-| `/about` | Timeline, principles, safety, leadership, careers |
-| `/contact` | Quote form (client-side only) |
-| `/insights`, `/legal`, 404, `sitemap.xml`, `robots.txt` | |
+## Structure
 
-## Editing content
+```
+app/            routes; api/enquiry is the form endpoint
+components/     ui.tsx (primitives) · sections.tsx (page furniture)
+lib/site.ts     all content — nav, grades, services, company details
+lib/photos.ts   photo manifest
+```
 
-Nearly everything lives in **`lib/site.ts`** — navigation, the price board,
-service copy, yard addresses, stats. Company details are in the `company`
-object at the top.
-
-## Before you go live
-
-1. **Every number is invented** — the 29 rates, ABN, licence number, addresses,
-   phone, staff names, certifications, the 182,000 t figure.
-2. **The quote form does nothing.** Wire `components/QuoteForm.tsx` to a route
-   handler, email service or CRM.
-3. **Legal copy needs a lawyer**, particularly the terms of trade and the
-   Second-hand Dealers and Pawnbrokers Act references.
-4. **Randstad's blue, navy and layout are their brand assets.** This is a close
-   reproduction. Shift the palette and commission a wordmark before launching.
-5. Add analytics, a favicon and OG images — `app/layout.tsx` has the scaffolding.
+Almost all copy lives in `lib/site.ts`. Change it there and every page follows.

@@ -1,124 +1,143 @@
 @import "tailwindcss";
 
 /* ==================================================================
-   MetalBase design tokens
+   MetalBase design system
 
-   Measured directly off randstad.com.au rather than eyeballed:
-     page background  rgb(247,245,240)  warm cream
-     navy             rgb(15,25,65)
-     blue             rgb(33,117,217)
-     muted text       rgb(101,108,133)
-     h2 60px / 400 weight / -3px tracking / 60px leading
-     buttons 18px / 400 weight / 4px radius / 2px border / 30px x-pad
+   Deliberately NOT Randstad. The previous version copied their navy
+   (#0F1941), blue (#2175D9), cream, and the lowercase-heading-with-a-
+   full-stop mannerism. All three are gone:
 
-   Three colours. No shadows. No pills. Headings are light, huge,
-   very tightly tracked, lowercase, and end in a full stop.
+     - palette moved to steel / copper / warm paper
+     - display type is a squarer industrial grotesque at weight 500,
+       not a light humanist face at 400
+     - headings are sentence case, no trailing full stops
+
+   What was kept is craft, not brand: tight display tracking, a strict
+   three-colour discipline, no drop shadows, full-bleed splits.
    ================================================================== */
 
 @theme {
-  --color-cream: #f7f5f0;
-  --color-navy: #0f1941;
-  --color-blue: #2175d9;
-  --color-blue-dark: #1a5cae;
-  --color-muted: #656c85;
-  --color-line: #dcd8d0;
-  --color-line-navy: rgba(255, 255, 255, 0.18);
+  /* surfaces */
+  --color-ink: #14171a; /* near-black steel — dark sections */
+  --color-ink-soft: #22272c; /* raised panels on ink */
+  --color-paper: #f4f1ea; /* warm off-white — default page */
+  --color-paper-deep: #e8e3d8; /* subtle banding on paper */
 
-  --font-sans: "Hanken Grotesk", "Graphik", -apple-system,
-    BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  /* Accent — copper, the highest-value metal over the weighbridge.
+     Darkened from the first pass: #b2542f only reached 4.39:1 on paper,
+     which fails WCAG AA for body-size text. These clear it. */
+  --color-copper: #a34a28; /* 5.2:1 on paper · 5.9:1 white-on-copper */
+  --color-copper-bright: #bd5730; /* hover · 4.6:1 white-on-copper */
+
+  /* text */
+  --color-slate: #5c636e;
+  --color-line: #d9d3c7;
+  --color-line-ink: rgba(255, 255, 255, 0.14);
+
+  --font-sans: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Helvetica, Arial, sans-serif;
 }
 
 /* ------------------------------------------------------------------
    base
+
+   These MUST live in @layer base. Tailwind v4 emits utilities inside
+   a cascade layer, and unlayered rules beat layered ones regardless of
+   specificity — so an unlayered `h2 { font-size }` silently overrides
+   every `text-[…]` utility on an h2. Layering restores normal
+   precedence so per-element overrides work.
    ------------------------------------------------------------------ */
 
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-copper);
+    color: #fff;
+  }
+
+  /* Visible on every interactive element, on both surfaces. */
+  :focus-visible {
+    outline: 3px solid var(--color-copper);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .on-ink :focus-visible {
+    outline-color: #fff;
+  }
+
+  /* type — industrial grotesque, weight 500, sentence case */
+  h1 {
+    font-size: clamp(2.35rem, 1.5rem + 3.4vw, 3.5rem);
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -0.032em;
+    text-wrap: balance;
+  }
+
+  h2 {
+    font-size: clamp(1.85rem, 1.4rem + 1.8vw, 2.4rem);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.028em;
+    text-wrap: balance;
+  }
+
+  h3 {
+    font-size: 1.375rem;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  h4 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
 }
 
-body {
-  background: var(--color-cream);
-  color: var(--color-navy);
-  font-family: var(--font-sans);
-  font-size: 18px;
-  line-height: 1.56;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-}
-
-::selection {
-  background: var(--color-navy);
-  color: #fff;
-}
-
-:focus-visible {
-  outline: 2px solid var(--color-blue);
-  outline-offset: 3px;
-}
-
-/* ------------------------------------------------------------------
-   type scale — all display type is weight 400 and tightly tracked
-   ------------------------------------------------------------------ */
-
-h1,
-.t-hero {
-  font-size: clamp(2.5rem, 1.6rem + 3.6vw, 3.75rem); /* → 60px */
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -0.05em;
-}
-
-h2,
-.t-h2 {
-  font-size: clamp(2rem, 1.5rem + 2vw, 2.5rem); /* → 40px */
-  font-weight: 400;
-  line-height: 1.125;
-  letter-spacing: -0.05em;
-}
-
-h3,
-.t-h3 {
-  font-size: 1.625rem; /* 26px */
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: -0.038em;
-}
-
-h4,
-.t-h4 {
-  font-size: 1.25rem;
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
-}
-
-/* the oversized lowercase label that sits above a heading */
+/* Small tracked-out label. Distinct from Randstad's oversized eyebrow. */
 .t-eyebrow {
-  font-size: 1.625rem;
-  font-weight: 400;
-  line-height: 1.2;
-  letter-spacing: -0.038em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .t-lead {
-  font-size: 1.125rem;
-  line-height: 1.62;
+  font-size: 1.0625rem;
+  line-height: 1.65;
 }
 
-.t-small {
-  font-size: 0.875rem;
-  line-height: 1.5;
+/* Tabular figures for the price board so columns align. */
+.t-num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  letter-spacing: -0.03em;
 }
 
 /* ------------------------------------------------------------------
-   layout — content sits in a 1088px column with a 213px gutter at
-   1512px wide, matching randstad. full-bleed panels align their copy
-   to the same gutter.
+   layout
    ------------------------------------------------------------------ */
 
 :root {
-  --shell: 1088px;
+  --shell: 1140px;
   --gutter: max(1.25rem, calc((100vw - var(--shell)) / 2));
 }
 
@@ -129,38 +148,35 @@ h4,
   padding-inline: 1.25rem;
 }
 
-@media (min-width: 1180px) {
+@media (min-width: 1240px) {
   .shell {
     padding-inline: 0;
   }
 }
 
-/* copy block inside the left half of a full-bleed 50/50 split */
+/* Copy column inside one half of a full-bleed 50/50 split, aligned to
+   the same gutter as .shell so nothing looks off-grid. */
 .split-l {
   padding-left: var(--gutter);
   padding-right: 1.25rem;
 }
 
-@media (min-width: 1024px) {
-  .split-l {
-    padding-right: 4.5rem;
-  }
-}
-
-/* copy block inside the right half */
 .split-r {
   padding-right: var(--gutter);
   padding-left: 1.25rem;
 }
 
 @media (min-width: 1024px) {
+  .split-l {
+    padding-right: 4rem;
+  }
   .split-r {
-    padding-left: 4.5rem;
+    padding-left: 4rem;
   }
 }
 
 /* ------------------------------------------------------------------
-   links
+   components
    ------------------------------------------------------------------ */
 
 .u-link {
@@ -175,7 +191,16 @@ h4,
   background-size: 100% 1px;
 }
 
-/* header dropdown */
+/* A short copper rule used to open a section. */
+.rule::before {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  background: var(--color-copper);
+  margin-bottom: 1.25rem;
+}
+
 .mega:hover > .mega-panel,
 .mega:focus-within > .mega-panel {
   opacity: 1;

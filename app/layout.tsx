@@ -2,33 +2,78 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { company, locations } from "@/lib/site";
+
+const SITE = "https://metalbase.vercel.app";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.metalbase.com.au"),
+  metadataBase: new URL(SITE),
   title: {
-    default: "MetalBase | Scrap Metal Recycling Brisbane",
+    default: "MetalBase | Scrap Metal Recycling, Brisbane",
     template: "%s | MetalBase",
   },
   description:
-    "MetalBase buys, processes and remarkets scrap metal across Brisbane. Four yards, certified weighbridges, index-linked pricing, EFT payment within one business day.",
+    "MetalBase buys, processes and remarkets ferrous and non-ferrous scrap across Brisbane. Graded in front of you, weighed on a certified bridge, paid by EFT.",
   keywords: [
     "scrap metal Brisbane",
-    "scrap metal prices Brisbane",
+    "metal recycling Brisbane",
     "copper prices Brisbane",
-    "metal recycling Queensland",
+    "scrap metal Queensland",
     "skip bin hire scrap Brisbane",
     "demolition steel buy-back",
   ],
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_AU",
     siteName: "MetalBase",
-    title: "MetalBase | Scrap Metal Recycling Brisbane",
+    url: SITE,
+    title: "MetalBase | Scrap Metal Recycling, Brisbane",
     description:
-      "Four Brisbane yards. Certified weighbridges. Index-linked rates paid by EFT within one business day.",
+      "Ferrous and non-ferrous scrap bought, processed and remarketed across greater Brisbane.",
   },
+  twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
 };
+
+/**
+ * LocalBusiness structured data. Fields that have no real value are
+ * omitted rather than filled with a plausible-looking invention —
+ * Google penalises structured data that contradicts the page.
+ */
+function structuredData() {
+  const data: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "RecyclingCenter",
+    name: company.name,
+    legalName: company.legal,
+    url: SITE,
+    description:
+      "Ferrous and non-ferrous scrap metal recycling across greater Brisbane.",
+    areaServed: { "@type": "City", name: "Brisbane" },
+  };
+  if (company.phone) data.telephone = company.phone;
+  if (company.email) data.email = company.email;
+  if (company.head) {
+    data.address = {
+      "@type": "PostalAddress",
+      streetAddress: company.head,
+      addressLocality: "Brisbane",
+      addressRegion: "QLD",
+      addressCountry: "AU",
+    };
+  }
+  if (locations.length) {
+    data.location = locations
+      .filter((l) => l.address)
+      .map((l) => ({
+        "@type": "Place",
+        name: l.name,
+        address: { "@type": "PostalAddress", streetAddress: l.address },
+      }));
+  }
+  return data;
+}
 
 export default function RootLayout({
   children,
@@ -39,25 +84,24 @@ export default function RootLayout({
     <html lang="en-AU">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        {/* Randstad sets everything in Graphik, which is licensed.
-            Hanken Grotesk is the closest free match: same low-contrast
-            humanist grotesque, holds up at 60px with tight tracking. */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap"
           rel="stylesheet"
+        />
+        <meta name="theme-color" content="#14171a" />
+        <script
+          type="application/ld+json"
+          // Serialised from a typed object above; no user input reaches this.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData()) }}
         />
       </head>
       <body>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-navy focus:px-5 focus:py-3 focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-copper focus:px-5 focus:py-3 focus:font-semibold focus:text-white"
         >
-          skip to content
+          Skip to content
         </a>
         <Header />
         <main id="main">{children}</main>

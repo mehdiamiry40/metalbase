@@ -1,18 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import PageHero from "@/components/PageHero";
-import Scene from "@/components/Scene";
-import {
-  ArrowLink,
-  Button,
-  Chevron,
-  CtaBand,
-  Eyebrow,
-  Section,
-  SectionHead,
-  StatBand,
-} from "@/components/ui";
+import { DefinitionRows, PageHeader, Split, Steps } from "@/components/sections";
+import { ArrowRight, Button, CtaBand, Section } from "@/components/ui";
 import { services } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -28,28 +18,16 @@ export async function generateMetadata({
   const service = services.find((s) => s.slug === slug);
   if (!service) return { title: "Service not found" };
   return {
-    title: `${service.title.replace(/\b\w/g, (c) => c.toUpperCase())} — Brisbane`,
+    title: `${service.title} — Brisbane`,
     description: service.blurb.slice(0, 155),
   };
 }
 
-const process = [
-  {
-    t: "site walk",
-    b: "we look at where the metal is actually generated, not where the bin currently sits.",
-  },
-  {
-    t: "written proposal",
-    b: "bin plan, swap frequency, indicative rates and the reporting you'll receive.",
-  },
-  {
-    t: "equipment on site",
-    b: "bins and signage delivered, crews inducted, first collection scheduled.",
-  },
-  {
-    t: "monthly reconciliation",
-    b: "tonnage by grade against the index, rebate paid on a fixed day.",
-  },
+const onboarding = [
+  { title: "Site walk", body: "We look at where the metal is actually generated, not where the bin currently sits." },
+  { title: "Written proposal", body: "Bin plan, swap frequency, indicative rates and the reporting you'll receive." },
+  { title: "Equipment on site", body: "Bins and signage delivered, crews inducted, first collection scheduled." },
+  { title: "Reconciliation", body: "Tonnage by grade against the index, rebate paid on a fixed day." },
 ];
 
 export default async function ServiceDetail({
@@ -65,126 +43,74 @@ export default async function ServiceDetail({
 
   return (
     <>
-      <PageHero
+      <PageHeader
         eyebrow={service.audience}
         title={service.title}
         intro={service.blurb}
-        scene={service.scene}
         trail={[
-          { label: "home", href: "/" },
-          { label: "for business", href: "/services" },
+          { label: "Home", href: "/" },
+          { label: "For business", href: "/services" },
           { label: service.title },
         ]}
       >
-        <div className="flex flex-wrap gap-3">
-          <Button href="/contact">request a quote</Button>
-          <Button href="/prices" variant="outline">
-            today&apos;s rates
+        <div className="flex flex-wrap gap-4">
+          <Button href="/contact">Request a quote</Button>
+          <Button href="/prices" variant="outlinePaper">
+            Rate board
           </Button>
         </div>
-      </PageHero>
+      </PageHeader>
 
-      {/* stats -------------------------------------------------------- */}
-      <div className="bg-white pt-14">
-        <div className="shell">
-          <StatBand
-            items={service.stats.map((s) => ({
-              value: s.value,
-              label: s.label,
-            }))}
-            tone="sky"
-          />
-        </div>
-      </div>
+      <Split
+        photo={service.photo}
+        side="right"
+        tone="paper"
+        eyebrow="What you get"
+        title="How it works in practice"
+        priority
+      >
+        <p className="t-lead mt-5">
+          Every arrangement is written down before it starts — what turns up,
+          how often, what it&rsquo;s worth and what you receive on paper.
+        </p>
+      </Split>
 
-      {/* detail ------------------------------------------------------- */}
-      <Section>
-        <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
-          <div className="lg:sticky lg:top-32">
-            <Eyebrow>what you get</Eyebrow>
-            <h2 className="text-[1.8rem] lg:text-[2.3rem]">
-              how it works in practice
-            </h2>
-            <div
-              className="mt-6 h-1.5 w-24 rounded-full"
-              style={{ background: service.accent }}
-            />
-            <p className="mt-6 text-[1rem] leading-relaxed text-muted">
-              every arrangement is written down before it starts — what turns
-              up, how often, what it&apos;s worth and what you receive on paper.
-            </p>
-            <div className="mt-7">
-              <ArrowLink href="/contact">talk to the trade desk</ArrowLink>
-            </div>
-          </div>
-
-          <div className="space-y-8">
-            {service.points.map((p, i) => (
-              <div
-                key={p.title}
-                className="border-l-4 pl-7"
-                style={{ borderColor: service.accent }}
-              >
-                <p className="text-[0.78rem] font-bold uppercase tracking-[0.16em] text-muted">
-                  {String(i + 1).padStart(2, "0")}
-                </p>
-                <h3 className="mt-2 text-[1.4rem] leading-snug">{p.title}</h3>
-                <p className="mt-3 text-[1rem] leading-relaxed text-muted">
-                  {p.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* process ------------------------------------------------------ */}
-      <Section tone="navy">
-        <SectionHead
-          eyebrow="onboarding"
-          title="from first call to first rebate"
-          intro="usually two to three weeks, faster if the site is already segregated."
-          tone="white"
+      <Section className="!pt-0">
+        <DefinitionRows
+          items={service.points.map((p) => ({ term: p.title, detail: p.body }))}
         />
-        <ol className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {process.map((p, i) => (
-            <li key={p.t} className="rounded-2xl bg-white/[0.06] p-7">
-              <span className="text-[2rem] font-bold leading-none text-amber">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-4 !text-white text-[1.2rem]">{p.t}</h3>
-              <p className="mt-3 text-[0.93rem] leading-relaxed text-white/75">
-                {p.b}
-              </p>
-            </li>
-          ))}
-        </ol>
       </Section>
 
-      {/* other services ----------------------------------------------- */}
-      <Section tone="sky">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
-          <h2 className="text-[1.8rem] lg:text-[2.4rem]">other services</h2>
-          <ArrowLink href="/services">all services</ArrowLink>
+      <section className="on-ink bg-ink py-16 text-paper lg:py-24">
+        <div className="shell">
+          <div className="rule max-w-3xl">
+            <h2>From first call to first rebate</h2>
+            <p className="t-lead mt-5 text-paper/70">
+              Usually two to three weeks, faster if the site is already
+              segregated.
+            </p>
+          </div>
+          <div className="mt-12">
+            <Steps items={onboarding} tone="paper" />
+          </div>
         </div>
-        <div className="grid gap-6 md:grid-cols-3">
+      </section>
+
+      <Section tone="deep">
+        <h2 className="rule">Other services</h2>
+        <div className="mt-8 divide-y divide-line border-y border-line">
           {others.map((o) => (
             <Link
               key={o.slug}
               href={`/services/${o.slug}`}
-              className="group flex flex-col overflow-hidden rounded-2xl bg-white transition hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(15,25,65,0.6)]"
+              className="group grid gap-3 py-7 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-12"
             >
-              <div className="relative aspect-[16/9] overflow-hidden">
-                <Scene name={o.scene} />
-              </div>
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="text-[1.25rem]">{o.title}</h3>
-                <p className="mt-3 flex-1 text-[0.92rem] leading-relaxed text-muted">
-                  {o.blurb.split(".")[0]}.
-                </p>
-                <span className="mt-5 inline-flex items-center gap-2 text-[0.9rem] font-bold lowercase text-navy">
-                  <Chevron className="h-4 w-4 text-blue transition-transform group-hover:translate-x-1" />
-                  learn more
+              <h3 className="group-hover:text-copper">{o.title}</h3>
+              <div>
+                <p className="text-slate">{o.blurb}</p>
+                <span className="mt-3 inline-flex items-center gap-2 text-[0.94rem] font-semibold">
+                  Read more
+                  <ArrowRight className="h-4 w-4 text-copper transition-transform group-hover:translate-x-1" />
                 </span>
               </div>
             </Link>
@@ -193,10 +119,10 @@ export default async function ServiceDetail({
       </Section>
 
       <CtaBand
-        title={`ready to talk about ${service.title}?`}
-        body="send through your site details and rough volumes. we'll come back inside one business day with a written proposal and indicative rates."
-        primary={{ label: "request a quote", href: "/contact" }}
-        secondary={{ label: "call 1300 metal b", href: "tel:1300638252" }}
+        title={`Ready to talk about ${service.title.toLowerCase()}?`}
+        body="Send through your site details and rough volumes. We'll come back inside one business day with a written proposal and indicative rates."
+        primary={{ label: "Request a quote", href: "/contact" }}
+        secondary={{ label: "All services", href: "/services" }}
       />
     </>
   );

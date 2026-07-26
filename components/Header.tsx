@@ -5,71 +5,67 @@ import { useState } from "react";
 import { company, nav } from "@/lib/site";
 import { ArrowLink, Chevron, Logo } from "@/components/ui";
 
+const blurbs: Record<string, string> = {
+  "What we buy":
+    "Ferrous, non-ferrous and specialty streams, graded on arrival and priced against the index.",
+  "For business":
+    "Bins, collections and buy-back for sites that generate metal on a schedule.",
+  "Sell your scrap":
+    "No minimum load, graded in front of you, paid by EFT.",
+  Sustainability:
+    "The reporting, certificates and audit evidence procurement teams ask for.",
+  About: "Who we are and how the yards run.",
+};
+
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [section, setSection] = useState<string | null>(null);
 
   return (
-    <header className="sticky top-0 z-50 bg-white">
-      {/* utility strip — small, grey, right aligned */}
-      <div className="hidden bg-white pt-3 lg:block">
-        <div className="shell flex justify-end gap-7 text-[0.75rem] text-muted">
-          <Link href="/prices" className="u-link hover:text-navy">
-            price board · {company.priceDate}
-          </Link>
-          <Link href="/legal" className="u-link hover:text-navy">
-            terms of trade
-          </Link>
-          <Link href="/contact" className="u-link hover:text-navy">
-            contact us
-          </Link>
-        </div>
-      </div>
-
-      {/* main bar */}
-      <div className="bg-white">
-        <div className="shell flex h-[68px] items-center justify-between gap-8">
+    <header className="sticky top-0 z-50 bg-paper">
+      <div className="border-b border-line bg-paper">
+        <div className="shell flex h-[70px] items-center justify-between gap-8">
           <Link href="/" aria-label="MetalBase home">
             <Logo />
           </Link>
 
-          <nav className="hidden h-full items-stretch xl:flex">
+          <nav aria-label="Main" className="hidden h-full items-stretch xl:flex">
             {nav.map((item) => (
               <div key={item.label} className="mega static flex items-stretch">
                 <Link
                   href={item.href}
-                  className="flex items-center gap-1.5 whitespace-nowrap px-3 text-[1rem] text-navy hover:text-blue"
+                  className="flex items-center gap-1.5 whitespace-nowrap px-3.5 text-[0.95rem] font-medium text-ink hover:text-copper"
                 >
                   {item.label}
-                  <Chevron className="h-3 w-3 rotate-90 text-navy/60" />
+                  <Chevron className="h-[11px] w-[11px] rotate-90 text-slate" />
                 </Link>
 
-                <div className="mega-panel absolute left-0 right-0 top-full border-t border-line bg-white">
-                  <div className="shell grid gap-12 py-12 lg:grid-cols-[240px_1fr]">
+                <div className="mega-panel absolute left-0 right-0 top-full border-b border-line bg-paper">
+                  <div className="shell grid gap-12 py-11 lg:grid-cols-[250px_1fr]">
                     <div>
-                      <p className="t-h3 text-navy">{item.label}</p>
-                      <p className="mt-4 text-[0.95rem] leading-relaxed text-muted">
-                        {blurbFor(item.label)}
+                      <p className="t-h3">{item.label}</p>
+                      <p className="mt-3 text-[0.94rem] leading-relaxed text-slate">
+                        {blurbs[item.label]}
                       </p>
                       <div className="mt-6">
-                        <ArrowLink href={item.href}>all {item.label}</ArrowLink>
+                        <ArrowLink href={item.href}>All {item.label.toLowerCase()}</ArrowLink>
                       </div>
                     </div>
-                    <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+                    <div className="grid gap-9 sm:grid-cols-2 lg:grid-cols-4">
                       {item.columns.map((col) => (
                         <div key={col.label}>
                           <Link
                             href={col.href}
-                            className="u-link text-[1.0625rem] text-navy hover:text-blue"
+                            className="u-link text-[0.95rem] font-semibold text-ink hover:text-copper"
                           >
                             {col.label}
                           </Link>
-                          <ul className="mt-4 space-y-2.5">
+                          <ul className="mt-3.5 space-y-2.5">
                             {col.children.map((c) => (
                               <li key={c.label}>
                                 <Link
                                   href={c.href}
-                                  className="u-link text-[0.9375rem] text-muted hover:text-blue"
+                                  className="u-link text-[0.9rem] text-slate hover:text-copper"
                                 >
                                   {c.label}
                                 </Link>
@@ -86,36 +82,37 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-5">
-            <a
-              href={company.phoneHref}
-              className="hidden whitespace-nowrap text-[1rem] text-navy hover:text-blue sm:inline"
+            {company.phone && (
+              <a
+                href={`tel:${company.phone.replace(/\s/g, "")}`}
+                className="hidden whitespace-nowrap text-[0.95rem] font-medium text-ink hover:text-copper sm:inline"
+              >
+                {company.phoneLabel ?? company.phone}
+              </a>
+            )}
+            <Link
+              href="/contact"
+              className="hidden rounded-[2px] bg-copper px-5 py-2.5 text-[0.9rem] font-semibold text-white transition-colors hover:bg-copper-bright sm:inline-block"
             >
-              {company.phoneLabel}
-            </a>
+              Get a quote
+            </Link>
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
-              aria-label="toggle navigation"
+              aria-label="Toggle navigation"
               className="flex h-10 w-10 flex-col items-center justify-center gap-[6px] xl:hidden"
             >
-              <span
-                className={`block h-[1.5px] w-6 bg-navy transition ${open ? "translate-y-[7.5px] rotate-45" : ""}`}
-              />
-              <span className={`block h-[1.5px] w-6 bg-navy transition ${open ? "opacity-0" : ""}`} />
-              <span
-                className={`block h-[1.5px] w-6 bg-navy transition ${open ? "-translate-y-[7.5px] -rotate-45" : ""}`}
-              />
+              <span className={`block h-[2px] w-6 bg-ink transition ${open ? "translate-y-2 rotate-45" : ""}`} />
+              <span className={`block h-[2px] w-6 bg-ink transition ${open ? "opacity-0" : ""}`} />
+              <span className={`block h-[2px] w-6 bg-ink transition ${open ? "-translate-y-2 -rotate-45" : ""}`} />
             </button>
           </div>
         </div>
       </div>
 
-      <div className="h-px w-full bg-line" />
-
-      {/* mobile drawer */}
       {open && (
-        <div className="max-h-[calc(100vh-69px)] overflow-y-auto bg-white xl:hidden">
+        <div className="max-h-[calc(100vh-70px)] overflow-y-auto border-b border-line bg-paper xl:hidden">
           <div className="shell py-2">
             {nav.map((item) => {
               const isOpen = section === item.label;
@@ -125,61 +122,43 @@ export default function Header() {
                     type="button"
                     onClick={() => setSection(isOpen ? null : item.label)}
                     aria-expanded={isOpen}
-                    className="flex w-full items-center justify-between py-4 text-left text-[1.125rem] text-navy"
+                    className="flex w-full items-center justify-between py-4 text-left text-[1.05rem] font-medium text-ink"
                   >
                     {item.label}
-                    <Chevron
-                      className={`h-4 w-4 text-navy/60 transition ${isOpen ? "-rotate-90" : "rotate-90"}`}
-                    />
+                    <Chevron className={`h-4 w-4 text-slate transition ${isOpen ? "-rotate-90" : "rotate-90"}`} />
                   </button>
                   {isOpen && (
-                    <div className="pb-6">
-                      <Link
-                        href={item.href}
-                        onClick={() => setOpen(false)}
-                        className="mb-5 inline-block text-[0.95rem] text-blue"
-                      >
-                        all {item.label}
-                      </Link>
-                      <div className="grid gap-6 sm:grid-cols-2">
-                        {item.columns.map((col) => (
-                          <div key={col.label}>
-                            <p className="text-[1rem] text-navy">{col.label}</p>
-                            <ul className="mt-2 space-y-2">
-                              {col.children.map((c) => (
-                                <li key={c.label}>
-                                  <Link
-                                    href={c.href}
-                                    onClick={() => setOpen(false)}
-                                    className="text-[0.9rem] text-muted"
-                                  >
-                                    {c.label}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
+                    <div className="grid gap-6 pb-6 sm:grid-cols-2">
+                      {item.columns.map((col) => (
+                        <div key={col.label}>
+                          <p className="text-[0.95rem] font-semibold text-ink">{col.label}</p>
+                          <ul className="mt-2 space-y-2">
+                            {col.children.map((c) => (
+                              <li key={c.label}>
+                                <Link
+                                  href={c.href}
+                                  onClick={() => setOpen(false)}
+                                  className="text-[0.9rem] text-slate"
+                                >
+                                  {c.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
               );
             })}
-            <div className="flex flex-wrap gap-4 py-7">
+            <div className="py-6">
               <Link
                 href="/contact"
                 onClick={() => setOpen(false)}
-                className="rounded-[4px] bg-blue px-[30px] py-3 text-[1.125rem] text-white"
+                className="inline-block rounded-[2px] bg-copper px-7 py-3.5 font-semibold text-white"
               >
-                get a quote
-              </Link>
-              <Link
-                href="/prices"
-                onClick={() => setOpen(false)}
-                className="rounded-[4px] border-2 border-navy px-[30px] py-3 text-[1.125rem] text-navy"
-              >
-                price board
+                Get a quote
               </Link>
             </div>
           </div>
@@ -187,19 +166,4 @@ export default function Header() {
       )}
     </header>
   );
-}
-
-function blurbFor(label: string) {
-  switch (label) {
-    case "what we buy":
-      return "ferrous, non-ferrous and specialty streams, graded on arrival and priced against the index.";
-    case "for business":
-      return "bins, collections and buy-back for sites that generate metal on a schedule.";
-    case "sell your scrap":
-      return "four brisbane yards, no minimum load, paid by eft within one business day.";
-    case "sustainability":
-      return "the reporting, certificates and audit evidence procurement teams ask for.";
-    default:
-      return "a queensland family business processing metal since 1995.";
-  }
 }

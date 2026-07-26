@@ -1,22 +1,47 @@
-/* ------------------------------------------------------------------
-   Single source of truth for MetalBase site content.
-   Swap real figures/addresses in here and every page updates.
-   ------------------------------------------------------------------ */
+/* ==================================================================
+   Single source of truth for MetalBase content.
+
+   IMPORTANT — read before launch.
+
+   An earlier version of this file carried an invented ABN, an invented
+   Queensland second-hand dealer licence number, invented ISO/ERA
+   certifications, invented staff, invented tonnage claims and 29
+   invented prices. On a live commercial site those are not placeholder
+   text, they are false representations — and in Queensland, holding
+   out that you are a licensed second-hand dealer when you are not is
+   an offence under the Second-hand Dealers and Pawnbrokers Act 2003.
+
+   They have all been removed. Anything still unknown is `null` and the
+   UI degrades gracefully. Fill the values in below; nothing invents a
+   number on your behalf.
+   ================================================================== */
+
+/** Flip to true only once every `null` below has a real value. */
+export const LAUNCH_READY = false;
 
 export const company = {
   name: "MetalBase",
   legal: "MetalBase Recycling Pty Ltd",
-  abn: "42 617 903 118",
-  licence: "QLD second-hand dealer licence 4187264",
-  tagline: "brisbane's scrap metal base",
-  phone: "1300 638 252",
-  phoneHref: "tel:1300638252",
-  phoneLabel: "1300 METAL B",
-  email: "weighin@metalbase.com.au",
-  trade: "trade@metalbase.com.au",
-  head: "128 Sherwood Road, Rocklea QLD 4106",
-  priceDate: "22 july 2026",
+  tagline: "Brisbane's metal base",
+
+  /* --- fill these in ------------------------------------------- */
+  abn: null as string | null,
+  /** QLD second-hand dealer licence. Leave null until issued. */
+  licence: null as string | null,
+  phone: null as string | null,
+  phoneLabel: null as string | null,
+  email: null as string | null,
+  tradeEmail: null as string | null,
+  head: null as string | null,
+  /** Date the rate board was last set, e.g. "22 July 2026". */
+  priceDate: null as string | null,
+  /* -------------------------------------------------------------- */
 };
+
+/** Renders a value, or a clearly-marked gap. Never invents one. */
+export function orGap(value: string | null, label: string) {
+  return value ?? `[${label} — to be confirmed]`;
+}
 
 /* ---------------------------- navigation --------------------------- */
 
@@ -26,230 +51,196 @@ export type NavItem = { label: string; href: string; columns: NavColumn[] };
 
 export const nav: NavItem[] = [
   {
-    label: "what we buy",
+    label: "What we buy",
     href: "/what-we-buy",
     columns: [
       {
-        label: "non-ferrous",
+        label: "Non-ferrous",
         href: "/what-we-buy#non-ferrous",
         children: [
-          { label: "copper & cable", href: "/what-we-buy#non-ferrous" },
-          { label: "brass & bronze", href: "/what-we-buy#non-ferrous" },
-          { label: "aluminium", href: "/what-we-buy#non-ferrous" },
-          { label: "lead & zinc", href: "/what-we-buy#non-ferrous" },
-          { label: "stainless steel", href: "/what-we-buy#non-ferrous" },
+          { label: "Copper & cable", href: "/what-we-buy#non-ferrous" },
+          { label: "Brass & bronze", href: "/what-we-buy#non-ferrous" },
+          { label: "Aluminium", href: "/what-we-buy#non-ferrous" },
+          { label: "Lead & zinc", href: "/what-we-buy#non-ferrous" },
+          { label: "Stainless steel", href: "/what-we-buy#non-ferrous" },
         ],
       },
       {
-        label: "ferrous",
+        label: "Ferrous",
         href: "/what-we-buy#ferrous",
         children: [
-          { label: "heavy melting steel", href: "/what-we-buy#ferrous" },
-          { label: "light gauge & mixed", href: "/what-we-buy#ferrous" },
-          { label: "cast iron", href: "/what-we-buy#ferrous" },
-          { label: "structural & plate", href: "/what-we-buy#ferrous" },
-          { label: "end-of-life vehicles", href: "/what-we-buy#ferrous" },
+          { label: "Heavy melting steel", href: "/what-we-buy#ferrous" },
+          { label: "Light gauge & mixed", href: "/what-we-buy#ferrous" },
+          { label: "Cast iron", href: "/what-we-buy#ferrous" },
+          { label: "Structural & plate", href: "/what-we-buy#ferrous" },
+          { label: "End-of-life vehicles", href: "/what-we-buy#ferrous" },
         ],
       },
       {
-        label: "specialty streams",
+        label: "Specialty streams",
         href: "/what-we-buy#specialty",
         children: [
-          { label: "electric motors & armatures", href: "/what-we-buy#specialty" },
-          { label: "lead-acid & lithium batteries", href: "/what-we-buy#specialty" },
-          { label: "radiators & heat exchangers", href: "/what-we-buy#specialty" },
-          { label: "e-waste & data media", href: "/what-we-buy#specialty" },
-          { label: "cable & harness", href: "/what-we-buy#specialty" },
+          { label: "Electric motors", href: "/what-we-buy#specialty" },
+          { label: "Batteries", href: "/what-we-buy#specialty" },
+          { label: "Radiators & heat exchangers", href: "/what-we-buy#specialty" },
+          { label: "E-waste & data media", href: "/what-we-buy#specialty" },
         ],
       },
       {
-        label: "pricing",
+        label: "Pricing",
         href: "/prices",
         children: [
-          { label: "today's price list", href: "/prices" },
-          { label: "how grading works", href: "/prices#grading" },
-          { label: "contract & rebate pricing", href: "/prices#contract" },
-          { label: "get a written quote", href: "/contact" },
+          { label: "Rate board", href: "/prices" },
+          { label: "How grading works", href: "/prices#grading" },
+          { label: "Contract & rebate pricing", href: "/prices#contract" },
+          { label: "Get a written quote", href: "/contact" },
         ],
       },
     ],
   },
   {
-    label: "for business",
+    label: "For business",
     href: "/services",
     columns: [
       {
-        label: "collection",
+        label: "Collection",
         href: "/services/collection-and-bins",
         children: [
-          { label: "bin & skip hire", href: "/services/collection-and-bins" },
-          { label: "scheduled milk runs", href: "/services/collection-and-bins" },
-          { label: "crane & hiab pick-up", href: "/services/collection-and-bins" },
-          { label: "emergency clean-outs", href: "/services/collection-and-bins" },
+          { label: "Bin & skip hire", href: "/services/collection-and-bins" },
+          { label: "Scheduled collections", href: "/services/collection-and-bins" },
+          { label: "Crane & hiab pick-up", href: "/services/collection-and-bins" },
         ],
       },
       {
-        label: "industrial & manufacturing",
+        label: "Industrial",
         href: "/services/industrial",
         children: [
-          { label: "offcut & swarf programs", href: "/services/industrial" },
-          { label: "on-site segregation", href: "/services/industrial" },
-          { label: "baling & shearing", href: "/services/industrial" },
-          { label: "monthly rebate statements", href: "/services/industrial" },
+          { label: "Offcut & swarf programs", href: "/services/industrial" },
+          { label: "On-site segregation", href: "/services/industrial" },
+          { label: "Rebate statements", href: "/services/industrial" },
         ],
       },
       {
-        label: "demolition & construction",
+        label: "Demolition",
         href: "/services/demolition",
         children: [
-          { label: "structural steel buy-back", href: "/services/demolition" },
-          { label: "site strip-outs", href: "/services/demolition" },
-          { label: "mobile shears & processing", href: "/services/demolition" },
-          { label: "weighbridge dockets", href: "/services/demolition" },
+          { label: "Structural steel buy-back", href: "/services/demolition" },
+          { label: "Site strip-outs", href: "/services/demolition" },
+          { label: "Weighbridge dockets", href: "/services/demolition" },
         ],
       },
       {
-        label: "get started",
+        label: "Get started",
         href: "/contact",
         children: [
-          { label: "request a quote", href: "/contact" },
-          { label: "book a site assessment", href: "/contact" },
-          { label: "open a trade account", href: "/contact" },
-          { label: "talk to the trade desk", href: "/contact" },
+          { label: "Request a quote", href: "/contact" },
+          { label: "Book a site assessment", href: "/contact" },
+          { label: "Open a trade account", href: "/contact" },
         ],
       },
     ],
   },
   {
-    label: "sell your scrap",
+    label: "Sell your scrap",
     href: "/locations",
     columns: [
       {
-        label: "visit a yard",
+        label: "Visit a yard",
         href: "/locations",
-        children: [
-          { label: "rocklea", href: "/locations#rocklea" },
-          { label: "wacol", href: "/locations#wacol" },
-          { label: "brendale", href: "/locations#brendale" },
-          { label: "hemmant", href: "/locations#hemmant" },
-        ],
+        children: [{ label: "Yard locations", href: "/locations" }],
       },
       {
-        label: "before you come in",
+        label: "Before you come in",
         href: "/locations#how-it-works",
         children: [
-          { label: "how a weigh-in works", href: "/locations#how-it-works" },
-          { label: "id you need to bring", href: "/locations#id" },
-          { label: "what we can't accept", href: "/what-we-buy#excluded" },
-          { label: "prepping your load", href: "/what-we-buy#prep" },
+          { label: "How a weigh-in works", href: "/locations#how-it-works" },
+          { label: "ID you need to bring", href: "/locations#id" },
+          { label: "What we can't accept", href: "/what-we-buy#excluded" },
+          { label: "Prepping your load", href: "/what-we-buy#prep" },
         ],
       },
       {
-        label: "getting paid",
+        label: "Getting paid",
         href: "/locations#payment",
         children: [
-          { label: "eft within 24 hours", href: "/locations#payment" },
-          { label: "why we can't pay cash", href: "/locations#payment" },
-          { label: "trade account payments", href: "/services/industrial" },
-        ],
-      },
-      {
-        label: "today's prices",
-        href: "/prices",
-        children: [
-          { label: "non-ferrous rates", href: "/prices#non-ferrous" },
-          { label: "ferrous rates", href: "/prices#ferrous" },
-          { label: "specialty rates", href: "/prices#specialty" },
+          { label: "Why we can't pay cash", href: "/locations#payment" },
+          { label: "Trade accounts", href: "/services/industrial" },
         ],
       },
     ],
   },
   {
-    label: "sustainability",
+    label: "Sustainability",
     href: "/sustainability",
     columns: [
       {
-        label: "reporting",
+        label: "Reporting",
         href: "/sustainability#reporting",
         children: [
-          { label: "diversion reports", href: "/sustainability#reporting" },
-          { label: "scope 3 emissions data", href: "/sustainability#reporting" },
-          { label: "certificates of destruction", href: "/sustainability#destruction" },
-          { label: "chain of custody", href: "/sustainability#destruction" },
+          { label: "Diversion reports", href: "/sustainability#reporting" },
+          { label: "Certificates of destruction", href: "/sustainability#destruction" },
+          { label: "Chain of custody", href: "/sustainability#destruction" },
         ],
       },
       {
-        label: "compliance",
+        label: "Compliance",
         href: "/sustainability#compliance",
         children: [
-          { label: "iso 14001 & 45001", href: "/sustainability#compliance" },
-          { label: "queensland ERA licensing", href: "/sustainability#compliance" },
-          { label: "audit pack for procurement", href: "/sustainability#compliance" },
+          { label: "Licensing & accreditation", href: "/sustainability#compliance" },
+          { label: "Audit pack", href: "/sustainability#compliance" },
         ],
       },
       {
-        label: "circular economy",
+        label: "Circular economy",
         href: "/sustainability#circular",
-        children: [
-          { label: "where your metal goes", href: "/sustainability#circular" },
-          { label: "recycled content sourcing", href: "/sustainability#circular" },
-          { label: "our 2030 targets", href: "/sustainability#targets" },
-        ],
+        children: [{ label: "Where your metal goes", href: "/sustainability#circular" }],
       },
     ],
   },
   {
-    label: "about us",
+    label: "About",
     href: "/about",
     columns: [
       {
-        label: "who we are",
+        label: "Who we are",
         href: "/about",
         children: [
-          { label: "our story", href: "/about#story" },
-          { label: "how we operate", href: "/about#operate" },
-          { label: "safety first", href: "/about#safety" },
-          { label: "leadership", href: "/about#leadership" },
+          { label: "Our story", href: "/about#story" },
+          { label: "How we operate", href: "/about#operate" },
+          { label: "Safety", href: "/about#safety" },
         ],
       },
       {
-        label: "our yards",
-        href: "/locations",
-        children: [
-          { label: "all four sites", href: "/locations" },
-          { label: "weighbridge facilities", href: "/locations#weighbridge" },
-          { label: "opening hours", href: "/locations" },
-        ],
-      },
-      {
-        label: "work with us",
-        href: "/about#careers",
-        children: [
-          { label: "current openings", href: "/about#careers" },
-          { label: "apprenticeships", href: "/about#careers" },
-          { label: "life at metalbase", href: "/about#careers" },
-        ],
-      },
-      {
-        label: "get in touch",
+        label: "Get in touch",
         href: "/contact",
         children: [
-          { label: "contact us", href: "/contact" },
-          { label: "trade desk", href: "/contact" },
-          { label: "media enquiries", href: "/contact" },
+          { label: "Contact us", href: "/contact" },
+          { label: "Trade desk", href: "/contact" },
         ],
       },
     ],
   },
 ];
 
-/* ------------------------------ prices ----------------------------- */
+/* ------------------------------ prices -----------------------------
+   The grade taxonomy below is real and industry-standard — it is
+   genuinely useful to a customer. The RATES are not published, because
+   inventing them would misrepresent what you pay.
+
+   To publish: set PUBLISH_RATES = true and give each row a `rate`.
+   Until then every row renders "Rate on request", which is both honest
+   and how plenty of yards actually operate.
+   ------------------------------------------------------------------ */
+
+export const PUBLISH_RATES = false;
 
 export type PriceRow = {
   grade: string;
   spec: string;
-  rate: string;
-  unit: string;
+  /** e.g. "12.40". Leave null until you set a real rate. */
+  rate: string | null;
+  /** "kg" | "tonne" */
+  unit: "kg" | "tonne";
 };
 
 export const priceGroups: {
@@ -260,52 +251,51 @@ export const priceGroups: {
 }[] = [
   {
     id: "non-ferrous",
-    title: "non-ferrous",
-    note: "settled against the previous day's LME close, adjusted for freight and yield.",
+    title: "Non-ferrous",
+    note: "Higher value per kilo and by far the most sensitive to how well the load is separated. Graded on arrival, alloys confirmed by XRF where it matters.",
     rows: [
-      { grade: "bare bright copper", spec: "clean, uncoated, 16 gauge or heavier", rate: "12.40", unit: "kg" },
-      { grade: "#1 copper", spec: "clean tube and bus bar, no fittings", rate: "11.80", unit: "kg" },
-      { grade: "#2 copper", spec: "solder, paint or light plating acceptable", rate: "11.05", unit: "kg" },
-      { grade: "hg insulated cable", spec: "60%+ recoverable copper", rate: "7.20", unit: "kg" },
-      { grade: "lg insulated cable", spec: "data, comms and flex under 40%", rate: "2.35", unit: "kg" },
-      { grade: "mixed brass", spec: "fittings, valves, taps, drained", rate: "7.40", unit: "kg" },
-      { grade: "clean aluminium extrusion", spec: "no thermal break, no ends", rate: "2.65", unit: "kg" },
-      { grade: "aluminium sheet & plate", spec: "clean, no attachments", rate: "2.10", unit: "kg" },
-      { grade: "cast aluminium", spec: "wheels, housings, no iron", rate: "1.85", unit: "kg" },
-      { grade: "aluminium cans (ubc)", spec: "loose or baled, dry", rate: "1.55", unit: "kg" },
-      { grade: "lead", spec: "sheet, weights, flashing", rate: "2.85", unit: "kg" },
-      { grade: "stainless 304", spec: "non-magnetic, clean", rate: "2.20", unit: "kg" },
-      { grade: "stainless 316", spec: "verified by xrf on arrival", rate: "3.10", unit: "kg" },
+      { grade: "Bare bright copper", spec: "Clean, uncoated, 16 gauge or heavier", rate: null, unit: "kg" },
+      { grade: "#1 copper", spec: "Clean tube and bus bar, no fittings", rate: null, unit: "kg" },
+      { grade: "#2 copper", spec: "Solder, paint or light plating acceptable", rate: null, unit: "kg" },
+      { grade: "High-grade insulated cable", spec: "Recoverable copper above 60%", rate: null, unit: "kg" },
+      { grade: "Low-grade insulated cable", spec: "Data, comms and flex under 40%", rate: null, unit: "kg" },
+      { grade: "Mixed brass", spec: "Fittings, valves, taps, drained", rate: null, unit: "kg" },
+      { grade: "Clean aluminium extrusion", spec: "No thermal break, no ends", rate: null, unit: "kg" },
+      { grade: "Aluminium sheet & plate", spec: "Clean, no attachments", rate: null, unit: "kg" },
+      { grade: "Cast aluminium", spec: "Wheels, housings, no iron", rate: null, unit: "kg" },
+      { grade: "Aluminium cans (UBC)", spec: "Loose or baled, dry", rate: null, unit: "kg" },
+      { grade: "Lead", spec: "Sheet, weights, flashing", rate: null, unit: "kg" },
+      { grade: "Stainless 304", spec: "Non-magnetic, clean", rate: null, unit: "kg" },
+      { grade: "Stainless 316", spec: "Verified by XRF on arrival", rate: null, unit: "kg" },
     ],
   },
   {
     id: "ferrous",
-    title: "ferrous",
-    note: "priced per tonne over the weighbridge; sized to fit a 1.5m x 0.5m charge box.",
+    title: "Ferrous",
+    note: "Priced per tonne over the weighbridge. Mostly a question of size and cleanliness — if it fits a charge box and isn't full of concrete, it grades well.",
     rows: [
-      { grade: "heavy melting steel 1", spec: "6mm+ plate, cut to 1.5m", rate: "352", unit: "tonne" },
-      { grade: "heavy melting steel 2", spec: "3mm+, mixed lengths", rate: "318", unit: "tonne" },
-      { grade: "structural & plate", spec: "beams, columns, purlins", rate: "336", unit: "tonne" },
-      { grade: "light gauge / mixed steel", spec: "under 3mm, sheet, roofing", rate: "215", unit: "tonne" },
-      { grade: "cast iron", spec: "engine blocks, baths, pipe", rate: "290", unit: "tonne" },
-      { grade: "reinforcing bar & mesh", spec: "concrete-free", rate: "268", unit: "tonne" },
-      { grade: "end-of-life vehicles", spec: "drained, de-gassed, no tyres", rate: "252", unit: "tonne" },
-      { grade: "whitegoods", spec: "degassed, compressor removed", rate: "185", unit: "tonne" },
+      { grade: "Heavy melting steel 1", spec: "6mm+ plate, cut to 1.5m", rate: null, unit: "tonne" },
+      { grade: "Heavy melting steel 2", spec: "3mm+, mixed lengths", rate: null, unit: "tonne" },
+      { grade: "Structural & plate", spec: "Beams, columns, purlins", rate: null, unit: "tonne" },
+      { grade: "Light gauge / mixed steel", spec: "Under 3mm, sheet, roofing", rate: null, unit: "tonne" },
+      { grade: "Cast iron", spec: "Engine blocks, baths, pipe", rate: null, unit: "tonne" },
+      { grade: "Reinforcing bar & mesh", spec: "Concrete-free", rate: null, unit: "tonne" },
+      { grade: "End-of-life vehicles", spec: "Drained, de-gassed, no tyres", rate: null, unit: "tonne" },
+      { grade: "Whitegoods", spec: "Degassed, compressor removed", rate: null, unit: "tonne" },
     ],
   },
   {
     id: "specialty",
-    title: "specialty streams",
-    note: "sampled and graded at the yard; large parcels quoted on assay.",
+    title: "Specialty streams",
+    note: "Mixed-material items where the value sits inside. Sampled and graded individually; larger parcels quoted on assay.",
     rows: [
-      { grade: "electric motors", spec: "no gearboxes, no pumps", rate: "1.05", unit: "kg" },
-      { grade: "copper radiators", spec: "no steel frames", rate: "5.60", unit: "kg" },
-      { grade: "aluminium / copper radiators", spec: "car and hvac coils", rate: "4.30", unit: "kg" },
-      { grade: "lead-acid batteries", spec: "automotive and industrial", rate: "1.15", unit: "kg" },
-      { grade: "lithium packs", spec: "quoted per parcel, handling applies", rate: "poa", unit: "" },
-      { grade: "transformers", spec: "oil drained and certified", rate: "1.45", unit: "kg" },
-      { grade: "mixed e-waste", spec: "servers, pcs, comms racks", rate: "0.55", unit: "kg" },
-      { grade: "circuit boards (high grade)", spec: "telecom and server boards", rate: "9.80", unit: "kg" },
+      { grade: "Electric motors", spec: "No gearboxes, no pumps", rate: null, unit: "kg" },
+      { grade: "Copper radiators", spec: "No steel frames", rate: null, unit: "kg" },
+      { grade: "Aluminium / copper radiators", spec: "Automotive and HVAC coils", rate: null, unit: "kg" },
+      { grade: "Lead-acid batteries", spec: "Automotive and industrial", rate: null, unit: "kg" },
+      { grade: "Lithium packs", spec: "Quoted per parcel, handling applies", rate: null, unit: "kg" },
+      { grade: "Mixed e-waste", spec: "Servers, PCs, comms racks", rate: null, unit: "kg" },
+      { grade: "Circuit boards", spec: "Telecom and server boards", rate: null, unit: "kg" },
     ],
   },
 ];
@@ -317,212 +307,162 @@ export type Service = {
   title: string;
   audience: string;
   blurb: string;
-  scene: "grab" | "bin" | "truck" | "coil";
-  accent: string;
+  photo: "yard-grab" | "tipper" | "crew" | "mixed-parts";
   points: { title: string; body: string }[];
-  stats: { value: string; label: string }[];
 };
 
 export const services: Service[] = [
   {
     slug: "collection-and-bins",
-    title: "collection & bin hire",
-    audience: "for sites that generate metal every week",
+    title: "Collection & bin hire",
+    audience: "For sites that generate metal every week",
     blurb:
-      "bins dropped where the metal is, swapped before they overflow, and weighed on a certified bridge you can audit. from a single 3m³ cage in a workshop to twenty 30m³ hooks across a project.",
-    scene: "bin",
-    accent: "var(--color-blue)",
+      "Bins dropped where the metal is, swapped before they overflow, and weighed on a certified bridge you can audit — from a single cage in a workshop to hook lifts across a project.",
+    photo: "tipper",
     points: [
       {
-        title: "the right bin, not the biggest one",
-        body: "3m³ cages, 6m³ and 9m³ marrels, 20m³ and 30m³ hook lifts, plus stillages for turnings and swarf. we size the fleet to your throughput so you are not paying to cart air.",
+        title: "The right bin, not the biggest one",
+        body: "Cages, marrels, hook lifts and stillages for turnings and swarf. We size the fleet to your throughput so you are not paying to cart air.",
       },
       {
-        title: "swaps inside 24 hours",
-        body: "standing runs are scheduled around your production calendar. ad-hoc swaps ordered before 10am are on the ground the same working day across greater brisbane, ipswich and the gold coast corridor.",
+        title: "Swaps on a schedule you set",
+        body: "Standing runs are built around your production calendar rather than ours, with ad-hoc swaps available when a job runs hot.",
       },
       {
-        title: "crane and hiab capability",
-        body: "for loads that cannot be tipped — tanks, transformers, plant and structural sections — we bring the lift to you rather than asking you to find one.",
+        title: "Crane and hiab capability",
+        body: "For loads that cannot be tipped — tanks, transformers, plant and structural sections — we bring the lift to you rather than asking you to find one.",
       },
       {
-        title: "every movement documented",
-        body: "each swap generates a weighbridge docket with net weight, grade and photo evidence, pushed to your portal the same day and rolled into a monthly statement.",
+        title: "Every movement documented",
+        body: "Each swap generates a weighbridge docket with net weight and grade, rolled into a statement you can reconcile.",
       },
-    ],
-    stats: [
-      { value: "24hr", label: "standard swap window" },
-      { value: "3–30m³", label: "bin sizes on fleet" },
-      { value: "6 days", label: "collection week" },
     ],
   },
   {
     slug: "industrial",
-    title: "industrial & manufacturing",
-    audience: "for fabricators, engineers and production plants",
+    title: "Industrial & manufacturing",
+    audience: "For fabricators, engineers and production plants",
     blurb:
-      "your offcuts are a raw material with a market price. we set up segregation at the machine, take the grading argument off the table, and pay a rebate that shows up on your p&l instead of your waste bill.",
-    scene: "coil",
-    accent: "var(--color-teal)",
+      "Your offcuts are a raw material with a market price. We set up segregation at the machine, take the grading argument off the table, and pay a rebate that shows up on your P&L instead of your waste bill.",
+    photo: "mixed-parts",
     points: [
       {
-        title: "segregation designed at the machine",
-        body: "we walk the floor, map where each alloy is generated, and place labelled receptacles at the point of cut. clean streams grade higher, so segregation is the single biggest lever on your return.",
+        title: "Segregation designed at the machine",
+        body: "We walk the floor, map where each alloy is generated, and place labelled receptacles at the point of cut. Clean streams grade higher, so segregation is the single biggest lever on your return.",
       },
       {
-        title: "swarf, turnings and fines",
-        body: "sealed stillages for wet turnings, briquetting advice where volumes justify it, and oil content assessed transparently rather than deducted by guesswork.",
+        title: "Swarf, turnings and fines",
+        body: "Sealed stillages for wet turnings, and oil content assessed transparently rather than deducted by guesswork.",
       },
       {
-        title: "on-site baling and shearing",
-        body: "where volumes support it we install processing at your site, cutting cartage movements and lifting the grade of what leaves the gate.",
+        title: "On-site processing where it pays",
+        body: "Where volumes support it we can install baling or shearing at your site, cutting cartage movements and lifting the grade of what leaves the gate.",
       },
       {
-        title: "rebates you can forecast",
-        body: "monthly statements reconcile tonnage by grade against the index, so finance can model the rebate line instead of treating it as a windfall.",
+        title: "Rebates you can forecast",
+        body: "Statements reconcile tonnage by grade against the index, so finance can model the rebate line instead of treating it as a windfall.",
       },
-    ],
-    stats: [
-      { value: "monthly", label: "rebate statements" },
-      { value: "18%", label: "avg. uplift after segregation" },
-      { value: "xrf", label: "alloy verification on site" },
     ],
   },
   {
     slug: "demolition",
-    title: "demolition & construction",
-    audience: "for principal contractors and demolition crews",
+    title: "Demolition & construction",
+    audience: "For principal contractors and demolition crews",
     blurb:
-      "structural steel bought back at index-linked rates, processed on site where access allows, and reported in the format your client's waste management plan actually asks for.",
-    scene: "grab",
-    accent: "var(--color-coral)",
+      "Structural steel bought back at index-linked rates, processed on site where access allows, and reported in the format your client's waste management plan actually asks for.",
+    photo: "yard-grab",
     points: [
       {
-        title: "buy-back priced before you swing",
-        body: "we assess the structure from your drawings and give you a written recovery value up front, so the steel becomes a line in your tender rather than a surprise at the end.",
+        title: "Buy-back priced before you swing",
+        body: "We assess the structure from your drawings and give you a written recovery value up front, so the steel becomes a line in your tender rather than a surprise at the end.",
       },
       {
-        title: "mobile shears and grabs",
-        body: "material handlers, mobile shears and grab trucks deployed to site to size sections in place. fewer truck movements, faster program, lower cartage.",
+        title: "Mobile shears and grabs",
+        body: "Material handlers and grab trucks deployed to site to size sections in place. Fewer truck movements, faster program, lower cartage.",
       },
       {
-        title: "strip-outs and soft demolition",
-        body: "cable, ductwork, plant rooms, switchboards and fit-out metal removed by our crews under your site induction and swms.",
+        title: "Strip-outs and soft demolition",
+        body: "Cable, ductwork, plant rooms, switchboards and fit-out metal removed by our crews under your site induction and SWMS.",
       },
       {
-        title: "reporting for the wmp",
-        body: "tonnage by stream, diversion percentage and destination mill, issued against the project so it drops straight into your waste management plan and green star submission.",
+        title: "Reporting for the waste management plan",
+        body: "Tonnage by stream, diversion percentage and destination mill, issued against the project so it drops straight into your submission.",
       },
-    ],
-    stats: [
-      { value: "98.6%", label: "material diverted from landfill" },
-      { value: "written", label: "buy-back before demolition" },
-      { value: "24/7", label: "program-critical crews" },
     ],
   },
   {
     slug: "public-and-trade",
-    title: "public & trade drop-off",
-    audience: "for sparkies, plumbers, mechanics and the weekend clean-out",
+    title: "Public & trade drop-off",
+    audience: "For sparkies, plumbers, mechanics and the weekend clean-out",
     blurb:
-      "drive on, weigh in, get paid. no appointment, no minimum load, and the same posted rate whether you turn up with a ute tray or a trailer of copper.",
-    scene: "truck",
-    accent: "var(--color-amber)",
+      "Drive on, weigh in, get paid. No appointment, no minimum load, and the same posted rate whether you turn up with a ute tray or a trailer of copper.",
+    photo: "crew",
     points: [
       {
-        title: "one posted rate for everyone",
-        body: "the price on the board is the price you get. tradies with a regular run can open an account for volume rates, but nobody gets a worse deal for turning up once.",
+        title: "One posted rate for everyone",
+        body: "The price on the board is the price you get. Regular trade can open an account for volume rates, but nobody gets a worse deal for turning up once.",
       },
       {
-        title: "in and out in fifteen minutes",
-        body: "certified weighbridges at rocklea and wacol, floor scales at every site, and a grader who tells you what your load is before it hits the pile.",
+        title: "Graded before it's tipped",
+        body: "A grader tells you what your load is before it hits the pile. If you disagree, ask for the XRF gun — that is what it is there for.",
       },
       {
-        title: "paid by eft, always",
-        body: "queensland law prohibits cash for scrap metal. we transfer to your nominated account, usually within a couple of hours and always within one business day.",
+        title: "Paid by EFT, always",
+        body: "Queensland law prohibits cash for scrap metal. We transfer to your nominated account.",
       },
       {
-        title: "bring photo id",
-        body: "as a licensed second-hand dealer we record the seller and the vehicle on every transaction. a driver licence is enough. it keeps stolen metal out of the supply chain.",
+        title: "Bring photo ID",
+        body: "A licensed second-hand dealer must record the seller and the vehicle on every transaction. A driver licence is enough. It keeps stolen metal out of the supply chain.",
       },
-    ],
-    stats: [
-      { value: "15min", label: "typical turnaround" },
-      { value: "no min.", label: "load size" },
-      { value: "6.30am", label: "gates open weekdays" },
     ],
   },
 ];
 
-/* ----------------------------- locations --------------------------- */
+/* ----------------------------- locations ---------------------------
+   Yard list. Add real sites here — nothing is invented.
+   ------------------------------------------------------------------ */
 
-export const locations = [
-  {
-    id: "rocklea",
-    name: "rocklea",
-    role: "head office & main processing yard",
-    address: "128 Sherwood Road, Rocklea QLD 4106",
-    hours: "mon–fri 6:30am–5pm · sat 7am–1pm",
-    features: ["80t certified weighbridge", "public drop-off", "mobile shear", "trade counter"],
-  },
-  {
-    id: "wacol",
-    name: "wacol",
-    role: "heavy ferrous & vehicle processing",
-    address: "9 Bandara Street, Wacol QLD 4076",
-    hours: "mon–fri 6:30am–4:30pm · sat 7am–12pm",
-    features: ["80t certified weighbridge", "end-of-life vehicles", "de-pollution bay", "baler"],
-  },
-  {
-    id: "brendale",
-    name: "brendale",
-    role: "northside trade & non-ferrous",
-    address: "44 Kremzow Road, Brendale QLD 4500",
-    hours: "mon–fri 7am–4:30pm · sat 7am–12pm",
-    features: ["floor scales", "cable granulation", "trade accounts", "bin depot"],
-  },
-  {
-    id: "hemmant",
-    name: "hemmant",
-    role: "port-side export & bulk handling",
-    address: "212 Radley Street, Hemmant QLD 4174",
-    hours: "mon–fri 6am–4pm",
-    features: ["container packing", "bulk export", "rail siding access", "no public drop-off"],
-  },
-];
+export type Location = {
+  id: string;
+  name: string;
+  role: string;
+  address: string | null;
+  hours: string | null;
+  features: string[];
+};
 
-/* ------------------------------- misc ------------------------------ */
+export const locations: Location[] = [];
 
-export const stats = [
-  { value: "182,000t", label: "metal recovered last financial year" },
-  { value: "4", label: "yards across greater brisbane" },
-  { value: "98.6%", label: "diverted from landfill" },
-  { value: "31 years", label: "trading in queensland" },
-];
+/* ------------------------------- stats -----------------------------
+   Deliberately empty. The previous version claimed 182,000 t recovered,
+   98.6% diversion and 31 years trading — all invented. Add real,
+   defensible figures here and they will render.
+   ------------------------------------------------------------------ */
+
+export const stats: { value: string; label: string }[] = [];
+
+/* ------------------------------ insights ---------------------------- */
 
 export const insights = [
   {
-    tag: "market",
-    title: "what a softening copper price means for your q3 rebate",
+    tag: "Market",
+    title: "What a softening copper price means for your quarterly rebate",
     excerpt:
-      "the LME has traded in a narrow band since may. here is how that flows through to yard rates in brisbane, and why segregation matters more when the index is flat.",
-    date: "18 july 2026",
+      "How index movement flows through to yard rates in Brisbane, and why segregation matters more when the market is flat.",
     href: "/insights",
   },
   {
-    tag: "compliance",
-    title: "the paperwork your waste management plan actually needs",
+    tag: "Compliance",
+    title: "The paperwork your waste management plan actually needs",
     excerpt:
-      "green star and infrastructure sustainability submissions keep getting knocked back for the same three gaps. a checklist for site managers.",
-    date: "9 july 2026",
+      "Green Star and Infrastructure Sustainability submissions get knocked back for the same few gaps. A checklist for site managers.",
     href: "/insights",
   },
   {
-    tag: "operations",
-    title: "five metres of separation that lifted one fabricator's return 22%",
+    tag: "Operations",
+    title: "Five metres of separation that changed a fabricator's return",
     excerpt:
-      "a brendale sheet metal shop moved four bins and relabelled them. no capital, no new process, a materially better cheque.",
-    date: "27 june 2026",
+      "Moving four bins and relabelling them. No capital, no new process, a materially better cheque.",
     href: "/insights",
   },
 ];
