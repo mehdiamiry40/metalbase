@@ -142,13 +142,16 @@ export function PhotoTile({
 export function Steps({
   items,
   tone = "ink",
+  columns = 4,
 }: {
   items: { title: string; body: string }[];
   tone?: "ink" | "paper";
+  columns?: 3 | 4;
 }) {
   const dark = tone === "paper";
+  const cols = columns === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4";
   return (
-    <ol className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+    <ol className={`grid gap-x-10 gap-y-10 sm:grid-cols-2 ${cols}`}>
       {items.map((s, i) => (
         <li key={s.title} className={`border-t-2 pt-5 ${dark ? "border-copper-on-ink" : "border-ink/15"}`}>
           <span className={`t-num text-[0.95rem] font-semibold ${dark ? "text-copper-on-ink" : "text-copper"}`}>

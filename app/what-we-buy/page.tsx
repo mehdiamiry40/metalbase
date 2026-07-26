@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DefinitionRows, PageHeader, Split } from "@/components/sections";
+import { DefinitionRows, PageHeader, Split, Steps } from "@/components/sections";
 import { Button, CtaBand, Eyebrow, Section } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -172,18 +172,8 @@ export default function WhatWeBuyPage() {
               move the return by double digits.
             </p>
           </div>
-          <div className="mt-12 grid gap-x-10 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-            {prep.map((p, i) => (
-              <div key={p.title} className="border-t-2 border-copper pt-5">
-                <span className="t-num text-[0.95rem] font-semibold text-copper">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-2 text-[1.15rem]">{p.title}</h3>
-                <p className="mt-2.5 text-[0.94rem] leading-relaxed text-paper/65">
-                  {p.body}
-                </p>
-              </div>
-            ))}
+          <div className="mt-12">
+            <Steps items={prep} tone="paper" columns={3} />
           </div>
         </div>
       </section>
