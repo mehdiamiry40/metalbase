@@ -25,7 +25,7 @@
   --color-paper-deep: #eff1f5; /* cool banding */
 
   /* accent — one orange, three jobs, none interchangeable */
-  --color-accent: #b84e15; /* orange as TEXT on white   · 5.1:1 */
+  --color-accent: #a8460f; /* orange as TEXT · 5.9:1 white · 5.2:1 on paper-deep */
   --color-accent-fill: #ff6a1a; /* FILL, carries ink text    · 6.3:1 */
   --color-accent-fill-hover: #e85d12; /* fill hover                       */
   --color-accent-on-ink: #ff8a45; /* orange as TEXT on ink     · 7.6:1 */
