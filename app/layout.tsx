@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -106,6 +107,10 @@ export default function RootLayout({
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        {/* Vercel Web Analytics. Cookieless and no cross-site identifiers,
+            so it does not by itself require a consent banner — but it is
+            still visitor analytics, so it belongs in the privacy policy. */}
+        <Analytics />
       </body>
     </html>
   );

@@ -19,6 +19,7 @@ const sections = [
       "That record includes your name, address, date of birth, identification document details, vehicle registration and bank account details for payment. It is retained for the period required by the Second-hand Dealers and Pawnbrokers Act 2003 and associated regulation.",
       "We do not sell personal information. We disclose it to Queensland Police where a lawful request is made, to our payment provider to process your transfer, and to our auditors under confidentiality.",
       "Enquiries submitted through this website are delivered to our trade desk and retained only as long as needed to respond. You can request access to the information we hold about you, or correction of it, by writing to the address below.",
+      "This website uses Vercel Web Analytics to count visits and page views. It does not set cookies, does not use cross-site identifiers and does not build a profile of you. It records the page visited, referrer, and coarse device and country information, which we use only to understand which pages are useful.",
     ],
   },
   {
