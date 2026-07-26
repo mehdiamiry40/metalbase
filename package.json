@@ -11,9 +11,14 @@
     "photos": "node scripts/fetch-photos.mjs"
   },
   "dependencies": {
-    "next": "15.5.4",
+    "next": "15.5.22",
     "react": "19.1.0",
     "react-dom": "19.1.0"
+  },
+  "//overrides": "next 15.5.22 vendors sharp 0.34.5 (libvips CVEs, GHSA-f88m-g3jw-g9cj) and postcss 8.4.31 (sourceMappingURL path traversal, GHSA-r28c-9q8g-f849). Both are pinned forward here. Re-check on each Next.js upgrade and drop these once upstream catches up.",
+  "overrides": {
+    "sharp": "^0.35.3",
+    "postcss": "^8.5.23"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.13",
