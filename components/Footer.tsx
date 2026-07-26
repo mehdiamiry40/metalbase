@@ -23,7 +23,7 @@ export default function Footer() {
 
             <dl className="mt-8 space-y-4 text-[0.94rem]">
               <div>
-                <dt className="text-paper/45">Trade desk</dt>
+                <dt className="text-paper/60">Trade desk</dt>
                 <dd className="mt-0.5">
                   {company.phone ? (
                     <a
@@ -33,26 +33,26 @@ export default function Footer() {
                       {company.phoneLabel ?? company.phone}
                     </a>
                   ) : (
-                    <Pending>Phone number to be confirmed</Pending>
+                    <Pending tone="paper">Phone number to be confirmed</Pending>
                   )}
                 </dd>
               </div>
               <div>
-                <dt className="text-paper/45">Email</dt>
+                <dt className="text-paper/60">Email</dt>
                 <dd className="mt-0.5">
                   {company.email ? (
                     <a href={`mailto:${company.email}`} className="hover:text-copper-on-ink">
                       {company.email}
                     </a>
                   ) : (
-                    <Pending>Email to be confirmed</Pending>
+                    <Pending tone="paper">Email to be confirmed</Pending>
                   )}
                 </dd>
               </div>
               <div>
-                <dt className="text-paper/45">Head office</dt>
+                <dt className="text-paper/60">Head office</dt>
                 <dd className="mt-0.5 text-paper/85">
-                  {company.head ?? <Pending>Address to be confirmed</Pending>}
+                  {company.head ?? <Pending tone="paper">Address to be confirmed</Pending>}
                 </dd>
               </div>
             </dl>
@@ -97,28 +97,28 @@ export default function Footer() {
           </div>
         )}
 
-        <div className="mt-14 space-y-2 border-t border-line-ink pt-8 text-[0.82rem] leading-relaxed text-paper/45">
+        <div className="mt-14 space-y-2 border-t border-line-ink pt-8 text-[0.82rem] leading-relaxed text-paper/60">
           <p>
             © {new Date().getFullYear()} {company.legal}
             {company.abn ? ` · ABN ${company.abn}` : null}
           </p>
           {!company.abn && (
             <p>
-              <Pending>ABN to be confirmed before launch</Pending>
+              <Pending tone="paper">ABN to be confirmed before launch</Pending>
             </p>
           )}
           {company.licence ? (
             <p>Queensland second-hand dealer licence {company.licence}</p>
           ) : (
             <p>
-              <Pending>
+              <Pending tone="paper">
                 Second-hand dealer licence pending — required before trading
               </Pending>
             </p>
           )}
         </div>
 
-        <p className="mt-7 max-w-4xl text-[0.82rem] leading-relaxed text-paper/45">
+        <p className="mt-7 max-w-4xl text-[0.82rem] leading-relaxed text-paper/60">
           MetalBase acknowledges the Turrbal and Jagera peoples, the Traditional
           Custodians of the land on which we operate, and pays respect to Elders
           past and present.
@@ -127,7 +127,7 @@ export default function Footer() {
         <ul className="mt-7 flex flex-wrap gap-x-7 gap-y-2">
           {legal.map((l) => (
             <li key={l.label}>
-              <Link href={l.href} className="text-[0.86rem] text-paper/45 hover:text-paper">
+              <Link href={l.href} className="text-[0.86rem] text-paper/60 hover:text-paper">
                 {l.label}
               </Link>
             </li>

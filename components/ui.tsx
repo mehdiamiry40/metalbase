@@ -282,10 +282,28 @@ export function TickList({
   );
 }
 
-/** Shown where real data has not been supplied yet. Honest, not fake. */
-export function Pending({ children }: { children: ReactNode }) {
+/**
+ * Shown where real data has not been supplied yet. Honest, not fake.
+ *
+ * Surface-aware: `slate` is a paper-surface colour and only reaches
+ * 2.96:1 on ink, so the dark variant uses translucent paper instead.
+ */
+export function Pending({
+  children,
+  tone = "ink",
+}: {
+  children: ReactNode;
+  /** "ink" = sits on a light surface · "paper" = sits on a dark one */
+  tone?: "ink" | "paper";
+}) {
+  const skin =
+    tone === "paper"
+      ? "border-paper/40 text-paper/75"
+      : "border-slate/50 text-slate";
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-[2px] border border-dashed border-slate/50 px-2 py-0.5 text-[0.82rem] text-slate">
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-[2px] border border-dashed px-2 py-0.5 text-[0.82rem] ${skin}`}
+    >
       {children}
     </span>
   );
