@@ -39,11 +39,11 @@ export function Logo({
   variant?: "ink" | "paper";
   className?: string;
 }) {
-  const word = variant === "paper" ? "#f4f1ea" : "#14171a";
+  const word = variant === "paper" ? "#ffffff" : "#0a1633";
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <svg viewBox="0 0 32 28" className="h-[26px] w-[30px] shrink-0" aria-hidden="true">
-        <path d="M4 4h18l-4 6H0z" fill="#b2542f" />
+        <path d="M4 4h18l-4 6H0z" fill="#ff6a1a" />
         <path d="M7 11h18l-4 6H3z" fill={word} opacity="0.85" />
         <path d="M10 18h18l-4 6H6z" fill={word} opacity="0.45" />
       </svg>
@@ -65,8 +65,8 @@ const btnBase =
   "inline-flex items-center justify-center gap-2 rounded-[2px] px-7 py-3.5 text-[0.95rem] font-semibold tracking-[-0.01em] transition-colors duration-150";
 
 const variants: Record<string, string> = {
-  primary: "bg-accent-fill text-white hover:bg-accent-fill-hover",
-  ink: "bg-ink text-paper hover:bg-accent-fill",
+  primary: "bg-accent-fill text-ink hover:bg-accent-fill-hover",
+  ink: "bg-ink text-paper hover:bg-ink-soft",
   outline: "border-2 border-ink text-ink hover:bg-ink hover:text-paper",
   outlinePaper: "border-2 border-paper text-paper hover:bg-paper hover:text-ink",
 };
@@ -121,7 +121,7 @@ const tones: Record<string, string> = {
   paper: "bg-paper text-ink",
   deep: "bg-paper-deep text-ink",
   ink: "bg-ink text-paper on-ink",
-  accent: "bg-accent-fill text-white",
+  accent: "bg-accent-fill text-ink",
 };
 
 export function Section({

@@ -14,33 +14,33 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#14171a",
+          background: "#0a1633",
           padding: "72px",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <svg width="58" height="50" viewBox="0 0 32 28">
-            <path d="M4 4h18l-4 6H0z" fill="#b2542f" />
-            <path d="M7 11h18l-4 6H3z" fill="#f4f1ea" opacity="0.85" />
-            <path d="M10 18h18l-4 6H6z" fill="#f4f1ea" opacity="0.45" />
+            <path d="M4 4h18l-4 6H0z" fill="#ff6a1a" />
+            <path d="M7 11h18l-4 6H3z" fill="#ffffff" opacity="0.85" />
+            <path d="M10 18h18l-4 6H6z" fill="#ffffff" opacity="0.45" />
           </svg>
-          <span style={{ color: "#f4f1ea", fontSize: 44, fontWeight: 600, letterSpacing: -1.6 }}>
+          <span style={{ color: "#ffffff", fontSize: 44, fontWeight: 600, letterSpacing: -1.6 }}>
             MetalBase
           </span>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <span style={{ color: "#f4f1ea", fontSize: 74, lineHeight: 1.05, letterSpacing: -2.6 }}>
+          <span style={{ color: "#ffffff", fontSize: 74, lineHeight: 1.05, letterSpacing: -2.6 }}>
             Your metal is worth more than
           </span>
-          <span style={{ color: "#f4f1ea", fontSize: 74, lineHeight: 1.05, letterSpacing: -2.6 }}>
+          <span style={{ color: "#ffffff", fontSize: 74, lineHeight: 1.05, letterSpacing: -2.6 }}>
             the bin it&rsquo;s sitting in
           </span>
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <span style={{ width: 64, height: 5, background: "#b2542f" }} />
-          <span style={{ color: "#9aa0aa", fontSize: 28 }}>
+          <span style={{ width: 64, height: 5, background: "#ff6a1a" }} />
+          <span style={{ color: "#5b6478", fontSize: 28 }}>
             Scrap metal recycling · Brisbane
           </span>
         </div>

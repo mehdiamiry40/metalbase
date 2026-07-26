@@ -1,35 +1,38 @@
 @import "tailwindcss";
 
 /* ==================================================================
-   MetalBase design system — corporate blue
+   MetalBase design system — ink & orange
 
-   Every colour below is verified against WCAG AA. Three earlier passes
-   failed because values were reasoned about rather than measured, so
-   the contrast ratio is recorded next to each one and re-checked with
-   axe against the deployed site.
+   Deep ink navy, one hot orange, white. Contemporary rather than
+   traditional: modern sans at weight 500, very tight tracking, a lot
+   of white, orange reserved for action.
 
-   The key structural rule: ONE accent needs THREE values. A blue dark
-   enough to pass as text on cream is too dark to read on navy, and the
-   blue that looks right as a button fill passes as a fill but not as
-   text. They are not interchangeable — see --color-accent* below.
+   CONTRAST — every value measured, not estimated. Three earlier
+   palettes shipped failures because ratios were reasoned about.
+
+   The trap in this palette: #FF6A1A is a beautiful button colour and
+   a terrible text colour. White on it is 2.86:1, which fails AA
+   outright. So the bright orange is a FILL that carries INK text
+   (6.3:1), and a darker orange exists for the rare case where orange
+   itself must be text on white.
    ================================================================== */
 
 @theme {
   /* surfaces */
-  --color-ink: #0f1941; /* navy — reserved for the CTA band and one feature band */
-  --color-ink-soft: #1b2550;
-  --color-paper: #f7f5f0; /* warm cream — the default page surface */
-  --color-paper-deep: #edeae3; /* quiet banding on cream */
+  --color-ink: #0a1633; /* 18.0:1 on white */
+  --color-ink-soft: #16244a;
+  --color-paper: #ffffff;
+  --color-paper-deep: #eff1f5; /* cool banding */
 
-  /* accent — one blue, three jobs */
-  --color-accent: #1a5cae; /* TEXT on cream       · 6.2:1 */
-  --color-accent-fill: #2175d9; /* BUTTON FILL         · 4.6:1 white-on-blue */
-  --color-accent-fill-hover: #1a5cae; /* fill hover          · 6.2:1 white-on-blue */
-  --color-accent-on-ink: #6fa8ee; /* TEXT on navy        · 7.0:1 */
+  /* accent — one orange, three jobs, none interchangeable */
+  --color-accent: #b84e15; /* orange as TEXT on white   · 5.1:1 */
+  --color-accent-fill: #ff6a1a; /* FILL, carries ink text    · 6.3:1 */
+  --color-accent-fill-hover: #e85d12; /* fill hover                       */
+  --color-accent-on-ink: #ff8a45; /* orange as TEXT on ink     · 7.6:1 */
 
   /* text */
-  --color-slate: #5a6072; /* muted body on cream · 5.7:1 */
-  --color-line: #dedad2;
+  --color-slate: #5b6478; /* muted body on white       · 5.9:1 */
+  --color-line: #dde1e8;
   --color-line-ink: rgba(255, 255, 255, 0.16);
 
   --font-sans: "Hanken Grotesk", -apple-system, BlinkMacSystemFont,
@@ -39,10 +42,9 @@
 /* ------------------------------------------------------------------
    base
 
-   MUST stay inside @layer base. Tailwind v4 emits utilities in a
-   cascade layer, and unlayered rules beat layered ones regardless of
-   specificity — an unlayered `h2 { font-size }` silently overrides
-   every `text-[…]` utility on an h2.
+   MUST stay in @layer base. Tailwind v4 layers its utilities, and
+   unlayered rules beat layered ones regardless of specificity — an
+   unlayered `h2 { font-size }` silently defeats every text-[…] utility.
    ------------------------------------------------------------------ */
 
 @layer base {
@@ -56,14 +58,14 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 17px;
-    line-height: 1.62;
+    line-height: 1.65;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
   }
 
   ::selection {
     background: var(--color-accent-fill);
-    color: #fff;
+    color: var(--color-ink);
   }
 
   :focus-visible {
@@ -73,67 +75,66 @@
   }
 
   .on-ink :focus-visible {
-    outline-color: #fff;
+    outline-color: var(--color-accent-fill);
   }
 
-  /* Display type is light and tightly tracked — the calm corporate
-     register. Sentence case, no trailing full stops: the lowercase
-     full-stop mannerism belongs to the reference site, not this one. */
+  /* Large, tightly tracked, weight 500. Space does the work. */
   h1 {
-    font-size: clamp(2.4rem, 1.5rem + 3.6vw, 3.6rem);
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -0.04em;
+    font-size: clamp(2.6rem, 1.5rem + 4.4vw, 4.25rem);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.05em;
     text-wrap: balance;
   }
 
   h2 {
-    font-size: clamp(1.9rem, 1.4rem + 2vw, 2.5rem);
-    font-weight: 400;
-    line-height: 1.14;
-    letter-spacing: -0.035em;
+    font-size: clamp(2rem, 1.4rem + 2.4vw, 2.9rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.045em;
     text-wrap: balance;
   }
 
   h3 {
-    font-size: 1.4rem;
+    font-size: 1.45rem;
     font-weight: 500;
-    line-height: 1.25;
-    letter-spacing: -0.025em;
+    line-height: 1.22;
+    letter-spacing: -0.03em;
   }
 
   h4 {
     font-size: 1.0625rem;
     font-weight: 600;
     line-height: 1.35;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
   }
 }
 
 .t-eyebrow {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
 .t-lead {
-  font-size: 1.0625rem;
-  line-height: 1.68;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  letter-spacing: -0.012em;
 }
 
 .t-num {
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
-  letter-spacing: -0.03em;
+  letter-spacing: -0.05em;
 }
 
 /* ------------------------------------------------------------------
-   layout
+   layout — wider column and more air than the previous system
    ------------------------------------------------------------------ */
 
 :root {
-  --shell: 1140px;
+  --shell: 1180px;
   --gutter: max(1.25rem, calc((100vw - var(--shell)) / 2));
 }
 
@@ -141,10 +142,10 @@
   width: 100%;
   max-width: var(--shell);
   margin-inline: auto;
-  padding-inline: 1.25rem;
+  padding-inline: 1.5rem;
 }
 
-@media (min-width: 1240px) {
+@media (min-width: 1290px) {
   .shell {
     padding-inline: 0;
   }
@@ -152,20 +153,20 @@
 
 .split-l {
   padding-left: var(--gutter);
-  padding-right: 1.25rem;
+  padding-right: 1.5rem;
 }
 
 .split-r {
   padding-right: var(--gutter);
-  padding-left: 1.25rem;
+  padding-left: 1.5rem;
 }
 
 @media (min-width: 1024px) {
   .split-l {
-    padding-right: 4rem;
+    padding-right: 5rem;
   }
   .split-r {
-    padding-left: 4rem;
+    padding-left: 5rem;
   }
 }
 
@@ -185,18 +186,13 @@
   background-size: 100% 1px;
 }
 
-/* Short accent rule used to open a section. */
 .rule::before {
   content: "";
   display: block;
-  width: 44px;
+  width: 40px;
   height: 3px;
   background: var(--color-accent-fill);
-  margin-bottom: 1.25rem;
-}
-
-.on-ink .rule::before {
-  background: var(--color-accent-on-ink);
+  margin-bottom: 1.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

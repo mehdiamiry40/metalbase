@@ -66,7 +66,7 @@ export function Split({
     tone === "ink"
       ? "bg-ink text-paper on-ink"
       : tone === "accent"
-        ? "bg-accent-fill text-white on-ink"
+        ? "bg-accent-fill text-ink"
         : tone === "deep"
           ? "bg-paper-deep text-ink"
           : "bg-paper text-ink";
