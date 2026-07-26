@@ -163,17 +163,17 @@ export default function WhatWeBuyPage() {
       ))}
 
       {/* prep --------------------------------------------------------- */}
-      <section id="prep" className="on-ink scroll-mt-20 bg-ink py-16 text-paper lg:py-24">
+      <section id="prep" className="scroll-mt-20 bg-paper-deep py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>Six things that change what your load is worth</h2>
-            <p className="t-lead mt-5 text-paper/70">
+            <p className="t-lead mt-5 text-slate">
               None of these require equipment. Most take less than an hour and
               move the return by double digits.
             </p>
           </div>
           <div className="mt-12">
-            <Steps items={prep} tone="paper" columns={3} />
+            <Steps items={prep} columns={3} />
           </div>
         </div>
       </section>
@@ -195,7 +195,7 @@ export default function WhatWeBuyPage() {
               </Button>
             </div>
           </div>
-          <ul className="divide-y divide-line border-y-2 border-copper">
+          <ul className="divide-y divide-line border-y-2 border-accent-fill">
             {excluded.map((e) => (
               <li key={e} className="py-4 text-[0.98rem]">
                 {e}

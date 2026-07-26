@@ -12,23 +12,23 @@ const links = [
 
 export default function NotFound() {
   return (
-    <section className="on-ink bg-ink py-24 text-paper lg:py-32">
+    <section className="bg-paper py-24 lg:py-32">
       <div className="shell">
-        <p className="t-eyebrow text-copper">Error 404</p>
+        <p className="t-eyebrow text-accent">Error 404</p>
         <h1 className="mt-3 max-w-2xl">That page has already been recycled</h1>
-        <p className="t-lead mt-5 max-w-xl text-paper/70">
+        <p className="t-lead mt-5 max-w-xl text-slate">
           The link is broken or the page has moved. Here&rsquo;s where most people
           were heading.
         </p>
         <ul className="mt-10 grid max-w-2xl gap-x-10 gap-y-4 sm:grid-cols-2">
           {links.map((l) => (
-            <li key={l.href} className="border-t border-line-ink pt-3">
+            <li key={l.href} className="border-t border-line pt-3">
               <Link
                 href={l.href}
                 className="group inline-flex items-center gap-2 font-semibold"
               >
                 {l.label}
-                <ArrowRight className="h-4 w-4 text-copper transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-1" />
               </Link>
             </li>
           ))}

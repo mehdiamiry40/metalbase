@@ -26,12 +26,12 @@ export default function ContactPage() {
 
           <aside className="space-y-8 lg:sticky lg:top-24">
             <div className="border-2 border-ink p-7">
-              <p className="t-eyebrow text-copper">Fastest route</p>
+              <p className="t-eyebrow text-accent">Fastest route</p>
               {company.phone ? (
                 <>
                   <a
                     href={`tel:${company.phone.replace(/\s/g, "")}`}
-                    className="mt-2 block text-[1.9rem] font-medium leading-none tracking-[-0.03em] hover:text-copper"
+                    className="mt-2 block text-[1.9rem] font-medium leading-none tracking-[-0.03em] hover:text-accent"
                   >
                     {company.phoneLabel ?? company.phone}
                   </a>
@@ -47,7 +47,7 @@ export default function ContactPage() {
               {company.email && (
                 <a
                   href={`mailto:${company.email}`}
-                  className="mt-4 inline-block font-semibold text-copper u-link"
+                  className="mt-4 inline-block font-semibold text-accent u-link"
                 >
                   {company.email}
                 </a>
@@ -75,7 +75,7 @@ export default function ContactPage() {
               </ol>
             </div>
 
-            <div className="border-l-4 border-copper bg-paper-deep p-6">
+            <div className="border-l-4 border-accent-fill bg-paper-deep p-6">
               <p className="text-[0.94rem] leading-relaxed text-ink">
                 <strong className="font-semibold">Before you visit:</strong>{" "}
                 bring current photo ID and your bank details. Queensland law

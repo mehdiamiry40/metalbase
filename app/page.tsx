@@ -24,23 +24,16 @@ const steps = [
 export default function Home() {
   return (
     <>
-      {/* ---------------------------------------------------------- hero */}
-      <section className="on-ink relative isolate bg-ink text-paper">
-        <div className="absolute inset-0 -z-10">
-          <Photo
-            name="yard-grab"
-            priority
-            sizes="100vw"
-            alt="A material handler working a pile of mixed scrap steel at a recycling yard"
-          />
-          <span aria-hidden="true" className="absolute inset-0 bg-ink/85" />
-        </div>
-
-        <div className="shell py-20 lg:py-28">
+      {/* ---------------------------------------------------------- hero
+          A compact navy band rather than a full-bleed darkened photo.
+          The photography still carries the page — it just does it in the
+          splits below, where it doesn't have to sit under a scrim. */}
+      <section className="on-ink bg-ink text-paper">
+        <div className="shell py-16 lg:py-20">
           <div className="max-w-3xl">
             <Eyebrow tone="paper">Scrap metal recycling · Brisbane</Eyebrow>
             <h1>Your metal is worth more than the bin it&rsquo;s sitting in</h1>
-            <p className="t-lead mt-6 max-w-xl text-paper">
+            <p className="t-lead mt-6 max-w-xl text-paper/85">
               {company.name} buys, processes and remarkets ferrous and
               non-ferrous scrap across greater Brisbane. Graded in front of you,
               weighed on a certified bridge, paid by EFT.
@@ -51,12 +44,29 @@ export default function Home() {
                 See what we buy
               </Button>
             </div>
-            <p className="mt-7 text-[0.9rem] text-paper/85">
-              No minimum load · Graded before it&rsquo;s tipped · Paid by EFT, never cash
-            </p>
           </div>
         </div>
       </section>
+
+      <div className="border-b border-line bg-paper-deep">
+        <div className="shell flex flex-wrap gap-x-8 gap-y-2 py-4 text-[0.9rem] text-slate">
+          <span>No minimum load</span>
+          <span aria-hidden="true">·</span>
+          <span>Graded before it&rsquo;s tipped</span>
+          <span aria-hidden="true">·</span>
+          <span>Paid by EFT, never cash</span>
+        </div>
+      </div>
+
+      {/* the yard shot now runs full-bleed with nothing over it */}
+      <div className="relative h-[300px] w-full lg:h-[440px]">
+        <Photo
+          name="yard-grab"
+          priority
+          sizes="100vw"
+          alt="A material handler working a pile of mixed scrap steel at a recycling yard"
+        />
+      </div>
 
       {/* ------------------------------------------------- two audiences */}
       <section className="bg-paper py-16 lg:py-24">
@@ -123,14 +133,14 @@ export default function Home() {
                 className="group grid gap-4 py-8 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-12"
               >
                 <div>
-                  <p className="t-eyebrow text-copper">{s.audience}</p>
-                  <h3 className="mt-2 group-hover:text-copper">{s.title}</h3>
+                  <p className="t-eyebrow text-accent">{s.audience}</p>
+                  <h3 className="mt-2 group-hover:text-accent">{s.title}</h3>
                 </div>
                 <div>
                   <p className="text-slate">{s.blurb}</p>
                   <span className="mt-4 inline-flex items-center gap-2 text-[0.94rem] font-semibold">
                     Read more
-                    <ArrowRight className="h-4 w-4 text-copper transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
               </Link>
@@ -140,16 +150,16 @@ export default function Home() {
       </section>
 
       {/* --------------------------------------------------- how it works */}
-      <section className="on-ink bg-ink py-16 text-paper lg:py-24">
+      <section className="bg-paper-deep py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>How a weigh-in works</h2>
-            <p className="t-lead mt-5 text-paper/70">
+            <p className="t-lead mt-5 text-slate">
               About fifteen minutes end to end for a ute or trailer load.
             </p>
           </div>
           <div className="mt-12">
-            <Steps items={steps} tone="paper" />
+            <Steps items={steps} />
           </div>
           {stats.length > 0 && (
             <div className="mt-16 border-t border-line-ink pt-14">

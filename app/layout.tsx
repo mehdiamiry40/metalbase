@@ -87,10 +87,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
-        <meta name="theme-color" content="#14171a" />
+        <meta name="theme-color" content="#0f1941" />
         <script
           type="application/ld+json"
           // Serialised from a typed object above; no user input reaches this.
@@ -100,7 +100,7 @@ export default function RootLayout({
       <body>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-copper focus:px-5 focus:py-3 focus:font-semibold focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-accent-fill focus:px-5 focus:py-3 focus:font-semibold focus:text-white"
         >
           Skip to content
         </a>

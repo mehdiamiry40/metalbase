@@ -88,17 +88,17 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <section id="safety" className="on-ink scroll-mt-20 bg-ink py-16 text-paper lg:py-24">
+      <section id="safety" className="scroll-mt-20 bg-paper-deep py-16 lg:py-24">
         <div className="shell grid gap-12 lg:grid-cols-2">
           <div className="rule">
             <h2>A scrap yard is a heavy industrial site</h2>
-            <p className="t-lead mt-5 text-paper/70">
+            <p className="t-lead mt-5 text-slate">
               Material handlers, mobile shears, moving trucks and unpredictable
               loads. We treat every visitor as somebody who has never been in one
               before, because most of them haven&rsquo;t.
             </p>
           </div>
-          <TickList items={safety} tone="paper" className="lg:pt-4" />
+          <TickList items={safety} className="lg:pt-4" />
         </div>
       </section>
 

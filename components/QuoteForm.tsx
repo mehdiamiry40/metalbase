@@ -35,9 +35,9 @@ const volumes = [
 ];
 
 const field =
-  "w-full rounded-[2px] border border-line bg-white px-4 py-3 text-[1rem] text-ink outline-none transition-colors placeholder:text-slate focus:border-copper";
+  "w-full rounded-[2px] border border-line bg-white px-4 py-3 text-[1rem] text-ink outline-none transition-colors placeholder:text-slate focus:border-accent-fill";
 const labelCls = "mb-2 block text-[0.9rem] font-semibold text-ink";
-const errCls = "mt-1.5 text-[0.85rem] text-copper";
+const errCls = "mt-1.5 text-[0.85rem] text-accent";
 
 type State = "idle" | "sending" | "sent" | "sent-undelivered" | "error";
 
@@ -99,8 +99,8 @@ export default function QuoteForm() {
 
   if (state === "sent" || state === "sent-undelivered") {
     return (
-      <div className="border-2 border-copper bg-white p-10" role="status">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-copper">
+      <div className="border-2 border-accent-fill bg-white p-10" role="status">
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-fill">
           <Tick className="h-6 w-6 text-white" />
         </span>
         <h3 className="mt-5 text-[1.5rem]">Thanks — that&rsquo;s with the trade desk</h3>
@@ -109,7 +109,7 @@ export default function QuoteForm() {
         </p>
 
         {state === "sent-undelivered" && (
-          <div className="mt-6 border-l-4 border-copper bg-paper-deep p-5">
+          <div className="mt-6 border-l-4 border-accent-fill bg-paper-deep p-5">
             <p className="text-[0.94rem] leading-relaxed text-ink">
               <strong className="font-semibold">Heads up:</strong> no email or
               webhook is configured on this deployment yet, so your enquiry was
@@ -127,7 +127,7 @@ export default function QuoteForm() {
             setState("idle");
             setPicked([]);
           }}
-          className="mt-6 font-semibold text-copper u-link"
+          className="mt-6 font-semibold text-accent u-link"
         >
           Send another enquiry
         </button>
@@ -140,7 +140,7 @@ export default function QuoteForm() {
   return (
     <form onSubmit={onSubmit} noValidate className="border border-line bg-white p-7 lg:p-9">
       {state === "error" && (
-        <div role="alert" className="mb-6 border-l-4 border-copper bg-paper-deep p-4 text-[0.94rem]">
+        <div role="alert" className="mb-6 border-l-4 border-accent-fill bg-paper-deep p-4 text-[0.94rem]">
           {message}
         </div>
       )}
@@ -244,8 +244,8 @@ export default function QuoteForm() {
                   onClick={() => toggle(m)}
                   className={`rounded-[2px] border px-3.5 py-2 text-[0.88rem] font-medium transition-colors ${
                     on
-                      ? "border-copper bg-copper text-white"
-                      : "border-line text-slate hover:border-copper hover:text-copper"
+                      ? "border-accent-fill bg-accent-fill text-white"
+                      : "border-line text-slate hover:border-accent-fill hover:text-accent"
                   }`}
                 >
                   {m}
@@ -279,7 +279,7 @@ export default function QuoteForm() {
         <button
           type="submit"
           disabled={busy}
-          className="inline-flex items-center gap-2 rounded-[2px] bg-copper px-7 py-3.5 font-semibold text-white transition-colors hover:bg-copper-bright disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-[2px] bg-accent-fill px-7 py-3.5 font-semibold text-white transition-colors hover:bg-accent-fill-hover disabled:cursor-not-allowed disabled:opacity-60"
         >
           {busy ? "Sending…" : "Send enquiry"}
           {!busy && <ArrowRight className="h-4 w-4" />}

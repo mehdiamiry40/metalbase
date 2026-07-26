@@ -1,59 +1,48 @@
 @import "tailwindcss";
 
 /* ==================================================================
-   MetalBase design system
+   MetalBase design system — corporate blue
 
-   Deliberately NOT Randstad. The previous version copied their navy
-   (#0F1941), blue (#2175D9), cream, and the lowercase-heading-with-a-
-   full-stop mannerism. All three are gone:
+   Every colour below is verified against WCAG AA. Three earlier passes
+   failed because values were reasoned about rather than measured, so
+   the contrast ratio is recorded next to each one and re-checked with
+   axe against the deployed site.
 
-     - palette moved to steel / copper / warm paper
-     - display type is a squarer industrial grotesque at weight 500,
-       not a light humanist face at 400
-     - headings are sentence case, no trailing full stops
-
-   What was kept is craft, not brand: tight display tracking, a strict
-   three-colour discipline, no drop shadows, full-bleed splits.
+   The key structural rule: ONE accent needs THREE values. A blue dark
+   enough to pass as text on cream is too dark to read on navy, and the
+   blue that looks right as a button fill passes as a fill but not as
+   text. They are not interchangeable — see --color-accent* below.
    ================================================================== */
 
 @theme {
   /* surfaces */
-  --color-ink: #14171a; /* near-black steel — dark sections */
-  --color-ink-soft: #22272c; /* raised panels on ink */
-  --color-paper: #f4f1ea; /* warm off-white — default page */
-  --color-paper-deep: #e8e3d8; /* subtle banding on paper */
+  --color-ink: #0f1941; /* navy — reserved for the CTA band and one feature band */
+  --color-ink-soft: #1b2550;
+  --color-paper: #f7f5f0; /* warm cream — the default page surface */
+  --color-paper-deep: #edeae3; /* quiet banding on cream */
 
-  /* Accent — copper, the highest-value metal over the weighbridge.
-     ONE accent needs TWO values, because a copper dark enough to pass
-     on paper is far too dark to pass on ink. Verified with axe:
-     --copper on ink measured 3.07:1 across 18 nodes.
-
-       on paper → --color-copper        5.2:1
-       on ink   → --color-copper-on-ink 5.7:1
-
-     Use `text-copper` on light surfaces and `text-copper-on-ink` on
-     dark ones. Never the other way round. */
-  --color-copper: #a34a28; /* 5.2:1 on paper · 5.9:1 white-on-copper */
-  --color-copper-bright: #bd5730; /* hover fill · 4.6:1 white-on-copper */
-  --color-copper-on-ink: #d9773f; /* 5.7:1 on ink · do not use on paper */
+  /* accent — one blue, three jobs */
+  --color-accent: #1a5cae; /* TEXT on cream       · 6.2:1 */
+  --color-accent-fill: #2175d9; /* BUTTON FILL         · 4.6:1 white-on-blue */
+  --color-accent-fill-hover: #1a5cae; /* fill hover          · 6.2:1 white-on-blue */
+  --color-accent-on-ink: #6fa8ee; /* TEXT on navy        · 7.0:1 */
 
   /* text */
-  --color-slate: #5c636e;
-  --color-line: #d9d3c7;
-  --color-line-ink: rgba(255, 255, 255, 0.14);
+  --color-slate: #5a6072; /* muted body on cream · 5.7:1 */
+  --color-line: #dedad2;
+  --color-line-ink: rgba(255, 255, 255, 0.16);
 
-  --font-sans: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Helvetica, Arial, sans-serif;
+  --font-sans: "Hanken Grotesk", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 /* ------------------------------------------------------------------
    base
 
-   These MUST live in @layer base. Tailwind v4 emits utilities inside
-   a cascade layer, and unlayered rules beat layered ones regardless of
-   specificity — so an unlayered `h2 { font-size }` silently overrides
-   every `text-[…]` utility on an h2. Layering restores normal
-   precedence so per-element overrides work.
+   MUST stay inside @layer base. Tailwind v4 emits utilities in a
+   cascade layer, and unlayered rules beat layered ones regardless of
+   specificity — an unlayered `h2 { font-size }` silently overrides
+   every `text-[…]` utility on an h2.
    ------------------------------------------------------------------ */
 
 @layer base {
@@ -67,19 +56,18 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 17px;
-    line-height: 1.6;
+    line-height: 1.62;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
   }
 
   ::selection {
-    background: var(--color-copper);
+    background: var(--color-accent-fill);
     color: #fff;
   }
 
-  /* Visible on every interactive element, on both surfaces. */
   :focus-visible {
-    outline: 3px solid var(--color-copper);
+    outline: 3px solid var(--color-accent-fill);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -88,28 +76,30 @@
     outline-color: #fff;
   }
 
-  /* type — industrial grotesque, weight 500, sentence case */
+  /* Display type is light and tightly tracked — the calm corporate
+     register. Sentence case, no trailing full stops: the lowercase
+     full-stop mannerism belongs to the reference site, not this one. */
   h1 {
-    font-size: clamp(2.35rem, 1.5rem + 3.4vw, 3.5rem);
-    font-weight: 500;
-    line-height: 1.04;
-    letter-spacing: -0.032em;
+    font-size: clamp(2.4rem, 1.5rem + 3.6vw, 3.6rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
     text-wrap: balance;
   }
 
   h2 {
-    font-size: clamp(1.85rem, 1.4rem + 1.8vw, 2.4rem);
-    font-weight: 500;
-    line-height: 1.12;
-    letter-spacing: -0.028em;
+    font-size: clamp(1.9rem, 1.4rem + 2vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1.14;
+    letter-spacing: -0.035em;
     text-wrap: balance;
   }
 
   h3 {
-    font-size: 1.375rem;
+    font-size: 1.4rem;
     font-weight: 500;
     line-height: 1.25;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
   }
 
   h4 {
@@ -120,7 +110,6 @@
   }
 }
 
-/* Small tracked-out label. Distinct from Randstad's oversized eyebrow. */
 .t-eyebrow {
   font-size: 0.75rem;
   font-weight: 600;
@@ -130,10 +119,9 @@
 
 .t-lead {
   font-size: 1.0625rem;
-  line-height: 1.65;
+  line-height: 1.68;
 }
 
-/* Tabular figures for the price board so columns align. */
 .t-num {
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
@@ -162,8 +150,6 @@
   }
 }
 
-/* Copy column inside one half of a full-bleed 50/50 split, aligned to
-   the same gutter as .shell so nothing looks off-grid. */
 .split-l {
   padding-left: var(--gutter);
   padding-right: 1.25rem;
@@ -199,18 +185,18 @@
   background-size: 100% 1px;
 }
 
-/* A short copper rule used to open a section. */
+/* Short accent rule used to open a section. */
 .rule::before {
   content: "";
   display: block;
   width: 44px;
   height: 3px;
-  background: var(--color-copper);
+  background: var(--color-accent-fill);
   margin-bottom: 1.25rem;
 }
 
 .on-ink .rule::before {
-  background: var(--color-copper-on-ink);
+  background: var(--color-accent-on-ink);
 }
 
 @media (prefers-reduced-motion: reduce) {

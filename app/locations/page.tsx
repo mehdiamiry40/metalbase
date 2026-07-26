@@ -44,7 +44,7 @@ export default function LocationsPage() {
               <div key={l.id} id={l.id} className="grid scroll-mt-20 gap-4 py-8 md:grid-cols-[minmax(0,18rem)_1fr] md:gap-12">
                 <div>
                   <h3>{l.name}</h3>
-                  <p className="t-eyebrow mt-2 text-copper">{l.role}</p>
+                  <p className="t-eyebrow mt-2 text-accent">{l.role}</p>
                 </div>
                 <div className="space-y-3">
                   {l.address && <p className="text-[1.02rem]">{l.address}</p>}
@@ -63,7 +63,7 @@ export default function LocationsPage() {
                       href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(l.address)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block pt-2 font-semibold text-copper u-link"
+                      className="inline-block pt-2 font-semibold text-accent u-link"
                     >
                       Directions
                     </a>
@@ -74,7 +74,7 @@ export default function LocationsPage() {
           </div>
         ) : (
           <div className="mt-10 border-2 border-dashed border-line p-8">
-            <p className="t-eyebrow text-copper">Not yet published</p>
+            <p className="t-eyebrow text-accent">Not yet published</p>
             <p className="mt-3 max-w-2xl text-[0.98rem] leading-relaxed text-slate">
               Yard addresses and opening hours will be listed here once sites are
               confirmed. We&rsquo;d rather leave this blank than send someone to an
@@ -90,16 +90,16 @@ export default function LocationsPage() {
       </Section>
 
       {/* how it works ------------------------------------------------- */}
-      <section id="how-it-works" className="on-ink scroll-mt-20 bg-ink py-16 text-paper lg:py-24">
+      <section id="how-it-works" className="scroll-mt-20 bg-paper-deep py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>How a weigh-in works</h2>
-            <p className="t-lead mt-5 text-paper/70">
+            <p className="t-lead mt-5 text-slate">
               About fifteen minutes end to end for a ute or trailer load.
             </p>
           </div>
           <div className="mt-12">
-            <Steps items={steps} tone="paper" />
+            <Steps items={steps} />
           </div>
         </div>
       </section>
@@ -125,7 +125,7 @@ export default function LocationsPage() {
             </p>
           </div>
 
-          <div id="payment" className="scroll-mt-20 border-2 border-copper p-8">
+          <div id="payment" className="scroll-mt-20 border-2 border-accent-fill p-8">
             <Eyebrow>Getting paid</Eyebrow>
             <h2 className="text-[1.6rem]">Why nobody in Queensland can pay you cash</h2>
             <div className="mt-5 space-y-4 text-[0.97rem] leading-relaxed text-slate">

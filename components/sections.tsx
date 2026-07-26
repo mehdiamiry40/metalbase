@@ -9,7 +9,7 @@ import { ArrowRight, Breadcrumb, Eyebrow } from "@/components/ui";
    site stays consistent — no per-page card styling.
    ------------------------------------------------------------------ */
 
-/** Dark banner at the top of an inner page. */
+/** Page introduction. Light by design — navy is reserved for the CTA. */
 export function PageHeader({
   eyebrow,
   title,
@@ -24,23 +24,17 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <>
-      <div className="border-b border-line bg-paper-deep">
-        <div className="shell pt-6">
-          <Breadcrumb trail={trail} />
-        </div>
+    <section className="border-b border-line bg-paper">
+      <div className="shell pt-6">
+        <Breadcrumb trail={trail} />
       </div>
-      <section className="on-ink bg-ink text-paper">
-        <div className="shell py-14 lg:py-20">
-          <Eyebrow tone="paper">{eyebrow}</Eyebrow>
-          <h1 className="max-w-4xl">{title}</h1>
-          {intro && (
-            <p className="t-lead mt-6 max-w-2xl text-paper/70">{intro}</p>
-          )}
-          {children && <div className="mt-9">{children}</div>}
-        </div>
-      </section>
-    </>
+      <div className="shell pb-14 lg:pb-20">
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <h1 className="max-w-4xl">{title}</h1>
+        {intro && <p className="t-lead mt-6 max-w-2xl text-slate">{intro}</p>}
+        {children && <div className="mt-9">{children}</div>}
+      </div>
+    </section>
   );
 }
 
@@ -62,7 +56,7 @@ export function Split({
   photoAlt?: string;
   /** Which side the photograph sits on. */
   side?: "left" | "right";
-  tone?: "paper" | "deep" | "ink" | "copper";
+  tone?: "paper" | "deep" | "ink" | "accent";
   eyebrow?: string;
   title: string;
   children: ReactNode;
@@ -71,8 +65,8 @@ export function Split({
   const bg =
     tone === "ink"
       ? "bg-ink text-paper on-ink"
-      : tone === "copper"
-        ? "bg-copper text-white on-ink"
+      : tone === "accent"
+        ? "bg-accent-fill text-white on-ink"
         : tone === "deep"
           ? "bg-paper-deep text-ink"
           : "bg-paper text-ink";
@@ -86,14 +80,14 @@ export function Split({
       <div className={`${bg} ${pad} ${copyOrder} order-2 py-14 lg:py-20`}>
         <div className="max-w-lg">
           {eyebrow && (
-            <Eyebrow tone={tone === "ink" || tone === "copper" ? "paper" : "copper"}>
+            <Eyebrow tone={tone === "ink" || tone === "accent" ? "paper" : "accent"}>
               {eyebrow}
             </Eyebrow>
           )}
           <h2>{title}</h2>
           <div
             className={
-              tone === "ink" || tone === "copper" ? "text-paper/80" : "text-slate"
+              tone === "ink" || tone === "accent" ? "text-paper/80" : "text-slate"
             }
           >
             {children}
@@ -153,8 +147,8 @@ export function Steps({
   return (
     <ol className={`grid gap-x-10 gap-y-10 sm:grid-cols-2 ${cols}`}>
       {items.map((s, i) => (
-        <li key={s.title} className={`border-t-2 pt-5 ${dark ? "border-copper-on-ink" : "border-ink/15"}`}>
-          <span className={`t-num text-[0.95rem] font-semibold ${dark ? "text-copper-on-ink" : "text-copper"}`}>
+        <li key={s.title} className={`border-t-2 pt-5 ${dark ? "border-accent-on-ink" : "border-ink/15"}`}>
+          <span className={`t-num text-[0.95rem] font-semibold ${dark ? "text-accent-on-ink" : "text-accent"}`}>
             {String(i + 1).padStart(2, "0")}
           </span>
           <h3 className="mt-2 text-[1.15rem]">{s.title}</h3>

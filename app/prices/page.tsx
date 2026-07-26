@@ -124,17 +124,17 @@ export default function PricesPage() {
       ))}
 
       {/* grading ------------------------------------------------------ */}
-      <section id="grading" className="on-ink bg-ink py-16 text-paper lg:py-24">
+      <section id="grading" className="bg-paper-deep py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>How a load gets graded</h2>
-            <p className="t-lead mt-5 text-paper/70">
+            <p className="t-lead mt-5 text-slate">
               Grading is where most yards lose people&rsquo;s trust. Ours happens
               in front of you, before the load is tipped.
             </p>
           </div>
           <div className="mt-12">
-            <Steps items={grading} tone="paper" />
+            <Steps items={grading} />
           </div>
         </div>
       </section>

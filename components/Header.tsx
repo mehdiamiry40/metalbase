@@ -96,7 +96,7 @@ export default function Header() {
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     onClick={() => setOpenMenu(isOpen ? null : item.label)}
-                    className="flex items-center gap-1.5 whitespace-nowrap px-3.5 text-[0.95rem] font-medium text-ink hover:text-copper"
+                    className="flex items-center gap-1.5 whitespace-nowrap px-3.5 text-[0.95rem] font-medium text-ink hover:text-accent"
                   >
                     {item.label}
                     <Chevron
@@ -129,7 +129,7 @@ export default function Header() {
                             <Link
                               href={col.href}
                               onClick={close}
-                              className="u-link text-[0.95rem] font-semibold text-ink hover:text-copper"
+                              className="u-link text-[0.95rem] font-semibold text-ink hover:text-accent"
                             >
                               {col.label}
                             </Link>
@@ -139,7 +139,7 @@ export default function Header() {
                                   <Link
                                     href={c.href}
                                     onClick={close}
-                                    className="u-link text-[0.9rem] text-slate hover:text-copper"
+                                    className="u-link text-[0.9rem] text-slate hover:text-accent"
                                   >
                                     {c.label}
                                   </Link>
@@ -160,14 +160,14 @@ export default function Header() {
             {company.phone && (
               <a
                 href={`tel:${company.phone.replace(/\s/g, "")}`}
-                className="hidden whitespace-nowrap text-[0.95rem] font-medium text-ink hover:text-copper sm:inline"
+                className="hidden whitespace-nowrap text-[0.95rem] font-medium text-ink hover:text-accent sm:inline"
               >
                 {company.phoneLabel ?? company.phone}
               </a>
             )}
             <Link
               href="/contact"
-              className="hidden rounded-[2px] bg-copper px-5 py-2.5 text-[0.9rem] font-semibold text-white transition-colors hover:bg-copper-bright sm:inline-block"
+              className="hidden rounded-[2px] bg-accent-fill px-5 py-2.5 text-[0.9rem] font-semibold text-white transition-colors hover:bg-accent-fill-hover sm:inline-block"
             >
               Get a quote
             </Link>
@@ -237,7 +237,7 @@ export default function Header() {
             <Link
               href="/contact"
               onClick={() => setMobileOpen(false)}
-              className="inline-block rounded-[2px] bg-copper px-7 py-3.5 font-semibold text-white"
+              className="inline-block rounded-[2px] bg-accent-fill px-7 py-3.5 font-semibold text-white"
             >
               Get a quote
             </Link>

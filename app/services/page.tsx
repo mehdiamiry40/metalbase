@@ -44,12 +44,12 @@ export default function ServicesPage() {
                 <Photo name={s.photo} sizes="(max-width: 1024px) 100vw, 22rem" priority={i === 0} />
               </div>
               <div className="self-center">
-                <p className="t-eyebrow text-copper">{s.audience}</p>
-                <h2 className="mt-2 group-hover:text-copper">{s.title}</h2>
+                <p className="t-eyebrow text-accent">{s.audience}</p>
+                <h2 className="mt-2 group-hover:text-accent">{s.title}</h2>
                 <p className="t-lead mt-4 max-w-2xl text-slate">{s.blurb}</p>
                 <span className="mt-6 inline-flex items-center gap-2 font-semibold">
                   Read the detail
-                  <ArrowRight className="h-4 w-4 text-copper transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-1" />
                 </span>
               </div>
             </Link>
@@ -57,18 +57,17 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      <section className="on-ink bg-ink py-16 text-paper lg:py-24">
+      <section className="bg-paper-deep py-16 lg:py-24">
         <div className="shell grid gap-12 lg:grid-cols-2">
           <div className="rule">
             <h2>The boring things done properly</h2>
-            <p className="t-lead mt-5 text-paper/70">
+            <p className="t-lead mt-5 text-slate">
               Nobody switches scrap merchants for a rebrand. They switch because
               the bin turned up, the docket was right and the money landed when
               it was supposed to.
             </p>
             <TickList
               className="mt-8"
-              tone="paper"
               items={[
                 "A named account manager who knows your site",
                 "Dockets with net weight and grade, not a monthly guess",

@@ -81,17 +81,17 @@ export default async function ServiceDetail({
         />
       </Section>
 
-      <section className="on-ink bg-ink py-16 text-paper lg:py-24">
+      <section className="bg-paper-deep py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>From first call to first rebate</h2>
-            <p className="t-lead mt-5 text-paper/70">
+            <p className="t-lead mt-5 text-slate">
               Usually two to three weeks, faster if the site is already
               segregated.
             </p>
           </div>
           <div className="mt-12">
-            <Steps items={onboarding} tone="paper" />
+            <Steps items={onboarding} />
           </div>
         </div>
       </section>
@@ -105,12 +105,12 @@ export default async function ServiceDetail({
               href={`/services/${o.slug}`}
               className="group grid gap-3 py-7 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-12"
             >
-              <h3 className="group-hover:text-copper">{o.title}</h3>
+              <h3 className="group-hover:text-accent">{o.title}</h3>
               <div>
                 <p className="text-slate">{o.blurb}</p>
                 <span className="mt-3 inline-flex items-center gap-2 text-[0.94rem] font-semibold">
                   Read more
-                  <ArrowRight className="h-4 w-4 text-copper transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-1" />
                 </span>
               </div>
             </Link>

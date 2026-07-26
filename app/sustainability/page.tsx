@@ -85,20 +85,20 @@ export default function SustainabilityPage() {
       </Split>
 
       {/* compliance --------------------------------------------------- */}
-      <section id="compliance" className="on-ink scroll-mt-20 bg-ink py-16 text-paper lg:py-24">
+      <section id="compliance" className="scroll-mt-20 bg-paper-deep py-16 lg:py-24">
         <div className="shell max-w-3xl">
           <div className="rule">
             <h2>Licensing and accreditation</h2>
           </div>
-          <p className="t-lead mt-5 text-paper/70">
+          <p className="t-lead mt-5 text-slate">
             Scrap metal buying in Queensland requires a second-hand dealer
             licence, and metal recovery above threshold volumes is an
             environmentally relevant activity requiring an environmental
             authority.
           </p>
           <div className="mt-8 border-2 border-dashed border-white/25 p-7">
-            <p className="t-eyebrow text-copper-on-ink">Not yet published</p>
-            <p className="mt-3 text-[0.98rem] leading-relaxed text-paper/70">
+            <p className="t-eyebrow text-accent-on-ink">Not yet published</p>
+            <p className="mt-3 text-[0.98rem] leading-relaxed text-slate">
               Licence numbers, environmental authority references and any
               management-system certifications will be listed here once issued.
               We would rather show nothing than claim an accreditation we

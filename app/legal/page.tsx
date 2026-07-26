@@ -54,7 +54,7 @@ export default function LegalPage() {
       />
 
       <Section>
-        <div className="border-l-4 border-copper bg-paper-deep p-6">
+        <div className="border-l-4 border-accent-fill bg-paper-deep p-6">
           <p className="text-[0.95rem] leading-relaxed text-ink">
             <strong className="font-semibold">Draft wording.</strong> This is a
             starting point, not legal advice. Have it reviewed by a lawyer
@@ -69,7 +69,7 @@ export default function LegalPage() {
             <ul className="mt-4 space-y-2.5">
               {sections.map((s) => (
                 <li key={s.id}>
-                  <Link href={`#${s.id}`} className="u-link font-medium hover:text-copper">
+                  <Link href={`#${s.id}`} className="u-link font-medium hover:text-accent">
                     {s.h}
                   </Link>
                 </li>
@@ -99,7 +99,7 @@ export default function LegalPage() {
                 {company.email ? (
                   <>
                     , or email{" "}
-                    <a href={`mailto:${company.email}`} className="font-semibold text-copper u-link">
+                    <a href={`mailto:${company.email}`} className="font-semibold text-accent u-link">
                       {company.email}
                     </a>
                   </>

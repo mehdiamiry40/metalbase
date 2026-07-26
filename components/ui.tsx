@@ -65,8 +65,8 @@ const btnBase =
   "inline-flex items-center justify-center gap-2 rounded-[2px] px-7 py-3.5 text-[0.95rem] font-semibold tracking-[-0.01em] transition-colors duration-150";
 
 const variants: Record<string, string> = {
-  primary: "bg-copper text-white hover:bg-copper-bright",
-  ink: "bg-ink text-paper hover:bg-copper",
+  primary: "bg-accent-fill text-white hover:bg-accent-fill-hover",
+  ink: "bg-ink text-paper hover:bg-accent-fill",
   outline: "border-2 border-ink text-ink hover:bg-ink hover:text-paper",
   outlinePaper: "border-2 border-paper text-paper hover:bg-paper hover:text-ink",
 };
@@ -99,11 +99,11 @@ export function ArrowLink({
 }: {
   href: string;
   children: ReactNode;
-  tone?: "ink" | "paper" | "copper";
+  tone?: "ink" | "paper" | "accent";
   className?: string;
 }) {
   const colour =
-    tone === "paper" ? "text-paper" : tone === "copper" ? "text-copper" : "text-ink";
+    tone === "paper" ? "text-paper" : tone === "accent" ? "text-accent" : "text-ink";
   return (
     <Link
       href={href}
@@ -121,7 +121,7 @@ const tones: Record<string, string> = {
   paper: "bg-paper text-ink",
   deep: "bg-paper-deep text-ink",
   ink: "bg-ink text-paper on-ink",
-  copper: "bg-copper text-white",
+  accent: "bg-accent-fill text-white",
 };
 
 export function Section({
@@ -144,13 +144,13 @@ export function Section({
 
 export function Eyebrow({
   children,
-  tone = "copper",
+  tone = "accent",
 }: {
   children: ReactNode;
-  tone?: "copper" | "paper" | "slate";
+  tone?: "accent" | "paper" | "slate";
 }) {
   const colour =
-    tone === "paper" ? "text-copper-on-ink" : tone === "slate" ? "text-slate" : "text-copper";
+    tone === "paper" ? "text-accent-on-ink" : tone === "slate" ? "text-slate" : "text-accent";
   return <p className={`t-eyebrow mb-3 ${colour}`}>{children}</p>;
 }
 
@@ -168,7 +168,7 @@ export function SectionHead({
   const dark = tone === "paper";
   return (
     <div className="mb-12 max-w-3xl">
-      {eyebrow && <Eyebrow tone={dark ? "paper" : "copper"}>{eyebrow}</Eyebrow>}
+      {eyebrow && <Eyebrow tone={dark ? "paper" : "accent"}>{eyebrow}</Eyebrow>}
       <h2>{title}</h2>
       {intro && (
         <p className={`t-lead mt-5 ${dark ? "text-paper/70" : "text-slate"}`}>{intro}</p>
@@ -192,7 +192,7 @@ export function StatBand({
   return (
     <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
       {items.map((s) => (
-        <div key={s.label} className={`border-t-2 pt-5 ${dark ? "border-copper-on-ink" : "border-ink/20"}`}>
+        <div key={s.label} className={`border-t-2 pt-5 ${dark ? "border-accent-on-ink" : "border-ink/20"}`}>
           <p className={`t-num text-[2.5rem] font-medium leading-none ${dark ? "text-paper" : "text-ink"}`}>
             {s.value}
           </p>
@@ -213,7 +213,7 @@ export function Breadcrumb({ trail }: { trail: { label: string; href?: string }[
           <li key={t.label} className="flex items-center gap-2">
             {i > 0 && <span aria-hidden="true">/</span>}
             {t.href ? (
-              <Link href={t.href} className="u-link hover:text-copper">
+              <Link href={t.href} className="u-link hover:text-accent">
                 {t.label}
               </Link>
             ) : (
@@ -273,7 +273,7 @@ export function TickList({
       {items.map((i) => (
         <li key={i} className="flex items-start gap-3">
           <Tick
-            className={`mt-1 h-4 w-4 shrink-0 ${tone === "paper" ? "text-copper-on-ink" : "text-copper"}`}
+            className={`mt-1 h-4 w-4 shrink-0 ${tone === "paper" ? "text-accent-on-ink" : "text-accent"}`}
           />
           <span className={tone === "paper" ? "text-paper/85" : "text-ink"}>{i}</span>
         </li>
