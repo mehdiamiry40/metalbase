@@ -9,6 +9,14 @@ npm run dev        # http://localhost:3000
 
 Node 18.18+. Verified on Node 22 — clean `next build`, 19 routes.
 
+## Security
+
+Pinned to `next@15.5.22` to remediate React2Shell (CVE-2025-55182 /
+CVE-2025-66478, CVSS 10.0) and the related RSC advisories, plus `sharp` and
+`postcss` overrides for two vulnerable packages Next.js still vendors.
+`npm audit`: 0 vulnerabilities. See [SECURITY.md](./SECURITY.md) before
+upgrading Next.js — the overrides need re-checking each time.
+
 ## The design system
 
 Version one of this build was guessed from a text scrape and got the fundamentals
