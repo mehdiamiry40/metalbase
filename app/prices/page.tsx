@@ -111,7 +111,7 @@ export default function PricesPage() {
                         </>
                       ) : (
                         <span className="text-[0.94rem] text-slate">
-                          On request <span className="text-slate/80">/{r.unit}</span>
+                          On request <span className="text-slate">/{r.unit}</span>
                         </span>
                       )}
                     </td>

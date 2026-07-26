@@ -35,7 +35,7 @@ const volumes = [
 ];
 
 const field =
-  "w-full rounded-[2px] border border-line bg-white px-4 py-3 text-[1rem] text-ink outline-none transition-colors placeholder:text-slate/60 focus:border-copper";
+  "w-full rounded-[2px] border border-line bg-white px-4 py-3 text-[1rem] text-ink outline-none transition-colors placeholder:text-slate focus:border-copper";
 const labelCls = "mb-2 block text-[0.9rem] font-semibold text-ink";
 const errCls = "mt-1.5 text-[0.85rem] text-copper";
 
