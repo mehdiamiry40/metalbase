@@ -26,12 +26,12 @@ export default function ContactPage() {
 
           <aside className="space-y-8 lg:sticky lg:top-24">
             <div className="border-2 border-ink p-7">
-              <p className="t-eyebrow text-accent">Fastest route</p>
+              <p className="t-eyebrow text-brand-text">Fastest route</p>
               {company.phone ? (
                 <>
                   <a
                     href={`tel:${company.phone.replace(/\s/g, "")}`}
-                    className="mt-2 block text-[1.9rem] font-medium leading-none tracking-[-0.03em] hover:text-accent"
+                    className="mt-2 block text-[1.9rem] font-medium leading-none tracking-[-0.03em] hover:text-brand-text"
                   >
                     {company.phoneLabel ?? company.phone}
                   </a>
@@ -47,7 +47,7 @@ export default function ContactPage() {
               {company.email && (
                 <a
                   href={`mailto:${company.email}`}
-                  className="mt-4 inline-block font-semibold text-accent u-link"
+                  className="mt-4 inline-block font-semibold text-brand-text u-link"
                 >
                   {company.email}
                 </a>

@@ -14,13 +14,13 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0a1633",
+          background: "#0f1941",
           padding: "72px",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <svg width="58" height="50" viewBox="0 0 32 28">
-            <path d="M4 4h18l-4 6H0z" fill="#ff6a1a" />
+            <path d="M4 4h18l-4 6H0z" fill="#2175d9" />
             <path d="M7 11h18l-4 6H3z" fill="#ffffff" opacity="0.85" />
             <path d="M10 18h18l-4 6H6z" fill="#ffffff" opacity="0.45" />
           </svg>

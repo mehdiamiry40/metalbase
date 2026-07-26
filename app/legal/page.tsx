@@ -69,7 +69,7 @@ export default function LegalPage() {
             <ul className="mt-4 space-y-2.5">
               {sections.map((s) => (
                 <li key={s.id}>
-                  <Link href={`#${s.id}`} className="u-link font-medium hover:text-accent">
+                  <Link href={`#${s.id}`} className="u-link font-medium hover:text-brand-text">
                     {s.h}
                   </Link>
                 </li>
@@ -99,7 +99,7 @@ export default function LegalPage() {
                 {company.email ? (
                   <>
                     , or email{" "}
-                    <a href={`mailto:${company.email}`} className="font-semibold text-accent u-link">
+                    <a href={`mailto:${company.email}`} className="font-semibold text-brand-text u-link">
                       {company.email}
                     </a>
                   </>

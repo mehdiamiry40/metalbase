@@ -96,7 +96,7 @@ export default function Header() {
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     onClick={() => setOpenMenu(isOpen ? null : item.label)}
-                    className="flex items-center gap-1.5 whitespace-nowrap px-3.5 text-[0.95rem] font-medium text-ink hover:text-accent"
+                    className="flex items-center gap-1.5 whitespace-nowrap px-3.5 text-[0.95rem] font-medium text-ink hover:text-brand-text"
                   >
                     {item.label}
                     <Chevron
@@ -129,7 +129,7 @@ export default function Header() {
                             <Link
                               href={col.href}
                               onClick={close}
-                              className="u-link text-[0.95rem] font-semibold text-ink hover:text-accent"
+                              className="u-link text-[0.95rem] font-semibold text-ink hover:text-brand-text"
                             >
                               {col.label}
                             </Link>
@@ -139,7 +139,7 @@ export default function Header() {
                                   <Link
                                     href={c.href}
                                     onClick={close}
-                                    className="u-link text-[0.9rem] text-slate hover:text-accent"
+                                    className="u-link text-[0.9rem] text-slate hover:text-brand-text"
                                   >
                                     {c.label}
                                   </Link>
@@ -160,7 +160,7 @@ export default function Header() {
             {company.phone && (
               <a
                 href={`tel:${company.phone.replace(/\s/g, "")}`}
-                className="hidden whitespace-nowrap text-[0.95rem] font-medium text-ink hover:text-accent sm:inline"
+                className="hidden whitespace-nowrap text-[0.95rem] font-medium text-ink hover:text-brand-text sm:inline"
               >
                 {company.phoneLabel ?? company.phone}
               </a>

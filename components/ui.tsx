@@ -39,11 +39,11 @@ export function Logo({
   variant?: "ink" | "paper";
   className?: string;
 }) {
-  const word = variant === "paper" ? "#ffffff" : "#0a1633";
+  const word = variant === "paper" ? "#ffffff" : "#0f1941";
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <svg viewBox="0 0 32 28" className="h-[26px] w-[30px] shrink-0" aria-hidden="true">
-        <path d="M4 4h18l-4 6H0z" fill="#ff6a1a" />
+        <path d="M4 4h18l-4 6H0z" fill="#2175d9" />
         <path d="M7 11h18l-4 6H3z" fill={word} opacity="0.85" />
         <path d="M10 18h18l-4 6H6z" fill={word} opacity="0.45" />
       </svg>
@@ -103,7 +103,7 @@ export function ArrowLink({
   className?: string;
 }) {
   const colour =
-    tone === "paper" ? "text-paper" : tone === "accent" ? "text-accent" : "text-ink";
+    tone === "paper" ? "text-paper" : tone === "accent" ? "text-brand-text" : "text-ink";
   return (
     <Link
       href={href}
@@ -150,7 +150,7 @@ export function Eyebrow({
   tone?: "accent" | "paper" | "slate";
 }) {
   const colour =
-    tone === "paper" ? "text-accent-on-ink" : tone === "slate" ? "text-slate" : "text-accent";
+    tone === "paper" ? "text-brand-on-ink" : tone === "slate" ? "text-slate" : "text-brand-text";
   return <p className={`t-eyebrow mb-3 ${colour}`}>{children}</p>;
 }
 
@@ -192,7 +192,7 @@ export function StatBand({
   return (
     <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
       {items.map((s) => (
-        <div key={s.label} className={`border-t-2 pt-5 ${dark ? "border-accent-on-ink" : "border-ink/20"}`}>
+        <div key={s.label} className={`border-t-2 pt-5 ${dark ? "border-brand-on-ink" : "border-ink/20"}`}>
           <p className={`t-num text-[2.5rem] font-medium leading-none ${dark ? "text-paper" : "text-ink"}`}>
             {s.value}
           </p>
@@ -213,7 +213,7 @@ export function Breadcrumb({ trail }: { trail: { label: string; href?: string }[
           <li key={t.label} className="flex items-center gap-2">
             {i > 0 && <span aria-hidden="true">/</span>}
             {t.href ? (
-              <Link href={t.href} className="u-link hover:text-accent">
+              <Link href={t.href} className="u-link hover:text-brand-text">
                 {t.label}
               </Link>
             ) : (
@@ -273,7 +273,7 @@ export function TickList({
       {items.map((i) => (
         <li key={i} className="flex items-start gap-3">
           <Tick
-            className={`mt-1 h-4 w-4 shrink-0 ${tone === "paper" ? "text-accent-on-ink" : "text-accent"}`}
+            className={`mt-1 h-4 w-4 shrink-0 ${tone === "paper" ? "text-brand-on-ink" : "text-accent"}`}
           />
           <span className={tone === "paper" ? "text-paper/85" : "text-ink"}>{i}</span>
         </li>

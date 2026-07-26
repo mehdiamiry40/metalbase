@@ -28,7 +28,7 @@ export default function Footer() {
                   {company.phone ? (
                     <a
                       href={`tel:${company.phone.replace(/\s/g, "")}`}
-                      className="text-[1.3rem] font-medium text-accent-on-ink hover:underline"
+                      className="text-[1.3rem] font-medium text-brand-on-ink hover:underline"
                     >
                       {company.phoneLabel ?? company.phone}
                     </a>
@@ -41,7 +41,7 @@ export default function Footer() {
                 <dt className="text-paper/60">Email</dt>
                 <dd className="mt-0.5">
                   {company.email ? (
-                    <a href={`mailto:${company.email}`} className="hover:text-accent-on-ink">
+                    <a href={`mailto:${company.email}`} className="hover:text-brand-on-ink">
                       {company.email}
                     </a>
                   ) : (

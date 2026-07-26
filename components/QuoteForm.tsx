@@ -127,7 +127,7 @@ export default function QuoteForm() {
             setState("idle");
             setPicked([]);
           }}
-          className="mt-6 font-semibold text-accent u-link"
+          className="mt-6 font-semibold text-brand-text u-link"
         >
           Send another enquiry
         </button>
@@ -245,7 +245,7 @@ export default function QuoteForm() {
                   className={`rounded-[2px] border px-3.5 py-2 text-[0.88rem] font-medium transition-colors ${
                     on
                       ? "border-accent-fill bg-accent-fill text-ink"
-                      : "border-line text-slate hover:border-accent-fill hover:text-accent"
+                      : "border-line text-slate hover:border-accent-fill hover:text-brand-text"
                   }`}
                 >
                   {m}

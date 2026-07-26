@@ -63,7 +63,7 @@ export default function LocationsPage() {
                       href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(l.address)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block pt-2 font-semibold text-accent u-link"
+                      className="inline-block pt-2 font-semibold text-brand-text u-link"
                     >
                       Directions
                     </a>

@@ -1,37 +1,42 @@
 @import "tailwindcss";
 
 /* ==================================================================
-   MetalBase design system — ink & orange
+   MetalBase design system — Randstad blue + orange
 
-   Deep ink navy, one hot orange, white. Contemporary rather than
-   traditional: modern sans at weight 500, very tight tracking, a lot
-   of white, orange reserved for action.
+   Randstad blue #2175D9 carries the brand; #FF6A1A carries action.
+   Two colours with two different jobs, so neither has to do both:
 
-   CONTRAST — every value measured, not estimated. Three earlier
-   palettes shipped failures because ratios were reasoned about.
+     BLUE   structure — links, eyebrows, navigation, the navy sections
+     ORANGE action    — buttons, the section rule, the number that matters
 
-   The trap in this palette: #FF6A1A is a beautiful button colour and
-   a terrible text colour. White on it is 2.86:1, which fails AA
-   outright. So the bright orange is a FILL that carries INK text
-   (6.3:1), and a darker orange exists for the rare case where orange
-   itself must be text on white.
+   CONTRAST — measured, not estimated.
+
+   #2175D9 is a fine fill (white on it is 4.55:1) but a poor text
+   colour: 4.55:1 on white is marginal and 4.03:1 on the grey band
+   fails outright. So the visible brand blue is a FILL, and a darker
+   sibling handles blue-as-text. Same split the orange needs.
    ================================================================== */
 
 @theme {
   /* surfaces */
-  --color-ink: #0a1633; /* 18.0:1 on white */
-  --color-ink-soft: #16244a;
+  --color-ink: #0f1941; /* Randstad navy · 17.0:1 on white */
+  --color-ink-soft: #1b2550;
   --color-paper: #ffffff;
-  --color-paper-deep: #eff1f5; /* cool banding */
+  --color-paper-deep: #eff1f5;
 
-  /* accent — one orange, three jobs, none interchangeable */
-  --color-accent: #a8460f; /* orange as TEXT · 5.9:1 white · 5.2:1 on paper-deep */
-  --color-accent-fill: #ff6a1a; /* FILL, carries ink text    · 6.3:1 */
-  --color-accent-fill-hover: #e85d12; /* fill hover                       */
-  --color-accent-on-ink: #ff8a45; /* orange as TEXT on ink     · 7.6:1 */
+  /* brand blue — structure */
+  --color-brand: #2175d9; /* FILL, carries white text · 4.6:1 */
+  --color-brand-text: #1a5cae; /* blue as TEXT · 6.6:1 white · 5.8:1 band */
+  --color-brand-on-ink: #6fa8ee; /* blue as TEXT on navy     · 6.9:1 */
+
+  /* accent orange — action */
+  --color-accent: #a8460f; /* orange as TEXT · 5.9:1 white · 5.2:1 band */
+  --color-accent-fill: #ff6a1a; /* FILL, carries INK text   · 5.9:1 */
+  --color-accent-fill-hover: #e85d12;
+  --color-accent-on-ink: #ff8a45; /* orange as TEXT on navy   · 7.3:1 */
 
   /* text */
-  --color-slate: #5b6478; /* muted body on white       · 5.9:1 */
+  --color-slate: #5b6478; /* 5.9:1 white · 5.3:1 band */
   --color-line: #dde1e8;
   --color-line-ink: rgba(255, 255, 255, 0.16);
 
@@ -69,13 +74,13 @@
   }
 
   :focus-visible {
-    outline: 3px solid var(--color-accent-fill);
+    outline: 3px solid var(--color-brand);
     outline-offset: 3px;
     border-radius: 2px;
   }
 
   .on-ink :focus-visible {
-    outline-color: var(--color-accent-fill);
+    outline-color: var(--color-brand-on-ink);
   }
 
   /* Large, tightly tracked, weight 500. Space does the work. */

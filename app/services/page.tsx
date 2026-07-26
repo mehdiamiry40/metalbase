@@ -44,12 +44,12 @@ export default function ServicesPage() {
                 <Photo name={s.photo} sizes="(max-width: 1024px) 100vw, 22rem" priority={i === 0} />
               </div>
               <div className="self-center">
-                <p className="t-eyebrow text-accent">{s.audience}</p>
-                <h2 className="mt-2 group-hover:text-accent">{s.title}</h2>
+                <p className="t-eyebrow text-brand-text">{s.audience}</p>
+                <h2 className="mt-2 group-hover:text-brand-text">{s.title}</h2>
                 <p className="t-lead mt-4 max-w-2xl text-slate">{s.blurb}</p>
                 <span className="mt-6 inline-flex items-center gap-2 font-semibold">
                   Read the detail
-                  <ArrowRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="h-4 w-4 text-brand-text transition-transform group-hover:translate-x-1" />
                 </span>
               </div>
             </Link>

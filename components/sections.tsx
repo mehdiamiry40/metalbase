@@ -147,8 +147,8 @@ export function Steps({
   return (
     <ol className={`grid gap-x-10 gap-y-10 sm:grid-cols-2 ${cols}`}>
       {items.map((s, i) => (
-        <li key={s.title} className={`border-t-2 pt-5 ${dark ? "border-accent-on-ink" : "border-ink/15"}`}>
-          <span className={`t-num text-[0.95rem] font-semibold ${dark ? "text-accent-on-ink" : "text-accent"}`}>
+        <li key={s.title} className={`border-t-2 pt-5 ${dark ? "border-brand-on-ink" : "border-ink/15"}`}>
+          <span className={`t-num text-[0.95rem] font-semibold ${dark ? "text-brand-on-ink" : "text-accent"}`}>
             {String(i + 1).padStart(2, "0")}
           </span>
           <h3 className="mt-2 text-[1.15rem]">{s.title}</h3>

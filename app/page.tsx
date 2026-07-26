@@ -133,14 +133,14 @@ export default function Home() {
                 className="group grid gap-4 py-8 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-12"
               >
                 <div>
-                  <p className="t-eyebrow text-accent">{s.audience}</p>
-                  <h3 className="mt-2 group-hover:text-accent">{s.title}</h3>
+                  <p className="t-eyebrow text-brand-text">{s.audience}</p>
+                  <h3 className="mt-2 group-hover:text-brand-text">{s.title}</h3>
                 </div>
                 <div>
                   <p className="text-slate">{s.blurb}</p>
                   <span className="mt-4 inline-flex items-center gap-2 text-[0.94rem] font-semibold">
                     Read more
-                    <ArrowRight className="h-4 w-4 text-accent transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="h-4 w-4 text-brand-text transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
               </Link>
