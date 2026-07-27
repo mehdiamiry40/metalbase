@@ -111,8 +111,19 @@ export const photos = {
 
 export type PhotoKey = keyof typeof photos;
 
-export function photoSrc(key: PhotoKey, width = 1600) {
+/**
+ * Upstream source width.
+ *
+ * This is the ceiling on quality: Next's optimiser cannot produce a
+ * sharper image than the source it fetches. The full-bleed hero is
+ * ~1728 CSS px, which is 3456 device px at DPR 2 — so a 1600px source
+ * was being upscaled and rendering soft. 2880 keeps retina full-bleed
+ * crisp without pulling multi-megabyte originals.
+ *
+ * Pass a smaller width for images that are never displayed large.
+ */
+export function photoSrc(key: PhotoKey, width = 2880) {
   if (USE_LOCAL) return `/photos/${key}.jpg`;
   const { uid } = photos[key];
-  return `https://images.unsplash.com/photo-${uid}?fm=jpg&q=72&w=${width}&auto=format&fit=crop`;
+  return `https://images.unsplash.com/photo-${uid}?fm=jpg&q=76&w=${width}&auto=format&fit=crop`;
 }

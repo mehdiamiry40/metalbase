@@ -130,7 +130,7 @@ export default function Home() {
               <Link
                 key={s.slug}
                 href={`/services/${s.slug}`}
-                className="group grid gap-4 py-8 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-12"
+                className="row-link group grid gap-4 py-8 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-12"
               >
                 <div>
                   <p className="t-eyebrow text-brand-text">{s.audience}</p>

@@ -38,10 +38,10 @@ export default function ServicesPage() {
             <Link
               key={s.slug}
               href={`/services/${s.slug}`}
-              className="group grid gap-6 py-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-14"
+              className="row-link group grid gap-6 py-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-14"
             >
               <div className="relative aspect-[16/10] overflow-hidden lg:aspect-[4/3]">
-                <Photo name={s.photo} sizes="(max-width: 1024px) 100vw, 22rem" priority={i === 0} />
+                <Photo name={s.photo} sizes="(max-width: 1024px) 100vw, 22rem" sourceWidth={1200} priority={i === 0} />
               </div>
               <div className="self-center">
                 <p className="t-eyebrow text-brand-text">{s.audience}</p>

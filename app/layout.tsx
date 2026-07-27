@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import MobileActionBar from "@/components/MobileActionBar";
 import { company, locations } from "@/lib/site";
 
 const SITE = "https://metalbase.vercel.app";
@@ -97,7 +98,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData()) }}
         />
       </head>
-      <body>
+      <body className="pb-[76px] lg:pb-0">
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-accent-fill focus:px-5 focus:py-3 focus:font-semibold focus:text-ink"
@@ -107,6 +108,7 @@ export default function RootLayout({
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <MobileActionBar />
         {/* Vercel Web Analytics. Cookieless and no cross-site identifiers,
             so it does not by itself require a consent banner — but it is
             still visitor analytics, so it belongs in the privacy policy. */}

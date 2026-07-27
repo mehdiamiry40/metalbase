@@ -11,6 +11,8 @@ export default function Photo({
   priority = false,
   sizes = "(max-width: 1024px) 100vw, 50vw",
   tint = false,
+  /** Upstream source width. Lower it for thumbnails to save bytes. */
+  sourceWidth,
   className = "",
 }: {
   name: PhotoKey;
@@ -19,12 +21,13 @@ export default function Photo({
   sizes?: string;
   /** navy wash for photos carrying text on top */
   tint?: boolean;
+  sourceWidth?: number;
   className?: string;
 }) {
   return (
     <>
       <Image
-        src={photoSrc(name)}
+        src={photoSrc(name, sourceWidth)}
         alt={alt ?? photos[name].alt}
         fill
         priority={priority}

@@ -56,6 +56,30 @@ export default function PricesPage() {
         </div>
       </PageHeader>
 
+      {/* Three long tables need a way to move between them. */}
+      <nav
+        aria-label="Material streams"
+        className="sticky top-[70px] z-30 border-b border-line bg-paper/95 backdrop-blur"
+      >
+        <div className="shell flex gap-6 overflow-x-auto py-3.5">
+          {priceGroups.map((g) => (
+            <a
+              key={g.id}
+              href={`#${g.id}`}
+              className="u-link whitespace-nowrap text-[0.92rem] font-medium text-slate hover:text-brand-text"
+            >
+              {g.title}
+            </a>
+          ))}
+          <a
+            href="#grading"
+            className="u-link ml-auto hidden whitespace-nowrap text-[0.92rem] font-medium text-slate hover:text-brand-text sm:block"
+          >
+            How grading works
+          </a>
+        </div>
+      </nav>
+
       {!PUBLISH_RATES && (
         <div className="border-b border-line bg-paper-deep">
           <div className="shell py-5 text-[0.94rem] text-slate">
@@ -85,41 +109,54 @@ export default function PricesPage() {
             </caption>
             <thead>
               <tr className="border-b-2 border-ink">
-                <th scope="col" className="t-eyebrow py-3 text-slate">Grade</th>
-                <th scope="col" className="t-eyebrow hidden py-3 text-slate md:table-cell">
+                <th scope="col" className="t-eyebrow py-3 text-slate">
+                  Grade
+                </th>
+                <th scope="col" className="t-eyebrow py-3 text-slate">
                   Specification
                 </th>
-                <th scope="col" className="t-eyebrow py-3 text-right text-slate">Rate</th>
+                {PUBLISH_RATES && (
+                  <th scope="col" className="t-eyebrow py-3 text-right text-slate">
+                    Rate
+                  </th>
+                )}
               </tr>
             </thead>
             <tbody>
-              {group.rows.map((r) => {
-                return (
-                  <tr key={r.grade} className="border-b border-line">
-                    <td className="py-5 pr-6 align-top">
-                      <p className="text-[1.05rem] font-semibold">{r.grade}</p>
-                      <p className="mt-1 text-[0.9rem] text-slate md:hidden">{r.spec}</p>
-                    </td>
-                    <td className="hidden py-5 pr-6 align-top text-[0.94rem] text-slate md:table-cell">
-                      {r.spec}
-                    </td>
-                    <td className="whitespace-nowrap py-5 text-right align-top">
+              {group.rows.map((r) => (
+                <tr key={r.grade} className="border-b border-line align-top">
+                  <th
+                    scope="row"
+                    className="py-5 pr-6 text-left text-[1.05rem] font-semibold"
+                  >
+                    {r.grade}
+                  </th>
+                  <td className="py-5 pr-6 text-[0.95rem] text-slate">
+                    {r.spec}
+                  </td>
+                  {PUBLISH_RATES && (
+                    <td className="whitespace-nowrap py-5 text-right">
                       {r.rate ? (
                         <>
-                          <span className="t-num text-[1.4rem] font-medium">${r.rate}</span>
-                          <span className="ml-1 text-[0.9rem] text-slate">/{r.unit}</span>
+                          <span className="t-num text-[1.4rem] font-medium">
+                            ${r.rate}
+                          </span>
+                          <span className="ml-1 text-[0.9rem] text-slate">
+                            /{r.unit}
+                          </span>
                         </>
                       ) : (
                         <span className="text-[0.94rem] text-slate">
-                          On request <span className="text-slate">/{r.unit}</span>
+                          On request
                         </span>
                       )}
                     </td>
-                  </tr>
-                );
-              })}
+                  )}
+                </tr>
+              ))}
             </tbody>
           </table>
+
         </Section>
       ))}
 

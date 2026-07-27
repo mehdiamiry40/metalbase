@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { ArrowRight, Tick } from "@/components/ui";
 import { company } from "@/lib/site";
 
@@ -43,6 +43,7 @@ type State = "idle" | "sending" | "sent" | "sent-undelivered" | "error";
 
 export default function QuoteForm() {
   const uid = useId();
+  const formRef = useRef<HTMLFormElement>(null);
   const [state, setState] = useState<State>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [message, setMessage] = useState("");
@@ -84,6 +85,20 @@ export default function QuoteForm() {
         if (json.errors) {
           setErrors(json.errors);
           setState("idle");
+          // Move the user to the first problem rather than leaving them
+          // to hunt for red text somewhere up the page.
+          const first = Object.keys(json.errors)[0];
+          const map: Record<string, string> = {
+            enquiryType: "type",
+            name: "name",
+            email: "email",
+            phone: "phone",
+          };
+          requestAnimationFrame(() => {
+            const el = document.getElementById(`${uid}-${map[first] ?? first}`);
+            el?.focus();
+            el?.scrollIntoView({ block: "center", behavior: "smooth" });
+          });
           return;
         }
         setMessage(json.error ?? "Something went wrong.");
@@ -136,9 +151,24 @@ export default function QuoteForm() {
   }
 
   const busy = state === "sending";
+  const errorCount = Object.keys(errors).length;
 
   return (
-    <form onSubmit={onSubmit} noValidate className="border border-line bg-white p-7 lg:p-9">
+    <form
+      ref={formRef}
+      onSubmit={onSubmit}
+      noValidate
+      className="border border-line bg-white p-7 lg:p-9"
+    >
+      {/* Announced to screen readers without stealing focus. */}
+      <p aria-live="polite" className="sr-only">
+        {busy
+          ? "Sending your enquiry"
+          : errorCount > 0
+            ? `${errorCount} ${errorCount === 1 ? "field needs" : "fields need"} attention`
+            : ""}
+      </p>
+
       {state === "error" && (
         <div role="alert" className="mb-6 border-l-4 border-accent-fill bg-paper-deep p-4 text-[0.94rem]">
           {message}

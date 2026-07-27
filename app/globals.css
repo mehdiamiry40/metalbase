@@ -191,6 +191,42 @@
   background-size: 100% 1px;
 }
 
+/* Row lists: give the whole row an affordance, not just the text. */
+.row-link {
+  transition: background-color 0.16s ease, padding-left 0.16s ease;
+}
+
+.row-link:hover {
+  background-color: var(--color-paper-deep);
+}
+
+@media (min-width: 768px) {
+  .row-link:hover {
+    padding-left: 0.75rem;
+  }
+}
+
+/* Sections rise very slightly into place. Purely supportive — the
+   reduced-motion block below switches it off entirely. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.5s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 22%;
+  }
+}
+
 .rule::before {
   content: "";
   display: block;

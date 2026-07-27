@@ -103,7 +103,7 @@ export default async function ServiceDetail({
             <Link
               key={o.slug}
               href={`/services/${o.slug}`}
-              className="group grid gap-3 py-7 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-12"
+              className="row-link group grid gap-3 py-7 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-12"
             >
               <h3 className="group-hover:text-brand-text">{o.title}</h3>
               <div>

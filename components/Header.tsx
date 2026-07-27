@@ -29,10 +29,22 @@ export default function Header() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
   const uid = useId();
 
   const close = useCallback(() => setOpenMenu(null), []);
+
+  // The header only separates itself from the page once you have moved.
+  // At rest it sits flush, which reads calmer.
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 8);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Escape closes whichever layer is open, and returns focus sensibly.
   useEffect(() => {
@@ -69,7 +81,13 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-paper">
-      <div className="border-b border-line bg-paper">
+      <div
+        className={`bg-paper transition-shadow duration-200 ${
+          scrolled || openMenu
+            ? "border-b border-line shadow-[0_1px_16px_-8px_rgba(15,25,65,0.35)]"
+            : "border-b border-transparent"
+        }`}
+      >
         <div className="shell flex h-[70px] items-center justify-between gap-8">
           <Link href="/" aria-label="MetalBase home">
             <Logo />
