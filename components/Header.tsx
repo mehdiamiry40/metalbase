@@ -88,11 +88,11 @@ export default function Header() {
   }, [openMenu, close]);
 
   return (
-    <header className="sticky top-0 z-50 bg-navy">
+    <header className="on-light sticky top-0 z-50 bg-cream">
       <div
-        className={`bg-navy transition-shadow duration-200 ${
+        className={`bg-cream transition-shadow duration-200 ${
           scrolled || openMenu
-            ? "border-b border-line shadow-[0_1px_16px_-8px_rgba(15,25,65,0.35)]"
+            ? "border-b hair shadow-[0_1px_16px_-8px_rgba(15,25,65,0.35)]"
             : "border-b border-transparent"
         }`}
       >
@@ -122,11 +122,11 @@ export default function Header() {
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     onClick={() => setOpenMenu(isOpen ? null : item.label)}
-                    className="flex items-center gap-1.5 whitespace-nowrap px-3.5 text-[0.95rem] font-medium text-cloud hover:text-orange"
+                    className="flex items-center gap-1.5 whitespace-nowrap px-3.5 text-[0.95rem] font-medium hover:text-[color:var(--accent-text)]"
                   >
                     {item.label}
                     <Chevron
-                      className={`h-[11px] w-[11px] text-mist transition-transform ${
+                      className={`h-[11px] w-[11px] t-muted transition-transform ${
                         isOpen ? "-rotate-90" : "rotate-90"
                       }`}
                     />
@@ -135,12 +135,12 @@ export default function Header() {
                   <div
                     id={panelId}
                     hidden={!isOpen}
-                    className="absolute left-0 right-0 top-full border-b border-line bg-navy"
+                    className="absolute left-0 right-0 top-full border-b hair bg-cream"
                   >
                     <div className="shell grid gap-12 py-11 lg:grid-cols-[250px_1fr]">
                       <div>
                         <p className="t-h3">{item.label}</p>
-                        <p className="mt-3 text-[0.94rem] leading-relaxed text-mist">
+                        <p className="mt-3 text-[0.94rem] leading-relaxed t-muted">
                           {blurbs[item.label]}
                         </p>
                         <div className="mt-6">
@@ -155,7 +155,7 @@ export default function Header() {
                             <Link
                               href={col.href}
                               onClick={close}
-                              className="u-link text-[0.95rem] font-semibold text-cloud hover:text-orange"
+                              className="u-link text-[0.95rem] font-semibold hover:text-[color:var(--accent-text)]"
                             >
                               {col.label}
                             </Link>
@@ -165,7 +165,7 @@ export default function Header() {
                                   <Link
                                     href={c.href}
                                     onClick={close}
-                                    className="u-link text-[0.9rem] text-mist hover:text-orange"
+                                    className="u-link text-[0.9rem] t-muted hover:text-[color:var(--accent-text)]"
                                   >
                                     {c.label}
                                   </Link>
@@ -186,14 +186,14 @@ export default function Header() {
             {company.phone && (
               <a
                 href={`tel:${company.phone.replace(/\s/g, "")}`}
-                className="hidden whitespace-nowrap text-[0.95rem] font-medium text-cloud hover:text-orange sm:inline"
+                className="hidden whitespace-nowrap text-[0.95rem] font-medium hover:text-[color:var(--accent-text)] sm:inline"
               >
                 {company.phoneLabel ?? company.phone}
               </a>
             )}
             <Link
               href="/contact"
-              className="hidden rounded-[2px] bg-orange-fill px-5 py-2.5 text-[0.9rem] font-semibold text-navy transition-colors hover:bg-orange-hover sm:inline-block"
+              className="hidden rounded-[2px] bg-orange px-5 py-2.5 text-[0.9rem] font-semibold text-navy transition-colors hover:bg-orange-deep sm:inline-block"
             >
               Get a quote
             </Link>
@@ -205,9 +205,9 @@ export default function Header() {
               aria-label="Toggle navigation"
               className="flex h-10 w-10 flex-col items-center justify-center gap-[6px] xl:hidden"
             >
-              <span className={`block h-[2px] w-6 bg-cloud transition ${mobileOpen ? "translate-y-2 rotate-45" : ""}`} />
-              <span className={`block h-[2px] w-6 bg-cloud transition ${mobileOpen ? "opacity-0" : ""}`} />
-              <span className={`block h-[2px] w-6 bg-cloud transition ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`} />
+              <span className={`block h-[2px] w-6 bg-navy transition ${mobileOpen ? "translate-y-2 rotate-45" : ""}`} />
+              <span className={`block h-[2px] w-6 bg-navy transition ${mobileOpen ? "opacity-0" : ""}`} />
+              <span className={`block h-[2px] w-6 bg-navy transition ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`} />
             </button>
           </div>
         </div>
@@ -216,37 +216,37 @@ export default function Header() {
       <div
         id={`${uid}-mobile`}
         hidden={!mobileOpen}
-        className="max-h-[calc(100vh-70px)] overflow-y-auto border-b border-line bg-navy xl:hidden"
+        className="max-h-[calc(100vh-70px)] overflow-y-auto border-b hair bg-cream xl:hidden"
       >
         <div className="shell py-2">
           {nav.map((item) => {
             const isOpen = mobileSection === item.label;
             const secId = `${uid}-m-${slug(item.label)}`;
             return (
-              <div key={item.label} className="border-b border-line">
+              <div key={item.label} className="border-b hair">
                 <button
                   type="button"
                   onClick={() => setMobileSection(isOpen ? null : item.label)}
                   aria-expanded={isOpen}
                   aria-controls={secId}
-                  className="flex w-full items-center justify-between py-4 text-left text-[1.05rem] font-medium text-cloud"
+                  className="flex w-full items-center justify-between py-4 text-left text-[1.05rem] font-medium "
                 >
                   {item.label}
                   <Chevron
-                    className={`h-4 w-4 text-mist transition ${isOpen ? "-rotate-90" : "rotate-90"}`}
+                    className={`h-4 w-4 t-muted transition ${isOpen ? "-rotate-90" : "rotate-90"}`}
                   />
                 </button>
                 <div id={secId} hidden={!isOpen} className="grid gap-6 pb-6 sm:grid-cols-2">
                   {item.columns.map((col) => (
                     <div key={col.label}>
-                      <p className="text-[0.95rem] font-semibold text-cloud">{col.label}</p>
+                      <p className="text-[0.95rem] font-semibold ">{col.label}</p>
                       <ul className="mt-2 space-y-2">
                         {col.children.map((c) => (
                           <li key={c.label}>
                             <Link
                               href={c.href}
                               onClick={() => setMobileOpen(false)}
-                              className="text-[0.9rem] text-mist"
+                              className="text-[0.9rem] t-muted"
                             >
                               {c.label}
                             </Link>
@@ -263,7 +263,7 @@ export default function Header() {
             <Link
               href="/contact"
               onClick={() => setMobileOpen(false)}
-              className="inline-block rounded-[2px] bg-orange-fill px-7 py-3.5 font-semibold text-navy"
+              className="inline-block rounded-[2px] bg-orange px-7 py-3.5 font-semibold text-navy"
             >
               Get a quote
             </Link>

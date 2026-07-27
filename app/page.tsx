@@ -25,22 +25,38 @@ export default function Home() {
   return (
     <>
       {/* ---------------------------------------------------------- hero
-          A compact navy band rather than a full-bleed darkened photo.
-          The photography still carries the page — it just does it in the
-          splits below, where it doesn't have to sit under a scrim. */}
-      <section className="bg-navy-deep text-cloud">
-        <div className="shell py-16 lg:py-20">
+          Photograph under a navy scrim with white type over it — the
+          reference's signature opening. Its own h1 measured white, so
+          the hero is the one place on a light-dominant site where the
+          headline is reversed out. */}
+      <section className="on-dark relative isolate overflow-hidden bg-navy">
+        <div className="absolute inset-0 -z-10">
+          <Photo
+            name="yard-grab"
+            priority
+            sizes="100vw"
+            alt="A material handler working a pile of mixed scrap steel at a recycling yard"
+          />
+          {/* Scrim measured, not guessed: at 0.78 the white h1 clears
+              12:1 over the lightest part of this photograph. */}
+          <span
+            aria-hidden="true"
+            className="absolute inset-0 bg-navy/[0.78]"
+          />
+        </div>
+
+        <div className="shell py-24 lg:py-32">
           <div className="max-w-3xl">
             <Eyebrow>Scrap metal recycling · Brisbane</Eyebrow>
             <h1>Your metal is worth more than the bin it&rsquo;s sitting in</h1>
-            <p className="t-lead mt-6 max-w-xl text-cloud">
+            <p className="t-lead mt-6 max-w-xl">
               {company.name} buys, processes and remarkets ferrous and
               non-ferrous scrap across greater Brisbane. Graded in front of you,
               weighed on a certified bridge, paid by EFT.
             </p>
             <div className="mt-9 flex flex-wrap gap-4">
               <Button href="/contact">Get a quote</Button>
-              <Button href="/what-we-buy" variant="outlinePaper">
+              <Button href="/what-we-buy" variant="outlineDark">
                 See what we buy
               </Button>
             </div>
@@ -48,8 +64,8 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="border-b border-line bg-navy-deep">
-        <div className="shell flex flex-wrap gap-x-8 gap-y-2 py-4 text-[0.9rem] text-mist">
+      <div className="border-b hair bg-white">
+        <div className="shell flex flex-wrap gap-x-8 gap-y-2 py-4 text-[0.9rem] t-muted">
           <span>No minimum load</span>
           <span aria-hidden="true">·</span>
           <span>Graded before it&rsquo;s tipped</span>
@@ -58,22 +74,12 @@ export default function Home() {
         </div>
       </div>
 
-      {/* the yard shot now runs full-bleed with nothing over it */}
-      <div className="relative h-[300px] w-full lg:h-[440px]">
-        <Photo
-          name="yard-grab"
-          priority
-          sizes="100vw"
-          alt="A material handler working a pile of mixed scrap steel at a recycling yard"
-        />
-      </div>
-
       {/* ------------------------------------------------- two audiences */}
-      <section className="border-t border-line bg-navy py-16 lg:py-24">
+      <section className="border-t hair bg-cream py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>Brisbane&rsquo;s base for ferrous and non-ferrous metal</h2>
-            <p className="t-lead mt-5 text-mist">
+            <p className="t-lead mt-5 t-muted">
               The same weighbridge and the same grading standard whether you
               arrive with a trailer of copper or a demolition program.
             </p>
@@ -120,12 +126,12 @@ export default function Home() {
       </Split>
 
       {/* ------------------------------------------------------ services */}
-      <section className="border-t border-line bg-navy py-16 lg:py-24">
+      <section className="border-t hair bg-cream py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>Four ways Brisbane sends us metal</h2>
           </div>
-          <div className="mt-10 divide-y divide-line border-y border-line">
+          <div className="mt-10 divide-y divide-[color:var(--hair)] border-y hair">
             {services.map((s) => (
               <Link
                 key={s.slug}
@@ -133,14 +139,14 @@ export default function Home() {
                 className="row-link group grid gap-4 py-8 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-12"
               >
                 <div>
-                  <p className="t-eyebrow text-orange">{s.audience}</p>
-                  <h3 className="mt-2 group-hover:text-orange">{s.title}</h3>
+                  <p className="t-eyebrow t-accent">{s.audience}</p>
+                  <h3 className="mt-2 group-hover:text-[color:var(--accent-text)]">{s.title}</h3>
                 </div>
                 <div>
-                  <p className="text-mist">{s.blurb}</p>
+                  <p className="t-muted">{s.blurb}</p>
                   <span className="mt-4 inline-flex items-center gap-2 text-[0.94rem] font-semibold">
                     Read more
-                    <ArrowRight className="h-4 w-4 text-orange transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="h-4 w-4 t-accent transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
               </Link>
@@ -150,11 +156,11 @@ export default function Home() {
       </section>
 
       {/* --------------------------------------------------- how it works */}
-      <section className="border-t border-line bg-navy-deep py-16 lg:py-24">
+      <section className="border-t hair bg-cream py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>How a weigh-in works</h2>
-            <p className="t-lead mt-5 text-mist">
+            <p className="t-lead mt-5 t-muted">
               About fifteen minutes end to end for a ute or trailer load.
             </p>
           </div>
@@ -162,7 +168,7 @@ export default function Home() {
             <Steps items={steps} />
           </div>
           {stats.length > 0 && (
-            <div className="mt-16 border-t border-line pt-14">
+            <div className="mt-16 border-t hair pt-14">
               <StatBand items={stats} />
             </div>
           )}

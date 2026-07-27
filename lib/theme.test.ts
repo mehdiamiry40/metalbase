@@ -76,16 +76,54 @@ describe("theme tokens", () => {
 
   it("declares the tokens the design system documents", () => {
     for (const t of [
+      "cream",
+      "white",
       "navy",
-      "navy-deep",
-      "navy-raised",
-      "cloud",
-      "mist",
+      "slate",
+      "blue",
+      "blue-text",
       "orange",
-      "orange-fill",
+      "orange-warm",
     ]) {
       expect(tokens.has(t)).toBe(true);
     }
+  });
+
+  /* Same failure shape, different cause. The design system defines a few
+     hand-written CSS classes (.t-muted, .t-accent, .hair) that read the
+     surface variables. Tailwind's variant system only generates rules
+     for utilities Tailwind itself knows about, so putting one behind a
+     variant — `placeholder:t-muted`, `hover:hair` — compiles to nothing
+     at all. It reads perfectly sensibly in the markup and silently does
+     nothing in the browser. Shipped exactly this on the form's
+     placeholder.
+
+     Note this holds whether or not the class sits in @layer utilities.
+     The layer controls cascade ORDER against Tailwind's own utilities;
+     it does not register the class for variant generation. Getting that
+     distinction wrong is what made the first version of this test pass
+     against a bug that was genuinely present. */
+  it("never puts a hand-written CSS class behind a Tailwind variant", () => {
+    const css = readFileSync(join(root, "app/globals.css"), "utf8");
+    const handWritten = new Set(
+      [...css.matchAll(/(?:^|\s)\.([a-z][a-z0-9-]*)(?=[\s,{:])/gm)].map(
+        (m) => m[1],
+      ),
+    );
+    expect(handWritten.size).toBeGreaterThan(3); // regex hasn't rotted
+
+    const offenders: string[] = [];
+    for (const file of files) {
+      const src = stripComments(readFileSync(file, "utf8"));
+      for (const m of src.matchAll(
+        /(?<![\w-])(?:hover|focus|focus-visible|active|disabled|placeholder|group-hover|peer-focus|sm|md|lg|xl|2xl|dark|first|last|odd|even):([a-z][a-z0-9-]*)(?![\w-])/g,
+      )) {
+        if (handWritten.has(m[1])) {
+          offenders.push(`${file.replace(root, "")}: ${m[0]}`);
+        }
+      }
+    }
+    expect(offenders).toEqual([]);
   });
 
   it("never references a colour token that does not exist", () => {

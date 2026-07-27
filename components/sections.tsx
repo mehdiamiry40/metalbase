@@ -24,14 +24,14 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <section className="border-b border-line bg-navy">
+    <section className="on-light border-b hair bg-cream">
       <div className="shell pt-6">
         <Breadcrumb trail={trail} />
       </div>
       <div className="shell pb-14 lg:pb-20">
         <Eyebrow>{eyebrow}</Eyebrow>
         <h1 className="max-w-4xl">{title}</h1>
-        {intro && <p className="t-lead mt-6 max-w-2xl text-mist">{intro}</p>}
+        {intro && <p className="t-lead mt-6 max-w-2xl t-muted">{intro}</p>}
         {children && <div className="mt-9">{children}</div>}
       </div>
     </section>
@@ -62,21 +62,25 @@ export function Split({
   children: ReactNode;
   priority?: boolean;
 }) {
+  /* Each surface brings its own text colours via on-light / on-dark
+     rather than setting them per element. The bulk class mapping had
+     collapsed "deep" to cream, which silently removed the dark band
+     from every page that used it. */
   const bg =
     tone === "accent"
-      ? "bg-orange-fill text-navy"
+      ? "on-light bg-orange"
       : tone === "deep"
-        ? "bg-navy-deep text-cloud"
+        ? "on-dark bg-navy"
         : tone === "raised"
-          ? "bg-navy-raised text-cloud"
-          : "bg-navy text-cloud";
+          ? "on-light bg-white"
+          : "on-light bg-cream";
 
   const copyOrder = side === "right" ? "lg:order-1" : "lg:order-2";
   const photoOrder = side === "right" ? "lg:order-2" : "lg:order-1";
   const pad = side === "right" ? "split-l" : "split-r";
 
   return (
-    <section className="grid border-t border-line lg:grid-cols-2">
+    <section className="grid lg:grid-cols-2">
       <div className={`${bg} ${pad} ${copyOrder} order-2 py-14 lg:py-20`}>
         <div className="max-w-lg">
           {eyebrow && (
@@ -85,7 +89,7 @@ export function Split({
             </Eyebrow>
           )}
           <h2>{title}</h2>
-          <div className={tone === "accent" ? "text-navy" : "text-mist"}>
+          <div className={tone === "accent" ? "text-navy" : "t-muted"}>
             {children}
           </div>
         </div>
@@ -140,12 +144,12 @@ export function Steps({
   return (
     <ol className={`grid gap-x-10 gap-y-10 sm:grid-cols-2 ${cols}`}>
       {items.map((s, i) => (
-        <li key={s.title} className="border-t-2 border-orange-bright pt-5">
-          <span className="t-num text-[0.95rem] font-semibold text-orange">
+        <li key={s.title} className="border-t-2 border-orange pt-5">
+          <span className="t-num text-[0.95rem] font-semibold t-accent">
             {String(i + 1).padStart(2, "0")}
           </span>
           <h3 className="mt-2 text-[1.15rem]">{s.title}</h3>
-          <p className="mt-2.5 text-[0.94rem] leading-relaxed text-mist">{s.body}</p>
+          <p className="mt-2.5 text-[0.94rem] leading-relaxed t-muted">{s.body}</p>
         </li>
       ))}
     </ol>
@@ -159,11 +163,11 @@ export function DefinitionRows({
   items: { term: string; detail: string }[];
 }) {
   return (
-    <dl className="divide-y divide-line">
+    <dl className="divide-y divide-[color:var(--hair)]">
       {items.map((it) => (
         <div key={it.term} className="grid gap-2 py-6 md:grid-cols-[minmax(0,18rem)_1fr] md:gap-10">
           <dt className="text-[1.1rem] font-semibold">{it.term}</dt>
-          <dd className="text-[0.98rem] leading-relaxed text-mist">
+          <dd className="text-[0.98rem] leading-relaxed t-muted">
             {it.detail}
           </dd>
         </div>

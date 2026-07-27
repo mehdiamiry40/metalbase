@@ -50,7 +50,7 @@ export default function PricesPage() {
       >
         <div className="flex flex-wrap gap-4">
           <Button href="/contact">Get a rate for your load</Button>
-          <Button href="#grading" variant="outlinePaper">
+          <Button href="#grading" variant="outline">
             How grading works
           </Button>
         </div>
@@ -59,21 +59,21 @@ export default function PricesPage() {
       {/* Three long tables need a way to move between them. */}
       <nav
         aria-label="Material streams"
-        className="sticky top-[70px] z-30 border-b border-line bg-navy/95 backdrop-blur"
+        className="sticky top-[70px] z-30 border-b hair bg-cream/95 backdrop-blur"
       >
         <div className="shell flex gap-6 overflow-x-auto py-3.5">
           {priceGroups.map((g) => (
             <a
               key={g.id}
               href={`#${g.id}`}
-              className="u-link whitespace-nowrap text-[0.92rem] font-medium text-mist hover:text-orange"
+              className="u-link whitespace-nowrap text-[0.92rem] font-medium t-muted hover:text-[color:var(--accent-text)]"
             >
               {g.title}
             </a>
           ))}
           <a
             href="#grading"
-            className="u-link ml-auto hidden whitespace-nowrap text-[0.92rem] font-medium text-mist hover:text-orange sm:block"
+            className="u-link ml-auto hidden whitespace-nowrap text-[0.92rem] font-medium t-muted hover:text-[color:var(--accent-text)] sm:block"
           >
             How grading works
           </a>
@@ -81,9 +81,9 @@ export default function PricesPage() {
       </nav>
 
       {!PUBLISH_RATES && (
-        <div className="border-b border-line bg-navy-deep">
-          <div className="shell py-5 text-[0.94rem] text-mist">
-            <strong className="font-semibold text-cloud">
+        <div className="border-b hair bg-cream">
+          <div className="shell py-5 text-[0.94rem] t-muted">
+            <strong className="font-semibold ">
               Rates are quoted, not posted.
             </strong>{" "}
             Send a photo and a rough weight and a grader will come back with a
@@ -98,7 +98,7 @@ export default function PricesPage() {
             <div className="max-w-2xl">
               <Eyebrow>{`Stream 0${gi + 1}`}</Eyebrow>
               <h2>{group.title}</h2>
-              <p className="t-lead mt-4 text-mist">{group.note}</p>
+              <p className="t-lead mt-4 t-muted">{group.note}</p>
             </div>
             <ArrowLink href="/contact">Quote this stream</ArrowLink>
           </div>
@@ -108,15 +108,15 @@ export default function PricesPage() {
               {group.title} grades and specifications
             </caption>
             <thead>
-              <tr className="border-b-2 border-cloud">
-                <th scope="col" className="t-eyebrow py-3 text-mist">
+              <tr className="border-b-2 border-navy">
+                <th scope="col" className="t-eyebrow py-3 t-muted">
                   Grade
                 </th>
-                <th scope="col" className="t-eyebrow py-3 text-mist">
+                <th scope="col" className="t-eyebrow py-3 t-muted">
                   Specification
                 </th>
                 {PUBLISH_RATES && (
-                  <th scope="col" className="t-eyebrow py-3 text-right text-mist">
+                  <th scope="col" className="t-eyebrow py-3 text-right t-muted">
                     Rate
                   </th>
                 )}
@@ -124,14 +124,14 @@ export default function PricesPage() {
             </thead>
             <tbody>
               {group.rows.map((r) => (
-                <tr key={r.grade} className="border-b border-line align-top">
+                <tr key={r.grade} className="border-b hair align-top">
                   <th
                     scope="row"
                     className="py-5 pr-6 text-left text-[1.05rem] font-semibold"
                   >
                     {r.grade}
                   </th>
-                  <td className="py-5 pr-6 text-[0.95rem] text-mist">
+                  <td className="py-5 pr-6 text-[0.95rem] t-muted">
                     {r.spec}
                   </td>
                   {PUBLISH_RATES && (
@@ -141,12 +141,12 @@ export default function PricesPage() {
                           <span className="t-num text-[1.4rem] font-medium">
                             ${r.rate}
                           </span>
-                          <span className="ml-1 text-[0.9rem] text-mist">
+                          <span className="ml-1 text-[0.9rem] t-muted">
                             /{r.unit}
                           </span>
                         </>
                       ) : (
-                        <span className="text-[0.94rem] text-mist">
+                        <span className="text-[0.94rem] t-muted">
                           On request
                         </span>
                       )}
@@ -161,11 +161,11 @@ export default function PricesPage() {
       ))}
 
       {/* grading ------------------------------------------------------ */}
-      <section id="grading" className="bg-navy-deep py-16 lg:py-24">
+      <section id="grading" className="bg-cream py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>How a load gets graded</h2>
-            <p className="t-lead mt-5 text-mist">
+            <p className="t-lead mt-5 t-muted">
               Grading is where most yards lose people&rsquo;s trust. Ours happens
               in front of you, before the load is tipped.
             </p>
@@ -182,7 +182,7 @@ export default function PricesPage() {
           <div>
             <Eyebrow>Volume & contract</Eyebrow>
             <h2>Index-linked pricing for regular tonnage</h2>
-            <p className="t-lead mt-5 text-mist">
+            <p className="t-lead mt-5 t-muted">
               If you generate metal on a schedule, a posted board rate is the
               wrong instrument. Contract customers are priced as a formula — a
               published index, less an agreed treatment charge — so the rate
@@ -202,18 +202,18 @@ export default function PricesPage() {
             </div>
           </div>
 
-          <aside className="border-2 border-line p-8">
+          <aside className="border-2 hair p-8">
             <h3>The fine print, in plain English</h3>
-            <div className="mt-5 space-y-5 text-[0.95rem] leading-relaxed text-mist">
+            <div className="mt-5 space-y-5 text-[0.95rem] leading-relaxed t-muted">
               <p>
-                <strong className="font-semibold text-cloud">
+                <strong className="font-semibold ">
                   A quote is not the final rate.
                 </strong>{" "}
                 Settlement depends on the grade assessed at the yard.
                 Contamination, moisture, attachments and size all affect yield.
               </p>
               <p>
-                <strong className="font-semibold text-cloud">
+                <strong className="font-semibold ">
                   We cannot pay cash.
                 </strong>{" "}
                 Under Queensland&rsquo;s second-hand dealer legislation, scrap
@@ -221,7 +221,7 @@ export default function PricesPage() {
                 offering cash is operating outside the law.
               </p>
               <p>
-                <strong className="font-semibold text-cloud">
+                <strong className="font-semibold ">
                   Photo ID is required.
                 </strong>{" "}
                 Every transaction is recorded against a seller and a vehicle.

@@ -37,7 +37,7 @@ export default function Photo({
       {tint && (
         <span
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-navy-deep/40 to-transparent"
+          className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/35 to-transparent"
         />
       )}
     </>

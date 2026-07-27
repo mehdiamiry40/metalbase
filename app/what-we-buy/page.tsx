@@ -139,7 +139,7 @@ export default function WhatWeBuyPage() {
       >
         <div className="flex flex-wrap gap-4">
           <Button href="/prices">See the rate board</Button>
-          <Button href="/contact" variant="outlinePaper">
+          <Button href="/contact" variant="outline">
             Ask about a material
           </Button>
         </div>
@@ -163,11 +163,11 @@ export default function WhatWeBuyPage() {
       ))}
 
       {/* prep --------------------------------------------------------- */}
-      <section id="prep" className="scroll-mt-20 bg-navy-deep py-16 lg:py-24">
+      <section id="prep" className="scroll-mt-20 bg-cream py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>Six things that change what your load is worth</h2>
-            <p className="t-lead mt-5 text-mist">
+            <p className="t-lead mt-5 t-muted">
               None of these require equipment. Most take less than an hour and
               move the return by double digits.
             </p>
@@ -184,7 +184,7 @@ export default function WhatWeBuyPage() {
           <div>
             <Eyebrow>Hard limits</Eyebrow>
             <h2>What we can&rsquo;t accept</h2>
-            <p className="t-lead mt-5 text-mist">
+            <p className="t-lead mt-5 t-muted">
               These are safety and licensing limits, not commercial ones. If
               you&rsquo;re holding something on this list, call us anyway — we can
               usually point you to a licensed handler who can take it.
@@ -195,7 +195,7 @@ export default function WhatWeBuyPage() {
               </Button>
             </div>
           </div>
-          <ul className="divide-y divide-line border-y-2 border-orange-bright">
+          <ul className="divide-y divide-[color:var(--hair)] border-y-2 border-orange">
             {excluded.map((e) => (
               <li key={e} className="py-4 text-[0.98rem]">
                 {e}

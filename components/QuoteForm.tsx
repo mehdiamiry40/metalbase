@@ -35,9 +35,9 @@ const volumes = [
 ];
 
 const field =
-  "w-full rounded-[2px] border border-line-strong bg-navy px-4 py-3 text-[1rem] text-cloud outline-none transition-colors placeholder:text-mist focus:border-orange-bright";
-const labelCls = "mb-2 block text-[0.9rem] font-semibold text-cloud";
-const errCls = "mt-1.5 text-[0.85rem] text-orange";
+  "w-full rounded-[4px] border hair bg-cream px-4 py-3 text-[1rem] outline-none transition-colors placeholder:text-slate focus:border-blue";
+const labelCls = "mb-2 block text-[0.9rem] font-semibold ";
+const errCls = "mt-1.5 text-[0.85rem] t-accent";
 
 type State = "idle" | "sending" | "sent" | "sent-undelivered" | "error";
 
@@ -114,18 +114,18 @@ export default function QuoteForm() {
 
   if (state === "sent" || state === "sent-undelivered") {
     return (
-      <div className="border-2 border-orange-bright bg-navy-raised p-10" role="status">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-fill">
+      <div className="border-2 border-orange bg-white p-10" role="status">
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-orange">
           <Tick className="h-6 w-6 text-white" />
         </span>
         <h3 className="mt-5 text-[1.5rem]">Thanks — that&rsquo;s with the trade desk</h3>
-        <p className="mt-3 max-w-md leading-relaxed text-mist">
+        <p className="mt-3 max-w-md leading-relaxed t-muted">
           A grader will come back to you inside one business day.
         </p>
 
         {state === "sent-undelivered" && (
-          <div className="mt-6 border-l-4 border-orange-bright bg-navy-deep p-5">
-            <p className="text-[0.94rem] leading-relaxed text-cloud">
+          <div className="mt-6 border-l-4 border-orange bg-cream p-5">
+            <p className="text-[0.94rem] leading-relaxed ">
               <strong className="font-semibold">Heads up:</strong> no email or
               webhook is configured on this deployment yet, so your enquiry was
               logged on the server rather than sent to anyone.
@@ -142,7 +142,7 @@ export default function QuoteForm() {
             setState("idle");
             setPicked([]);
           }}
-          className="mt-6 font-semibold text-orange u-link"
+          className="mt-6 font-semibold t-accent u-link"
         >
           Send another enquiry
         </button>
@@ -158,7 +158,7 @@ export default function QuoteForm() {
       ref={formRef}
       onSubmit={onSubmit}
       noValidate
-      className="border border-line bg-navy-raised p-7 lg:p-9"
+      className="border hair bg-white p-7 lg:p-9"
     >
       {/* Announced to screen readers without stealing focus. */}
       <p aria-live="polite" className="sr-only">
@@ -170,7 +170,7 @@ export default function QuoteForm() {
       </p>
 
       {state === "error" && (
-        <div role="alert" className="mb-6 border-l-4 border-orange-bright bg-navy-deep p-4 text-[0.94rem]">
+        <div role="alert" className="mb-6 border-l-4 border-orange bg-cream p-4 text-[0.94rem]">
           {message}
         </div>
       )}
@@ -213,7 +213,7 @@ export default function QuoteForm() {
 
         <div>
           <label className={labelCls} htmlFor={`${uid}-company`}>
-            Company <span className="font-normal text-mist">(optional)</span>
+            Company <span className="font-normal t-muted">(optional)</span>
           </label>
           <input id={`${uid}-company`} name="company" autoComplete="organization" className={field} />
         </div>
@@ -274,8 +274,8 @@ export default function QuoteForm() {
                   onClick={() => toggle(m)}
                   className={`rounded-[2px] border px-3.5 py-2 text-[0.88rem] font-medium transition-colors ${
                     on
-                      ? "border-orange-bright bg-orange-fill text-navy"
-                      : "border-line-strong text-mist hover:border-orange-bright hover:text-orange"
+                      ? "border-orange bg-orange text-navy"
+                      : "hair t-muted hover:border-orange hover:text-[color:var(--accent-text)]"
                   }`}
                 >
                   {m}
@@ -309,12 +309,12 @@ export default function QuoteForm() {
         <button
           type="submit"
           disabled={busy}
-          className="inline-flex items-center gap-2 rounded-[2px] bg-orange-fill px-7 py-3.5 font-semibold text-navy transition-colors hover:bg-orange-hover disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-[4px] border-2 border-orange bg-orange px-7 py-3 text-[1.0625rem] font-normal text-navy transition-colors hover:bg-orange-deep disabled:cursor-not-allowed disabled:opacity-60"
         >
           {busy ? "Sending…" : "Send enquiry"}
           {!busy && <ArrowRight className="h-4 w-4" />}
         </button>
-        <p className="text-[0.88rem] text-mist">
+        <p className="text-[0.88rem] t-muted">
           Answered inside one business day · No obligation
         </p>
       </div>

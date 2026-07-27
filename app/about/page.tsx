@@ -78,21 +78,21 @@ export default function AboutPage() {
       <Section id="operate" tone="deep" className="scroll-mt-20">
         <div className="rule max-w-3xl">
           <h2>Four rules the yards run on</h2>
-          <p className="t-lead mt-5 text-mist">
+          <p className="t-lead mt-5 t-muted">
             They sound obvious. The reason people switch merchants is that they
             are not universal.
           </p>
         </div>
-        <div className="mt-10 border-t border-line">
+        <div className="mt-10 border-t hair">
           <DefinitionRows items={values} />
         </div>
       </Section>
 
-      <section id="safety" className="scroll-mt-20 bg-navy-deep py-16 lg:py-24">
+      <section id="safety" className="scroll-mt-20 bg-cream py-16 lg:py-24">
         <div className="shell grid gap-12 lg:grid-cols-2">
           <div className="rule">
             <h2>A scrap yard is a heavy industrial site</h2>
-            <p className="t-lead mt-5 text-mist">
+            <p className="t-lead mt-5 t-muted">
               Material handlers, mobile shears, moving trucks and unpredictable
               loads. We treat every visitor as somebody who has never been in one
               before, because most of them haven&rsquo;t.

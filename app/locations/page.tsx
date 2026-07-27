@@ -27,7 +27,7 @@ export default function LocationsPage() {
       >
         <div className="flex flex-wrap gap-4">
           <Button href="/prices">Rate board</Button>
-          <Button href="#id" variant="outlinePaper">
+          <Button href="#id" variant="outline">
             What to bring
           </Button>
         </div>
@@ -39,20 +39,20 @@ export default function LocationsPage() {
           <h2>Where to find us</h2>
         </div>
         {locations.length > 0 ? (
-          <div className="mt-10 divide-y divide-line border-y border-line">
+          <div className="mt-10 divide-y divide-[color:var(--hair)] border-y hair">
             {locations.map((l) => (
               <div key={l.id} id={l.id} className="grid scroll-mt-20 gap-4 py-8 md:grid-cols-[minmax(0,18rem)_1fr] md:gap-12">
                 <div>
                   <h3>{l.name}</h3>
-                  <p className="t-eyebrow mt-2 text-orange">{l.role}</p>
+                  <p className="t-eyebrow mt-2 t-accent">{l.role}</p>
                 </div>
                 <div className="space-y-3">
                   {l.address && <p className="text-[1.02rem]">{l.address}</p>}
-                  {l.hours && <p className="text-mist">{l.hours}</p>}
+                  {l.hours && <p className="t-muted">{l.hours}</p>}
                   {l.features.length > 0 && (
                     <ul className="flex flex-wrap gap-2 pt-1">
                       {l.features.map((f) => (
-                        <li key={f} className="border border-line px-3 py-1 text-[0.86rem] text-mist">
+                        <li key={f} className="border hair px-3 py-1 text-[0.86rem] t-muted">
                           {f}
                         </li>
                       ))}
@@ -63,7 +63,7 @@ export default function LocationsPage() {
                       href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(l.address)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block pt-2 font-semibold text-orange u-link"
+                      className="inline-block pt-2 font-semibold t-accent u-link"
                     >
                       Directions
                     </a>
@@ -73,9 +73,9 @@ export default function LocationsPage() {
             ))}
           </div>
         ) : (
-          <div className="mt-10 border-2 border-dashed border-line p-8">
-            <p className="t-eyebrow text-orange">Not yet published</p>
-            <p className="mt-3 max-w-2xl text-[0.98rem] leading-relaxed text-mist">
+          <div className="mt-10 border-2 border-dashed hair p-8">
+            <p className="t-eyebrow t-accent">Not yet published</p>
+            <p className="mt-3 max-w-2xl text-[0.98rem] leading-relaxed t-muted">
               Yard addresses and opening hours will be listed here once sites are
               confirmed. We&rsquo;d rather leave this blank than send someone to an
               address that isn&rsquo;t ours.
@@ -90,11 +90,11 @@ export default function LocationsPage() {
       </Section>
 
       {/* how it works ------------------------------------------------- */}
-      <section id="how-it-works" className="scroll-mt-20 bg-navy-deep py-16 lg:py-24">
+      <section id="how-it-works" className="scroll-mt-20 bg-cream py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>How a weigh-in works</h2>
-            <p className="t-lead mt-5 text-mist">
+            <p className="t-lead mt-5 t-muted">
               About fifteen minutes end to end for a ute or trailer load.
             </p>
           </div>
@@ -119,16 +119,16 @@ export default function LocationsPage() {
                 "Registration papers, if you're selling a vehicle for scrap",
               ]}
             />
-            <p className="mt-6 text-[0.95rem] leading-relaxed text-mist">
+            <p className="mt-6 text-[0.95rem] leading-relaxed t-muted">
               ID is scanned at the bridge. It is a licensing requirement, not a
               preference.
             </p>
           </div>
 
-          <div id="payment" className="scroll-mt-20 border-2 border-orange-bright p-8">
+          <div id="payment" className="scroll-mt-20 border-2 border-orange p-8">
             <Eyebrow>Getting paid</Eyebrow>
             <h2 className="text-[1.6rem]">Why nobody in Queensland can pay you cash</h2>
-            <div className="mt-5 space-y-4 text-[0.97rem] leading-relaxed text-mist">
+            <div className="mt-5 space-y-4 text-[0.97rem] leading-relaxed t-muted">
               <p>
                 Queensland&rsquo;s second-hand dealer legislation prohibits cash
                 payment for scrap metal. It was introduced to make stolen metal

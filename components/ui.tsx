@@ -32,19 +32,21 @@ export function Tick({ className = "" }: { className?: string }) {
    section. Nothing borrowed from the reference site.
    ------------------------------------------------------------------ */
 
-/* One surface family means one logo. The old two-variant version
-   defaulted to a navy wordmark, which is invisible on a navy header. */
+/**
+ * The mark carries both accents: blue on top, orange beneath. The
+ * wordmark takes the surface colour, so it is navy on the cream header
+ * and white on a navy footer without needing a variant prop — the
+ * variant approach previously shipped an invisible navy-on-navy logo.
+ */
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <svg viewBox="0 0 32 28" className="h-[26px] w-[30px] shrink-0" aria-hidden="true">
-        <path d="M4 4h18l-4 6H0z" fill="#ff6a1a" />
-        <path d="M7 11h18l-4 6H3z" fill="#ff6a1a" opacity="0.62" />
-        <path d="M10 18h18l-4 6H6z" fill="#ffffff" opacity="0.5" />
+        <path d="M4 4h18l-4 6H0z" fill="#2175d9" />
+        <path d="M7 11h18l-4 6H3z" fill="#ff6a1a" />
+        <path d="M10 18h18l-4 6H6z" fill="currentColor" opacity="0.35" />
       </svg>
-      <span
-        className="text-[1.4rem] font-semibold leading-none tracking-[-0.04em] text-cloud"
-      >
+      <span className="text-[1.4rem] font-medium leading-none tracking-[-0.05em]">
         MetalBase
       </span>
     </span>
@@ -55,16 +57,20 @@ export function Logo({ className = "" }: { className?: string }) {
    Square-ish and solid. Industrial rather than corporate-soft.
    ------------------------------------------------------------------ */
 
+/* 4px radius, weight 400, 2px border — measured off the reference,
+   which uses quiet rectangular buttons rather than bold pills. */
 const btnBase =
-  "inline-flex items-center justify-center gap-2 rounded-[2px] px-7 py-3.5 text-[0.95rem] font-semibold tracking-[-0.01em] transition-colors duration-150";
+  "inline-flex items-center justify-center gap-2 rounded-[4px] border-2 px-7 py-3 text-[1.0625rem] font-normal transition-colors duration-150";
 
 const variants: Record<string, string> = {
-  primary: "bg-orange-fill text-navy hover:bg-orange-hover",
-  ink: "bg-navy-raised text-cloud hover:bg-orange-fill hover:text-navy",
-  /* Outline buttons invert on hover — on a navy page the fill has to
-     become light, or the hover reads as no change at all. */
-  outline: "border-2 border-cloud text-cloud hover:bg-cloud hover:text-navy",
-  outlinePaper: "border-2 border-cloud text-cloud hover:bg-cloud hover:text-navy",
+  /* The CTA. Orange fill carries navy at 5.93 — white on orange is
+     2.87 and can never pass, which is why the label is navy. */
+  primary: "border-orange bg-orange text-navy hover:border-orange-deep hover:bg-orange-deep",
+  /* Blue is the trust colour: secondary actions and navigation. */
+  blue: "border-blue bg-blue text-white hover:border-blue-deep hover:bg-blue-deep",
+  /* Outlines invert on hover so the change is unmistakable. */
+  outline: "border-navy text-navy hover:bg-navy hover:text-white",
+  outlineDark: "border-white text-white hover:bg-white hover:text-navy",
 };
 
 export function Button({
@@ -98,8 +104,7 @@ export function ArrowLink({
   tone?: "base" | "accent";
   className?: string;
 }) {
-  const colour =
-    tone === "accent" ? "text-orange" : "text-cloud";
+  const colour = tone === "accent" ? "t-accent" : "";
   return (
     <Link
       href={href}
@@ -113,19 +118,17 @@ export function ArrowLink({
 
 /* ------------------------------ layout ----------------------------- */
 
-/* Surface names kept so pages don't all need rewriting; every one is
-   now a navy. "base" is the page, "deep" bands it, "raised" is the
-   darkest, "accent" is the orange fill. */
 /**
- * Surface tones. The three navies sit only ~1.2:1 apart, so the tonal
- * step alone is too weak to signal a band change on a dark page — each
- * one carries a hairline at its top edge to do the actual dividing.
+ * Surface tones. Each sets its own background AND the text colours
+ * that go with it, via .on-light / .on-dark. Body and muted colours
+ * are never set per element — doing that is precisely how the
+ * dark-on-dark bugs got in last time.
  */
 const tones: Record<string, string> = {
-  base: "border-t border-line bg-navy text-cloud",
-  deep: "border-t border-line bg-navy-deep text-cloud",
-  raised: "border-t border-line bg-navy-raised text-cloud",
-  accent: "border-t border-line bg-orange-fill text-navy",
+  base: "on-light bg-cream", // the page
+  raised: "on-light border-y hair bg-white", // cards / lifted bands
+  deep: "on-dark bg-navy", // the dark band
+  accent: "on-light bg-orange", // orange band, navy type
 };
 
 export function Section({
@@ -154,7 +157,7 @@ export function Eyebrow({
   tone?: "accent" | "muted";
 }) {
   return (
-    <p className={`t-eyebrow mb-3 ${tone === "muted" ? "text-mist" : "text-orange"}`}>
+    <p className={`t-eyebrow mb-3 ${tone === "muted" ? "t-muted" : "t-accent"}`}>
       {children}
     </p>
   );
@@ -174,7 +177,7 @@ export function SectionHead({
     <div className="mb-12 max-w-3xl">
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <h2>{title}</h2>
-      {intro && <p className="t-lead mt-5 text-mist">{intro}</p>}
+      {intro && <p className="t-lead mt-5 t-muted">{intro}</p>}
     </div>
   );
 }
@@ -191,11 +194,11 @@ export function StatBand({
   return (
     <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
       {items.map((s) => (
-        <div key={s.label} className="border-t-2 border-orange-bright pt-5">
-          <p className="t-num text-[2.5rem] font-medium leading-none text-cloud">
+        <div key={s.label} className="border-t-2 border-orange pt-5">
+          <p className="t-num text-[2.5rem] font-medium leading-none ">
             {s.value}
           </p>
-          <p className="mt-3 text-[0.92rem] leading-snug text-mist">{s.label}</p>
+          <p className="mt-3 text-[0.92rem] leading-snug t-muted">{s.label}</p>
         </div>
       ))}
     </div>
@@ -205,16 +208,16 @@ export function StatBand({
 export function Breadcrumb({ trail }: { trail: { label: string; href?: string }[] }) {
   return (
     <nav aria-label="Breadcrumb" className="mb-7 text-[0.85rem]">
-      <ol className="flex flex-wrap items-center gap-2 text-mist">
+      <ol className="flex flex-wrap items-center gap-2 t-muted">
         {trail.map((t, i) => (
           <li key={t.label} className="flex items-center gap-2">
             {i > 0 && <span aria-hidden="true">/</span>}
             {t.href ? (
-              <Link href={t.href} className="u-link hover:text-orange">
+              <Link href={t.href} className="u-link hover:text-[color:var(--accent-text)]">
                 {t.label}
               </Link>
             ) : (
-              <span className="text-cloud">{t.label}</span>
+              <span className="">{t.label}</span>
             )}
           </li>
         ))}
@@ -235,17 +238,17 @@ export function CtaBand({
   secondary?: { label: string; href: string };
 }) {
   return (
-    <section className="border-t border-line bg-navy-deep text-cloud">
+    <section className="on-dark bg-navy">
       <div className="shell py-18 lg:py-24">
         <div className="rule" />
         <h2 className="max-w-3xl">{title}</h2>
-        <p className="t-lead mt-5 max-w-2xl text-mist">{body}</p>
+        <p className="t-lead mt-5 max-w-2xl t-muted">{body}</p>
         <div className="mt-9 flex flex-wrap gap-4">
           <Button href={primary.href} variant="primary">
             {primary.label}
           </Button>
           {secondary && (
-            <Button href={secondary.href} variant="outlinePaper">
+            <Button href={secondary.href} variant="outlineDark">
               {secondary.label}
             </Button>
           )}
@@ -267,8 +270,8 @@ export function TickList({
     <ul className={`space-y-3 ${className}`}>
       {items.map((i) => (
         <li key={i} className="flex items-start gap-3">
-          <Tick className="mt-1 h-4 w-4 shrink-0 text-orange" />
-          <span className="text-cloud">{i}</span>
+          <Tick className="mt-1 h-4 w-4 shrink-0 t-accent" />
+          <span className="">{i}</span>
         </li>
       ))}
     </ul>
@@ -282,7 +285,7 @@ export function TickList({
  */
 export function Pending({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-[2px] border border-dashed border-line-strong px-2 py-0.5 text-[0.82rem] text-mist">
+    <span className="inline-flex items-center gap-1.5 rounded-[2px] border border-dashed hair px-2 py-0.5 text-[0.82rem] t-muted">
       {children}
     </span>
   );
