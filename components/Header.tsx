@@ -185,7 +185,7 @@ export default function Header() {
             )}
             <Link
               href="/contact"
-              className="hidden rounded-[2px] bg-orange-fill px-5 py-2.5 text-[0.9rem] font-semibold text-white transition-colors hover:bg-orange-hover sm:inline-block"
+              className="hidden rounded-[2px] bg-orange-fill px-5 py-2.5 text-[0.9rem] font-semibold text-navy transition-colors hover:bg-orange-hover sm:inline-block"
             >
               Get a quote
             </Link>
@@ -255,7 +255,7 @@ export default function Header() {
             <Link
               href="/contact"
               onClick={() => setMobileOpen(false)}
-              className="inline-block rounded-[2px] bg-orange-fill px-7 py-3.5 font-semibold text-white"
+              className="inline-block rounded-[2px] bg-orange-fill px-7 py-3.5 font-semibold text-navy"
             >
               Get a quote
             </Link>

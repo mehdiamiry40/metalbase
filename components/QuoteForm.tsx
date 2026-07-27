@@ -274,7 +274,7 @@ export default function QuoteForm() {
                   onClick={() => toggle(m)}
                   className={`rounded-[2px] border px-3.5 py-2 text-[0.88rem] font-medium transition-colors ${
                     on
-                      ? "border-orange-bright bg-orange-fill text-white"
+                      ? "border-orange-bright bg-orange-fill text-navy"
                       : "border-line-strong text-mist hover:border-orange-bright hover:text-orange"
                   }`}
                 >
@@ -309,7 +309,7 @@ export default function QuoteForm() {
         <button
           type="submit"
           disabled={busy}
-          className="inline-flex items-center gap-2 rounded-[2px] bg-orange-fill px-7 py-3.5 font-semibold text-white transition-colors hover:bg-orange-hover disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-[2px] bg-orange-fill px-7 py-3.5 font-semibold text-navy transition-colors hover:bg-orange-hover disabled:cursor-not-allowed disabled:opacity-60"
         >
           {busy ? "Sending…" : "Send enquiry"}
           {!busy && <ArrowRight className="h-4 w-4" />}

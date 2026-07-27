@@ -24,8 +24,8 @@
      orange text on deep       8.3:1
      mist on raised            5.7:1
      orange text on raised     5.2:1
-     white on orange hover     5.9:1
-     white on orange button    4.6:1
+     navy on orange button     5.9:1
+     navy on orange hover      7.3:1
 
    The surfaces sit close together (1.1–1.4:1) by design — they band
    the page rather than divide it. Hairline borders do the dividing.
@@ -41,11 +41,16 @@
   --color-cloud: #ffffff; /* primary */
   --color-mist: #a8b2cc; /* muted — 8.0:1 on navy */
 
-  /* orange — the only other colour */
-  --color-orange: #ff8a45; /* TEXT · passes on all three navies */
-  --color-orange-bright: #ff6a1a; /* decorative — rule, logo, keylines */
-  --color-orange-fill: #c2551a; /* BUTTON FILL, carries white · 4.6:1 */
-  --color-orange-hover: #a8460f; /* hover · 5.9:1 white-on-fill */
+  /* orange — the only other colour.
+     One vivid orange now does every job. White text on #FF6A1A is
+     2.9:1 and can never pass, so buttons carry the page navy as their
+     label instead — 5.9:1, and it reads as the brand rather than as a
+     warning label. Hover goes lighter, not darker: on a vivid fill
+     that is the direction that gains contrast (5.9 -> 7.3). */
+  --color-orange: #ff8a45; /* TEXT on navy · 7.3:1 */
+  --color-orange-bright: #ff6a1a; /* rule, logo, keylines, focus ring */
+  --color-orange-fill: #ff6a1a; /* BUTTON FILL, carries navy · 5.9:1 */
+  --color-orange-hover: #ff8a45; /* hover · 7.3:1 navy-on-fill */
 
   --color-line: rgba(255, 255, 255, 0.14);
   --color-line-strong: rgba(255, 255, 255, 0.3);

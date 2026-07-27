@@ -64,7 +64,7 @@ export function Split({
 }) {
   const bg =
     tone === "accent"
-      ? "bg-orange-fill text-white"
+      ? "bg-orange-fill text-navy"
       : tone === "deep"
         ? "bg-navy-deep text-cloud"
         : tone === "raised"
@@ -85,7 +85,7 @@ export function Split({
             </Eyebrow>
           )}
           <h2>{title}</h2>
-          <div className={tone === "accent" ? "text-white" : "text-mist"}>
+          <div className={tone === "accent" ? "text-navy" : "text-mist"}>
             {children}
           </div>
         </div>

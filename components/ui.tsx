@@ -59,8 +59,8 @@ const btnBase =
   "inline-flex items-center justify-center gap-2 rounded-[2px] px-7 py-3.5 text-[0.95rem] font-semibold tracking-[-0.01em] transition-colors duration-150";
 
 const variants: Record<string, string> = {
-  primary: "bg-orange-fill text-white hover:bg-orange-hover",
-  ink: "bg-navy-raised text-cloud hover:bg-orange-fill hover:text-white",
+  primary: "bg-orange-fill text-navy hover:bg-orange-hover",
+  ink: "bg-navy-raised text-cloud hover:bg-orange-fill hover:text-navy",
   /* Outline buttons invert on hover — on a navy page the fill has to
      become light, or the hover reads as no change at all. */
   outline: "border-2 border-cloud text-cloud hover:bg-cloud hover:text-navy",
@@ -125,7 +125,7 @@ const tones: Record<string, string> = {
   base: "border-t border-line bg-navy text-cloud",
   deep: "border-t border-line bg-navy-deep text-cloud",
   raised: "border-t border-line bg-navy-raised text-cloud",
-  accent: "border-t border-line bg-orange-fill text-white",
+  accent: "border-t border-line bg-orange-fill text-navy",
 };
 
 export function Section({
