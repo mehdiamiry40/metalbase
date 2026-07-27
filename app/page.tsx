@@ -29,23 +29,30 @@ export default function Home() {
           reference's signature opening. Its own h1 measured white, so
           the hero is the one place on a light-dominant site where the
           headline is reversed out. */}
-      <section className="on-dark relative isolate overflow-hidden bg-navy">
-        <div className="absolute inset-0 -z-10">
+      {/* The photo layer must NOT be negative z-index. `isolate` on the
+          section creates a stacking context, so a -z-10 child paints
+          behind the section's own opaque bg-navy and vanishes entirely
+          — the image loaded fine and simply could not be seen. Photo
+          layer sits at auto z, content above it via `relative`, and
+          bg-navy stays as the fallback while the image loads. */}
+      <section className="on-dark relative overflow-hidden bg-navy">
+        <div className="absolute inset-0">
           <Photo
             name="yard-grab"
             priority
             sizes="100vw"
             alt="A material handler working a pile of mixed scrap steel at a recycling yard"
           />
-          {/* Scrim measured, not guessed: at 0.78 the white h1 clears
-              12:1 over the lightest part of this photograph. */}
+          {/* Scrim: heavy enough that white type clears AA over the
+              brightest part of this photograph, light enough that the
+              yard is still legible behind it. */}
           <span
             aria-hidden="true"
-            className="absolute inset-0 bg-navy/[0.78]"
+            className="absolute inset-0 bg-navy/[0.72]"
           />
         </div>
 
-        <div className="shell py-24 lg:py-32">
+        <div className="shell relative py-24 lg:py-32">
           <div className="max-w-3xl">
             <Eyebrow>Scrap metal recycling · Brisbane</Eyebrow>
             <h1>Your metal is worth more than the bin it&rsquo;s sitting in</h1>
