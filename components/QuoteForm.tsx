@@ -37,7 +37,13 @@ const volumes = [
 const field =
   "w-full rounded-[4px] border hair bg-cream px-4 py-3 text-[1rem] outline-none transition-colors placeholder:text-slate focus:border-blue";
 const labelCls = "mb-2 block text-[0.9rem] font-semibold ";
-const errCls = "mt-1.5 text-[0.85rem] t-accent";
+/* Errors are navy and bold, not blue. t-accent resolves to the link
+   blue on a light surface, so validation messages were rendering in
+   exactly the colour the rest of the site uses for "this is a link" —
+   legible, but saying the wrong thing. A two-colour palette has no red
+   to reach for, so the weight and the orange keyline on the summary do
+   the signalling and the text stays at 17:1. */
+const errCls = "mt-1.5 text-[0.85rem] font-semibold text-navy";
 
 type State = "idle" | "sending" | "sent" | "sent-undelivered" | "error";
 
