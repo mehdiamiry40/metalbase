@@ -25,6 +25,13 @@ const blurbs: Record<string, string> = {
    kept as a pointer-only convenience on top.
    ------------------------------------------------------------------ */
 
+/* Nav labels contain spaces ("Sell your scrap"), and an HTML id may not.
+   Interpolating the raw label produced an aria-controls that could never
+   resolve — invisible until a menu is actually open, which is why it
+   survived earlier audits. Module scope keeps the reference stable for
+   the effect that looks the trigger back up. */
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
 export default function Header() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -32,6 +39,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
   const uid = useId();
+
 
   const close = useCallback(() => setOpenMenu(null), []);
 
@@ -51,7 +59,7 @@ export default function Header() {
     function onKeyDown(e: KeyboardEvent) {
       if (e.key !== "Escape") return;
       if (openMenu) {
-        const trigger = document.getElementById(`${uid}-trigger-${openMenu}`);
+        const trigger = document.getElementById(`${uid}-trigger-${slug(openMenu)}`);
         close();
         trigger?.focus();
       } else if (mobileOpen) {
@@ -101,7 +109,7 @@ export default function Header() {
           >
             {nav.map((item) => {
               const isOpen = openMenu === item.label;
-              const panelId = `${uid}-panel-${item.label}`;
+              const panelId = `${uid}-panel-${slug(item.label)}`;
               return (
                 <div
                   key={item.label}
@@ -110,7 +118,7 @@ export default function Header() {
                 >
                   <button
                     type="button"
-                    id={`${uid}-trigger-${item.label}`}
+                    id={`${uid}-trigger-${slug(item.label)}`}
                     aria-expanded={isOpen}
                     aria-controls={panelId}
                     onClick={() => setOpenMenu(isOpen ? null : item.label)}
