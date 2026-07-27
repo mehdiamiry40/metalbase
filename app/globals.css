@@ -68,8 +68,10 @@
   --color-line: rgba(15, 25, 65, 0.14); /* on light */
   --color-line-dark: rgba(255, 255, 255, 0.2); /* on navy */
 
-  --font-sans: "Hanken Grotesk", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Helvetica, Arial, sans-serif;
+  /* Supplied by next/font (self-hosted, metric-adjusted fallback). The
+     literal stack stays as a guard in case the variable is ever absent. */
+  --font-sans: var(--font-hanken), "Hanken Grotesk", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 /* ------------------------------------------------------------------

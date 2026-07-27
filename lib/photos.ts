@@ -122,7 +122,22 @@ export type PhotoKey = keyof typeof photos;
  *
  * Pass a smaller width for images that are never displayed large.
  */
-export function photoSrc(key: PhotoKey, width = 2880) {
+/**
+ * `width` is the width requested from the UPSTREAM CDN, which caps how
+ * sharp the image can ever be — Next resizes down from it but cannot
+ * invent detail above it.
+ *
+ * Measured on the deployed hero: 2592 real pixels rendering into a
+ * 3456-pixel box on a 2x display, a 25% shortfall, which is exactly
+ * why it looked soft. Full-bleed images now default high enough to
+ * cover a 2x 1728px viewport; pass a smaller width for thumbnails,
+ * where the extra bytes buy nothing.
+ *
+ * Worth remembering when reading these numbers back: naturalWidth is
+ * density-corrected, so it reads LOWER than the true pixel count by a
+ * factor of devicePixelRatio.
+ */
+export function photoSrc(key: PhotoKey, width = 3456) {
   if (USE_LOCAL) return `/photos/${key}.jpg`;
   const { uid } = photos[key];
   return `https://images.unsplash.com/photo-${uid}?fm=jpg&q=76&w=${width}&auto=format&fit=crop`;
