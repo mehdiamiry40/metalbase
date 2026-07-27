@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Hanken_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -7,6 +8,29 @@ import MobileActionBar from "@/components/MobileActionBar";
 import { company, locations } from "@/lib/site";
 
 const SITE = "https://metalbase.vercel.app";
+
+/**
+ * Self-hosted rather than a <link> to fonts.googleapis.com.
+ *
+ * The stylesheet link was render-blocking and on a third-party origin,
+ * so first paint waited on a DNS lookup, TLS handshake and round trip
+ * to Google before a single character could be drawn. next/font builds
+ * the font into the deployment, serves it same-origin, and inlines the
+ * @font-face — no third-party request on the critical path at all.
+ *
+ * It also removes the only external origin the site contacted on load,
+ * which is worth something under GDPR: Google Fonts served from
+ * Google's CDN discloses visitor IPs to a third party.
+ *
+ * `display: swap` keeps text visible during load; the fallback stack
+ * is metric-adjusted by next/font to limit the reflow when it swaps.
+ */
+const hanken = Hanken_Grotesk({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-hanken",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
@@ -83,14 +107,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-AU">
+    <html lang="en-AU" className={hanken.variable}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
         <meta name="theme-color" content="#0f1941" />
         <script
           type="application/ld+json"
