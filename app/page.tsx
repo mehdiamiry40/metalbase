@@ -35,7 +35,7 @@ export default function Home() {
           — the image loaded fine and simply could not be seen. Photo
           layer sits at auto z, content above it via `relative`, and
           bg-navy stays as the fallback while the image loads. */}
-      <section className="on-dark relative overflow-hidden bg-navy">
+      <section className="on-dark over-photo relative overflow-hidden bg-navy">
         <div className="absolute inset-0">
           <Photo
             name="yard-grab"

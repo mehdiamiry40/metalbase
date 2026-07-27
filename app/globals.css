@@ -195,6 +195,16 @@
    type utilities
    ------------------------------------------------------------------ */
 
+/* Text over a photograph can only guarantee contrast for white. The
+   scrim fixes the DARKEST the background can be, not the lightest, so
+   a mid-tone accent has no floor: the orange eyebrow measured 2.93:1
+   against a white pixel in the yard shot. axe reports these nodes as
+   "incomplete" rather than failing, because it cannot evaluate text
+   over an image — so nothing automated catches it. */
+.over-photo {
+  --accent-text: #ffffff;
+}
+
 .t-eyebrow {
   font-size: 0.75rem;
   font-weight: 600;
