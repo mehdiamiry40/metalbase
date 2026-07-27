@@ -97,7 +97,7 @@ export default function Header() {
         }`}
       >
         <div className="shell flex h-[70px] items-center justify-between gap-8">
-          <Link href="/" aria-label="MetalBase home">
+          <Link href="/" aria-label="MetalBase home" className="-ml-1 flex h-11 items-center px-1">
             <Logo />
           </Link>
 
@@ -203,7 +203,7 @@ export default function Header() {
               aria-expanded={mobileOpen}
               aria-controls={`${uid}-mobile`}
               aria-label="Toggle navigation"
-              className="flex h-10 w-10 flex-col items-center justify-center gap-[6px] xl:hidden"
+              className="-mr-1 flex h-11 w-11 flex-col items-center justify-center gap-[6px] xl:hidden"
             >
               <span className={`block h-[2px] w-6 bg-navy transition ${mobileOpen ? "translate-y-2 rotate-45" : ""}`} />
               <span className={`block h-[2px] w-6 bg-navy transition ${mobileOpen ? "opacity-0" : ""}`} />

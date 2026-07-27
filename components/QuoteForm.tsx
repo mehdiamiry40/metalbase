@@ -278,7 +278,7 @@ export default function QuoteForm() {
                   type="button"
                   aria-pressed={on}
                   onClick={() => toggle(m)}
-                  className={`rounded-[2px] border px-3.5 py-2 text-[0.88rem] font-medium transition-colors ${
+                  className={`min-h-11 rounded-[4px] border px-3.5 py-2 text-[0.88rem] font-medium transition-colors ${
                     on
                       ? "border-orange bg-orange text-navy"
                       : "hair t-muted hover:border-orange hover:text-[color:var(--accent-text)]"
