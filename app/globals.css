@@ -29,11 +29,16 @@
   --color-brand-text: #1a5cae; /* blue as TEXT · 6.6:1 white · 5.8:1 band */
   --color-brand-on-ink: #6fa8ee; /* blue as TEXT on navy     · 6.9:1 */
 
-  /* accent orange — action */
-  --color-accent: #a8460f; /* orange as TEXT · 5.9:1 white · 5.2:1 band */
-  --color-accent-fill: #ff6a1a; /* FILL, carries INK text   · 5.9:1 */
-  --color-accent-fill-hover: #e85d12;
-  --color-accent-on-ink: #ff8a45; /* orange as TEXT on navy   · 7.3:1 */
+  /* accent orange — action
+     Buttons carry WHITE text, so the fill has to be dark enough for it.
+     #FF6A1A is only 2.9:1 against white, so it stays a decorative
+     colour (the section rule, the logo) and #C2551A carries the
+     buttons: the brightest orange that clears AA with white on it. */
+  --color-accent: #a8460f; /* orange as TEXT   · 5.9:1 white · 5.2:1 band */
+  --color-accent-fill: #c2551a; /* BUTTON FILL      · 4.6:1 white-on-fill */
+  --color-accent-fill-hover: #a8460f; /* hover            · 5.9:1 white-on-fill */
+  --color-accent-bright: #ff6a1a; /* DECORATIVE only  · never behind text */
+  --color-accent-on-ink: #ff8a45; /* orange as TEXT on navy · 7.3:1 */
 
   /* text */
   --color-slate: #5b6478; /* 5.9:1 white · 5.3:1 band */
@@ -70,7 +75,7 @@
 
   ::selection {
     background: var(--color-accent-fill);
-    color: var(--color-ink);
+    color: #fff;
   }
 
   :focus-visible {
@@ -232,7 +237,7 @@
   display: block;
   width: 40px;
   height: 3px;
-  background: var(--color-accent-fill);
+  background: var(--color-accent-bright);
   margin-bottom: 1.5rem;
 }
 

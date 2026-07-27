@@ -44,7 +44,7 @@ export default function MobileActionBar() {
         <Link
           href="/contact"
           tabIndex={show ? undefined : -1}
-          className="flex flex-1 items-center justify-center rounded-[2px] bg-accent-fill px-5 py-3.5 font-semibold text-ink"
+          className="flex flex-1 items-center justify-center rounded-[2px] bg-accent-fill px-5 py-3.5 font-semibold text-white"
         >
           Get a quote
         </Link>

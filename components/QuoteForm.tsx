@@ -116,7 +116,7 @@ export default function QuoteForm() {
     return (
       <div className="border-2 border-accent-fill bg-white p-10" role="status">
         <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-fill">
-          <Tick className="h-6 w-6 text-ink" />
+          <Tick className="h-6 w-6 text-white" />
         </span>
         <h3 className="mt-5 text-[1.5rem]">Thanks — that&rsquo;s with the trade desk</h3>
         <p className="mt-3 max-w-md leading-relaxed text-slate">
@@ -274,7 +274,7 @@ export default function QuoteForm() {
                   onClick={() => toggle(m)}
                   className={`rounded-[2px] border px-3.5 py-2 text-[0.88rem] font-medium transition-colors ${
                     on
-                      ? "border-accent-fill bg-accent-fill text-ink"
+                      ? "border-accent-fill bg-accent-fill text-white"
                       : "border-line text-slate hover:border-accent-fill hover:text-brand-text"
                   }`}
                 >
@@ -309,7 +309,7 @@ export default function QuoteForm() {
         <button
           type="submit"
           disabled={busy}
-          className="inline-flex items-center gap-2 rounded-[2px] bg-accent-fill px-7 py-3.5 font-semibold text-ink transition-colors hover:bg-accent-fill-hover disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-[2px] bg-accent-fill px-7 py-3.5 font-semibold text-white transition-colors hover:bg-accent-fill-hover disabled:cursor-not-allowed disabled:opacity-60"
         >
           {busy ? "Sending…" : "Send enquiry"}
           {!busy && <ArrowRight className="h-4 w-4" />}

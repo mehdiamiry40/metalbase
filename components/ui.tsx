@@ -43,9 +43,9 @@ export function Logo({
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <svg viewBox="0 0 32 28" className="h-[26px] w-[30px] shrink-0" aria-hidden="true">
-        <path d="M4 4h18l-4 6H0z" fill="#2175d9" />
-        <path d="M7 11h18l-4 6H3z" fill={word} opacity="0.85" />
-        <path d="M10 18h18l-4 6H6z" fill={word} opacity="0.45" />
+        <path d="M4 4h18l-4 6H0z" fill="#ff6a1a" />
+        <path d="M7 11h18l-4 6H3z" fill="#2175d9" />
+        <path d="M10 18h18l-4 6H6z" fill={word} opacity="0.5" />
       </svg>
       <span
         className="text-[1.4rem] font-semibold leading-none tracking-[-0.04em]"
@@ -65,7 +65,7 @@ const btnBase =
   "inline-flex items-center justify-center gap-2 rounded-[2px] px-7 py-3.5 text-[0.95rem] font-semibold tracking-[-0.01em] transition-colors duration-150";
 
 const variants: Record<string, string> = {
-  primary: "bg-accent-fill text-ink hover:bg-accent-fill-hover",
+  primary: "bg-accent-fill text-white hover:bg-accent-fill-hover",
   ink: "bg-ink text-paper hover:bg-ink-soft",
   outline: "border-2 border-ink text-ink hover:bg-ink hover:text-paper",
   outlinePaper: "border-2 border-paper text-paper hover:bg-paper hover:text-ink",
@@ -121,7 +121,7 @@ const tones: Record<string, string> = {
   paper: "bg-paper text-ink",
   deep: "bg-paper-deep text-ink",
   ink: "bg-ink text-paper on-ink",
-  accent: "bg-accent-fill text-ink",
+  accent: "bg-accent-fill text-white",
 };
 
 export function Section({
