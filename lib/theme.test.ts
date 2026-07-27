@@ -75,7 +75,15 @@ describe("theme tokens", () => {
   ];
 
   it("declares the tokens the design system documents", () => {
-    for (const t of ["ink", "paper", "accent", "accent-fill", "accent-on-ink", "slate"]) {
+    for (const t of [
+      "navy",
+      "navy-deep",
+      "navy-raised",
+      "cloud",
+      "mist",
+      "orange",
+      "orange-fill",
+    ]) {
       expect(tokens.has(t)).toBe(true);
     }
   });

@@ -64,7 +64,7 @@ export default async function ServiceDetail({
       <Split
         photo={service.photo}
         side="right"
-        tone="paper"
+        tone="base"
         eyebrow="What you get"
         title="How it works in practice"
         priority
@@ -81,11 +81,11 @@ export default async function ServiceDetail({
         />
       </Section>
 
-      <section className="bg-paper-deep py-16 lg:py-24">
+      <section className="bg-navy-deep py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>From first call to first rebate</h2>
-            <p className="t-lead mt-5 text-slate">
+            <p className="t-lead mt-5 text-mist">
               Usually two to three weeks, faster if the site is already
               segregated.
             </p>
@@ -105,12 +105,12 @@ export default async function ServiceDetail({
               href={`/services/${o.slug}`}
               className="row-link group grid gap-3 py-7 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-12"
             >
-              <h3 className="group-hover:text-brand-text">{o.title}</h3>
+              <h3 className="group-hover:text-orange">{o.title}</h3>
               <div>
-                <p className="text-slate">{o.blurb}</p>
+                <p className="text-mist">{o.blurb}</p>
                 <span className="mt-3 inline-flex items-center gap-2 text-[0.94rem] font-semibold">
                   Read more
-                  <ArrowRight className="h-4 w-4 text-brand-text transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="h-4 w-4 text-orange transition-transform group-hover:translate-x-1" />
                 </span>
               </div>
             </Link>

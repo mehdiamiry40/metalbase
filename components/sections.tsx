@@ -24,14 +24,14 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <section className="border-b border-line bg-paper">
+    <section className="border-b border-line bg-navy">
       <div className="shell pt-6">
         <Breadcrumb trail={trail} />
       </div>
       <div className="shell pb-14 lg:pb-20">
         <Eyebrow>{eyebrow}</Eyebrow>
         <h1 className="max-w-4xl">{title}</h1>
-        {intro && <p className="t-lead mt-6 max-w-2xl text-slate">{intro}</p>}
+        {intro && <p className="t-lead mt-6 max-w-2xl text-mist">{intro}</p>}
         {children && <div className="mt-9">{children}</div>}
       </div>
     </section>
@@ -46,7 +46,7 @@ export function Split({
   photo,
   photoAlt,
   side = "right",
-  tone = "paper",
+  tone = "base",
   eyebrow,
   title,
   children,
@@ -56,40 +56,36 @@ export function Split({
   photoAlt?: string;
   /** Which side the photograph sits on. */
   side?: "left" | "right";
-  tone?: "paper" | "deep" | "ink" | "accent";
+  tone?: "base" | "deep" | "raised" | "accent";
   eyebrow?: string;
   title: string;
   children: ReactNode;
   priority?: boolean;
 }) {
   const bg =
-    tone === "ink"
-      ? "bg-ink text-paper on-ink"
-      : tone === "accent"
-        ? "bg-accent-fill text-white"
-        : tone === "deep"
-          ? "bg-paper-deep text-ink"
-          : "bg-paper text-ink";
+    tone === "accent"
+      ? "bg-orange-fill text-white"
+      : tone === "deep"
+        ? "bg-navy-deep text-cloud"
+        : tone === "raised"
+          ? "bg-navy-raised text-cloud"
+          : "bg-navy text-cloud";
 
   const copyOrder = side === "right" ? "lg:order-1" : "lg:order-2";
   const photoOrder = side === "right" ? "lg:order-2" : "lg:order-1";
   const pad = side === "right" ? "split-l" : "split-r";
 
   return (
-    <section className="grid lg:grid-cols-2">
+    <section className="grid border-t border-line lg:grid-cols-2">
       <div className={`${bg} ${pad} ${copyOrder} order-2 py-14 lg:py-20`}>
         <div className="max-w-lg">
           {eyebrow && (
-            <Eyebrow tone={tone === "ink" || tone === "accent" ? "paper" : "accent"}>
+            <Eyebrow>
               {eyebrow}
             </Eyebrow>
           )}
           <h2>{title}</h2>
-          <div
-            className={
-              tone === "ink" || tone === "accent" ? "text-paper/80" : "text-slate"
-            }
-          >
+          <div className={tone === "accent" ? "text-white" : "text-mist"}>
             {children}
           </div>
         </div>
@@ -135,26 +131,21 @@ export function PhotoTile({
 /** Numbered process steps. */
 export function Steps({
   items,
-  tone = "ink",
   columns = 4,
 }: {
   items: { title: string; body: string }[];
-  tone?: "ink" | "paper";
   columns?: 3 | 4;
 }) {
-  const dark = tone === "paper";
   const cols = columns === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4";
   return (
     <ol className={`grid gap-x-10 gap-y-10 sm:grid-cols-2 ${cols}`}>
       {items.map((s, i) => (
-        <li key={s.title} className={`border-t-2 pt-5 ${dark ? "border-brand-on-ink" : "border-ink/15"}`}>
-          <span className={`t-num text-[0.95rem] font-semibold ${dark ? "text-brand-on-ink" : "text-accent"}`}>
+        <li key={s.title} className="border-t-2 border-orange-bright pt-5">
+          <span className="t-num text-[0.95rem] font-semibold text-orange">
             {String(i + 1).padStart(2, "0")}
           </span>
           <h3 className="mt-2 text-[1.15rem]">{s.title}</h3>
-          <p className={`mt-2.5 text-[0.94rem] leading-relaxed ${dark ? "text-paper/65" : "text-slate"}`}>
-            {s.body}
-          </p>
+          <p className="mt-2.5 text-[0.94rem] leading-relaxed text-mist">{s.body}</p>
         </li>
       ))}
     </ol>
@@ -164,18 +155,15 @@ export function Steps({
 /** Definition rows separated by hairlines — replaces the old card grids. */
 export function DefinitionRows({
   items,
-  tone = "ink",
 }: {
   items: { term: string; detail: string }[];
-  tone?: "ink" | "paper";
 }) {
-  const dark = tone === "paper";
   return (
-    <dl className={`divide-y ${dark ? "divide-white/15" : "divide-line"}`}>
+    <dl className="divide-y divide-line">
       {items.map((it) => (
         <div key={it.term} className="grid gap-2 py-6 md:grid-cols-[minmax(0,18rem)_1fr] md:gap-10">
           <dt className="text-[1.1rem] font-semibold">{it.term}</dt>
-          <dd className={`text-[0.98rem] leading-relaxed ${dark ? "text-paper/70" : "text-slate"}`}>
+          <dd className="text-[0.98rem] leading-relaxed text-mist">
             {it.detail}
           </dd>
         </div>

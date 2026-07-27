@@ -51,14 +51,14 @@ export default function AboutPage() {
 
       {stats.length > 0 && (
         <Section>
-          <StatBand items={stats} tone="paper" />
+          <StatBand items={stats} />
         </Section>
       )}
 
       <Split
         photo="yard-wide"
         side="right"
-        tone="paper"
+        tone="base"
         eyebrow="Our story"
         title="Built around the weighbridge"
         priority
@@ -78,7 +78,7 @@ export default function AboutPage() {
       <Section id="operate" tone="deep" className="scroll-mt-20">
         <div className="rule max-w-3xl">
           <h2>Four rules the yards run on</h2>
-          <p className="t-lead mt-5 text-slate">
+          <p className="t-lead mt-5 text-mist">
             They sound obvious. The reason people switch merchants is that they
             are not universal.
           </p>
@@ -88,11 +88,11 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <section id="safety" className="scroll-mt-20 bg-paper-deep py-16 lg:py-24">
+      <section id="safety" className="scroll-mt-20 bg-navy-deep py-16 lg:py-24">
         <div className="shell grid gap-12 lg:grid-cols-2">
           <div className="rule">
             <h2>A scrap yard is a heavy industrial site</h2>
-            <p className="t-lead mt-5 text-slate">
+            <p className="t-lead mt-5 text-mist">
               Material handlers, mobile shears, moving trucks and unpredictable
               loads. We treat every visitor as somebody who has never been in one
               before, because most of them haven&rsquo;t.

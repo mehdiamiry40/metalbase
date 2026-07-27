@@ -19,7 +19,7 @@ export default function Icon() {
       >
         <svg width="46" height="40" viewBox="0 0 32 28">
           <path d="M4 4h18l-4 6H0z" fill="#ff6a1a" />
-          <path d="M7 11h18l-4 6H3z" fill="#2175d9" />
+          <path d="M7 11h18l-4 6H3z" fill="#ff6a1a" opacity="0.62" />
           <path d="M10 18h18l-4 6H6z" fill="#ffffff" opacity="0.5" />
         </svg>
       </div>

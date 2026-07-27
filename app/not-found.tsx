@@ -12,11 +12,11 @@ const links = [
 
 export default function NotFound() {
   return (
-    <section className="bg-paper py-24 lg:py-32">
+    <section className="bg-navy py-24 lg:py-32">
       <div className="shell">
-        <p className="t-eyebrow text-brand-text">Error 404</p>
+        <p className="t-eyebrow text-orange">Error 404</p>
         <h1 className="mt-3 max-w-2xl">That page has already been recycled</h1>
-        <p className="t-lead mt-5 max-w-xl text-slate">
+        <p className="t-lead mt-5 max-w-xl text-mist">
           The link is broken or the page has moved. Here&rsquo;s where most people
           were heading.
         </p>
@@ -28,7 +28,7 @@ export default function NotFound() {
                 className="group inline-flex items-center gap-2 font-semibold"
               >
                 {l.label}
-                <ArrowRight className="h-4 w-4 text-brand-text transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="h-4 w-4 text-orange transition-transform group-hover:translate-x-1" />
               </Link>
             </li>
           ))}

@@ -21,7 +21,7 @@ export default function OpengraphImage() {
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <svg width="58" height="50" viewBox="0 0 32 28">
             <path d="M4 4h18l-4 6H0z" fill="#ff6a1a" />
-            <path d="M7 11h18l-4 6H3z" fill="#2175d9" />
+            <path d="M7 11h18l-4 6H3z" fill="#ff6a1a" opacity="0.62" />
             <path d="M10 18h18l-4 6H6z" fill="#ffffff" opacity="0.5" />
           </svg>
           <span style={{ color: "#ffffff", fontSize: 44, fontWeight: 600, letterSpacing: -1.6 }}>
@@ -40,7 +40,7 @@ export default function OpengraphImage() {
 
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <span style={{ width: 64, height: 5, background: "#ff6a1a" }} />
-          <span style={{ color: "#5b6478", fontSize: 28 }}>
+          <span style={{ color: "#a8b2cc", fontSize: 28 }}>
             Scrap metal recycling · Brisbane
           </span>
         </div>

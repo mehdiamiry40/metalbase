@@ -25,17 +25,17 @@ export default function ContactPage() {
           <QuoteForm />
 
           <aside className="space-y-8 lg:sticky lg:top-24">
-            <div className="border-2 border-ink p-7">
-              <p className="t-eyebrow text-brand-text">Fastest route</p>
+            <div className="border-2 border-cloud p-7">
+              <p className="t-eyebrow text-orange">Fastest route</p>
               {company.phone ? (
                 <>
                   <a
                     href={`tel:${company.phone.replace(/\s/g, "")}`}
-                    className="mt-2 block text-[1.9rem] font-medium leading-none tracking-[-0.03em] hover:text-brand-text"
+                    className="mt-2 block text-[1.9rem] font-medium leading-none tracking-[-0.03em] hover:text-orange"
                   >
                     {company.phoneLabel ?? company.phone}
                   </a>
-                  <p className="mt-3 text-[0.94rem] text-slate">
+                  <p className="mt-3 text-[0.94rem] text-mist">
                     Trade desk, weekdays
                   </p>
                 </>
@@ -47,7 +47,7 @@ export default function ContactPage() {
               {company.email && (
                 <a
                   href={`mailto:${company.email}`}
-                  className="mt-4 inline-block font-semibold text-brand-text u-link"
+                  className="mt-4 inline-block font-semibold text-orange u-link"
                 >
                   {company.email}
                 </a>
@@ -56,27 +56,27 @@ export default function ContactPage() {
 
             <div>
               <h2 className="text-[1.2rem]">What happens next</h2>
-              <ol className="mt-4 space-y-4 text-[0.95rem] leading-relaxed text-slate">
+              <ol className="mt-4 space-y-4 text-[0.95rem] leading-relaxed text-mist">
                 <li>
-                  <span className="font-semibold text-ink">1.</span> A grader
+                  <span className="font-semibold text-cloud">1.</span> A grader
                   reads what you&rsquo;ve sent and, if it&rsquo;s ambiguous, asks
                   for a photo.
                 </li>
                 <li>
-                  <span className="font-semibold text-ink">2.</span> You get an
+                  <span className="font-semibold text-cloud">2.</span> You get an
                   indicative rate by grade, plus a bin recommendation if the
                   volume warrants one.
                 </li>
                 <li>
-                  <span className="font-semibold text-ink">3.</span> If it
+                  <span className="font-semibold text-cloud">3.</span> If it
                   stacks up, we book a collection or a weigh-in. Nothing is
                   committed until you say so.
                 </li>
               </ol>
             </div>
 
-            <div className="border-l-4 border-accent-fill bg-paper-deep p-6">
-              <p className="text-[0.94rem] leading-relaxed text-ink">
+            <div className="border-l-4 border-orange-bright bg-navy-deep p-6">
+              <p className="text-[0.94rem] leading-relaxed text-cloud">
                 <strong className="font-semibold">Before you visit:</strong>{" "}
                 bring current photo ID and your bank details. Queensland law
                 prohibits cash for scrap metal, so payment is by EFT.

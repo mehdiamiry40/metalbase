@@ -46,7 +46,7 @@ export default function SustainabilityPage() {
       <Section id="reporting" className="scroll-mt-20">
         <div className="rule max-w-3xl">
           <h2>Four documents that cover most requirements</h2>
-          <p className="t-lead mt-5 text-slate">
+          <p className="t-lead mt-5 text-mist">
             If your client, your board or your certification scheme asks for
             something we don&rsquo;t already produce, tell us — most of it is
             already in the weighbridge data.
@@ -85,20 +85,20 @@ export default function SustainabilityPage() {
       </Split>
 
       {/* compliance --------------------------------------------------- */}
-      <section id="compliance" className="scroll-mt-20 bg-paper-deep py-16 lg:py-24">
+      <section id="compliance" className="scroll-mt-20 bg-navy-deep py-16 lg:py-24">
         <div className="shell max-w-3xl">
           <div className="rule">
             <h2>Licensing and accreditation</h2>
           </div>
-          <p className="t-lead mt-5 text-slate">
+          <p className="t-lead mt-5 text-mist">
             Scrap metal buying in Queensland requires a second-hand dealer
             licence, and metal recovery above threshold volumes is an
             environmentally relevant activity requiring an environmental
             authority.
           </p>
-          <div className="mt-8 border-2 border-dashed border-white/25 p-7">
-            <p className="t-eyebrow text-accent-on-ink">Not yet published</p>
-            <p className="mt-3 text-[0.98rem] leading-relaxed text-slate">
+          <div className="mt-8 border-2 border-dashed border-line-strong p-7">
+            <p className="t-eyebrow text-orange">Not yet published</p>
+            <p className="mt-3 text-[0.98rem] leading-relaxed text-mist">
               Licence numbers, environmental authority references and any
               management-system certifications will be listed here once issued.
               We would rather show nothing than claim an accreditation we
@@ -118,7 +118,7 @@ export default function SustainabilityPage() {
       <Section id="circular" className="scroll-mt-20">
         <Eyebrow>Circular economy</Eyebrow>
         <h2>Where your metal actually goes</h2>
-        <p className="t-lead mt-5 max-w-2xl text-slate">
+        <p className="t-lead mt-5 max-w-2xl text-mist">
           Nothing disappears. Ferrous is baled or sheared to mill specification
           and moves to electric arc furnaces. Non-ferrous is sorted, sampled and
           sold to refiners and secondary smelters. We name the destination on

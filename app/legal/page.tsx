@@ -54,8 +54,8 @@ export default function LegalPage() {
       />
 
       <Section>
-        <div className="border-l-4 border-accent-fill bg-paper-deep p-6">
-          <p className="text-[0.95rem] leading-relaxed text-ink">
+        <div className="border-l-4 border-orange-bright bg-navy-deep p-6">
+          <p className="text-[0.95rem] leading-relaxed text-cloud">
             <strong className="font-semibold">Draft wording.</strong> This is a
             starting point, not legal advice. Have it reviewed by a lawyer
             before you rely on it — particularly the terms of trade and the
@@ -65,11 +65,11 @@ export default function LegalPage() {
 
         <div className="mt-14 grid gap-12 lg:grid-cols-[minmax(0,14rem)_1fr] lg:gap-16">
           <nav aria-label="On this page" className="lg:sticky lg:top-24 lg:self-start">
-            <p className="t-eyebrow text-slate">On this page</p>
+            <p className="t-eyebrow text-mist">On this page</p>
             <ul className="mt-4 space-y-2.5">
               {sections.map((s) => (
                 <li key={s.id}>
-                  <Link href={`#${s.id}`} className="u-link font-medium hover:text-brand-text">
+                  <Link href={`#${s.id}`} className="u-link font-medium hover:text-orange">
                     {s.h}
                   </Link>
                 </li>
@@ -83,7 +83,7 @@ export default function LegalPage() {
                 <h2>{s.h}</h2>
                 <div className="mt-5 space-y-4">
                   {s.p.map((para, i) => (
-                    <p key={i} className="leading-relaxed text-slate">
+                    <p key={i} className="leading-relaxed text-mist">
                       {para}
                     </p>
                   ))}
@@ -93,13 +93,13 @@ export default function LegalPage() {
 
             <div className="border-t border-line pt-8">
               <h2 className="text-[1.3rem]">Questions about any of this?</h2>
-              <p className="mt-3 leading-relaxed text-slate">
+              <p className="mt-3 leading-relaxed text-mist">
                 Write to {company.legal}
                 {company.head ? `, ${company.head}` : ""}
                 {company.email ? (
                   <>
                     , or email{" "}
-                    <a href={`mailto:${company.email}`} className="font-semibold text-brand-text u-link">
+                    <a href={`mailto:${company.email}`} className="font-semibold text-orange u-link">
                       {company.email}
                     </a>
                   </>

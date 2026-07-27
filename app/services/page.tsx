@@ -44,12 +44,12 @@ export default function ServicesPage() {
                 <Photo name={s.photo} sizes="(max-width: 1024px) 100vw, 22rem" sourceWidth={1200} priority={i === 0} />
               </div>
               <div className="self-center">
-                <p className="t-eyebrow text-brand-text">{s.audience}</p>
-                <h2 className="mt-2 group-hover:text-brand-text">{s.title}</h2>
-                <p className="t-lead mt-4 max-w-2xl text-slate">{s.blurb}</p>
+                <p className="t-eyebrow text-orange">{s.audience}</p>
+                <h2 className="mt-2 group-hover:text-orange">{s.title}</h2>
+                <p className="t-lead mt-4 max-w-2xl text-mist">{s.blurb}</p>
                 <span className="mt-6 inline-flex items-center gap-2 font-semibold">
                   Read the detail
-                  <ArrowRight className="h-4 w-4 text-brand-text transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="h-4 w-4 text-orange transition-transform group-hover:translate-x-1" />
                 </span>
               </div>
             </Link>
@@ -57,11 +57,11 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      <section className="bg-paper-deep py-16 lg:py-24">
+      <section className="bg-navy-deep py-16 lg:py-24">
         <div className="shell grid gap-12 lg:grid-cols-2">
           <div className="rule">
             <h2>The boring things done properly</h2>
-            <p className="t-lead mt-5 text-slate">
+            <p className="t-lead mt-5 text-mist">
               Nobody switches scrap merchants for a rebrand. They switch because
               the bin turned up, the docket was right and the money landed when
               it was supposed to.
@@ -77,7 +77,7 @@ export default function ServicesPage() {
           </div>
           <div>
             <h3>Where we collect</h3>
-            <TickList className="mt-6" tone="paper" items={coverage} />
+            <TickList className="mt-6" items={coverage} />
           </div>
         </div>
       </section>

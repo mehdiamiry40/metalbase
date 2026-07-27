@@ -1,49 +1,54 @@
 @import "tailwindcss";
 
 /* ==================================================================
-   MetalBase design system — Randstad blue + orange
+   MetalBase design system — navy & orange
 
-   Randstad blue #2175D9 carries the brand; #FF6A1A carries action.
-   Two colours with two different jobs, so neither has to do both:
+   Navy-dominant. The page is navy, not white with navy on it. Three
+   navy surfaces carry the whole structure, and orange is the only
+   other colour on the site.
 
-     BLUE   structure — links, eyebrows, navigation, the navy sections
-     ORANGE action    — buttons, the section rule, the number that matters
+   Going navy-dominant unlocks something the white versions never
+   could: the vivid #FF6A1A works as TEXT here. On white it was
+   2.9:1 and unusable for anything but fills. On navy the orange
+   family clears AA comfortably, so orange can finally do typographic
+   work instead of only sitting inside buttons.
 
-   CONTRAST — measured, not estimated.
+   Every value below is measured, not estimated:
 
-   #2175D9 is a fine fill (white on it is 4.55:1) but a poor text
-   colour: 4.55:1 on white is marginal and 4.03:1 on the grey band
-   fails outright. So the visible brand blue is a FILL, and a darker
-   sibling handles blue-as-text. Same split the orange needs.
+     white on navy            17.0:1
+     white on deep            19.4:1
+     white on raised          12.2:1
+     mist on navy              8.0:1
+     mist on deep              9.1:1
+     orange text on navy       7.3:1
+     orange text on deep       8.3:1
+     mist on raised            5.7:1
+     orange text on raised     5.2:1
+     white on orange hover     5.9:1
+     white on orange button    4.6:1
+
+   The surfaces sit close together (1.1–1.4:1) by design — they band
+   the page rather than divide it. Hairline borders do the dividing.
    ================================================================== */
 
 @theme {
-  /* surfaces */
-  --color-ink: #0f1941; /* Randstad navy · 17.0:1 on white */
-  --color-ink-soft: #1b2550;
-  --color-paper: #ffffff;
-  --color-paper-deep: #eff1f5;
-
-  /* brand blue — structure */
-  --color-brand: #2175d9; /* FILL, carries white text · 4.6:1 */
-  --color-brand-text: #1a5cae; /* blue as TEXT · 6.6:1 white · 5.8:1 band */
-  --color-brand-on-ink: #6fa8ee; /* blue as TEXT on navy     · 6.9:1 */
-
-  /* accent orange — action
-     Buttons carry WHITE text, so the fill has to be dark enough for it.
-     #FF6A1A is only 2.9:1 against white, so it stays a decorative
-     colour (the section rule, the logo) and #C2551A carries the
-     buttons: the brightest orange that clears AA with white on it. */
-  --color-accent: #a8460f; /* orange as TEXT   · 5.9:1 white · 5.2:1 band */
-  --color-accent-fill: #c2551a; /* BUTTON FILL      · 4.6:1 white-on-fill */
-  --color-accent-fill-hover: #a8460f; /* hover            · 5.9:1 white-on-fill */
-  --color-accent-bright: #ff6a1a; /* DECORATIVE only  · never behind text */
-  --color-accent-on-ink: #ff8a45; /* orange as TEXT on navy · 7.3:1 */
+  /* the three navies */
+  --color-navy: #0f1941; /* page */
+  --color-navy-deep: #070c22; /* hero, footer, alternating bands */
+  --color-navy-raised: #243363; /* panels, form, cards */
 
   /* text */
-  --color-slate: #5b6478; /* 5.9:1 white · 5.3:1 band */
-  --color-line: #dde1e8;
-  --color-line-ink: rgba(255, 255, 255, 0.16);
+  --color-cloud: #ffffff; /* primary */
+  --color-mist: #a8b2cc; /* muted — 8.0:1 on navy */
+
+  /* orange — the only other colour */
+  --color-orange: #ff8a45; /* TEXT · passes on all three navies */
+  --color-orange-bright: #ff6a1a; /* decorative — rule, logo, keylines */
+  --color-orange-fill: #c2551a; /* BUTTON FILL, carries white · 4.6:1 */
+  --color-orange-hover: #a8460f; /* hover · 5.9:1 white-on-fill */
+
+  --color-line: rgba(255, 255, 255, 0.14);
+  --color-line-strong: rgba(255, 255, 255, 0.3);
 
   --font-sans: "Hanken Grotesk", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Helvetica, Arial, sans-serif;
@@ -61,11 +66,12 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    background: var(--color-navy);
   }
 
   body {
-    background: var(--color-paper);
-    color: var(--color-ink);
+    background: var(--color-navy);
+    color: var(--color-cloud);
     font-family: var(--font-sans);
     font-size: 17px;
     line-height: 1.65;
@@ -74,21 +80,17 @@
   }
 
   ::selection {
-    background: var(--color-accent-fill);
-    color: #fff;
+    background: var(--color-orange-bright);
+    color: var(--color-navy-deep);
   }
 
+  /* One ring colour now the whole site is one surface family. */
   :focus-visible {
-    outline: 3px solid var(--color-brand);
+    outline: 3px solid var(--color-orange-bright);
     outline-offset: 3px;
     border-radius: 2px;
   }
 
-  .on-ink :focus-visible {
-    outline-color: var(--color-brand-on-ink);
-  }
-
-  /* Large, tightly tracked, weight 500. Space does the work. */
   h1 {
     font-size: clamp(2.6rem, 1.5rem + 4.4vw, 4.25rem);
     font-weight: 500;
@@ -140,7 +142,7 @@
 }
 
 /* ------------------------------------------------------------------
-   layout — wider column and more air than the previous system
+   layout
    ------------------------------------------------------------------ */
 
 :root {
@@ -196,13 +198,13 @@
   background-size: 100% 1px;
 }
 
-/* Row lists: give the whole row an affordance, not just the text. */
+/* Row lists: the whole row is the affordance, not just the text. */
 .row-link {
   transition: background-color 0.16s ease, padding-left 0.16s ease;
 }
 
 .row-link:hover {
-  background-color: var(--color-paper-deep);
+  background-color: var(--color-navy-raised);
 }
 
 @media (min-width: 768px) {
@@ -211,8 +213,6 @@
   }
 }
 
-/* Sections rise very slightly into place. Purely supportive — the
-   reduced-motion block below switches it off entirely. */
 @keyframes rise {
   from {
     opacity: 0;
@@ -237,7 +237,7 @@
   display: block;
   width: 40px;
   height: 3px;
-  background: var(--color-accent-bright);
+  background: var(--color-orange-bright);
   margin-bottom: 1.5rem;
 }
 

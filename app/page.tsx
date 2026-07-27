@@ -28,12 +28,12 @@ export default function Home() {
           A compact navy band rather than a full-bleed darkened photo.
           The photography still carries the page — it just does it in the
           splits below, where it doesn't have to sit under a scrim. */}
-      <section className="on-ink bg-ink text-paper">
+      <section className="bg-navy-deep text-cloud">
         <div className="shell py-16 lg:py-20">
           <div className="max-w-3xl">
-            <Eyebrow tone="paper">Scrap metal recycling · Brisbane</Eyebrow>
+            <Eyebrow>Scrap metal recycling · Brisbane</Eyebrow>
             <h1>Your metal is worth more than the bin it&rsquo;s sitting in</h1>
-            <p className="t-lead mt-6 max-w-xl text-paper/85">
+            <p className="t-lead mt-6 max-w-xl text-cloud">
               {company.name} buys, processes and remarkets ferrous and
               non-ferrous scrap across greater Brisbane. Graded in front of you,
               weighed on a certified bridge, paid by EFT.
@@ -48,8 +48,8 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="border-b border-line bg-paper-deep">
-        <div className="shell flex flex-wrap gap-x-8 gap-y-2 py-4 text-[0.9rem] text-slate">
+      <div className="border-b border-line bg-navy-deep">
+        <div className="shell flex flex-wrap gap-x-8 gap-y-2 py-4 text-[0.9rem] text-mist">
           <span>No minimum load</span>
           <span aria-hidden="true">·</span>
           <span>Graded before it&rsquo;s tipped</span>
@@ -69,11 +69,11 @@ export default function Home() {
       </div>
 
       {/* ------------------------------------------------- two audiences */}
-      <section className="bg-paper py-16 lg:py-24">
+      <section className="border-t border-line bg-navy py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>Brisbane&rsquo;s base for ferrous and non-ferrous metal</h2>
-            <p className="t-lead mt-5 text-slate">
+            <p className="t-lead mt-5 text-mist">
               The same weighbridge and the same grading standard whether you
               arrive with a trailer of copper or a demolition program.
             </p>
@@ -120,7 +120,7 @@ export default function Home() {
       </Split>
 
       {/* ------------------------------------------------------ services */}
-      <section className="bg-paper py-16 lg:py-24">
+      <section className="border-t border-line bg-navy py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>Four ways Brisbane sends us metal</h2>
@@ -133,14 +133,14 @@ export default function Home() {
                 className="row-link group grid gap-4 py-8 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-12"
               >
                 <div>
-                  <p className="t-eyebrow text-brand-text">{s.audience}</p>
-                  <h3 className="mt-2 group-hover:text-brand-text">{s.title}</h3>
+                  <p className="t-eyebrow text-orange">{s.audience}</p>
+                  <h3 className="mt-2 group-hover:text-orange">{s.title}</h3>
                 </div>
                 <div>
-                  <p className="text-slate">{s.blurb}</p>
+                  <p className="text-mist">{s.blurb}</p>
                   <span className="mt-4 inline-flex items-center gap-2 text-[0.94rem] font-semibold">
                     Read more
-                    <ArrowRight className="h-4 w-4 text-brand-text transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="h-4 w-4 text-orange transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
               </Link>
@@ -150,11 +150,11 @@ export default function Home() {
       </section>
 
       {/* --------------------------------------------------- how it works */}
-      <section className="bg-paper-deep py-16 lg:py-24">
+      <section className="border-t border-line bg-navy-deep py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>How a weigh-in works</h2>
-            <p className="t-lead mt-5 text-slate">
+            <p className="t-lead mt-5 text-mist">
               About fifteen minutes end to end for a ute or trailer load.
             </p>
           </div>
@@ -162,7 +162,7 @@ export default function Home() {
             <Steps items={steps} />
           </div>
           {stats.length > 0 && (
-            <div className="mt-16 border-t border-line-ink pt-14">
+            <div className="mt-16 border-t border-line pt-14">
               <StatBand items={stats} />
             </div>
           )}
@@ -173,7 +173,7 @@ export default function Home() {
       <Split
         photo="alloy"
         side="left"
-        tone="paper"
+        tone="base"
         eyebrow="Sustainability"
         title="Recycling is the easy part. Proving it is the work."
       >
