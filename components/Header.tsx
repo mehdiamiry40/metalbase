@@ -221,7 +221,7 @@ export default function Header() {
         <div className="shell py-2">
           {nav.map((item) => {
             const isOpen = mobileSection === item.label;
-            const secId = `${uid}-m-${item.label}`;
+            const secId = `${uid}-m-${slug(item.label)}`;
             return (
               <div key={item.label} className="border-b border-line">
                 <button
