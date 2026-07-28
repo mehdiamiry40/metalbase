@@ -1,3 +1,5 @@
+import { existsSync, readdirSync } from "node:fs";
+import { join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   LAUNCH_READY,
@@ -61,16 +63,30 @@ describe("navigation integrity", () => {
   });
 
   it("points only at routes that exist", () => {
+    /* Routes are discovered from the filesystem, not listed by hand.
+       The hardcoded list this replaces went stale the moment /faq was
+       added: the page existed and worked, and the test failed anyway,
+       which is the wrong failure — a test that has to be updated every
+       time a route is added trains you to edit the test rather than
+       read it. Reading app/ means adding a page is enough. */
+    const appDir = resolve(__dirname, "../app");
+    const found: string[] = [];
+    (function walk(dir: string, prefix: string) {
+      for (const entry of readdirSync(dir, { withFileTypes: true })) {
+        if (!entry.isDirectory()) continue;
+        // route groups (grouping) and dynamic [slug] segments
+        if (entry.name.startsWith("(") || entry.name.startsWith("[")) continue;
+        if (entry.name === "api") continue;
+        const child = join(dir, entry.name);
+        const route = `${prefix}/${entry.name}`;
+        if (existsSync(join(child, "page.tsx"))) found.push(route);
+        walk(child, route);
+      }
+    })(appDir, "");
+
     const routes = new Set([
       "/",
-      "/what-we-buy",
-      "/prices",
-      "/services",
-      "/sustainability",
-      "/locations",
-      "/about",
-      "/contact",
-      "/legal",
+      ...found,
       ...services.map((s) => `/services/${s.slug}`),
     ]);
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FaqList } from "@/components/Faq";
 import Photo from "@/components/Photo";
 import { PhotoTile, Split, Steps } from "@/components/sections";
 import {
@@ -10,7 +11,7 @@ import {
   StatBand,
   TickList,
 } from "@/components/ui";
-import { company, priceGroups, services, stats } from "@/lib/site";
+import { company, faqs, priceGroups, services, stats } from "@/lib/site";
 
 const gradeCount = priceGroups.reduce((n, g) => n + g.rows.length, 0);
 
@@ -210,6 +211,29 @@ export default function Home() {
         </div>
       </Split>
 
+      {/* ------------------------------------------------------- faq
+          Placed immediately before the closing CTA on purpose. This is
+          where someone decides whether to send the form, and the things
+          stopping them are practical, not emotional — do I need ID, how
+          do I get paid, is my load too small. Answering those here
+          removes the objection at the moment it occurs rather than
+          making them go hunting for a separate page. */}
+      <section className="border-t hair bg-white py-16 lg:py-24">
+        <div className="shell">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-20">
+            <div className="rule">
+              <h2>Before you drive over</h2>
+              <p className="t-lead mt-5 t-muted">
+                The things worth knowing before your first weigh-in.
+              </p>
+              <div className="mt-7">
+                <ArrowLink href="/faq">All questions</ArrowLink>
+              </div>
+            </div>
+            <FaqList items={faqs.slice(0, 4)} />
+          </div>
+        </div>
+      </section>
 
       <CtaBand
         title="Tell us what you've got and we'll price it"

@@ -28,7 +28,7 @@ const values = [
   {
     term: "No cash, no exceptions",
     detail:
-      "Queensland law is clear and we don't work around it. It costs some walk-up trade and we're fine with that.",
+      "Queensland does not yet ban cash for scrap the way Victoria and New South Wales do. We hold the stricter line anyway. It costs us some walk-up trade and we're fine with that.",
   },
 ];
 

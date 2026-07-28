@@ -31,7 +31,7 @@ const grading = [
   },
   {
     title: "Get paid",
-    body: "EFT to your nominated account. Queensland law prohibits cash for scrap metal.",
+    body: "EFT to your nominated account, usually same day. We do not pay cash for scrap under any circumstances \u2014 our policy, and it keeps a traceable record on both sides.",
   },
 ];
 

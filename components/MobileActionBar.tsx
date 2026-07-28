@@ -44,7 +44,7 @@ export default function MobileActionBar() {
         <Link
           href="/contact"
           tabIndex={show ? undefined : -1}
-          className="flex flex-1 items-center justify-center rounded-[2px] bg-orange px-5 py-3.5 font-semibold text-navy"
+          className="flex flex-1 items-center justify-center rounded-[4px] bg-orange px-5 py-3.5 font-semibold text-navy"
         >
           Get a quote
         </Link>
@@ -52,7 +52,7 @@ export default function MobileActionBar() {
           <a
             href={`tel:${tel}`}
             tabIndex={show ? undefined : -1}
-            className="flex items-center justify-center rounded-[2px] border-2 border-navy px-5 py-3.5 font-semibold "
+            className="flex items-center justify-center rounded-[4px] border-2 border-navy px-5 py-3.5 font-semibold "
           >
             Call
           </a>
@@ -60,7 +60,7 @@ export default function MobileActionBar() {
           <Link
             href="/what-we-buy"
             tabIndex={show ? undefined : -1}
-            className="flex items-center justify-center rounded-[2px] border-2 border-navy px-5 py-3.5 font-semibold "
+            className="flex items-center justify-center rounded-[4px] border-2 border-navy px-5 py-3.5 font-semibold "
           >
             What we buy
           </Link>

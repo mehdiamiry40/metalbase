@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import Photo from "@/components/Photo";
 import type { PhotoKey } from "@/lib/photos";
+import { Breadcrumbs } from "@/components/Schema";
 import { ArrowRight, Breadcrumb, Eyebrow } from "@/components/ui";
 
 /* ------------------------------------------------------------------
@@ -25,6 +26,12 @@ export function PageHeader({
 }) {
   return (
     <section className="on-light border-b hair bg-cream">
+      {/* BreadcrumbList markup is emitted here, from the SAME trail the
+          <Breadcrumb> below renders. Putting it inside PageHeader means
+          every page that shows a trail also describes it to crawlers,
+          and the two physically cannot disagree — there is no second
+          array to forget to update. */}
+      <Breadcrumbs trail={trail} />
       <div className="shell pt-6">
         <Breadcrumb trail={trail} />
       </div>

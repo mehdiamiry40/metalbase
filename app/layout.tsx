@@ -5,9 +5,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileActionBar from "@/components/MobileActionBar";
-import { company, locations } from "@/lib/site";
-
-const SITE = "https://metalbase.vercel.app";
+import { SITE, company, locations } from "@/lib/site";
 
 /**
  * Self-hosted rather than a <link> to fonts.googleapis.com.

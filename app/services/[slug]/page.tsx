@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ServiceSchema } from "@/components/Schema";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { DefinitionRows, PageHeader, Split, Steps } from "@/components/sections";
@@ -43,6 +44,11 @@ export default async function ServiceDetail({
 
   return (
     <>
+      <ServiceSchema
+        name={service.title}
+        description={service.blurb}
+        slug={service.slug}
+      />
       <PageHeader
         eyebrow={service.audience}
         title={service.title}

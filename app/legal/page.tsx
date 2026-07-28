@@ -28,7 +28,17 @@ const sections = [
     p: [
       "Quoted rates are indicative and apply to material of the stated grade delivered to our yard. Final settlement is based on the grade assessed on arrival and the net weight recorded on a certified weighbridge or scale.",
       "Title in material passes to MetalBase on acceptance at the weighbridge. By delivering material you warrant that you are lawfully entitled to sell it.",
-      "Payment is by electronic transfer only, in accordance with Queensland law. We do not pay cash for scrap metal under any circumstances.",
+      /* Was: "in accordance with Queensland law". That was wrong.
+         Victoria and New South Wales prohibit cash for scrap metal;
+         Queensland does not currently. Queensland's Second-hand
+         Dealers and Pawnbrokers Act 2003 requires licensing and
+         seller identification, and the Justice and Other Legislation
+         Amendment Bill 2026 strengthens that further, but neither
+         imposes a cash ban. Stating otherwise misrepresented the law
+         on a page whose whole purpose is to state it accurately.
+         EFT-only remains true and worth saying — it is just our
+         policy, not a legal requirement. */
+      "Payment is by electronic transfer only. We do not pay cash for scrap metal under any circumstances. This is our own policy rather than a Queensland legal requirement: cash payment for scrap is prohibited in Victoria and New South Wales but not currently in Queensland. We apply the stricter standard because a traceable payment record protects both sides and is where the law is clearly heading.",
       "We may refuse any load, in whole or in part, where the material is outside our licence conditions, presents a safety risk, or cannot be verified as lawfully held.",
       "Contract customers are subject to a separate written agreement which prevails over these terms to the extent of any inconsistency.",
     ],

@@ -19,6 +19,12 @@
 /** Flip to true only once every `null` below has a real value. */
 export const LAUNCH_READY = false;
 
+/** Canonical origin. Single source for metadata, sitemap and schema.
+ *  TODO: change this once a custom domain is pointed at the project —
+ *  it is referenced by canonicals, Open Graph and every JSON-LD block,
+ *  so it must not be duplicated anywhere else. */
+export const SITE = "https://metalbase.vercel.app";
+
 export const company = {
   name: "MetalBase",
   legal: "MetalBase Recycling Pty Ltd",
@@ -163,8 +169,18 @@ export const nav: NavItem[] = [
         label: "Getting paid",
         href: "/locations#payment",
         children: [
-          { label: "Why we can't pay cash", href: "/locations#payment" },
+          { label: "Why we don't pay cash", href: "/faq" },
           { label: "Trade accounts", href: "/services/industrial" },
+        ],
+      },
+      {
+        label: "Common questions",
+        href: "/faq",
+        children: [
+          { label: "Do I need ID?", href: "/faq" },
+          { label: "How and when do I get paid?", href: "/faq" },
+          { label: "Is there a minimum load?", href: "/faq" },
+          { label: "What can't you take?", href: "/faq" },
         ],
       },
     ],
@@ -408,7 +424,7 @@ export const services: Service[] = [
       },
       {
         title: "Paid by EFT, always",
-        body: "Queensland law prohibits cash for scrap metal. We transfer to your nominated account.",
+        body: "We transfer to your nominated account and never pay cash. That is our policy rather than a Queensland requirement \u2014 it gives both of us a traceable record.",
       },
       {
         title: "Bring photo ID",
@@ -440,3 +456,75 @@ export const locations: Location[] = [];
    ------------------------------------------------------------------ */
 
 export const stats: { value: string; label: string }[] = [];
+
+/* --------------------------------- faqs ----------------------------
+   The questions people actually type before selling scrap, answered
+   plainly. This is the highest-intent content on the site: someone
+   searching "do I need ID to sell scrap metal Brisbane" is a customer
+   with metal in their ute right now.
+
+   Sourcing rule for this block, because it is easy to get wrong:
+
+   - Statements about Queensland LAW are limited to what the
+     Second-hand Dealers and Pawnbrokers Act 2003 actually requires —
+     licensing, and recording the seller's identity.
+   - Cash payment is NOT banned in Queensland. Victoria and New South
+     Wales prohibit it; Queensland's Justice and Other Legislation
+     Amendment Bill 2026 raises penalties and tightens photographic ID
+     but does not ban cash. Anywhere EFT-only appears it is described
+     as MetalBase policy, never as law. An earlier version of this
+     site got that wrong in five separate places.
+   - Anything specific to this yard — hours, minimum loads, whether
+     car bodies are accepted, current rates — is marked TODO rather
+     than guessed, because only the operator knows it.
+   ------------------------------------------------------------------ */
+
+export type Faq = {
+  q: string;
+  /** Plain text. Rendered on the page AND emitted as FAQPage JSON-LD,
+   *  so the two can never disagree. Keep it free of markup. */
+  a: string;
+  /** Set where the answer is generic and needs the operator's input. */
+  todo?: string;
+};
+
+export const faqs: Faq[] = [
+  {
+    q: "Do I need ID to sell scrap metal?",
+    a: "Yes. A licensed second-hand dealer in Queensland has to record who sold the metal, so bring current photo identification — an Australian driver licence is the simplest option. We also record the vehicle you arrive in. This applies to every seller, every load, with no exceptions, and it is the main thing that keeps stolen metal out of the supply chain.",
+  },
+  {
+    q: "How and when do I get paid?",
+    a: "By electronic transfer to your nominated bank account, so bring your BSB and account number along with your ID. We do not pay cash for scrap metal. That is our own policy rather than a Queensland legal requirement — cash is banned for scrap in Victoria and New South Wales but not currently in Queensland — and we hold the stricter line because a traceable payment protects both sides.",
+    todo: "Confirm the actual payment timing — same day, next business day, or on a weekly run.",
+  },
+  {
+    q: "Is there a minimum load?",
+    a: "No. A single trailer of copper offcuts is worth weighing, and so is a full demolition program. You do not need an appointment or an account to drive on with a small load.",
+    todo: "Confirm there is genuinely no minimum, and whether a small-load handling fee applies below some weight.",
+  },
+  {
+    q: "How is my metal graded, and can I challenge it?",
+    a: "A grader assesses the load and tells you the grade before anything is tipped, not after. Attachments, moisture and contamination reduce the yield of a load, so they reduce the grade, and we tell you what is being deducted and why before the load is committed. If you disagree on an alloy, ask for the handheld XRF analyser — it settles the question by reading the actual composition rather than anyone's judgement.",
+  },
+  {
+    q: "What can't you take?",
+    a: "Anything we cannot verify you are lawfully entitled to sell, anything outside our licence conditions, and anything that presents a safety risk. Sealed containers such as gas bottles, drums and fuel tanks need to be cut open and purged before we can handle them. We may refuse a load in whole or in part on any of those grounds.",
+    todo: "Confirm the full exclusion list for this yard — asbestos-bearing material, whitegoods with refrigerant gas, LPG cylinders, and whether an on-site de-gassing service is offered.",
+  },
+  {
+    q: "Do you buy end-of-life vehicles?",
+    a: "Vehicles are handled differently from loose scrap, because proof of ownership and correct disposal of fluids, batteries and airbags all have to be dealt with before the shell can be processed.",
+    todo: "Confirm whether car bodies are accepted, what paperwork is required (registration papers, statutory declaration), and whether pickup is available.",
+  },
+  {
+    q: "What are your rates?",
+    a: "Scrap metal is a commodity, so rates move with the market and with the grade of the specific load. Rather than publish a number that is stale within a week, we give you an indicative rate by grade when you send through what you have, and confirm the final figure against the grade assessed and the weight recorded on arrival.",
+    todo: "Decide whether to publish a public rate board. If yes, set PUBLISH_RATES = true and fill in priceGroups with real figures plus the date they were set.",
+  },
+  {
+    q: "Do you collect, or do I have to deliver?",
+    a: "Both. You can drive on and use the weighbridge yourself, or we can place a bin on your site and swap it before it overflows. Which one makes sense depends on how much metal you generate and how often.",
+    todo: "Confirm the collection radius around Brisbane, and any minimum volume for a bin placement.",
+  },
+];

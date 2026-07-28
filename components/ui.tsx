@@ -285,7 +285,7 @@ export function TickList({
  */
 export function Pending({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-[2px] border border-dashed hair px-2 py-0.5 text-[0.82rem] t-muted">
+    <span className="inline-flex items-center gap-1.5 rounded-[4px] border border-dashed hair px-2 py-0.5 text-[0.82rem] t-muted">
       {children}
     </span>
   );
