@@ -116,13 +116,14 @@ export default function LegalPage() {
                 ) : null}
                 .
               </p>
-              {(!company.abn || !company.licence || !company.head) && (
-                <p className="mt-4">
-                  <Pending>
-                    ABN, licence number and registered address to be confirmed
-                  </Pending>
-                </p>
-              )}
+              {(!company.abn || !company.licence || !company.head) &&
+                process.env.NODE_ENV !== "production" && (
+                  <p className="mt-4">
+                    <Pending>
+                      ABN, licence number and registered address not set
+                    </Pending>
+                  </p>
+                )}
             </div>
           </div>
         </div>

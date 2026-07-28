@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { company, locations, nav } from "@/lib/site";
-import { Logo, Pending } from "@/components/ui";
+import { DataRow, Logo, Pending } from "@/components/ui";
+
+const IS_PROD = process.env.NODE_ENV === "production";
 
 const legal = [
   { label: "Privacy", href: "/legal#privacy" },
@@ -22,39 +24,25 @@ export default function Footer() {
             </p>
 
             <dl className="mt-8 space-y-4 text-[0.94rem]">
-              <div>
-                <dt className="t-muted">Trade desk</dt>
-                <dd className="mt-0.5">
-                  {company.phone ? (
-                    <a
-                      href={`tel:${company.phone.replace(/\s/g, "")}`}
-                      className="text-[1.3rem] font-medium t-accent hover:underline"
-                    >
-                      {company.phoneLabel ?? company.phone}
-                    </a>
-                  ) : (
-                    <Pending>Phone number to be confirmed</Pending>
-                  )}
-                </dd>
-              </div>
-              <div>
-                <dt className="t-muted">Email</dt>
-                <dd className="mt-0.5">
-                  {company.email ? (
-                    <a href={`mailto:${company.email}`} className="hover:text-[color:var(--accent-text)]">
-                      {company.email}
-                    </a>
-                  ) : (
-                    <Pending>Email to be confirmed</Pending>
-                  )}
-                </dd>
-              </div>
-              <div>
-                <dt className="t-muted">Head office</dt>
-                <dd className="mt-0.5 ">
-                  {company.head ?? <Pending>Address to be confirmed</Pending>}
-                </dd>
-              </div>
+              <DataRow label="Trade desk" value={company.phone}>
+                <a
+                  href={`tel:${company.phone?.replace(/\s/g, "")}`}
+                  className="text-[1.3rem] font-medium t-accent hover:underline"
+                >
+                  {company.phoneLabel ?? company.phone}
+                </a>
+              </DataRow>
+              <DataRow label="Email" value={company.email}>
+                <a
+                  href={`mailto:${company.email}`}
+                  className="hover:text-[color:var(--accent-text)]"
+                >
+                  {company.email}
+                </a>
+              </DataRow>
+              <DataRow label="Head office" value={company.head}>
+                {company.head}
+              </DataRow>
             </dl>
           </div>
 
@@ -102,17 +90,20 @@ export default function Footer() {
             © {new Date().getFullYear()} {company.legal}
             {company.abn ? ` · ABN ${company.abn}` : null}
           </p>
-          {!company.abn && (
+          {/* Pending renders null in production, so these wrappers would
+              leave empty <p> elements behind. Guard on the data instead
+              of on the marker. */}
+          {!company.abn && !IS_PROD && (
             <p>
-              <Pending>ABN to be confirmed before launch</Pending>
+              <Pending>ABN not set</Pending>
             </p>
           )}
           {company.licence ? (
             <p>Queensland second-hand dealer licence {company.licence}</p>
-          ) : (
+          ) : IS_PROD ? null : (
             <p>
               <Pending>
-                Second-hand dealer licence pending — required before trading
+                Second-hand dealer licence not set — required before trading
               </Pending>
             </p>
           )}

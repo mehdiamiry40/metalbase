@@ -284,9 +284,55 @@ export function TickList({
  * mist clears AA on the lightest of the three (5.7:1 on raised).
  */
 export function Pending({ children }: { children: ReactNode }) {
+  // Development only. See DataRow below for why.
+  if (process.env.NODE_ENV === "production") return null;
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-[4px] border border-dashed hair px-2 py-0.5 text-[0.82rem] t-muted">
+    <span className="inline-flex items-center gap-1.5 rounded-[4px] border border-dashed border-orange px-2 py-0.5 text-[0.82rem] t-muted">
       {children}
     </span>
+  );
+}
+
+/**
+ * A labelled contact row that disappears entirely when there is no
+ * value — label included.
+ *
+ * The footer previously rendered four dashed "to be confirmed" chips to
+ * every visitor. That was honest, but a customer reading "ABN to be
+ * confirmed" learns nothing and concludes the business is half-built.
+ * A real company simply has no ABN line until it has an ABN: omitting
+ * the row claims nothing, so it is equally honest, and it does not
+ * advertise the gap.
+ *
+ * The operator still has to know what is missing, so the marker stays
+ * loud in `npm run dev`, the source of truth stays `null` in
+ * lib/site.ts beside a comment, and LAUNCH_READY gates the lot.
+ * Nothing here invents a value in either environment.
+ */
+export function DataRow({
+  label,
+  value,
+  children,
+}: {
+  label: string;
+  /** Row renders only when this is non-null. */
+  value: string | null;
+  children: ReactNode;
+}) {
+  if (!value) {
+    return process.env.NODE_ENV === "production" ? null : (
+      <div>
+        <dt className="t-muted">{label}</dt>
+        <dd className="mt-0.5">
+          <Pending>{label} — not set</Pending>
+        </dd>
+      </div>
+    );
+  }
+  return (
+    <div>
+      <dt className="t-muted">{label}</dt>
+      <dd className="mt-0.5">{children}</dd>
+    </div>
   );
 }
