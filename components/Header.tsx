@@ -193,7 +193,7 @@ export default function Header() {
             )}
             <Link
               href="/contact"
-              className="hidden rounded-[4px] bg-orange px-5 py-2.5 text-[0.9rem] font-semibold text-navy transition-colors hover:bg-orange-deep sm:inline-block"
+              className="hidden min-h-11 items-center rounded-[4px] bg-orange px-5 py-2.5 text-[0.9rem] font-semibold text-navy transition-colors hover:bg-orange-deep sm:inline-flex"
             >
               Get a quote
             </Link>
