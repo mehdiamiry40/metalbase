@@ -4,6 +4,7 @@ import { Button, CtaBand, Section, StatBand, TickList } from "@/components/ui";
 import { stats } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About MetalBase",
   description:
     "How MetalBase operates, how we approach safety, and the rules the yards run on.",

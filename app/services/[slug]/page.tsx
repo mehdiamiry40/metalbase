@@ -21,6 +21,7 @@ export async function generateMetadata({
   return {
     title: `${service.title} — Brisbane`,
     description: service.blurb.slice(0, 155),
+    alternates: { canonical: `/services/${service.slug}` },
   };
 }
 

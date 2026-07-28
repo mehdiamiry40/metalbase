@@ -3,6 +3,7 @@ import { DefinitionRows, PageHeader, Split } from "@/components/sections";
 import { Button, CtaBand, Eyebrow, Section, TickList } from "@/components/ui";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/sustainability" },
   title: "Sustainability, Reporting & Certificates of Destruction",
   description:
     "Diversion reporting, chain-of-custody records and certificates of destruction from MetalBase Brisbane — the evidence procurement and audit teams actually ask for.",

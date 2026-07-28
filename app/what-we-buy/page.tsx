@@ -3,6 +3,7 @@ import { DefinitionRows, PageHeader, Split, Steps } from "@/components/sections"
 import { Button, CtaBand, Eyebrow, Section } from "@/components/ui";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/what-we-buy" },
   title: "What We Buy — Ferrous, Non-Ferrous & Specialty Scrap",
   description:
     "Copper, aluminium, brass, lead, stainless, heavy melting steel, cast iron, batteries, motors and e-waste. What MetalBase buys in Brisbane and how each stream is graded.",

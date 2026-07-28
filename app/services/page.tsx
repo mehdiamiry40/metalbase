@@ -6,6 +6,7 @@ import { ArrowRight, Button, CtaBand, Section, TickList } from "@/components/ui"
 import { services } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services" },
   title: "Services for Business — Bins, Collection, Demolition & Rebates",
   description:
     "Scrap collection and bin hire, industrial offcut programs, demolition steel buy-back and trade drop-off across Brisbane.",

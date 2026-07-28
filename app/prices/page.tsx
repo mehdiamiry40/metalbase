@@ -11,6 +11,7 @@ import {
 import { PUBLISH_RATES, company, priceGroups } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/prices" },
   title: "Scrap Metal Rate Board — Brisbane",
   description:
     "The grades MetalBase buys across non-ferrous, ferrous and specialty streams in Brisbane, how each is graded, and how to get a written rate for your load.",

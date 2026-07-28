@@ -4,6 +4,7 @@ import { Button, CtaBand, Eyebrow, Section, TickList } from "@/components/ui";
 import { company, locations } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/locations" },
   title: "Yards & How to Sell Your Scrap — Brisbane",
   description:
     "How a weigh-in works at MetalBase, what ID to bring, why Queensland yards cannot pay cash, and where to find us.",

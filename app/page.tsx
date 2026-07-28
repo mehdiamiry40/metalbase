@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { FaqList } from "@/components/Faq";
 import Photo from "@/components/Photo";
@@ -12,6 +13,13 @@ import {
   TickList,
 } from "@/components/ui";
 import { company, faqs, priceGroups, services, stats } from "@/lib/site";
+
+/* The home page inherits title, description and Open Graph from the
+   root layout, which is correct — but the layout no longer sets a
+   canonical (it cascaded to every child), so home declares its own. */
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 const gradeCount = priceGroups.reduce((n, g) => n + g.rows.length, 0);
 

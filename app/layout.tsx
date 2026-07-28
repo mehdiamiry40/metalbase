@@ -46,7 +46,13 @@ export const metadata: Metadata = {
     "skip bin hire scrap Brisbane",
     "demolition steel buy-back",
   ],
-  alternates: { canonical: "/" },
+  /* No canonical here. A canonical in the root layout CASCADES to every
+     page that does not override it, so setting "/" made nine inner pages
+     declare the homepage as their canonical — telling Google they were
+     all duplicates of the home page and should be dropped from the
+     index. Each page now sets its own; layout deliberately sets none, so
+     a page that forgets simply has no canonical (harmless) rather than
+     inheriting a wrong one (destructive). */
   openGraph: {
     type: "website",
     locale: "en_AU",

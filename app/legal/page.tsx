@@ -5,6 +5,7 @@ import { Pending, Section } from "@/components/ui";
 import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/legal" },
   title: "Legal, Privacy & Terms of Trade",
   description:
     "Privacy policy, terms of trade and accessibility commitment for MetalBase Recycling Pty Ltd.",
