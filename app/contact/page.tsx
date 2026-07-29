@@ -35,7 +35,7 @@ export default function ContactPage() {
                 route, so the panel says so and points at it, rather than
                 advertising a gap. It flips back to the phone-first
                 layout automatically the moment company.phone is set. */}
-            <div className="border-2 border-navy p-7">
+            <div className="border-2 border-graphite p-7">
               {company.phone ? (
                 <>
                   <p className="t-eyebrow t-accent">Fastest route</p>
@@ -93,7 +93,7 @@ export default function ContactPage() {
               </ol>
             </div>
 
-            <div className="border-l-4 border-orange bg-cream p-6">
+            <div className="border-l-4 border-orange bg-paper p-6">
               <p className="text-[0.94rem] leading-relaxed ">
                 <strong className="font-semibold">Before you visit:</strong>{" "}
                 bring current photo ID and your bank details. A licensed

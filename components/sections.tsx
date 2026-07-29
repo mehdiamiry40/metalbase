@@ -10,7 +10,7 @@ import { ArrowRight, Breadcrumb, Eyebrow } from "@/components/ui";
    site stays consistent — no per-page card styling.
    ------------------------------------------------------------------ */
 
-/** Page introduction. Light by design — navy is reserved for the CTA. */
+/** Page introduction. Light by design — graphite is reserved for the CTA. */
 export function PageHeader({
   eyebrow,
   title,
@@ -25,7 +25,7 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <section className="on-light border-b hair bg-cream">
+    <section className="on-light border-b hair bg-paper">
       {/* BreadcrumbList markup is emitted here, from the SAME trail the
           <Breadcrumb> below renders. Putting it inside PageHeader means
           every page that shows a trail also describes it to crawlers,
@@ -71,16 +71,16 @@ export function Split({
 }) {
   /* Each surface brings its own text colours via on-light / on-dark
      rather than setting them per element. The bulk class mapping had
-     collapsed "deep" to cream, which silently removed the dark band
+     collapsed "deep" to paper, which silently removed the dark band
      from every page that used it. */
   const bg =
     tone === "accent"
       ? "on-light bg-orange"
       : tone === "deep"
-        ? "on-dark bg-navy"
+        ? "on-dark bg-graphite"
         : tone === "raised"
           ? "on-light bg-white"
-          : "on-light bg-cream";
+          : "on-light bg-paper";
 
   const copyOrder = side === "right" ? "lg:order-1" : "lg:order-2";
   const photoOrder = side === "right" ? "lg:order-2" : "lg:order-1";
@@ -96,7 +96,7 @@ export function Split({
             </Eyebrow>
           )}
           <h2>{title}</h2>
-          <div className={tone === "accent" ? "text-navy" : "t-muted"}>
+          <div className={tone === "accent" ? "text-graphite" : "t-muted"}>
             {children}
           </div>
         </div>

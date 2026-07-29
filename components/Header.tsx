@@ -88,11 +88,11 @@ export default function Header() {
   }, [openMenu, close]);
 
   return (
-    <header className="on-light sticky top-0 z-50 bg-cream">
+    <header className="on-light sticky top-0 z-50 bg-paper">
       <div
-        className={`bg-cream transition-shadow duration-200 ${
+        className={`bg-paper transition-shadow duration-200 ${
           scrolled || openMenu
-            ? "border-b hair shadow-[0_1px_16px_-8px_rgba(15,25,65,0.35)]"
+            ? "border-b hair shadow-[0_1px_16px_-8px_rgba(32,30,28,0.38)]"
             : "border-b border-transparent"
         }`}
       >
@@ -135,7 +135,7 @@ export default function Header() {
                   <div
                     id={panelId}
                     hidden={!isOpen}
-                    className="absolute left-0 right-0 top-full border-b hair bg-cream"
+                    className="absolute left-0 right-0 top-full border-b hair bg-paper"
                   >
                     <div className="shell grid gap-12 py-11 lg:grid-cols-[250px_1fr]">
                       <div>
@@ -193,7 +193,7 @@ export default function Header() {
             )}
             <Link
               href="/contact"
-              className="hidden min-h-11 items-center rounded-[4px] bg-orange px-5 py-2.5 text-[0.9rem] font-semibold text-navy transition-colors hover:bg-orange-deep sm:inline-flex"
+              className="hidden min-h-11 items-center rounded-[4px] bg-orange px-5 py-2.5 text-[0.9rem] font-semibold text-graphite transition-colors hover:bg-orange-deep sm:inline-flex"
             >
               Get a quote
             </Link>
@@ -205,9 +205,9 @@ export default function Header() {
               aria-label="Toggle navigation"
               className="-mr-1 flex h-11 w-11 flex-col items-center justify-center gap-[6px] xl:hidden"
             >
-              <span className={`block h-[2px] w-6 bg-navy transition ${mobileOpen ? "translate-y-2 rotate-45" : ""}`} />
-              <span className={`block h-[2px] w-6 bg-navy transition ${mobileOpen ? "opacity-0" : ""}`} />
-              <span className={`block h-[2px] w-6 bg-navy transition ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`} />
+              <span className={`block h-[2px] w-6 bg-graphite transition ${mobileOpen ? "translate-y-2 rotate-45" : ""}`} />
+              <span className={`block h-[2px] w-6 bg-graphite transition ${mobileOpen ? "opacity-0" : ""}`} />
+              <span className={`block h-[2px] w-6 bg-graphite transition ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`} />
             </button>
           </div>
         </div>
@@ -216,7 +216,7 @@ export default function Header() {
       <div
         id={`${uid}-mobile`}
         hidden={!mobileOpen}
-        className="max-h-[calc(100vh-70px)] overflow-y-auto border-b hair bg-cream xl:hidden"
+        className="max-h-[calc(100vh-70px)] overflow-y-auto border-b hair bg-paper xl:hidden"
       >
         <div className="shell py-2">
           {nav.map((item) => {
@@ -263,7 +263,7 @@ export default function Header() {
             <Link
               href="/contact"
               onClick={() => setMobileOpen(false)}
-              className="inline-block rounded-[4px] bg-orange px-7 py-3.5 font-semibold text-navy"
+              className="inline-block rounded-[4px] bg-orange px-7 py-3.5 font-semibold text-graphite"
             >
               Get a quote
             </Link>

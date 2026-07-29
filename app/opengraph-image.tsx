@@ -14,7 +14,7 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0f1941",
+          background: "#201e1c",
           padding: "72px",
         }}
       >
@@ -40,7 +40,7 @@ export default function OpengraphImage() {
 
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <span style={{ width: 64, height: 5, background: "#ff6a1a" }} />
-          <span style={{ color: "#a8b2cc", fontSize: 28 }}>
+          <span style={{ color: "#b9b2aa", fontSize: 28 }}>
             Scrap metal recycling · Brisbane
           </span>
         </div>

@@ -65,7 +65,7 @@ export default function LegalPage() {
       />
 
       <Section>
-        <div className="border-l-4 border-orange bg-cream p-6">
+        <div className="border-l-4 border-orange bg-paper p-6">
           <p className="text-[0.95rem] leading-relaxed ">
             <strong className="font-semibold">Draft wording.</strong> This is a
             starting point, not legal advice. Have it reviewed by a lawyer

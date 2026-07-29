@@ -86,7 +86,7 @@ export default function SustainabilityPage() {
       </Split>
 
       {/* compliance --------------------------------------------------- */}
-      <section id="compliance" className="scroll-mt-20 bg-cream py-16 lg:py-24">
+      <section id="compliance" className="scroll-mt-20 bg-paper py-16 lg:py-24">
         <div className="shell max-w-3xl">
           <div className="rule">
             <h2>Licensing and accreditation</h2>

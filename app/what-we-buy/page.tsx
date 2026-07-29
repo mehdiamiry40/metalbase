@@ -164,7 +164,7 @@ export default function WhatWeBuyPage() {
       ))}
 
       {/* prep --------------------------------------------------------- */}
-      <section id="prep" className="scroll-mt-20 bg-cream py-16 lg:py-24">
+      <section id="prep" className="scroll-mt-20 bg-paper py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>Six things that change what your load is worth</h2>
