@@ -42,7 +42,7 @@ export default function FaqPage() {
               </div>
             </div>
 
-            <div className="mt-6 border-l-4 border-orange bg-cream p-5">
+            <div className="mt-6 border-l-4 border-orange bg-paper p-5">
               <p className="text-[0.92rem] leading-relaxed">
                 <strong className="font-semibold">Bringing a load?</strong>{" "}
                 Current photo ID and your bank details. A licensed second-hand

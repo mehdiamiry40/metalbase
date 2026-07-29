@@ -35,15 +35,15 @@ const volumes = [
 ];
 
 const field =
-  "w-full rounded-[4px] border hair bg-cream px-4 py-3 text-[1rem] outline-none transition-colors placeholder:text-slate focus:border-blue";
+  "w-full rounded-[4px] border hair bg-paper px-4 py-3 text-[1rem] outline-none transition-colors placeholder:text-stone focus:border-graphite";
 const labelCls = "mb-2 block text-[0.9rem] font-semibold ";
-/* Errors are navy and bold, not blue. t-accent resolves to the link
-   blue on a light surface, so validation messages were rendering in
-   exactly the colour the rest of the site uses for "this is a link" —
-   legible, but saying the wrong thing. A two-colour palette has no red
+/* Errors are graphite and bold, not the accent. t-accent resolves to the
+   link colour on a light surface, so validation messages were rendering
+   in exactly the colour the rest of the site uses for "this is a link" —
+   legible, but saying the wrong thing. A single-accent palette has no red
    to reach for, so the weight and the orange keyline on the summary do
-   the signalling and the text stays at 17:1. */
-const errCls = "mt-1.5 text-[0.85rem] font-semibold text-navy";
+   the signalling and the text stays at 15:1. */
+const errCls = "mt-1.5 text-[0.85rem] font-semibold text-graphite";
 
 type State = "idle" | "sending" | "sent" | "sent-undelivered" | "error";
 
@@ -130,7 +130,7 @@ export default function QuoteForm() {
         </p>
 
         {state === "sent-undelivered" && (
-          <div className="mt-6 border-l-4 border-orange bg-cream p-5">
+          <div className="mt-6 border-l-4 border-orange bg-paper p-5">
             <p className="text-[0.94rem] leading-relaxed ">
               <strong className="font-semibold">Heads up:</strong> no email or
               webhook is configured on this deployment yet, so your enquiry was
@@ -176,7 +176,7 @@ export default function QuoteForm() {
       </p>
 
       {state === "error" && (
-        <div role="alert" className="mb-6 border-l-4 border-orange bg-cream p-4 text-[0.94rem]">
+        <div role="alert" className="mb-6 border-l-4 border-orange bg-paper p-4 text-[0.94rem]">
           {message}
         </div>
       )}
@@ -280,7 +280,7 @@ export default function QuoteForm() {
                   onClick={() => toggle(m)}
                   className={`min-h-11 rounded-[4px] border px-3.5 py-2 text-[0.88rem] font-medium transition-colors ${
                     on
-                      ? "border-orange bg-orange text-navy"
+                      ? "border-orange bg-orange text-graphite"
                       : "hair t-muted hover:border-orange hover:text-[color:var(--accent-text)]"
                   }`}
                 >
@@ -315,7 +315,7 @@ export default function QuoteForm() {
         <button
           type="submit"
           disabled={busy}
-          className="inline-flex items-center gap-2 rounded-[4px] border-2 border-orange bg-orange px-7 py-3 text-[1.0625rem] font-normal text-navy transition-colors hover:bg-orange-deep disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-[4px] border-2 border-orange bg-orange px-7 py-3 text-[1.0625rem] font-normal text-graphite transition-colors hover:bg-orange-deep disabled:cursor-not-allowed disabled:opacity-60"
         >
           {busy ? "Sending…" : "Send enquiry"}
           {!busy && <ArrowRight className="h-4 w-4" />}

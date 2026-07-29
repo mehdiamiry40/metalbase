@@ -13,7 +13,7 @@ const legal = [
 
 export default function Footer() {
   return (
-    <footer className="on-dark bg-navy">
+    <footer className="on-dark bg-graphite">
       <div className="shell py-16">
         <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
           <div>

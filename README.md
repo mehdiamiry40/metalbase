@@ -36,22 +36,36 @@ disappearing, so you can see what's outstanding.
 
 ## Design system
 
-Built for MetalBase, not borrowed. The previous version copied Randstad's navy
-`#0F1941`, blue `#2175D9`, cream, and their lowercase-heading-with-a-full-stop
-mannerism. All three are gone.
+Built for MetalBase, not borrowed. An earlier version copied Randstad's navy
+`#0F1941` and blue `#2175D9`; carrying two accents made the site read like
+every other corporate-blue trades page, so blue is gone. Orange is now the
+only hue and everything else is a neutral.
 
 | Token | Value |
 |---|---|
-| Ink | `#14171A` — near-black steel, dark sections |
-| Paper | `#F4F1EA` — warm off-white, default surface |
-| Copper | `#A34A28` — single accent, 5.2:1 on paper |
-| Slate | `#5C636E` — muted text, 5.05:1 on paper |
-| Display | Archivo, weight 500, `-0.03em`, **sentence case** |
-| Buttons | 2px radius, solid or 2px outline |
+| Paper | `#F6F4F1` — warm off-white, the default surface |
+| Graphite | `#201E1C` — warm near-black, dark bands and body type |
+| White | `#FFFFFF` — cards and raised panels |
+| Orange | `#FF6A1A` — the accent. **Fill only** — 2.61:1 on paper |
+| Rust | `#A83E0C` — accent *text* on light, 5.69:1 on paper |
+| Orange-warm | `#FF8A45` — accent text on graphite, 7.10:1 |
+| Stone | `#5F5B55` — muted text, 6.14:1 on paper |
+| Display | Hanken Grotesk, weight 400, `-0.05em`, **sentence case** |
+| Buttons | 4px radius, solid or 2px outline |
 
-Three colours. No drop shadows, no rounded cards, no hover lifts. The dominant
+The accent splits in two because `#FF6A1A` cannot carry text on a light
+surface. On paper and white it is fills, rules and keylines; rust does the
+typographic work there, and orange-warm does it on the dark bands. For the
+same reason orange fills carry *graphite* labels, never white (white on
+orange is 2.87:1 and can never pass).
+
+One hue. No drop shadows, no rounded cards, no hover lifts. The dominant
 layout unit is a full-bleed 50/50 split. Everything composes from
 `components/sections.tsx` so pages can't drift apart.
+
+Focus rings are surface-aware (`--focus`): graphite on light, orange-warm on
+the dark bands, white over photographs. A single fixed ring colour cannot
+clear 3:1 against both surfaces.
 
 **Base styles live in `@layer base`.** Tailwind v4 emits utilities inside a
 cascade layer, and unlayered rules beat layered ones regardless of specificity —

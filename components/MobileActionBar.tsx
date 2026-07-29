@@ -32,7 +32,7 @@ export default function MobileActionBar() {
 
   return (
     <div
-      className={`on-light fixed inset-x-0 bottom-0 z-40 border-t hair bg-cream/95 backdrop-blur transition-transform duration-300 lg:hidden ${
+      className={`on-light fixed inset-x-0 bottom-0 z-40 border-t hair bg-paper/95 backdrop-blur transition-transform duration-300 lg:hidden ${
         show ? "translate-y-0" : "translate-y-full"
       }`}
       // Hidden from assistive tech when off-screen so it isn't a stray
@@ -44,7 +44,7 @@ export default function MobileActionBar() {
         <Link
           href="/contact"
           tabIndex={show ? undefined : -1}
-          className="flex flex-1 items-center justify-center rounded-[4px] bg-orange px-5 py-3.5 font-semibold text-navy"
+          className="flex flex-1 items-center justify-center rounded-[4px] bg-orange px-5 py-3.5 font-semibold text-graphite"
         >
           Get a quote
         </Link>
@@ -52,7 +52,7 @@ export default function MobileActionBar() {
           <a
             href={`tel:${tel}`}
             tabIndex={show ? undefined : -1}
-            className="flex items-center justify-center rounded-[4px] border-2 border-navy px-5 py-3.5 font-semibold "
+            className="flex items-center justify-center rounded-[4px] border-2 border-graphite px-5 py-3.5 font-semibold "
           >
             Call
           </a>
@@ -60,7 +60,7 @@ export default function MobileActionBar() {
           <Link
             href="/what-we-buy"
             tabIndex={show ? undefined : -1}
-            className="flex items-center justify-center rounded-[4px] border-2 border-navy px-5 py-3.5 font-semibold "
+            className="flex items-center justify-center rounded-[4px] border-2 border-graphite px-5 py-3.5 font-semibold "
           >
             What we buy
           </Link>

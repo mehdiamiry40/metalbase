@@ -88,7 +88,7 @@ export default async function ServiceDetail({
         />
       </Section>
 
-      <section className="bg-cream py-16 lg:py-24">
+      <section className="bg-paper py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>From first call to first rebate</h2>

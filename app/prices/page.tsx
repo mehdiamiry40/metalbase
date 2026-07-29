@@ -60,7 +60,7 @@ export default function PricesPage() {
       {/* Three long tables need a way to move between them. */}
       <nav
         aria-label="Material streams"
-        className="sticky top-[70px] z-30 border-b hair bg-cream/95 backdrop-blur"
+        className="sticky top-[70px] z-30 border-b hair bg-paper/95 backdrop-blur"
       >
         <div className="shell flex gap-6 overflow-x-auto py-3.5">
           {priceGroups.map((g) => (
@@ -82,7 +82,7 @@ export default function PricesPage() {
       </nav>
 
       {!PUBLISH_RATES && (
-        <div className="border-b hair bg-cream">
+        <div className="border-b hair bg-paper">
           <div className="shell py-5 text-[0.94rem] t-muted">
             <strong className="font-semibold ">
               Rates are quoted, not posted.
@@ -109,7 +109,7 @@ export default function PricesPage() {
               {group.title} grades and specifications
             </caption>
             <thead>
-              <tr className="border-b-2 border-navy">
+              <tr className="border-b-2 border-graphite">
                 <th scope="col" className="t-eyebrow py-3 t-muted">
                   Grade
                 </th>
@@ -162,7 +162,7 @@ export default function PricesPage() {
       ))}
 
       {/* grading ------------------------------------------------------ */}
-      <section id="grading" className="bg-cream py-16 lg:py-24">
+      <section id="grading" className="bg-paper py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>How a load gets graded</h2>

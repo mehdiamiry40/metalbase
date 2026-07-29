@@ -33,17 +33,22 @@ export function Tick({ className = "" }: { className?: string }) {
    ------------------------------------------------------------------ */
 
 /**
- * The mark carries both accents: blue on top, orange beneath. The
- * wordmark takes the surface colour, so it is navy on the cream header
- * and white on a navy footer without needing a variant prop — the
- * variant approach previously shipped an invisible navy-on-navy logo.
+ * The mark is orange stepping down into the surface colour. The
+ * wordmark takes the surface colour too, so it is graphite on the paper
+ * header and white on a graphite footer without needing a variant prop —
+ * the variant approach previously shipped an invisible logo.
+ *
+ * The top bar is the full accent and the second is the same hue lifted,
+ * which reads as one colour in two tones on both surfaces. The old mark
+ * put blue above orange; with blue out of the palette the bars carry the
+ * single accent instead of two competing ones.
  */
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <svg viewBox="0 0 32 28" className="h-[26px] w-[30px] shrink-0" aria-hidden="true">
-        <path d="M4 4h18l-4 6H0z" fill="#2175d9" />
-        <path d="M7 11h18l-4 6H3z" fill="#ff6a1a" />
+        <path d="M4 4h18l-4 6H0z" fill="#ff6a1a" />
+        <path d="M7 11h18l-4 6H3z" fill="#ff8a45" />
         <path d="M10 18h18l-4 6H6z" fill="currentColor" opacity="0.35" />
       </svg>
       <span className="text-[1.4rem] font-medium leading-none tracking-[-0.05em]">
@@ -63,14 +68,12 @@ const btnBase =
   "inline-flex items-center justify-center gap-2 rounded-[4px] border-2 px-7 py-3 text-[1.0625rem] font-normal transition-colors duration-150";
 
 const variants: Record<string, string> = {
-  /* The CTA. Orange fill carries navy at 5.93 — white on orange is
-     2.87 and can never pass, which is why the label is navy. */
-  primary: "border-orange bg-orange text-navy hover:border-orange-deep hover:bg-orange-deep",
-  /* Blue is the trust colour: secondary actions and navigation. */
-  blue: "border-blue bg-blue text-white hover:border-blue-deep hover:bg-blue-deep",
+  /* The CTA. Orange fill carries graphite at 5.80 — white on orange is
+     2.87 and can never pass, which is why the label is graphite. */
+  primary: "border-orange bg-orange text-graphite hover:border-orange-deep hover:bg-orange-deep",
   /* Outlines invert on hover so the change is unmistakable. */
-  outline: "border-navy text-navy hover:bg-navy hover:text-white",
-  outlineDark: "border-white text-white hover:bg-white hover:text-navy",
+  outline: "border-graphite text-graphite hover:bg-graphite hover:text-white",
+  outlineDark: "border-white text-white hover:bg-white hover:text-graphite",
 };
 
 export function Button({
@@ -125,10 +128,10 @@ export function ArrowLink({
  * dark-on-dark bugs got in last time.
  */
 const tones: Record<string, string> = {
-  base: "on-light bg-cream", // the page
+  base: "on-light bg-paper", // the page
   raised: "on-light border-y hair bg-white", // cards / lifted bands
-  deep: "on-dark bg-navy", // the dark band
-  accent: "on-light bg-orange", // orange band, navy type
+  deep: "on-dark bg-graphite", // the dark band
+  accent: "on-light bg-orange", // orange band, graphite type
 };
 
 export function Section({
@@ -238,7 +241,7 @@ export function CtaBand({
   secondary?: { label: string; href: string };
 }) {
   return (
-    <section className="on-dark bg-navy">
+    <section className="on-dark bg-graphite">
       <div className="shell py-18 lg:py-24">
         <div className="rule" />
         <h2 className="max-w-3xl">{title}</h2>
@@ -280,8 +283,9 @@ export function TickList({
 
 /**
  * Shown where real data has not been supplied yet. Honest, not fake.
- * Every surface is a navy now, so one skin covers all of them —
- * mist clears AA on the lightest of the three (5.7:1 on raised).
+ * The badge takes its colours from the surface (t-muted plus the orange
+ * keyline), so one skin covers paper, white and graphite alike — the
+ * muted tone clears AA on the lightest of the three (6.7:1 on white).
  */
 export function Pending({ children }: { children: ReactNode }) {
   // Development only. See DataRow below for why.

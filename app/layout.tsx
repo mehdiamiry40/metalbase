@@ -113,7 +113,7 @@ export default function RootLayout({
   return (
     <html lang="en-AU" className={hanken.variable}>
       <head>
-        <meta name="theme-color" content="#0f1941" />
+        <meta name="theme-color" content="#201e1c" />
         <script
           type="application/ld+json"
           // Serialised from a typed object above; no user input reaches this.
@@ -123,7 +123,7 @@ export default function RootLayout({
       <body className="pb-[76px] lg:pb-0">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-orange focus:px-5 focus:py-3 focus:font-semibold focus:text-navy"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-orange focus:px-5 focus:py-3 focus:font-semibold focus:text-graphite"
         >
           Skip to content
         </a>

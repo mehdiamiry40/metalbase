@@ -34,17 +34,17 @@ export default function Home() {
   return (
     <>
       {/* ---------------------------------------------------------- hero
-          Photograph under a navy scrim with white type over it — the
+          Photograph under a graphite scrim with white type over it — the
           reference's signature opening. Its own h1 measured white, so
           the hero is the one place on a light-dominant site where the
           headline is reversed out. */}
       {/* The photo layer must NOT be negative z-index. `isolate` on the
           section creates a stacking context, so a -z-10 child paints
-          behind the section's own opaque bg-navy and vanishes entirely
+          behind the section's own opaque bg-graphite and vanishes entirely
           — the image loaded fine and simply could not be seen. Photo
           layer sits at auto z, content above it via `relative`, and
-          bg-navy stays as the fallback while the image loads. */}
-      <section className="on-dark over-photo relative overflow-hidden bg-navy">
+          bg-graphite stays as the fallback while the image loads. */}
+      <section className="on-dark over-photo relative overflow-hidden bg-graphite">
         <div className="absolute inset-0">
           <Photo
             name="yard-grab"
@@ -57,7 +57,7 @@ export default function Home() {
               yard is still legible behind it. */}
           <span
             aria-hidden="true"
-            className="absolute inset-0 bg-navy/[0.72]"
+            className="absolute inset-0 bg-graphite/[0.72]"
           />
         </div>
 
@@ -91,7 +91,7 @@ export default function Home() {
       </div>
 
       {/* ------------------------------------------------- two audiences */}
-      <section className="border-t hair bg-cream py-16 lg:py-24">
+      <section className="border-t hair bg-paper py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>Brisbane&rsquo;s base for ferrous and non-ferrous metal</h2>
@@ -142,7 +142,7 @@ export default function Home() {
       </Split>
 
       {/* ------------------------------------------------------ services */}
-      <section className="border-t hair bg-cream py-16 lg:py-24">
+      <section className="border-t hair bg-paper py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>Four ways Brisbane sends us metal</h2>
@@ -172,7 +172,7 @@ export default function Home() {
       </section>
 
       {/* --------------------------------------------------- how it works */}
-      <section className="border-t hair bg-cream py-16 lg:py-24">
+      <section className="border-t hair bg-paper py-16 lg:py-24">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>How a weigh-in works</h2>

@@ -76,16 +76,27 @@ describe("theme tokens", () => {
 
   it("declares the tokens the design system documents", () => {
     for (const t of [
-      "cream",
+      "paper",
       "white",
-      "navy",
-      "slate",
-      "blue",
-      "blue-text",
+      "graphite",
+      "stone",
       "orange",
+      "rust",
       "orange-warm",
+      "orange-deep",
     ]) {
       expect(tokens.has(t)).toBe(true);
+    }
+  });
+
+  /* Blue was removed when the palette collapsed to a single accent. The
+     rename guard below only catches utilities naming a token that does
+     not exist — it cannot catch a token that still exists but shouldn't,
+     so a half-finished revert that re-added `--color-blue` would go
+     unnoticed until the site quietly had two accents again. */
+  it("has no blue left in the palette", () => {
+    for (const t of ["blue", "blue-text", "blue-deep", "navy", "cream", "slate"]) {
+      expect(tokens.has(t)).toBe(false);
     }
   });
 

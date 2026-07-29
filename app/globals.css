@@ -1,19 +1,22 @@
 @import "tailwindcss";
 
 /* ==================================================================
-   MetalBase design system — Randstad blue with orange
+   MetalBase design system — orange on graphite
 
-   Light-dominant, the way the reference site actually is. The page is
-   cream; navy carries the type and the dark bands; blue and orange
-   are the two accents.
+   One chromatic colour. Orange is the brand; everything else is a
+   neutral. The previous system carried blue AND orange, which split
+   the accent work in two and made the site read like every other
+   corporate-blue trades page. Blue is gone: the dark bands are a warm
+   near-black, the page is warm paper, and orange is the only hue on
+   the site.
 
-   Every value below was measured off randstad.com.au with
-   getComputedStyle, not eyeballed:
+   Light-dominant. The page is paper; graphite carries the type and
+   the dark bands; orange is the single accent.
 
-     page background   #F7F5F0   (15 blocks — the dominant surface)
-     dark band         #0F1941   (6 blocks)
-     cards             #FFFFFF   (4 blocks)
-     blue accent       #2175D9   (3 blocks — logo and primary button)
+     page background   #F6F4F1   the dominant surface
+     dark band         #201E1C   warm near-black
+     cards             #FFFFFF
+     accent            #FF6A1A   fills, rules, CTA
      h1/h2             60px · weight 400 · tracking -3px · lh 1.0
      h3                26px · weight 400 · tracking -1px
      body              18px
@@ -21,52 +24,50 @@
      button radius     4px · weight 400
 
    The weight-400 headings at -3px tracking are the single most
-   characteristic thing about the reference. Bold headings are what
-   made the earlier attempts read as generic.
+   characteristic thing about this design. Bold headings are what made
+   the earlier attempts read as generic; that has not changed.
 
    ------------------------------------------------------------------
-   Contrast, computed rather than assumed. This is where the previous
+   Contrast, computed rather than assumed. This is where earlier
    attempts kept failing, so the whole matrix is written down:
 
-     on cream    navy 15.6  PASS | blue 4.18 FAIL | orange 2.63 FAIL
-     on white    navy 17.0  PASS | blue 4.55 PASS | orange 2.87 FAIL
-     on navy     white 17.0 PASS | orange 5.93 PASS | blue 3.73 FAIL
+     on paper     graphite 15.13 PASS | rust 5.69 PASS | orange 2.61 FAIL
+     on white     graphite 16.62 PASS | rust 6.25 PASS | orange 2.87 FAIL
+     on graphite  white 16.62 PASS | orange-warm 7.10 PASS | orange 5.80 PASS
+     on orange    graphite 5.80 PASS | white 2.87 FAIL
 
    Three consequences that drive the whole system:
 
-   1. Randstad's own #2175D9 does NOT pass as text on their cream —
-      only as a fill. So there are two blues: #2175D9 fills, and a
-      slightly deeper #1E6AC4 (4.92) for blue text and links.
-   2. Orange can never be text on a light surface. On cream and white
-      it is fills, rules and keylines only. It becomes available as
-      text on the navy bands (5.93), which is where it does its
-      typographic work.
-   3. Blue is unusable on navy (3.73). Dark bands are navy + white +
-      orange; no blue.
+   1. #FF6A1A can never be text on a light surface (2.61). On paper
+      and white it is fills, rules and keylines only. So there are two
+      oranges on light: #FF6A1A fills, and a deep #A83E0C "rust"
+      (5.69) for accent text and links.
+   2. Orange becomes available as text on the graphite bands (5.80),
+      and #FF8A45 is brighter still there (7.10) — that is where the
+      accent does its typographic work.
+   3. White can never sit on an orange fill (2.87). Orange fills carry
+      graphite labels, which is why the CTA button is dark-on-orange
+      rather than white-on-orange.
    ================================================================== */
 
 @theme {
   /* surfaces */
-  --color-cream: #f7f5f0; /* the page */
+  --color-paper: #f6f4f1; /* the page */
   --color-white: #ffffff; /* cards, raised panels */
-  --color-navy: #0f1941; /* dark bands, and the body type colour */
+  --color-graphite: #201e1c; /* dark bands, and the body type colour */
 
   /* type */
-  --color-slate: #5b6478; /* muted on light · 5.45 cream, 5.93 white */
+  --color-stone: #5f5b55; /* muted on light · 6.14 paper, 6.74 white */
 
-  /* blue — trust, primary, navigation */
-  --color-blue: #2175d9; /* FILL, carries white · 4.55 */
-  --color-blue-text: #1e6ac4; /* TEXT/links on light · 4.92 cream */
-  --color-blue-deep: #1a5fb0; /* hover · 6.35 white-on-fill */
-
-  /* orange — action, energy, the CTA */
-  --color-orange: #ff6a1a; /* FILL, carries navy · 5.93 · and rules */
-  --color-orange-warm: #ff8a45; /* TEXT on navy only · 7.26 */
-  --color-orange-deep: #e85c12; /* hover · 4.83 navy-on-fill */
+  /* orange — the only hue on the site */
+  --color-orange: #ff6a1a; /* FILL, carries graphite · 5.80 · and rules */
+  --color-rust: #a83e0c; /* TEXT/links on light · 5.69 paper, 6.25 white */
+  --color-orange-warm: #ff8a45; /* TEXT on graphite only · 7.10 */
+  --color-orange-deep: #e85c12; /* hover · 4.72 graphite-on-fill */
 
   /* hairlines */
-  --color-line: rgba(15, 25, 65, 0.14); /* on light */
-  --color-line-dark: rgba(255, 255, 255, 0.2); /* on navy */
+  --color-line: rgba(32, 30, 28, 0.14); /* on light */
+  --color-line-dark: rgba(255, 255, 255, 0.2); /* on graphite */
 
   /* Supplied by next/font (self-hosted, metric-adjusted fallback). The
      literal stack stays as a guard in case the variable is ever absent. */
@@ -87,12 +88,12 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    background: var(--color-cream);
+    background: var(--color-paper);
   }
 
   body {
-    background: var(--color-cream);
-    color: var(--color-navy);
+    background: var(--color-paper);
+    color: var(--color-graphite);
     font-family: var(--font-sans);
     font-size: 18px;
     line-height: 1.6;
@@ -103,18 +104,24 @@
        section that forgets its surface class still renders correctly.
        Only .on-dark has to be declared explicitly, which means the
        failure mode is a missing dark band rather than invisible text. */
-    --muted: var(--color-slate);
+    --muted: var(--color-stone);
     --hair: var(--color-line);
-    --accent-text: var(--color-blue-text);
+    --accent-text: var(--color-rust);
+    --focus: var(--color-graphite);
   }
 
   ::selection {
     background: var(--color-orange);
-    color: var(--color-navy);
+    color: var(--color-graphite);
   }
 
+  /* The ring is surface-aware for the same reason the type is. A single
+     fixed ring colour cannot clear 3:1 against both paper and graphite
+     once blue — which used to split the difference, badly, at 3.73 on
+     navy — is out of the palette. Graphite rings on light (15.13),
+     orange-warm on the dark bands (7.10). */
   :focus-visible {
-    outline: 3px solid var(--color-blue);
+    outline: 3px solid var(--focus, var(--color-graphite));
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -155,24 +162,26 @@
 /* ------------------------------------------------------------------
    surfaces
 
-   The same markup appears on cream, on white and on navy, so body and
+   The same markup appears on paper, on white and on graphite, so body and
    muted text colours are carried by the surface rather than set on
    every element. Setting them per-element is exactly how the
    dark-on-dark bugs happened in the previous iteration.
    ------------------------------------------------------------------ */
 
 .on-light {
-  color: var(--color-navy);
-  --muted: var(--color-slate);
+  color: var(--color-graphite);
+  --muted: var(--color-stone);
   --hair: var(--color-line);
-  --accent-text: var(--color-blue-text);
+  --accent-text: var(--color-rust);
+  --focus: var(--color-graphite);
 }
 
 .on-dark {
   color: #ffffff;
-  --muted: rgba(255, 255, 255, 0.78); /* 12.4:1 on navy */
+  --muted: rgba(255, 255, 255, 0.78); /* 10.6:1 on graphite */
   --hair: var(--color-line-dark);
   --accent-text: var(--color-orange-warm);
+  --focus: var(--color-orange-warm);
 }
 
 /* These must sit in @layer utilities, not unlayered. An unlayered rule
@@ -205,6 +214,7 @@
    over an image — so nothing automated catches it. */
 .over-photo {
   --accent-text: #ffffff;
+  --focus: #ffffff;
 }
 
 .t-eyebrow {
@@ -289,7 +299,7 @@
 }
 
 .row-link:hover {
-  background-color: rgba(15, 25, 65, 0.04);
+  background-color: rgba(32, 30, 28, 0.05);
 }
 
 .on-dark .row-link:hover {

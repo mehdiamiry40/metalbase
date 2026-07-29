@@ -8,14 +8,14 @@ real customers.
 
 ## 1. Business facts — blocks launch
 
-Every value below is `null` in `lib/site.ts`. Nothing is invented, so the
-UI omits whatever is missing rather than printing a placeholder. That is
-honest, but it also means the site currently cannot be contacted by
-phone and does not identify itself as a licensed dealer.
+Every value below is still `null` in `lib/site.ts`. Nothing is invented, so
+the UI omits whatever is missing rather than printing a placeholder. That
+is honest, but it also means the site does not yet identify itself as a
+licensed dealer.
 
 | Field | Where it appears | Consequence while null |
 |---|---|---|
-| `phone` + `phoneLabel` | header, footer, contact, mobile bar | **No click-to-call anywhere.** The mobile bar shows "What we buy" instead of "Call". Highest-value single fix. |
+| ~~`phone` + `phoneLabel`~~ | header, footer, contact, mobile bar | ✅ **Set.** `+61481438444` / `0481 438 444`. Click-to-call is live everywhere and the mobile bar now shows "Call". |
 | `email` | footer, contact, legal | No direct email route |
 | `head` | footer, legal, `PostalAddress` schema | No address in the local-business markup, which is a ranking input for local search |
 | `abn` | footer, legal | Required on Australian commercial material |
