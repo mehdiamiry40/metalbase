@@ -32,7 +32,7 @@ const grading = [
   },
   {
     title: "Get paid",
-    body: "EFT to your nominated account, usually same day. We do not pay cash for scrap under any circumstances \u2014 our policy, and it keeps a traceable record on both sides.",
+    body: "Cash in your hand at the weighbridge, against the grade on your docket. Prefer it in the bank? We will transfer to your nominated account instead \u2014 just say so before the load is committed.",
   },
 ];
 
@@ -215,11 +215,11 @@ export default function PricesPage() {
               </p>
               <p>
                 <strong className="font-semibold ">
-                  We cannot pay cash.
+                  You are paid in cash on the spot.
                 </strong>{" "}
-                Under Queensland&rsquo;s second-hand dealer legislation, scrap
-                metal must be paid by electronic transfer or cheque. Anyone
-                offering cash is operating outside the law.
+                Settlement happens at the bridge once the tare weight is in, or
+                by electronic transfer to an account in your name if you would
+                rather. Say which at the weighbridge.
               </p>
               <p>
                 <strong className="font-semibold ">

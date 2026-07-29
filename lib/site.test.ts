@@ -1,4 +1,4 @@
-import { existsSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
@@ -101,6 +101,81 @@ describe("navigation integrity", () => {
       .filter((h) => !routes.has(h));
 
     expect([...new Set(broken)]).toEqual([]);
+  });
+});
+
+/* ------------------------------------------------------------------
+   Payment method is a commercial choice, not a legal one, and this
+   site has got that wrong twice.
+
+   The first version asserted a Queensland cash ban in five places. A
+   commit corrected those, but two survived it — /locations said "if a
+   yard offers you cash, they are breaking the law" and /prices said
+   "anyone offering cash is operating outside the law" — and they
+   stayed live for two more redesigns. Nothing caught them, because
+   nothing was looking: the claim reads as confident, sober compliance
+   copy, which is exactly why it survives review.
+
+   Queensland's Second-hand Dealers and Pawnbrokers Act 2003 governs
+   licensing, seller identity and records. It does not dictate how the
+   money moves. Victoria and New South Wales ban cash for scrap;
+   Queensland does not.
+
+   So this asserts the property directly rather than trusting a sweep:
+   no rendered string may tie a payment METHOD to a legal obligation,
+   in either direction. Saying "cash is illegal" was the old bug;
+   "cash is legally required" would be the same bug wearing the
+   opposite hat.
+   ------------------------------------------------------------------ */
+describe("payment claims", () => {
+  /* Comments are where the rule itself is written down, quoting the
+     old offending strings verbatim. Scanning them would flag the
+     documentation of the bug as the bug. */
+  const stripComments = (src: string) =>
+    src.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
+
+  const sources = (dir: string, acc: string[] = []): string[] => {
+    for (const entry of readdirSync(dir)) {
+      const full = join(dir, entry);
+      if (statSync(full).isDirectory()) sources(full, acc);
+      else if (/\.tsx?$/.test(entry) && !entry.endsWith(".test.ts")) acc.push(full);
+    }
+    return acc;
+  };
+
+  const PAYMENT = /(cash|eft|electronic transfer|cheque)/i;
+  /* Phrases that assert legal force. "not mandated either way by
+     Queensland law" is the sanctioned wording and matches none of
+     them, so the legal page's own disclaimer stays legal. */
+  const LEGAL_FORCE = [
+    "breaking the law",
+    "outside the law",
+    "prohibits cash",
+    "cash is prohibited",
+    "banned in queensland",
+    "must be paid by",
+    "legally required",
+    "required by law",
+    "law requires",
+    "illegal",
+  ];
+
+  it("never claims a payment method is mandated or forbidden by law", () => {
+    const root = resolve(__dirname, "..");
+    const files = [...sources(join(root, "app")), ...sources(join(root, "lib"))];
+    const offenders: string[] = [];
+
+    for (const file of files) {
+      const src = stripComments(readFileSync(file, "utf8"));
+      for (const line of src.split("\n")) {
+        if (!PAYMENT.test(line)) continue;
+        const lower = line.toLowerCase();
+        const hit = LEGAL_FORCE.find((p) => lower.includes(p));
+        if (hit) offenders.push(`${file.replace(root + "/", "")}: "${hit}"`);
+      }
+    }
+
+    expect(offenders).toEqual([]);
   });
 });
 

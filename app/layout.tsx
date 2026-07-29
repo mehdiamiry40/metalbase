@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     template: "%s | MetalBase",
   },
   description:
-    "MetalBase buys, processes and remarkets ferrous and non-ferrous scrap across Brisbane. Graded in front of you, weighed on a certified bridge, paid by EFT.",
+    "MetalBase buys, processes and remarkets ferrous and non-ferrous scrap across Brisbane. Graded in front of you, weighed on a certified bridge, paid in cash on the spot.",
   keywords: [
     "scrap metal Brisbane",
     "metal recycling Brisbane",
