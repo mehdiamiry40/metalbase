@@ -78,10 +78,15 @@ Keep new element rules inside the layer.
 honeypot, per-instance rate limiting. Delivery is configured by environment:
 
 ```bash
-RESEND_API_KEY=...        # + ENQUIRY_TO, optionally ENQUIRY_FROM
+RESEND_API_KEY=...        # the only one required; optionally ENQUIRY_FROM
 # or
 ENQUIRY_WEBHOOK_URL=...   # Zapier, Make, CRM
 ```
+
+The destination is `ENQUIRY_INBOX` in `app/api/enquiry/route.ts`, overridable
+with `ENQUIRY_TO`. It is a constant rather than environment-only because
+forgetting it in a dashboard is silent — the endpoint still returns ok and the
+enquiry is simply lost.
 
 With neither set the endpoint returns `delivered: false` and the UI tells the
 user their enquiry was logged but not sent, and to phone instead. It never
