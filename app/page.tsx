@@ -27,7 +27,7 @@ const steps = [
   { title: "Drive on", body: "No appointment, no booking, no minimum load. Follow the line to the weighbridge." },
   { title: "Weigh in", body: "Gross weight recorded, photo ID scanned, vehicle logged. About ninety seconds." },
   { title: "Get graded", body: "A grader calls the grade before you tip. Disagree and we settle it with the XRF gun." },
-  { title: "Get paid", body: "Tare on the way out, docket printed, EFT to your nominated account." },
+  { title: "Get paid", body: "Tare on the way out, docket printed, cash in your hand before you leave. EFT if you'd rather." },
 ];
 
 export default function Home() {
@@ -68,7 +68,7 @@ export default function Home() {
             <p className="t-lead mt-6 max-w-xl">
               {company.name} buys, processes and remarkets ferrous and
               non-ferrous scrap across greater Brisbane. Graded in front of you,
-              weighed on a certified bridge, paid by EFT.
+              weighed on a certified bridge, paid in cash on the spot.
             </p>
             <div className="mt-9 flex flex-wrap gap-4">
               <Button href="/contact">Get a quote</Button>
@@ -86,7 +86,7 @@ export default function Home() {
           <span aria-hidden="true">·</span>
           <span>Graded before it&rsquo;s tipped</span>
           <span aria-hidden="true">·</span>
-          <span>Paid by EFT, never cash</span>
+          <span>Paid cash on the spot</span>
         </div>
       </div>
 

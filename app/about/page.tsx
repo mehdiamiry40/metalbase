@@ -27,9 +27,9 @@ const values = [
       "Every movement generates a docket, and dockets are retained. It protects you, it protects us, and it keeps stolen metal out of the chain.",
   },
   {
-    term: "No cash, no exceptions",
+    term: "Paid before you leave",
     detail:
-      "Queensland does not yet ban cash for scrap the way Victoria and New South Wales do. We hold the stricter line anyway. It costs us some walk-up trade and we're fine with that.",
+      "Cash at the bridge against the grade on your docket, or a transfer if you'd rather. Nobody waits on a payment run, and nobody is told the rate after the metal is already tipped.",
   },
 ];
 

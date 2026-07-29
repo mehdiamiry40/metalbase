@@ -45,8 +45,9 @@ export default function FaqPage() {
             <div className="mt-6 border-l-4 border-orange bg-paper p-5">
               <p className="text-[0.92rem] leading-relaxed">
                 <strong className="font-semibold">Bringing a load?</strong>{" "}
-                Current photo ID and your bank details. A licensed second-hand
-                dealer has to record who sold the metal, and payment is by EFT.
+                Current photo ID. A licensed second-hand dealer has to record
+                who sold the metal. Payment is cash at the bridge, or EFT if
+                you bring your bank details and ask for it.
               </p>
             </div>
           </aside>

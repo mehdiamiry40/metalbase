@@ -96,9 +96,10 @@ export default function ContactPage() {
             <div className="border-l-4 border-orange bg-paper p-6">
               <p className="text-[0.94rem] leading-relaxed ">
                 <strong className="font-semibold">Before you visit:</strong>{" "}
-                bring current photo ID and your bank details. A licensed
-                second-hand dealer has to record who sold the metal, and we
-                pay by EFT rather than cash.
+                bring current photo ID. A licensed second-hand dealer has to
+                record who sold the metal. You are paid in cash at the bridge,
+                so bank details are only needed if you would rather have it
+                transferred.
               </p>
             </div>
           </aside>

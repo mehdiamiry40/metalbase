@@ -10,7 +10,7 @@ const blurbs: Record<string, string> = {
     "Ferrous, non-ferrous and specialty streams, graded on arrival and priced against the index.",
   "For business":
     "Bins, collections and buy-back for sites that generate metal on a schedule.",
-  "Sell your scrap": "No minimum load, graded in front of you, paid by EFT.",
+  "Sell your scrap": "No minimum load, graded in front of you, paid cash on the spot.",
   Sustainability:
     "The reporting, certificates and audit evidence procurement teams ask for.",
   About: "Who we are and how the yards run.",

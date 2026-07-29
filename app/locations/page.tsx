@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/locations" },
   title: "Yards & How to Sell Your Scrap — Brisbane",
   description:
-    "How a weigh-in works at MetalBase, what ID to bring, why Queensland yards cannot pay cash, and where to find us.",
+    "How a weigh-in works at MetalBase, what ID to bring, how you get paid in cash on the spot, and where to find us.",
 };
 
 const steps = [
@@ -115,7 +115,7 @@ export default function LocationsPage() {
               className="mt-7"
               items={[
                 "Current photo ID — an Australian driver licence is ideal",
-                "Your BSB and account number for the EFT",
+                "Your BSB and account number, only if you'd prefer EFT to cash",
                 "The vehicle you'll be in — registration is recorded each time",
                 "Registration papers, if you're selling a vehicle for scrap",
               ]}
@@ -128,22 +128,25 @@ export default function LocationsPage() {
 
           <div id="payment" className="scroll-mt-20 border-2 border-orange p-8">
             <Eyebrow>Getting paid</Eyebrow>
-            <h2 className="text-[1.6rem]">Why nobody in Queensland can pay you cash</h2>
+            <h2 className="text-[1.6rem]">Cash before you drive out</h2>
             <div className="mt-5 space-y-4 text-[0.97rem] leading-relaxed t-muted">
               <p>
-                Queensland&rsquo;s second-hand dealer legislation prohibits cash
-                payment for scrap metal. It was introduced to make stolen metal
-                hard to move — copper off building sites, catalytic converters,
-                cable off infrastructure projects.
+                Once the tare weight is recorded the docket is printed and you
+                are paid on the spot, in cash, against the grade on that docket.
+                No waiting on a transfer to clear.
               </p>
               <p>
-                So payment is by electronic transfer, every time, to an account
-                in the seller&rsquo;s name.
+                If you would rather have it in the bank, say so at the bridge
+                and we will pay by electronic transfer to an account in your
+                name instead. Bring your BSB and account number if that is your
+                preference.
               </p>
               <p>
-                If a yard offers you cash, they are breaking the law, and the
-                transaction leaves you exposed too. Worth knowing before you go
-                looking for a better rate.
+                Either way the load is documented the same. Photo ID is scanned
+                and the docket is retained — that part is a licensing
+                requirement under Queensland&rsquo;s second-hand dealer
+                legislation and applies to every seller and every load,
+                whichever way you take the money.
               </p>
             </div>
           </div>

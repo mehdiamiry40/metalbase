@@ -175,7 +175,7 @@ export const nav: NavItem[] = [
         label: "Getting paid",
         href: "/locations#payment",
         children: [
-          { label: "Why we don't pay cash", href: "/faq" },
+          { label: "How you get paid", href: "/faq" },
           { label: "Trade accounts", href: "/services/industrial" },
         ],
       },
@@ -429,8 +429,8 @@ export const services: Service[] = [
         body: "A grader tells you what your load is before it hits the pile. If you disagree, ask for the XRF gun — that is what it is there for.",
       },
       {
-        title: "Paid by EFT, always",
-        body: "We transfer to your nominated account and never pay cash. That is our policy rather than a Queensland requirement \u2014 it gives both of us a traceable record.",
+        title: "Paid cash on the spot",
+        body: "Cash in your hand at the weighbridge, against the grade on your docket. Ask for an electronic transfer instead and you'll get one \u2014 either way the load is ID'd and docketed.",
       },
       {
         title: "Bring photo ID",
@@ -477,9 +477,18 @@ export const stats: { value: string; label: string }[] = [];
    - Cash payment is NOT banned in Queensland. Victoria and New South
      Wales prohibit it; Queensland's Justice and Other Legislation
      Amendment Bill 2026 raises penalties and tightens photographic ID
-     but does not ban cash. Anywhere EFT-only appears it is described
-     as MetalBase policy, never as law. An earlier version of this
-     site got that wrong in five separate places.
+     but does not ban cash. MetalBase pays cash at the bridge, with
+     EFT on request. The payment method is a commercial choice and
+     must never be described as legally required or legally forbidden,
+     in either direction.
+
+     An earlier version of this site asserted a Queensland cash ban in
+     five places. Two more survived that correction and were still
+     live on /locations ("if a yard offers you cash, they are breaking
+     the law") and /prices ("anyone offering cash is operating outside
+     the law") until the switch to cash removed them. If a claim about
+     payment cites the Act, it is wrong — the Act governs licensing,
+     seller identity and records, not how the money moves.
    - Anything specific to this yard — hours, minimum loads, whether
      car bodies are accepted, current rates — is marked TODO rather
      than guessed, because only the operator knows it.
@@ -501,8 +510,8 @@ export const faqs: Faq[] = [
   },
   {
     q: "How and when do I get paid?",
-    a: "By electronic transfer to your nominated bank account, so bring your BSB and account number along with your ID. We do not pay cash for scrap metal. That is our own policy rather than a Queensland legal requirement — cash is banned for scrap in Victoria and New South Wales but not currently in Queensland — and we hold the stricter line because a traceable payment protects both sides.",
-    todo: "Confirm the actual payment timing — same day, next business day, or on a weekly run.",
+    a: "In cash, at the weighbridge, once the tare weight is recorded and your docket is printed. You do not wait on a payment run. If you would rather have it in the bank, ask at the bridge and we will transfer it to an account in your name instead — bring your BSB and account number if that is your preference. Either way you need current photo ID, and the load is docketed the same.",
+    todo: "Confirm any upper cash limit per load, and whether large loads are settled by transfer as a matter of course.",
   },
   {
     q: "Is there a minimum load?",

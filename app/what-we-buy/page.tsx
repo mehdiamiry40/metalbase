@@ -126,7 +126,7 @@ const excluded = [
   "Chemical drums with residue",
   "PCB-containing transformers without testing",
   "General household waste, timber or plasterboard",
-  "Cash-in-hand transactions of any kind",
+  "Undocumented loads — every sale is ID'd and docketed, cash or not",
 ];
 
 export default function WhatWeBuyPage() {
