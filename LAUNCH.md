@@ -44,17 +44,32 @@ at this site before the licence is issued.**
 It validates, strips control characters, rate-limits, and honestly
 returns `delivered: false`. Nothing is emailed, because no key is set.
 
-Set three environment variables in Vercel → Settings → Environment
-Variables:
+Enquiries are addressed to `mehdiamiry40@gmail.com`, set as
+`ENQUIRY_INBOX` in `app/api/enquiry/route.ts`. That part needs no
+configuration. **One variable still blocks delivery**, because it is a
+secret and cannot live in the repo:
 
 ```
 RESEND_API_KEY   re_xxxxxxxx     # resend.com, free tier is ample
-ENQUIRY_TO       you@yourdomain  # where enquiries land
-ENQUIRY_FROM     noreply@yourdomain   # must be a domain you verified in Resend
 ```
 
-Redeploy, then send a real enquiry and confirm it arrives. Until then
-every submission is logged and lost, and the customer is told so.
+Set it in Vercel → Settings → Environment Variables and redeploy.
+
+Two optional overrides:
+
+```
+ENQUIRY_TO       someone@else    # overrides ENQUIRY_INBOX
+ENQUIRY_FROM     noreply@yourdomain   # a domain you verified in Resend
+```
+
+Leave `ENQUIRY_FROM` unset and the sender is Resend's shared
+`onboarding@resend.dev`, which only delivers to the address that owns
+the Resend account. So if you create that account with
+`mehdiamiry40@gmail.com`, quotes arrive with no domain verification at
+all. Sending anywhere else means verifying a domain first.
+
+Redeploy, then send a real enquiry and confirm it arrives. Until the key
+is set every submission is logged and lost, and the customer is told so.
 
 Optional but recommended: `UPSTASH_REDIS_REST_URL` and
 `UPSTASH_REDIS_REST_TOKEN` for durable rate limiting. Without them the
