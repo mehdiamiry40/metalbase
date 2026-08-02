@@ -23,7 +23,7 @@ export const LAUNCH_READY = false;
  *  TODO: change this once a custom domain is pointed at the project —
  *  it is referenced by canonicals, Open Graph and every JSON-LD block,
  *  so it must not be duplicated anywhere else. */
-export const SITE = "https://metalbase.vercel.app";
+export const SITE = "https://metalbase.com.au";
 
 export const company = {
   name: "MetalBase",
