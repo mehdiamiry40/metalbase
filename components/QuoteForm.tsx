@@ -35,7 +35,7 @@ const volumes = [
 ];
 
 const field =
-  "w-full rounded-[4px] border hair bg-paper px-4 py-3 text-[1rem] outline-none transition-colors placeholder:text-stone focus:border-graphite";
+  "w-full border hair bg-paper px-4 py-3 text-[1rem] outline-none transition-colors placeholder:text-stone focus:border-graphite";
 const labelCls = "mb-2 block text-[0.9rem] font-semibold ";
 /* Errors are graphite and bold, not the accent. t-accent resolves to the
    link colour on a light surface, so validation messages were rendering
@@ -121,7 +121,7 @@ export default function QuoteForm() {
   if (state === "sent" || state === "sent-undelivered") {
     return (
       <div className="border-2 border-orange bg-white p-10" role="status">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-orange">
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-rust">
           <Tick className="h-6 w-6 text-white" />
         </span>
         <h3 className="mt-5 text-[1.5rem]">Thanks — that&rsquo;s with the trade desk</h3>
@@ -278,9 +278,9 @@ export default function QuoteForm() {
                   type="button"
                   aria-pressed={on}
                   onClick={() => toggle(m)}
-                  className={`min-h-11 rounded-[4px] border px-3.5 py-2 text-[0.88rem] font-medium transition-colors ${
+                  className={`min-h-11 border px-3.5 py-2 text-[0.82rem] font-bold transition-colors ${
                     on
-                      ? "border-orange bg-orange text-graphite"
+                      ? "border-orange bg-rust text-white"
                       : "hair t-muted hover:border-orange hover:text-[color:var(--accent-text)]"
                   }`}
                 >
@@ -315,7 +315,7 @@ export default function QuoteForm() {
         <button
           type="submit"
           disabled={busy}
-          className="inline-flex items-center gap-2 rounded-[4px] border-2 border-orange bg-orange px-7 py-3 text-[1.0625rem] font-normal text-graphite transition-colors hover:bg-orange-deep disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex items-center gap-2 border-2 border-orange bg-rust px-7 py-3 text-[0.82rem] font-bold uppercase tracking-[0.09em] text-white transition-colors hover:bg-rust-deep disabled:cursor-not-allowed disabled:opacity-60"
         >
           {busy ? "Sending…" : "Send enquiry"}
           {!busy && <ArrowRight className="h-4 w-4" />}

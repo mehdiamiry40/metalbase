@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ==================================================================
-   MetalBase design system — orange on graphite
+   MetalBase design system — bold, industrial, minimal
 
    One chromatic colour. Orange is the brand; everything else is a
    neutral. The previous system carried blue AND orange, which split
@@ -17,15 +17,14 @@
      dark band         #201E1C   warm near-black
      cards             #FFFFFF
      accent            #FF6A1A   fills, rules, CTA
-     h1/h2             60px · weight 400 · tracking -3px · lh 1.0
-     h3                26px · weight 400 · tracking -1px
+     h1/h2             oversized · weight 700 · tight tracking
+     h3                26px · weight 700
      body              18px
      container         1240px
      button radius     4px · weight 400
 
-   The weight-400 headings at -3px tracking are the single most
-   characteristic thing about this design. Bold headings are what made
-   the earlier attempts read as generic; that has not changed.
+   Heavy type, hard edges and generous empty space do the visual work.
+   Orange is used as a decisive block, not as decoration on every card.
 
    ------------------------------------------------------------------
    Contrast, computed rather than assumed. This is where earlier
@@ -45,9 +44,9 @@
    2. Orange becomes available as text on the graphite bands (5.80),
       and #FF8A45 is brighter still there (7.10) — that is where the
       accent does its typographic work.
-   3. White can never sit on an orange fill (2.87). Orange fills carry
-      graphite labels, which is why the CTA button is dark-on-orange
-      rather than white-on-orange.
+   3. White can never sit on a bright orange fill (2.87). Primary
+      buttons use the deeper rust fill with white labels; bright orange
+      remains the keyline and high-energy accent.
    ================================================================== */
 
 @theme {
@@ -62,6 +61,7 @@
   /* orange — the only hue on the site */
   --color-orange: #ff6a1a; /* FILL, carries graphite · 5.80 · and rules */
   --color-rust: #a83e0c; /* TEXT/links on light · 5.69 paper, 6.25 white */
+  --color-rust-deep: #842c08; /* button hover · white 8.40 */
   --color-orange-warm: #ff8a45; /* TEXT on graphite only · 7.10 */
   --color-orange-deep: #e85c12; /* hover · 4.72 graphite-on-fill */
 
@@ -126,36 +126,27 @@
     border-radius: 2px;
   }
 
-  /* Weight 400 at tight negative tracking — the reference's signature.
-     Bold headings are what made the earlier drafts look generic. */
-  /* The scale was set when the page had nine sections competing for
-     attention, so headings stayed modest to avoid shouting over each
-     other. With fewer, longer sections a heading can carry its own
-     block, and editorial layouts want the jump between levels to be
-     obvious rather than polite. Every step up here is paired with more
-     surrounding space, not less — big type in a tight box reads
-     cramped, which is the opposite of the intent. */
   h1 {
-    font-size: clamp(3rem, 1.5rem + 5.8vw, 4.75rem);
-    font-weight: 400;
-    line-height: 0.98;
-    letter-spacing: -0.052em;
+    font-size: clamp(3.5rem, 1.6rem + 6vw, 6.5rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.065em;
     text-wrap: balance;
   }
 
   h2 {
-    font-size: clamp(2.25rem, 1.35rem + 3.6vw, 4rem);
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.05em;
+    font-size: clamp(2.5rem, 1.4rem + 4vw, 4.75rem);
+    font-weight: 700;
+    line-height: 0.94;
+    letter-spacing: -0.06em;
     text-wrap: balance;
   }
 
   h3 {
-    font-size: 1.75rem;
-    font-weight: 400;
-    line-height: 1.15;
-    letter-spacing: -0.038em;
+    font-size: 1.65rem;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.045em;
   }
 
   h4 {
@@ -213,51 +204,23 @@
    type utilities
    ------------------------------------------------------------------ */
 
-/* Text over a photograph can only guarantee contrast for white. The
-   scrim fixes the DARKEST the background can be, not the lightest, so
-   a mid-tone accent has no floor: the orange eyebrow measured 2.93:1
-   against a white pixel in the yard shot. axe reports these nodes as
-   "incomplete" rather than failing, because it cannot evaluate text
-   over an image — so nothing automated catches it. */
-.over-photo {
-  --accent-text: #ffffff;
-  --focus: #ffffff;
-}
-
 .t-eyebrow {
   font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .t-lead {
-  font-size: 1.3125rem;
-  line-height: 1.5;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.1rem, 1rem + 0.35vw, 1.3rem);
+  line-height: 1.45;
+  letter-spacing: -0.018em;
 }
 
-/* Editorial measure. Long-form prose past ~68 characters per line gets
-   noticeably harder to track back to the next line, and the 1240px
-   shell is far wider than that. Applied to the new explainer sections
-   rather than globally, because tables and grids want the full width. */
-.measure {
-  max-width: 34rem;
-}
-
-.measure-wide {
-  max-width: 44rem;
-}
-
-/* A numbered editorial marker: the figure sits in the margin rather
-   than inline, which is what makes a list of points read as a
-   considered sequence instead of a bulleted dump. */
-.marker {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum";
-  font-size: 0.8rem;
-  letter-spacing: 0.16em;
-  color: var(--accent-text);
+.home-title {
+  font-size: clamp(4.25rem, 2.1rem + 8vw, 8.5rem);
+  line-height: 0.82;
+  letter-spacing: -0.075em;
 }
 
 .t-num {
@@ -342,32 +305,11 @@
   }
 }
 
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .rise {
-    animation: rise 0.5s cubic-bezier(0.2, 0.6, 0.2, 1) both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 22%;
-  }
-}
-
-/* The orange rule above a heading — the one place orange appears on a
-   light surface, where it is decoration and carries no text. */
 .rule::before {
   content: "";
   display: block;
-  width: 48px;
-  height: 4px;
+  width: 64px;
+  height: 6px;
   background: var(--color-orange);
   margin-bottom: 1.5rem;
 }
