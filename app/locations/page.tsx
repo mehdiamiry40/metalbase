@@ -87,7 +87,7 @@ export default function LocationsPage() {
       </Section>
 
       {/* how it works ------------------------------------------------- */}
-      <section id="how-it-works" className="scroll-mt-20 bg-paper py-16 lg:py-24">
+      <section id="how-it-works" className="scroll-mt-20 bg-paper py-20 lg:py-32">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>How a weigh-in works</h2>

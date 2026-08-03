@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHeader, Steps } from "@/components/sections";
+import { Essay, PageHeader, Steps } from "@/components/sections";
 import {
   ArrowLink,
   Button,
@@ -140,7 +140,7 @@ export default function PricesPage() {
       ))}
 
       {/* grading ------------------------------------------------------ */}
-      <section id="grading" className="bg-paper py-16 lg:py-24">
+      <section id="grading" className="bg-paper py-20 lg:py-32">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>How a load gets graded</h2>
@@ -154,6 +154,50 @@ export default function PricesPage() {
           </div>
         </div>
       </section>
+
+      {/* ------------------------------------------------ index pricing
+          New copy. The contract section below states WHAT the formula
+          is; this explains why the trade prices that way at all, which
+          is the part that makes a posted board rate look like the
+          weaker offer rather than the more generous one.
+
+          No index is named and no charge is quoted — those are
+          commercial terms per agreement, and inventing an example
+          number would be exactly the kind of fabricated specific this
+          repo has had to strip out before. */}
+      <Essay
+        id="how-pricing-works"
+        eyebrow="Understanding the number"
+        title="Why nobody in this trade posts a fixed price"
+        lead="Scrap is a commodity, and commodities are repriced continuously. A yard advertising a rate that never moves is either behind the market or pricing in a buffer to protect itself from it."
+        points={[
+          {
+            term: "The metal is sold before you are paid for it",
+            detail:
+              "A merchant buys your load against what a mill or refinery will pay for that grade, at the time it is remarketed. That underlying number moves daily on international markets, so the rate offered has to move with it.",
+          },
+            {
+            term: "A posted rate has to be conservative",
+            detail:
+              "If a yard commits to a printed number for a month, it has to set that number low enough to survive a month of the market moving against it. You pay for that safety margin on every load, including the ones where the market moved the other way.",
+          },
+          {
+            term: "A formula moves both ways",
+            detail:
+              "Contract pricing nominates a published index and an agreed treatment charge, so the rate rises when the market rises instead of waiting for a renegotiation. It also falls when the market falls — that is the honest half of the arrangement, and it is why it suits regular tonnage rather than a one-off load.",
+          },
+          {
+            term: "Quoting per load is not evasion",
+            detail:
+              "It is how you get today's number instead of last month's. Send a photograph and a rough weight and the answer comes back the same day, against the grade we would actually pay on.",
+          },
+        ]}
+        footer={
+          <Button href="/contact" variant="outline">
+            Get a rate for your load
+          </Button>
+        }
+      />
 
       {/* contract ----------------------------------------------------- */}
       <Section id="contract">

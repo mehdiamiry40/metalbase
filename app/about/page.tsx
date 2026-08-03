@@ -89,7 +89,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <section id="safety" className="scroll-mt-20 bg-paper py-16 lg:py-24">
+      <section id="safety" className="scroll-mt-20 bg-paper py-20 lg:py-32">
         <div className="shell grid gap-12 lg:grid-cols-2">
           <div className="rule">
             <h2>A scrap yard is a heavy industrial site</h2>

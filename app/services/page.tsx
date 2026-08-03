@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Photo from "@/components/Photo";
-import { PageHeader } from "@/components/sections";
+import { Essay, PageHeader } from "@/components/sections";
 import { ArrowRight, Button, CtaBand, Section, TickList } from "@/components/ui";
 import { services } from "@/lib/site";
 
@@ -58,7 +58,7 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      <section className="bg-paper py-16 lg:py-24">
+      <section className="bg-paper py-20 lg:py-32">
         <div className="shell grid gap-12 lg:grid-cols-2">
           <div className="rule">
             <h2>The boring things done properly</h2>
@@ -82,6 +82,46 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* ------------------------------------------- drop-off or bin
+          New copy. People arrive at this page already knowing they
+          generate metal and not knowing which arrangement they want,
+          and getting that choice wrong is the most common reason a
+          site ends up unhappy with a merchant. Framed as guidance
+          rather than a pitch, including the case for NOT taking a bin. */}
+      <Essay
+        id="which-arrangement"
+        eyebrow="Choosing"
+        title="A bin is not automatically the right answer"
+        lead="The question is not how much metal you produce. It is how predictably you produce it, and how much room you have to hold it."
+        points={[
+          {
+            term: "Drop-off suits irregular volume",
+            detail:
+              "If metal accumulates in bursts — a strip-out here, a machine replacement there — driving it in when it suits you avoids paying for a bin that sits mostly empty. There is no minimum load and no account required, so occasional is a perfectly sensible way to operate.",
+          },
+          {
+            term: "A bin is really about handling, not tonnage",
+            detail:
+              "The value of a bin is that metal goes straight into the right container at the moment it is generated, instead of being stockpiled in a corner and re-sorted later. That is a labour saving on your side before it is anything else.",
+          },
+          {
+            term: "Segregated bins pay for themselves or they do not",
+            detail:
+              "Several bins only make sense where the material genuinely separates at the source — a machine shop producing one alloy of swarf, say. Where everything arrives mixed anyway, one bin and a good sort at our end is usually the better arrangement, and we will say so.",
+          },
+          {
+            term: "Access decides more than you expect",
+            detail:
+              "Truck room, overhead clearance, gate widths and where a bin can legally stand often rule out the theoretically ideal setup. It is worth ten minutes on site before committing to a schedule that cannot physically run.",
+          },
+        ]}
+        footer={
+          <Button href="/contact" variant="outline">
+            Book a site assessment
+          </Button>
+        }
+      />
 
       <CtaBand
         title="Book a site assessment"
