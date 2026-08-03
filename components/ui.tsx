@@ -128,8 +128,8 @@ export function ArrowLink({
    ------------------------------------------------------------------ */
 
 const tones = {
-  ink: "on-dark bg-ink", // the page
-  slab: "on-dark bg-slab", // raised panel on dark
+  ink: "on-light bg-chalk", // warm paper
+  slab: "on-light bg-white", // raised light panel
   chalk: "on-light bg-chalk", // a document
   sheet: "on-light bg-white", // the sheet itself — ledgers, dockets
 } as const;

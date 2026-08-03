@@ -17,8 +17,7 @@ import {
    ------------------------------------------------------------------ */
 
 /**
- * Page introduction. Sits on ink: the dark surface is the site's
- * default, and a page opening is not a document.
+ * Page introduction on the warm paper surface.
  */
 export function PageHeader({
   eyebrow,
@@ -34,7 +33,7 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <section className="on-dark bg-ink">
+    <section className="on-light bg-chalk">
       {/* BreadcrumbList markup is emitted here from the SAME trail the
           <Breadcrumb> below renders. Putting it inside PageHeader means
           every page that shows a trail also describes it to crawlers,

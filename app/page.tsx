@@ -78,7 +78,7 @@ export default function Home() {
           Typographic, on ink. The photograph moves below the fold and
           is framed as a plate, which is both more honest about being
           stock and considerably better looking than a scrim. */}
-      <section className="on-dark bg-ink">
+      <section className="on-light bg-chalk">
         <div className="shell pb-16 pt-16 lg:pb-24 lg:pt-24">
           <p className="t-index t-accent">Scrap metal recycling · Brisbane</p>
 
@@ -121,7 +121,7 @@ export default function Home() {
       {/* Full-bleed plate. The caption aligns to the shell rather than
           the image so it reads as a figure number in the margin of a
           manual, not a caption bar stuck to a hero. */}
-      <figure className="on-dark border-t hair bg-ink">
+      <figure className="on-light border-t hair bg-white">
         <div className="relative h-[42vw] max-h-[560px] min-h-[260px] w-full overflow-hidden bg-slab">
           <Photo
             name="yard-grab"
@@ -147,7 +147,7 @@ export default function Home() {
           It sits this high deliberately: a project manager should not
           have to scroll past a public drop-off explainer to find out we
           do demolition steel. */}
-      <section className="on-dark border-t hair bg-slab py-20 lg:py-28">
+      <section className="on-light border-t hair bg-white py-20 lg:py-28">
         <div className="shell">
           <div className="border-b hair pb-4">
             <Index n={2} label="Where you fit" />
@@ -231,7 +231,7 @@ export default function Home() {
           The process, paired with the artifact it produces. Putting the
           blank docket beside the four steps is the single clearest way
           to say what "we show our working" actually means. */}
-      <section className="on-dark scroll-mt-20 border-t hair bg-ink py-20 lg:py-28">
+      <section className="on-light scroll-mt-20 border-t hair bg-chalk py-20 lg:py-28">
         <div className="shell">
           <div className="border-b hair pb-4">
             <Index n={4} label="How a weigh-in works" />
@@ -356,7 +356,7 @@ export default function Home() {
           a set of names to scan for one's own, not a list to read. */}
       <section
         id="coverage"
-        className="on-dark scroll-mt-20 border-t hair bg-ink py-20 lg:py-28"
+        className="on-light scroll-mt-20 border-t hair bg-chalk py-20 lg:py-28"
       >
         <div className="shell">
           <div className="border-b hair pb-4">

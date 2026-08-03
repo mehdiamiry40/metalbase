@@ -45,7 +45,7 @@ export default function Header() {
   const tel = company.phone?.replace(/\s/g, "");
 
   return (
-    <header className="on-dark sticky top-0 z-50 bg-ink/95 backdrop-blur">
+    <header className="on-light sticky top-0 z-50 bg-chalk/95 backdrop-blur">
       <div
         className={`transition-colors duration-200 ${
           scrolled ? "border-b hair" : "border-b border-transparent"
@@ -102,13 +102,13 @@ export default function Header() {
               className="-mr-1 flex h-11 w-11 flex-col items-center justify-center gap-[6px] lg:hidden"
             >
               <span
-                className={`block h-[2px] w-6 bg-white transition ${mobileOpen ? "translate-y-2 rotate-45" : ""}`}
+                className={`block h-[2px] w-6 bg-ink transition ${mobileOpen ? "translate-y-2 rotate-45" : ""}`}
               />
               <span
-                className={`block h-[2px] w-6 bg-white transition ${mobileOpen ? "opacity-0" : ""}`}
+                className={`block h-[2px] w-6 bg-ink transition ${mobileOpen ? "opacity-0" : ""}`}
               />
               <span
-                className={`block h-[2px] w-6 bg-white transition ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`}
+                className={`block h-[2px] w-6 bg-ink transition ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`}
               />
             </button>
           </div>
@@ -118,7 +118,7 @@ export default function Header() {
       <div
         id={`${uid}-mobile`}
         hidden={!mobileOpen}
-        className="border-b hair bg-ink lg:hidden"
+        className="border-b hair bg-chalk lg:hidden"
       >
         <nav aria-label="Main, mobile" className="shell py-2">
           {nav.map((item) => (

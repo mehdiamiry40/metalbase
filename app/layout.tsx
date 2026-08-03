@@ -127,7 +127,7 @@ export default function RootLayout({
   return (
     <html lang="en-AU" className={`${archivo.variable} ${plexMono.variable}`}>
       <head>
-        <meta name="theme-color" content="#0d0f11" />
+        <meta name="theme-color" content="#f4f2ed" />
         <script
           type="application/ld+json"
           // Serialised from a typed object above; no user input reaches this.

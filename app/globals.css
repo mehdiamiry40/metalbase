@@ -138,12 +138,12 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    background: var(--color-ink);
+    background: var(--color-chalk);
   }
 
   body {
-    background: var(--color-ink);
-    color: #ffffff;
+    background: var(--color-chalk);
+    color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 17px;
     line-height: 1.65;
@@ -151,15 +151,16 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 
-    /* The DARK surface is the document default now, so a section that
-       forgets its surface class still renders correctly. Only .on-light
-       has to be declared, which means the failure mode is a missing
-       light band rather than invisible text. */
-    --muted: var(--color-mist);
-    --hair: var(--color-line-dark);
-    --accent-text: var(--color-copper);
-    --focus: var(--color-copper-hi);
-    --status: var(--color-verdigris);
+    --muted: var(--color-stone);
+    --hair: var(--color-line-light);
+    --accent-text: var(--color-copper-deep);
+    --focus: var(--color-ink);
+    --status: var(--color-verdigris-deep);
+    --surface: var(--color-chalk);
+    --btn-fill: var(--color-ink);
+    --btn-fill-hover: #000000;
+    --btn-label: var(--color-chalk);
+    --btn-border: var(--color-ink);
   }
 
   ::selection {
@@ -236,9 +237,10 @@
   --surface: var(--color-ink);
   /* Copper fill, ink label (6.60). White on copper is 2.91 and can
      never be used. */
-  --btn-fill: var(--color-copper);
-  --btn-fill-hover: var(--color-copper-hi);
-  --btn-label: var(--color-ink);
+  --btn-fill: var(--color-copper-deep);
+  --btn-fill-hover: #6f3514;
+  --btn-label: #ffffff;
+  --btn-border: var(--color-copper);
 }
 
 .on-light {
@@ -256,6 +258,7 @@
   --btn-fill: var(--color-ink);
   --btn-fill-hover: #000000;
   --btn-label: var(--color-chalk);
+  --btn-border: var(--color-ink);
 }
 
 /* `--surface` is the band's own background, declared so a child can
@@ -521,7 +524,7 @@
 
 .btn-solid {
   background: var(--btn-fill);
-  border-color: var(--btn-fill);
+  border-color: var(--btn-border, var(--btn-fill));
   color: var(--btn-label);
 }
 

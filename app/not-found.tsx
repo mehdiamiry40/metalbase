@@ -14,7 +14,7 @@ const links = [
 
 export default function NotFound() {
   return (
-    <section className="on-dark bg-ink py-24 lg:py-32">
+    <section className="on-light bg-chalk py-24 lg:py-32">
       <div className="shell">
         <p className="t-index t-accent">Error 404</p>
         <h1 className="mt-4 max-w-2xl">That page has already been recycled</h1>
