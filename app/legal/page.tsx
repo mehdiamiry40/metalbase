@@ -16,10 +16,10 @@ const sections = [
     id: "privacy",
     h: "Privacy",
     p: [
-      "We collect personal information because we are legally required to. A licensed second-hand dealer in Queensland must record the identity of every person who sells scrap metal, along with the vehicle used and a description of the material.",
-      "That record includes your name, address, date of birth, identification document details, vehicle registration and bank account details for payment. It is retained for the period required by the Second-hand Dealers and Pawnbrokers Act 2003 and associated regulation.",
-      "We do not sell personal information. We disclose it to Queensland Police where a lawful request is made, to our payment provider to process your transfer, and to our auditors under confidentiality.",
-      "Enquiries submitted through this website are delivered to our trade desk and retained only as long as needed to respond. You can request access to the information we hold about you, or correction of it, by writing to the address below.",
+      "The enquiry form collects the details you choose to provide, such as your name, contact information, suburb, material type and notes about the load. Do not include identification documents or bank details in the website form.",
+      "Queensland law can require licensed second-hand dealers to record seller identity, vehicle and transaction information when material is accepted. The exact information required for a proposed trade should be confirmed before you travel.",
+      "Personal information must be used only for the purpose for which it was collected, protected from unauthorised access and disclosed only where authorised or legally required. The final retention and disclosure schedule must be reviewed before these terms are published as operative policy.",
+      "You can request access to personal information held about you, or ask for a correction, using the contact details published on this site.",
       "This website uses Vercel Web Analytics to count visits and page views. It does not set cookies, does not use cross-site identifiers and does not build a profile of you. It records the page visited, referrer, and coarse device and country information, which we use only to understand which pages are useful.",
     ],
   },
@@ -27,33 +27,18 @@ const sections = [
     id: "terms",
     h: "Terms of trade",
     p: [
-      "Quoted rates are indicative and apply to material of the stated grade delivered to our yard. Final settlement is based on the grade assessed on arrival and the net weight recorded on a certified weighbridge or scale.",
-      "Title in material passes to MetalBase on acceptance at the weighbridge. By delivering material you warrant that you are lawfully entitled to sell it.",
-      /* Payment method is the operator's commercial choice, and this
-         clause must not imply otherwise in either direction.
-
-         Queensland does not ban cash for scrap. Victoria and New South
-         Wales do; Queensland's Second-hand Dealers and Pawnbrokers Act
-         2003 requires licensing and seller identification, and the
-         Justice and Other Legislation Amendment Bill 2026 strengthens
-         that further, but neither imposes a cash ban. An earlier
-         version of this site asserted a Queensland cash ban in five
-         places, and two more survived that correction on /locations
-         and /prices — both have now gone.
-
-         So: state what we do, tie the LEGAL obligations to identity
-         and records where they actually sit, and claim no legal basis
-         for the payment method itself. */
-      "Payment is made in cash at the weighbridge on completion of weighing, or by electronic transfer to an account in the seller's name where the seller requests it. Payment method is our commercial policy and is not mandated either way by Queensland law. Every sale is documented regardless of method: photo identification is recorded and a docket is retained for each load, as required of a licensed second-hand dealer.",
-      "We may refuse any load, in whole or in part, where the material is outside our licence conditions, presents a safety risk, or cannot be verified as lawfully held.",
-      "Contract customers are subject to a separate written agreement which prevails over these terms to the extent of any inconsistency.",
+      "A website quote is indicative unless it is expressly confirmed in writing. Final commercial terms depend on the material, grade, condition, quantity, location and agreed handling method.",
+      "Before material is accepted, the parties should confirm the applicable grade, weight basis, deductions, settlement method, timing and any transport or processing charges.",
+      "By presenting material for sale, the seller represents that they are lawfully entitled to sell it and can provide any ownership or authority documents reasonably required for that material.",
+      "Material may be declined where its identity, ownership or safe handling cannot be established. Acceptance requirements for vehicles, sealed vessels, batteries, e-waste and other regulated items must be confirmed in advance.",
+      "A separate written agreement may apply to contract customers and will prevail to the extent of any inconsistency with these general terms.",
     ],
   },
   {
     id: "accessibility",
     h: "Accessibility",
     p: [
-      "This site targets WCAG 2.1 Level AA — keyboard-operable navigation, visible focus indicators, text contrast of at least 4.5:1, meaningful alternative text and respect for reduced-motion preferences.",
+      "This site aims to meet WCAG Level AA, including keyboard-operable navigation, visible focus indicators, readable contrast, meaningful alternative text and respect for reduced-motion preferences.",
       "If you encounter a barrier on this site, or need information in an alternative format, contact us and we will provide it directly.",
     ],
   },
@@ -65,18 +50,18 @@ export default function LegalPage() {
       <PageHeader
         eyebrow="Legal"
         title="Privacy, terms and policies"
-        intro="The obligations we operate under, in language you can actually read."
+        intro="Draft website terms, privacy information and accessibility commitments in plain language."
         trail={[{ label: "Home", href: "/" }, { label: "Legal" }]}
       />
 
-      <Section>
+      <Section className="pb-20 pt-10 lg:pb-28 lg:pt-14">
         <Callout label="Draft wording">
           This is a starting point, not legal advice. Have it reviewed by a
           lawyer before you rely on it — particularly the terms of trade and
           the Second-hand Dealers and Pawnbrokers Act references.
         </Callout>
 
-        <div className="mt-14 grid gap-12 lg:grid-cols-[minmax(0,14rem)_1fr] lg:gap-16">
+        <div className="mt-12 grid gap-12 lg:grid-cols-[minmax(0,13rem)_1fr] lg:gap-20">
           <nav aria-label="On this page" className="lg:sticky lg:top-24 lg:self-start">
             <p className="t-index t-muted">On this page</p>
             <ul className="mt-4 space-y-2.5">
@@ -90,7 +75,7 @@ export default function LegalPage() {
             </ul>
           </nav>
 
-          <div className="space-y-14">
+          <div className="space-y-16">
             {sections.map((s) => (
               <section key={s.id} id={s.id} className="scroll-mt-24">
                 <h2>{s.h}</h2>
@@ -105,9 +90,9 @@ export default function LegalPage() {
             ))}
 
             <div className="border-t hair pt-8">
-              <h2 className="text-[1.3rem]">Questions about any of this?</h2>
+              <h2 className="text-xl">Questions about any of this?</h2>
               <p className="mt-3 leading-relaxed t-muted">
-                Write to {company.legal}
+                Contact {company.legal}
                 {company.head ? `, ${company.head}` : ""}
                 {company.email ? (
                   <>
@@ -117,7 +102,7 @@ export default function LegalPage() {
                     </a>
                   </>
                 ) : null}
-                .
+                {company.head || company.email ? "." : " through the contact form."}
               </p>
               {(!company.abn || !company.licence || !company.head) &&
                 process.env.NODE_ENV !== "production" && (

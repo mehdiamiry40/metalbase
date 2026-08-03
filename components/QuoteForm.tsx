@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { ArrowRight, Tick } from "@/components/ui";
 import { company } from "@/lib/site";
 
@@ -41,15 +41,15 @@ const volumes = [
    every automated check because the colours are inherited rather than
    declared. */
 const field =
-  "w-full rounded-[2px] border hair bg-chalk px-4 py-3 text-[1rem] outline-none transition-colors placeholder:text-stone focus:border-ink";
-const labelCls = "mb-2 block text-[0.9rem] font-semibold";
+  "min-h-12 w-full border border-steel bg-chalk px-4 py-3 text-base transition-colors duration-[160ms] ease-out placeholder:text-steel focus:border-signal aria-[invalid=true]:border-furnace";
+const labelCls = "mb-2 block text-sm font-semibold";
 /* Errors are ink and bold, not the accent. t-accent resolves to the
    link colour on a light surface, so validation messages were rendering
    in exactly the colour the rest of the site uses for "this is a link" —
    legible, but saying the wrong thing. A single-hue palette has no red
    to reach for, so the weight and the copper keyline on the summary do
    the signalling and the text stays at 19:1. */
-const errCls = "mt-1.5 text-[0.85rem] font-semibold text-ink";
+const errCls = "mt-1.5 text-sm font-semibold text-ink";
 
 type State = "idle" | "sending" | "sent" | "sent-undelivered" | "error";
 
@@ -126,20 +126,18 @@ export default function QuoteForm() {
 
   if (state === "sent" || state === "sent-undelivered") {
     return (
-      <div className="on-light border-2 border-copper bg-white p-10" role="status">
-        {/* Ink on copper, never white: white on this fill measures 2.91
-            and can never pass. Same rule as the primary button. */}
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-copper">
-          <Tick className="h-6 w-6 text-ink" />
+      <div className="on-light border border-steel bg-chalk p-8 sm:p-10" role="status">
+        <span className="flex h-12 w-12 items-center justify-center bg-shaft">
+          <Tick className="h-6 w-6 text-furnace" />
         </span>
-        <h3 className="mt-5 text-[1.5rem]">Thanks — that&rsquo;s with the trade desk</h3>
+        <h3 className="mt-5 text-2xl">Thanks — your enquiry has been recorded</h3>
         <p className="mt-3 max-w-md leading-relaxed t-muted">
-          A grader will come back to you inside one business day.
+          Your details were accepted by this website. Phone the trade desk if the enquiry is urgent.
         </p>
 
         {state === "sent-undelivered" && (
           <div className="callout mt-6">
-            <p className="text-[0.94rem] leading-relaxed">
+            <p className="text-base leading-relaxed">
               <strong className="font-semibold">Heads up:</strong> no email or
               webhook is configured on this deployment yet, so your enquiry was
               logged on the server rather than sent to anyone.
@@ -156,7 +154,7 @@ export default function QuoteForm() {
             setState("idle");
             setPicked([]);
           }}
-          className="mt-6 font-semibold t-accent u-link"
+          className="mt-6 font-semibold underline decoration-1 underline-offset-4 transition-colors duration-[160ms] ease-out hover:text-steel"
         >
           Send another enquiry
         </button>
@@ -172,7 +170,7 @@ export default function QuoteForm() {
       ref={formRef}
       onSubmit={onSubmit}
       noValidate
-      className="on-light border hair bg-white p-7 lg:p-9"
+      className="on-light border border-steel bg-chalk p-6 sm:p-8 lg:p-9"
     >
       {/* Announced to screen readers without stealing focus. */}
       <p aria-live="polite" className="sr-only">
@@ -184,7 +182,7 @@ export default function QuoteForm() {
       </p>
 
       {state === "error" && (
-        <div role="alert" className="callout mb-6 text-[0.94rem]">
+        <div role="alert" className="callout mb-6 text-base">
           {message}
         </div>
       )}
@@ -286,10 +284,10 @@ export default function QuoteForm() {
                   type="button"
                   aria-pressed={on}
                   onClick={() => toggle(m)}
-                  className={`min-h-11 rounded-[2px] border px-3.5 py-2 text-[0.88rem] font-medium transition-colors ${
+                  className={`min-h-11 border px-3.5 py-2 text-sm font-medium transition-colors duration-[160ms] ease-out ${
                     on
-                      ? "border-copper bg-copper text-ink"
-                      : "hair t-muted hover:border-copper hover:text-[color:var(--accent-text)]"
+                      ? "border-furnace bg-furnace text-white"
+                      : "border-steel t-muted hover:bg-shaft hover:text-furnace"
                   }`}
                 >
                   {m}
@@ -308,7 +306,7 @@ export default function QuoteForm() {
             name="detail"
             rows={4}
             className={field}
-            placeholder="Access restrictions, timing, whether you need a bin on site, drawings you can send through…"
+            placeholder="Access, timing, bin requirements or material details"
           />
         </div>
       </div>
@@ -329,10 +327,10 @@ export default function QuoteForm() {
           className="btn btn-solid disabled:cursor-not-allowed disabled:opacity-60"
         >
           {busy ? "Sending…" : "Send enquiry"}
-          {!busy && <ArrowRight className="h-4 w-4" />}
+          {!busy && <ArrowRight className="h-6 w-6" />}
         </button>
-        <p className="text-[0.88rem] t-muted">
-          Answered inside one business day · No obligation
+        <p className="text-sm t-muted">
+          No obligation. Phone the trade desk if timing matters.
         </p>
       </div>
     </form>

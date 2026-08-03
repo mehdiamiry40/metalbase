@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { company } from "@/lib/site";
 
@@ -18,6 +19,7 @@ import { company } from "@/lib/site";
 
 export default function MobileActionBar() {
   const [show, setShow] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     function onScroll() {
@@ -29,29 +31,30 @@ export default function MobileActionBar() {
   }, []);
 
   const tel = company.phone?.replace(/\s/g, "");
+  const visible = show && pathname !== "/contact";
 
   return (
     <div
-      className={`on-light fixed inset-x-0 bottom-0 z-40 border-t hair bg-chalk/95 backdrop-blur transition-transform duration-300 lg:hidden ${
-        show ? "translate-y-0" : "translate-y-full"
+      className={`on-light fixed inset-x-0 bottom-0 z-40 border-t hair bg-chalk lg:hidden ${
+        visible ? "translate-y-0" : "translate-y-full"
       }`}
       // Hidden from assistive tech when off-screen so it isn't a stray
       // tab stop. React 19 types `inert` as a boolean.
-      aria-hidden={!show}
-      inert={!show}
+      aria-hidden={!visible}
+      inert={!visible}
     >
       <div className="flex items-stretch gap-2 px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         <Link
           href="/contact"
-          tabIndex={show ? undefined : -1}
+          tabIndex={visible ? undefined : -1}
           className="btn btn-solid flex-1"
         >
-          Get a quote
+          Request a quote
         </Link>
         {tel ? (
           <a
             href={`tel:${tel}`}
-            tabIndex={show ? undefined : -1}
+            tabIndex={visible ? undefined : -1}
             className="btn btn-ghost"
           >
             Call
@@ -59,7 +62,7 @@ export default function MobileActionBar() {
         ) : (
           <Link
             href="/what-we-buy"
-            tabIndex={show ? undefined : -1}
+            tabIndex={visible ? undefined : -1}
             className="btn btn-ghost"
           >
             What we buy

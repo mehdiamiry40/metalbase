@@ -19,7 +19,7 @@ export default function Photo({
   alt?: string;
   priority?: boolean;
   sizes?: string;
-  /** ink wash for photos carrying text on top */
+    /** Flat furnace wash for photos carrying text on top. */
   tint?: boolean;
   sourceWidth?: number;
   className?: string;
@@ -37,7 +37,7 @@ export default function Photo({
       {tint && (
         <span
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent"
+          className="absolute inset-0 bg-furnace/70"
         />
       )}
     </>

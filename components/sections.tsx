@@ -17,7 +17,7 @@ import {
    ------------------------------------------------------------------ */
 
 /**
- * Page introduction on the warm paper surface.
+ * Page introduction on the scale-paper surface.
  */
 export function PageHeader({
   eyebrow,
@@ -43,8 +43,8 @@ export function PageHeader({
       <div className="shell pt-8">
         <Breadcrumb trail={trail} />
       </div>
-      <div className="shell border-t hair pb-16 pt-10 lg:pb-24">
-        <p className="t-index mb-6 t-accent">{eyebrow}</p>
+      <div className="shell pb-20 pt-6 lg:pb-28 lg:pt-14">
+        <p className="t-index mb-5 t-muted">{eyebrow}</p>
         <h1 className="max-w-4xl">{title}</h1>
         {intro && <p className="t-lead measure-wide mt-7 t-muted">{intro}</p>}
         {children && <div className="mt-10">{children}</div>}
@@ -90,7 +90,7 @@ export function Plate({
 }) {
   return (
     <figure className={className}>
-      <div className={`relative overflow-hidden bg-slab ${aspect}`}>
+      <div className={`editorial-photo relative overflow-hidden bg-slab ${aspect}`}>
         <Photo name={photo} alt={alt} priority={priority} sizes={sizes} />
       </div>
       <figcaption className="t-spec mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -139,7 +139,7 @@ export function Split({
   return (
     <section className="grid border-t hair lg:grid-cols-2">
       <div
-        className={`${toneClass(tone)} ${pad} ${copyOrder} order-2 py-16 lg:py-24`}
+        className={`${toneClass(tone)} ${pad} ${copyOrder} order-2 py-14 lg:py-20`}
       >
         <div className="max-w-lg">
           {eyebrow && <p className="t-index mb-5 t-accent">{eyebrow}</p>}
@@ -148,7 +148,7 @@ export function Split({
         </div>
       </div>
       <div
-        className={`relative order-1 min-h-[280px] bg-slab ${photoOrder} lg:min-h-[540px]`}
+        className={`editorial-photo relative order-1 min-h-[280px] bg-slab ${photoOrder} lg:min-h-[540px]`}
       >
         <Photo
           name={photo}
@@ -160,7 +160,7 @@ export function Split({
             image is edge-to-edge and has no margin to caption into.
             Over a photograph everything is white — a mid-tone accent
             has no contrast floor against an unknown pixel. */}
-        <figcaption className="over-photo t-spec absolute bottom-0 left-0 right-0 flex flex-wrap items-baseline gap-x-3 gap-y-1 bg-gradient-to-t from-ink/85 to-transparent px-5 pb-4 pt-10">
+        <figcaption className="over-photo t-spec absolute bottom-0 left-0 right-0 flex flex-wrap items-baseline gap-x-3 gap-y-1 bg-furnace px-5 py-3">
           <span className="uppercase tracking-[0.14em]">
             Fig.&nbsp;{String(n).padStart(2, "0")}
           </span>
@@ -171,7 +171,7 @@ export function Split({
   );
 }
 
-/** Large photographic link tile with a label over a gradient. */
+/** Large photographic link tile with its label on a separate ruled plate. */
 export function PhotoTile({
   href,
   photo,
@@ -186,17 +186,21 @@ export function PhotoTile({
   return (
     <Link
       href={href}
-      className="group relative block aspect-[16/10] overflow-hidden bg-slab focus-visible:outline-offset-0"
+      className="group block border-y hair focus-visible:outline-offset-0"
     >
-      <Photo name={photo} tint sizes="(max-width: 768px) 100vw, 50vw" />
-      <span className="over-photo absolute inset-x-0 bottom-0 z-10 p-6">
-        <span className="flex items-center gap-3 text-[1.25rem] font-semibold tracking-[-0.025em]">
-          {label}
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+      <span className="editorial-photo relative block aspect-[16/10] bg-furnace">
+        <Photo name={photo} sizes="(max-width: 768px) 100vw, 50vw" />
+      </span>
+      <span className="on-light flex items-start justify-between gap-5 bg-chalk px-1 py-4">
+        <span>
+          <span className="block text-xl font-semibold leading-tight underline decoration-1 underline-offset-4">
+            {label}
+          </span>
+          {caption && (
+            <span className="t-spec mt-1.5 block t-muted">{caption}</span>
+          )}
         </span>
-        {caption && (
-          <span className="t-spec mt-1.5 block t-muted">{caption}</span>
-        )}
+        <ArrowRight className="h-6 w-6 shrink-0 transition-transform duration-[160ms] ease-out group-hover:translate-x-1" />
       </span>
     </Link>
   );
@@ -205,7 +209,7 @@ export function PhotoTile({
 /* ------------------------------------------------------------------
    Steps.
 
-   Numbered in mono against a copper rule. The number is the point —
+   Numbered on one continuous ruled rail. The number is the point —
    this is a sequence, and a sequence deserves an index rather than a
    bullet.
    ------------------------------------------------------------------ */
@@ -217,16 +221,23 @@ export function Steps({
   items: { title: string; body: string }[];
   columns?: 3 | 4;
 }) {
-  const cols = columns === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4";
+  const width = columns === 3 ? "max-w-4xl" : "max-w-5xl";
   return (
-    <ol className={`grid gap-x-8 gap-y-10 sm:grid-cols-2 ${cols}`}>
+    <ol className={`border-y hair ${width}`}>
       {items.map((s, i) => (
-        <li key={s.title} className="border-t-2 border-copper pt-5">
-          <span className="t-index t-accent">
+        <li
+          key={s.title}
+          className="grid grid-cols-[3.5rem_1fr] border-b hair last:border-b-0 sm:grid-cols-[5rem_1fr]"
+        >
+          <span className="t-spec flex items-start justify-center border-r hair px-2 py-6 font-semibold t-muted">
             {String(i + 1).padStart(2, "0")}
           </span>
-          <h3 className="mt-3 text-[1.2rem]">{s.title}</h3>
-          <p className="mt-3 text-[0.94rem] leading-relaxed t-muted">{s.body}</p>
+          <span className="block px-5 py-6 sm:px-7">
+            <h3 className="text-xl">{s.title}</h3>
+            <span className="measure-wide mt-2 block text-base leading-relaxed t-muted">
+              {s.body}
+            </span>
+          </span>
         </li>
       ))}
     </ol>
@@ -252,23 +263,23 @@ export function Router({
   items: { who: string; need: string; href: string; cta: string }[];
 }) {
   return (
-    <ul className="border-t hair">
+    <ul className="border-y hair">
       {items.map((a) => (
-        <li key={a.who} className="border-b hair">
+        <li key={a.who} className="border-b hair last:border-b-0">
           <Link
             href={a.href}
-            className="row-link group grid gap-x-10 gap-y-3 py-7 md:grid-cols-[minmax(0,22rem)_1fr] md:items-baseline"
+            className="group grid min-h-24 gap-3 py-6 transition-colors duration-[160ms] ease-out hover:bg-shaft md:grid-cols-[minmax(0,17rem)_1fr_auto] md:items-center md:gap-10 md:px-4"
           >
-            <h3 className="text-[1.25rem]">{a.who}</h3>
+            <h3 className="text-xl">{a.who}</h3>
             <div>
-              <p className="measure-wide text-[0.96rem] leading-relaxed t-muted">
+              <p className="measure-wide text-base leading-relaxed t-muted">
                 {a.need}
               </p>
-              <span className="t-spec mt-3 inline-flex items-center gap-2 uppercase tracking-[0.1em] t-accent">
-                {a.cta}
-                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-              </span>
             </div>
+            <span className="inline-flex items-center gap-2 self-start whitespace-nowrap text-sm font-semibold underline decoration-1 underline-offset-4 md:self-center">
+              {a.cta}
+              <ArrowRight className="h-6 w-6 transition-transform duration-[160ms] ease-out group-hover:translate-x-1" />
+            </span>
           </Link>
         </li>
       ))}
@@ -283,14 +294,14 @@ export function DefinitionRows({
   items: { term: string; detail: string }[];
 }) {
   return (
-    <dl className="border-t hair">
+    <dl className="border-y hair">
       {items.map((it) => (
         <div
           key={it.term}
-          className="grid gap-2 border-b hair py-6 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-10"
+          className="grid gap-2 border-b hair py-6 last:border-b-0 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-10"
         >
-          <dt className="text-[1.05rem] font-semibold">{it.term}</dt>
-          <dd className="measure-wide text-[0.96rem] leading-relaxed t-muted">
+          <dt className="text-base font-semibold">{it.term}</dt>
+          <dd className="measure-wide text-base leading-relaxed t-muted">
             {it.detail}
           </dd>
         </div>
@@ -354,16 +365,21 @@ export function Essay({
             {footer && <div className="mt-8">{footer}</div>}
           </div>
 
-          <div className="border-t hair">
+          <div className="border-y hair">
             {points.map((p, i) => (
-              <article key={p.term} className="rise border-b hair py-8 first:pt-8">
-                <p className="t-index t-accent">
+              <article
+                key={p.term}
+                className="grid grid-cols-[3.5rem_1fr] border-b hair last:border-b-0 sm:grid-cols-[4.5rem_1fr]"
+              >
+                <p className="t-spec border-r hair px-2 py-7 text-center font-semibold t-muted">
                   {String(i + 1).padStart(2, "0")}
                 </p>
-                <h3 className="mt-3">{p.term}</h3>
-                <p className="measure-wide mt-4 leading-relaxed t-muted">
-                  {p.detail}
-                </p>
+                <div className="px-5 py-7 sm:px-7">
+                  <h3>{p.term}</h3>
+                  <p className="measure-wide mt-3 leading-relaxed t-muted">
+                    {p.detail}
+                  </p>
+                </div>
               </article>
             ))}
           </div>

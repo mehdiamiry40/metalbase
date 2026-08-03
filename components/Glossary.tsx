@@ -1,9 +1,10 @@
 import { glossary, type GlossaryEntry } from "@/lib/site";
+import { ArrowRight } from "@/components/ui";
 
 /* ==================================================================
    The glossary.
 
-   Every docket, rate board and phone call in this trade is conducted
+   Every docket, grade guide and phone call in this trade is conducted
    in vocabulary nobody explains to a first-time seller — tare, HMS 2,
    bare bright, treatment charge — and being unable to follow the
    language is most of why people feel the number was decided without
@@ -28,15 +29,15 @@ function Entry({ entry }: { entry: GlossaryEntry }) {
       id={slug(entry.term)}
       className="grid scroll-mt-24 gap-x-12 gap-y-2 border-b hair py-7 md:grid-cols-[minmax(0,16rem)_1fr]"
     >
-      <dt className="mono text-[1rem] font-medium leading-snug">
+      <dt className="mono text-base font-medium leading-snug">
         {entry.term}
       </dt>
       <dd>
-        <p className="measure-wide text-[1rem] leading-relaxed">
+        <p className="measure-wide text-base leading-relaxed">
           {entry.short}
         </p>
         {entry.detail && (
-          <p className="measure-wide mt-3 text-[0.94rem] leading-relaxed t-muted">
+          <p className="measure-wide mt-3 text-base leading-relaxed t-muted">
             {entry.detail}
           </p>
         )}
@@ -47,16 +48,23 @@ function Entry({ entry }: { entry: GlossaryEntry }) {
 
 export function GlossaryIndex() {
   return (
-    <nav aria-label="Glossary sections" className="ruled grid-cols-1 sm:grid-cols-3">
+    <nav aria-label="Glossary sections" className="border-y hair">
       {groups.map((g) => {
         const n = glossary.filter((e) => e.group === g).length;
         return (
-          <a key={g} href={`#${slug(g)}`} className="row-link block px-5 py-5">
-            <span className="t-spec block uppercase tracking-[0.1em] t-accent">
-              {n} terms
-            </span>
-            <span className="mt-2 block text-[1.05rem] font-medium leading-snug">
+          <a
+            key={g}
+            href={`#${slug(g)}`}
+            className="group grid min-h-14 grid-cols-[1fr_auto] items-center gap-6 border-b hair py-4 transition-colors duration-[160ms] ease-out last:border-b-0 hover:text-steel"
+          >
+            <span className="text-base font-medium leading-snug underline decoration-1 underline-offset-4">
               {g}
+            </span>
+            <span className="flex items-center gap-4">
+              <span className="t-spec uppercase tracking-[0.1em] t-muted">
+              {n} terms
+              </span>
+              <ArrowRight className="h-6 w-6 transition-transform duration-[160ms] ease-out group-hover:translate-x-1" />
             </span>
           </a>
         );
@@ -73,7 +81,7 @@ export function GlossaryList() {
         if (!entries.length) return null;
         return (
           <section key={g} id={slug(g)} className="scroll-mt-24">
-            <h2 className="border-b-2 border-[color:currentColor] pb-3 text-[1.6rem]">
+            <h2 className="border-b hair pb-3 text-3xl">
               {g}
             </h2>
             <dl className="mt-2 border-t hair">

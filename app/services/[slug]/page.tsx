@@ -7,7 +7,6 @@ import {
   ArrowRight,
   Button,
   Callout,
-  CtaBand,
   Section,
   SectionHead,
   TickList,
@@ -28,27 +27,27 @@ export async function generateMetadata({
   if (!service) return { title: "Service not found" };
   return {
     title: `${service.title} — Brisbane`,
-    description: service.blurb.slice(0, 155),
+    description: `${service.title} for Brisbane businesses. Site scope, equipment, availability, reporting and commercial terms are confirmed in writing for each job.`,
     alternates: { canonical: `/services/${service.slug}` },
   };
 }
 
 const onboarding = [
   {
-    title: "Site walk",
-    body: "We look at where the metal is actually generated, not where the bin currently sits.",
+    title: "Describe the site",
+    body: "Provide the address, access constraints, material, approximate volume and the way it is generated.",
   },
   {
-    title: "Written proposal",
-    body: "Bin plan, swap frequency, indicative rates and the reporting you'll receive.",
+    title: "Confirm the scope",
+    body: "The proposal should name equipment, responsibilities, timing, pricing assumptions and reporting requirements.",
   },
   {
-    title: "Equipment on site",
-    body: "Bins and signage delivered, crews inducted, first collection scheduled.",
+    title: "Complete site requirements",
+    body: "Resolve inductions, permits, placement, traffic controls and procurement documents before work is scheduled.",
   },
   {
-    title: "Reconciliation",
-    body: "Tonnage by grade against the index, rebate paid on a fixed day.",
+    title: "Review the records",
+    body: "Check the agreed weight, grade, movement and settlement records against the written scope.",
   },
 ];
 
@@ -80,13 +79,13 @@ export default async function ServiceDetail({
     <>
       <ServiceSchema
         name={service.title}
-        description={service.blurb}
+        description={`${service.title} options are scoped and confirmed in writing for each site.`}
         slug={service.slug}
       />
       <PageHeader
         eyebrow={service.audience}
         title={service.title}
-        intro={service.blurb}
+        intro="Use this page to prepare the scope. Equipment, coverage, timing, reporting and commercial terms are confirmed in writing for each site."
         trail={[
           { label: "Home", href: "/" },
           { label: "For business", href: "/services" },
@@ -96,7 +95,7 @@ export default async function ServiceDetail({
         <div className="flex flex-wrap gap-3">
           <Button href="/contact">Request a quote</Button>
           <Button href="/prices" variant="ghost">
-            Rate board
+            How pricing works
           </Button>
         </div>
       </PageHeader>
@@ -108,32 +107,33 @@ export default async function ServiceDetail({
         n={1}
         caption={`${service.title} — material handled on site`}
         eyebrow="What you get"
-        title="How it works in practice"
+        title="What the proposal needs to settle"
         priority
       >
         <p className="t-lead mt-5">
-          Every arrangement is written down before it starts — what turns up,
-          how often, what it&rsquo;s worth and what you receive on paper.
+          A workable scope names the material, site access, equipment,
+          responsibilities, pricing assumptions and the records you need.
         </p>
       </Split>
 
-      <Section tone="slab">
+      <Section tone="slab" className="pb-20 pt-12 lg:pb-28 lg:pt-16">
         <SectionHead
           index={1}
-          eyebrow="The detail"
-          title={`What ${service.title.toLowerCase()} involves`}
+          eyebrow="Capabilities"
+          title={`What to discuss for ${service.title.toLowerCase()}`}
+          intro="These are common options, not a promise that every item suits every site. The written proposal confirms what is available for your job."
         />
         <DefinitionRows
           items={service.points.map((p) => ({ term: p.title, detail: p.body }))}
         />
       </Section>
 
-      <Section id="onboarding" className="scroll-mt-20">
+      <Section id="onboarding" className="scroll-mt-20 pb-24 pt-20 lg:pb-32 lg:pt-28">
         <SectionHead
           index={2}
           eyebrow="Getting started"
-          title="From first call to first rebate"
-          intro="Usually two to three weeks, faster if the site is already segregated."
+          title="From site details to an agreed scope"
+          intro="Timing depends on access, equipment, approvals and the material involved."
         />
         <Steps items={onboarding} />
       </Section>
@@ -143,13 +143,13 @@ export default async function ServiceDetail({
           the same five facts, and a customer who arrives with them gets
           a firm proposal rather than a range. Cheap to publish, and it
           makes the next step concrete instead of "get in touch". */}
-      <Section id="what-we-need" tone="chalk" className="scroll-mt-20">
+      <Section id="what-we-need" tone="chalk" className="scroll-mt-20 pb-20 pt-12 lg:pb-24 lg:pt-16">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           <div>
             <SectionHead
               index={3}
               eyebrow="Before the first call"
-              title="What we need to quote it properly"
+              title="What to send for a useful proposal"
               intro="None of it has to be exact. Approximate answers to all five beat a precise answer to one, and they are the difference between a firm number and a range with a disclaimer on it."
               className="mb-0"
             />
@@ -168,7 +168,7 @@ export default async function ServiceDetail({
         </div>
       </Section>
 
-      <Section tone="slab">
+      <Section tone="slab" className="pb-16 pt-10 lg:pb-20 lg:pt-12">
         <SectionHead index={4} eyebrow="Elsewhere" title="Other services" />
         <div className="divide-y divide-[color:var(--hair)] border-y hair">
           {others.map((o) => (
@@ -181,7 +181,10 @@ export default async function ServiceDetail({
                 {o.title}
               </h3>
               <div>
-                <p className="measure-wide t-muted">{o.blurb}</p>
+                <p className="measure-wide t-muted">
+                  Scope, availability and commercial terms are confirmed for
+                  each site.
+                </p>
                 <span className="t-spec mt-3 inline-flex items-center gap-2 uppercase tracking-[0.1em]">
                   Read more
                   <ArrowRight className="h-3.5 w-3.5 t-accent transition-transform group-hover:translate-x-1" />
@@ -191,13 +194,6 @@ export default async function ServiceDetail({
           ))}
         </div>
       </Section>
-
-      <CtaBand
-        title={`Ready to talk about ${service.title.toLowerCase()}?`}
-        body="Send through your site details and rough volumes. We'll come back inside one business day with a written proposal and indicative rates."
-        primary={{ label: "Request a quote", href: "/contact" }}
-        secondary={{ label: "All services", href: "/services" }}
-      />
     </>
   );
 }

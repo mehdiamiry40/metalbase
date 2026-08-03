@@ -2,19 +2,10 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
-/* ------------------------------------------------------------------
-   Guards against a failure mode that bit this project twice.
-
-   Tailwind silently emits NOTHING for a class naming a colour token
-   that doesn't exist. `from-navy/85` survived two redesigns after the
-   `navy` token was renamed to `ink` — the gradient behind the photo
-   tile labels just quietly stopped rendering, and no build error, type
-   error or axe run could catch it (axe can't evaluate text over an
-   image; it reports those as "incomplete").
-
-   So: parse the tokens actually declared in globals.css, then assert
-   every colour utility in the codebase names one of them.
-   ------------------------------------------------------------------ */
+/* Design-system regression guards. Tailwind silently emits no CSS for
+   utilities that name a missing token, while one-off colours, type sizes
+   and fashionable effects can otherwise creep back in without a build
+   error. These tests keep the visual system small and explicit. */
 
 const root = resolve(__dirname, "..");
 
@@ -54,18 +45,25 @@ function stripComments(src: string): string {
   return src.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
 }
 
-/* Utility words that follow the same shape but aren't colours. */
+/* Utility words that follow the same shape but are not colours. */
 const NOT_COLOURS = new Set([
   "left", "right", "center", "top", "bottom", "start", "end", "justify",
   "wrap", "nowrap", "balance", "pretty", "clip", "ellipsis", "b", "t", "l", "r",
   "x", "y", "s", "e", "none", "solid", "dashed", "dotted", "double", "hidden",
-  "collapse", "separate", "auto", "sm", "md", "lg", "xl", "2xl", "3xl", "full",
+  "collapse", "separate", "auto", "base", "xs", "sm", "md", "lg", "xl", "2xl", "3xl", "full",
   "px", "reverse", "y-reverse", "x-reverse", "opacity", "offset", "inset",
   "1", "2", "3", "4", "0",
-  // gradient plumbing, not colours
-  "gradient", "gradient-to-t", "gradient-to-b", "gradient-to-r", "gradient-to-l",
   "edge", "transparent", "cover", "contain",
 ]);
+
+const CANONICAL_COLOURS = [
+  "#182024", // furnace
+  "#4d595f", // steel
+  "#b8c1c5", // galvanised
+  "#e8ecee", // yard fog
+  "#f7f9f9", // scale paper
+  "#075ea8", // signal blue
+] as const;
 
 describe("theme tokens", () => {
   const tokens = declaredTokens();
@@ -74,35 +72,19 @@ describe("theme tokens", () => {
     ...sourceFiles(join(root, "components")),
   ];
 
-  it("declares the tokens the design system documents", () => {
+  it("declares the six canonical MetalBase colours", () => {
     for (const t of [
-      // surfaces — dark is the yard, light is the record
-      "ink",
-      "slab",
-      "shaft",
-      "chalk",
-      "white",
-      // muted type, one per surface
-      "mist",
-      "stone",
-      // the single hue, split by the surface it has to carry text on
-      "copper",
-      "copper-hi",
-      "copper-deep",
+      "furnace",
+      "steel",
+      "galvanised",
+      "yard-fog",
+      "scale-paper",
+      "signal",
     ]) {
       expect(tokens.has(t)).toBe(true);
     }
   });
 
-  /* Each palette this project has shipped left tokens behind. Blue went
-     when the accent collapsed to one hue; paper/graphite/orange went
-     when the surface rule inverted to dark-by-default.
-
-     The rename guard below only catches utilities naming a token that
-     does NOT exist — it cannot catch a token that still exists but
-     shouldn't, so a half-finished revert that re-added `--color-orange`
-     alongside copper would go unnoticed until the site quietly had two
-     accents again. Hence asserting the absences directly. */
   it("has no superseded palette left", () => {
     for (const t of [
       "blue",
@@ -117,8 +99,100 @@ describe("theme tokens", () => {
       "orange-warm",
       "orange-deep",
       "rust",
+      "terracotta",
     ]) {
       expect(tokens.has(t)).toBe(false);
+    }
+  });
+
+  it("uses only the six canonical colour literals", () => {
+    const css = readFileSync(join(root, "app/globals.css"), "utf8");
+    const sources = [css, ...files.map((file) => readFileSync(file, "utf8"))];
+    const literals = new Set(
+      sources.flatMap((source) =>
+        [...source.matchAll(/#[0-9a-f]{6}(?:[0-9a-f]{2})?\b|#[0-9a-f]{3}\b/gi)].map(
+          (match) => match[0].toLowerCase(),
+        ),
+      ),
+    );
+
+    expect([...literals].sort()).toEqual([...CANONICAL_COLOURS].sort());
+    expect(css).not.toContain("color-mix(");
+  });
+
+  it("keeps the interface square and free of stock landing-page effects", () => {
+    const offenders: string[] = [];
+    for (const file of files) {
+      const source = stripComments(readFileSync(file, "utf8"));
+      for (const pattern of [
+        /\brounded(?:-|\b)/g,
+        /\bshadow(?:-|\b)/g,
+        /(?:bg-)?gradient(?:-|\b)/g,
+        /backdrop-blur(?:-|\b)/g,
+        /hover:scale(?:-|\b)/g,
+        /transition-all\b/g,
+      ]) {
+        for (const match of source.matchAll(pattern)) {
+          offenders.push(`${file.replace(root + "/", "")}: ${match[0]}`);
+        }
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  it("does not bypass the documented type scale", () => {
+    const offenders: string[] = [];
+    for (const file of files) {
+      const source = stripComments(readFileSync(file, "utf8"));
+      for (const match of source.matchAll(/text-\[(?:\d|\.)[^\]]*(?:rem|px)\]/g)) {
+        offenders.push(`${file.replace(root + "/", "")}: ${match[0]}`);
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  it("pins named type utilities to the seven-step scale", () => {
+    const css = readFileSync(join(root, "app/globals.css"), "utf8");
+    for (const declaration of [
+      "--type-1: 0.75rem",
+      "--type-2: 0.875rem",
+      "--type-3: 1rem",
+      "--type-4: 1.25rem",
+      "--type-5: 1.75rem",
+      "--type-6: 2.5rem",
+      "--type-7: 3.5rem",
+      "--text-xs: var(--type-1)",
+      "--text-sm: var(--type-2)",
+      "--text-base: var(--type-3)",
+      "--text-xl: var(--type-4)",
+      "--text-2xl: var(--type-5)",
+      "--text-3xl: var(--type-5)",
+      "--text-4xl: var(--type-6)",
+    ]) {
+      expect(css).toContain(declaration);
+    }
+  });
+
+  it("keeps explicit interaction motion between 150 and 200ms", () => {
+    const offenders: string[] = [];
+    for (const file of files) {
+      const source = stripComments(readFileSync(file, "utf8"));
+      for (const match of source.matchAll(/duration-(?:\[(\d+)ms\]|(\d+))/g)) {
+        const duration = Number(match[1] ?? match[2]);
+        if (duration < 150 || duration > 200) {
+          offenders.push(`${file.replace(root + "/", "")}: ${match[0]}`);
+        }
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  it("loads no more than the two documented font families", () => {
+    const layout = readFileSync(join(root, "app/layout.tsx"), "utf8");
+    expect(layout).toContain("Barlow_Condensed");
+    expect(layout).toContain("IBM_Plex_Sans");
+    for (const retired of ["Poppins", "DM_Serif_Display", "Archivo", "IBM_Plex_Mono"]) {
+      expect(layout).not.toContain(retired);
     }
   });
 

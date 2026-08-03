@@ -3,9 +3,9 @@ import { ArrowRight, Button } from "@/components/ui";
 
 const links = [
   { label: "What we buy", href: "/what-we-buy" },
-  { label: "Rate board", href: "/prices" },
+  { label: "How pricing works", href: "/prices" },
   { label: "For business", href: "/services" },
-  { label: "Sell your scrap", href: "/locations" },
+  { label: "Plan a drop-off", href: "/locations" },
   { label: "Glossary", href: "/glossary" },
   { label: "Sustainability", href: "/sustainability" },
   { label: "FAQ", href: "/faq" },

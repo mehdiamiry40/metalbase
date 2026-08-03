@@ -18,28 +18,27 @@ import { PUBLISH_RATES, type PriceRow, priceGroups } from "@/lib/site";
    as an instrument printout, which is exactly what it is.
 
    Rates stay honest. PUBLISH_RATES is false and every rate is null, so
-   the column renders a measured em-rule and the header says the rates
-   are quoted on the day. Nothing invents a number, and the layout does
-   not pretend the column is missing either — the column is the point.
+   the column renders a measured em-rule and asks for a quote. Nothing
+   invents a number, and the layout does not pretend the column is
+   missing either — the column is the point.
    ================================================================== */
 
 function Rate({ row }: { row: PriceRow }) {
   if (PUBLISH_RATES && row.rate) {
     return (
-      <span className="mono text-[0.95rem] font-medium">
+      <span className="mono text-base font-medium">
         ${row.rate}
         <span className="t-muted">/{row.unit}</span>
       </span>
     );
   }
   return (
-    <span className="mono inline-flex items-center gap-2 text-[0.8rem] t-muted">
-      {/* An em-rule, not the word "TBC". A blank field on a printed form
-          reads as "filled in on the day"; the word reads as "unfinished". */}
+    <span className="mono inline-flex items-center gap-2 text-xs t-muted">
+      {/* An em-rule and a specific next step, not an unfinished "TBC". */}
       <span aria-hidden="true" className="h-px w-5 bg-[color:var(--hair)]" />
-      <span className="uppercase tracking-[0.08em]">on the day</span>
+      <span className="uppercase tracking-[0.08em]">request quote</span>
       <span className="sr-only">
-        Rate quoted on the day, per {row.unit === "kg" ? "kilogram" : "tonne"}
+        Rate available by quote, per {row.unit === "kg" ? "kilogram" : "tonne"}
       </span>
     </span>
   );
@@ -59,7 +58,7 @@ export function Ledger({
     <div className="space-y-14">
       {groups.map((group) => (
         <section key={group.id} id={group.id} className="scroll-mt-24">
-          <header className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 border-b-2 border-[color:currentColor] pb-3">
+          <header className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 border-b hair pb-3">
             <h3>{group.title}</h3>
             <p className="t-spec t-muted">
               {group.rows.length} grades · priced per{" "}
@@ -68,7 +67,7 @@ export function Ledger({
           </header>
 
           {showNotes && (
-            <p className="measure-wide mt-5 text-[0.95rem] leading-relaxed t-muted">
+            <p className="measure-wide mt-5 text-base leading-relaxed t-muted">
               {group.note}
             </p>
           )}
@@ -110,11 +109,11 @@ export function Ledger({
                   <tr key={row.grade} className="border-b hair align-baseline">
                     <th
                       scope="row"
-                      className="py-4 pr-6 text-[0.98rem] font-medium leading-snug"
+                      className="py-4 pr-6 text-base font-medium leading-snug"
                     >
                       {row.grade}
                     </th>
-                    <td className="py-4 pr-6 text-[0.9rem] leading-snug t-muted">
+                    <td className="py-4 pr-6 text-sm leading-snug t-muted">
                       {row.spec}
                     </td>
                     <td className="whitespace-nowrap py-4 text-right">

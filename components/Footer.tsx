@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { company, locations, nav } from "@/lib/site";
-import { DataRow, Logo, Pending } from "@/components/ui";
-
-const IS_PROD = process.env.NODE_ENV === "production";
+import { DataRow, Logo } from "@/components/ui";
 
 /* Pages the flat nav deliberately leaves out. They are real pages with
    real content, just not among the four things someone arrives needing,
@@ -26,21 +24,21 @@ export default function Footer() {
   const tel = company.phone?.replace(/\s/g, "");
 
   return (
-    <footer className="on-dark border-t hair bg-ink">
+    <footer className="on-dark border-t hair bg-furnace">
       <div className="shell py-16">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
           <div>
             <Logo />
-            <p className="mt-6 max-w-xs text-[0.94rem] leading-relaxed t-muted">
-              {company.legal} — buying, processing and remarketing scrap metal
-              across greater Brisbane.
+            <p className="mt-6 max-w-xs text-base leading-relaxed t-muted">
+          Brisbane scrap-metal quote requests, grade guidance and practical
+          preparation information.
             </p>
 
             <dl className="mt-9 space-y-5">
               <DataRow label="Trade desk" value={company.phone}>
                 <a
                   href={`tel:${tel}`}
-                  className="mono text-[1.35rem] font-medium tracking-[-0.02em] t-accent hover:underline"
+                  className="mono text-xl font-medium tracking-[-0.02em] underline decoration-1 underline-offset-4 transition-colors duration-[160ms] ease-out hover:text-mist"
                 >
                   {company.phoneLabel ?? company.phone}
                 </a>
@@ -48,7 +46,7 @@ export default function Footer() {
               <DataRow label="Email" value={company.email}>
                 <a
                   href={`mailto:${company.email}`}
-                  className="hover:text-[color:var(--accent-text)]"
+                  className="underline decoration-1 underline-offset-4 transition-colors duration-[160ms] ease-out hover:text-mist"
                 >
                   {company.email}
                 </a>
@@ -70,12 +68,12 @@ export default function Footer() {
               <p className="t-spec border-b hair pb-3 uppercase tracking-[0.14em] t-muted">
                 Trading
               </p>
-              <ul className="mt-4 space-y-3">
+              <ul className="mt-3 space-y-1">
                 {nav.map((item) => (
                   <li key={item.label}>
                     <Link
                       href={item.href}
-                      className="text-[0.95rem] hover:text-[color:var(--accent-text)]"
+                      className="inline-flex min-h-11 items-center text-base transition-colors duration-[160ms] ease-out hover:text-mist"
                     >
                       {item.label}
                     </Link>
@@ -87,12 +85,12 @@ export default function Footer() {
               <p className="t-spec border-b hair pb-3 uppercase tracking-[0.14em] t-muted">
                 Company
               </p>
-              <ul className="mt-4 space-y-3">
+              <ul className="mt-3 space-y-1">
                 {secondary.map((item) => (
                   <li key={item.label}>
                     <Link
                       href={item.href}
-                      className="text-[0.95rem] hover:text-[color:var(--accent-text)]"
+                      className="inline-flex min-h-11 items-center text-base transition-colors duration-[160ms] ease-out hover:text-mist"
                     >
                       {item.label}
                     </Link>
@@ -111,7 +109,7 @@ export default function Footer() {
                 <li key={l.id}>
                   <Link
                     href={`/locations#${l.id}`}
-                    className="text-[0.92rem] hover:text-[color:var(--accent-text)]"
+                    className="inline-flex min-h-11 items-center text-sm transition-colors duration-[160ms] ease-out hover:text-mist"
                   >
                     {l.name}
                   </Link>
@@ -121,42 +119,28 @@ export default function Footer() {
           </div>
         )}
 
-        <div className="mt-14 space-y-2 border-t hair pt-8 text-[0.82rem] leading-relaxed t-muted">
+        <div className="mt-14 space-y-2 border-t hair pt-8 text-sm leading-relaxed t-muted">
           <p>
             © {new Date().getFullYear()} {company.legal}
             {company.abn ? ` · ABN ${company.abn}` : null}
           </p>
-          {/* Pending renders null in production, so these wrappers would
-              leave empty <p> elements behind. Guard on the data instead
-              of on the marker. */}
-          {!company.abn && !IS_PROD && (
-            <p>
-              <Pending>ABN not set</Pending>
-            </p>
-          )}
-          {company.licence ? (
+          {company.licence && (
             <p>Queensland second-hand dealer licence {company.licence}</p>
-          ) : IS_PROD ? null : (
-            <p>
-              <Pending>
-                Second-hand dealer licence not set — required before trading
-              </Pending>
-            </p>
           )}
         </div>
 
-        <p className="mt-7 max-w-4xl text-[0.82rem] leading-relaxed t-muted">
+        <p className="mt-7 max-w-4xl text-sm leading-relaxed t-muted">
           MetalBase acknowledges the Turrbal and Jagera peoples, the Traditional
           Custodians of the land on which we operate, and pays respect to Elders
           past and present.
         </p>
 
-        <ul className="mt-7 flex flex-wrap gap-x-7 gap-y-2">
+        <ul className="mt-5 flex flex-wrap gap-x-7 gap-y-1">
           {legal.map((l) => (
             <li key={l.label}>
               <Link
                 href={l.href}
-                className="text-[0.85rem] t-muted hover:text-[color:var(--accent-text)]"
+                className="inline-flex min-h-11 items-center text-sm underline decoration-1 underline-offset-4 t-muted transition-colors duration-[160ms] ease-out hover:text-white"
               >
                 {l.label}
               </Link>

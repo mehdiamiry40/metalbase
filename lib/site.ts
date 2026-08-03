@@ -70,9 +70,9 @@ export type NavItem = { label: string; href: string };
 
 export const nav: NavItem[] = [
   { label: "What we buy", href: "/what-we-buy" },
-  { label: "Prices", href: "/prices" },
+  { label: "Pricing", href: "/prices" },
   { label: "For business", href: "/services" },
-  { label: "Visit us", href: "/locations" },
+  { label: "Drop-off guide", href: "/locations" },
 ];
 
 /* ------------------------------ prices -----------------------------

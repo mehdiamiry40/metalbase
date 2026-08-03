@@ -6,7 +6,6 @@ import {
   ArrowRight,
   Button,
   ChipList,
-  CtaBand,
   Section,
   SectionHead,
   TickList,
@@ -17,7 +16,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services" },
   title: "Services for Business — Bins, Collection, Demolition & Rebates",
   description:
-    "Scrap collection and bin hire, industrial offcut programs, demolition steel buy-back and trade drop-off across Brisbane.",
+    "Plan scrap collection, bin hire, industrial offcut recovery or demolition steel handling. Availability and commercial terms are confirmed for each Brisbane site.",
 };
 
 /* What a business customer receives on paper. Written out because it
@@ -26,24 +25,24 @@ export const metadata: Metadata = {
    these four artefacts. */
 const paperwork = [
   {
-    term: "A docket per movement",
+    term: "Movement records",
     detail:
-      "Every bin swap and every delivery produces its own weighbridge docket with net weight and grade against it — not a monthly total that cannot be traced back to a truck.",
+      "Specify whether each collection or delivery needs its own weight and grade record, and what reference must connect it to your project or purchase order.",
   },
   {
-    term: "A statement you can reconcile",
+    term: "Reconciliation format",
     detail:
-      "Dockets rolled up by grade and tonnage for the period, so finance can tie the rebate line to physical movements rather than accepting a figure.",
+      "Agree how movements will be rolled up by grade, tonnage and period so finance can reconcile the commercial return.",
   },
   {
-    term: "Diversion and destination reporting",
+    term: "Project reporting",
     detail:
-      "Tonnage by stream, diversion percentage and the mill or refinery each parcel went to. The format most waste management plans and client reports ask for.",
+      "Provide the exact diversion, destination or client-reporting fields required and have their availability confirmed in the written scope.",
   },
   {
-    term: "Documentation on request",
+    term: "Procurement documents",
     detail:
-      "Weighbridge verification certificates, insurances, SWMS and site inductions, supplied for a procurement pack rather than promised in a proposal.",
+      "List the insurances, safety documents, measurement records and approvals procurement needs before work is scheduled.",
   },
 ];
 
@@ -52,14 +51,14 @@ export default function ServicesPage() {
     <>
       <PageHeader
         eyebrow="For business"
-        title="Metal is a line on your P&L, not just a bin in the yard"
-        intro="Four service models off the same weighbridge and the same grading standard. Pick the one that matches how your metal is generated, or call and we'll tell you which it is."
+        title="Scope the metal before you scope the bin"
+        intro="Choose the service that best matches the material and site. Equipment, collection area, frequency, reporting and commercial terms are confirmed in a written proposal."
         trail={[{ label: "Home", href: "/" }, { label: "For business" }]}
       >
         <Button href="/contact">Book a site assessment</Button>
       </PageHeader>
 
-      <Section>
+      <Section className="pb-20 pt-10 lg:pb-28 lg:pt-14">
         <div className="divide-y divide-[color:var(--hair)] border-y hair">
           {services.map((s, i) => (
             <Link
@@ -80,9 +79,8 @@ export default function ServicesPage() {
                 <h2 className="mt-3 group-hover:text-[color:var(--accent-text)]">
                   {s.title}
                 </h2>
-                <p className="t-lead measure-wide mt-4 t-muted">{s.blurb}</p>
-                <span className="t-spec mt-6 inline-flex items-center gap-2 uppercase tracking-[0.1em]">
-                  Read the detail
+                <span className="t-spec mt-5 inline-flex items-center gap-2 uppercase tracking-[0.1em]">
+                  Review scope and options
                   <ArrowRight className="h-3.5 w-3.5 t-accent transition-transform group-hover:translate-x-1" />
                 </span>
               </div>
@@ -91,27 +89,27 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      <Section tone="slab">
+      <Section tone="slab" className="pb-24 pt-16 lg:pb-32 lg:pt-24">
         <div className="grid gap-12 lg:grid-cols-2">
           <div>
             <SectionHead
               index={1}
               eyebrow="What changes"
-              title="The boring things done properly"
-              intro="Nobody switches scrap merchants for a rebrand. They switch because the bin turned up, the docket was right and the money landed when it was supposed to."
+              title="What belongs in the written scope"
+              intro="A useful proposal removes uncertainty about access, records, responsibilities and settlement before a truck is scheduled."
               className="mb-0"
             />
             <TickList
               className="mt-8"
               items={[
-                "A named account manager who knows your site",
-                "Dockets with net weight and grade, not a monthly guess",
-                "Records you can hand to a client or an auditor",
+                "Site contact, access window and handling responsibility",
+                "Weight, grade and reconciliation method",
+                "Documents required by procurement or the end client",
               ]}
             />
           </div>
           <div>
-            <h3>Where we collect</h3>
+            <h3>Areas to confirm</h3>
             <div className="mt-6 space-y-6">
               {serviceAreas.map((area) => (
                 <div key={area.region}>
@@ -122,8 +120,9 @@ export default function ServicesPage() {
                 </div>
               ))}
             </div>
-            <p className="mt-6 text-[0.92rem] t-muted">
-              Project work travels beyond the standing routes — ask.
+            <p className="mt-6 text-sm t-muted">
+              Send the exact site address. Collection coverage, minimum volume
+              and equipment are confirmed per job.
             </p>
           </div>
         </div>
@@ -145,7 +144,7 @@ export default function ServicesPage() {
           {
             term: "Drop-off suits irregular volume",
             detail:
-              "If metal accumulates in bursts — a strip-out here, a machine replacement there — driving it in when it suits you avoids paying for a bin that sits mostly empty. There is no minimum load and no account required, so occasional is a perfectly sensible way to operate.",
+              "If metal accumulates in bursts, a confirmed drop-off may avoid leaving a bin mostly empty. Check the current yard, hours, acceptance conditions and any minimum before travelling.",
           },
           {
             term: "A bin is really about handling, not tonnage",
@@ -175,22 +174,15 @@ export default function ServicesPage() {
           this is what turns up in an inbox, which is the half of the
           arrangement that procurement and finance are actually judging.
           On the light surface, because all four items are documents. */}
-      <Section id="paperwork" tone="chalk" className="scroll-mt-20">
+      <Section id="paperwork" tone="chalk" className="scroll-mt-20 pb-20 pt-12 lg:pb-24 lg:pt-16">
         <SectionHead
           index={3}
           eyebrow="What you receive"
-          title="The paper trail behind the rebate"
-          intro="A rebate nobody can reconcile is just a number in an email. These four artefacts are what make it auditable, and they come as standard rather than on request."
+          title="Put the reporting requirements in the proposal"
+          intro="These are common procurement requirements, not automatic deliverables. Name the fields and documents your organisation needs before service starts."
         />
         <DefinitionRows items={paperwork} />
       </Section>
-
-      <CtaBand
-        title="Book a site assessment"
-        body="We'll walk the floor or the project, map where the metal is generated, and come back with a bin plan and an indicative return. It takes about an hour and costs nothing."
-        primary={{ label: "Request a quote", href: "/contact" }}
-        secondary={{ label: "Rate board", href: "/prices" }}
-      />
     </>
   );
 }

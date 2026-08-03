@@ -3,7 +3,6 @@ import QuoteForm from "@/components/QuoteForm";
 import { PageHeader } from "@/components/sections";
 import {
   Callout,
-  CtaBand,
   Panel,
   Section,
   SpecStrip,
@@ -22,20 +21,20 @@ export default function ContactPage() {
     <>
       <PageHeader
         eyebrow="Get in touch"
-        title="Tell us what you've got and we'll price it"
-        intro="One form for everything — a quote, a bin, a site assessment, a trade account or a reporting request. A grader or account manager comes back inside one business day."
+        title="Describe the metal. Get the next step."
+        intro="Use this form for a price enquiry, collection request, site assessment, trade account or reporting requirement. Add a rough weight, condition and visible markings when you can."
         trail={[{ label: "Home", href: "/" }, { label: "Contact" }]}
       >
         <SpecStrip
           items={[
-            { k: "Reply", v: "One business day" },
-            { k: "Account", v: "Not required" },
-            { k: "Obligation", v: "None" },
+            { k: "Useful detail", v: "Condition + rough weight" },
+            { k: "For collection", v: "Site + access" },
+            { k: "Next step", v: "Confirmed directly" },
           ]}
         />
       </PageHeader>
 
-      <Section>
+      <Section className="pb-20 pt-12 lg:pb-28 lg:pt-16">
         <div className="grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-start">
           <QuoteForm />
 
@@ -55,24 +54,24 @@ export default function ContactPage() {
                   <p className="t-index t-accent">Fastest route</p>
                   <a
                     href={`tel:${company.phone.replace(/\s/g, "")}`}
-                    className="mono mt-3 block text-[1.75rem] font-medium leading-none tracking-[-0.03em] hover:text-[color:var(--accent-text)]"
+                    className="mono mt-3 block text-3xl font-medium leading-none tracking-[-0.03em] hover:text-[color:var(--accent-text)]"
                   >
                     {company.phoneLabel ?? company.phone}
                   </a>
-                  <p className="mt-3 text-[0.94rem] t-muted">
-                    Trade desk, weekdays
+                  <p className="mt-3 text-base t-muted">
+                    Call about a load
                   </p>
                 </>
               ) : (
                 <>
                   <p className="t-index t-accent">What to expect</p>
-                  <p className="mt-3 text-[1.35rem] font-medium leading-tight tracking-[-0.03em]">
-                    A grader replies inside one business day
+                  <p className="mt-3 text-xl font-medium leading-tight tracking-[-0.03em]">
+                    Send enough detail for a useful reply
                   </p>
-                  <p className="mt-3 text-[0.94rem] leading-relaxed t-muted">
-                    Send the form through with a photo if you have one. You
-                    don&rsquo;t need an account, and nothing is committed until
-                    you say so.
+                  <p className="mt-3 text-base leading-relaxed t-muted">
+                    Send the form with the material condition and rough size or
+                    weight. Have a clear photo ready if the trade desk requests
+                    one later.
                   </p>
                 </>
               )}
@@ -87,42 +86,34 @@ export default function ContactPage() {
             </Panel>
 
             <div>
-              <h2 className="text-[1.2rem]">What happens next</h2>
-              <ol className="mt-4 space-y-4 text-[0.95rem] leading-relaxed t-muted">
+              <h2 className="text-xl">What happens next</h2>
+              <ol className="mt-4 space-y-4 text-base leading-relaxed t-muted">
                 <li>
-                  <span className="mono font-medium t-accent">01</span> A grader
-                  reads what you&rsquo;ve sent and, if it&rsquo;s ambiguous, asks
-                  for a photo.
+                  <span className="mono font-medium t-accent">01</span> The trade
+                  desk reviews the material details and may ask for a clearer
+                  description or photo.
                 </li>
                 <li>
                   <span className="mono font-medium t-accent">02</span> You get
-                  an indicative rate by grade, plus a bin recommendation if the
-                  volume warrants one.
+                  the grade assumptions, the information still needed and the
+                  available handling options.
                 </li>
                 <li>
                   <span className="mono font-medium t-accent">03</span> If it
-                  stacks up, we book a collection or a weigh-in. Nothing is
-                  committed until you say so.
+                  suits the load, the trade desk confirms the location, timing
+                  and commercial terms with you.
                 </li>
               </ol>
             </div>
 
             <Callout label="Before you visit">
-              Bring current photo ID. A licensed second-hand dealer has to record
-              who sold the metal, on every load without exception. You are paid
-              at the bridge in cash, so bank details are only needed if you would
-              rather have it transferred.
+              Do not travel with a load until the yard location, opening hours,
+              accepted material and required identification have been confirmed.
+              Vehicle and regulated-material paperwork can vary by load.
             </Callout>
           </aside>
         </div>
       </Section>
-
-      <CtaBand
-        title="Already know what you need?"
-        body="Check the grades we buy, then send a photo and a rough weight and we'll quote it."
-        primary={{ label: "What we buy", href: "/what-we-buy" }}
-        secondary={{ label: "Rate board", href: "/prices" }}
-      />
     </>
   );
 }

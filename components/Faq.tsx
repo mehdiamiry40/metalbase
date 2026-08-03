@@ -1,4 +1,5 @@
 import type { Faq } from "@/lib/site";
+import { ChevronDown } from "@/components/ui";
 
 /**
  * Accordion built on <details>/<summary>.
@@ -11,20 +12,12 @@ import type { Faq } from "@/lib/site";
  */
 export function FaqList({ items }: { items: Faq[] }) {
   return (
-    <div className="divide-y divide-[color:var(--hair)] border-y hair">
+    <div className="border-t hair">
       {items.map((f) => (
-        <details key={f.q} className="group">
-          <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-[1.0625rem] font-semibold marker:content-none [&::-webkit-details-marker]:hidden">
+        <details key={f.q} className="group border-b hair px-1 sm:px-2">
+          <summary className="flex min-h-14 cursor-pointer list-none items-start justify-between gap-6 py-5 font-display text-xl font-semibold leading-tight marker:content-none [&::-webkit-details-marker]:hidden">
             {f.q}
-            {/* Copper is a fill here and carries no text, so it is legal
-                on both surfaces — the accent cannot do typographic work
-                on chalk. The rotating half is a pseudo-element so the
-                whole control is one node rather than two crossed rules
-                that have to be kept in sync. */}
-            <span
-              aria-hidden="true"
-              className="relative mt-2 h-[2px] w-4 shrink-0 bg-copper before:absolute before:inset-0 before:rotate-90 before:bg-copper before:transition-transform before:duration-200 before:content-[''] group-open:before:rotate-0"
-            />
+            <ChevronDown className="h-6 w-6 shrink-0 group-open:rotate-180" />
           </summary>
           <p className="max-w-2xl pb-6 leading-relaxed t-muted">{f.a}</p>
         </details>

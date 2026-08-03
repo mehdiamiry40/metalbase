@@ -3,7 +3,6 @@ import { DefinitionRows, PageHeader, Split, Steps } from "@/components/sections"
 import {
   Button,
   Callout,
-  CtaBand,
   Section,
   SectionHead,
   TickList,
@@ -13,29 +12,29 @@ export const metadata: Metadata = {
   alternates: { canonical: "/sustainability" },
   title: "Sustainability, Reporting & Certificates of Destruction",
   description:
-    "Diversion reporting, chain-of-custody records and certificates of destruction from MetalBase Brisbane — the evidence procurement and audit teams actually ask for.",
+    "How to specify diversion reporting, chain-of-custody records and certificates of destruction for a Brisbane scrap-metal project.",
 };
 
 const reports = [
   {
     term: "Diversion report",
     detail:
-      "Tonnage received by stream, percentage diverted from landfill, and residual sent to disposal. Issued per site or per project.",
+      "Specify the reporting boundary, period, material streams and treatment of residual waste. Availability is confirmed in the project scope.",
   },
   {
     term: "Destination & chain of custody",
     detail:
-      "Which mill or refinery each parcel went to, when it left, and the docket trail connecting it back to your gate. The record that survives an audit.",
+      "State which movement, destination and docket fields the audit needs, and how they must connect back to your site or project.",
   },
   {
     term: "Certificate of destruction",
     detail:
-      "Issued against a serialised asset list for equipment, data media and branded product. Destruction can be witnessed on site or recorded on video.",
+      "Provide the asset list, required destruction method, witness requirement and evidence format before material is accepted.",
   },
   {
     term: "Avoided-emissions data",
     detail:
-      "Calculated per tonne by material type against primary-production baselines, with the methodology and emission factors stated so your assurance provider can check the working.",
+      "Nominate the methodology, factors and assurance standard your report must use. Do not assume a generic industry comparison meets the requirement.",
   },
 ];
 
@@ -47,20 +46,20 @@ const reports = [
    be tied to physical movements rather than to good intentions. */
 const journey = [
   {
-    title: "Received and weighed",
-    body: "Over a verified bridge, against a docket that names the seller, the vehicle and the grade. The chain of custody starts at this reading and every later report traces back to it.",
+    title: "Receipt",
+    body: "The record should connect the material, source, project reference, measured quantity and accepted grade at the first custody event.",
   },
   {
-    title: "Sorted and assessed",
-    body: "Streams separated, alloys confirmed by analyser where the grade turns on it, and non-metallic fill removed. This is where a mixed load either becomes several clean products or stays one poor one.",
+    title: "Assessment",
+    body: "Record any separation, grade verification and removal of non-metallic material that changes the quantity or classification.",
   },
   {
-    title: "Processed to specification",
-    body: "Sheared, baled or shredded to the size and density a furnace or refinery will accept. Grade specifications exist because of what plant can charge efficiently, not because of how the metal looks.",
+    title: "Processing",
+    body: "State how material is prepared to a receiving specification and how process losses or residual material are accounted for.",
   },
   {
-    title: "Despatched to a named destination",
-    body: "Domestic mills and refiners, or export through the port. The destination is recorded per parcel and appears on your chain-of-custody report rather than being described in general terms.",
+    title: "Destination",
+    body: "The final record should identify the receiving facility and retain the movement reference that connects it to the original site or project.",
   },
 ];
 
@@ -69,19 +68,19 @@ export default function SustainabilityPage() {
     <>
       <PageHeader
         eyebrow="Sustainability"
-        title="Recycling is the easy part. Proving it is the work."
-        intro="Every tonne we take is diverted from landfill and returned to production. What customers actually need from us is the evidence — tonnage, destination, methodology and a signature — in a format their auditor will accept."
+        title="Specify the evidence before the metal moves"
+        intro="A sustainability claim is only as useful as the records behind it. Send the fields, methodology and sign-off your client or auditor requires so availability can be confirmed in the scope."
         trail={[{ label: "Home", href: "/" }, { label: "Sustainability" }]}
       >
-        <Button href="/contact">Request a reporting sample</Button>
+        <Button href="/contact">Send reporting requirements</Button>
       </PageHeader>
 
-      <Section id="reporting" className="scroll-mt-20">
+      <Section id="reporting" className="scroll-mt-20 pb-20 pt-12 lg:pb-28 lg:pt-16">
         <SectionHead
           index={1}
           eyebrow="Reporting"
-          title="Four documents that cover most requirements"
-          intro="If your client, your board or your certification scheme asks for something we don't already produce, tell us — most of it is already in the weighbridge data."
+          title="Four reporting items to define up front"
+          intro="Treat these as a scoping checklist. The proposal should state which records can be supplied and in what format."
         />
         <DefinitionRows items={reports} />
       </Section>
@@ -91,12 +90,12 @@ export default function SustainabilityPage() {
           this is the physical process the paperwork describes, and
           without it the reporting reads as an administrative product
           rather than a record of something that happened. */}
-      <Section id="journey" tone="chalk" className="scroll-mt-20">
+      <Section id="journey" tone="chalk" className="scroll-mt-20 pb-24 pt-20 lg:pb-32 lg:pt-28">
         <SectionHead
           index={2}
           eyebrow="The journey"
-          title="What actually happens to a tonne"
-          intro="Four movements between your gate and a furnace. Each one is a point where material can be downgraded or lost track of, which is why the reports are tied to weighbridge events rather than to estimates."
+          title="Four stages a traceable record should follow"
+          intro="Each handoff is a point where material can be downgraded or lose its project reference. Ask how the reporting connects those stages."
         />
         <Steps items={journey} />
       </Section>
@@ -108,45 +107,44 @@ export default function SustainabilityPage() {
         n={2}
         caption="Operator alongside processing plant"
         eyebrow="Secure destruction"
-        title="When it has to be gone, and provably gone"
+        title="Scope secure destruction before dispatch"
       >
         <p className="t-lead mt-5">
-          Recalled product, branded stock, failed components, decommissioned
-          plant and data-bearing equipment — destroyed under controlled
-          conditions with a certificate issued against the list you provide.
+          For recalled product, branded stock, plant or data-bearing equipment,
+          send the asset list and required evidence first. The accepted material,
+          destruction method, witness option and certificate are then confirmed.
         </p>
         <TickList
           className="mt-7"
           items={[
-            "Witnessed on site, or recorded on video",
-            "Serialised asset register reconciled line by line",
-            "Drives physically destroyed, not just wiped",
+            "Material and destruction method named in the scope",
+            "Serialised asset register supplied before the job",
+            "Witness, video and certificate requirements confirmed",
           ]}
         />
         <div className="mt-8" id="destruction">
           <Button href="/contact" variant="ghost">
-            Book a destruction job
+            Ask about secure destruction
           </Button>
         </div>
       </Split>
 
       {/* compliance --------------------------------------------------- */}
-      <Section id="compliance" className="scroll-mt-20">
+      <Section id="compliance" className="scroll-mt-20 pb-16 pt-10 lg:pb-20 lg:pt-12">
         <div className="max-w-3xl">
           <SectionHead
             index={3}
             eyebrow="Compliance"
-            title="Licensing and accreditation"
+            title="Check current credentials"
             intro="Scrap metal buying in Queensland requires a second-hand dealer licence, and metal recovery above threshold volumes is an environmentally relevant activity requiring an environmental authority."
           />
           <div className="border-2 border-dashed hair p-7">
             <p className="t-index t-accent">Not yet published</p>
-            <p className="mt-3 text-[0.98rem] leading-relaxed t-muted">
-              Licence numbers, environmental authority references and any
-              management-system certifications will be listed here once issued.
-              We would rather show nothing than claim an accreditation we
-              don&rsquo;t hold — if you need current documentation for a
-              procurement pack, ask and we&rsquo;ll send exactly what exists.
+            <p className="mt-3 text-base leading-relaxed t-muted">
+              No licence number, environmental-authority reference or
+              management-system certification is currently published here. Ask
+              for the current documents your procurement process requires and
+              verify them before appointing a contractor.
             </p>
             <div className="mt-6">
               <Button href="/contact" variant="ghost">
@@ -158,12 +156,12 @@ export default function SustainabilityPage() {
       </Section>
 
       {/* circular ----------------------------------------------------- */}
-      <Section id="circular" tone="slab" className="scroll-mt-20">
+      <Section id="circular" tone="slab" className="scroll-mt-20 pb-20 pt-12 lg:pb-28 lg:pt-16">
         <SectionHead
           index={4}
           eyebrow="Circular economy"
-          title="Where your metal actually goes"
-          intro="Nothing disappears. Ferrous is baled or sheared to mill specification and moves to electric arc furnaces. Non-ferrous is sorted, sampled and sold to refiners and secondary smelters. We name the destination on every report."
+          title="Where recovered metal can go next"
+          intro="The destination depends on grade, processing and market. If destination evidence matters to the project, make it an explicit reporting requirement."
         />
         <DefinitionRows
           items={[
@@ -188,18 +186,11 @@ export default function SustainabilityPage() {
           The energy figures above are the industry&rsquo;s published
           comparisons for primary versus secondary production, not measurements
           of this business. Tonnages, diversion rates and avoided emissions for
-          your own material come from your weighbridge data, and we do not
-          quote a headline figure for the yard until there is one worth
-          standing behind.
+          a specific project must come from measured transaction records. No
+          headline tonnage, diversion or emissions figure for MetalBase is
+          published until verified data supports it.
         </Callout>
       </Section>
-
-      <CtaBand
-        title="Need reporting in a specific format?"
-        body="Green Star, Infrastructure Sustainability, NABERS or a client's own template — send us the requirement and we'll tell you honestly whether the weighbridge data supports it."
-        primary={{ label: "Talk to us", href: "/contact" }}
-        secondary={{ label: "For business", href: "/services" }}
-      />
     </>
   );
 }

@@ -5,7 +5,6 @@ import {
   ArrowLink,
   Button,
   Callout,
-  CtaBand,
   Panel,
   Section,
   SectionHead,
@@ -15,27 +14,27 @@ import { PUBLISH_RATES, company } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/prices" },
-  title: "Scrap Metal Rate Board — Brisbane",
+  title: "How Scrap Metal Pricing Works — Brisbane",
   description:
-    "The grades MetalBase buys across non-ferrous, ferrous and specialty streams in Brisbane, how each is graded, how a settlement is calculated, and how to get a written rate for your load.",
+    "A Brisbane scrap-metal grade guide: how grade, net weight, deductions and commodity markets shape an indicative quote and final settlement.",
 };
 
 const grading = [
   {
-    title: "Weigh in",
-    body: "Gross weight over a certified bridge, tare on the way out. The docket shows both.",
+    title: "Identify the grade",
+    body: "A quote should name the assumed material grade and the condition it expects, rather than attach one number to every load.",
   },
   {
-    title: "Grade",
-    body: "A grader inspects the load before it is tipped and tells you the grade to your face. Non-ferrous alloys are confirmed with a handheld XRF gun where it matters.",
+    title: "Establish net weight",
+    body: "Confirm whether the transaction uses a platform scale or gross less tare, and which readings will appear on the docket.",
   },
   {
-    title: "Deductions, stated up front",
-    body: "Attachments, moisture and contamination reduce yield, so they reduce grade. We tell you what is being deducted and why before the load is committed.",
+    title: "Name the deductions",
+    body: "Attachments, moisture, mixed grades and non-metallic material can reduce recovered yield. Ask which of them affects the quote.",
   },
   {
-    title: "Get paid",
-    body: "Cash in your hand at the weighbridge, against the grade on your docket. Prefer it in the bank? We will transfer to your nominated account instead — just say so before the load is committed.",
+    title: "Confirm the settlement",
+    body: "Agree the final-rate basis, payment method and timing before handover. Large or ongoing loads may use different commercial terms.",
   },
 ];
 
@@ -50,7 +49,7 @@ const workings = [
   { step: "= Net", note: "the metal, and the only weight you are paid on" },
   { step: "× Rate", note: "set by the grade called before you tipped" },
   { step: "− Deductions", note: "named on the docket, not absorbed into the rate" },
-  { step: "= Paid", note: "at the bridge, before you drive out" },
+  { step: "= Settlement", note: "under the payment terms agreed for the load" },
 ];
 
 export default function PricesPage() {
@@ -58,11 +57,11 @@ export default function PricesPage() {
     <>
       <PageHeader
         eyebrow="Pricing"
-        title="The rate board"
+        title="How scrap pricing works"
         intro={
           PUBLISH_RATES
-            ? `Indicative Brisbane yard rates${company.priceDate ? `, updated ${company.priceDate}` : ""}. The board rate when you drive in is the rate you are paid.`
-            : "These are the grades we buy and how each one is assessed. Rates move daily with the index, so we quote them directly rather than publishing a number that is stale by the afternoon."
+            ? `Indicative rates by grade${company.priceDate ? `, updated ${company.priceDate}` : ""}. Final terms are confirmed against the actual material and agreed handling method.`
+            : "This guide explains the common grades and the factors that affect a quote. No public prices are currently posted; request a figure for the material you have."
         }
         trail={[{ label: "Home", href: "/" }, { label: "Prices" }]}
       >
@@ -78,12 +77,10 @@ export default function PricesPage() {
 
       {!PUBLISH_RATES && (
         <div className="on-light border-b hair bg-chalk">
-          <div className="shell py-5 text-[0.94rem] t-muted">
-            <strong className="font-semibold">
-              Rates are quoted, not posted.
-            </strong>{" "}
-            Send a photo and a rough weight and a grader will come back with a
-            firm number the same day.
+          <div className="shell py-5 text-base t-muted">
+            <strong className="font-semibold">No public rate is posted.</strong>{" "}
+            Send the rough weight, suburb and material condition for an
+            indicative quote. Have clear photos ready if more detail is needed.
           </div>
         </div>
       )}
@@ -94,23 +91,23 @@ export default function PricesPage() {
           hand-maintained tables over one array, which is how the two
           drift apart. Both are the Ledger component now, so the board
           exists once and every page shows the same one. */}
-      <Section id="board" tone="chalk">
+      <Section id="board" tone="chalk" className="pb-24 pt-16 lg:pb-32 lg:pt-24">
         <SectionHead
           index={1}
-          eyebrow="The board"
-          title="Every grade we buy, and the spec that decides yours"
-          intro="Three streams, priced two different ways: non-ferrous and specialty by the kilo, ferrous by the tonne over the weighbridge."
+          eyebrow="Grade guide"
+          title="Common grades and the specification behind each one"
+          intro="The guide lists non-ferrous and specialty grades per kilogram, and ferrous grades per tonne. Confirm the applicable grade, instrument and rate for the proposed load."
         />
-        <Ledger />
+        <Ledger showNotes={false} />
       </Section>
 
       {/* grading ------------------------------------------------------ */}
-      <Section id="grading" className="scroll-mt-20">
+      <Section id="grading" className="scroll-mt-20 pb-20 pt-12 lg:pb-24 lg:pt-16">
         <SectionHead
           index={2}
           eyebrow="Assessment"
-          title="How a load gets graded"
-          intro="Grading is where most yards lose people's trust. Ours happens in front of you, before the load is tipped."
+          title="The four parts of a clear quote"
+          intro="A useful number explains the assumed grade, net weight, deductions and settlement terms."
         />
         <Steps items={grading} />
       </Section>
@@ -121,14 +118,14 @@ export default function PricesPage() {
           handed — and that gap is arithmetic nobody shows them. Setting
           it out as an expression, on the sheet surface, makes the docket
           legible before they are standing at the bridge holding one. */}
-      <Section id="settlement" tone="sheet" className="scroll-mt-20">
+      <Section id="settlement" tone="sheet" className="scroll-mt-20 pb-24 pt-20 lg:pb-32 lg:pt-28">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <div>
             <SectionHead
               index={3}
               eyebrow="The arithmetic"
-              title="How the figure on your docket is built"
-              intro="Six terms, all of them printed on the paper you keep. Nothing in the sum happens out of your sight, which is the entire reason it is worth writing down."
+              title="The arithmetic behind a weight-based quote"
+              intro="The same six terms should be clear before handover and traceable on the final transaction record."
               className="mb-0"
             />
           </div>
@@ -140,16 +137,15 @@ export default function PricesPage() {
                   key={w.step}
                   className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 px-5 py-4"
                 >
-                  <dt className="mono text-[1.05rem] font-medium">{w.step}</dt>
+                  <dt className="mono text-base font-medium">{w.step}</dt>
                   <dd className="t-spec t-muted">{w.note}</dd>
                 </div>
               ))}
             </dl>
             <Callout className="mt-8">
-              A quote given over the phone is against the grade you describe. The
-              settlement is against the grade in front of the grader — which is
-              why the two can differ, and why the difference gets named rather
-              than quietly applied.{" "}
+              A remote quote relies on the grade and condition described. Final
+              terms can change when the material differs, so ask for any change
+              and its reason to be stated before acceptance.{" "}
               <ArrowLink href="/what-we-buy#deductions" tone="accent">
                 What gets deducted
               </ArrowLink>
@@ -172,28 +168,28 @@ export default function PricesPage() {
         id="how-pricing-works"
         index={4}
         eyebrow="Understanding the number"
-        title="Why nobody in this trade posts a fixed price"
-        lead="Scrap is a commodity, and commodities are repriced continuously. A yard advertising a rate that never moves is either behind the market or pricing in a buffer to protect itself from it."
+        title="Why scrap prices move"
+        lead="The value starts with the commodity market, then changes with grade, recovered yield, quantity and the work needed to prepare the material for its next buyer."
         points={[
           {
-            term: "The metal is sold before you are paid for it",
+            term: "Commodity values move",
             detail:
-              "A merchant buys your load against what a mill or refinery will pay for that grade, at the time it is remarketed. That underlying number moves daily on international markets, so the rate offered has to move with it.",
+              "Published metal markets change continuously. A quote therefore applies at a stated time and should not be treated as a permanent price list.",
           },
           {
-            term: "A posted rate has to be conservative",
+            term: "Grade changes recovered yield",
             detail:
-              "If a yard commits to a printed number for a month, it has to set that number low enough to survive a month of the market moving against it. You pay for that safety margin on every load, including the ones where the market moved the other way.",
+              "Clean, separated metal produces more saleable material than a mixed or contaminated load. That difference is why two visually similar loads can receive different quotes.",
           },
           {
-            term: "A formula moves both ways",
+            term: "Regular volume may suit a formula",
             detail:
-              "Contract pricing nominates a published index and an agreed treatment charge, so the rate rises when the market rises instead of waiting for a renegotiation. It also falls when the market falls — that is the honest half of the arrangement, and it is why it suits regular tonnage rather than a one-off load.",
+              "For recurring tonnage, a written proposal may use a nominated index and agreed treatment charge. The exact index, review cycle and settlement terms belong in the agreement.",
           },
           {
-            term: "Quoting per load is not evasion",
+            term: "A useful quote states its assumptions",
             detail:
-              "It is how you get today's number instead of last month's. Send a photograph and a rough weight and the answer comes back the same day, against the grade we would actually pay on.",
+              "Send the approximate weight, location, material condition and visible markings. Have photographs ready if more detail is needed. The response should state the assumed grade and anything that could alter the figure.",
           },
         ]}
         footer={
@@ -204,23 +200,23 @@ export default function PricesPage() {
       />
 
       {/* contract ----------------------------------------------------- */}
-      <Section id="contract" tone="slab">
+      <Section id="contract" tone="slab" className="pb-20 pt-12 lg:pb-28 lg:pt-16">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           <div>
             <SectionHead
               index={5}
               eyebrow="Volume & contract"
-              title="Index-linked pricing for regular tonnage"
-              intro="If you generate metal on a schedule, a posted board rate is the wrong instrument. Contract customers are priced as a formula — a published index, less an agreed treatment charge — so the rate moves with the market instead of with a phone call."
+              title="Pricing options for regular tonnage"
+              intro="If metal is generated on a schedule, ask whether a written index-linked formula is suitable. The proposal should state every variable and review point."
               className="mb-0"
             />
             <TickList
               className="mt-7"
               items={[
-                "Index nominated in the agreement",
-                "Treatment charge fixed for the term",
-                "Reconciliation by grade and tonnage",
-                "Rebate paid on a set day, not on request",
+                "Index and reference date named in the agreement",
+                "Treatment and transport charges written down",
+                "Reconciliation method stated by grade and tonnage",
+                "Settlement timing confirmed before service starts",
               ]}
             />
             <div className="mt-8">
@@ -230,7 +226,7 @@ export default function PricesPage() {
 
           <Panel>
             <h3>The fine print, in plain English</h3>
-            <div className="mt-5 space-y-5 text-[0.95rem] leading-relaxed t-muted">
+            <div className="mt-5 space-y-5 text-base leading-relaxed t-muted">
               <p>
                 <strong className="font-semibold">
                   A quote is not the final rate.
@@ -239,30 +235,19 @@ export default function PricesPage() {
                 Contamination, moisture, attachments and size all affect yield.
               </p>
               <p>
-                <strong className="font-semibold">
-                  You are paid in cash on the spot.
-                </strong>{" "}
-                Settlement happens at the bridge once the tare weight is in, or
-                by electronic transfer to an account in your name if you would
-                rather. Say which at the weighbridge.
+                <strong className="font-semibold">Settlement is agreed per load.</strong>{" "}
+                Confirm the payment method, timing and any limits before the
+                material is handed over.
               </p>
               <p>
-                <strong className="font-semibold">Photo ID is required.</strong>{" "}
-                Every transaction is recorded against a seller and a vehicle.
-                It is the most effective control against stolen metal entering
-                the supply chain.
+                <strong className="font-semibold">Records may be required.</strong>{" "}
+                Ask which identity, vehicle and ownership documents apply to the
+                proposed transaction before travelling.
               </p>
             </div>
           </Panel>
         </div>
       </Section>
-
-      <CtaBand
-        title="Not sure what grade you've got?"
-        body="Send a photo and a rough weight. A grader will tell you what it is, what it's worth today, and whether it's worth separating further before you bring it in."
-        primary={{ label: "Ask a grader", href: "/contact" }}
-        secondary={{ label: "What we buy", href: "/what-we-buy" }}
-      />
     </>
   );
 }
