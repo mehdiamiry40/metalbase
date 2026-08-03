@@ -15,7 +15,7 @@ licensed dealer.
 
 | Field | Where it appears | Consequence while null |
 |---|---|---|
-| ~~`phone` + `phoneLabel`~~ | header, footer, contact, mobile bar | ✅ **Set.** `+61481438444` / `0481 438 444`. Click-to-call is live everywhere and the mobile bar now shows "Call". |
+| ~~`phone` + `phoneLabel`~~ | header, footer, contact, mobile bar | ✅ **Set.** `+61410233335` / `0410 233 335`. Click-to-call is live everywhere and the mobile bar now shows "Call". |
 | `email` | footer, contact, legal | No direct email route |
 | `head` | footer, legal, `PostalAddress` schema | No address in the local-business markup, which is a ranking input for local search |
 | `abn` | footer, legal | Required on Australian commercial material |
