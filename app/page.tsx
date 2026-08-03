@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Photo from "@/components/Photo";
-import { Split, Steps } from "@/components/sections";
+import { Essay, Split, Steps } from "@/components/sections";
 import { Button, CtaBand, Eyebrow, StatBand } from "@/components/ui";
 import { company, priceGroups, stats } from "@/lib/site";
 
@@ -113,7 +113,7 @@ export default function Home() {
       </Split>
 
       {/* --------------------------------------------------- how it works */}
-      <section className="border-t hair bg-paper py-16 lg:py-24">
+      <section className="border-t hair bg-paper py-20 lg:py-32">
         <div className="shell">
           <div className="rule max-w-3xl">
             <h2>How a weigh-in works</h2>
@@ -131,6 +131,89 @@ export default function Home() {
           )}
         </div>
       </section>
+
+      {/* ------------------------------------------------- why grading
+          New copy, and deliberately argumentative rather than
+          descriptive. Everything above this point tells someone what
+          happens; this tells them why it is arranged that way, which is
+          the thing that actually decides whether they drive to us or to
+          the yard closer to home.
+
+          Kept free of specific claims — no percentages, no tonnages, no
+          comparisons to named competitors. Every sentence here is true
+          of how the process works, not of numbers nobody has verified. */}
+      <Essay
+        id="grading"
+        eyebrow="Why it works this way"
+        title="Grading in front of you is the whole argument"
+        lead="Almost every dispute in this trade comes from the same place: someone found out what their metal was worth after they had already tipped it."
+        points={[
+          {
+            term: "The load is called before it is tipped",
+            detail:
+              "Once material is on the pile it is mixed with everyone else's and the conversation becomes your memory against ours. Calling the grade while it is still on your vehicle keeps the evidence in front of both of us, which is the only reason the number is arguable at all.",
+          },
+          {
+            term: "Disagreeing is a normal part of it",
+            detail:
+              "Alloys are genuinely hard to identify by eye, and a grader who is never wrong is not being careful, they are guessing confidently. If the call looks wrong to you, ask for the XRF gun. That is what it is there for, and using it costs nothing.",
+          },
+          {
+            term: "Deductions get named, not absorbed",
+            detail:
+              "Attachments, moisture and contamination all reduce what a tonne is actually worth, so they have to come off somewhere. The difference between merchants is whether you are told which deduction applied and why, or simply handed a smaller number at the end.",
+          },
+          {
+            term: "The docket is the record",
+            detail:
+              "Gross weight, tare, net, grade. Written down, printed, and retained by both sides. It is unglamorous, and it is the reason a disagreement three weeks later is a five-minute conversation rather than an argument.",
+          },
+        ]}
+        footer={
+          <Button href="/prices" variant="outline">
+            How grading works
+          </Button>
+        }
+      />
+
+      {/* ------------------------------------------------ separation
+          Practical guidance rather than positioning. This is the single
+          highest-return thing a seller can do, it costs them nothing to
+          act on, and explaining it honestly is worth more trust than
+          another paragraph about our values. */}
+      <Essay
+        id="separation"
+        eyebrow="Before you load"
+        title="Sorting is the best-paid hour on any scrap job"
+        lead="Nothing else a seller does moves the return as much, and none of it needs equipment you do not already own."
+        points={[
+          {
+            term: "A mixed load pays the rate of its worst part",
+            detail:
+              "This is the rule that surprises people. Copper thrown in with general non-ferrous does not average out — it is graded as the mix. Pulling the copper into its own pile is the difference between two rates, not a slightly better one.",
+          },
+          {
+            term: "Anything that is not the metal is a deduction",
+            detail:
+              "Steel brackets bolted to aluminium, plastic tanks on radiators, timber packed through steel. It all has to be removed at some point, and it is far cheaper to do it with a spanner at your end than to have it taken off the grade at ours.",
+          },
+          {
+            term: "Cable is priced on what is inside it",
+            detail:
+              "Insulated cable is graded by recoverable copper, so heavy power cable and thin data flex are not the same product. Keeping them apart takes a few minutes and stops the good cable being graded down to the level of the poor.",
+          },
+          {
+            term: "Ask before you cut anything unusual",
+            detail:
+              "Some items are worth more intact than as metal, and a few are regulated and must not be cut at all. A photo and thirty seconds of a grader's time is the cheapest possible way to find out which one you are holding.",
+          },
+        ]}
+        footer={
+          <Button href="/what-we-buy" variant="outline">
+            Prep guidance
+          </Button>
+        }
+      />
 
       <CtaBand
         title="Tell us what you've got and we'll price it"

@@ -182,3 +182,62 @@ export function DefinitionRows({
     </dl>
   );
 }
+
+/* ------------------------------------------------------------------
+   Essay — the editorial long-form block.
+
+   An asymmetric two-column arrangement: the heading holds the left
+   rail and stays put while the argument scrolls past it on the right.
+   That is the whole device. It works because the eye keeps a fixed
+   reference point for what it is reading about, which a stacked
+   heading loses the moment it scrolls away.
+
+   Points are numbered in the margin rather than bulleted inline. A
+   bullet says "here is a list"; a margin figure says "here is step two
+   of four", which is the right signal for a sequence of reasoning.
+
+   The sticky rail is deliberately lg-only. On a phone there is no
+   second column to be sticky against, and a heading pinned over
+   narrow prose eats the screen it is trying to explain.
+   ------------------------------------------------------------------ */
+
+export function Essay({
+  id,
+  eyebrow,
+  title,
+  lead,
+  points,
+  footer,
+}: {
+  id?: string;
+  eyebrow: string;
+  title: string;
+  lead?: string;
+  points: { term: string; detail: string }[];
+  footer?: ReactNode;
+}) {
+  return (
+    <section id={id} className="on-light scroll-mt-20 border-t hair bg-paper py-20 lg:py-32">
+      <div className="shell grid gap-14 lg:grid-cols-[minmax(0,24rem)_1fr] lg:gap-24">
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <Eyebrow>{eyebrow}</Eyebrow>
+          <h2 className="mt-3">{title}</h2>
+          {lead && <p className="t-lead measure mt-6 t-muted">{lead}</p>}
+          {footer && <div className="mt-8">{footer}</div>}
+        </div>
+
+        <div className="border-t hair">
+          {points.map((p, i) => (
+            <article key={p.term} className="rise border-b hair py-9 first:pt-9">
+              <p className="marker">{String(i + 1).padStart(2, "0")}</p>
+              <h3 className="mt-3">{p.term}</h3>
+              <p className="measure-wide mt-4 leading-relaxed t-muted">
+                {p.detail}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

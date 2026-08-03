@@ -146,7 +146,7 @@ export function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={`${tones[tone]} py-18 lg:py-24 ${className}`}>
+    <section id={id} className={`${tones[tone]} py-20 lg:py-32 ${className}`}>
       <div className="shell">{children}</div>
     </section>
   );
@@ -242,7 +242,7 @@ export function CtaBand({
 }) {
   return (
     <section className="on-dark bg-graphite">
-      <div className="shell py-18 lg:py-24">
+      <div className="shell py-20 lg:py-32">
         <div className="rule" />
         <h2 className="max-w-3xl">{title}</h2>
         <p className="t-lead mt-5 max-w-2xl t-muted">{body}</p>
