@@ -32,7 +32,7 @@ export default function MobileActionBar() {
 
   return (
     <div
-      className={`on-dark fixed inset-x-0 bottom-0 z-40 border-t hair bg-ink/95 backdrop-blur transition-transform duration-300 lg:hidden ${
+      className={`on-light fixed inset-x-0 bottom-0 z-40 border-t hair bg-chalk/95 backdrop-blur transition-transform duration-300 lg:hidden ${
         show ? "translate-y-0" : "translate-y-full"
       }`}
       // Hidden from assistive tech when off-screen so it isn't a stray
