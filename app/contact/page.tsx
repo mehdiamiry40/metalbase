@@ -1,38 +1,30 @@
-import type { Metadata } from "next";
 import QuoteForm from "@/components/QuoteForm";
 import { PageHeader } from "@/components/sections";
 import {
   Callout,
   Panel,
   Section,
-  SpecStrip,
 } from "@/components/ui";
 import { company } from "@/lib/site";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/contact" },
-  title: "Contact & Get a Quote",
+export const metadata = pageMetadata({
+  path: "/contact",
+  title: "Get a Scrap Metal Quote in Brisbane",
   description:
-    "Talk to the MetalBase trade desk in Brisbane. Request a quote, book a bin, arrange a site assessment or open a trade account.",
-};
+    "Send the metal type, estimated quantity, condition and Brisbane suburb for an indicative scrap metal quote.",
+});
 
 export default function ContactPage() {
   return (
     <>
       <PageHeader
         eyebrow="Get in touch"
-        title="Describe the metal. Get the next step."
-        intro="Use this form for a price enquiry, collection request, site assessment, trade account or reporting requirement. Add a rough weight, condition and visible markings when you can."
+        photo="mixed-parts"
+        title="Tell us what you have"
+        intro="Send the material type, rough quantity, condition and suburb. Add access details if collection may be needed."
         trail={[{ label: "Home", href: "/" }, { label: "Contact" }]}
-      >
-        <SpecStrip
-          items={[
-            { k: "Useful detail", v: "Condition + rough weight" },
-            { k: "For collection", v: "Site + access" },
-            { k: "Next step", v: "Confirmed directly" },
-          ]}
-        />
-      </PageHeader>
+      />
 
       <Section className="pb-20 pt-12 lg:pb-28 lg:pt-16">
         <div className="grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-start">
@@ -51,16 +43,14 @@ export default function ContactPage() {
             <Panel id="call" className="scroll-mt-24 border-2">
               {company.phone ? (
                 <>
-                  <p className="t-index t-accent">Fastest route</p>
+                  <p className="t-index t-accent">Call us</p>
                   <a
                     href={`tel:${company.phone.replace(/\s/g, "")}`}
                     className="mono mt-3 block text-3xl font-medium leading-none tracking-[-0.03em] hover:text-[color:var(--accent-text)]"
                   >
                     {company.phoneLabel ?? company.phone}
                   </a>
-                  <p className="mt-3 text-base t-muted">
-                    Call about a load
-                  </p>
+                  <p className="mt-3 text-base t-muted">Talk through a load</p>
                 </>
               ) : (
                 <>
@@ -70,8 +60,7 @@ export default function ContactPage() {
                   </p>
                   <p className="mt-3 text-base leading-relaxed t-muted">
                     Send the form with the material condition and rough size or
-                    weight. Have a clear photo ready if the trade desk requests
-                    one later.
+                    weight. Have a clear photo ready if we request one later.
                   </p>
                 </>
               )}
@@ -89,9 +78,9 @@ export default function ContactPage() {
               <h2 className="text-xl">What happens next</h2>
               <ol className="mt-4 space-y-4 text-base leading-relaxed t-muted">
                 <li>
-                  <span className="mono font-medium t-accent">01</span> The trade
-                  desk reviews the material details and may ask for a clearer
-                  description or photo.
+                  <span className="mono font-medium t-accent">01</span> We review
+                  the material details and may ask for a clearer description or
+                  photo.
                 </li>
                 <li>
                   <span className="mono font-medium t-accent">02</span> You get
@@ -100,8 +89,8 @@ export default function ContactPage() {
                 </li>
                 <li>
                   <span className="mono font-medium t-accent">03</span> If it
-                  suits the load, the trade desk confirms the location, timing
-                  and commercial terms with you.
+                  suits the load, we confirm the location, timing and commercial
+                  terms with you.
                 </li>
               </ol>
             </div>

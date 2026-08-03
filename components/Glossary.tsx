@@ -11,10 +11,8 @@ import { ArrowRight } from "@/components/ui";
    them.
 
    Typeset as a reference document rather than an article: a light
-   sheet, terms in mono because they are codes, a one-line definition
-   that stands alone, and the longer note underneath for anyone who
-   wants it. That structure means the page is usable by someone
-   scanning for one word, which is how a glossary is actually read.
+   sheet, terms in mono because they are codes, and one concise
+   definition per row. The page is built for scanning one word.
    ================================================================== */
 
 const groups = ["Weighing & settlement", "Grades & materials", "Processing & plant"] as const;
@@ -36,11 +34,6 @@ function Entry({ entry }: { entry: GlossaryEntry }) {
         <p className="measure-wide text-base leading-relaxed">
           {entry.short}
         </p>
-        {entry.detail && (
-          <p className="measure-wide mt-3 text-base leading-relaxed t-muted">
-            {entry.detail}
-          </p>
-        )}
       </dd>
     </div>
   );
@@ -110,7 +103,7 @@ export function GlossarySchema() {
     hasDefinedTerm: glossary.map((e) => ({
       "@type": "DefinedTerm",
       name: e.term,
-      description: e.detail ? `${e.short} ${e.detail}` : e.short,
+      description: e.short,
     })),
   };
   return (

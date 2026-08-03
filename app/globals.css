@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 /* ==================================================================
-   MetalBase design system — galvanised, direct and operational.
+   MetalBase design system — architectural, direct and image led.
 
    Six colours, two type families, a 4px spacing grid and square edges.
-   Signal blue is reserved for primary actions and light-surface focus;
-   hierarchy everywhere else comes from scale, weight, rules and space.
+   Deep indigo carries the identity; white space, photography and fine
+   rules create hierarchy without decorative cards or stock effects.
    ================================================================== */
 
 @theme {
   /* Canonical, subject-specific palette. */
-  --color-furnace: #182024;
-  --color-steel: #4d595f;
-  --color-galvanised: #b8c1c5;
-  --color-yard-fog: #e8ecee;
-  --color-scale-paper: #f7f9f9;
-  --color-signal: #075ea8;
+  --color-furnace: #1d2747;
+  --color-steel: #5f6675;
+  --color-galvanised: #d8dce4;
+  --color-yard-fog: #f1f3f6;
+  --color-scale-paper: #ffffff;
+  --color-signal: #44527e;
 
   /* Compatibility aliases keep existing utilities semantic while the
      new named tokens remain the only source of colour. */
@@ -36,11 +36,11 @@
 
   /* Two families only. Numeric data uses the body face with tabular
      figures rather than importing a third, decorative mono family. */
-  --font-sans: var(--font-plex-sans), "IBM Plex Sans", -apple-system,
+  --font-sans: var(--font-open-sans), "Open Sans", -apple-system,
     BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --font-display: var(--font-barlow-condensed), "Arial Narrow", "Helvetica Neue",
-    Arial, sans-serif;
-  --font-mono: var(--font-plex-sans), "IBM Plex Sans", ui-monospace,
+  --font-display: var(--font-barlow), "Barlow", "Helvetica Neue", Arial,
+    sans-serif;
+  --font-mono: var(--font-open-sans), "Open Sans", ui-monospace,
     SFMono-Regular, Menlo, Consolas, monospace;
 
   /* Tailwind's named utilities are pinned to the documented scale.
@@ -48,21 +48,30 @@
   --text-xs: var(--type-1);
   --text-sm: var(--type-2);
   --text-base: var(--type-3);
+  --text-lg: 1.125rem;
   --text-xl: var(--type-4);
   --text-2xl: var(--type-5);
   --text-3xl: var(--type-5);
   --text-4xl: var(--type-6);
+  --text-xs--line-height: 1rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl--line-height: 1.5rem;
+  --text-2xl--line-height: 2.125rem;
+  --text-3xl--line-height: 2.125rem;
+  --text-4xl--line-height: 2.875rem;
 }
 
 :root {
-  /* Explicit type scale: 12 / 14 / 16 / 20 / 28 / 40 / 56. */
+  /* Explicit type scale: 12 / 14 / 16 / 20 / 32 / 40 / 72. */
   --type-1: 0.75rem;
   --type-2: 0.875rem;
   --type-3: 1rem;
   --type-4: 1.25rem;
-  --type-5: 1.75rem;
+  --type-5: 2rem;
   --type-6: 2.5rem;
-  --type-7: 3.5rem;
+  --type-7: 4.5rem;
 
   /* One 4px-based spacing scale. */
   --space-1: 0.25rem;
@@ -93,8 +102,16 @@
 @layer base {
   html {
     scroll-behavior: auto;
+    scroll-padding-top: 5rem;
+    scroll-padding-bottom: 6rem;
     -webkit-text-size-adjust: 100%;
     background: var(--color-scale-paper);
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      scroll-padding-bottom: 0;
+    }
   }
 
   body {
@@ -102,16 +119,15 @@
     color: var(--color-furnace);
     font-family: var(--font-sans);
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.7;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 
     --muted: var(--color-steel);
     --hair: var(--color-galvanised);
-    --accent-text: var(--color-furnace);
+    --accent-text: var(--color-signal);
     --focus: var(--color-signal);
-    --status: var(--color-steel);
     --surface: var(--color-scale-paper);
     --btn-fill: var(--color-signal);
     --btn-fill-hover: var(--color-furnace);
@@ -141,22 +157,22 @@
 
   h1 {
     font-size: var(--type-6);
-    line-height: 1.05;
+    line-height: 1.04;
     letter-spacing: -0.02em;
     text-wrap: balance;
   }
 
   h2 {
     font-size: var(--type-5);
-    line-height: 1.08;
+    line-height: 1.15;
     letter-spacing: -0.015em;
     text-wrap: balance;
   }
 
   h3 {
-    font-size: var(--type-5);
-    line-height: 1.1;
-    letter-spacing: -0.01em;
+    font-size: var(--type-4);
+    line-height: 1.25;
+    letter-spacing: -0.003em;
   }
 
   h4 {
@@ -164,6 +180,10 @@
     font-weight: 600;
     line-height: 1.1;
     letter-spacing: -0.01em;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   @media (min-width: 768px) {
@@ -199,10 +219,9 @@
   --hair: var(--color-steel);
   --accent-text: var(--color-scale-paper);
   --focus: var(--color-scale-paper);
-  --status: var(--color-galvanised);
   --surface: var(--color-furnace);
   --btn-fill: var(--color-signal);
-  --btn-fill-hover: var(--color-steel);
+  --btn-fill-hover: var(--color-scale-paper);
   --btn-label: var(--color-scale-paper);
   --btn-border: var(--color-scale-paper);
 }
@@ -211,9 +230,8 @@
   color: var(--color-furnace);
   --muted: var(--color-steel);
   --hair: var(--color-galvanised);
-  --accent-text: var(--color-furnace);
+  --accent-text: var(--color-signal);
   --focus: var(--color-signal);
-  --status: var(--color-steel);
   --surface: var(--color-scale-paper);
   --btn-fill: var(--color-signal);
   --btn-fill-hover: var(--color-furnace);
@@ -225,11 +243,7 @@
    paint with it rather than hardcoding a colour it cannot verify. Only
    .ruled needs it today, but the point is that a component dropped onto
    an unexpected band cannot end up painting ink cells onto chalk.
-   The two bands that are not the surface default say so. */
-.surface-slab {
-  --surface: var(--color-slab);
-}
-
+   The alternate bands that are not the surface default say so. */
 .surface-shaft {
   --surface: var(--color-shaft);
 }
@@ -246,7 +260,7 @@
    catches it. Over a photo, everything is white. */
 .over-photo {
   color: var(--color-scale-paper);
-  --muted: var(--color-yard-fog);
+  --muted: var(--color-scale-paper);
   --accent-text: var(--color-scale-paper);
   --focus: var(--color-scale-paper);
   --hair: var(--color-steel);
@@ -265,17 +279,10 @@
     color: var(--accent-text);
   }
 
-  .t-status {
-    color: var(--status);
-  }
-
   .hair {
     border-color: var(--hair);
   }
 
-  .divide-hair > * + * {
-    border-color: var(--hair);
-  }
 }
 
 /* ==================================================================
@@ -331,7 +338,7 @@
 
 .t-lead {
   font-size: var(--type-4);
-  line-height: 1.6;
+  line-height: 1.55;
   letter-spacing: -0.01em;
 }
 
@@ -347,12 +354,12 @@
 }
 
 /* ------------------------------------------------------------------
-   layout — a 1280px shell with a visible gutter rail
+   layout — a calm 1240px architectural rail with generous side space
    ------------------------------------------------------------------ */
 
 :root {
-  --shell: 1260px;
-  --gutter: max(1.25rem, calc((100vw - var(--shell)) / 2));
+  --shell: 1240px;
+  --gutter: 1.25rem;
 }
 
 .shell {
@@ -363,14 +370,12 @@
 }
 
 @media (min-width: 768px) {
-  .shell {
-    padding-inline: 2.5rem;
+  :root {
+    --gutter: max(3rem, calc((100vw - var(--shell)) / 2 + 3rem));
   }
-}
 
-@media (min-width: 1340px) {
   .shell {
-    padding-inline: 0;
+    padding-inline: 3rem;
   }
 }
 
@@ -401,15 +406,6 @@
    visible structure rather than incidental borders.
    ------------------------------------------------------------------ */
 
-/* Vertical hairline between grid columns, drawn only where there is a
-   column to divide. */
-@media (min-width: 768px) {
-  .rail > * + * {
-    border-left: 1px solid var(--hair);
-    padding-left: 2rem;
-  }
-}
-
 /* ------------------------------------------------------------------
    Ruled grid — the gap IS the rule.
 
@@ -436,7 +432,7 @@
 
 /* A note set against a strong neutral keyline. */
 .callout {
-  border-left: 4px solid var(--color-steel);
+  border-left: 4px solid var(--color-signal);
   border-top: 1px solid var(--hair);
   border-bottom: 1px solid var(--hair);
   background: transparent;
@@ -451,20 +447,21 @@
 
    `.btn-solid` reads its fill and label from the surface, so a primary
    CTA cannot lose contrast with the band it happens to sit on. That is
-   Primary actions are the only place signal blue appears as a fill. */
+   Primary actions are the only place oxide signal appears as a fill. */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  min-height: var(--space-12);
-  padding: var(--space-3) var(--space-6);
+  min-height: 3.5rem;
+  padding: var(--space-3) var(--space-8);
   border: 1px solid transparent;
   border-radius: 0;
   font-family: var(--font-sans);
   font-size: var(--type-2);
   font-weight: 600;
-  letter-spacing: 0;
+  line-height: 1.25rem;
+  letter-spacing: 0.01em;
   transition:
     background-color var(--motion-fast) var(--motion-ease),
     border-color var(--motion-fast) var(--motion-ease),
@@ -480,6 +477,11 @@
 .btn-solid:hover {
   background: var(--btn-fill-hover);
   border-color: var(--btn-fill-hover);
+}
+
+.on-dark .btn-solid:hover {
+  border-color: var(--color-scale-paper);
+  color: var(--color-furnace);
 }
 
 /* Outline. Border sits at full surface colour rather than the hairline
@@ -541,7 +543,7 @@
   position: relative;
   overflow: hidden;
   background: var(--color-yard-fog);
-  border: 1px solid var(--hair);
+  border: 0;
 }
 
 .editorial-photo::after {
@@ -552,22 +554,47 @@
   pointer-events: none;
 }
 
-.soft-card {
-  border: 1px solid var(--hair);
-  background: var(--color-scale-paper);
+/* Preserve the natural rust, copper, machinery and sky colours. Hero
+   darkness is concentrated behind the copy instead of washing the whole
+   photograph in navy; tiles darken only where their labels sit. */
+.site-photo {
+  filter: saturate(1.08) contrast(1.02);
 }
 
-.cta-warm {
-  background: var(--color-furnace);
-  color: var(--color-scale-paper);
-  --muted: var(--color-galvanised);
-  --hair: var(--color-steel);
-  --accent-text: var(--color-scale-paper);
-  --focus: var(--color-scale-paper);
-  --btn-fill: var(--color-signal);
-  --btn-fill-hover: var(--color-steel);
-  --btn-label: var(--color-scale-paper);
-  --btn-border: var(--color-scale-paper);
+.photo-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgb(10 18 34 / 36%) 0%,
+    rgb(10 18 34 / 74%) 25%,
+    rgb(10 18 34 / 76%) 75%,
+    rgb(10 18 34 / 36%) 100%
+  );
+  pointer-events: none;
+}
+
+.photo-scrim-soft {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    0deg,
+    rgb(10 18 34 / 88%) 0%,
+    rgb(10 18 34 / 54%) 34%,
+    rgb(10 18 34 / 8%) 72%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.image-link img {
+  transition: transform 180ms var(--motion-ease), filter 180ms var(--motion-ease);
+}
+
+.image-link:hover img,
+.image-link:focus-visible img {
+  transform: scale(1.025);
+  filter: saturate(1.16) contrast(1.03);
 }
 
 } /* end @layer components */

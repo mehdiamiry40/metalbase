@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { METALBASE_MARK_PATHS } from "@/lib/brand";
 
 /* ------------------------------- icons ----------------------------- */
 
@@ -106,10 +107,88 @@ export function ChevronDown({ className = "" }: { className?: string }) {
   );
 }
 
+export type YardIconName =
+  | "coil"
+  | "beam"
+  | "motor"
+  | "tag"
+  | "sort"
+  | "scale"
+  | "bin"
+  | "pin"
+  | "trend";
+
+/**
+ * A small industrial icon set for visual wayfinding. The meaning always
+ * remains in adjacent text, so every glyph is decorative and silent to
+ * assistive technology.
+ */
+export function YardIcon({
+  name,
+  className = "",
+}: {
+  name: YardIconName;
+  className?: string;
+}) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="square"
+      strokeLinejoin="miter"
+      className={className}
+      aria-hidden="true"
+      focusable="false"
+    >
+      {name === "coil" && (
+        <>
+          <circle cx="10" cy="12" r="6" />
+          <circle cx="10" cy="12" r="2.5" />
+          <path d="M16 12h3a2 2 0 0 1 2 2v4h-3" />
+        </>
+      )}
+      {name === "beam" && (
+        <path d="M5 4h14M5 20h14M8 4v16M16 4v16M8 9h8M8 15h8" />
+      )}
+      {name === "motor" && (
+        <path d="M5 8h12v10H5zM8 5h6v3M17 11h3v4h-3M3 10h2v6H3M8 18v2M14 18v2" />
+      )}
+      {name === "tag" && (
+        <>
+          <path d="M4 5h8l8 8-7 7-9-9V5z" />
+          <circle cx="8.5" cy="9.5" r="1.25" />
+        </>
+      )}
+      {name === "sort" && (
+        <path d="M4 5h6v6H4zM14 5h6v6h-6zM4 15h6v4H4zM14 15h6v4h-6z" />
+      )}
+      {name === "scale" && (
+        <path d="M12 4v16M7 20h10M5 7h14M5 7l-3 6h6L5 7zM19 7l-3 6h6l-3-6z" />
+      )}
+      {name === "bin" && (
+        <path d="M6 7h12l-1 13H7L6 7zM4 7h16M9 4h6l1 3H8l1-3zM10 10v7M14 10v7" />
+      )}
+      {name === "pin" && (
+        <>
+          <path d="M12 21s6-6.2 6-11a6 6 0 1 0-12 0c0 4.8 6 11 6 11z" />
+          <circle cx="12" cy="10" r="2" />
+        </>
+      )}
+      {name === "trend" && (
+        <path d="M4 19V5M4 19h16M7 15l4-4 3 2 5-6M16 7h3v3" />
+      )}
+    </svg>
+  );
+}
+
 /* ------------------------------- logo ------------------------------
-   An M-shaped steel frame sits on a weighbridge deck. The mark is one
-   colour and takes that colour from its surface, so it remains legible
-   in the header, footer and favicon without an accent treatment.
+   Three solid steel plates fold into an M above a grounded base. The
+   compact silhouette reads clearly at favicon size and feels materially
+   stronger than the previous thin outline.
    ------------------------------------------------------------------ */
 
 /**
@@ -120,27 +199,18 @@ export function ChevronDown({ className = "" }: { className?: string }) {
  */
 export function Logo({ className = "" }: { className?: string }) {
   return (
-    <span className={`inline-flex items-center gap-2.5 ${className}`}>
+    <span className={`inline-flex items-center gap-2.5 sm:gap-3 ${className}`}>
       <svg
-        viewBox="0 0 34 34"
-        className="h-9 w-9 shrink-0"
+        viewBox="0 0 48 48"
+        className="h-9 w-9 shrink-0 sm:h-11 sm:w-11"
         aria-hidden="true"
+        focusable="false"
       >
-        <path
-          d="M4 24V6h6l7 10 7-10h6v18"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.25"
-          strokeLinejoin="miter"
-        />
-        <path
-          d="M2 28h30M7 28v3M27 28v3"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.25"
-        />
+        {METALBASE_MARK_PATHS.map((path) => (
+          <path key={path} d={path} fill="currentColor" />
+        ))}
       </svg>
-      <span className="font-display text-3xl font-bold uppercase leading-none tracking-[0.035em]">
+      <span className="font-display text-xl font-semibold uppercase leading-none tracking-[0.025em]">
         MetalBase
       </span>
     </span>
@@ -153,7 +223,7 @@ export function Logo({ className = "" }: { className?: string }) {
    ------------------------------------------------------------------ */
 
 const variants = {
-  /** Signal blue with a white label on every surface. */
+  /** Oxide signal with a light label on every surface. */
   solid: "btn-solid",
   /** Outlined in the surface colour; inverts on hover. */
   ghost: "btn-ghost",
@@ -354,7 +424,6 @@ export function StatBand({
 
 const surfaces = {
   ink: "",
-  slab: "surface-slab",
   shaft: "surface-shaft",
   chalk: "",
   sheet: "surface-sheet",
@@ -467,7 +536,7 @@ export function Breadcrumb({
   trail: { label: string; href?: string }[];
 }) {
   return (
-    <nav aria-label="Breadcrumb" className="t-spec mb-8">
+    <nav aria-label="Breadcrumb" className="t-spec">
       <ol className="flex flex-wrap items-center gap-2 t-muted">
         {trail.map((t, i) => (
           <li key={t.label} className="flex items-center gap-2">
@@ -475,53 +544,17 @@ export function Breadcrumb({
             {t.href ? (
               <Link
                 href={t.href}
-                className="underline decoration-1 underline-offset-4 transition-colors duration-[160ms] ease-out hover:text-furnace"
+                className="underline decoration-1 underline-offset-4 transition-colors duration-[160ms] ease-out hover:text-[color:var(--accent-text)]"
               >
                 {t.label}
               </Link>
             ) : (
-              <span>{t.label}</span>
+              <span aria-current="page">{t.label}</span>
             )}
           </li>
         ))}
       </ol>
     </nav>
-  );
-}
-
-export function CtaBand({
-  title,
-  body,
-  primary,
-  secondary,
-}: {
-  title: string;
-  body: string;
-  primary: { label: string; href: string };
-  secondary?: { label: string; href: string };
-}) {
-  return (
-    <section className="on-dark border-t hair bg-furnace">
-      <div className="shell py-12 lg:py-16">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-24">
-          <div>
-            <p className="t-index mb-4 t-muted">Trade desk</p>
-            <h2>{title}</h2>
-          </div>
-          <div>
-            <p className="measure t-muted">{body}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href={primary.href}>{primary.label}</Button>
-              {secondary && (
-                <Button href={secondary.href} variant="ghost">
-                  {secondary.label}
-                </Button>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -542,52 +575,5 @@ export function TickList({
         </li>
       ))}
     </ul>
-  );
-}
-
-/**
- * Shown where real data has not been supplied yet. Honest, not fake.
- * Development only — see DataRow below for why.
- */
-export function Pending({ children }: { children: ReactNode }) {
-  if (process.env.NODE_ENV === "production") return null;
-  return (
-    <span className="t-spec inline-flex items-center gap-1.5 border border-dashed hair px-2 py-0.5 t-muted">
-      {children}
-    </span>
-  );
-}
-
-/**
- * A labelled contact row that disappears entirely when there is no
- * value — label included.
- *
- * The footer previously rendered four dashed "to be confirmed" chips to
- * every visitor. That was honest, but a customer reading "ABN to be
- * confirmed" learns nothing and concludes the business is half-built.
- * A real company simply has no ABN line until it has an ABN: omitting
- * the row claims nothing, so it is equally honest, and it does not
- * advertise the gap.
- *
- * The source of truth stays `null` in lib/site.ts, where the launch
- * checklist keeps the missing value visible to the operator without
- * placing unfinished business details in the customer-facing UI.
- */
-export function DataRow({
-  label,
-  value,
-  children,
-}: {
-  label: string;
-  /** Row renders only when this is non-null. */
-  value: string | null;
-  children: ReactNode;
-}) {
-  if (!value) return null;
-  return (
-    <div>
-      <dt className="t-spec t-muted">{label}</dt>
-      <dd className="mt-1">{children}</dd>
-    </div>
   );
 }

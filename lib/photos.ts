@@ -48,10 +48,17 @@ export const photos = {
     page: "https://unsplash.com/photos/ng2_GHL76RQ",
   },
   cable: {
-    uid: "1518994255497-c5f17690567f",
-    alt: "Coiled copper cable stacked in a yard",
-    credit: "Daniel Fazio",
-    page: "https://unsplash.com/photos/m9LlUwkPvT8",
+    uid: "1714352069805-e0bf94d1381f",
+    alt: "A close view of copper-coloured wire and dark insulated cable",
+    credit: "Émile Dionne",
+    page: "https://unsplash.com/photos/eolqn65X-DE",
+  },
+  "copper-sheets": {
+    uid: "1753771145085-d71e89c23092",
+    alt: "Stacks of warm copper sheet bundled for storage",
+    credit: "Sikwe Scarter",
+    page:
+      "https://unsplash.com/photos/piles-of-copper-sheets-stacked-for-storage-d61RBncf9k8",
   },
   "mixed-parts": {
     uid: "1723365316514-8509dea457f2",
@@ -77,11 +84,25 @@ export const photos = {
     credit: "Jay Alexander",
     page: "https://unsplash.com/photos/uvATiTYQQ_8",
   },
+  "aluminium-cans": {
+    uid: "1745122552632-404174b2ed6e",
+    alt: "Colourful recycled aluminium cans arranged in a repeating pattern",
+    credit: "Daniel Romero",
+    page:
+      "https://unsplash.com/photos/recycled-cans-are-arranged-in-a-unique-pattern-Cyh8xJ_HbmU",
+  },
   gears: {
     uid: "1633281256183-c0f106f70d76",
     alt: "Machined steel gears and cast components",
     credit: "Elena Mozhvilo",
     page: "https://unsplash.com/photos/lVGr-HFxAfE",
+  },
+  "rusty-steel": {
+    uid: "1761665698864-02b1afa9060e",
+    alt: "Rusty steel offcuts and cable stacked for recovery",
+    credit: "Anneliese Klotz",
+    page:
+      "https://unsplash.com/photos/pile-of-rusty-metal-and-electrical-wires-PFdMhgjXgmw",
   },
   vehicle: {
     uid: "1585572214973-0fd84fd354fd",
@@ -106,6 +127,13 @@ export const photos = {
     alt: "Turnings and swarf from a machining operation",
     credit: "Pavel Neznanov",
     page: "https://unsplash.com/photos/w95Fb7EEcjE",
+  },
+  "machine-swarf": {
+    uid: "1763772212486-b8623d8e0e8b",
+    alt: "Metal turnings piled beside green industrial machinery",
+    credit: "Zoshua Colah",
+    page:
+      "https://unsplash.com/photos/metal-shavings-piled-next-to-industrial-machinery-d61lb2jY59g",
   },
 } satisfies Record<string, Entry>;
 

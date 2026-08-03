@@ -1,4 +1,5 @@
 import { PUBLISH_RATES, type PriceRow, priceGroups } from "@/lib/site";
+import { ChevronDown } from "@/components/ui";
 
 /* ==================================================================
    The grade ledger.
@@ -61,7 +62,8 @@ export function Ledger({
           <header className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 border-b hair pb-3">
             <h3>{group.title}</h3>
             <p className="t-spec t-muted">
-              {group.rows.length} grades · priced per{" "}
+              {group.rows.length} grades ·{" "}
+              {PUBLISH_RATES ? "priced per" : "quote required · per"}{" "}
               {group.rows[0]?.unit === "kg" ? "kilogram" : "tonne"}
             </p>
           </header>
@@ -71,6 +73,14 @@ export function Ledger({
               {group.note}
             </p>
           )}
+
+          <details className="group mt-7 border-y hair">
+            <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-5 py-4 font-semibold [&::-webkit-details-marker]:hidden">
+              <span>
+                View {group.rows.length} {group.title.toLowerCase()} specifications
+              </span>
+              <ChevronDown className="h-6 w-6 shrink-0 transition-transform duration-[160ms] ease-out group-open:rotate-180" />
+            </summary>
 
           {/* A real table, not a grid of divs: this is tabular data, and
               a screen reader user navigating it by column deserves the
@@ -86,10 +96,15 @@ export function Ledger({
               viewport on every page carrying the board. The table
               scrolled correctly the whole time, which is why it looked
               fine and measured wrong. */}
-          <div className="relative mt-7 overflow-x-auto">
-            <table className="w-full min-w-[34rem] border-collapse text-left">
+            <div className="relative overflow-x-auto border-t hair">
+            <table
+              className={`w-full border-collapse text-left ${
+                PUBLISH_RATES ? "min-w-[34rem]" : "min-w-[28rem]"
+              }`}
+            >
               <caption className="sr-only">
-                {group.title} scrap metal grades, specifications and rates
+                {group.title} scrap metal grades and specifications
+                {PUBLISH_RATES ? ", including indicative rates" : ""}
               </caption>
               <thead>
                 <tr className="border-b hair">
@@ -99,9 +114,11 @@ export function Ledger({
                   <th scope="col" className="t-spec py-3 pr-6 font-normal uppercase t-muted">
                     Specification
                   </th>
-                  <th scope="col" className="t-spec py-3 text-right font-normal uppercase t-muted">
-                    Rate
-                  </th>
+                  {PUBLISH_RATES && (
+                    <th scope="col" className="t-spec py-3 text-right font-normal uppercase t-muted">
+                      Rate
+                    </th>
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -116,14 +133,17 @@ export function Ledger({
                     <td className="py-4 pr-6 text-sm leading-snug t-muted">
                       {row.spec}
                     </td>
-                    <td className="whitespace-nowrap py-4 text-right">
-                      <Rate row={row} />
-                    </td>
+                    {PUBLISH_RATES && (
+                      <td className="whitespace-nowrap py-4 text-right">
+                        <Rate row={row} />
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
+            </div>
+          </details>
         </section>
       ))}
     </div>

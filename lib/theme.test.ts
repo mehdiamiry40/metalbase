@@ -57,12 +57,12 @@ const NOT_COLOURS = new Set([
 ]);
 
 const CANONICAL_COLOURS = [
-  "#182024", // furnace
-  "#4d595f", // steel
-  "#b8c1c5", // galvanised
-  "#e8ecee", // yard fog
-  "#f7f9f9", // scale paper
-  "#075ea8", // signal blue
+  "#1d2747", // furnace
+  "#5f6675", // steel
+  "#d8dce4", // galvanised
+  "#f1f3f6", // yard fog
+  "#ffffff", // scale paper
+  "#44527e", // signal indigo
 ] as const;
 
 describe("theme tokens", () => {
@@ -158,9 +158,9 @@ describe("theme tokens", () => {
       "--type-2: 0.875rem",
       "--type-3: 1rem",
       "--type-4: 1.25rem",
-      "--type-5: 1.75rem",
+      "--type-5: 2rem",
       "--type-6: 2.5rem",
-      "--type-7: 3.5rem",
+      "--type-7: 4.5rem",
       "--text-xs: var(--type-1)",
       "--text-sm: var(--type-2)",
       "--text-base: var(--type-3)",
@@ -189,8 +189,8 @@ describe("theme tokens", () => {
 
   it("loads no more than the two documented font families", () => {
     const layout = readFileSync(join(root, "app/layout.tsx"), "utf8");
-    expect(layout).toContain("Barlow_Condensed");
-    expect(layout).toContain("IBM_Plex_Sans");
+    expect(layout).toContain("Barlow");
+    expect(layout).toContain("Open_Sans");
     for (const retired of ["Poppins", "DM_Serif_Display", "Archivo", "IBM_Plex_Mono"]) {
       expect(layout).not.toContain(retired);
     }

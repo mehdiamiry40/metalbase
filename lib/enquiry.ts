@@ -80,9 +80,11 @@ export function sanitise(raw: RawEnquiry): CleanEnquiry {
 export function validate(data: CleanEnquiry): Record<string, string> {
   const errors: Record<string, string> = {};
   if (!data.name) errors.name = "Tell us your name.";
-  if (!data.email) errors.email = "We need an email to reply to.";
-  else if (!isEmail(data.email)) errors.email = "That email doesn't look right.";
-  if (!data.phone) errors.phone = "A phone number gets you a faster answer.";
+  if (!data.email && !data.phone) {
+    errors.contact = "Add an email address or phone number.";
+  } else if (data.email && !isEmail(data.email)) {
+    errors.email = "That email doesn't look right.";
+  }
   if (!data.enquiryType) errors.enquiryType = "Pick what you need.";
   return errors;
 }
@@ -92,8 +94,8 @@ export function formatSummary(data: CleanEnquiry): string {
     `Enquiry type: ${data.enquiryType}`,
     `Name: ${data.name}`,
     data.company && `Company: ${data.company}`,
-    `Email: ${data.email}`,
-    `Phone: ${data.phone}`,
+    data.email && `Email: ${data.email}`,
+    data.phone && `Phone: ${data.phone}`,
     data.suburb && `Suburb: ${data.suburb}`,
     data.volume && `Volume: ${data.volume}`,
     data.materials.length > 0 && `Materials: ${data.materials.join(", ")}`,
@@ -115,6 +117,7 @@ export function formatSummary(data: CleanEnquiry): string {
 
 export const WINDOW_MS = 60_000;
 export const MAX_PER_WINDOW = 5;
+const LIMITER_TIMEOUT_MS = 3_000;
 
 const local = new Map<string, { count: number; resetAt: number }>();
 
@@ -143,34 +146,64 @@ export function isDurableLimiterConfigured(
   );
 }
 
+type RateLimitOptions = {
+  env?: Record<string, string | undefined>;
+  fetcher?: typeof fetch;
+};
+
 /**
- * Shared counter via Upstash's REST API — INCR then EXPIRE on first hit.
- * Fails open: if Redis is unreachable we would rather accept a genuine
- * enquiry than drop it.
+ * Shared counter via one atomic Upstash transaction. Incrementing and setting
+ * the expiry in separate requests can leave a permanent key when the second
+ * request fails. Refreshing the expiry here creates a simple sliding window:
+ * a caller is allowed again WINDOW_MS after their latest attempt.
+ *
+ * If Redis is unreachable, the per-instance limiter remains as a bounded
+ * fallback rather than removing protection entirely.
  */
-export async function durableRateLimit(key: string): Promise<boolean> {
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+export async function durableRateLimit(
+  key: string,
+  options: RateLimitOptions = {},
+): Promise<boolean> {
+  const env = options.env ?? process.env;
+  const fetcher = options.fetcher ?? fetch;
+  const url = env.UPSTASH_REDIS_REST_URL?.replace(/\/$/, "");
+  const token = env.UPSTASH_REDIS_REST_TOKEN;
   if (!url || !token) return localRateLimit(key);
 
   try {
-    const headers = { Authorization: `Bearer ${token}` };
-    const res = await fetch(`${url}/incr/enquiry:${encodeURIComponent(key)}`, {
-      headers,
+    const redisKey = `enquiry:${encodeURIComponent(key).slice(0, 180)}`;
+    const res = await fetcher(`${url}/multi-exec`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       cache: "no-store",
+      signal: AbortSignal.timeout(LIMITER_TIMEOUT_MS),
+      body: JSON.stringify([
+        ["INCR", redisKey],
+        ["PEXPIRE", redisKey, WINDOW_MS],
+      ]),
     });
-    if (!res.ok) throw new Error(`Upstash INCR ${res.status}`);
-    const { result } = (await res.json()) as { result: number };
+    if (!res.ok) throw new Error("limiter_request_failed");
+    const result = (await res.json()) as
+      | [{ result?: number; error?: string }, { result?: number; error?: string }]
+      | { error?: string };
+    if (!Array.isArray(result)) throw new Error("limiter_transaction_failed");
 
-    if (result === 1) {
-      await fetch(
-        `${url}/expire/enquiry:${encodeURIComponent(key)}/${Math.ceil(WINDOW_MS / 1000)}`,
-        { headers, cache: "no-store" },
-      );
+    const [increment, expiry] = result;
+    if (
+      increment.error ||
+      expiry.error ||
+      typeof increment.result !== "number" ||
+      expiry.result !== 1
+    ) {
+      throw new Error("limiter_command_failed");
     }
-    return result > MAX_PER_WINDOW;
-  } catch (err) {
-    console.error("[enquiry] rate limiter unavailable, failing open:", err);
-    return false;
+    return increment.result > MAX_PER_WINDOW;
+  } catch {
+    // Do not log the key/IP or provider response body.
+    console.error("[enquiry] durable rate limiter unavailable; using local fallback.");
+    return localRateLimit(key);
   }
 }

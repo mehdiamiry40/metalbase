@@ -1,26 +1,26 @@
-import type { Metadata } from "next";
-import { DefinitionRows, PageHeader, Steps } from "@/components/sections";
+import { DefinitionRows, PageHeader } from "@/components/sections";
 import {
-  ArrowLink,
   Button,
-  Callout,
+  ChevronDown,
   Section,
   SectionHead,
+  YardIcon,
+  type YardIconName,
 } from "@/components/ui";
-import { deductions, identify } from "@/lib/site";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/what-we-buy" },
-  title: "What We Buy — Ferrous, Non-Ferrous & Specialty Scrap",
+export const metadata = pageMetadata({
+  path: "/what-we-buy",
+  title: "Scrap Metal We Buy in Brisbane",
   description:
-    "Copper, aluminium, brass, lead, stainless, heavy melting steel, cast iron, batteries, motors and e-waste. What MetalBase buys in Brisbane, how each stream is graded, and how to tell what you have.",
-};
+    "A practical guide to common copper, aluminium, brass, cable, steel and specialty scrap grades in Brisbane.",
+});
 
 const streams = [
   {
     id: "non-ferrous",
-    title: "Non-ferrous",
-    lead: "The money metals. Non-magnetic, higher value per kilo, and by far the most sensitive to how well you separate them.",
+    title: "Non-ferrous & stainless",
+    lead: "Higher-value grades where alloy, cleanliness and separation matter.",
     items: [
       {
         term: "Copper & cable",
@@ -30,7 +30,7 @@ const streams = [
       {
         term: "Brass & bronze",
         detail:
-          "Taps, valves, fittings, marine hardware and gunmetal. Drain water and remove steel bodies and gaskets — mixed brass with steel attached drops a full grade.",
+          "Taps, valves, fittings, marine hardware and gunmetal. Drain water and identify attached steel, rubber or plastic because it can change the grade.",
       },
       {
         term: "Aluminium",
@@ -52,7 +52,7 @@ const streams = [
   {
     id: "ferrous",
     title: "Ferrous",
-    lead: "Magnetic, priced per tonne, and mostly about size and cleanliness. If it fits a charge box and isn't full of concrete, it grades well.",
+    lead: "Iron-bearing grades such as steel and cast iron, where size and cleanliness can affect handling.",
     items: [
       {
         term: "Heavy melting steel",
@@ -67,7 +67,7 @@ const streams = [
       {
         term: "Light gauge & mixed steel",
         detail:
-          "Roofing, ducting, shelving, fencing and general clean-up steel under 3mm. Loose light gauge is bulky, so bring it baled or crushed if you can.",
+          "Roofing, ducting, shelving, fencing and general light steel. Send dimensions and condition details for bulky material.",
       },
       {
         term: "Cast iron",
@@ -84,12 +84,12 @@ const streams = [
   {
     id: "specialty",
     title: "Specialty streams",
-    lead: "Mixed-material items where the value sits inside. Sampled and graded individually, and a few of them are regulated.",
+    lead: "Mixed-material items that require individual assessment and may need special handling.",
     items: [
       {
         term: "Electric motors & armatures",
         detail:
-          "Single and three-phase motors, alternators, starters and stators. Gearboxes and pumps attached will drop the grade — split them if the bolts will move.",
+          "Single and three-phase motors, alternators, starters and stators. Identify attached gearboxes, pumps and housings in the quote request.",
       },
       {
         term: "Batteries",
@@ -115,30 +115,26 @@ const streams = [
   },
 ];
 
-const prep = [
+const prep: { title: string; body: string; icon: YardIconName }[] = [
   {
-    title: "Separate the alloys",
-    body: "A mixed bin can be assessed against its lowest recoverable component. Sorting obvious metals at the source can make the grade and quote easier to verify.",
+    title: "Separate grades",
+    body: "Keep copper, aluminium, cable and steel apart where practical.",
+    icon: "sort",
   },
   {
-    title: "Strip attachments",
-    body: "Steel brackets on aluminium, plastic tanks on radiators, timber in steel. Anything that isn't the metal reduces yield and therefore grade.",
+    title: "Remove attachments",
+    body: "Plastic, timber, rubber and mixed-metal fittings can reduce recoverable yield.",
+    icon: "tag",
   },
   {
     title: "Drain fluids",
-    body: "Oil, coolant, fuel and water all have to come out before material can be processed. Undrained items may be refused at the gate.",
+    body: "Identify oil, coolant, fuel, water or residue before anything is moved.",
+    icon: "bin",
   },
   {
-    title: "Size it if you can",
-    body: "Prepared dimensions can affect grade and handling. If you cannot cut it safely, send measurements and photographs so the next step can be confirmed.",
-  },
-  {
-    title: "Keep cable separate",
-    body: "Cable is priced on recoverable copper. Mixed into general non-ferrous it gets graded down to the mix.",
-  },
-  {
-    title: "Photograph anything unusual",
-    body: "A clear photograph, nameplate and rough dimensions make it much easier to confirm whether an unusual item is worth transporting.",
+    title: "Send useful photos",
+    body: "Show the whole load, visible markings and rough dimensions for unusual items.",
+    icon: "scale",
   },
 ];
 
@@ -157,8 +153,9 @@ export default function WhatWeBuyPage() {
     <>
       <PageHeader
         eyebrow="Materials"
+        photo="copper-sheets"
         title="What we buy"
-        intro="Use this as a grade guide, not automatic acceptance. Confirm the current yard, material, condition and paperwork before travelling — especially for vehicles, batteries, tanks, e-waste and regulated items."
+        intro="A practical guide to common ferrous, non-ferrous and specialty scrap. Confirm unusual or regulated items before loading."
         trail={[{ label: "Home", href: "/" }, { label: "What we buy" }]}
       >
         {/* One action per page header. The second button here pointed
@@ -185,76 +182,56 @@ export default function WhatWeBuyPage() {
         >
           <SectionHead
             index={i + 1}
-            eyebrow={`Grade family 0${i + 1}`}
+            eyebrow="Grade family"
             title={s.title}
             intro={s.lead}
           />
-          <DefinitionRows items={s.items} />
+          <details className="group border-y hair">
+            <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-5 py-4 font-semibold [&::-webkit-details-marker]:hidden">
+              <span>
+                View {s.items.length} {s.title.toLowerCase()} material groups
+              </span>
+              <ChevronDown className="h-6 w-6 shrink-0 transition-transform duration-[160ms] ease-out group-open:rotate-180" />
+            </summary>
+            <div className="border-t hair pt-2">
+              <DefinitionRows items={s.items} />
+            </div>
+          </details>
         </Section>
       ))}
 
-      {/* ------------------------------------------------- identification
-          New section, and the one a first-time seller needs most. The
-          grade taxonomy above is only useful to someone who can already
-          tell brass from bronze; this is the half-page that gets them
-          there.
-
-          It sits on the light surface because it is reference material
-          rather than argument — the same rule that puts the ledger and
-          the docket on chalk. */}
-      <Section id="identify" tone="chalk" className="scroll-mt-20 pb-24 pt-20 lg:pb-32 lg:pt-28">
+      <Section id="prepare" tone="slab" className="scroll-mt-20">
         <SectionHead
           index={4}
-          eyebrow="Identification"
-          title="Working out what you've actually got"
-          intro="Six field checks that cost nothing and settle most of it before you load. None of them beat an analyser, and none of them need to."
-        />
-        <DefinitionRows items={identify} />
-        <Callout className="mt-10" label="Not on this list">
-          Grinding a spark test is genuinely diagnostic and genuinely how people
-          start fires in suburban sheds, so it is not something to suggest in
-          passing. If a piece matters enough to test, photograph it and ask, or
-          send a clear photograph and ask which test or next step is available.{" "}
-          <ArrowLink href="/glossary" tone="accent">
-            Glossary of trade terms
-          </ArrowLink>
-        </Callout>
-      </Section>
-
-      {/* prep --------------------------------------------------------- */}
-      <Section id="prep" className="scroll-mt-20 pb-20 pt-12 lg:pb-24 lg:pt-16">
-        <SectionHead
-          index={5}
           eyebrow="Preparation"
-          title="Six ways to make a quote more accurate"
-          intro="These checks make the condition easier to describe and can reduce avoidable uncertainty in the quoted grade."
+          title="Prepare a clearer quote"
+          intro="Four details make the material easier to identify and the next step easier to confirm."
         />
-        <Steps items={prep} columns={3} />
-      </Section>
-
-      {/* --------------------------------------------------- deductions
-          New section. Deductions are the part of a settlement people
-          feel hardest done by, because they are the part nobody
-          explains — the number arrives smaller than expected and the
-          reason is left implied. Writing them down in advance is worth
-          more than any assurance that we are fair about them.
-
-          Deliberately no percentages and no dollar figures: those are
-          load-specific and commercial, and inventing an example rate
-          would be exactly the fabrication this repo keeps removing. */}
-      <Section id="deductions" tone="slab" className="scroll-mt-20 pb-24 pt-20 lg:pb-32 lg:pt-28">
-        <SectionHead
-          index={6}
-          eyebrow="Yield"
-          title="What comes off a load, and why it has to"
-          intro="A quote can account for anything that reduces recovered metal yield. Ask which factor applies, how it was assessed and what preparation could change it."
-        />
-        <DefinitionRows items={deductions} />
-        <p className="measure-wide mt-10 t-muted">
-          Ask whether each adjustment is assessed from the actual load or
-          applied by a standing rule. If an adjustment is proposed, request the
-          reason and the preparation needed to avoid it next time.
-        </p>
+        <ol className="grid border-y hair sm:grid-cols-2 lg:grid-cols-4">
+          {prep.map((item, index) => (
+            <li
+              key={item.title}
+              className={`py-7 sm:min-h-56 ${
+                index === 0
+                  ? "sm:pr-7"
+                  : index === 1
+                    ? "border-t hair sm:border-l sm:border-t-0 sm:pl-7 lg:pr-7"
+                    : index === 2
+                      ? "border-t hair sm:pr-7 lg:border-l lg:border-t-0 lg:px-7"
+                      : "border-t hair sm:border-l sm:pl-7 lg:border-t-0"
+              }`}
+            >
+              <div className="flex items-center justify-between gap-4">
+                <YardIcon name={item.icon} className="h-9 w-9" />
+                <span className="text-xs font-semibold tracking-[0.08em] t-muted">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <h3 className="mt-7">{item.title}</h3>
+              <p className="mt-3 t-muted">{item.body}</p>
+            </li>
+          ))}
+        </ol>
       </Section>
 
       {/* excluded ----------------------------------------------------- */}
@@ -262,10 +239,10 @@ export default function WhatWeBuyPage() {
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           <div>
             <SectionHead
-              index={7}
+              index={5}
               eyebrow="Hard limits"
-          title="Confirm these before loading"
-          intro="The final exclusion list is still being verified. Treat every item here as requiring prior confirmation; do not arrive with it unannounced."
+              title="Ask before loading these"
+              intro="Sealed, hazardous, controlled and unusual items need load-specific confirmation."
               className="mb-8"
             />
             <Button href="/contact" variant="ghost">

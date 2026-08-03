@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import {
   GlossaryIndex,
   GlossaryList,
@@ -7,13 +6,14 @@ import {
 import { PageHeader } from "@/components/sections";
 import { ArrowLink, Callout, Section } from "@/components/ui";
 import { glossary } from "@/lib/site";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/glossary" },
+export const metadata = pageMetadata({
+  path: "/glossary",
   title: "Scrap Metal Terms Explained",
   description:
-    "Tare, net, HMS 1, bare bright, UBC, swarf, treatment charge and XRF: the vocabulary on a weighbridge docket and grade guide, explained plainly.",
-};
+    "Plain-English definitions for tare, net weight, HMS, bare bright copper, UBC, swarf, treatment charges and other scrap terms.",
+});
 
 export default function GlossaryPage() {
   return (
@@ -22,8 +22,9 @@ export default function GlossaryPage() {
 
       <PageHeader
         eyebrow="Reference"
+        photo="rusty-steel"
         title="The words on your docket"
-        intro={`Every transaction in this trade is conducted in vocabulary nobody explains to a first-time seller. Here are ${glossary.length} of them — standard industry language, not our jargon, which is exactly why it is worth writing down.`}
+        intro={`Plain-English definitions for ${glossary.length} common grade, weight and settlement terms used in scrap metal quotes and dockets.`}
         trail={[{ label: "Home", href: "/" }, { label: "Glossary" }]}
       >
         <GlossaryIndex />
@@ -36,11 +37,9 @@ export default function GlossaryPage() {
         <GlossaryList />
 
         <Callout className="mt-16">
-          Not finding a term? Send it through and we will both answer it and
-          add it here — if one person had to ask, the word belongs on this
-          page.{" "}
+          Can&rsquo;t find a term? Send the word or phrase and ask for a plain-English explanation.{" "}
           <ArrowLink href="/contact" tone="accent">
-            Ask the trade desk
+            Ask us
           </ArrowLink>
         </Callout>
       </Section>

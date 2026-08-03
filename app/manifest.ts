@@ -13,14 +13,14 @@ import { company } from "@/lib/site";
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${company.name} — Scrap Metal Recycling, Brisbane`,
+    name: `${company.name} — Scrap Metal Quotes, Brisbane`,
     short_name: company.name,
     description:
-      "Ferrous and non-ferrous scrap bought, processed and remarketed across greater Brisbane.",
+      "Brisbane scrap metal quote requests and practical guidance on grades and preparation.",
     start_url: "/",
     display: "browser",
-    background_color: "#f7f9f9",
-    theme_color: "#182024",
+    background_color: "#ffffff",
+    theme_color: "#1d2747",
     lang: "en-AU",
     categories: ["business", "utilities"],
     icons: [
