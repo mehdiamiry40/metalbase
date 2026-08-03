@@ -19,8 +19,20 @@ import { describe, expect, it } from "vitest";
  * audit entirely. Two separate id schemes had the bug (`-panel-`/
  * `-trigger-` and `-m-`) and fixing the first did not fix the second.
  *
- * So this asserts the property directly rather than trusting a sweep:
+ * So this asserted the property directly rather than trusting a sweep:
  * every id interpolated from a value must pass through slug().
+ *
+ * The disclosure menus are gone — the nav is four plain links, and the
+ * only remaining id is the literal `${uid}-mobile`, which interpolates
+ * nothing. That removes the bug by construction rather than by fixing
+ * it, so the original "find at least four id sites" rot-guard now
+ * asserts the presence of code that should no longer exist and has been
+ * replaced.
+ *
+ * The slug rule below is kept anyway. It passes vacuously today, and
+ * that is the point: the day someone reintroduces a menu built from
+ * labels, it starts failing again without anyone having to remember
+ * this history.
  */
 
 const header = readFileSync(
@@ -41,10 +53,21 @@ describe("nav element ids", () => {
     expect(offenders).toEqual([]);
   });
 
-  it("finds the id sites at all, so the regex can't silently rot", () => {
-    expect([...header.matchAll(INTERPOLATED_ID)].length).toBeGreaterThanOrEqual(
-      4,
-    );
+  /* Replaces the old rot-guard. That one asserted the header still
+     contained at least four interpolated ids, which is now the opposite
+     of what we want: the flat nav should not be rebuilding a disclosure
+     with aria-controls panels at all. Assert the simplification holds,
+     and keep the regex honest by checking it still matches a known-bad
+     sample rather than by requiring live offenders in the source. */
+  it("the regex still detects an interpolated id", () => {
+    const sample = "aria-controls={`${uid}-panel-${item.label}`}";
+    expect([...sample.matchAll(INTERPOLATED_ID)].length).toBe(1);
+  });
+
+  it("the nav has not regrown into a disclosure menu", () => {
+    const triggers = header.match(/aria-controls=/g) ?? [];
+    // Only the mobile toggle should own a controlled panel.
+    expect(triggers.length).toBeLessThanOrEqual(1);
   });
 
   it("slug produces ids that are valid HTML", () => {

@@ -1,50 +1,30 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { company, nav } from "@/lib/site";
-import { ArrowLink, Chevron, Logo } from "@/components/ui";
-
-const blurbs: Record<string, string> = {
-  "What we buy":
-    "Ferrous, non-ferrous and specialty streams, graded on arrival and priced against the index.",
-  "For business":
-    "Bins, collections and buy-back for sites that generate metal on a schedule.",
-  "Sell your scrap": "No minimum load, graded in front of you, paid cash on the spot.",
-  Sustainability:
-    "The reporting, certificates and audit evidence procurement teams ask for.",
-  About: "Who we are and how the yards run.",
-};
+import { Logo } from "@/components/ui";
 
 /* ------------------------------------------------------------------
-   The first version of this menu opened on :hover / :focus-within only.
-   That is a genuine accessibility failure: no aria-expanded, no way to
-   dismiss with a keyboard, and screen readers got no notice that a
-   submenu existed. It is now a real disclosure — button + aria-expanded
-   + aria-controls, Escape to close, click-outside to close — with hover
-   kept as a pointer-only convenience on top.
+   This was a mega-menu: five disclosure panels holding 74 links, with
+   aria-expanded/aria-controls wiring, Escape handling, click-outside
+   and focus-out listeners, plus a parallel mobile accordion with its
+   own id scheme.
+
+   All of that machinery existed to manage a problem the site did not
+   need to have. Four plain links need no disclosure state, so the
+   state, the three document-level listeners and both id schemes are
+   gone with it. The mobile menu is now a list, not an accordion.
+
+   The one behaviour worth keeping: the header sits flush at rest and
+   only separates itself from the page once you have scrolled.
    ------------------------------------------------------------------ */
 
-/* Nav labels contain spaces ("Sell your scrap"), and an HTML id may not.
-   Interpolating the raw label produced an aria-controls that could never
-   resolve — invisible until a menu is actually open, which is why it
-   survived earlier audits. Module scope keeps the reference stable for
-   the effect that looks the trigger back up. */
-const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-
 export default function Header() {
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileSection, setMobileSection] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
-  const navRef = useRef<HTMLElement | null>(null);
   const uid = useId();
 
-
-  const close = useCallback(() => setOpenMenu(null), []);
-
-  // The header only separates itself from the page once you have moved.
-  // At rest it sits flush, which reads calmer.
   useEffect(() => {
     function onScroll() {
       setScrolled(window.scrollY > 8);
@@ -54,132 +34,43 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Escape closes whichever layer is open, and returns focus sensibly.
+  // Escape closes the mobile menu. Nothing else opens any more.
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key !== "Escape") return;
-      if (openMenu) {
-        const trigger = document.getElementById(`${uid}-trigger-${slug(openMenu)}`);
-        close();
-        trigger?.focus();
-      } else if (mobileOpen) {
-        setMobileOpen(false);
-      }
+      if (e.key === "Escape") setMobileOpen(false);
     }
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [openMenu, mobileOpen, close, uid]);
-
-  // Clicking or tabbing away closes the panel.
-  useEffect(() => {
-    if (!openMenu) return;
-    function onPointerDown(e: PointerEvent) {
-      if (!navRef.current?.contains(e.target as Node)) close();
-    }
-    function onFocusIn(e: FocusEvent) {
-      if (!navRef.current?.contains(e.target as Node)) close();
-    }
-    document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("focusin", onFocusIn);
-    return () => {
-      document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("focusin", onFocusIn);
-    };
-  }, [openMenu, close]);
+  }, []);
 
   return (
     <header className="on-light sticky top-0 z-50 bg-paper">
       <div
         className={`bg-paper transition-shadow duration-200 ${
-          scrolled || openMenu
-            ? "border-b hair shadow-[0_1px_16px_-8px_rgba(32,30,28,0.38)]"
+          scrolled
+            ? "border-b hair"
             : "border-b border-transparent"
         }`}
       >
         <div className="shell flex h-[70px] items-center justify-between gap-8">
-          <Link href="/" aria-label="MetalBase home" className="-ml-1 flex h-11 items-center px-1">
+          <Link
+            href="/"
+            aria-label="MetalBase home"
+            className="-ml-1 flex h-11 items-center px-1"
+          >
             <Logo />
           </Link>
 
-          <nav
-            ref={navRef}
-            aria-label="Main"
-            className="hidden h-full items-stretch xl:flex"
-            onPointerLeave={close}
-          >
-            {nav.map((item) => {
-              const isOpen = openMenu === item.label;
-              const panelId = `${uid}-panel-${slug(item.label)}`;
-              return (
-                <div
-                  key={item.label}
-                  className="static flex items-stretch"
-                  onPointerEnter={() => setOpenMenu(item.label)}
-                >
-                  <button
-                    type="button"
-                    id={`${uid}-trigger-${slug(item.label)}`}
-                    aria-expanded={isOpen}
-                    aria-controls={panelId}
-                    onClick={() => setOpenMenu(isOpen ? null : item.label)}
-                    className="flex items-center gap-1.5 whitespace-nowrap px-3.5 text-[0.95rem] font-medium hover:text-[color:var(--accent-text)]"
-                  >
-                    {item.label}
-                    <Chevron
-                      className={`h-[11px] w-[11px] t-muted transition-transform ${
-                        isOpen ? "-rotate-90" : "rotate-90"
-                      }`}
-                    />
-                  </button>
-
-                  <div
-                    id={panelId}
-                    hidden={!isOpen}
-                    className="absolute left-0 right-0 top-full border-b hair bg-paper"
-                  >
-                    <div className="shell grid gap-12 py-11 lg:grid-cols-[250px_1fr]">
-                      <div>
-                        <p className="t-h3">{item.label}</p>
-                        <p className="mt-3 text-[0.94rem] leading-relaxed t-muted">
-                          {blurbs[item.label]}
-                        </p>
-                        <div className="mt-6">
-                          <ArrowLink href={item.href}>
-                            All {item.label.toLowerCase()}
-                          </ArrowLink>
-                        </div>
-                      </div>
-                      <div className="grid gap-9 sm:grid-cols-2 lg:grid-cols-4">
-                        {item.columns.map((col) => (
-                          <div key={col.label}>
-                            <Link
-                              href={col.href}
-                              onClick={close}
-                              className="u-link text-[0.95rem] font-semibold hover:text-[color:var(--accent-text)]"
-                            >
-                              {col.label}
-                            </Link>
-                            <ul className="mt-3.5 space-y-2.5">
-                              {col.children.map((c) => (
-                                <li key={c.label}>
-                                  <Link
-                                    href={c.href}
-                                    onClick={close}
-                                    className="u-link text-[0.9rem] t-muted hover:text-[color:var(--accent-text)]"
-                                  >
-                                    {c.label}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+          <nav aria-label="Main" className="hidden items-center gap-9 lg:flex">
+            {nav.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="whitespace-nowrap text-[0.95rem] hover:text-[color:var(--accent-text)]"
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
           <div className="flex items-center gap-5">
@@ -203,11 +94,17 @@ export default function Header() {
               aria-expanded={mobileOpen}
               aria-controls={`${uid}-mobile`}
               aria-label="Toggle navigation"
-              className="-mr-1 flex h-11 w-11 flex-col items-center justify-center gap-[6px] xl:hidden"
+              className="-mr-1 flex h-11 w-11 flex-col items-center justify-center gap-[6px] lg:hidden"
             >
-              <span className={`block h-[2px] w-6 bg-graphite transition ${mobileOpen ? "translate-y-2 rotate-45" : ""}`} />
-              <span className={`block h-[2px] w-6 bg-graphite transition ${mobileOpen ? "opacity-0" : ""}`} />
-              <span className={`block h-[2px] w-6 bg-graphite transition ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`} />
+              <span
+                className={`block h-[2px] w-6 bg-graphite transition ${mobileOpen ? "translate-y-2 rotate-45" : ""}`}
+              />
+              <span
+                className={`block h-[2px] w-6 bg-graphite transition ${mobileOpen ? "opacity-0" : ""}`}
+              />
+              <span
+                className={`block h-[2px] w-6 bg-graphite transition ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`}
+              />
             </button>
           </div>
         </div>
@@ -216,59 +113,27 @@ export default function Header() {
       <div
         id={`${uid}-mobile`}
         hidden={!mobileOpen}
-        className="max-h-[calc(100vh-70px)] overflow-y-auto border-b hair bg-paper xl:hidden"
+        className="border-b hair bg-paper lg:hidden"
       >
-        <div className="shell py-2">
-          {nav.map((item) => {
-            const isOpen = mobileSection === item.label;
-            const secId = `${uid}-m-${slug(item.label)}`;
-            return (
-              <div key={item.label} className="border-b hair">
-                <button
-                  type="button"
-                  onClick={() => setMobileSection(isOpen ? null : item.label)}
-                  aria-expanded={isOpen}
-                  aria-controls={secId}
-                  className="flex w-full items-center justify-between py-4 text-left text-[1.05rem] font-medium "
-                >
-                  {item.label}
-                  <Chevron
-                    className={`h-4 w-4 t-muted transition ${isOpen ? "-rotate-90" : "rotate-90"}`}
-                  />
-                </button>
-                <div id={secId} hidden={!isOpen} className="grid gap-6 pb-6 sm:grid-cols-2">
-                  {item.columns.map((col) => (
-                    <div key={col.label}>
-                      <p className="text-[0.95rem] font-semibold ">{col.label}</p>
-                      <ul className="mt-2 space-y-2">
-                        {col.children.map((c) => (
-                          <li key={c.label}>
-                            <Link
-                              href={c.href}
-                              onClick={() => setMobileOpen(false)}
-                              className="text-[0.9rem] t-muted"
-                            >
-                              {c.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-          <div className="py-6">
+        <nav aria-label="Main, mobile" className="shell py-2">
+          {nav.map((item) => (
             <Link
-              href="/contact"
+              key={item.label}
+              href={item.href}
               onClick={() => setMobileOpen(false)}
-              className="inline-block rounded-[4px] bg-orange px-7 py-3.5 font-semibold text-graphite"
+              className="block border-b hair py-4 text-[1.05rem]"
             >
-              Get a quote
+              {item.label}
             </Link>
-          </div>
-        </div>
+          ))}
+          <Link
+            href="/contact"
+            onClick={() => setMobileOpen(false)}
+            className="my-6 inline-block rounded-[4px] bg-orange px-7 py-3.5 font-semibold text-graphite"
+          >
+            Get a quote
+          </Link>
+        </nav>
       </div>
     </header>
   );

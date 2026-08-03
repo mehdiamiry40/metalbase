@@ -26,12 +26,8 @@ export default function LocationsPage() {
         intro="No appointment and no minimum load. Here is exactly how it works, what to bring, and how the money reaches you."
         trail={[{ label: "Home", href: "/" }, { label: "Sell your scrap" }]}
       >
-        <div className="flex flex-wrap gap-4">
-          <Button href="/prices">Rate board</Button>
-          <Button href="#id" variant="outline">
-            What to bring
-          </Button>
-        </div>
+        {/* Second button was an in-page anchor to #id. */}
+        <Button href="/prices">Rate board</Button>
       </PageHeader>
 
       {/* yards -------------------------------------------------------- */}

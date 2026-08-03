@@ -4,6 +4,16 @@ import { DataRow, Logo, Pending } from "@/components/ui";
 
 const IS_PROD = process.env.NODE_ENV === "production";
 
+/* Pages the flat nav deliberately leaves out. They are real pages with
+   real content, just not among the four things someone arrives needing,
+   so they live here rather than in the header. */
+const secondary = [
+  { label: "How it works", href: "/locations#how-it-works" },
+  { label: "Sustainability", href: "/sustainability" },
+  { label: "About", href: "/about" },
+  { label: "FAQ", href: "/faq" },
+];
+
 const legal = [
   { label: "Privacy", href: "/legal#privacy" },
   { label: "Terms of trade", href: "/legal#terms" },
@@ -46,25 +56,26 @@ export default function Footer() {
             </dl>
           </div>
 
-          <div className="grid gap-9 sm:grid-cols-2 lg:grid-cols-4">
-            {nav.map((item) => (
-              <div key={item.label}>
-                <p className="text-[0.95rem] font-semibold ">{item.label}</p>
-                <ul className="mt-4 space-y-2.5">
-                  {item.columns.map((col) => (
-                    <li key={col.label}>
-                      <Link
-                        href={col.href}
-                        className="text-[0.9rem] t-muted hover:"
-                      >
-                        {col.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          {/* Was a four-column link grid mirroring the mega-menu. A
+              footer that repeats the whole site is a sitemap, not a
+              footer.
+
+              It is one wrapping row now, and it carries the secondary
+              pages too. The home page used to link About, FAQ and
+              Sustainability from full sections; those sections are gone,
+              so without this row those three pages would be reachable
+              from nowhere at all. */}
+          <nav aria-label="Footer" className="flex flex-wrap gap-x-8 gap-y-3 lg:justify-end">
+            {[...nav, ...secondary].map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="text-[0.95rem] t-muted hover:text-[color:var(--accent-text)]"
+              >
+                {item.label}
+              </Link>
             ))}
-          </div>
+          </nav>
         </div>
 
         {locations.length > 0 && (
