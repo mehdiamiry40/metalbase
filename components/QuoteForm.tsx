@@ -1,16 +1,16 @@
 "use client";
 
-import { useId, useRef, useState } from "react";
+import Link from "next/link";
+import { useEffect, useId, useRef, useState } from "react";
 import { ArrowRight, Tick } from "@/components/ui";
 import { company } from "@/lib/site";
 
 const enquiryTypes = [
-  "Commercial collection or bin hire",
-  "Demolition / structural steel buy-back",
-  "Industrial offcut & rebate program",
-  "Trade account (regular drop-off)",
-  "One-off drop-off",
-  "Sustainability reporting",
+  "Scrap metal quote",
+  "Drop-off question",
+  "Collection or container enquiry",
+  "Commercial site enquiry",
+  "Something else",
 ];
 
 const materials = [
@@ -30,8 +30,8 @@ const volumes = [
   "Under 200kg — ute or trailer load",
   "200kg – 1 tonne",
   "1 – 10 tonnes",
-  "10 – 100 tonnes",
-  "100+ tonnes / ongoing contract",
+  "10+ tonnes",
+  "Not sure yet",
 ];
 
 /* The form is a document, so it sits on the light surface — and it says
@@ -51,15 +51,21 @@ const labelCls = "mb-2 block text-sm font-semibold";
    the signalling and the text stays at 19:1. */
 const errCls = "mt-1.5 text-sm font-semibold text-ink";
 
-type State = "idle" | "sending" | "sent" | "sent-undelivered" | "error";
+type State = "idle" | "sending" | "sent" | "error";
 
 export default function QuoteForm() {
   const uid = useId();
-  const formRef = useRef<HTMLFormElement>(null);
+  const typeRef = useRef<HTMLSelectElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<State>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [message, setMessage] = useState("");
   const [picked, setPicked] = useState<string[]>([]);
+  const tel = company.phone?.replace(/\s/g, "");
+
+  useEffect(() => {
+    if (state === "sent") successRef.current?.focus();
+  }, [state]);
 
   function toggle(m: string) {
     setPicked((p) => (p.includes(m) ? p.filter((x) => x !== m) : [...p, m]));
@@ -99,17 +105,25 @@ export default function QuoteForm() {
           setState("idle");
           // Move the user to the first problem rather than leaving them
           // to hunt for red text somewhere up the page.
-          const first = Object.keys(json.errors)[0];
+          const first = ["enquiryType", "name", "contact", "email"].find(
+            (key) => json.errors[key],
+          ) ?? Object.keys(json.errors)[0];
           const map: Record<string, string> = {
             enquiryType: "type",
             name: "name",
+            contact: "email",
             email: "email",
-            phone: "phone",
           };
           requestAnimationFrame(() => {
             const el = document.getElementById(`${uid}-${map[first] ?? first}`);
             el?.focus();
-            el?.scrollIntoView({ block: "center", behavior: "smooth" });
+            const reduceMotion = window.matchMedia(
+              "(prefers-reduced-motion: reduce)",
+            ).matches;
+            el?.scrollIntoView({
+              block: "center",
+              behavior: reduceMotion ? "auto" : "smooth",
+            });
           });
           return;
         }
@@ -117,42 +131,52 @@ export default function QuoteForm() {
         setState("error");
         return;
       }
-      setState(json.delivered === false ? "sent-undelivered" : "sent");
+      if (json.delivered === true) {
+        setState("sent");
+        return;
+      }
+
+      setMessage(
+        "We couldn't send that just now. Please call us instead.",
+      );
+      setState("error");
     } catch {
       setMessage("Couldn't reach the server. Check your connection, or call us.");
       setState("error");
     }
   }
 
-  if (state === "sent" || state === "sent-undelivered") {
+  if (state === "sent") {
     return (
-      <div className="on-light border border-steel bg-chalk p-8 sm:p-10" role="status">
+      <div
+        ref={successRef}
+        className="on-light border border-steel bg-chalk p-8 sm:p-10"
+        role="status"
+        tabIndex={-1}
+      >
         <span className="flex h-12 w-12 items-center justify-center bg-shaft">
           <Tick className="h-6 w-6 text-furnace" />
         </span>
-        <h3 className="mt-5 text-2xl">Thanks — your enquiry has been recorded</h3>
+        <h2 className="mt-5 text-2xl">Thanks — your enquiry has been sent</h2>
         <p className="mt-3 max-w-md leading-relaxed t-muted">
-          Your details were accepted by this website. Phone the trade desk if the enquiry is urgent.
+          We received your details.
+          {tel ? (
+            <>
+              {" "}If it is urgent, call{" "}
+              <a href={`tel:${tel}`} className="u-link font-semibold">
+                {company.phoneLabel ?? company.phone}
+              </a>
+              .
+            </>
+          ) : null}
         </p>
-
-        {state === "sent-undelivered" && (
-          <div className="callout mt-6">
-            <p className="text-base leading-relaxed">
-              <strong className="font-semibold">Heads up:</strong> no email or
-              webhook is configured on this deployment yet, so your enquiry was
-              logged on the server rather than sent to anyone.
-              {company.phone
-                ? ` Please phone ${company.phoneLabel ?? company.phone} if it's urgent.`
-                : " Please phone instead if it's urgent."}
-            </p>
-          </div>
-        )}
 
         <button
           type="button"
           onClick={() => {
             setState("idle");
             setPicked([]);
+            requestAnimationFrame(() => typeRef.current?.focus());
           }}
           className="mt-6 font-semibold underline decoration-1 underline-offset-4 transition-colors duration-[160ms] ease-out hover:text-steel"
         >
@@ -167,7 +191,6 @@ export default function QuoteForm() {
 
   return (
     <form
-      ref={formRef}
       onSubmit={onSubmit}
       noValidate
       className="on-light border border-steel bg-chalk p-6 sm:p-8 lg:p-9"
@@ -183,19 +206,30 @@ export default function QuoteForm() {
 
       {state === "error" && (
         <div role="alert" className="callout mb-6 text-base">
-          {message}
+          <p>{message}</p>
+          {tel ? (
+            <a
+              href={`tel:${tel}`}
+              className="mt-3 inline-flex min-h-11 items-center font-semibold u-link"
+            >
+              Call {company.phoneLabel ?? company.phone}
+            </a>
+          ) : null}
         </div>
       )}
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="sm:col-span-2">
           <label className={labelCls} htmlFor={`${uid}-type`}>
-            What do you need?
+            What do you need?{" "}
+            <span className="font-normal t-muted">(required)</span>
           </label>
           <select
+            ref={typeRef}
             id={`${uid}-type`}
             name="enquiryType"
             defaultValue=""
+            required
             className={field}
             aria-invalid={!!errors.enquiryType}
             aria-describedby={errors.enquiryType ? `${uid}-type-err` : undefined}
@@ -211,10 +245,13 @@ export default function QuoteForm() {
         </div>
 
         <div>
-          <label className={labelCls} htmlFor={`${uid}-name`}>Your name</label>
+          <label className={labelCls} htmlFor={`${uid}-name`}>
+            Your name <span className="font-normal t-muted">(required)</span>
+          </label>
           <input
             id={`${uid}-name`}
             name="name"
+            required
             autoComplete="name"
             className={field}
             aria-invalid={!!errors.name}
@@ -230,33 +267,61 @@ export default function QuoteForm() {
           <input id={`${uid}-company`} name="company" autoComplete="organization" className={field} />
         </div>
 
-        <div>
-          <label className={labelCls} htmlFor={`${uid}-email`}>Email</label>
-          <input
-            id={`${uid}-email`}
-            name="email"
-            type="email"
-            autoComplete="email"
-            className={field}
-            aria-invalid={!!errors.email}
-            aria-describedby={errors.email ? `${uid}-email-err` : undefined}
-          />
-          {errors.email && <p id={`${uid}-email-err`} className={errCls}>{errors.email}</p>}
-        </div>
+        <fieldset className="sm:col-span-2">
+          <legend className="mb-3 text-sm font-semibold">
+            How can we reply?{" "}
+            <span className="font-normal t-muted">(choose at least one)</span>
+          </legend>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label className={labelCls} htmlFor={`${uid}-email`}>
+                Email
+              </label>
+              <input
+                id={`${uid}-email`}
+                name="email"
+                type="email"
+                autoComplete="email"
+                className={field}
+                aria-invalid={!!(errors.email || errors.contact)}
+                aria-describedby={
+                  errors.email
+                    ? `${uid}-email-err`
+                    : errors.contact
+                      ? `${uid}-contact-err`
+                      : undefined
+                }
+              />
+              {errors.email && (
+                <p id={`${uid}-email-err`} className={errCls}>
+                  {errors.email}
+                </p>
+              )}
+            </div>
 
-        <div>
-          <label className={labelCls} htmlFor={`${uid}-phone`}>Phone</label>
-          <input
-            id={`${uid}-phone`}
-            name="phone"
-            type="tel"
-            autoComplete="tel"
-            className={field}
-            aria-invalid={!!errors.phone}
-            aria-describedby={errors.phone ? `${uid}-phone-err` : undefined}
-          />
-          {errors.phone && <p id={`${uid}-phone-err`} className={errCls}>{errors.phone}</p>}
-        </div>
+            <div>
+              <label className={labelCls} htmlFor={`${uid}-phone`}>
+                Phone
+              </label>
+              <input
+                id={`${uid}-phone`}
+                name="phone"
+                type="tel"
+                autoComplete="tel"
+                className={field}
+                aria-invalid={!!errors.contact}
+                aria-describedby={
+                  errors.contact ? `${uid}-contact-err` : undefined
+                }
+              />
+            </div>
+          </div>
+          {errors.contact && (
+            <p id={`${uid}-contact-err`} className={errCls}>
+              {errors.contact}
+            </p>
+          )}
+        </fieldset>
 
         <div>
           <label className={labelCls} htmlFor={`${uid}-suburb`}>Suburb or postcode</label>
@@ -329,8 +394,12 @@ export default function QuoteForm() {
           {busy ? "Sending…" : "Send enquiry"}
           {!busy && <ArrowRight className="h-6 w-6" />}
         </button>
-        <p className="text-sm t-muted">
-          No obligation. Phone the trade desk if timing matters.
+        <p className="max-w-sm text-sm t-muted">
+          No obligation. We use your details to respond to this enquiry. Read our{" "}
+          <Link href="/legal#privacy" className="u-link font-medium text-furnace">
+            privacy notice
+          </Link>
+          .
         </p>
       </div>
     </form>

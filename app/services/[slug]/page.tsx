@@ -1,17 +1,22 @@
-import type { Metadata } from "next";
 import { ServiceSchema } from "@/components/Schema";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { DefinitionRows, PageHeader, Split, Steps } from "@/components/sections";
+import { DefinitionRows, PageHeader, Split } from "@/components/sections";
 import {
   ArrowRight,
   Button,
-  Callout,
   Section,
   SectionHead,
-  TickList,
 } from "@/components/ui";
 import { services } from "@/lib/site";
+import type { PhotoKey } from "@/lib/photos";
+import { pageMetadata } from "@/lib/metadata";
+
+const detailPhotos: Record<string, PhotoKey> = {
+  "collection-and-bins": "tipper",
+  industrial: "machine-swarf",
+  demolition: "stainless",
+};
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -21,48 +26,20 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+}) {
   const { slug } = await params;
   const service = services.find((s) => s.slug === slug);
-  if (!service) return { title: "Service not found" };
-  return {
-    title: `${service.title} — Brisbane`,
-    description: `${service.title} for Brisbane businesses. Site scope, equipment, availability, reporting and commercial terms are confirmed in writing for each job.`,
-    alternates: { canonical: `/services/${service.slug}` },
-  };
+  if (!service) return pageMetadata({
+    path: `/services/${slug}`,
+    title: "Service not found",
+    description: "The requested MetalBase service page could not be found.",
+  });
+  return pageMetadata({
+    path: `/services/${service.slug}`,
+    title: service.seoTitle,
+    description: service.seoDescription,
+  });
 }
-
-const onboarding = [
-  {
-    title: "Describe the site",
-    body: "Provide the address, access constraints, material, approximate volume and the way it is generated.",
-  },
-  {
-    title: "Confirm the scope",
-    body: "The proposal should name equipment, responsibilities, timing, pricing assumptions and reporting requirements.",
-  },
-  {
-    title: "Complete site requirements",
-    body: "Resolve inductions, permits, placement, traffic controls and procurement documents before work is scheduled.",
-  },
-  {
-    title: "Review the records",
-    body: "Check the agreed weight, grade, movement and settlement records against the written scope.",
-  },
-];
-
-/* The five things that decide whether a quote is a real number or a
-   range with a disclaimer on it. Published because a customer who
-   brings them to the first call gets a firm answer a fortnight
-   earlier, and because "it depends" is a poor substitute for saying
-   what it depends on. */
-const toQuote = [
-  "The site address, and whether a truck can turn and stand there",
-  "Roughly what the metal is — one alloy, or a bit of everything",
-  "How much accumulates, and over what period",
-  "Whether it's already separated at the point it's generated",
-  "Any site rules we'd be working under — inductions, hours, permits",
-];
 
 export default async function ServiceDetail({
   params,
@@ -81,38 +58,35 @@ export default async function ServiceDetail({
         name={service.title}
         description={`${service.title} options are scoped and confirmed in writing for each site.`}
         slug={service.slug}
+        verified={service.verified}
       />
       <PageHeader
         eyebrow={service.audience}
+        photo={service.photo}
         title={service.title}
-        intro="Use this page to prepare the scope. Equipment, coverage, timing, reporting and commercial terms are confirmed in writing for each site."
+        intro={service.blurb}
         trail={[
           { label: "Home", href: "/" },
           { label: "For business", href: "/services" },
           { label: service.title },
         ]}
       >
-        <div className="flex flex-wrap gap-3">
-          <Button href="/contact">Request a quote</Button>
-          <Button href="/prices" variant="ghost">
-            How pricing works
-          </Button>
-        </div>
+        <Button href="/contact">Start an enquiry</Button>
       </PageHeader>
 
       <Split
-        photo={service.photo}
+        photo={detailPhotos[service.slug] ?? "yard-wide"}
         side="right"
         tone="ink"
         n={1}
-        caption={`${service.title} — material handled on site`}
-        eyebrow="What you get"
-        title="What the proposal needs to settle"
-        priority
+        caption={`${service.title} planning reference`}
+        eyebrow="What to send"
+        title="Start with five useful details"
       >
         <p className="t-lead mt-5">
-          A workable scope names the material, site access, equipment,
-          responsibilities, pricing assumptions and the records you need.
+          Send the material type, approximate quantity, suburb, access
+          constraints and any visible markings. Exact measurements are not
+          needed to begin.
         </p>
       </Split>
 
@@ -128,48 +102,8 @@ export default async function ServiceDetail({
         />
       </Section>
 
-      <Section id="onboarding" className="scroll-mt-20 pb-24 pt-20 lg:pb-32 lg:pt-28">
-        <SectionHead
-          index={2}
-          eyebrow="Getting started"
-          title="From site details to an agreed scope"
-          intro="Timing depends on access, equipment, approvals and the material involved."
-        />
-        <Steps items={onboarding} />
-      </Section>
-
-      {/* --------------------------------------------------- to quote it
-          New section. Half of every first call is spent establishing
-          the same five facts, and a customer who arrives with them gets
-          a firm proposal rather than a range. Cheap to publish, and it
-          makes the next step concrete instead of "get in touch". */}
-      <Section id="what-we-need" tone="chalk" className="scroll-mt-20 pb-20 pt-12 lg:pb-24 lg:pt-16">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
-          <div>
-            <SectionHead
-              index={3}
-              eyebrow="Before the first call"
-              title="What to send for a useful proposal"
-              intro="None of it has to be exact. Approximate answers to all five beat a precise answer to one, and they are the difference between a firm number and a range with a disclaimer on it."
-              className="mb-0"
-            />
-            <div className="mt-8">
-              <Button href="/contact">Send it through</Button>
-            </div>
-          </div>
-          <div>
-            <TickList items={toQuote} />
-            <Callout className="mt-8">
-              Photographs are worth more than descriptions for all of it —
-              a picture of the pile and a picture of the gate answers most of
-              this list at once.
-            </Callout>
-          </div>
-        </div>
-      </Section>
-
       <Section tone="slab" className="pb-16 pt-10 lg:pb-20 lg:pt-12">
-        <SectionHead index={4} eyebrow="Elsewhere" title="Other services" />
+        <SectionHead index={2} eyebrow="Elsewhere" title="Other services" />
         <div className="divide-y divide-[color:var(--hair)] border-y hair">
           {others.map((o) => (
             <Link

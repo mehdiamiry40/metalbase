@@ -1,8 +1,9 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
   MAX_PER_WINDOW,
   WINDOW_MS,
   clean,
+  durableRateLimit,
   formatSummary,
   isBot,
   isDurableLimiterConfigured,
@@ -56,14 +57,18 @@ describe("validate", () => {
     expect(validate(sanitise(good))).toEqual({});
   });
 
-  it("requires name, email, phone and type", () => {
+  it("requires name, one reply method and an enquiry type", () => {
     const errors = validate(sanitise({}));
     expect(Object.keys(errors).sort()).toEqual([
-      "email",
+      "contact",
       "enquiryType",
       "name",
-      "phone",
     ]);
+  });
+
+  it("accepts either email or phone as the reply method", () => {
+    expect(validate(sanitise({ ...good, phone: "" }))).toEqual({});
+    expect(validate(sanitise({ ...good, email: "" }))).toEqual({});
   });
 
   it("flags a malformed email specifically", () => {
@@ -155,5 +160,67 @@ describe("isDurableLimiterConfigured", () => {
         UPSTASH_REDIS_REST_TOKEN: "t",
       }),
     ).toBe(true);
+  });
+});
+
+describe("durableRateLimit", () => {
+  const env = {
+    UPSTASH_REDIS_REST_URL: "https://redis.example",
+    UPSTASH_REDIS_REST_TOKEN: "secret",
+  };
+
+  it("increments and refreshes expiry in one transaction", async () => {
+    let calls = 0;
+    let calledUrl = "";
+    let calledInit: RequestInit | undefined;
+    const fetcher: typeof fetch = async (input, init) => {
+      calls += 1;
+      calledUrl = String(input);
+      calledInit = init;
+      return new Response(JSON.stringify([{ result: 1 }, { result: 1 }]), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    };
+
+    await expect(durableRateLimit("1.2.3.4", { env, fetcher })).resolves.toBe(
+      false,
+    );
+    expect(calls).toBe(1);
+    expect(calledUrl).toBe("https://redis.example/multi-exec");
+    expect(JSON.parse(String(calledInit?.body))).toEqual([
+      ["INCR", "enquiry:1.2.3.4"],
+      ["PEXPIRE", "enquiry:1.2.3.4", WINDOW_MS],
+    ]);
+  });
+
+  it("blocks once the shared counter exceeds the limit", async () => {
+    const fetcher: typeof fetch = async () =>
+      new Response(
+        JSON.stringify([{ result: MAX_PER_WINDOW + 1 }, { result: 1 }]),
+        { status: 200, headers: { "Content-Type": "application/json" } },
+      );
+
+    await expect(durableRateLimit("1.2.3.4", { env, fetcher })).resolves.toBe(
+      true,
+    );
+  });
+
+  it("fails open without exposing the caller key when the transaction fails", async () => {
+    const fetcher: typeof fetch = async () =>
+      new Response(JSON.stringify([{ result: 1 }, { result: 0 }]), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    await expect(
+      durableRateLimit("private-ip", { env, fetcher }),
+    ).resolves.toBe(false);
+    expect(error).toHaveBeenCalledWith(
+      "[enquiry] durable rate limiter unavailable; using local fallback.",
+    );
+    expect(error.mock.calls.flat().join(" ")).not.toContain("private-ip");
+    error.mockRestore();
   });
 });

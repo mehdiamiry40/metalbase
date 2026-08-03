@@ -1,35 +1,33 @@
-# MetalBase — scrap metal recycling, Brisbane
+# MetalBase — Brisbane scrap metal quotes
 
 Next.js 15 marketing site. App Router, TypeScript, Tailwind v4.
 
 ```bash
 npm install
+cp .env.example .env.local  # optional local delivery configuration
 npm run dev        # http://localhost:3000
 ```
 
-Node 18.18+. Verified on Node 22 — clean `next build`, 22 routes.
+Node 18.18+. Verified on Node 22 with a clean production build.
 
 ## ⚠️ Before this goes live
 
 This site is **not launch-ready**, deliberately. `LAUNCH_READY` in
 `lib/site.ts` is `false` and several values are `null`.
 
-An earlier version carried an invented ABN, an invented Queensland second-hand
-dealer licence number, invented ISO/ERA certifications, invented staff, invented
-tonnage claims and 29 invented prices. On a live commercial site those are not
-placeholder copy — they are false representations, and holding out that you are
-a licensed second-hand dealer when you are not is an offence under the
-**Second-hand Dealers and Pawnbrokers Act 2003 (Qld)**.
+An earlier version carried an invented ABN, dealer licence number, certifications,
+staff, tonnage claims and prices. On a live commercial site those are false
+representations, not harmless placeholder copy.
 
 They have been removed. Nothing invents a number on your behalf. Fill in:
 
 | Where | What |
 |---|---|
-| `company` in `lib/site.ts` | ABN, licence number, phone, email, address |
-| `locations` | Yard addresses and hours (currently empty → page shows an honest "not yet published" panel) |
+| `company` in `lib/site.ts` | Registered entity, ABN, licence number, email and address |
+| `locations` | Verified receiving addresses and hours (currently empty → page asks visitors to confirm before travelling) |
 | `stats` | Any figure you can defend (currently empty → the band doesn't render) |
 | `priceGroups` | Real rates, then set `PUBLISH_RATES = true` |
-| `/legal` | Draft wording — have a lawyer review it |
+| `/legal` | Have the privacy and trade wording reviewed before launch |
 
 Unfilled values remain `null` and are omitted from customer-facing surfaces.
 The launch checklist above is the source of truth for what is still outstanding.
@@ -42,28 +40,28 @@ condensed yard-signage headings and tabular figures. Layouts read as continuous
 editorial records instead of collections of floating cards.
 
 There are two type families. IBM Plex Sans carries body copy, controls and
-tabular data; Barlow Condensed carries display headings. Signal blue is reserved
-for the primary action and focus state. It is never used as decoration.
+tabular data; Barlow Condensed carries display headings. Signal rust is reserved
+for primary actions and light-surface focus. It is never used as decoration.
 
 | Token | Value |
 |---|---|
 | Furnace | `#182024` — headings, dark bands and strongest rules |
-| Steel | `#4D595F` — secondary text and interactive boundaries |
-| Galvanised | `#B8C1C5` — quiet rules and structural detail |
-| Yard fog | `#E8ECEE` — alternate bands and hover states |
-| Scale paper | `#F7F9F9` — primary page surface and text on dark |
-| Signal | `#075EA8` — primary action and light-surface focus only |
+| Steel | `#58615F` — secondary text and interactive boundaries |
+| Galvanised | `#C7CCC7` — quiet rules and structural detail |
+| Yard fog | `#EDEFE9` — alternate bands and hover states |
+| Scale paper | `#FAFAF6` — primary page surface and text on dark |
+| Signal rust | `#C24724` — primary action and light-surface focus only |
 | Display | Barlow Condensed, weight 600 |
 | Body / data | IBM Plex Sans, tabular figures where required |
-| Type scale | `12 / 14 / 16 / 20 / 28 / 40 / 56px` |
+| Type scale | `12 / 14 / 16 / 20 / 32 / 44 / 64px` |
 | Spacing | `4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 96px` |
-| Buttons | Square, 48px minimum height, 160ms colour transition |
+| Buttons | Square, 52px minimum height, 160ms colour transition |
 
 Everything composes from `components/ui.tsx` and `components/sections.tsx`
 so the homepage and inner pages cannot drift apart. There are no gradients,
 shadows, translucent blurs, floating rounded cards or hover lifts.
 
-Focus rings are surface-aware (`--focus`): signal blue on scale paper and
+Focus rings are surface-aware (`--focus`): signal rust on scale paper and
 scale paper on furnace or photographs. A single fixed ring colour cannot clear
 3:1 against every surface.
 
@@ -95,25 +93,37 @@ but shouldn't is invisible to the rename guard.
 ## Enquiry form
 
 `components/QuoteForm.tsx` → `POST /api/enquiry`. Server-side validation,
-honeypot, per-instance rate limiting. Delivery is configured by environment:
+honeypot and rate limiting. Delivery is configured by environment:
 
 ```bash
-RESEND_API_KEY=...        # the only one required; optionally ENQUIRY_FROM
+RESEND_API_KEY=...
+ENQUIRY_TO=quotes@example.com
+ENQUIRY_FROM=...          # optional; use a verified sender
 # or
 ENQUIRY_WEBHOOK_URL=...   # Zapier, Make, CRM
 ```
 
-The destination is `ENQUIRY_INBOX` in `app/api/enquiry/route.ts`, overridable
-with `ENQUIRY_TO`. It is a constant rather than environment-only because
-forgetting it in a dashboard is silent — the endpoint still returns ok and the
-enquiry is simply lost.
+Email delivery requires both `RESEND_API_KEY` and `ENQUIRY_TO`. Webhook delivery
+requires `ENQUIRY_WEBHOOK_URL`. With neither path configured, the endpoint
+returns `503`, logs no customer details and the form shows a click-to-call
+fallback. It never pretends an enquiry was delivered.
 
-With neither set the endpoint returns `delivered: false` and the UI tells the
-user their enquiry was logged but not sent, and to phone instead. It never
-pretends an enquiry got through.
+The rate limiter uses one atomic Upstash transaction and a sliding one-minute
+window when its URL and token are configured, with an in-memory fallback for
+local development. Provider calls have bounded timeouts and logs exclude
+customer and provider response bodies.
 
-The rate limiter is per-instance memory only — put Vercel Firewall or Upstash in
-front if this gets real traffic.
+## Quality gates
+
+```bash
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm audit --audit-level=high
+```
+
+CI runs the same non-interactive checks on pushes and pull requests.
 
 ## Photography
 
@@ -134,10 +144,9 @@ Harry Dona, Johnny Sanchez, Evan Demicoli, Pavel Neznanov.
 
 ## SEO & accessibility
 
-- `RecyclingCenter` JSON-LD in `app/layout.tsx`, which **omits** fields with no
-  real value rather than inventing them
+- Launch-gated organisation and service JSON-LD that omits unverified claims
 - Favicon and OG image generated at build (`app/icon.tsx`, `app/opengraph-image.tsx`)
-- `sitemap.xml`, `robots.txt`
+- Launch-gated `sitemap.xml`, `robots.txt` and page-level `noindex`
 - Skip link, visible focus rings on both surfaces, labelled form controls with
   `aria-invalid` / `aria-describedby`, `prefers-reduced-motion` respected
 - Body text and accent both clear WCAG AA on paper
@@ -158,14 +167,13 @@ taxonomy* and its *process*, and that every competitor hides both behind a
 | Export | What it drives |
 |---|---|
 | `priceGroups` | 28 grades across three streams. Home shows three visual summaries; `/prices` carries the full `Ledger` |
-| `glossary` | 22 standard trade terms — `/glossary`, plus teasers on `/faq` |
-| `identify` | Field checks for telling metals apart — `/what-we-buy#identify` |
-| `deductions` | What comes off a load and why — `/what-we-buy#deductions` |
-| `merchantQuestions` | Questions worth asking *any* yard — `/about#questions` |
-| `standards` | The legislative framework the trade sits under — `/about#standards` |
-| `serviceAreas` | Collection suburbs — home, `/locations`, `/services` |
-| `audiences` | The home-page router: four ways people arrive |
-| `faqs` | `/faq` page **and** its FAQPage JSON-LD, from one array |
+| `glossary` | Standard trade terms — `/glossary` |
+| `services` | Three business enquiry scopes — `/services` and its detail pages |
+| `serviceAreas` | Areas listed for collection enquiries — `/locations`, `/services` |
+
+The cautious customer FAQ copy lives beside the route in `app/faq/page.tsx`,
+and the homepage carries its own shorter quote-focused subset. Do not restore
+the removed business-specific FAQ answers without first verifying each claim.
 
 Two rules hold across all of it, and both are load-bearing rather than
 stylistic:
@@ -183,14 +191,15 @@ stylistic:
 ```
 app/                routes; api/enquiry is the form endpoint
 components/ui.tsx        primitives — Button, Callout, Panel, SpecStrip,
-                         ChipList, Index, SectionHead, CtaBand
-components/sections.tsx  page furniture — PageHeader, Essay, Router, Split,
-                         Steps, DefinitionRows, Plate
+                         ChipList, Index, SectionHead, YardIcon
+components/sections.tsx  page furniture — PageHeader, Split, Steps,
+                         DefinitionRows
 components/Ledger.tsx    the grade board
-components/Docket.tsx    the blank weighbridge docket (deliberately empty)
 components/Glossary.tsx  the reference, plus DefinedTermSet markup
 lib/site.ts              all content
 lib/photos.ts            photo manifest
 ```
 
-Almost all copy lives in `lib/site.ts`. Change it there and every page follows.
+Shared business facts, services, material grades and glossary terms live in
+`lib/site.ts`. Page-specific explanatory copy stays beside its route so it can
+be edited without changing unrelated pages.

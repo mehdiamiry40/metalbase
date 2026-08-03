@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { FaqList, FaqSchema } from "@/components/Faq";
 import { PageHeader } from "@/components/sections";
 import {
@@ -9,6 +8,7 @@ import {
   Section,
 } from "@/components/ui";
 import { glossary } from "@/lib/site";
+import { pageMetadata } from "@/lib/metadata";
 
 /* These answers are intentionally limited to guidance that does not depend on
    an unpublished yard address, operating hour, minimum load, payment policy,
@@ -40,12 +40,12 @@ const publishedFaqs = [
   },
 ];
 
-export const metadata: Metadata = {
-  title: "Selling Scrap Metal in Brisbane — Common Questions",
+export const metadata = pageMetadata({
+  path: "/faq",
+  title: "Scrap Metal Questions Brisbane",
   description:
-    "What to send for a scrap quote, why grades affect price, what documents may be required and what to confirm before transporting unusual material in Brisbane.",
-  alternates: { canonical: "/faq" },
-};
+    "Answers about Brisbane scrap quotes, grading, preparation, documents and unusual materials.",
+});
 
 export default function FaqPage() {
   return (
@@ -54,8 +54,9 @@ export default function FaqPage() {
 
       <PageHeader
         eyebrow="Questions"
+        photo="grab-claw"
         title="Selling scrap metal, answered"
-        intro="What to confirm before requesting a quote or transporting material. If your question is not here, send it to the trade desk."
+        intro="What to confirm before requesting a quote or transporting material. If your question is not here, ask us."
         trail={[{ label: "Home", href: "/" }, { label: "FAQ" }]}
       />
 
@@ -70,8 +71,8 @@ export default function FaqPage() {
               <h2 className="text-xl">Still not sure?</h2>
               <p className="mt-3 text-base leading-relaxed t-muted">
                 Describe what you have, its condition and any visible markings.
-                The trade desk can confirm the grade assumptions, request a
-                photo if needed and explain the available next step.
+                We can confirm the grade assumptions, request a photo if needed
+                and explain the available next step.
               </p>
               <div className="mt-6">
                 <Button href="/contact">Request a quote</Button>

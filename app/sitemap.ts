@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
-import { SITE, services } from "@/lib/site";
+import { regions } from "@/lib/regions";
+import { LAUNCH_READY, PUBLISH_RATES, SITE, services } from "@/lib/site";
 
 /**
  * The base URL here used to be hardcoded to https://www.metalbase.com.au
@@ -17,7 +18,7 @@ import { SITE, services } from "@/lib/site";
  * often, because only it genuinely does.
  */
 
-const CONTENT_REVIEWED = new Date("2026-07-28");
+const CONTENT_REVIEWED = new Date("2026-08-03");
 
 const routes: {
   path: string;
@@ -28,7 +29,11 @@ const routes: {
   { path: "/what-we-buy", priority: 0.9, changeFrequency: "monthly" },
   { path: "/contact", priority: 0.9, changeFrequency: "monthly" },
   { path: "/faq", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/prices", priority: 0.8, changeFrequency: "daily" },
+  {
+    path: "/prices",
+    priority: 0.8,
+    changeFrequency: PUBLISH_RATES ? "daily" : "monthly",
+  },
   { path: "/services", priority: 0.8, changeFrequency: "monthly" },
   { path: "/locations", priority: 0.7, changeFrequency: "monthly" },
   { path: "/glossary", priority: 0.6, changeFrequency: "monthly" },
@@ -37,7 +42,11 @@ const routes: {
   { path: "/legal", priority: 0.3, changeFrequency: "monthly" },
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export function createSitemap(
+  launchReady = LAUNCH_READY,
+): MetadataRoute.Sitemap {
+  if (!launchReady) return [];
+
   return [
     ...routes.map((r) => ({
       url: `${SITE}${r.path}`,
@@ -51,5 +60,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
+    ...regions.map((region) => ({
+      url: `${SITE}/locations/${region.slug}`,
+      lastModified: new Date(region.reviewedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+    })),
   ];
+}
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return createSitemap();
 }

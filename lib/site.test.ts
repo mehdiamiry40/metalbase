@@ -5,6 +5,7 @@ import {
   LAUNCH_READY,
   PUBLISH_RATES,
   company,
+  locations,
   nav,
   priceGroups,
   services,
@@ -25,12 +26,37 @@ describe("launch guards", () => {
     }
   });
 
+  it("requires verified business facts before launch mode can be enabled", () => {
+    if (LAUNCH_READY) {
+      expect(company.abn?.trim()).toBeTruthy();
+      expect(company.legal?.trim()).toBeTruthy();
+      expect(company.licence?.trim()).toBeTruthy();
+      expect(company.email?.trim()).toBeTruthy();
+      expect(company.head?.trim()).toBeTruthy();
+      expect(company.phone?.trim()).toBeTruthy();
+      expect(company.phoneLabel?.trim()).toBeTruthy();
+      expect(company.priceDate?.trim()).toBeTruthy();
+      expect(locations.length).toBeGreaterThan(0);
+    }
+  });
+
   it("does not publish rates unless PUBLISH_RATES is set", () => {
     if (!PUBLISH_RATES) {
       const withRates = priceGroups.flatMap((g) =>
         g.rows.filter((r) => r.rate !== null),
       );
       expect(withRates).toEqual([]);
+    }
+  });
+
+  it("requires a complete, dated rate board before rates can be published", () => {
+    if (PUBLISH_RATES) {
+      expect(company.priceDate?.trim()).toBeTruthy();
+      for (const group of priceGroups) {
+        for (const row of group.rows) {
+          expect(row.rate?.trim()).toBeTruthy();
+        }
+      }
     }
   });
 
@@ -188,6 +214,17 @@ describe("services", () => {
   it("each carry at least three detail points", () => {
     for (const s of services) {
       expect(s.points.length).toBeGreaterThanOrEqual(3);
+      expect(s.seoTitle.trim()).not.toBe("");
+      expect(s.seoDescription.trim()).not.toBe("");
+      expect(`${s.seoTitle} ${s.seoDescription}`).not.toMatch(
+        /\benquir(?:y|ies)\s+enquiry\b/i,
+      );
+    }
+  });
+
+  it("does not verify service capabilities before the business launch facts", () => {
+    if (!LAUNCH_READY) {
+      expect(services.filter((service) => service.verified)).toEqual([]);
     }
   });
 });

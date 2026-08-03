@@ -16,30 +16,16 @@ import {
    Delivery:
      RESEND_API_KEY + a destination → email via Resend
      ENQUIRY_WEBHOOK_URL            → POSTs JSON (Zapier, Make, CRM)
-     neither                        → logs and reports delivered:false
+     neither                        → fails closed with a clear 503
 
-   The destination defaults to ENQUIRY_INBOX below and ENQUIRY_TO
-   overrides it. It is a constant rather than environment-only because
-   the address is not a secret and forgetting it in the dashboard is
-   silent: the endpoint keeps returning ok, the customer is told their
-   enquiry was logged but not sent, and nobody finds out until someone
-   asks why no quotes are arriving. A wrong-but-set address fails
-   loudly; an unset one does not fail at all.
-
-   This module is server-only (runtime = "nodejs", never imported by a
-   client component), so the address is not shipped to the browser.
-
-   NOTE: the address alone does not deliver anything — RESEND_API_KEY
-   must also be set in Vercel, and it is a secret, so it cannot live
-   here. Until it exists every submission is logged and lost.
+   No customer details are written to server logs. Delivery credentials
+   and destinations belong in deployment environment variables.
 
    Rate limiting uses Upstash when configured, in-memory otherwise.
    ------------------------------------------------------------------ */
 
 export const runtime = "nodejs";
-
-/** Where quote enquiries land. Overridden by ENQUIRY_TO when set. */
-const ENQUIRY_INBOX = "mehdiamiry40@gmail.com";
+const DELIVERY_TIMEOUT_MS = 8_000;
 
 export async function POST(request: Request) {
   const ip =
@@ -72,12 +58,9 @@ export async function POST(request: Request) {
   }
 
   const summary = formatSummary(data);
-  /* `||` rather than `??`: an env var set to an empty string is a
-     configuration mistake, not a deliberate "send nowhere", and `??`
-     would let "" through and drop the enquiry. */
-  const to = process.env.ENQUIRY_TO?.trim() || ENQUIRY_INBOX;
-  const resendKey = process.env.RESEND_API_KEY;
-  const webhook = process.env.ENQUIRY_WEBHOOK_URL;
+  const to = process.env.ENQUIRY_TO?.trim();
+  const resendKey = process.env.RESEND_API_KEY?.trim();
+  const webhook = process.env.ENQUIRY_WEBHOOK_URL?.trim();
 
   try {
     if (resendKey && to) {
@@ -90,13 +73,14 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           from: process.env.ENQUIRY_FROM ?? "MetalBase <onboarding@resend.dev>",
           to: [to],
-          reply_to: data.email,
+          ...(data.email ? { reply_to: data.email } : {}),
           subject: `Quote enquiry — ${data.enquiryType} — ${data.name}`,
           text: summary,
         }),
+        signal: AbortSignal.timeout(DELIVERY_TIMEOUT_MS),
       });
       if (!res.ok) {
-        throw new Error(`Resend responded ${res.status}: ${await res.text()}`);
+        throw new Error(`resend_${res.status}`);
       }
       return NextResponse.json({ ok: true, delivered: true });
     }
@@ -106,12 +90,14 @@ export async function POST(request: Request) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data, receivedAt: new Date().toISOString() }),
+        signal: AbortSignal.timeout(DELIVERY_TIMEOUT_MS),
       });
-      if (!res.ok) throw new Error(`Webhook responded ${res.status}`);
+      if (!res.ok) throw new Error(`webhook_${res.status}`);
       return NextResponse.json({ ok: true, delivered: true });
     }
-  } catch (err) {
-    console.error("[enquiry] delivery failed:", err);
+  } catch {
+    // Never log the provider body, destination, or customer payload.
+    console.error("[enquiry] delivery failed.");
     return NextResponse.json(
       {
         ok: false,
@@ -121,20 +107,18 @@ export async function POST(request: Request) {
     );
   }
 
-  /* Nothing configured — say so rather than faking success. The
-     destination always resolves now, so the only thing that can be
-     missing on the email path is the key; name it specifically rather
-     than listing everything and leaving the operator to work out which
-     one they skipped. */
   console.warn(
-    `[enquiry] Not delivered. Destination is ${to}, but RESEND_API_KEY is ` +
-      "not set (and no ENQUIRY_WEBHOOK_URL). Set it in Vercel → Settings → " +
-      "Environment Variables and redeploy. Enquiry received:\n" +
-      summary +
+    "[enquiry] Delivery is not configured. Set ENQUIRY_WEBHOOK_URL or both " +
+      "RESEND_API_KEY and ENQUIRY_TO." +
       (isDurableLimiterConfigured()
         ? ""
-        : "\n[enquiry] Rate limiting is in-memory only; set UPSTASH_REDIS_REST_URL " +
-          "and UPSTASH_REDIS_REST_TOKEN for a limit that holds across instances."),
+        : " Durable rate limiting is also not configured."),
   );
-  return NextResponse.json({ ok: true, delivered: false });
+  return NextResponse.json(
+    {
+      ok: false,
+      error: "Online enquiries are temporarily unavailable.",
+    },
+    { status: 503 },
+  );
 }

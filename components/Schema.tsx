@@ -1,4 +1,7 @@
-import { SITE, company } from "@/lib/site";
+import { LAUNCH_READY, SITE, company } from "@/lib/site";
+
+/** Stable identity shared by every schema node that refers to MetalBase. */
+export const ORGANIZATION_ID = `${SITE}/#organization`;
 
 /* ------------------------------------------------------------------
    Structured data helpers.
@@ -56,6 +59,51 @@ export function Breadcrumbs({
 }
 
 /**
+ * Describes an editorial regional guide without pretending MetalBase has a
+ * branch, yard or street address in that place. `about` identifies the
+ * geographic subject of the page; the publisher remains the single
+ * organisation node from the root layout.
+ */
+export function AreaGuideSchema({
+  slug,
+  name,
+  title,
+  description,
+}: {
+  slug: string;
+  name: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <Ld data={areaGuideSchemaData({ slug, name, title, description })} />
+  );
+}
+
+export function areaGuideSchemaData({
+  slug,
+  name,
+  title,
+  description,
+}: {
+  slug: string;
+  name: string;
+  title: string;
+  description: string;
+}): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${SITE}/locations/${slug}#webpage`,
+    url: `${SITE}/locations/${slug}`,
+    name: title,
+    description,
+    about: { "@type": "Place", name },
+    publisher: { "@id": ORGANIZATION_ID },
+  };
+}
+
+/**
  * Service schema for a single service page.
  *
  * `areaServed` is Brisbane rather than a fabricated radius, and
@@ -66,28 +114,54 @@ export function ServiceSchema({
   name,
   description,
   slug,
+  verified,
 }: {
   name: string;
   description: string;
   slug: string;
+  verified: boolean;
 }) {
+  const data = serviceSchemaData({ name, description, slug, verified });
+  if (!data) return null;
+
+  return <Ld data={data} />;
+}
+
+export function serviceSchemaData(
+  {
+    name,
+    description,
+    slug,
+    verified,
+  }: {
+    name: string;
+    description: string;
+    slug: string;
+    verified: boolean;
+  },
+  launchReady = LAUNCH_READY,
+): Record<string, unknown> | null {
+  /* A Service node is a commercial capability claim. Until the operator has
+     verified the business facts, omitting it is more accurate than attaching
+     cautious prose to an unverified offer. */
+  if (!launchReady || !verified) return null;
+
   return (
-    <Ld
-      data={{
-        "@context": "https://schema.org",
-        "@type": "Service",
-        name,
-        description,
-        serviceType: name,
-        url: `${SITE}/services/${slug}`,
-        areaServed: { "@type": "City", name: "Brisbane" },
-        provider: {
-          "@type": "RecyclingCenter",
-          name: company.name,
-          legalName: company.legal,
-          url: SITE,
-        },
-      }}
-    />
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name,
+      description,
+      serviceType: name,
+      url: `${SITE}/services/${slug}`,
+      areaServed: { "@type": "City", name: "Brisbane" },
+      provider: {
+        "@type": "RecyclingCenter",
+        "@id": ORGANIZATION_ID,
+        name: company.name,
+        ...(company.legal ? { legalName: company.legal } : {}),
+        url: SITE,
+      },
+    }
   );
 }

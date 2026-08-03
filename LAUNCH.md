@@ -6,9 +6,20 @@ real customers.
 
 ---
 
+## 0. Replace the stale production deployment — urgent
+
+The live domain was checked on 4 August 2026 and still served the superseded,
+indexable build. It did not contain the current launch gate, redirect, copy or
+security headers. Deploy the reviewed tree, then verify the live HTML,
+`robots.txt`, legacy redirect, form fallback and response headers before
+sharing the domain.
+
+Do not flip `LAUNCH_READY` during that deployment. The current tree intentionally
+ships `noindex, nofollow` and an empty sitemap until the facts below are supplied.
+
 ## 1. Business facts — blocks launch
 
-Every value below is still `null` in `lib/site.ts`. Nothing is invented, so
+Every unstruck value below is still `null` in `lib/site.ts`. Nothing is invented, so
 the UI omits whatever is missing rather than printing a placeholder. That
 is honest, but it also means the site does not yet identify itself as a
 licensed dealer.
@@ -16,6 +27,7 @@ licensed dealer.
 | Field | Where it appears | Consequence while null |
 |---|---|---|
 | ~~`phone` + `phoneLabel`~~ | header, footer, contact, mobile bar | ✅ **Set.** `+61410233335` / `0410 233 335`. Click-to-call is live everywhere and the mobile bar now shows "Call". |
+| `legal` | footer and structured data | The registered entity name is not published |
 | `email` | footer, contact, legal | No direct email route |
 | `head` | footer, legal, `PostalAddress` schema | No address in the local-business markup, which is a ranking input for local search |
 | `abn` | footer, legal | Required on Australian commercial material |
@@ -24,52 +36,39 @@ licensed dealer.
 
 Set them, then flip `LAUNCH_READY = true`.
 
-### The licence is not just a missing field
+### Confirm the operating and licensing model
 
-Under the *Second-hand Dealers and Pawnbrokers Act 2003* (Qld), dealing
-in second-hand goods — which now expressly includes scrap metal — is a
-licensed activity, and holding yourself out as licensed when you are not
-is an offence. The *Justice and Other Legislation Amendment Bill 2026*
-raises the maximum penalty for unlicensed scrap dealing to 400 penalty
-units or two years imprisonment.
-
-The site describes licensed-dealer obligations as things "we" do. That
-copy is correct only once the licence exists. **Do not point customers
-at this site before the licence is issued.**
+Before launch, have the operator and a Queensland legal adviser confirm whether
+MetalBase is the licensed merchant, a broker or an enquiry service, which
+licence and record-keeping rules apply, and which entity operates the site.
+Do not publish a licence number or licensed-dealer claim until it is verified.
 
 ---
 
-## 2. The enquiry form does not deliver
+## 2. Configure and test enquiry delivery
 
-It validates, strips control characters, rate-limits, and honestly
-returns `delivered: false`. Nothing is emailed, because no key is set.
+The endpoint validates, sanitises and rate-limits each request. It fails closed
+with `503` when no delivery path is configured and does not log customer data.
 
-Enquiries are addressed to `mehdiamiry40@gmail.com`, set as
-`ENQUIRY_INBOX` in `app/api/enquiry/route.ts`. That part needs no
-configuration. **One variable still blocks delivery**, because it is a
-secret and cannot live in the repo:
+For email delivery, set both values in the deployment environment:
 
 ```
-RESEND_API_KEY   re_xxxxxxxx     # resend.com, free tier is ample
+RESEND_API_KEY   re_xxxxxxxx
+ENQUIRY_TO       quotes@example.com
 ```
 
 Set it in Vercel → Settings → Environment Variables and redeploy.
 
-Two optional overrides:
+Optional sender override:
 
 ```
-ENQUIRY_TO       someone@else    # overrides ENQUIRY_INBOX
-ENQUIRY_FROM     noreply@yourdomain   # a domain you verified in Resend
+ENQUIRY_FROM     noreply@yourdomain
 ```
 
-Leave `ENQUIRY_FROM` unset and the sender is Resend's shared
-`onboarding@resend.dev`, which only delivers to the address that owns
-the Resend account. So if you create that account with
-`mehdiamiry40@gmail.com`, quotes arrive with no domain verification at
-all. Sending anywhere else means verifying a domain first.
+Alternatively, set `ENQUIRY_WEBHOOK_URL` for a Zapier, Make or CRM endpoint.
 
-Redeploy, then send a real enquiry and confirm it arrives. Until the key
-is set every submission is logged and lost, and the customer is told so.
+Redeploy, submit a real test enquiry, confirm it arrives at the intended
+destination and verify the reply path before enabling launch mode.
 
 Optional but recommended: `UPSTASH_REDIS_REST_URL` and
 `UPSTASH_REDIS_REST_TOKEN` for durable rate limiting. Without them the
@@ -78,10 +77,10 @@ times the intended rate.
 
 ---
 
-## 3. Answer the eight open questions in the FAQ
+## 3. Confirm unpublished operating details
 
-`lib/site.ts` → `faqs`. Entries with a `todo` field are answered
-generically because only you know how this yard operates:
+The site deliberately avoids firm answers where only the operator can verify
+the current policy. Confirm these before replacing the cautious enquiry wording:
 
 - payment timing (same day / next day / weekly run)
 - whether there is genuinely no minimum load
@@ -90,17 +89,18 @@ generically because only you know how this yard operates:
 - whether to publish a public rate board
 - collection radius and minimum volume for a bin
 
-The `todo` text is never rendered and never emitted into the FAQ schema.
-Delete the field once the answer is real.
+Record each verified answer in the page or shared content model that renders it.
+Do not restore the removed catch-all FAQ data or publish an operational promise
+from a launch note.
 
 ---
 
-## 4. Custom domain
+## 4. Canonical domain
 
 `SITE` in `lib/site.ts` is the single source for canonicals, Open Graph
-and every JSON-LD block. Change it in one place after pointing a domain
-at the project. `lib/seo.test.ts` fails the build if a host is ever
-hardcoded anywhere else again.
+and every JSON-LD block. It is currently set to `https://www.metalbase.com.au`.
+`lib/seo.test.ts` fails if another origin is hardcoded into sitemap or robots
+logic.
 
 ---
 
@@ -120,26 +120,23 @@ convincing one:
 
 ---
 
-## Verified as of the last deploy
+## Verified in the current worktree — 4 August 2026
 
-- Production build clean, TypeScript clean, 36 tests passing
-- Zero axe-core violations across every page, **with all nav
-  disclosures forced open** — a real `aria-controls` bug hid behind
-  closed menus through three earlier audits
-- Zero horizontal overflow at 390 / 768 / 1024 px
+- Production build, ESLint and TypeScript clean; 66 tests passing
+- `npm audit --audit-level=high`: zero known vulnerabilities
+- Every public route crawled without broken links, console errors, duplicate
+  IDs, missing image alternatives or heading skips in normal states
+- Zero horizontal overflow down to 320 px
 - All interactive controls ≥ 44 px
-- Every page self-canonicalises (nine previously claimed to be
-  duplicates of the home page)
-- Sitemap and robots.txt resolve to the serving host
-- No third-party origins requested on load
-- No placeholder text in the production HTML
+- Every page self-canonicalises; unfinished pages are `noindex, nofollow`
+- Empty pre-launch sitemap and no sitemap advertisement in `robots.txt`
+- Security headers present in the production-mode local response
+- Mobile navigation Escape/focus return, skip link, accordions, form errors,
+  success focus and sticky action bar verified with keyboard checks
 
 ## Known limitations
 
-- **Hero image is ~10% below native resolution** on a 2× display. The
-  upstream crop from Unsplash caps it; disappears with real photography.
-- **`next/font` cannot build in a sandboxed environment** that blocks
-  `fonts.googleapis.com`. It builds correctly on Vercel. If you build
-  locally behind a restrictive proxy, that is the failure you will see.
 - **`locations` is empty**, so the locations page has no yard list. It
   renders without one rather than inventing an address.
+- **Photography is stock**, so it cannot prove the real yard, team or
+  equipment. Replace it before relying on imagery as a trust signal.

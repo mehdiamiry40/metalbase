@@ -10,36 +10,30 @@ export default function Photo({
   alt,
   priority = false,
   sizes = "(max-width: 1024px) 100vw, 50vw",
-  tint = false,
   /** Upstream source width. Lower it for thumbnails to save bytes. */
   sourceWidth,
+  quality,
   className = "",
 }: {
   name: PhotoKey;
   alt?: string;
   priority?: boolean;
   sizes?: string;
-    /** Flat furnace wash for photos carrying text on top. */
-  tint?: boolean;
   sourceWidth?: number;
+  /** Output quality passed to Next's image optimiser. */
+  quality?: number;
   className?: string;
 }) {
   return (
-    <>
-      <Image
-        src={photoSrc(name, sourceWidth)}
-        alt={alt ?? photos[name].alt}
-        fill
-        priority={priority}
-        sizes={sizes}
-        className={`object-cover ${className}`}
-      />
-      {tint && (
-        <span
-          aria-hidden="true"
-          className="absolute inset-0 bg-furnace/70"
-        />
-      )}
-    </>
+    <Image
+      src={photoSrc(name, sourceWidth)}
+      alt={alt ?? photos[name].alt}
+      fill
+      priority={priority}
+      fetchPriority={priority ? undefined : "low"}
+      sizes={sizes}
+      quality={quality}
+      className={`site-photo object-cover ${className}`}
+    />
   );
 }
