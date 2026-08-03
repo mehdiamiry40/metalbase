@@ -52,13 +52,16 @@ describe("navigation integrity", () => {
     for (const item of nav) {
       expect(item.label.trim()).not.toBe("");
       expect(item.href).not.toBe("");
-      for (const col of item.columns) {
-        expect(col.label.trim()).not.toBe("");
-        for (const child of col.children) {
-          expect(child.label.trim()).not.toBe("");
-          expect(child.href).not.toBe("");
-        }
-      }
+    }
+  });
+
+  /* The menu was 74 links deep. Keeping it flat is the whole point of
+     the simplification, and a nav is exactly the thing that regrows a
+     link at a time, so the ceiling is asserted rather than assumed. */
+  it("stays a short flat list", () => {
+    expect(nav.length).toBeLessThanOrEqual(5);
+    for (const item of nav) {
+      expect(Object.keys(item).sort()).toEqual(["href", "label"]);
     }
   });
 
@@ -90,10 +93,7 @@ describe("navigation integrity", () => {
       ...services.map((s) => `/services/${s.slug}`),
     ]);
 
-    const hrefs = nav.flatMap((i) => [
-      i.href,
-      ...i.columns.flatMap((c) => [c.href, ...c.children.map((ch) => ch.href)]),
-    ]);
+    const hrefs = nav.map((i) => i.href);
 
     const broken = hrefs
       .filter(internal)

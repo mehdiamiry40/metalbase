@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DefinitionRows, PageHeader, Split, Steps } from "@/components/sections";
+import { DefinitionRows, PageHeader, Steps } from "@/components/sections";
 import { Button, CtaBand, Eyebrow, Section } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -138,29 +138,33 @@ export default function WhatWeBuyPage() {
         intro="If it's metal and it's legal, we'll price it. Below is what comes across our weighbridge most often, how each stream is graded, and the handful of things we cannot take at any price."
         trail={[{ label: "Home", href: "/" }, { label: "What we buy" }]}
       >
-        <div className="flex flex-wrap gap-4">
-          <Button href="/prices">See the rate board</Button>
-          <Button href="/contact" variant="outline">
-            Ask about a material
-          </Button>
-        </div>
+        {/* One action per page header. The second button here pointed
+            at /contact, which the sticky "Get a quote" and the closing
+            CTA band both already offer. */}
+        <Button href="/prices">See the rate board</Button>
       </PageHeader>
 
+      {/* Each stream used to open with a full-bleed photo split before
+          reaching its grade list — three large photographs of metal
+          ahead of the thing people came for, which is which grades we
+          take and what each one has to look like. The grades all stay;
+          the photographs do not. */}
       {streams.map((s, i) => (
-        <div key={s.id} id={s.id} className="scroll-mt-20">
-          <Split
-            photo={s.photo}
-            side={i % 2 === 0 ? "right" : "left"}
-            tone={i % 2 === 0 ? "base" : "deep"}
-            eyebrow={`Stream 0${i + 1}`}
-            title={s.title}
-          >
+        <Section
+          key={s.id}
+          id={s.id}
+          tone={i % 2 === 0 ? "base" : "deep"}
+          className="scroll-mt-20"
+        >
+          <div className="max-w-3xl">
+            <Eyebrow>{`Stream 0${i + 1}`}</Eyebrow>
+            <h2>{s.title}</h2>
             <p className="t-lead mt-5">{s.lead}</p>
-          </Split>
-          <Section tone={i % 2 === 0 ? "base" : "deep"} className="!pt-0">
+          </div>
+          <div className="mt-10">
             <DefinitionRows items={s.items} />
-          </Section>
-        </div>
+          </div>
+        </Section>
       ))}
 
       {/* prep --------------------------------------------------------- */}

@@ -57,191 +57,22 @@ export function orGap(value: string | null, label: string) {
 
 /* ---------------------------- navigation --------------------------- */
 
-export type NavChild = { label: string; href: string };
-export type NavColumn = { label: string; href: string; children: NavChild[] };
-export type NavItem = { label: string; href: string; columns: NavColumn[] };
+/* Navigation.
+
+   This was a five-item mega-menu: 5 top-level sections, 17 columns and
+   52 child links, 74 in all. Every one of those destinations still
+   exists — they were simply being offered all at once, in a dropdown,
+   to someone standing in a yard holding a phone. The menu is now a flat
+   list of the four places people actually need, and the pages do the
+   rest of the navigating via their own in-page links. */
+
+export type NavItem = { label: string; href: string };
 
 export const nav: NavItem[] = [
-  {
-    label: "What we buy",
-    href: "/what-we-buy",
-    columns: [
-      {
-        label: "Non-ferrous",
-        href: "/what-we-buy#non-ferrous",
-        children: [
-          { label: "Copper & cable", href: "/what-we-buy#non-ferrous" },
-          { label: "Brass & bronze", href: "/what-we-buy#non-ferrous" },
-          { label: "Aluminium", href: "/what-we-buy#non-ferrous" },
-          { label: "Lead & zinc", href: "/what-we-buy#non-ferrous" },
-          { label: "Stainless steel", href: "/what-we-buy#non-ferrous" },
-        ],
-      },
-      {
-        label: "Ferrous",
-        href: "/what-we-buy#ferrous",
-        children: [
-          { label: "Heavy melting steel", href: "/what-we-buy#ferrous" },
-          { label: "Light gauge & mixed", href: "/what-we-buy#ferrous" },
-          { label: "Cast iron", href: "/what-we-buy#ferrous" },
-          { label: "Structural & plate", href: "/what-we-buy#ferrous" },
-          { label: "End-of-life vehicles", href: "/what-we-buy#ferrous" },
-        ],
-      },
-      {
-        label: "Specialty streams",
-        href: "/what-we-buy#specialty",
-        children: [
-          { label: "Electric motors", href: "/what-we-buy#specialty" },
-          { label: "Batteries", href: "/what-we-buy#specialty" },
-          { label: "Radiators & heat exchangers", href: "/what-we-buy#specialty" },
-          { label: "E-waste & data media", href: "/what-we-buy#specialty" },
-        ],
-      },
-      {
-        label: "Pricing",
-        href: "/prices",
-        children: [
-          { label: "Rate board", href: "/prices" },
-          { label: "How grading works", href: "/prices#grading" },
-          { label: "Contract & rebate pricing", href: "/prices#contract" },
-          { label: "Get a written quote", href: "/contact" },
-        ],
-      },
-    ],
-  },
-  {
-    label: "For business",
-    href: "/services",
-    columns: [
-      {
-        label: "Collection",
-        href: "/services/collection-and-bins",
-        children: [
-          { label: "Bin & skip hire", href: "/services/collection-and-bins" },
-          { label: "Scheduled collections", href: "/services/collection-and-bins" },
-          { label: "Crane & hiab pick-up", href: "/services/collection-and-bins" },
-        ],
-      },
-      {
-        label: "Industrial",
-        href: "/services/industrial",
-        children: [
-          { label: "Offcut & swarf programs", href: "/services/industrial" },
-          { label: "On-site segregation", href: "/services/industrial" },
-          { label: "Rebate statements", href: "/services/industrial" },
-        ],
-      },
-      {
-        label: "Demolition",
-        href: "/services/demolition",
-        children: [
-          { label: "Structural steel buy-back", href: "/services/demolition" },
-          { label: "Site strip-outs", href: "/services/demolition" },
-          { label: "Weighbridge dockets", href: "/services/demolition" },
-        ],
-      },
-      {
-        label: "Get started",
-        href: "/contact",
-        children: [
-          { label: "Request a quote", href: "/contact" },
-          { label: "Book a site assessment", href: "/contact" },
-          { label: "Open a trade account", href: "/contact" },
-        ],
-      },
-    ],
-  },
-  {
-    label: "Sell your scrap",
-    href: "/locations",
-    columns: [
-      {
-        label: "Visit a yard",
-        href: "/locations",
-        children: [{ label: "Yard locations", href: "/locations" }],
-      },
-      {
-        label: "Before you come in",
-        href: "/locations#how-it-works",
-        children: [
-          { label: "How a weigh-in works", href: "/locations#how-it-works" },
-          { label: "ID you need to bring", href: "/locations#id" },
-          { label: "What we can't accept", href: "/what-we-buy#excluded" },
-          { label: "Prepping your load", href: "/what-we-buy#prep" },
-        ],
-      },
-      {
-        label: "Getting paid",
-        href: "/locations#payment",
-        children: [
-          { label: "How you get paid", href: "/faq" },
-          { label: "Trade accounts", href: "/services/industrial" },
-        ],
-      },
-      {
-        label: "Common questions",
-        href: "/faq",
-        children: [
-          { label: "Do I need ID?", href: "/faq" },
-          { label: "How and when do I get paid?", href: "/faq" },
-          { label: "Is there a minimum load?", href: "/faq" },
-          { label: "What can't you take?", href: "/faq" },
-        ],
-      },
-    ],
-  },
-  {
-    label: "Sustainability",
-    href: "/sustainability",
-    columns: [
-      {
-        label: "Reporting",
-        href: "/sustainability#reporting",
-        children: [
-          { label: "Diversion reports", href: "/sustainability#reporting" },
-          { label: "Certificates of destruction", href: "/sustainability#destruction" },
-          { label: "Chain of custody", href: "/sustainability#destruction" },
-        ],
-      },
-      {
-        label: "Compliance",
-        href: "/sustainability#compliance",
-        children: [
-          { label: "Licensing & accreditation", href: "/sustainability#compliance" },
-          { label: "Audit pack", href: "/sustainability#compliance" },
-        ],
-      },
-      {
-        label: "Circular economy",
-        href: "/sustainability#circular",
-        children: [{ label: "Where your metal goes", href: "/sustainability#circular" }],
-      },
-    ],
-  },
-  {
-    label: "About",
-    href: "/about",
-    columns: [
-      {
-        label: "Who we are",
-        href: "/about",
-        children: [
-          { label: "Our story", href: "/about#story" },
-          { label: "How we operate", href: "/about#operate" },
-          { label: "Safety", href: "/about#safety" },
-        ],
-      },
-      {
-        label: "Get in touch",
-        href: "/contact",
-        children: [
-          { label: "Contact us", href: "/contact" },
-          { label: "Trade desk", href: "/contact" },
-        ],
-      },
-    ],
-  },
+  { label: "What we buy", href: "/what-we-buy" },
+  { label: "Prices", href: "/prices" },
+  { label: "For business", href: "/services" },
+  { label: "Visit us", href: "/locations" },
 ];
 
 /* ------------------------------ prices -----------------------------

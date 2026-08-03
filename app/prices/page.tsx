@@ -49,37 +49,15 @@ export default function PricesPage() {
         }
         trail={[{ label: "Home", href: "/" }, { label: "Prices" }]}
       >
-        <div className="flex flex-wrap gap-4">
-          <Button href="/contact">Get a rate for your load</Button>
-          <Button href="#grading" variant="outline">
-            How grading works
-          </Button>
-        </div>
+        {/* Second button was an in-page anchor to #grading, which is
+            two scrolls away on the same page. */}
+        <Button href="/contact">Get a rate for your load</Button>
       </PageHeader>
 
-      {/* Three long tables need a way to move between them. */}
-      <nav
-        aria-label="Material streams"
-        className="sticky top-[70px] z-30 border-b hair bg-paper/95 backdrop-blur"
-      >
-        <div className="shell flex gap-6 overflow-x-auto py-3.5">
-          {priceGroups.map((g) => (
-            <a
-              key={g.id}
-              href={`#${g.id}`}
-              className="u-link whitespace-nowrap text-[0.92rem] font-medium t-muted hover:text-[color:var(--accent-text)]"
-            >
-              {g.title}
-            </a>
-          ))}
-          <a
-            href="#grading"
-            className="u-link ml-auto hidden whitespace-nowrap text-[0.92rem] font-medium t-muted hover:text-[color:var(--accent-text)] sm:block"
-          >
-            How grading works
-          </a>
-        </div>
-      </nav>
+      {/* A sticky sub-nav for three anchors sat here, under a header
+          that is already sticky — two fixed bars stacked on a phone,
+          eating vertical space on every scroll of a page whose content
+          is tables. Three headings are findable by scrolling. */}
 
       {!PUBLISH_RATES && (
         <div className="border-b hair bg-paper">
