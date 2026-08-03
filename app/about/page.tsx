@@ -3,7 +3,6 @@ import { DefinitionRows, PageHeader, Split } from "@/components/sections";
 import {
   ArrowLink,
   Callout,
-  CtaBand,
   Section,
   SectionHead,
   StatBand,
@@ -15,37 +14,37 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
   title: "About MetalBase",
   description:
-    "How MetalBase operates, the rules the yards run on, the legislation the trade sits under, and the questions worth asking any scrap merchant before you sell to them.",
+    "The grading, weighing, documentation and safety questions worth asking before choosing a Brisbane scrap-metal merchant.",
 };
 
 const values = [
   {
-    term: "The grade is the grade",
+    term: "Agree the grade before handover",
     detail:
-      "We call it before the load is tipped and we don't revise it afterwards. A yard that regrades at the scale is telling you something about how it does business.",
+      "A useful quote names the assumed grade, the condition of the material and anything that could change the final assessment. Ask for those points before the load moves.",
   },
   {
-    term: "Everybody gets the board rate",
+    term: "Price the load in front of you",
     detail:
-      "Volume gets you a contract formula, not a secret better price. A first-time seller and a regular fabricator are quoted against the same standard.",
+      "Scrap rates move with the market and the recovered yield. The quote should state the grade it applies to instead of presenting one number as universal.",
   },
   {
-    term: "Documentation isn't optional",
+    term: "Keep the transaction traceable",
     detail:
-      "Every movement generates a docket, and dockets are retained. It protects you, it protects us, and it keeps stolen metal out of the chain.",
+      "Before accepting a trade, confirm which identification, ownership records, weights and settlement details will appear on the docket.",
   },
   {
-    term: "Paid before you leave",
+    term: "Confirm settlement before unloading",
     detail:
-      "Cash at the bridge against the grade on your docket, or a transfer if you'd rather. Nobody waits on a payment run, and nobody is told the rate after the metal is already tipped.",
+      "Payment method, timing and any limits should be agreed with the trade desk before the material is committed, particularly for a large or ongoing load.",
   },
 ];
 
 const safety = [
-  "Site induction for every visitor, including drivers",
-  "Hi-vis, boots and eye protection past the office line",
-  "Pedestrian and vehicle traffic physically separated",
-  "Dangerous goods handled under a documented procedure, not a habit",
+  "Confirm the current site and arrival instructions before travelling",
+  "Bring closed footwear and follow the PPE directions at the gate",
+  "Stay with the vehicle until a spotter directs you",
+  "Declare tanks, batteries, fluids and other regulated material in advance",
 ];
 
 export default function AboutPage() {
@@ -53,8 +52,8 @@ export default function AboutPage() {
     <>
       <PageHeader
         eyebrow="About"
-        title="A scrap yard is a simple business done carefully"
-        intro="Buy the metal, grade it honestly, weigh it accurately, pay on time. Most of what separates merchants is whether they actually do those four things."
+        title="What to expect from a careful scrap trade"
+        intro="Grade, weight, deductions and settlement should be clear before material changes hands. This page sets out the questions worth asking."
         trail={[{ label: "Home", href: "/" }, { label: "About" }]}
       />
 
@@ -71,27 +70,27 @@ export default function AboutPage() {
         n={1}
         caption="Wide view across a metal recovery yard"
         eyebrow="Our story"
-        title="Built around the weighbridge"
+        title="Built around clear grading"
         priority
       >
         <p className="t-lead mt-5" id="story">
-          MetalBase buys, processes and remarkets ferrous and non-ferrous scrap
-          across greater Brisbane — from a single ute load through to structural
-          steel off a demolition program.
+          MetalBase focuses on ferrous and non-ferrous scrap, with the grade and
+          commercial terms set out before a load is accepted. Current drop-off
+          and collection arrangements are confirmed directly for each enquiry.
         </p>
         <p className="mt-4">
-          The commercial model is straightforward: recover more value from each
-          tonne by grading accurately and segregating properly, then share that
-          back through the rate rather than keeping it in the margin.
+          Better separation usually improves recovered yield. The useful part of
+          a quote is not a broad promise; it is the grade assumption, the likely
+          deductions and the next action written in plain language.
         </p>
       </Split>
 
-      <Section id="operate" tone="slab" className="scroll-mt-20">
+      <Section id="operate" tone="slab" className="scroll-mt-20 pb-20 pt-12 lg:pb-28 lg:pt-16">
         <SectionHead
           index={1}
           eyebrow="How we operate"
-          title="Four rules the yards run on"
-          intro="They sound obvious. The reason people switch merchants is that they are not universal."
+          title="Four points to settle before a trade"
+          intro="Use them as a checklist for a one-off load or a longer commercial arrangement."
         />
         <DefinitionRows items={values} />
       </Section>
@@ -106,7 +105,7 @@ export default function AboutPage() {
 
           On the light surface because it is a reference someone might
           actually take with them. */}
-      <Section id="questions" tone="chalk" className="scroll-mt-20">
+      <Section id="questions" tone="chalk" className="scroll-mt-20 pb-24 pt-20 lg:pb-32 lg:pt-28">
         <SectionHead
           index={2}
           eyebrow="Choosing a merchant"
@@ -114,12 +113,12 @@ export default function AboutPage() {
           intro="Including this one. Every question below has a short factual answer, and how readily a yard gives it tells you more than any amount of copy on a website — this page included."
         />
         <DefinitionRows items={merchantQuestions} />
-        <Callout className="mt-10" label="Our answers">
-          Before tipping. Gross, tare, net and grade. On request, with the
-          certificate. Named on the docket. Yes, immediately, at no cost. Photo
-          identification and vehicle registration, every load, no exceptions.{" "}
+        <Callout className="mt-12" label="Take the checklist with you">
+          Ask when the grade is confirmed, which weights appear on the docket,
+          what documentation is available and how identity and settlement are
+          handled. Get the current answer before you travel.{" "}
           <ArrowLink href="/locations#how-it-works" tone="accent">
-            Watch it happen
+            Read the drop-off guide
           </ArrowLink>
         </Callout>
       </Section>
@@ -130,7 +129,7 @@ export default function AboutPage() {
           claiming a single credential — the licence and authority
           numbers themselves stay unpublished until they are issued,
           which /sustainability says in as many words. */}
-      <Section id="standards" className="scroll-mt-20">
+      <Section id="standards" className="scroll-mt-20 pb-20 pt-12 lg:pb-24 lg:pt-16">
         <SectionHead
           index={3}
           eyebrow="The framework"
@@ -139,8 +138,8 @@ export default function AboutPage() {
         />
         <DefinitionRows items={standards} />
         <p className="measure-wide mt-10 t-muted">
-          Our own licence number, environmental authority reference and
-          certification details are published on the{" "}
+          Verified business credentials and documentation will be published on
+          the{" "}
           <ArrowLink href="/sustainability#compliance" tone="accent">
             compliance section
           </ArrowLink>{" "}
@@ -148,25 +147,18 @@ export default function AboutPage() {
         </p>
       </Section>
 
-      <Section id="safety" tone="slab" className="scroll-mt-20">
+      <Section id="safety" tone="slab" className="scroll-mt-20 pb-24 pt-16 lg:pb-28 lg:pt-20">
         <div className="grid gap-12 lg:grid-cols-2">
           <SectionHead
             index={4}
             eyebrow="Safety"
-            title="A scrap yard is a heavy industrial site"
-            intro="Material handlers, mobile shears, moving trucks and unpredictable loads. We treat every visitor as somebody who has never been in one before, because most of them haven't."
+            title="Treat every yard visit as an industrial visit"
+            intro="Requirements vary by site and load. Confirm the location, hours, PPE and unloading instructions before setting out."
             className="mb-0"
           />
           <TickList items={safety} className="lg:pt-4" />
         </div>
       </Section>
-
-      <CtaBand
-        title="Come and have a look"
-        body="If you're weighing up a new merchant, come and watch a load get graded. It tells you more in ten minutes than any proposal will."
-        primary={{ label: "Arrange a visit", href: "/contact" }}
-        secondary={{ label: "What we buy", href: "/what-we-buy" }}
-      />
     </>
   );
 }

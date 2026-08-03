@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
 
-/** Favicon — the stacked-bar mark on ink. */
+/** Favicon — an M-shaped steel frame sitting on a weighbridge deck. */
 export default function Icon() {
   return new ImageResponse(
     (
@@ -14,13 +14,23 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#201e1c",
+          background: "#182024",
         }}
       >
-        <svg width="46" height="40" viewBox="0 0 32 28">
-          <path d="M4 4h18l-4 6H0z" fill="#ff6a1a" />
-          <path d="M7 11h18l-4 6H3z" fill="#ff6a1a" opacity="0.62" />
-          <path d="M10 18h18l-4 6H6z" fill="#ffffff" opacity="0.5" />
+        <svg width="44" height="44" viewBox="0 0 34 34">
+          <path
+            d="M4 24V6h6l7 10 7-10h6v18"
+            fill="none"
+            stroke="#f7f9f9"
+            strokeWidth="2.5"
+            strokeLinejoin="miter"
+          />
+          <path
+            d="M2 28h30M7 28v3M27 28v3"
+            fill="none"
+            stroke="#f7f9f9"
+            strokeWidth="2.5"
+          />
         </svg>
       </div>
     ),

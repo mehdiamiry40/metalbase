@@ -47,9 +47,9 @@ function Rule() {
 export function Docket({ className = "" }: { className?: string }) {
   return (
     <figure
-      className={`on-light border hair bg-white p-6 sm:p-8 ${className}`}
+      className={`on-light border hair bg-chalk p-6 sm:p-8 ${className}`}
     >
-      <header className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b-2 border-ink pb-3">
+      <header className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b hair pb-3">
         <p className="t-spec font-medium uppercase tracking-[0.14em]">
           Weighbridge docket
         </p>
@@ -80,7 +80,7 @@ export function Docket({ className = "" }: { className?: string }) {
             className="flex items-baseline justify-between gap-6 py-2.5"
           >
             <dt className="flex items-baseline gap-2.5">
-              <span className="mono text-[1.05rem] font-medium">{f.label}</span>
+              <span className="mono text-base font-medium">{f.label}</span>
               {f.note && (
                 <span className="t-spec t-muted">{f.note}</span>
               )}
@@ -120,7 +120,7 @@ export function Docket({ className = "" }: { className?: string }) {
             <Rule />
           </dd>
         </div>
-        <div className="col-span-2 mt-1 border-t-2 border-ink pt-4">
+        <div className="col-span-2 mt-1 border-t hair pt-4">
           <dt className="t-spec font-medium uppercase tracking-[0.1em]">
             Paid
           </dt>
@@ -130,7 +130,7 @@ export function Docket({ className = "" }: { className?: string }) {
         </div>
       </dl>
 
-      <figcaption className="mt-7 text-[0.86rem] leading-relaxed t-muted">
+      <figcaption className="mt-7 text-sm leading-relaxed t-muted">
         A blank specimen, not a record of a transaction. Every field is
         completed at the bridge with you standing there, and you keep a
         copy.

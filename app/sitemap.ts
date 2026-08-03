@@ -13,7 +13,7 @@ import { SITE, services } from "@/lib/site";
  * `lastModified: new Date()` is deliberately NOT used. Stamping every
  * URL with the build time tells crawlers the entire site changed on
  * every deploy, which is false and trains them to discount the signal.
- * Pages carry a fixed review date; only the rate board claims to change
+ * Pages carry a fixed review date; only the pricing guide claims to change
  * often, because only it genuinely does.
  */
 

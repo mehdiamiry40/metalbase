@@ -5,31 +5,111 @@ import type { ReactNode } from "react";
 
 export function ArrowRight({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <path d="M3 12h17M13.5 5.5L20 12l-6.5 6.5" stroke="currentColor" strokeWidth="1.6" />
+    <svg
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        d="M4 12h16m-6-6 6 6-6 6"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="square"
+        strokeLinejoin="miter"
+      />
     </svg>
   );
 }
 
 export function Tick({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <path d="M4 12.5l5.5 5.5L20 6.5" stroke="currentColor" strokeWidth="2.2" />
+    <svg
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        d="m4 12.5 5.5 5.5L20 6.5"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="square"
+        strokeLinejoin="miter"
+      />
+    </svg>
+  );
+}
+
+export function MenuIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        d="M3 6h18M3 12h18M3 18h18"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="square"
+      />
+    </svg>
+  );
+}
+
+export function CloseIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        d="M5 5l14 14M19 5 5 19"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="square"
+      />
+    </svg>
+  );
+}
+
+export function ChevronDown({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+    >
+      <path
+        d="m5 9 7 7 7-7"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="square"
+        strokeLinejoin="miter"
+      />
     </svg>
   );
 }
 
 /* ------------------------------- logo ------------------------------
-   A dimension line beside three stacked sections.
-
-   The old mark was three orange bars — generic enough to belong to any
-   trade business. This one says what the company actually does: the
-   left element is a dimension line lifted straight off an engineering
-   drawing (end ticks, measure rail), and the right is material, in
-   section, being measured by it.
-
-   Copper is on the instrument, not the metal, because measuring is the
-   part being sold.
+   An M-shaped steel frame sits on a weighbridge deck. The mark is one
+   colour and takes that colour from its surface, so it remains legible
+   in the header, footer and favicon without an accent treatment.
    ------------------------------------------------------------------ */
 
 /**
@@ -42,23 +122,25 @@ export function Logo({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <svg
-        viewBox="0 0 30 28"
-        className="h-[26px] w-[28px] shrink-0"
+        viewBox="0 0 34 34"
+        className="h-9 w-9 shrink-0"
         aria-hidden="true"
       >
-        {/* dimension line — the instrument */}
-        <g stroke="#d9823f" strokeWidth="1.6">
-          <path d="M4 5.5v17" />
-          <path d="M1 5.5h6M1 22.5h6" />
-        </g>
-        {/* material in section */}
-        <g fill="currentColor">
-          <rect x="11" y="4.5" width="18" height="5" opacity="0.95" />
-          <rect x="11" y="11.5" width="13" height="5" opacity="0.7" />
-          <rect x="11" y="18.5" width="16" height="5" opacity="0.45" />
-        </g>
+        <path
+          d="M4 24V6h6l7 10 7-10h6v18"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.25"
+          strokeLinejoin="miter"
+        />
+        <path
+          d="M2 28h30M7 28v3M27 28v3"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.25"
+        />
       </svg>
-      <span className="text-[1.3rem] font-semibold leading-none tracking-[-0.035em]">
+      <span className="font-display text-3xl font-bold uppercase leading-none tracking-[0.035em]">
         MetalBase
       </span>
     </span>
@@ -71,7 +153,7 @@ export function Logo({ className = "" }: { className?: string }) {
    ------------------------------------------------------------------ */
 
 const variants = {
-  /** Copper on dark, ink on light. Always contrasts with its band. */
+  /** Signal blue with a white label on every surface. */
   solid: "btn-solid",
   /** Outlined in the surface colour; inverts on hover. */
   ghost: "btn-ghost",
@@ -111,12 +193,12 @@ export function ArrowLink({
   return (
     <Link
       href={href}
-      className={`group inline-flex items-baseline gap-2 text-[0.95rem] font-semibold ${
+      className={`group inline-flex items-center gap-2 text-base font-semibold underline decoration-1 underline-offset-4 transition-colors duration-[160ms] ease-out ${
         tone === "accent" ? "t-accent" : ""
       } ${className}`}
     >
-      <span className="u-link">{children}</span>
-      <ArrowRight className="h-[14px] w-[14px] shrink-0 translate-y-[2px] transition-transform duration-200 group-hover:translate-x-1" />
+      <span>{children}</span>
+      <ArrowRight className="h-6 w-6 shrink-0 transition-transform duration-[160ms] ease-out group-hover:translate-x-1" />
     </Link>
   );
 }
@@ -128,8 +210,8 @@ export function ArrowLink({
    ------------------------------------------------------------------ */
 
 const tones = {
-  ink: "on-light bg-chalk", // warm paper
-  slab: "on-light bg-white", // raised light panel
+  ink: "on-light bg-chalk", // scale-paper field
+  slab: "on-light bg-shaft", // yard-fog alternate band
   chalk: "on-light bg-chalk", // a document
   sheet: "on-light bg-white", // the sheet itself — ledgers, dockets
 } as const;
@@ -154,7 +236,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={`${tones[tone]} scroll-mt-20 border-t hair py-20 lg:py-28 ${className}`}
+      className={`${tones[tone]} scroll-mt-20 border-t hair py-16 lg:py-24 ${className}`}
     >
       <div className="shell">{children}</div>
     </section>
@@ -179,10 +261,11 @@ export function Index({
   className?: string;
 }) {
   return (
-    <p className={`t-index flex items-center gap-3 ${className}`}>
-      <span className="t-accent">§&nbsp;{String(n).padStart(2, "0")}</span>
-      <span aria-hidden="true" className="h-px w-6 bg-[color:var(--hair)]" />
-      <span className="t-muted">{label}</span>
+    <p className={`t-index flex items-center justify-between gap-4 ${className}`}>
+      <span className="t-accent">{label}</span>
+      <span className="border-l-2 border-galvanised pl-3 font-mono text-xs text-furnace">
+        {String(n).padStart(2, "0")}
+      </span>
     </p>
   );
 }
@@ -239,16 +322,19 @@ export function StatBand({
 }) {
   if (!items.length) return null;
   return (
-    <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+    <dl className="grid border-y hair sm:grid-cols-2 lg:grid-cols-4">
       {items.map((s) => (
-        <div key={s.label} className="border-t-2 border-copper pt-5">
-          <p className="mono text-[2.5rem] font-medium leading-none tracking-[-0.04em]">
+        <div
+          key={s.label}
+          className="flex flex-col border-b hair px-0 py-6 sm:border-r sm:px-6 lg:border-b-0 first:pl-0 last:border-r-0"
+        >
+          <dt className="order-2 mt-3 text-sm leading-snug t-muted">{s.label}</dt>
+          <dd className="mono order-1 text-4xl font-medium leading-none tracking-[-0.025em]">
             {s.value}
-          </p>
-          <p className="mt-3 text-[0.92rem] leading-snug t-muted">{s.label}</p>
+          </dd>
         </div>
       ))}
-    </div>
+    </dl>
   );
 }
 
@@ -286,13 +372,13 @@ export function SpecStrip({
   const cols =
     items.length % 3 === 0
       ? "grid-cols-1 sm:grid-cols-3"
-      : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4";
+      : "grid-cols-2 lg:grid-cols-4";
   return (
     <dl className={`ruled ${surfaces[surface]} ${cols} ${className}`}>
       {items.map((s) => (
         <div key={s.k} className="px-4 py-4">
           <dt className="t-spec uppercase tracking-[0.1em] t-muted">{s.k}</dt>
-          <dd className="mono mt-2 text-[0.95rem] font-medium leading-tight">
+          <dd className="mono mt-2 text-base font-medium leading-tight">
             {s.v}
           </dd>
         </div>
@@ -306,8 +392,8 @@ export function SpecStrip({
 
    Replaces four separate hand-rolled "left border and a tinted box"
    panels that had drifted into three different colours and two
-   different paddings. The keyline is copper on both surfaces because
-   it carries no text — see the contrast note in globals.css.
+   different paddings. A galvanised keyline keeps it inside the base
+   palette without competing with the primary action.
    ------------------------------------------------------------------ */
 
 export function Callout({
@@ -327,7 +413,7 @@ export function Callout({
           {label}
         </p>
       )}
-      <div className="text-[0.95rem] leading-relaxed t-muted">{children}</div>
+      <div className="text-base leading-relaxed t-muted">{children}</div>
     </div>
   );
 }
@@ -343,7 +429,7 @@ export function Panel({
   className?: string;
 }) {
   return (
-    <div id={id} className={`border hair p-7 ${className}`}>
+    <div id={id} className={`border hair bg-chalk p-7 ${className}`}>
       {children}
     </div>
   );
@@ -366,7 +452,7 @@ export function ChipList({
       {items.map((i) => (
         <li
           key={i}
-          className="border hair px-3 py-1.5 text-[0.86rem] leading-snug t-muted"
+          className="border-l-2 border-galvanised bg-transparent px-3 py-1 text-sm leading-snug t-muted"
         >
           {i}
         </li>
@@ -387,7 +473,10 @@ export function Breadcrumb({
           <li key={t.label} className="flex items-center gap-2">
             {i > 0 && <span aria-hidden="true">/</span>}
             {t.href ? (
-              <Link href={t.href} className="u-link hover:text-[color:var(--accent-text)]">
+              <Link
+                href={t.href}
+                className="underline decoration-1 underline-offset-4 transition-colors duration-[160ms] ease-out hover:text-furnace"
+              >
                 {t.label}
               </Link>
             ) : (
@@ -412,11 +501,11 @@ export function CtaBand({
   secondary?: { label: string; href: string };
 }) {
   return (
-    <section className="on-dark border-t hair bg-slab">
-      <div className="shell py-20 lg:py-28">
-        <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-20">
+    <section className="on-dark border-t hair bg-furnace">
+      <div className="shell py-12 lg:py-16">
+        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-24">
           <div>
-            <span aria-hidden="true" className="mb-8 block h-[3px] w-9 bg-copper" />
+            <p className="t-index mb-4 t-muted">Trade desk</p>
             <h2>{title}</h2>
           </div>
           <div>
@@ -436,7 +525,7 @@ export function CtaBand({
   );
 }
 
-/** A bulleted list with copper ticks. */
+/** A plain-language list with one consistent stroke tick. */
 export function TickList({
   items,
   className = "",
@@ -448,7 +537,7 @@ export function TickList({
     <ul className={`space-y-3 ${className}`}>
       {items.map((i) => (
         <li key={i} className="flex items-start gap-3">
-          <Tick className="mt-1.5 h-3.5 w-3.5 shrink-0 t-accent" />
+          <Tick className="mt-0.5 h-6 w-6 shrink-0 t-accent" />
           <span>{i}</span>
         </li>
       ))}
@@ -463,7 +552,7 @@ export function TickList({
 export function Pending({ children }: { children: ReactNode }) {
   if (process.env.NODE_ENV === "production") return null;
   return (
-    <span className="t-spec inline-flex items-center gap-1.5 rounded-[2px] border border-dashed border-copper px-2 py-0.5 t-muted">
+    <span className="t-spec inline-flex items-center gap-1.5 border border-dashed hair px-2 py-0.5 t-muted">
       {children}
     </span>
   );
@@ -480,10 +569,9 @@ export function Pending({ children }: { children: ReactNode }) {
  * the row claims nothing, so it is equally honest, and it does not
  * advertise the gap.
  *
- * The operator still has to know what is missing, so the marker stays
- * loud in `npm run dev`, the source of truth stays `null` in
- * lib/site.ts beside a comment, and LAUNCH_READY gates the lot.
- * Nothing here invents a value in either environment.
+ * The source of truth stays `null` in lib/site.ts, where the launch
+ * checklist keeps the missing value visible to the operator without
+ * placing unfinished business details in the customer-facing UI.
  */
 export function DataRow({
   label,
@@ -495,16 +583,7 @@ export function DataRow({
   value: string | null;
   children: ReactNode;
 }) {
-  if (!value) {
-    return process.env.NODE_ENV === "production" ? null : (
-      <div>
-        <dt className="t-spec t-muted">{label}</dt>
-        <dd className="mt-1">
-          <Pending>{label} — not set</Pending>
-        </dd>
-      </div>
-    );
-  }
+  if (!value) return null;
   return (
     <div>
       <dt className="t-spec t-muted">{label}</dt>

@@ -76,3 +76,33 @@ describe("sitemap and robots", () => {
     }
   });
 });
+
+describe("homepage search intent", () => {
+  const homepage = readFileSync(join(root, "app/page.tsx"), "utf8");
+
+  it("has one descriptive H1 and unique homepage metadata", () => {
+    expect(homepage.match(/<h1\b/g)?.length).toBe(1);
+    expect(homepage).toContain("Scrap Metal Quotes Brisbane | MetalBase");
+    expect(homepage).toContain("description: homeDescription");
+    expect(homepage).toContain("openGraph:");
+  });
+
+  it("links to every core customer-intent guide", () => {
+    for (const href of [
+      "/contact",
+      "/what-we-buy",
+      "/prices",
+      "/services",
+      "/locations",
+      "/glossary",
+      "/faq",
+    ]) {
+      expect(homepage, `homepage does not link to ${href}`).toContain(href);
+    }
+  });
+
+  it("does not publish an obsolete meta-keywords field", () => {
+    const layout = readFileSync(join(root, "app/layout.tsx"), "utf8");
+    expect(layout).not.toMatch(/\bkeywords\s*:/);
+  });
+});

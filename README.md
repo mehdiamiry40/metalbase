@@ -31,60 +31,41 @@ They have been removed. Nothing invents a number on your behalf. Fill in:
 | `priceGroups` | Real rates, then set `PUBLISH_RATES = true` |
 | `/legal` | Draft wording — have a lawyer review it |
 
-Unfilled values render as a dashed "to be confirmed" chip rather than silently
-disappearing, so you can see what's outstanding.
+Unfilled values remain `null` and are omitted from customer-facing surfaces.
+The launch checklist above is the source of truth for what is still outstanding.
 
 ## Design system
 
-The language is **metrology, not industry**. This business sells a number you
-can trust — weighbridge, XRF gun, grade, docket — so the site is built from
-instruments and spec sheets: hairline rules, tabular figures, monospaced
-labels, numbered sections. Not hi-vis and grit, which is what every other
-yard in the country already looks like.
+The visual language comes from a Brisbane metal yard rather than a generic
+software landing page: galvanised neutrals, square edges, visible rules,
+condensed yard-signage headings and tabular figures. Layouts read as continuous
+editorial records instead of collections of floating cards.
 
-One structural rule governs every surface decision:
-
-> **Dark is the yard. Light is the record.**
-
-Ink is the default. The light surface is reserved for things that are
-*documents* — the grade ledger, the docket, the glossary, the forms. That is
-why the light/dark rhythm reads as intentional rather than stripey.
+There are two type families. IBM Plex Sans carries body copy, controls and
+tabular data; Barlow Condensed carries display headings. Signal blue is reserved
+for the primary action and focus state. It is never used as decoration.
 
 | Token | Value |
 |---|---|
-| Ink | `#0D0F11` — the page, and the default surface |
-| Slab | `#15181B` — raised panel on dark |
-| Shaft | `#1C2023` — wells and inputs on dark |
-| Chalk | `#F4F2ED` — the document surface |
-| White | `#FFFFFF` — the sheet itself: ledgers, dockets |
-| Mist | `#9AA1A8` — muted text on dark, 7.35 on ink |
-| Stone | `#5E5A54` — muted text on light, 6.12 on chalk |
-| Copper | `#D9823F` — the only hue. Text on dark (6.60), **fill only** on light |
-| Copper-hi | `#E89A5C` — brighter on dark (8.42), fill hover |
-| Copper-deep | `#8A431A` — accent *text* on light, 6.48 on chalk |
-| Display | Archivo, weight 500, `-0.035em`, sentence case |
-| Instrument | IBM Plex Mono, tabular figures |
-| Buttons | 2px radius, solid or 2px outline, mono label |
+| Furnace | `#182024` — headings, dark bands and strongest rules |
+| Steel | `#4D595F` — secondary text and interactive boundaries |
+| Galvanised | `#B8C1C5` — quiet rules and structural detail |
+| Yard fog | `#E8ECEE` — alternate bands and hover states |
+| Scale paper | `#F7F9F9` — primary page surface and text on dark |
+| Signal | `#075EA8` — primary action and light-surface focus only |
+| Display | Barlow Condensed, weight 600 |
+| Body / data | IBM Plex Sans, tabular figures where required |
+| Type scale | `12 / 14 / 16 / 20 / 28 / 40 / 56px` |
+| Spacing | `4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 96px` |
+| Buttons | Square, 48px minimum height, 160ms colour transition |
 
-Copper splits in two because `#D9823F` measures 2.60 on chalk and can never
-carry type there — on light surfaces it is rules, fills and keylines only,
-and copper-deep does the typographic work. For the same reason copper fills
-carry **ink** labels, never white (2.91, unfixable).
+Everything composes from `components/ui.tsx` and `components/sections.tsx`
+so the homepage and inner pages cannot drift apart. There are no gradients,
+shadows, translucent blurs, floating rounded cards or hover lifts.
 
-The primary button derives its fill from the surface (`--btn-fill`): copper
-on dark, ink on light. One rule, and a whole class of "the button vanished"
-bugs cannot happen.
-
-The mono is a semantic, not a texture: if a value could appear on a printout
-— a grade code, a weight, a unit, a section index, a figure number — it is
-mono and tabular. Prose never is.
-
-No drop shadows, no rounded cards, no hover lifts. Everything composes from
-`components/ui.tsx` and `components/sections.tsx` so pages can't drift apart.
-
-Focus rings are surface-aware (`--focus`): copper-hi on dark, ink on light,
-white over photographs. A single fixed ring colour cannot clear 3:1 against
-both surfaces.
+Focus rings are surface-aware (`--focus`): signal blue on scale paper and
+scale paper on furnace or photographs. A single fixed ring colour cannot clear
+3:1 against every surface.
 
 ### Cascade layers are load-bearing
 
@@ -176,7 +157,7 @@ taxonomy* and its *process*, and that every competitor hides both behind a
 
 | Export | What it drives |
 |---|---|
-| `priceGroups` | 28 grades across three streams, each with the spec that decides it — the `Ledger`, on home and `/prices` |
+| `priceGroups` | 28 grades across three streams. Home shows three visual summaries; `/prices` carries the full `Ledger` |
 | `glossary` | 22 standard trade terms — `/glossary`, plus teasers on `/faq` |
 | `identify` | Field checks for telling metals apart — `/what-we-buy#identify` |
 | `deductions` | What comes off a load and why — `/what-we-buy#deductions` |

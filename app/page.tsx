@@ -1,426 +1,411 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Photo from "@/components/Photo";
-import { Docket } from "@/components/Docket";
 import { FaqList } from "@/components/Faq";
-import { Ledger } from "@/components/Ledger";
-import { Essay, Router, Steps } from "@/components/sections";
-import {
-  ArrowLink,
-  Button,
-  ChipList,
-  CtaBand,
-  Index,
-  SpecStrip,
-  StatBand,
-} from "@/components/ui";
-import {
-  audiences,
-  company,
-  faqs,
-  priceGroups,
-  serviceAreas,
-  stats,
-} from "@/lib/site";
+import { ArrowLink, Button, CtaBand, SpecStrip } from "@/components/ui";
+import { priceGroups } from "@/lib/site";
 
-/* The home page inherits title, description and Open Graph from the
-   root layout, which is correct — but the layout no longer sets a
-   canonical (it cascaded to every child), so home declares its own. */
+const homeTitle = "Scrap Metal Quotes Brisbane | MetalBase";
+const homeDescription =
+  "Request a scrap metal quote in Brisbane and learn how copper, aluminium, steel, cable and mixed metal are graded, priced and prepared.";
+
 export const metadata: Metadata = {
+  title: homeTitle,
+  description: homeDescription,
   alternates: { canonical: "/" },
+  openGraph: {
+    title: homeTitle,
+    description: homeDescription,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: homeTitle,
+    description: homeDescription,
+  },
 };
 
-const gradeCount = priceGroups.reduce((n, g) => n + g.rows.length, 0);
+const materialPhotos = {
+  "non-ferrous": "cable",
+  ferrous: "grab-claw",
+  specialty: "mixed-parts",
+} as const;
 
-const steps = [
+const materialSummaries = {
+  "non-ferrous":
+    "Copper, brass, aluminium, lead, stainless steel and insulated cable.",
+  ferrous:
+    "Structural steel, plate, cast iron, reinforcing bar and light-gauge steel.",
+  specialty:
+    "Motors, radiators, batteries, e-waste and other mixed-material items.",
+} as const;
+
+const homeFaqs = [
   {
-    title: "Drive on",
-    body: "No appointment, no booking, no minimum load. Follow the line to the weighbridge.",
+    q: "What should I send for a useful quote?",
+    a: "Send the approximate weight or dimensions, your suburb, whether the material is separated and any visible nameplate or alloy marking. Have clear photos ready if the trade desk asks for them.",
   },
   {
-    title: "Weigh in",
-    body: "Gross weight recorded, photo ID scanned, vehicle logged. About ninety seconds.",
+    q: "Why can the final figure differ from an indicative quote?",
+    a: "A remote quote relies on the grade, condition and quantity described. Mixed grades, attachments, moisture, non-metallic material and measured net weight can change the recovered yield.",
   },
   {
-    title: "Get graded",
-    body: "A grader calls the grade before you tip. Disagree and we settle it with the XRF gun.",
-  },
-  {
-    title: "Get paid",
-    body: "Tare on the way out, docket printed, cash in your hand before you leave. EFT if you'd rather.",
+    q: "What if the load contains different metals?",
+    a: "Separate obvious metals where it is safe and practical, then photograph anything uncertain. Ask how a mixed load would be assessed before transporting it.",
   },
 ];
 
-/* The four questions people actually type before a first weigh-in.
-   Pulled from the same array /faq renders, so they cannot drift — and
-   deliberately NOT re-emitted as FAQPage markup here, because the same
-   questions marked up on two URLs is a duplicate-content signal rather
-   than a second chance at a rich result. /faq owns the schema. */
-const homeFaqs = faqs.slice(0, 4);
+const quoteFactors = [
+  {
+    title: "Material grade",
+    body: "Copper, aluminium, brass, stainless steel, insulated cable and ferrous steel are assessed as different material streams. Start with the closest grade and note any visible alloy marking.",
+    href: "/what-we-buy",
+    link: "Compare scrap metal grades",
+  },
+  {
+    title: "Separation and condition",
+    body: "Mixed alloys, steel attachments, moisture, concrete, oil and other non-metal material can reduce recoverable yield. Describe what is attached or contaminated before relying on a figure.",
+    href: "/what-we-buy#deductions",
+    link: "See common grade deductions",
+  },
+  {
+    title: "Approximate net weight",
+    body: "A rough weight, item count or set of dimensions helps distinguish a small non-ferrous parcel from bulk ferrous material. State whether the estimate includes a container, pallet or vehicle.",
+    href: "/prices#grading",
+    link: "Understand scrap metal pricing",
+  },
+  {
+    title: "Location and handling",
+    body: "Oversize, heavy or site-held metal may need a different handling plan from a trailer load. Include the Brisbane suburb, access limits and largest dimensions so the available next step can be confirmed.",
+    href: "/services",
+    link: "Review business handling options",
+  },
+];
 
-/* ------------------------------------------------------------------
-   The home page is one argument in eight moves: what this is, who it
-   is for, what it is worth, what happens when you arrive, why it is
-   arranged that way, what to do before you load, where we go, and the
-   questions everybody asks first.
+const preparationSteps = [
+  {
+    title: "Separate ferrous from non-ferrous",
+    body: "A magnet is a useful first check: ordinary steel and cast iron are magnetic, while copper, brass and aluminium are not. Stainless steel can be an exception, so record any marking rather than guessing.",
+  },
+  {
+    title: "Keep obvious grades apart",
+    body: "Store copper, brass, aluminium, cable, stainless and general steel separately where it is safe and practical. Clear separation makes the quoted grade easier to explain and verify.",
+  },
+  {
+    title: "Describe attachments and residue",
+    body: "Note plastic, timber, concrete, rubber, oil, water and steel fittings attached to another metal. Do not cut sealed vessels or disturb suspect hazardous material simply to improve a grade.",
+  },
+  {
+    title: "Record size, quantity and access",
+    body: "Write down the approximate weight or dimensions, the suburb and any gate, loading or vehicle constraint. Have a wide photograph and a close detail ready if the trade desk requests them.",
+  },
+];
 
-   The old version opened on a full-bleed stock photograph under a
-   scrim, which is what every yard in the country opens on. This one
-   opens on type and on the grade taxonomy, because the taxonomy is the
-   genuinely useful thing the business knows and every competitor hides
-   it behind a "call for pricing" form.
-   ------------------------------------------------------------------ */
+const enquiryRoutes = [
+  {
+    title: "Scrap metal collection and bin hire",
+    body: "For workshops and sites that generate metal repeatedly. Send the site address, material streams, approximate volume, access constraints and preferred collection pattern for a scoped proposal.",
+    href: "/services/collection-and-bins",
+    link: "Scope collection and bin hire",
+  },
+  {
+    title: "Industrial offcuts and production scrap",
+    body: "For fabricators, engineers and manufacturers separating offcuts, swarf or turnings at the source. State the alloy, how it is stored and how often it accumulates.",
+    href: "/services/industrial",
+    link: "Plan an industrial scrap enquiry",
+  },
+  {
+    title: "Demolition and structural steel",
+    body: "For projects with beams, columns, plate, reinforcing steel or metal strip-out material. Include drawings, section sizes, estimated tonnage, programme and site-access requirements.",
+    href: "/services/demolition",
+    link: "Prepare a demolition steel scope",
+  },
+  {
+    title: "Public and trade drop-off planning",
+    body: "For one-off or regular loads brought to a yard. Confirm the current location, opening hours, accepted material, identification requirements and settlement terms before travelling.",
+    href: "/locations",
+    link: "Plan a Brisbane scrap-metal drop-off",
+  },
+];
 
 export default function Home() {
   return (
     <>
-      {/* ------------------------------------------------------ § 01 hero
-          Typographic, on ink. The photograph moves below the fold and
-          is framed as a plate, which is both more honest about being
-          stock and considerably better looking than a scrim. */}
-      <section className="on-light bg-chalk">
-        <div className="shell pb-16 pt-16 lg:pb-24 lg:pt-24">
-          <p className="t-index t-accent">Scrap metal recycling · Brisbane</p>
-
-          <h1 className="mt-8 max-w-[16ch]">
-            The number is decided in front of you
-          </h1>
-
-          <div className="mt-10 grid gap-10 border-t hair pt-8 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
-            <p className="t-lead measure-wide">
-              {company.name} buys, processes and remarkets ferrous and
-              non-ferrous scrap across greater Brisbane. Graded on your vehicle
-              before it is tipped, weighed on a certified bridge, paid in cash
-              at the bridge.
-            </p>
-
-            <div>
-              <div className="flex flex-wrap gap-3">
-                <Button href="/contact">Get a quote</Button>
-                <Button href="/what-we-buy" variant="ghost">
-                  What we buy
+      <section className="on-light border-b hair bg-chalk">
+        <div className="shell py-8 sm:py-12 lg:py-16">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-center lg:gap-16">
+            <div className="max-w-[38rem] lg:py-8">
+              <h1 className="max-w-[12ch]">Get a Brisbane scrap metal quote.</h1>
+              <p className="t-lead measure mt-6 t-muted">
+                Send the material type, approximate weight, your suburb and its
+                condition. Those details give the trade desk a useful starting
+                point for an indicative quote.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 min-[480px]:flex-row">
+                <Button href="/contact" className="w-full min-[480px]:w-auto">
+                  Send quote details
+                </Button>
+                <Button
+                  href="/what-we-buy"
+                  variant="ghost"
+                  className="w-full min-[480px]:w-auto"
+                >
+                  Open material guide
                 </Button>
               </div>
+              <p className="mt-5 max-w-[54ch] text-sm leading-relaxed t-muted">
+                Unsure of the grade? Note what is attached, mixed or visibly
+                marked. Have a wide photo and a close detail ready if requested.
+              </p>
+            </div>
 
-              {/* The instrument strip. Three facts a seller is actually
-                  deciding on, set as measurements rather than marketing
-                  — this is the mono layer doing its job. */}
-              <SpecStrip
-                className="mt-10"
-                items={[
-                  { k: "Minimum load", v: "None" },
-                  { k: "Graded", v: "Before tipping" },
-                  { k: "Paid", v: "At the bridge" },
-                ]}
+            <div className="editorial-photo aspect-[4/3] sm:aspect-[16/10] sm:min-h-[280px] lg:aspect-auto lg:min-h-[540px]">
+              <Photo
+                name="yard-grab"
+                priority
+                sizes="(max-width: 1024px) 100vw, 55vw"
+                alt="A material handler sorting a pile of mixed scrap steel"
+                className="object-[58%_center]"
               />
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Full-bleed plate. The caption aligns to the shell rather than
-          the image so it reads as a figure number in the margin of a
-          manual, not a caption bar stuck to a hero. */}
-      <figure className="on-light border-t hair bg-white">
-        <div className="relative h-[42vw] max-h-[560px] min-h-[260px] w-full overflow-hidden bg-slab">
-          <Photo
-            name="yard-grab"
-            priority
-            sizes="100vw"
-            alt="A material handler working a pile of mixed scrap steel at a recycling yard"
+          <SpecStrip
+            surface="chalk"
+            className="mt-10 lg:mt-12"
+            items={[
+              { k: "Material", v: "Type or best guess" },
+              { k: "Quantity", v: "Approximate weight" },
+              { k: "Location", v: "Your suburb" },
+              { k: "Condition", v: "Clean, mixed or attached" },
+            ]}
           />
         </div>
-        <figcaption className="shell t-spec flex flex-wrap items-baseline gap-x-3 gap-y-1 py-3">
-          <span className="t-accent uppercase tracking-[0.14em]">Fig.&nbsp;01</span>
-          <span className="t-muted">
-            Material handler working mixed heavy melting steel
-          </span>
-        </figcaption>
-      </figure>
-
-      {/* ----------------------------------------------------- § 02 router
-          Four completely different readers land on this page, and the
-          copy that serves one bores the other three. Rather than write
-          for an average nobody is, the page asks the question directly
-          and sends each of them somewhere specific.
-
-          It sits this high deliberately: a project manager should not
-          have to scroll past a public drop-off explainer to find out we
-          do demolition steel. */}
-      <section className="on-light border-t hair bg-white py-20 lg:py-28">
-        <div className="shell">
-          <div className="border-b hair pb-4">
-            <Index n={2} label="Where you fit" />
-          </div>
-
-          <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
-            <h2 className="tick">Four ways people sell metal to us</h2>
-            <p className="t-lead measure-wide">
-              The weighbridge, the grading standard and the docket are the same
-              for all of them. What changes is whether the metal comes to us or
-              we come to it, and how much paperwork sits around the transaction.
-            </p>
-          </div>
-
-          <div className="mt-14">
-            <Router items={audiences} />
-          </div>
-        </div>
       </section>
 
-      {/* ----------------------------------------------------- § 03 ledger
-          The centrepiece, and the reason the site is arranged this way.
-          On a light sheet, because it is a document. */}
       <section
         id="grades"
-        className="on-light scroll-mt-20 border-t hair bg-chalk py-20 lg:py-28"
+        className="on-light scroll-mt-20 bg-white py-16 lg:py-28"
       >
         <div className="shell">
-          <div className="border-b hair pb-4">
-            <Index n={3} label="What we buy" />
-          </div>
-
-          <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
+          <div className="grid gap-6 border-b hair pb-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end lg:gap-16 lg:pb-14">
+            <p className="t-index t-muted">Material groups</p>
             <div>
-              <h2 className="tick">
-                {gradeCount} grades, and the spec that decides yours
-              </h2>
-            </div>
-            <div>
-              <p className="t-lead measure-wide">
-                Most yards publish a phone number and call it a price list. The
-                grade is what actually determines what you are paid, so here is
-                the whole taxonomy with the specification against each one.
-              </p>
+              <h2 className="max-w-[15ch]">Start with what is in the pile.</h2>
               <p className="measure-wide mt-5 t-muted">
-                Rates move with the commodity market and with the state of your
-                specific load, so they are quoted on the day rather than posted
-                as a number that is stale within a week.
+                Browse the closest material group, then describe any markings,
+                attachments or mixed material. Exact grades can be discussed
+                with the quote.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button href="/prices">See how pricing works</Button>
-                <Button href="/what-we-buy" variant="ghost">
-                  Preparation guide
-                </Button>
-              </div>
             </div>
           </div>
 
-          <div className="mt-16">
-            <Ledger />
-          </div>
-
-          <p className="mt-12 border-t hair pt-6 text-[0.95rem] t-muted">
-            Not sure which of these your pile is?{" "}
-            <Link href="/glossary" className="font-semibold t-accent u-link">
-              The glossary explains the vocabulary
-            </Link>
-            , and{" "}
-            <Link
-              href="/what-we-buy#identify"
-              className="font-semibold t-accent u-link"
-            >
-              a magnet answers most of it in one second
-            </Link>
-            .
-          </p>
-        </div>
-      </section>
-
-      {/* -------------------------------------------------- § 04 weigh-in
-          The process, paired with the artifact it produces. Putting the
-          blank docket beside the four steps is the single clearest way
-          to say what "we show our working" actually means. */}
-      <section className="on-light scroll-mt-20 border-t hair bg-chalk py-20 lg:py-28">
-        <div className="shell">
-          <div className="border-b hair pb-4">
-            <Index n={4} label="How a weigh-in works" />
-          </div>
-
-          <div className="mt-12 grid gap-14 lg:grid-cols-[1.25fr_1fr] lg:gap-20">
-            <div>
-              <h2>About fifteen minutes, start to finish</h2>
-              <p className="t-lead measure-wide mt-6 t-muted">
-                For a ute or a trailer load. Longer if you want to argue about
-                an alloy, which is fine — that is what the analyser is for.
-              </p>
-
-              <div className="mt-12">
-                <Steps items={steps} columns={4} />
-              </div>
-
-              {stats.length > 0 && (
-                <div className="mt-14 border-t hair pt-12">
-                  <StatBand items={stats} />
+          <div className="border-b hair">
+            {priceGroups.map((group, index) => (
+              <Link
+                key={group.id}
+                href={`/what-we-buy#${group.id}`}
+                className="group grid border-t hair py-8 transition-colors duration-150 ease-out hover:bg-shaft focus-visible:outline-offset-[-2px] lg:grid-cols-12 lg:py-0"
+              >
+                <div
+                  className={`editorial-photo aspect-[16/9] sm:min-h-[220px] lg:col-span-7 lg:aspect-auto lg:min-h-[380px] ${
+                    index % 2 === 1 ? "lg:order-2" : ""
+                  }`}
+                >
+                  <Photo
+                    name={materialPhotos[group.id as keyof typeof materialPhotos]}
+                    sizes="(max-width: 1024px) 100vw, 58vw"
+                    alt={`${group.title} scrap metal ready to be identified`}
+                    className="object-cover"
+                  />
                 </div>
-              )}
-            </div>
 
-            <div>
-              <Docket />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------- § 05 grading
-          Deliberately argumentative rather than descriptive. Everything
-          above tells someone what happens; this tells them why it is
-          arranged that way, which is what actually decides whether they
-          drive to us or to the yard closer to home.
-
-          Kept free of specific claims — no percentages, no tonnages, no
-          comparisons to named competitors. Every sentence is true of how
-          the process works, not of numbers nobody has verified. */}
-      <Essay
-        id="grading"
-        index={5}
-        eyebrow="Why it works this way"
-        title="Grading in front of you is the whole argument"
-        lead="Almost every dispute in this trade comes from the same place: someone found out what their metal was worth after they had already tipped it."
-        points={[
-          {
-            term: "The load is called before it is tipped",
-            detail:
-              "Once material is on the pile it is mixed with everyone else's and the conversation becomes your memory against ours. Calling the grade while it is still on your vehicle keeps the evidence in front of both of us, which is the only reason the number is arguable at all.",
-          },
-          {
-            term: "Disagreeing is a normal part of it",
-            detail:
-              "Alloys are genuinely hard to identify by eye, and a grader who is never wrong is not being careful, they are guessing confidently. If the call looks wrong to you, ask for the XRF gun. That is what it is there for, and using it costs nothing.",
-          },
-          {
-            term: "Deductions get named, not absorbed",
-            detail:
-              "Attachments, moisture and contamination all reduce what a tonne is actually worth, so they have to come off somewhere. The difference between merchants is whether you are told which deduction applied and why, or simply handed a smaller number at the end.",
-          },
-          {
-            term: "The docket is the record",
-            detail:
-              "Gross weight, tare, net, grade. Written down, printed, and retained by both sides. It is unglamorous, and it is the reason a disagreement three weeks later is a five-minute conversation rather than an argument.",
-          },
-        ]}
-        footer={
-          <Button href="/prices" variant="ghost">
-            How grading works
-          </Button>
-        }
-      />
-
-      {/* ---------------------------------------------- § 06 separation
-          Practical guidance rather than positioning. This is the single
-          highest-return thing a seller can do, it costs them nothing to
-          act on, and explaining it honestly is worth more trust than
-          another paragraph about our values. */}
-      <Essay
-        id="separation"
-        index={6}
-        eyebrow="Before you load"
-        title="Sorting is the best-paid hour on any scrap job"
-        tone="slab"
-        lead="Nothing else a seller does moves the return as much, and none of it needs equipment you do not already own."
-        points={[
-          {
-            term: "A mixed load pays the rate of its worst part",
-            detail:
-              "This is the rule that surprises people. Copper thrown in with general non-ferrous does not average out — it is graded as the mix. Pulling the copper into its own pile is the difference between two rates, not a slightly better one.",
-          },
-          {
-            term: "Anything that is not the metal is a deduction",
-            detail:
-              "Steel brackets bolted to aluminium, plastic tanks on radiators, timber packed through steel. It all has to be removed at some point, and it is far cheaper to do it with a spanner at your end than to have it taken off the grade at ours.",
-          },
-          {
-            term: "Cable is priced on what is inside it",
-            detail:
-              "Insulated cable is graded by recoverable copper, so heavy power cable and thin data flex are not the same product. Keeping them apart takes a few minutes and stops the good cable being graded down to the level of the poor.",
-          },
-          {
-            term: "Ask before you cut anything unusual",
-            detail:
-              "Some items are worth more intact than as metal, and a few are regulated and must not be cut at all. A photo and thirty seconds of a grader's time is the cheapest possible way to find out which one you are holding.",
-          },
-        ]}
-        footer={
-          <Button href="/what-we-buy" variant="ghost">
-            Preparation guide
-          </Button>
-        }
-      />
-
-      {/* --------------------------------------------- § 07 where we go
-          A suburb list is the least glamorous section on the site and
-          one of the most read: half the people who arrive here are
-          establishing nothing more than whether we come to their end of
-          town. Set as chips rather than a bulleted column because it is
-          a set of names to scan for one's own, not a list to read. */}
-      <section
-        id="coverage"
-        className="on-light scroll-mt-20 border-t hair bg-chalk py-20 lg:py-28"
-      >
-        <div className="shell">
-          <div className="border-b hair pb-4">
-            <Index n={7} label="Where we go" />
-          </div>
-
-          <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
-            <h2 className="tick">Collection across greater Brisbane</h2>
-            <div>
-              <p className="t-lead measure-wide">
-                Bins, hook lifts and crane trucks run through the suburbs below
-                and out to project sites across South-East Queensland. Drop-off
-                has no catchment at all — if you can drive to the bridge, you
-                can sell to us.
-              </p>
-              <div className="mt-8">
-                <ArrowLink href="/services" tone="accent">
-                  How collection works
-                </ArrowLink>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {serviceAreas.map((area) => (
-              <div key={area.region} className="border-t-2 border-copper pt-5">
-                <h3 className="text-[1.1rem]">{area.region}</h3>
-                <ChipList className="mt-4" items={area.places} />
-              </div>
+                <div
+                  className={`flex flex-col justify-center py-7 lg:col-span-5 lg:py-14 ${
+                    index % 2 === 1
+                      ? "lg:order-1 lg:pr-12"
+                      : "lg:order-2 lg:pl-12"
+                  }`}
+                >
+                  <p className="t-spec uppercase tracking-[0.1em] t-muted">
+                    Material {String(index + 1).padStart(2, "0")} / {group.rows.length}{" "}
+                    listed grades
+                  </p>
+                  <h3 className="mt-4">{group.title}</h3>
+                  <p className="measure mt-4 t-muted">
+                    {
+                      materialSummaries[
+                        group.id as keyof typeof materialSummaries
+                      ]
+                    }
+                  </p>
+                  <p className="mt-6 border-t hair pt-5 text-sm leading-relaxed t-muted">
+                    Examples: {group.rows.slice(0, 3).map((row) => row.grade).join(", ")}.
+                  </p>
+                  <span className="mt-7 w-fit border-b border-current pb-1 text-sm font-semibold">
+                    View {group.title.toLowerCase()} materials
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
 
-          <p className="mt-12 text-[0.94rem] t-muted">
-            Somewhere not on the list? Ask anyway — project work travels further
-            than the standing runs do.
-          </p>
+          <div className="mt-8 flex flex-col gap-4 border-l-2 border-ink pl-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+            <p className="measure text-base t-muted">
+              Cannot match your material to a group? Describe its markings,
+              dimensions and anything attached when you request a quote.
+            </p>
+            <Link
+              href="/contact"
+              className="w-fit shrink-0 border-b border-current pb-1 text-sm font-semibold"
+            >
+              Describe it for review
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* ------------------------------------------------ § 08 questions
-          Four questions, on the light surface, because an answer you can
-          hold someone to is a record. The full set lives on /faq, which
-          also owns the structured data. */}
       <section
-        id="questions"
+        id="quote-factors"
         className="on-light scroll-mt-20 border-t hair bg-chalk py-20 lg:py-28"
       >
-        <div className="shell">
-          <div className="border-b hair pb-4">
-            <Index n={8} label="Before you come in" />
+        <div className="shell grid gap-12 lg:grid-cols-[minmax(0,0.68fr)_minmax(0,1.32fr)] lg:gap-20">
+          <div>
+            <p className="t-index t-muted">How pricing starts</p>
+            <h2 className="mt-5 max-w-[14ch]">What changes a scrap metal quote?</h2>
+            <p className="measure mt-6 t-muted">
+              A useful quote names its assumptions. These four details explain
+              why two piles that look similar can produce different figures.
+            </p>
+            <div className="mt-8">
+              <ArrowLink href="/prices">Read the scrap pricing guide</ArrowLink>
+            </div>
           </div>
 
-          <div className="mt-12 grid gap-12 lg:grid-cols-[minmax(0,23rem)_1fr] lg:gap-20">
-            <div className="lg:sticky lg:top-24 lg:self-start">
-              <h2>The four things everybody asks</h2>
-              <p className="t-lead measure mt-6 t-muted">
-                Answered the same way in person. If yours is not here, send it
-                through and a grader will answer it.
+          <div className="border-y hair">
+            {quoteFactors.map((factor) => (
+              <article
+                key={factor.title}
+                className="grid gap-4 border-b hair py-7 last:border-b-0 md:grid-cols-[minmax(0,14rem)_1fr] md:gap-10"
+              >
+                <h3 className="text-xl">{factor.title}</h3>
+                <div>
+                  <p className="measure-wide t-muted">{factor.body}</p>
+                  <div className="mt-4">
+                    <ArrowLink href={factor.href}>{factor.link}</ArrowLink>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="prepare-scrap"
+        className="on-light scroll-mt-20 border-t hair bg-white py-14 lg:py-20"
+      >
+        <div className="shell">
+          <div className="grid gap-6 border-b hair pb-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end lg:gap-16">
+            <p className="t-index t-muted">Before requesting a price</p>
+            <div>
+              <h2 className="max-w-[16ch]">How to prepare scrap metal for a clearer quote.</h2>
+              <p className="measure-wide mt-5 t-muted">
+                Safe separation and accurate descriptions are more useful than
+                polishing, stripping or dismantling material without a plan.
               </p>
-              <div className="mt-8">
-                <Button href="/faq" variant="ghost">
-                  All questions
-                </Button>
-              </div>
+            </div>
+          </div>
+
+          <ol className="border-b hair">
+            {preparationSteps.map((step, index) => (
+              <li
+                key={step.title}
+                className="grid gap-4 border-t hair py-7 md:grid-cols-[4rem_minmax(0,17rem)_1fr] md:gap-10"
+              >
+                <span className="t-spec t-muted" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-xl">{step.title}</h3>
+                <p className="measure-wide t-muted">{step.body}</p>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <p className="measure t-muted">
+              Unsure whether an item is safe to move or likely to be accepted?
+              Confirm it before loading.
+            </p>
+            <div className="flex flex-col items-start gap-4 sm:flex-row sm:gap-6">
+              <ArrowLink href="/what-we-buy#identify">
+                Identify an unknown metal
+              </ArrowLink>
+              <ArrowLink href="/glossary">
+                Use the scrap metal glossary
+              </ArrowLink>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="brisbane-enquiries"
+        className="on-light scroll-mt-20 border-t hair bg-shaft py-20 lg:py-28"
+      >
+        <div className="shell">
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
+            <div>
+              <p className="t-index t-muted">Brisbane enquiries</p>
+              <h2 className="mt-5 max-w-[15ch]">Choose the route that fits the metal.</h2>
+            </div>
+            <p className="t-lead measure-wide t-muted">
+              A Brisbane scrap-metal enquiry is easier to assess when the
+              material, site and handling method are described together.
+              Availability, equipment and commercial terms are confirmed for
+              each proposed load or site.
+            </p>
+          </div>
+
+          <div className="mt-12 divide-y divide-[color:var(--hair)] border-y hair">
+            {enquiryRoutes.map((route) => (
+              <Link
+                key={route.href}
+                href={route.href}
+                className="row-link group grid gap-4 py-8 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-12"
+              >
+                <h3 className="text-xl">{route.title}</h3>
+                <div>
+                  <p className="measure-wide t-muted">{route.body}</p>
+                  <span className="mt-4 inline-block border-b border-current pb-1 text-sm font-semibold">
+                    {route.link}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="questions"
+        className="on-light scroll-mt-20 border-t hair bg-white py-14 lg:py-20"
+      >
+        <div className="shell">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-20">
+            <div>
+              <p className="t-index t-muted">Before you send</p>
+              <h2 className="mt-5">Scrap metal quote questions.</h2>
+              <p className="measure mt-5 t-muted">
+                Quote assumptions, material condition and the details that
+                matter when a load contains more than one metal.
+              </p>
+              <Link
+                href="/faq"
+                className="mt-7 inline-block border-b border-current pb-1 text-sm font-semibold"
+              >
+                Read all questions
+              </Link>
             </div>
 
             <FaqList items={homeFaqs} />
@@ -429,10 +414,9 @@ export default function Home() {
       </section>
 
       <CtaBand
-        title="Tell us what you've got and we'll price it"
-        body="A grader comes back inside one business day with indicative rates and a collection window. No obligation, no account required."
-        primary={{ label: "Get a quote", href: "/contact" }}
-        secondary={{ label: "Call the trade desk", href: "/contact#call" }}
+        title="Request a Brisbane scrap metal quote."
+        body="Tell us the material type, approximate weight, suburb and condition. If you do not know the grade, say so and note any visible markings."
+        primary={{ label: "Send quote details", href: "/contact" }}
       />
     </>
   );

@@ -5,55 +5,83 @@ import {
   ArrowLink,
   Button,
   Callout,
-  CtaBand,
   Panel,
   Section,
-  SectionHead,
 } from "@/components/ui";
-import { faqs, glossary } from "@/lib/site";
+import { glossary } from "@/lib/site";
+
+/* These answers are intentionally limited to guidance that does not depend on
+   an unpublished yard address, operating hour, minimum load, payment policy,
+   collection radius, licence detail or material-acceptance decision. */
+const publishedFaqs = [
+  {
+    q: "What should I send for a useful quote?",
+    a: "Send the approximate weight or dimensions, your suburb, whether the material is separated and any visible nameplate or alloy marking. Include site-access details if collection may be needed, and have clear photos ready if requested.",
+  },
+  {
+    q: "Why can the final figure differ from an indicative quote?",
+    a: "A remote quote relies on the grade, condition and quantity described. Mixed grades, attachments, moisture, non-metallic material and the measured net weight can change the recovered yield. Ask for every changed assumption to be stated before handover.",
+  },
+  {
+    q: "What identification or ownership documents will I need?",
+    a: "Requirements depend on the seller and material. Confirm them before travelling, particularly for vehicles, controlled material or anything being sold on behalf of another person or business. Do not upload identification documents through the enquiry form.",
+  },
+  {
+    q: "How can I check a weight-based transaction?",
+    a: "Ask which measuring instrument will be used, whether the calculation is direct weight or gross less tare, which readings appear on the docket and what verification record is available for the instrument.",
+  },
+  {
+    q: "Should I separate different metals before asking for a price?",
+    a: "Yes where it is safe and practical. A mixed load can be assessed against its lowest recoverable grade. Separate obvious alloys, remove non-metal attachments and photograph anything uncertain before doing unnecessary work.",
+  },
+  {
+    q: "What should I do with a vehicle, tank, battery or unusual item?",
+    a: "Do not load it until acceptance, preparation, paperwork and transport have been confirmed. Send photographs, dimensions, labels and any de-pollution or test records first. Regulated and sealed items need load-specific handling advice.",
+  },
+];
 
 export const metadata: Metadata = {
   title: "Selling Scrap Metal in Brisbane — Common Questions",
   description:
-    "Do you need ID? How does payment work? Is there a minimum load? How accurate is the weighbridge? Straight answers to what Brisbane customers ask before selling scrap metal.",
+    "What to send for a scrap quote, why grades affect price, what documents may be required and what to confirm before transporting unusual material in Brisbane.",
   alternates: { canonical: "/faq" },
 };
 
 export default function FaqPage() {
   return (
     <>
-      <FaqSchema items={faqs} />
+      <FaqSchema items={publishedFaqs} />
 
       <PageHeader
         eyebrow="Questions"
         title="Selling scrap metal, answered"
-        intro="What people ask before their first trip to the weighbridge. If your question isn't here, send it through — a grader will answer it."
+        intro="What to confirm before requesting a quote or transporting material. If your question is not here, send it to the trade desk."
         trail={[{ label: "Home", href: "/" }, { label: "FAQ" }]}
       />
 
-      <Section>
+      <Section className="pb-20 pt-12 lg:pb-28 lg:pt-16">
         <div className="grid gap-12 lg:grid-cols-[1fr_minmax(0,20rem)] lg:gap-20">
           <div>
-            <FaqList items={faqs} />
+            <FaqList items={publishedFaqs} />
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
             <Panel className="on-light bg-white">
-              <h2 className="text-[1.3rem]">Still not sure?</h2>
-              <p className="mt-3 text-[0.96rem] leading-relaxed t-muted">
-                Describe what you have — a photo helps — and a grader comes
-                back inside one business day with an indicative rate and
-                whether it&rsquo;s worth a bin or a drive-on.
+              <h2 className="text-xl">Still not sure?</h2>
+              <p className="mt-3 text-base leading-relaxed t-muted">
+                Describe what you have, its condition and any visible markings.
+                The trade desk can confirm the grade assumptions, request a
+                photo if needed and explain the available next step.
               </p>
               <div className="mt-6">
-                <Button href="/contact">Get a quote</Button>
+                <Button href="/contact">Request a quote</Button>
               </div>
             </Panel>
 
             <Callout label="Bringing a load">
-              Current photo ID, every time. A licensed second-hand dealer has to
-              record who sold the metal. Payment is made at the bridge in cash,
-              or by transfer if you bring your bank details and ask for it.
+              Confirm the current yard, opening hours, accepted material and
+              identification requirements before travelling. Vehicle and
+              regulated-material paperwork can vary.
             </Callout>
           </aside>
         </div>
@@ -65,38 +93,21 @@ export default function FaqPage() {
           know what "tare" means cannot follow the answer about how
           payment is calculated. Pointing at the glossary from here is
           the shortest route between those two problems. */}
-      <Section id="vocabulary" tone="chalk" className="scroll-mt-20">
-        <SectionHead
-          index={1}
-          eyebrow="The vocabulary"
-          title="Half of these questions are really about the words"
-          intro="Tare, net, HMS 2, bare bright, treatment charge. The trade runs on terms that appear on every docket and are explained on almost no website, so we wrote them all down."
-        />
-        <ul className="ruled grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
-          {glossary.slice(0, 8).map((g) => (
-            <li key={g.term} className="px-4 py-4">
-              <p className="mono text-[0.95rem] font-medium leading-snug">
-                {g.term}
-              </p>
-              <p className="mt-2 text-[0.85rem] leading-snug t-muted">
-                {g.short}
-              </p>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-8">
+      <Section id="vocabulary" tone="chalk" className="scroll-mt-20 pb-16 pt-10 lg:pb-20 lg:pt-12">
+        <div className="grid gap-8 border-y hair py-8 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <p className="t-index t-muted">Reference</p>
+            <h2 className="mt-3">Unsure what a grade name means?</h2>
+            <p className="measure mt-4 t-muted">
+              The glossary explains {glossary.length} terms that appear on
+              quotes, grade sheets and weighbridge dockets.
+            </p>
+          </div>
           <ArrowLink href="/glossary" tone="accent">
-            All {glossary.length} terms
+            Open the grade glossary
           </ArrowLink>
         </div>
       </Section>
-
-      <CtaBand
-        title="Tell us what you've got and we'll price it"
-        body="No account, no appointment, no minimum load. A grader reads what you send and comes back with an indicative rate by grade."
-        primary={{ label: "Get a quote", href: "/contact" }}
-        secondary={{ label: "See what we buy", href: "/what-we-buy" }}
-      />
     </>
   );
 }

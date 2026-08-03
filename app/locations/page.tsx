@@ -5,7 +5,6 @@ import {
   Button,
   Callout,
   ChipList,
-  CtaBand,
   Panel,
   Section,
   SectionHead,
@@ -15,27 +14,27 @@ import { locations, serviceAreas } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/locations" },
-  title: "Yards & How to Sell Your Scrap — Brisbane",
+  title: "Scrap Metal Drop-off Guide — Brisbane",
   description:
-    "How a weigh-in works at MetalBase, what ID to bring, what a working yard is like, how you get paid in cash on the spot, and where we collect across Brisbane.",
+    "Plan a scrap-metal drop-off in Brisbane: what to confirm before travelling, what information to bring and how grading, weighing and settlement are agreed.",
 };
 
 const steps = [
   {
-    title: "Drive on",
-    body: "Follow the line to the weighbridge. No appointment, no booking, no minimum load. Keep your window down and a spotter will direct you.",
+    title: "Confirm before travelling",
+    body: "Check the current yard, opening hours, accepted material and any minimum or handling requirement with the trade desk.",
   },
   {
-    title: "Weigh in",
-    body: "Gross weight recorded, photo ID scanned, vehicle registration logged. About ninety seconds.",
+    title: "Follow the arrival instructions",
+    body: "Stay with the vehicle until directed. The site team will explain the weighing, unloading and safety sequence for that yard.",
   },
   {
-    title: "Get graded",
-    body: "A grader inspects the load and tells you the grade before you tip. If you disagree, ask for the XRF gun — that's what it's there for.",
+    title: "Confirm the assessment",
+    body: "Ask which grade applies, what condition it assumes and whether attachments, moisture or mixed material affect the return.",
   },
   {
-    title: "Tip and weigh out",
-    body: "Unload in the bay you're directed to. Tare on the way out, docket printed with net weight, grade and rate.",
+    title: "Review the trade details",
+    body: "Before handover, confirm the weight basis, deductions, docket details and agreed settlement method for the load.",
   },
 ];
 
@@ -44,29 +43,29 @@ const steps = [
    of it out loud, which is a good reason to answer it in writing. */
 const onSite = [
   {
-    term: "Stay in the vehicle until someone waves you on",
+    term: "Wait for a spotter",
     detail:
-      "The weighbridge queue shares ground with material handlers and trucks that cannot see a person standing beside a ute. A spotter will bring you forward and tell you where to stop.",
+      "Industrial yards mix trucks, mobile plant and pedestrians. Stay with the vehicle until site staff give you a clear direction.",
   },
   {
-    term: "Closed shoes, and cover your legs",
+    term: "Confirm the PPE requirement",
     detail:
-      "Thongs and shorts are the one thing that will genuinely get you turned around at the gate. Hi-vis and eye protection are provided if you do not have your own.",
+      "Closed footwear and suitable clothing are a sensible baseline. Ask whether hi-vis, eye protection or site-specific PPE must be brought with you.",
   },
   {
-    term: "Passengers, kids and dogs stay in the vehicle",
+    term: "Keep passengers clear of the work area",
     detail:
-      "Not a formality. A yard has suspended loads, moving plant and sharp material at ankle height, and none of it is fenced off the way a retail site would be.",
+      "Ask before bringing passengers or animals. Never enter an unloading or processing area unless site staff direct you there.",
   },
   {
-    term: "You unload your own load",
+    term: "Describe anything that needs mechanical handling",
     detail:
-      "In the bay you are directed to, at your own pace. If it is too heavy to handle by hand, say so at the bridge and we will put a machine on it rather than watch you hurt yourself.",
+      "Send dimensions, approximate weight and photographs of anything that cannot be unloaded safely by hand so the handling method can be confirmed first.",
   },
   {
-    term: "Ask before you photograph anything",
+    term: "Ask before taking photographs on site",
     detail:
-      "Other people's vehicles, loads and paperwork are on site. Your own load, your own docket and your own material are entirely your business.",
+      "Other customers, vehicle registrations and paperwork may be visible. Follow the site policy and keep other people out of frame.",
   },
 ];
 
@@ -74,17 +73,16 @@ export default function LocationsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Sell your scrap"
-        title="Drive on, weigh in, get paid"
-        intro="No appointment and no minimum load. Here is exactly how it works, what to bring, what a working yard is actually like, and how the money reaches you."
-        trail={[{ label: "Home", href: "/" }, { label: "Sell your scrap" }]}
+        eyebrow="Drop-off guide"
+        title="Check the details before you load"
+        intro="Yard addresses and opening hours are not yet published. Confirm where to go, when the site can receive you, what it can accept and which documents the load needs."
+        trail={[{ label: "Home", href: "/" }, { label: "Drop-off guide" }]}
       >
-        {/* Second button was an in-page anchor to #id. */}
-        <Button href="/prices">Rate board</Button>
+        <Button href="/contact">Confirm a drop-off</Button>
       </PageHeader>
 
       {/* yards -------------------------------------------------------- */}
-      <Section>
+      <Section className="pb-16 pt-10 lg:pb-20 lg:pt-12">
         <SectionHead index={1} eyebrow="Yards" title="Where to find us" />
         {locations.length > 0 ? (
           <div className="divide-y divide-[color:var(--hair)] border-y hair">
@@ -99,7 +97,7 @@ export default function LocationsPage() {
                   <p className="t-index mt-2 t-accent">{l.role}</p>
                 </div>
                 <div className="space-y-3">
-                  {l.address && <p className="text-[1.02rem]">{l.address}</p>}
+                  {l.address && <p className="text-base">{l.address}</p>}
                   {l.hours && <p className="t-muted">{l.hours}</p>}
                   {l.features.length > 0 && (
                     <ChipList className="pt-1" items={l.features} />
@@ -121,14 +119,13 @@ export default function LocationsPage() {
         ) : (
           <div className="border-2 border-dashed hair p-8">
             <p className="t-index t-accent">Not yet published</p>
-            <p className="measure-wide mt-3 text-[0.98rem] leading-relaxed t-muted">
-              Yard addresses and opening hours will be listed here once sites are
-              confirmed. We&rsquo;d rather leave this blank than send someone to an
-              address that isn&rsquo;t ours.
+            <p className="measure-wide mt-3 text-base leading-relaxed t-muted">
+              Yard addresses and opening hours will appear here only after they
+              are verified. Contact the trade desk before travelling with a load.
             </p>
             <div className="mt-6">
               <Button href="/contact" variant="ghost">
-                Ask where to bring a load
+                Confirm a drop-off location
               </Button>
             </div>
           </div>
@@ -136,18 +133,18 @@ export default function LocationsPage() {
       </Section>
 
       {/* how it works ------------------------------------------------- */}
-      <Section id="how-it-works" tone="slab" className="scroll-mt-20">
+      <Section id="how-it-works" tone="slab" className="scroll-mt-20 pb-24 pt-16 lg:pb-32 lg:pt-24">
         <SectionHead
           index={2}
           eyebrow="The weigh-in"
-          title="How a weigh-in works"
-          intro="About fifteen minutes end to end for a ute or trailer load."
+          title="A typical drop-off, step by step"
+          intro="The exact sequence depends on the yard and the load. Confirm the current instructions before travelling."
         />
         <Steps items={steps} />
       </Section>
 
       {/* id ----------------------------------------------------------- */}
-      <Section id="id" className="scroll-mt-20">
+      <Section id="id" className="scroll-mt-20 pb-20 pt-12 lg:pb-24 lg:pt-16">
         <SectionHead
           index={3}
           eyebrow="Before you come in"
@@ -158,38 +155,35 @@ export default function LocationsPage() {
           <div>
             <TickList
               items={[
-                "Current photo ID — an Australian driver licence is ideal",
-                "Your BSB and account number, only if you'd prefer EFT to cash",
-                "The vehicle you'll be in — registration is recorded each time",
-                "Registration papers, if you're selling a vehicle for scrap",
+                "Current photo ID, if the confirmed trade requires it",
+                "Proof that you are entitled to sell unusual or controlled material",
+                "Vehicle and access details needed for the agreed handling method",
+                "Any paperwork the trade desk requests before you set out",
               ]}
             />
-            <p className="measure-wide mt-6 text-[0.95rem] leading-relaxed t-muted">
-              ID is scanned at the bridge. It is a licence condition rather than
-              a preference, it applies to every seller and every load, and it is
-              the main control that keeps stolen metal out of the trade.
+            <p className="measure-wide mt-6 text-base leading-relaxed t-muted">
+              Identification and record-keeping requirements depend on the
+              transaction and applicable licence conditions. The trade desk can
+              tell you exactly what is needed for the material you describe.
             </p>
           </div>
 
           <Panel id="payment" className="scroll-mt-20 border-2">
             <p className="t-index t-accent">Getting paid</p>
-            <h3 className="mt-2 text-[1.6rem]">Cash before you drive out</h3>
-            <div className="mt-5 space-y-4 text-[0.97rem] leading-relaxed t-muted">
+            <h3 className="mt-2 text-3xl">Confirm settlement before arrival</h3>
+            <div className="mt-5 space-y-4 text-base leading-relaxed t-muted">
               <p>
-                Once the tare weight is recorded the docket is printed and you
-                are paid on the spot, in cash, against the grade on that docket.
-                No waiting on a payment run.
+                Payment method, timing and any limits are not published yet.
+                Agree them with the trade desk before the material is handed over.
               </p>
               <p>
-                If you would rather have it in the bank, say so at the bridge
-                and we will pay by electronic transfer to an account in your
-                name instead. Bring your BSB and account number if that is your
-                preference.
+                For a quoted load, ask which weight and grade will determine the
+                final amount and which details will be shown on the docket.
               </p>
               <p>
-                Either way the load is documented identically — photo ID
-                recorded, docket retained. Which way the money moves is our
-                commercial policy and changes nothing about the paperwork.
+                Large, commercial and regulated loads may require different
+                settlement or authority documents. Confirm those requirements in
+                writing rather than assuming the terms for a small load apply.
               </p>
             </div>
           </Panel>
@@ -203,12 +197,12 @@ export default function LocationsPage() {
           getting it wrong; five short paragraphs fix that, and they are
           the same five things a spotter would otherwise have to say at
           the gate. */}
-      <Section id="on-site" tone="chalk" className="scroll-mt-20">
+      <Section id="on-site" tone="chalk" className="scroll-mt-20 pb-24 pt-20 lg:pb-32 lg:pt-28">
         <SectionHead
           index={4}
           eyebrow="On the site"
-          title="What a working yard is actually like"
-          intro="If you have never driven into one, this is what to expect. None of it is meant to put you off — it is a heavy industrial site with a public weighbridge in the middle of it, and that combination has rules."
+          title="How to arrive safely"
+          intro="Industrial sites have moving vehicles, plant and sharp material. The yard's current directions take priority over this general checklist."
         />
         <DefinitionRows items={onSite} />
       </Section>
@@ -218,24 +212,24 @@ export default function LocationsPage() {
           out loud is simply "do you come to my end of town?" — and it
           is faster to answer with a list of names than with a sentence
           about South-East Queensland. */}
-      <Section id="collection" className="scroll-mt-20">
+      <Section id="collection" className="scroll-mt-20 pb-20 pt-12 lg:pb-24 lg:pt-16">
         <SectionHead
           index={5}
           eyebrow="Collection"
-          title="Or we come to you"
-          intro="Bins, hook lifts and crane trucks run standing routes through these areas, and project work travels further than the standing routes do."
+          title="Ask about collection in your area"
+          intro="These Brisbane areas are listed for collection enquiries. Availability, equipment, minimum volume and timing are confirmed for each site."
         />
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {serviceAreas.map((area) => (
             <div key={area.region} className="border-t-2 border-copper pt-5">
-              <h3 className="text-[1.1rem]">{area.region}</h3>
+              <h3 className="text-xl">{area.region}</h3>
               <ChipList className="mt-4" items={area.places} />
             </div>
           ))}
         </div>
         <Callout className="mt-12" label="Not listed">
-          Ask anyway. A one-off lift out of a regional site is a different
-          question from a weekly bin swap, and the answer is often yes.{" "}
+          Send the address, material, approximate volume and site-access details.
+          The trade desk can then confirm whether collection is available.{" "}
           <ArrowLink href="/services" tone="accent">
             Collection and bin hire
           </ArrowLink>
@@ -248,30 +242,23 @@ export default function LocationsPage() {
         tone="slab"
         n={2}
         caption="Tipper discharging at the processing bay"
-        eyebrow="Weighbridge"
-        title="Certified, calibrated and open to inspection"
+        eyebrow="Trade measurement"
+        title="What to check on a weight-based trade"
       >
         <p className="t-lead mt-5">
-          Weighbridges used for trade must be verified under national trade
-          measurement law and recalibrated on a set cycle. Calibration
-          certificates are available on request and included in the audit pack.
+          Measuring instruments used for trade are subject to national trade
+          measurement requirements. Ask which instrument will be used, how gross
+          and tare are recorded, and what verification record is available.
         </p>
         <TickList
           className="mt-7"
           items={[
-            "Gross and tare on every docket",
-            "Photo evidence of each load",
-            "Records retained for audit",
+            "Confirm whether the load is priced by kilogram or tonne",
+            "Ask which weights and grade appear on the docket",
+            "Request verification evidence when procurement requires it",
           ]}
         />
       </Split>
-
-      <CtaBand
-        title="Bringing something big?"
-        body="Anything over about ten tonnes, or oversized sections that need shearing, is worth a call first. We'll have the right bay clear and the right operator on it."
-        primary={{ label: "Get in touch", href: "/contact" }}
-        secondary={{ label: "What we buy", href: "/what-we-buy" }}
-      />
     </>
   );
 }

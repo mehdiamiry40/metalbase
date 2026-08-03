@@ -4,7 +4,6 @@ import {
   ArrowLink,
   Button,
   Callout,
-  CtaBand,
   Section,
   SectionHead,
 } from "@/components/ui";
@@ -36,17 +35,17 @@ const streams = [
       {
         term: "Aluminium",
         detail:
-          "Extrusion, sheet and plate, cast, wheels, litho and used beverage cans. Thermal-break extrusion and painted sheet are accepted but grade lower; separating clean extrusion is usually worth the ten minutes.",
+          "Extrusion, sheet and plate, cast, wheels, litho and used beverage cans. Thermal-break extrusion and painted sheet can grade differently; confirm acceptance and keep clean extrusion separate where practical.",
       },
       {
         term: "Lead & zinc",
         detail:
-          "Sheet lead, roof flashing, wheel weights, keel and ballast, zinc anodes and die-cast. Handled under our dangerous-goods procedure — call ahead for larger parcels.",
+          "Sheet lead, roof flashing, wheel weights, keel and ballast, zinc anodes and die-cast. Confirm quantity, condition and handling requirements before transport.",
       },
       {
         term: "Stainless steel",
         detail:
-          "304 and 316 verified on arrival with a handheld XRF gun. 316 is worth materially more, so it is always worth confirming rather than assuming.",
+          "304 and 316 can require analyser verification when the grade affects the quote. Send markings and photographs rather than assuming the alloy.",
       },
     ],
   },
@@ -58,12 +57,12 @@ const streams = [
       {
         term: "Heavy melting steel",
         detail:
-          "Plate, beam, pipe and heavy section. HMS 1 is 6mm and above cut to 1.5 metres; HMS 2 accepts 3mm and up in mixed lengths. We shear oversize rather than turning it away.",
+          "Plate, beam, pipe and heavy section. HMS specifications depend on thickness and prepared size; send the dimensions of oversize material before transport.",
       },
       {
         term: "Structural steel & plate",
         detail:
-          "Columns, beams, purlins, cleats and bracing out of demolition. Where the section is reusable we will quote it as remarket stock, which pays better than melt value.",
+          "Columns, beams, purlins, cleats and bracing from demolition. Send dimensions and condition details, then ask whether reusable sections can be assessed separately from melt-value material.",
       },
       {
         term: "Light gauge & mixed steel",
@@ -78,7 +77,7 @@ const streams = [
       {
         term: "End-of-life vehicles",
         detail:
-          "Cars, utes and light trucks, drained and de-polluted. Bring the registration papers and photo ID — we handle the disposal notice.",
+          "Vehicle acceptance is not yet published. Confirm ownership evidence, de-pollution requirements, paperwork and transport before moving a car, ute or truck.",
       },
     ],
   },
@@ -95,7 +94,7 @@ const streams = [
       {
         term: "Batteries",
         detail:
-          "Lead-acid automotive and industrial cells bought by weight. Lithium packs are accepted under a managed process with a handling charge; never put them in a general bin.",
+          "Battery chemistry changes the handling method. Identify it first, keep lithium packs out of general bins and confirm acceptance and any charge before transport.",
       },
       {
         term: "Radiators & heat exchangers",
@@ -105,12 +104,12 @@ const streams = [
       {
         term: "Transformers & switchgear",
         detail:
-          "Oil-filled units accepted with drain and disposal certification. Anything manufactured before 1980 must be tested for PCBs before we can take it.",
+          "Oil-filled or older equipment may need drain, disposal and PCB evidence. Send the nameplate and test records so acceptance can be confirmed first.",
       },
       {
         term: "E-waste & data media",
         detail:
-          "Servers, racks, PCs, comms gear and circuit boards. Drives can be physically destroyed under witness with a certificate issued against the asset list.",
+          "Servers, racks, PCs, communications gear and circuit boards. Confirm acceptance, data-destruction method and evidence requirements before dispatch.",
       },
     ],
   },
@@ -119,7 +118,7 @@ const streams = [
 const prep = [
   {
     title: "Separate the alloys",
-    body: "A mixed bin pays the rate of its lowest component. Five minutes of sorting at the source is the highest-return work anyone does on a scrap load.",
+    body: "A mixed bin can be assessed against its lowest recoverable component. Sorting obvious metals at the source can make the grade and quote easier to verify.",
   },
   {
     title: "Strip attachments",
@@ -131,7 +130,7 @@ const prep = [
   },
   {
     title: "Size it if you can",
-    body: "Heavy sections cut to 1.5 metres grade higher and load faster. If you can't cut it, tell us — we'll bring a shear rather than knock the load back.",
+    body: "Prepared dimensions can affect grade and handling. If you cannot cut it safely, send measurements and photographs so the next step can be confirmed.",
   },
   {
     title: "Keep cable separate",
@@ -139,19 +138,18 @@ const prep = [
   },
   {
     title: "Photograph anything unusual",
-    body: "It takes a grader thirty seconds to tell you whether an odd item is worth the trip.",
+    body: "A clear photograph, nameplate and rough dimensions make it much easier to confirm whether an unusual item is worth transporting.",
   },
 ];
 
 const excluded = [
-  "Asbestos or any material containing it",
-  "Sealed gas cylinders, LPG bottles and fire extinguishers",
-  "Fuel tanks that have not been cut, purged and certified",
-  "Radioactive sources or anything with a trefoil label",
-  "Chemical drums with residue",
-  "PCB-containing transformers without testing",
-  "General household waste, timber or plasterboard",
-  "Undocumented loads — every sale is ID'd and docketed",
+  "Asbestos or material suspected of containing it",
+  "Gas cylinders, LPG bottles, fire extinguishers or sealed vessels",
+  "Fuel tanks, drums or equipment containing liquids or residue",
+  "Radioactive sources or anything carrying a trefoil label",
+  "Older transformers without the required PCB evidence",
+  "Mixed loads containing household waste, timber or plasterboard",
+  "Vehicles, controlled material or unusual ownership situations without prior confirmation",
 ];
 
 export default function WhatWeBuyPage() {
@@ -160,13 +158,13 @@ export default function WhatWeBuyPage() {
       <PageHeader
         eyebrow="Materials"
         title="What we buy"
-        intro="If it's metal and it's legal, we'll price it. Below is what comes across our weighbridge most often, how each stream is graded, how to work out which one you're holding, and the handful of things we cannot take at any price."
+        intro="Use this as a grade guide, not automatic acceptance. Confirm the current yard, material, condition and paperwork before travelling — especially for vehicles, batteries, tanks, e-waste and regulated items."
         trail={[{ label: "Home", href: "/" }, { label: "What we buy" }]}
       >
         {/* One action per page header. The second button here pointed
-            at /contact, which the sticky "Get a quote" and the closing
+            at /contact, which the sticky "Request a quote" and the closing
             CTA band both already offer. */}
-        <Button href="/prices">See the rate board</Button>
+        <Button href="/prices">How pricing works</Button>
       </PageHeader>
 
       {/* Each stream used to open with a full-bleed photo split before
@@ -179,11 +177,15 @@ export default function WhatWeBuyPage() {
           key={s.id}
           id={s.id}
           tone={i % 2 === 0 ? "ink" : "slab"}
-          className="scroll-mt-20"
+          className={
+            i === 1
+              ? "scroll-mt-20 pb-24 pt-20 lg:pb-32 lg:pt-28"
+              : "scroll-mt-20 pb-20 pt-12 lg:pb-24 lg:pt-16"
+          }
         >
           <SectionHead
             index={i + 1}
-            eyebrow={`Stream 0${i + 1}`}
+            eyebrow={`Grade family 0${i + 1}`}
             title={s.title}
             intro={s.lead}
           />
@@ -200,7 +202,7 @@ export default function WhatWeBuyPage() {
           It sits on the light surface because it is reference material
           rather than argument — the same rule that puts the ledger and
           the docket on chalk. */}
-      <Section id="identify" tone="chalk" className="scroll-mt-20">
+      <Section id="identify" tone="chalk" className="scroll-mt-20 pb-24 pt-20 lg:pb-32 lg:pt-28">
         <SectionHead
           index={4}
           eyebrow="Identification"
@@ -212,7 +214,7 @@ export default function WhatWeBuyPage() {
           Grinding a spark test is genuinely diagnostic and genuinely how people
           start fires in suburban sheds, so it is not something to suggest in
           passing. If a piece matters enough to test, photograph it and ask, or
-          bring it in and we will point the analyser at it.{" "}
+          send a clear photograph and ask which test or next step is available.{" "}
           <ArrowLink href="/glossary" tone="accent">
             Glossary of trade terms
           </ArrowLink>
@@ -220,12 +222,12 @@ export default function WhatWeBuyPage() {
       </Section>
 
       {/* prep --------------------------------------------------------- */}
-      <Section id="prep" className="scroll-mt-20">
+      <Section id="prep" className="scroll-mt-20 pb-20 pt-12 lg:pb-24 lg:pt-16">
         <SectionHead
           index={5}
           eyebrow="Preparation"
-          title="Six things that change what your load is worth"
-          intro="None of these require equipment. Most take less than an hour, and every one of them moves the grade rather than just tidying the trailer."
+          title="Six ways to make a quote more accurate"
+          intro="These checks make the condition easier to describe and can reduce avoidable uncertainty in the quoted grade."
         />
         <Steps items={prep} columns={3} />
       </Section>
@@ -240,31 +242,30 @@ export default function WhatWeBuyPage() {
           Deliberately no percentages and no dollar figures: those are
           load-specific and commercial, and inventing an example rate
           would be exactly the fabrication this repo keeps removing. */}
-      <Section id="deductions" tone="slab" className="scroll-mt-20">
+      <Section id="deductions" tone="slab" className="scroll-mt-20 pb-24 pt-20 lg:pb-32 lg:pt-28">
         <SectionHead
           index={6}
           eyebrow="Yield"
           title="What comes off a load, and why it has to"
-          intro="Every merchant deducts for these, because a furnace pays for metal rather than for what came in attached to it. The difference between yards is whether you are told which one applied to your load."
+          intro="A quote can account for anything that reduces recovered metal yield. Ask which factor applies, how it was assessed and what preparation could change it."
         />
         <DefinitionRows items={deductions} />
         <p className="measure-wide mt-10 t-muted">
-          All of them are assessed against your actual load in front of you, not
-          applied as a standing percentage. If a deduction is called on your
-          material, ask what it was and what it would take to avoid it next
-          time — that answer is worth more than the deduction itself.
+          Ask whether each adjustment is assessed from the actual load or
+          applied by a standing rule. If an adjustment is proposed, request the
+          reason and the preparation needed to avoid it next time.
         </p>
       </Section>
 
       {/* excluded ----------------------------------------------------- */}
-      <Section id="excluded" className="scroll-mt-20">
+      <Section id="excluded" className="scroll-mt-20 pb-20 pt-12 lg:pb-24 lg:pt-16">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           <div>
             <SectionHead
               index={7}
               eyebrow="Hard limits"
-              title="What we can't accept"
-              intro="These are safety and licensing limits, not commercial ones. If you're holding something on this list, call us anyway — we can usually point you to a licensed handler who can take it."
+          title="Confirm these before loading"
+          intro="The final exclusion list is still being verified. Treat every item here as requiring prior confirmation; do not arrive with it unannounced."
               className="mb-8"
             />
             <Button href="/contact" variant="ghost">
@@ -273,20 +274,13 @@ export default function WhatWeBuyPage() {
           </div>
           <ul className="divide-y divide-[color:var(--hair)] border-y-2 border-copper">
             {excluded.map((e) => (
-              <li key={e} className="py-4 text-[0.98rem]">
+              <li key={e} className="py-4 text-base">
                 {e}
               </li>
             ))}
           </ul>
         </div>
       </Section>
-
-      <CtaBand
-        title="Got something unusual?"
-        body="Photograph it, guess the weight, and send it through. A grader will tell you what it is, what it's worth and whether it's worth separating before you load the trailer."
-        primary={{ label: "Ask a grader", href: "/contact" }}
-        secondary={{ label: "Rate board", href: "/prices" }}
-      />
     </>
   );
 }

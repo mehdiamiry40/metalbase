@@ -14,34 +14,51 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#201e1c",
+          background: "#f7f9f9",
           padding: "72px",
+          color: "#182024",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <svg width="58" height="50" viewBox="0 0 32 28">
-            <path d="M4 4h18l-4 6H0z" fill="#ff6a1a" />
-            <path d="M7 11h18l-4 6H3z" fill="#ff6a1a" opacity="0.62" />
-            <path d="M10 18h18l-4 6H6z" fill="#ffffff" opacity="0.5" />
+          <svg width="54" height="54" viewBox="0 0 34 34">
+            <path
+              d="M4 24V6h6l7 10 7-10h6v18"
+              fill="none"
+              stroke="#182024"
+              strokeWidth="2.5"
+            />
+            <path
+              d="M2 28h30M7 28v3M27 28v3"
+              fill="none"
+              stroke="#182024"
+              strokeWidth="2.5"
+            />
           </svg>
-          <span style={{ color: "#ffffff", fontSize: 44, fontWeight: 600, letterSpacing: -1.6 }}>
-            MetalBase
+          <span style={{ fontSize: 44, fontWeight: 700, letterSpacing: 1.5 }}>
+            METALBASE
           </span>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <span style={{ color: "#ffffff", fontSize: 74, lineHeight: 1.05, letterSpacing: -2.6 }}>
-            Your metal is worth more than
-          </span>
-          <span style={{ color: "#ffffff", fontSize: 74, lineHeight: 1.05, letterSpacing: -2.6 }}>
-            the bin it&rsquo;s sitting in
+        <div style={{ display: "flex", maxWidth: 970 }}>
+          <span style={{ fontSize: 76, fontWeight: 700, lineHeight: 1.02, letterSpacing: -1.5 }}>
+            Brisbane scrap metal, weighed and graded in front of you.
           </span>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <span style={{ width: 64, height: 5, background: "#ff6a1a" }} />
-          <span style={{ color: "#b9b2aa", fontSize: 28 }}>
-            Scrap metal recycling · Brisbane
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            borderTop: "2px solid #4d595f",
+            paddingTop: 24,
+          }}
+        >
+          <span style={{ color: "#4d595f", fontSize: 26 }}>
+            Quote requests · grading · preparation
+          </span>
+          <span style={{ color: "#4d595f", fontSize: 26 }}>
+            Brisbane, QLD
           </span>
         </div>
       </div>

@@ -5,14 +5,14 @@ import {
   GlossarySchema,
 } from "@/components/Glossary";
 import { PageHeader } from "@/components/sections";
-import { ArrowLink, Callout, CtaBand, Section } from "@/components/ui";
+import { ArrowLink, Callout, Section } from "@/components/ui";
 import { glossary } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/glossary" },
   title: "Scrap Metal Terms Explained",
   description:
-    "Tare, net, HMS 1, bare bright, UBC, swarf, treatment charge, XRF. The vocabulary on a weighbridge docket and a scrap rate board, explained in plain English.",
+    "Tare, net, HMS 1, bare bright, UBC, swarf, treatment charge and XRF: the vocabulary on a weighbridge docket and grade guide, explained plainly.",
 };
 
 export default function GlossaryPage() {
@@ -32,7 +32,7 @@ export default function GlossaryPage() {
       {/* The reference itself sits on the sheet: this is a document to
           be scanned for one word, not an argument to be read through,
           and the surface rule says documents are light. */}
-      <Section tone="sheet">
+      <Section tone="sheet" className="pb-24 pt-12 lg:pb-32 lg:pt-16">
         <GlossaryList />
 
         <Callout className="mt-16">
@@ -40,17 +40,10 @@ export default function GlossaryPage() {
           add it here — if one person had to ask, the word belongs on this
           page.{" "}
           <ArrowLink href="/contact" tone="accent">
-            Ask a grader
+            Ask the trade desk
           </ArrowLink>
         </Callout>
       </Section>
-
-      <CtaBand
-        title="Now put it to use"
-        body="The rate board lists every grade we buy with the specification that decides which one your load falls into — in the same vocabulary."
-        primary={{ label: "See the rate board", href: "/prices" }}
-        secondary={{ label: "What we buy", href: "/what-we-buy" }}
-      />
     </>
   );
 }

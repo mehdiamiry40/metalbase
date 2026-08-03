@@ -19,8 +19,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "Ferrous and non-ferrous scrap bought, processed and remarketed across greater Brisbane.",
     start_url: "/",
     display: "browser",
-    background_color: "#f6f4f1",
-    theme_color: "#201e1c",
+    background_color: "#f7f9f9",
+    theme_color: "#182024",
     lang: "en-AU",
     categories: ["business", "utilities"],
     icons: [

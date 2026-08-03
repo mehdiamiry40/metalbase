@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, IBM_Plex_Mono } from "next/font/google";
+import { Barlow_Condensed, IBM_Plex_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -8,10 +8,12 @@ import MobileActionBar from "@/components/MobileActionBar";
 import { SITE, company, locations } from "@/lib/site";
 
 /**
- * Two families, strict roles. Archivo is language; Plex Mono is
- * measurement — see the type note in globals.css.
+ * Barlow Condensed gives headings the narrow, load-board character of
+ * industrial signage. IBM Plex Sans carries everything else, including
+ * tabular figures, so the site uses two families rather than decorating
+ * measurements with a third face.
  *
- * Both self-hosted rather than a <link> to fonts.googleapis.com. A
+ * Both are self-hosted rather than linked from fonts.googleapis.com. A
  * stylesheet link is render-blocking and on a third-party origin, so
  * first paint would wait on a DNS lookup, TLS handshake and round trip
  * to Google before a single character could be drawn. next/font builds
@@ -25,23 +27,20 @@ import { SITE, company, locations } from "@/lib/site";
  * `display: swap` keeps text visible during load, and next/font
  * metric-adjusts each fallback to limit the reflow when it swaps.
  *
- * Archivo is requested as a variable range rather than a weight list —
- * one file covers 400-700, so the display weight (500) costs no extra
- * request. The mono only ever appears at two weights, so it names them
- * and ships less.
+ * Only the weights used by the interface are included.
  */
-const archivo = Archivo({
+const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   display: "swap",
-  variable: "--font-archivo",
+  variable: "--font-plex-sans",
 });
 
-const plexMono = IBM_Plex_Mono({
+const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["600", "700"],
   display: "swap",
-  variable: "--font-plex-mono",
+  variable: "--font-barlow-condensed",
 });
 
 export const metadata: Metadata = {
@@ -51,15 +50,7 @@ export const metadata: Metadata = {
     template: "%s | MetalBase",
   },
   description:
-    "MetalBase buys, processes and remarkets ferrous and non-ferrous scrap across Brisbane. Graded in front of you, weighed on a certified bridge, paid in cash on the spot.",
-  keywords: [
-    "scrap metal Brisbane",
-    "metal recycling Brisbane",
-    "copper prices Brisbane",
-    "scrap metal Queensland",
-    "skip bin hire scrap Brisbane",
-    "demolition steel buy-back",
-  ],
+    "Request a Brisbane scrap-metal quote and find practical guidance on grading, preparation, pricing and drop-off details to confirm.",
   /* No canonical here. A canonical in the root layout CASCADES to every
      page that does not override it, so setting "/" made nine inner pages
      declare the homepage as their canonical — telling Google they were
@@ -74,7 +65,7 @@ export const metadata: Metadata = {
     url: SITE,
     title: "MetalBase | Scrap Metal Recycling, Brisbane",
     description:
-      "Ferrous and non-ferrous scrap bought, processed and remarketed across greater Brisbane.",
+      "Brisbane scrap-metal quote requests and practical guidance on grades, preparation and pricing.",
   },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
@@ -93,7 +84,7 @@ function structuredData() {
     legalName: company.legal,
     url: SITE,
     description:
-      "Ferrous and non-ferrous scrap metal recycling across greater Brisbane.",
+      "Brisbane scrap-metal quote requests and practical grade guidance.",
     areaServed: { "@type": "City", name: "Brisbane" },
   };
   if (company.phone) data.telephone = company.phone;
@@ -125,9 +116,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-AU" className={`${archivo.variable} ${plexMono.variable}`}>
+    <html
+      lang="en-AU"
+      className={`${plexSans.variable} ${barlowCondensed.variable}`}
+    >
       <head>
-        <meta name="theme-color" content="#f4f2ed" />
+        <meta name="theme-color" content="#182024" />
         <script
           type="application/ld+json"
           // Serialised from a typed object above; no user input reaches this.
@@ -137,7 +131,7 @@ export default function RootLayout({
       <body className="pb-[76px] lg:pb-0">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-copper focus:px-5 focus:py-3 focus:font-semibold focus:text-ink"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-signal focus:px-5 focus:py-3 focus:font-semibold focus:text-white"
         >
           Skip to content
         </a>
