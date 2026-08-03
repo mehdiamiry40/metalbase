@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import QuoteForm from "@/components/QuoteForm";
 import { PageHeader } from "@/components/sections";
-import { CtaBand, Section } from "@/components/ui";
+import {
+  Callout,
+  CtaBand,
+  Panel,
+  Section,
+  SpecStrip,
+} from "@/components/ui";
 import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -19,7 +25,15 @@ export default function ContactPage() {
         title="Tell us what you've got and we'll price it"
         intro="One form for everything — a quote, a bin, a site assessment, a trade account or a reporting request. A grader or account manager comes back inside one business day."
         trail={[{ label: "Home", href: "/" }, { label: "Contact" }]}
-      />
+      >
+        <SpecStrip
+          items={[
+            { k: "Reply", v: "One business day" },
+            { k: "Account", v: "Not required" },
+            { k: "Obligation", v: "None" },
+          ]}
+        />
+      </PageHeader>
 
       <Section>
         <div className="grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-start">
@@ -35,13 +49,13 @@ export default function ContactPage() {
                 route, so the panel says so and points at it, rather than
                 advertising a gap. It flips back to the phone-first
                 layout automatically the moment company.phone is set. */}
-            <div className="border-2 border-graphite p-7">
+            <Panel id="call" className="scroll-mt-24 border-2">
               {company.phone ? (
                 <>
-                  <p className="t-eyebrow t-accent">Fastest route</p>
+                  <p className="t-index t-accent">Fastest route</p>
                   <a
                     href={`tel:${company.phone.replace(/\s/g, "")}`}
-                    className="mt-2 block text-[1.9rem] font-medium leading-none tracking-[-0.03em] hover:text-[color:var(--accent-text)]"
+                    className="mono mt-3 block text-[1.75rem] font-medium leading-none tracking-[-0.03em] hover:text-[color:var(--accent-text)]"
                   >
                     {company.phoneLabel ?? company.phone}
                   </a>
@@ -51,8 +65,8 @@ export default function ContactPage() {
                 </>
               ) : (
                 <>
-                  <p className="t-eyebrow t-accent">What to expect</p>
-                  <p className="mt-2 text-[1.35rem] font-medium leading-tight tracking-[-0.03em]">
+                  <p className="t-index t-accent">What to expect</p>
+                  <p className="mt-3 text-[1.35rem] font-medium leading-tight tracking-[-0.03em]">
                     A grader replies inside one business day
                   </p>
                   <p className="mt-3 text-[0.94rem] leading-relaxed t-muted">
@@ -70,38 +84,35 @@ export default function ContactPage() {
                   {company.email}
                 </a>
               )}
-            </div>
+            </Panel>
 
             <div>
               <h2 className="text-[1.2rem]">What happens next</h2>
               <ol className="mt-4 space-y-4 text-[0.95rem] leading-relaxed t-muted">
                 <li>
-                  <span className="font-semibold ">1.</span> A grader
+                  <span className="mono font-medium t-accent">01</span> A grader
                   reads what you&rsquo;ve sent and, if it&rsquo;s ambiguous, asks
                   for a photo.
                 </li>
                 <li>
-                  <span className="font-semibold ">2.</span> You get an
-                  indicative rate by grade, plus a bin recommendation if the
+                  <span className="mono font-medium t-accent">02</span> You get
+                  an indicative rate by grade, plus a bin recommendation if the
                   volume warrants one.
                 </li>
                 <li>
-                  <span className="font-semibold ">3.</span> If it
+                  <span className="mono font-medium t-accent">03</span> If it
                   stacks up, we book a collection or a weigh-in. Nothing is
                   committed until you say so.
                 </li>
               </ol>
             </div>
 
-            <div className="border-l-4 border-orange bg-paper p-6">
-              <p className="text-[0.94rem] leading-relaxed ">
-                <strong className="font-semibold">Before you visit:</strong>{" "}
-                bring current photo ID. A licensed second-hand dealer has to
-                record who sold the metal. You are paid in cash at the bridge,
-                so bank details are only needed if you would rather have it
-                transferred.
-              </p>
-            </div>
+            <Callout label="Before you visit">
+              Bring current photo ID. A licensed second-hand dealer has to record
+              who sold the metal, on every load without exception. You are paid
+              at the bridge in cash, so bank details are only needed if you would
+              rather have it transferred.
+            </Callout>
           </aside>
         </div>
       </Section>

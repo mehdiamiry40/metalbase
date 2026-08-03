@@ -1,20 +1,23 @@
 import type { Metadata } from "next";
-import { PageHeader, Steps } from "@/components/sections";
+import { Ledger } from "@/components/Ledger";
+import { Essay, PageHeader, Steps } from "@/components/sections";
 import {
   ArrowLink,
   Button,
+  Callout,
   CtaBand,
-  Eyebrow,
+  Panel,
   Section,
+  SectionHead,
   TickList,
 } from "@/components/ui";
-import { PUBLISH_RATES, company, priceGroups } from "@/lib/site";
+import { PUBLISH_RATES, company } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/prices" },
   title: "Scrap Metal Rate Board — Brisbane",
   description:
-    "The grades MetalBase buys across non-ferrous, ferrous and specialty streams in Brisbane, how each is graded, and how to get a written rate for your load.",
+    "The grades MetalBase buys across non-ferrous, ferrous and specialty streams in Brisbane, how each is graded, how a settlement is calculated, and how to get a written rate for your load.",
 };
 
 const grading = [
@@ -32,8 +35,22 @@ const grading = [
   },
   {
     title: "Get paid",
-    body: "Cash in your hand at the weighbridge, against the grade on your docket. Prefer it in the bank? We will transfer to your nominated account instead \u2014 just say so before the load is committed.",
+    body: "Cash in your hand at the weighbridge, against the grade on your docket. Prefer it in the bank? We will transfer to your nominated account instead — just say so before the load is committed.",
   },
+];
+
+/* The settlement, written as an expression rather than a paragraph.
+   Every term is a field on the docket, which is the point: a seller
+   can follow the arithmetic on the piece of paper they are handed.
+   No figures — the shape is the content, and inventing an example rate
+   would be exactly the fabrication this codebase keeps removing. */
+const workings = [
+  { step: "Gross", note: "vehicle and load, weighed in" },
+  { step: "− Tare", note: "the same vehicle, weighed out" },
+  { step: "= Net", note: "the metal, and the only weight you are paid on" },
+  { step: "× Rate", note: "set by the grade called before you tipped" },
+  { step: "− Deductions", note: "named on the docket, not absorbed into the rate" },
+  { step: "= Paid", note: "at the bridge, before you drive out" },
 ];
 
 export default function PricesPage() {
@@ -60,9 +77,9 @@ export default function PricesPage() {
           is tables. Three headings are findable by scrolling. */}
 
       {!PUBLISH_RATES && (
-        <div className="border-b hair bg-paper">
+        <div className="on-light border-b hair bg-chalk">
           <div className="shell py-5 text-[0.94rem] t-muted">
-            <strong className="font-semibold ">
+            <strong className="font-semibold">
               Rates are quoted, not posted.
             </strong>{" "}
             Send a photo and a rough weight and a grader will come back with a
@@ -71,102 +88,132 @@ export default function PricesPage() {
         </div>
       )}
 
-      {priceGroups.map((group, gi) => (
-        <Section key={group.id} id={group.id} tone={gi % 2 ? "deep" : "base"}>
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
-            <div className="max-w-2xl">
-              <Eyebrow>{`Stream 0${gi + 1}`}</Eyebrow>
-              <h2>{group.title}</h2>
-              <p className="t-lead mt-4 t-muted">{group.note}</p>
-            </div>
-            <ArrowLink href="/contact">Quote this stream</ArrowLink>
-          </div>
-
-          <table className="w-full text-left">
-            <caption className="sr-only">
-              {group.title} grades and specifications
-            </caption>
-            <thead>
-              <tr className="border-b-2 border-graphite">
-                <th scope="col" className="t-eyebrow py-3 t-muted">
-                  Grade
-                </th>
-                <th scope="col" className="t-eyebrow py-3 t-muted">
-                  Specification
-                </th>
-                {PUBLISH_RATES && (
-                  <th scope="col" className="t-eyebrow py-3 text-right t-muted">
-                    Rate
-                  </th>
-                )}
-              </tr>
-            </thead>
-            <tbody>
-              {group.rows.map((r) => (
-                <tr key={r.grade} className="border-b hair align-top">
-                  <th
-                    scope="row"
-                    className="py-5 pr-6 text-left text-[1.05rem] font-semibold"
-                  >
-                    {r.grade}
-                  </th>
-                  <td className="py-5 pr-6 text-[0.95rem] t-muted">
-                    {r.spec}
-                  </td>
-                  {PUBLISH_RATES && (
-                    <td className="whitespace-nowrap py-5 text-right">
-                      {r.rate ? (
-                        <>
-                          <span className="t-num text-[1.4rem] font-medium">
-                            ${r.rate}
-                          </span>
-                          <span className="ml-1 text-[0.9rem] t-muted">
-                            /{r.unit}
-                          </span>
-                        </>
-                      ) : (
-                        <span className="text-[0.94rem] t-muted">
-                          On request
-                        </span>
-                      )}
-                    </td>
-                  )}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-        </Section>
-      ))}
+      {/* ---------------------------------------------------- the board
+          This page used to render its own copy of the grade table,
+          separately from the identical one on the home page — two
+          hand-maintained tables over one array, which is how the two
+          drift apart. Both are the Ledger component now, so the board
+          exists once and every page shows the same one. */}
+      <Section id="board" tone="chalk">
+        <SectionHead
+          index={1}
+          eyebrow="The board"
+          title="Every grade we buy, and the spec that decides yours"
+          intro="Three streams, priced two different ways: non-ferrous and specialty by the kilo, ferrous by the tonne over the weighbridge."
+        />
+        <Ledger />
+      </Section>
 
       {/* grading ------------------------------------------------------ */}
-      <section id="grading" className="bg-paper py-20 lg:py-32">
-        <div className="shell">
-          <div className="rule max-w-3xl">
-            <h2>How a load gets graded</h2>
-            <p className="t-lead mt-5 t-muted">
-              Grading is where most yards lose people&rsquo;s trust. Ours happens
-              in front of you, before the load is tipped.
-            </p>
+      <Section id="grading" className="scroll-mt-20">
+        <SectionHead
+          index={2}
+          eyebrow="Assessment"
+          title="How a load gets graded"
+          intro="Grading is where most yards lose people's trust. Ours happens in front of you, before the load is tipped."
+        />
+        <Steps items={grading} />
+      </Section>
+
+      {/* ------------------------------------------------ the arithmetic
+          New section. People do not distrust the rate so much as the
+          gap between the rate they were quoted and the figure they were
+          handed — and that gap is arithmetic nobody shows them. Setting
+          it out as an expression, on the sheet surface, makes the docket
+          legible before they are standing at the bridge holding one. */}
+      <Section id="settlement" tone="sheet" className="scroll-mt-20">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+          <div>
+            <SectionHead
+              index={3}
+              eyebrow="The arithmetic"
+              title="How the figure on your docket is built"
+              intro="Six terms, all of them printed on the paper you keep. Nothing in the sum happens out of your sight, which is the entire reason it is worth writing down."
+              className="mb-0"
+            />
           </div>
-          <div className="mt-12">
-            <Steps items={grading} />
+
+          <div>
+            <dl className="ruled surface-sheet grid-cols-1">
+              {workings.map((w) => (
+                <div
+                  key={w.step}
+                  className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 px-5 py-4"
+                >
+                  <dt className="mono text-[1.05rem] font-medium">{w.step}</dt>
+                  <dd className="t-spec t-muted">{w.note}</dd>
+                </div>
+              ))}
+            </dl>
+            <Callout className="mt-8">
+              A quote given over the phone is against the grade you describe. The
+              settlement is against the grade in front of the grader — which is
+              why the two can differ, and why the difference gets named rather
+              than quietly applied.{" "}
+              <ArrowLink href="/what-we-buy#deductions" tone="accent">
+                What gets deducted
+              </ArrowLink>
+            </Callout>
           </div>
         </div>
-      </section>
+      </Section>
+
+      {/* ------------------------------------------------ index pricing
+          New copy. The contract section below states WHAT the formula
+          is; this explains why the trade prices that way at all, which
+          is the part that makes a posted board rate look like the
+          weaker offer rather than the more generous one.
+
+          No index is named and no charge is quoted — those are
+          commercial terms per agreement, and inventing an example
+          number would be exactly the kind of fabricated specific this
+          repo has had to strip out before. */}
+      <Essay
+        id="how-pricing-works"
+        index={4}
+        eyebrow="Understanding the number"
+        title="Why nobody in this trade posts a fixed price"
+        lead="Scrap is a commodity, and commodities are repriced continuously. A yard advertising a rate that never moves is either behind the market or pricing in a buffer to protect itself from it."
+        points={[
+          {
+            term: "The metal is sold before you are paid for it",
+            detail:
+              "A merchant buys your load against what a mill or refinery will pay for that grade, at the time it is remarketed. That underlying number moves daily on international markets, so the rate offered has to move with it.",
+          },
+          {
+            term: "A posted rate has to be conservative",
+            detail:
+              "If a yard commits to a printed number for a month, it has to set that number low enough to survive a month of the market moving against it. You pay for that safety margin on every load, including the ones where the market moved the other way.",
+          },
+          {
+            term: "A formula moves both ways",
+            detail:
+              "Contract pricing nominates a published index and an agreed treatment charge, so the rate rises when the market rises instead of waiting for a renegotiation. It also falls when the market falls — that is the honest half of the arrangement, and it is why it suits regular tonnage rather than a one-off load.",
+          },
+          {
+            term: "Quoting per load is not evasion",
+            detail:
+              "It is how you get today's number instead of last month's. Send a photograph and a rough weight and the answer comes back the same day, against the grade we would actually pay on.",
+          },
+        ]}
+        footer={
+          <Button href="/contact" variant="ghost">
+            Get a rate for your load
+          </Button>
+        }
+      />
 
       {/* contract ----------------------------------------------------- */}
-      <Section id="contract">
+      <Section id="contract" tone="slab">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           <div>
-            <Eyebrow>Volume & contract</Eyebrow>
-            <h2>Index-linked pricing for regular tonnage</h2>
-            <p className="t-lead mt-5 t-muted">
-              If you generate metal on a schedule, a posted board rate is the
-              wrong instrument. Contract customers are priced as a formula — a
-              published index, less an agreed treatment charge — so the rate
-              moves with the market instead of with a phone call.
-            </p>
+            <SectionHead
+              index={5}
+              eyebrow="Volume & contract"
+              title="Index-linked pricing for regular tonnage"
+              intro="If you generate metal on a schedule, a posted board rate is the wrong instrument. Contract customers are priced as a formula — a published index, less an agreed treatment charge — so the rate moves with the market instead of with a phone call."
+              className="mb-0"
+            />
             <TickList
               className="mt-7"
               items={[
@@ -181,18 +228,18 @@ export default function PricesPage() {
             </div>
           </div>
 
-          <aside className="border-2 hair p-8">
+          <Panel>
             <h3>The fine print, in plain English</h3>
             <div className="mt-5 space-y-5 text-[0.95rem] leading-relaxed t-muted">
               <p>
-                <strong className="font-semibold ">
+                <strong className="font-semibold">
                   A quote is not the final rate.
                 </strong>{" "}
                 Settlement depends on the grade assessed at the yard.
                 Contamination, moisture, attachments and size all affect yield.
               </p>
               <p>
-                <strong className="font-semibold ">
+                <strong className="font-semibold">
                   You are paid in cash on the spot.
                 </strong>{" "}
                 Settlement happens at the bridge once the tare weight is in, or
@@ -200,15 +247,13 @@ export default function PricesPage() {
                 rather. Say which at the weighbridge.
               </p>
               <p>
-                <strong className="font-semibold ">
-                  Photo ID is required.
-                </strong>{" "}
+                <strong className="font-semibold">Photo ID is required.</strong>{" "}
                 Every transaction is recorded against a seller and a vehicle.
                 It is the most effective control against stolen metal entering
                 the supply chain.
               </p>
             </div>
-          </aside>
+          </Panel>
         </div>
       </Section>
 

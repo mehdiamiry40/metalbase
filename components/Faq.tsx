@@ -16,9 +16,14 @@ export function FaqList({ items }: { items: Faq[] }) {
         <details key={f.q} className="group">
           <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-[1.0625rem] font-semibold marker:content-none [&::-webkit-details-marker]:hidden">
             {f.q}
+            {/* Copper is a fill here and carries no text, so it is legal
+                on both surfaces — the accent cannot do typographic work
+                on chalk. The rotating half is a pseudo-element so the
+                whole control is one node rather than two crossed rules
+                that have to be kept in sync. */}
             <span
               aria-hidden="true"
-              className="relative mt-2 h-[2px] w-4 shrink-0 bg-orange transition-transform duration-200 before:absolute before:inset-0 before:bg-orange before:transition-transform before:duration-200 before:content-[''] group-open:before:rotate-0 before:rotate-90"
+              className="relative mt-2 h-[2px] w-4 shrink-0 bg-copper before:absolute before:inset-0 before:rotate-90 before:bg-copper before:transition-transform before:duration-200 before:content-[''] group-open:before:rotate-0"
             />
           </summary>
           <p className="max-w-2xl pb-6 leading-relaxed t-muted">{f.a}</p>

@@ -1,19 +1,26 @@
 import type { Metadata } from "next";
 import { DefinitionRows, PageHeader, Steps } from "@/components/sections";
-import { Button, CtaBand, Eyebrow, Section } from "@/components/ui";
+import {
+  ArrowLink,
+  Button,
+  Callout,
+  CtaBand,
+  Section,
+  SectionHead,
+} from "@/components/ui";
+import { deductions, identify } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/what-we-buy" },
   title: "What We Buy — Ferrous, Non-Ferrous & Specialty Scrap",
   description:
-    "Copper, aluminium, brass, lead, stainless, heavy melting steel, cast iron, batteries, motors and e-waste. What MetalBase buys in Brisbane and how each stream is graded.",
+    "Copper, aluminium, brass, lead, stainless, heavy melting steel, cast iron, batteries, motors and e-waste. What MetalBase buys in Brisbane, how each stream is graded, and how to tell what you have.",
 };
 
 const streams = [
   {
     id: "non-ferrous",
     title: "Non-ferrous",
-    photo: "cable" as const,
     lead: "The money metals. Non-magnetic, higher value per kilo, and by far the most sensitive to how well you separate them.",
     items: [
       {
@@ -46,7 +53,6 @@ const streams = [
   {
     id: "ferrous",
     title: "Ferrous",
-    photo: "yard-grab" as const,
     lead: "Magnetic, priced per tonne, and mostly about size and cleanliness. If it fits a charge box and isn't full of concrete, it grades well.",
     items: [
       {
@@ -66,7 +72,8 @@ const streams = [
       },
       {
         term: "Cast iron",
-        detail: "Engine blocks, machine bases, baths, guttering and pipe. Drained of oil and free of steel fasteners where practical.",
+        detail:
+          "Engine blocks, machine bases, baths, guttering and pipe. Drained of oil and free of steel fasteners where practical.",
       },
       {
         term: "End-of-life vehicles",
@@ -78,7 +85,6 @@ const streams = [
   {
     id: "specialty",
     title: "Specialty streams",
-    photo: "mixed-parts" as const,
     lead: "Mixed-material items where the value sits inside. Sampled and graded individually, and a few of them are regulated.",
     items: [
       {
@@ -93,7 +99,8 @@ const streams = [
       },
       {
         term: "Radiators & heat exchangers",
-        detail: "Copper, copper/aluminium and all-aluminium cores from automotive and HVAC. Remove steel frames and plastic tanks to lift the grade.",
+        detail:
+          "Copper, copper/aluminium and all-aluminium cores from automotive and HVAC. Remove steel frames and plastic tanks to lift the grade.",
       },
       {
         term: "Transformers & switchgear",
@@ -110,12 +117,30 @@ const streams = [
 ];
 
 const prep = [
-  { title: "Separate the alloys", body: "A mixed bin pays the rate of its lowest component. Five minutes of sorting at the source is the highest-return work anyone does on a scrap load." },
-  { title: "Strip attachments", body: "Steel brackets on aluminium, plastic tanks on radiators, timber in steel. Anything that isn't the metal reduces yield and therefore grade." },
-  { title: "Drain fluids", body: "Oil, coolant, fuel and water all have to come out before material can be processed. Undrained items may be refused at the gate." },
-  { title: "Size it if you can", body: "Heavy sections cut to 1.5 metres grade higher and load faster. If you can't cut it, tell us — we'll bring a shear rather than knock the load back." },
-  { title: "Keep cable separate", body: "Cable is priced on recoverable copper. Mixed into general non-ferrous it gets graded down to the mix." },
-  { title: "Photograph anything unusual", body: "It takes a grader thirty seconds to tell you whether an odd item is worth the trip." },
+  {
+    title: "Separate the alloys",
+    body: "A mixed bin pays the rate of its lowest component. Five minutes of sorting at the source is the highest-return work anyone does on a scrap load.",
+  },
+  {
+    title: "Strip attachments",
+    body: "Steel brackets on aluminium, plastic tanks on radiators, timber in steel. Anything that isn't the metal reduces yield and therefore grade.",
+  },
+  {
+    title: "Drain fluids",
+    body: "Oil, coolant, fuel and water all have to come out before material can be processed. Undrained items may be refused at the gate.",
+  },
+  {
+    title: "Size it if you can",
+    body: "Heavy sections cut to 1.5 metres grade higher and load faster. If you can't cut it, tell us — we'll bring a shear rather than knock the load back.",
+  },
+  {
+    title: "Keep cable separate",
+    body: "Cable is priced on recoverable copper. Mixed into general non-ferrous it gets graded down to the mix.",
+  },
+  {
+    title: "Photograph anything unusual",
+    body: "It takes a grader thirty seconds to tell you whether an odd item is worth the trip.",
+  },
 ];
 
 const excluded = [
@@ -126,7 +151,7 @@ const excluded = [
   "Chemical drums with residue",
   "PCB-containing transformers without testing",
   "General household waste, timber or plasterboard",
-  "Undocumented loads — every sale is ID'd and docketed, cash or not",
+  "Undocumented loads — every sale is ID'd and docketed",
 ];
 
 export default function WhatWeBuyPage() {
@@ -135,7 +160,7 @@ export default function WhatWeBuyPage() {
       <PageHeader
         eyebrow="Materials"
         title="What we buy"
-        intro="If it's metal and it's legal, we'll price it. Below is what comes across our weighbridge most often, how each stream is graded, and the handful of things we cannot take at any price."
+        intro="If it's metal and it's legal, we'll price it. Below is what comes across our weighbridge most often, how each stream is graded, how to work out which one you're holding, and the handful of things we cannot take at any price."
         trail={[{ label: "Home", href: "/" }, { label: "What we buy" }]}
       >
         {/* One action per page header. The second button here pointed
@@ -153,54 +178,100 @@ export default function WhatWeBuyPage() {
         <Section
           key={s.id}
           id={s.id}
-          tone={i % 2 === 0 ? "base" : "deep"}
+          tone={i % 2 === 0 ? "ink" : "slab"}
           className="scroll-mt-20"
         >
-          <div className="max-w-3xl">
-            <Eyebrow>{`Stream 0${i + 1}`}</Eyebrow>
-            <h2>{s.title}</h2>
-            <p className="t-lead mt-5">{s.lead}</p>
-          </div>
-          <div className="mt-10">
-            <DefinitionRows items={s.items} />
-          </div>
+          <SectionHead
+            index={i + 1}
+            eyebrow={`Stream 0${i + 1}`}
+            title={s.title}
+            intro={s.lead}
+          />
+          <DefinitionRows items={s.items} />
         </Section>
       ))}
 
+      {/* ------------------------------------------------- identification
+          New section, and the one a first-time seller needs most. The
+          grade taxonomy above is only useful to someone who can already
+          tell brass from bronze; this is the half-page that gets them
+          there.
+
+          It sits on the light surface because it is reference material
+          rather than argument — the same rule that puts the ledger and
+          the docket on chalk. */}
+      <Section id="identify" tone="chalk" className="scroll-mt-20">
+        <SectionHead
+          index={4}
+          eyebrow="Identification"
+          title="Working out what you've actually got"
+          intro="Six field checks that cost nothing and settle most of it before you load. None of them beat an analyser, and none of them need to."
+        />
+        <DefinitionRows items={identify} />
+        <Callout className="mt-10" label="Not on this list">
+          Grinding a spark test is genuinely diagnostic and genuinely how people
+          start fires in suburban sheds, so it is not something to suggest in
+          passing. If a piece matters enough to test, photograph it and ask, or
+          bring it in and we will point the analyser at it.{" "}
+          <ArrowLink href="/glossary" tone="accent">
+            Glossary of trade terms
+          </ArrowLink>
+        </Callout>
+      </Section>
+
       {/* prep --------------------------------------------------------- */}
-      <section id="prep" className="scroll-mt-20 bg-paper py-20 lg:py-32">
-        <div className="shell">
-          <div className="rule max-w-3xl">
-            <h2>Six things that change what your load is worth</h2>
-            <p className="t-lead mt-5 t-muted">
-              None of these require equipment. Most take less than an hour and
-              move the return by double digits.
-            </p>
-          </div>
-          <div className="mt-12">
-            <Steps items={prep} columns={3} />
-          </div>
-        </div>
-      </section>
+      <Section id="prep" className="scroll-mt-20">
+        <SectionHead
+          index={5}
+          eyebrow="Preparation"
+          title="Six things that change what your load is worth"
+          intro="None of these require equipment. Most take less than an hour, and every one of them moves the grade rather than just tidying the trailer."
+        />
+        <Steps items={prep} columns={3} />
+      </Section>
+
+      {/* --------------------------------------------------- deductions
+          New section. Deductions are the part of a settlement people
+          feel hardest done by, because they are the part nobody
+          explains — the number arrives smaller than expected and the
+          reason is left implied. Writing them down in advance is worth
+          more than any assurance that we are fair about them.
+
+          Deliberately no percentages and no dollar figures: those are
+          load-specific and commercial, and inventing an example rate
+          would be exactly the fabrication this repo keeps removing. */}
+      <Section id="deductions" tone="slab" className="scroll-mt-20">
+        <SectionHead
+          index={6}
+          eyebrow="Yield"
+          title="What comes off a load, and why it has to"
+          intro="Every merchant deducts for these, because a furnace pays for metal rather than for what came in attached to it. The difference between yards is whether you are told which one applied to your load."
+        />
+        <DefinitionRows items={deductions} />
+        <p className="measure-wide mt-10 t-muted">
+          All of them are assessed against your actual load in front of you, not
+          applied as a standing percentage. If a deduction is called on your
+          material, ask what it was and what it would take to avoid it next
+          time — that answer is worth more than the deduction itself.
+        </p>
+      </Section>
 
       {/* excluded ----------------------------------------------------- */}
       <Section id="excluded" className="scroll-mt-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           <div>
-            <Eyebrow>Hard limits</Eyebrow>
-            <h2>What we can&rsquo;t accept</h2>
-            <p className="t-lead mt-5 t-muted">
-              These are safety and licensing limits, not commercial ones. If
-              you&rsquo;re holding something on this list, call us anyway — we can
-              usually point you to a licensed handler who can take it.
-            </p>
-            <div className="mt-8">
-              <Button href="/contact" variant="outline">
-                Ask before you load it
-              </Button>
-            </div>
+            <SectionHead
+              index={7}
+              eyebrow="Hard limits"
+              title="What we can't accept"
+              intro="These are safety and licensing limits, not commercial ones. If you're holding something on this list, call us anyway — we can usually point you to a licensed handler who can take it."
+              className="mb-8"
+            />
+            <Button href="/contact" variant="ghost">
+              Ask before you load it
+            </Button>
           </div>
-          <ul className="divide-y divide-[color:var(--hair)] border-y-2 border-orange">
+          <ul className="divide-y divide-[color:var(--hair)] border-y-2 border-copper">
             {excluded.map((e) => (
               <li key={e} className="py-4 text-[0.98rem]">
                 {e}

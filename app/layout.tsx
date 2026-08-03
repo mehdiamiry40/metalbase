@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Hanken_Grotesk } from "next/font/google";
+import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -8,26 +8,40 @@ import MobileActionBar from "@/components/MobileActionBar";
 import { SITE, company, locations } from "@/lib/site";
 
 /**
- * Self-hosted rather than a <link> to fonts.googleapis.com.
+ * Two families, strict roles. Archivo is language; Plex Mono is
+ * measurement — see the type note in globals.css.
  *
- * The stylesheet link was render-blocking and on a third-party origin,
- * so first paint waited on a DNS lookup, TLS handshake and round trip
+ * Both self-hosted rather than a <link> to fonts.googleapis.com. A
+ * stylesheet link is render-blocking and on a third-party origin, so
+ * first paint would wait on a DNS lookup, TLS handshake and round trip
  * to Google before a single character could be drawn. next/font builds
- * the font into the deployment, serves it same-origin, and inlines the
- * @font-face — no third-party request on the critical path at all.
+ * the files into the deployment, serves them same-origin, and inlines
+ * the @font-face — no third-party request on the critical path.
  *
- * It also removes the only external origin the site contacted on load,
- * which is worth something under GDPR: Google Fonts served from
- * Google's CDN discloses visitor IPs to a third party.
+ * It also keeps the site free of external origins on load, which is
+ * worth something under GDPR: Google Fonts served from Google's CDN
+ * discloses visitor IPs to a third party.
  *
- * `display: swap` keeps text visible during load; the fallback stack
- * is metric-adjusted by next/font to limit the reflow when it swaps.
+ * `display: swap` keeps text visible during load, and next/font
+ * metric-adjusts each fallback to limit the reflow when it swaps.
+ *
+ * Archivo is requested as a variable range rather than a weight list —
+ * one file covers 400-700, so the display weight (500) costs no extra
+ * request. The mono only ever appears at two weights, so it names them
+ * and ships less.
  */
-const hanken = Hanken_Grotesk({
+const archivo = Archivo({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
-  variable: "--font-hanken",
+  variable: "--font-archivo",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+  variable: "--font-plex-mono",
 });
 
 export const metadata: Metadata = {
@@ -111,9 +125,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-AU" className={hanken.variable}>
+    <html lang="en-AU" className={`${archivo.variable} ${plexMono.variable}`}>
       <head>
-        <meta name="theme-color" content="#201e1c" />
+        <meta name="theme-color" content="#0d0f11" />
         <script
           type="application/ld+json"
           // Serialised from a typed object above; no user input reaches this.
@@ -123,7 +137,7 @@ export default function RootLayout({
       <body className="pb-[76px] lg:pb-0">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-orange focus:px-5 focus:py-3 focus:font-semibold focus:text-graphite"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-copper focus:px-5 focus:py-3 focus:font-semibold focus:text-ink"
         >
           Skip to content
         </a>

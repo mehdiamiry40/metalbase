@@ -6,21 +6,23 @@ const links = [
   { label: "Rate board", href: "/prices" },
   { label: "For business", href: "/services" },
   { label: "Sell your scrap", href: "/locations" },
+  { label: "Glossary", href: "/glossary" },
   { label: "Sustainability", href: "/sustainability" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];
 
 export default function NotFound() {
   return (
-    <section className="bg-paper py-24 lg:py-32">
+    <section className="on-dark bg-ink py-24 lg:py-32">
       <div className="shell">
-        <p className="t-eyebrow t-accent">Error 404</p>
-        <h1 className="mt-3 max-w-2xl">That page has already been recycled</h1>
-        <p className="t-lead mt-5 max-w-xl t-muted">
+        <p className="t-index t-accent">Error 404</p>
+        <h1 className="mt-4 max-w-2xl">That page has already been recycled</h1>
+        <p className="t-lead measure mt-6 t-muted">
           The link is broken or the page has moved. Here&rsquo;s where most people
           were heading.
         </p>
-        <ul className="mt-10 grid max-w-2xl gap-x-10 gap-y-4 sm:grid-cols-2">
+        <ul className="mt-12 grid max-w-2xl gap-x-10 gap-y-4 sm:grid-cols-2">
           {links.map((l) => (
             <li key={l.href} className="border-t hair pt-3">
               <Link
