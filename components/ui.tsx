@@ -51,8 +51,8 @@ export function Logo({ className = "" }: { className?: string }) {
         <path d="M7 11h18l-4 6H3z" fill="#ff8a45" />
         <path d="M10 18h18l-4 6H6z" fill="currentColor" opacity="0.35" />
       </svg>
-      <span className="text-[1.4rem] font-medium leading-none tracking-[-0.05em]">
-        MetalBase
+      <span className="text-[1.4rem] font-bold leading-none tracking-[-0.06em]">
+        METALBASE
       </span>
     </span>
   );
@@ -65,12 +65,12 @@ export function Logo({ className = "" }: { className?: string }) {
 /* 4px radius, weight 400, 2px border — measured off the reference,
    which uses quiet rectangular buttons rather than bold pills. */
 const btnBase =
-  "inline-flex items-center justify-center gap-2 rounded-[4px] border-2 px-7 py-3 text-[1.0625rem] font-normal transition-colors duration-150";
+  "inline-flex min-h-12 items-center justify-center gap-2 border-2 px-6 py-3 text-[0.82rem] font-bold uppercase tracking-[0.09em] transition-colors duration-150";
 
 const variants: Record<string, string> = {
-  /* The CTA. Orange fill carries graphite at 5.80 — white on orange is
-     2.87 and can never pass, which is why the label is graphite. */
-  primary: "border-orange bg-orange text-graphite hover:border-orange-deep hover:bg-orange-deep",
+  /* Deep rust lets primary actions carry white text at accessible
+     contrast while the brighter orange stays visible as the keyline. */
+  primary: "border-orange bg-rust text-white hover:bg-rust-deep",
   /* Outlines invert on hover so the change is unmistakable. */
   outline: "border-graphite text-graphite hover:bg-graphite hover:text-white",
   outlineDark: "border-white text-white hover:bg-white hover:text-graphite",
@@ -146,7 +146,7 @@ export function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={`${tones[tone]} py-20 lg:py-32 ${className}`}>
+    <section id={id} className={`${tones[tone]} py-16 lg:py-24 ${className}`}>
       <div className="shell">{children}</div>
     </section>
   );
@@ -242,7 +242,7 @@ export function CtaBand({
 }) {
   return (
     <section className="on-dark bg-graphite">
-      <div className="shell py-20 lg:py-32">
+      <div className="shell py-16 lg:py-24">
         <div className="rule" />
         <h2 className="max-w-3xl">{title}</h2>
         <p className="t-lead mt-5 max-w-2xl t-muted">{body}</p>

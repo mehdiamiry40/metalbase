@@ -1,225 +1,266 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { FaqList, FaqSchema } from "@/components/Faq";
 import Photo from "@/components/Photo";
-import { Essay, Split, Steps } from "@/components/sections";
-import { Button, CtaBand, Eyebrow, StatBand } from "@/components/ui";
-import { company, priceGroups, stats } from "@/lib/site";
+import { Split } from "@/components/sections";
+import { ArrowRight, Button, CtaBand, Eyebrow } from "@/components/ui";
+import { company, faqs, priceGroups } from "@/lib/site";
 
-/* The home page inherits title, description and Open Graph from the
-   root layout, which is correct — but the layout no longer sets a
-   canonical (it cascaded to every child), so home declares its own. */
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-const gradeCount = priceGroups.reduce((n, g) => n + g.rows.length, 0);
+const streamCopy: Record<string, string> = {
+  "Non-ferrous": "Copper, brass, aluminium, lead and stainless",
+  Ferrous: "Steel, cast iron, vehicles and whitegoods",
+  "Specialty streams": "Motors, batteries, radiators and e-waste",
+};
 
 const steps = [
-  { title: "Drive on", body: "No appointment, no booking, no minimum load. Follow the line to the weighbridge." },
-  { title: "Weigh in", body: "Gross weight recorded, photo ID scanned, vehicle logged. About ninety seconds." },
-  { title: "Get graded", body: "A grader calls the grade before you tip. Disagree and we settle it with the XRF gun." },
-  { title: "Get paid", body: "Tare on the way out, docket printed, cash in your hand before you leave. EFT if you'd rather." },
+  {
+    number: "01",
+    title: "Bring it in",
+    body: "Drive on with no appointment, booking or minimum load.",
+  },
+  {
+    number: "02",
+    title: "Agree the grade",
+    body: "We inspect and grade the metal with you before it is tipped.",
+  },
+  {
+    number: "03",
+    title: "Get paid",
+    body: "We record the tare, print the docket and settle on the spot.",
+  },
 ];
 
-/* ------------------------------------------------------------------
-   The home page carried nine sections and ran to 9,146px on a phone —
-   about eleven screens. Four of them were doing the navigation's job
-   rather than answering a question: a two-audience tile block, a
-   four-row services list, a sustainability panel and an FAQ accordion,
-   each a summary of a page that already exists and says it better.
+const audiences = [
+  {
+    title: "Public & trade drop-off",
+    body: "Bring copper, cable, brass, aluminium, steel and other accepted scrap to the weighbridge with no appointment or minimum load.",
+    label: "Plan a drop-off",
+    href: "/locations#how-it-works",
+  },
+  {
+    title: "Bins & scheduled collection",
+    body: "Keep recurring scrap separated at the source with bins and collection schedules shaped around your site and production cycle.",
+    label: "Explore collections",
+    href: "/services/collection-and-bins",
+  },
+  {
+    title: "Industrial & project recovery",
+    body: "Recover value from manufacturing offcuts, demolition steel, plant, equipment and project material across South-East Queensland.",
+    label: "See business services",
+    href: "/services",
+  },
+];
 
-   What is left is the sequence someone with metal in their ute
-   actually needs: what this is, what we take, what happens when you
-   drive in, how to start. Everything removed is still reachable — the
-   footer carries the secondary destinations so nothing is orphaned.
-   ------------------------------------------------------------------ */
+const homeFaqs = faqs.slice(0, 4);
 
 export default function Home() {
   return (
     <>
-      {/* ---------------------------------------------------------- hero
-          Photograph under a graphite scrim with white type over it. Its
-          own h1 measured white, so the hero is the one place on a
-          light-dominant site where the headline is reversed out. */}
-      {/* The photo layer must NOT be negative z-index. `isolate` on the
-          section creates a stacking context, so a -z-10 child paints
-          behind the section's own opaque bg-graphite and vanishes entirely
-          — the image loaded fine and simply could not be seen. Photo
-          layer sits at auto z, content above it via `relative`, and
-          bg-graphite stays as the fallback while the image loads. */}
-      <section className="on-dark over-photo relative overflow-hidden bg-graphite">
-        <div className="absolute inset-0">
-          <Photo
-            name="yard-grab"
-            priority
-            sizes="100vw"
-            alt="A material handler working a pile of mixed scrap steel at a recycling yard"
-          />
-          {/* Scrim: heavy enough that white type clears AA over the
-              brightest part of this photograph, light enough that the
-              yard is still legible behind it. */}
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 bg-graphite/[0.72]"
-          />
-        </div>
+      <FaqSchema items={homeFaqs} />
 
-        <div className="shell relative py-24 lg:py-32">
-          <div className="max-w-3xl">
-            <Eyebrow>Scrap metal recycling · Brisbane</Eyebrow>
-            <h1>Your metal is worth more than the bin it&rsquo;s sitting in</h1>
-            <p className="t-lead mt-6 max-w-xl">
-              {company.name} buys, processes and remarkets ferrous and
-              non-ferrous scrap across greater Brisbane. Graded in front of you,
-              weighed on a certified bridge, paid in cash on the spot.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <Button href="/contact">Get a quote</Button>
-              <Button href="/what-we-buy" variant="outlineDark">
-                See what we buy
-              </Button>
+      <section className="on-dark overflow-hidden bg-graphite">
+        <div className="shell grid lg:min-h-[700px] lg:grid-cols-[1.08fr_0.92fr]">
+          <div className="flex items-center py-16 sm:py-20 lg:py-24 lg:pr-16">
+            <div>
+              <Eyebrow>Scrap metal recycling · Brisbane</Eyebrow>
+              <h1 className="home-title max-w-[10ch]">
+                Scrap metal.
+                <span className="block t-accent">Done right.</span>
+              </h1>
+              <p className="t-lead mt-7 max-w-xl t-muted">
+                Clear grading, accurate weights and straightforward payment for
+                ferrous and non-ferrous scrap.
+              </p>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <Button href="/contact">Get a quote</Button>
+                <Button href="/what-we-buy" variant="outlineDark">
+                  What we buy
+                </Button>
+              </div>
+              {company.phone && (
+                <a
+                  href={`tel:${company.phone.replace(/\s/g, "")}`}
+                  className="mt-8 inline-block text-sm font-bold uppercase tracking-[0.12em] t-accent hover:underline"
+                >
+                  Call {company.phoneLabel ?? company.phone}
+                </a>
+              )}
             </div>
+          </div>
+
+          <div className="relative min-h-[380px] lg:min-h-full">
+            <Photo
+              name="yard-grab"
+              priority
+              sizes="(max-width: 1024px) 100vw, 46vw"
+              alt="A material handler moving scrap steel in a Brisbane recycling yard"
+            />
+            <span className="absolute inset-y-0 left-0 hidden w-3 bg-orange lg:block" />
+            <span className="absolute bottom-5 left-5 bg-graphite px-3 py-2 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-white lg:left-8">
+              Brisbane · QLD
+            </span>
           </div>
         </div>
       </section>
 
-      <div className="border-b hair bg-white">
-        <div className="shell flex flex-wrap gap-x-8 gap-y-2 py-4 text-[0.9rem] t-muted">
-          <span>No minimum load</span>
-          <span aria-hidden="true">·</span>
-          <span>Graded before it&rsquo;s tipped</span>
-          <span aria-hidden="true">·</span>
-          <span>Paid cash on the spot</span>
-        </div>
-      </div>
-
-      {/* -------------------------------------------------- what we buy */}
-      <Split
-        photo="cable"
-        side="right"
-        tone="deep"
-        eyebrow="What we buy"
-        title="If it's metal and it's legal, we'll price it"
-      >
-        <p className="t-lead mt-5">
-          Copper, brass, aluminium, lead, stainless, heavy melting steel, cast
-          iron, batteries, motors, cable and e-waste — {gradeCount} grades
-          across three streams.
-        </p>
-        <div className="mt-8">
-          <Button href="/what-we-buy" variant="outline">
-            Explore the materials
-          </Button>
-        </div>
-      </Split>
-
-      {/* --------------------------------------------------- how it works */}
-      <section className="border-t hair bg-paper py-20 lg:py-32">
-        <div className="shell">
-          <div className="rule max-w-3xl">
-            <h2>How a weigh-in works</h2>
-            <p className="t-lead mt-5 t-muted">
-              About fifteen minutes end to end for a ute or trailer load.
-            </p>
-          </div>
-          <div className="mt-12">
-            <Steps items={steps} />
-          </div>
-          {stats.length > 0 && (
-            <div className="mt-16 border-t hair pt-14">
-              <StatBand items={stats} />
-            </div>
+      <section className="bg-orange text-graphite">
+        <div className="shell grid divide-y divide-graphite/25 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          {["No minimum load", "Graded before tipping", "Paid on the spot"].map(
+            (item) => (
+              <p
+                key={item}
+                className="py-5 text-sm font-bold uppercase tracking-[0.08em] sm:px-6 sm:first:pl-0"
+              >
+                {item}
+              </p>
+            ),
           )}
         </div>
       </section>
 
-      {/* ------------------------------------------------- why grading
-          New copy, and deliberately argumentative rather than
-          descriptive. Everything above this point tells someone what
-          happens; this tells them why it is arranged that way, which is
-          the thing that actually decides whether they drive to us or to
-          the yard closer to home.
+      <section className="on-light bg-paper py-16 lg:py-24">
+        <div className="shell">
+          <div className="grid gap-6 lg:grid-cols-[0.85fr_1fr] lg:gap-20">
+            <div>
+              <Eyebrow>What we buy</Eyebrow>
+              <h2>Three streams. One clear process.</h2>
+            </div>
+            <p className="t-lead max-w-2xl self-end t-muted">
+              From a tray of cable to a commercial steel load, we identify the
+              grade before it leaves your vehicle and explain what changes the
+              price.
+            </p>
+          </div>
 
-          Kept free of specific claims — no percentages, no tonnages, no
-          comparisons to named competitors. Every sentence here is true
-          of how the process works, not of numbers nobody has verified. */}
-      <Essay
-        id="grading"
-        eyebrow="Why it works this way"
-        title="Grading in front of you is the whole argument"
-        lead="Almost every dispute in this trade comes from the same place: someone found out what their metal was worth after they had already tipped it."
-        points={[
-          {
-            term: "The load is called before it is tipped",
-            detail:
-              "Once material is on the pile it is mixed with everyone else's and the conversation becomes your memory against ours. Calling the grade while it is still on your vehicle keeps the evidence in front of both of us, which is the only reason the number is arguable at all.",
-          },
-          {
-            term: "Disagreeing is a normal part of it",
-            detail:
-              "Alloys are genuinely hard to identify by eye, and a grader who is never wrong is not being careful, they are guessing confidently. If the call looks wrong to you, ask for the XRF gun. That is what it is there for, and using it costs nothing.",
-          },
-          {
-            term: "Deductions get named, not absorbed",
-            detail:
-              "Attachments, moisture and contamination all reduce what a tonne is actually worth, so they have to come off somewhere. The difference between merchants is whether you are told which deduction applied and why, or simply handed a smaller number at the end.",
-          },
-          {
-            term: "The docket is the record",
-            detail:
-              "Gross weight, tare, net, grade. Written down, printed, and retained by both sides. It is unglamorous, and it is the reason a disagreement three weeks later is a five-minute conversation rather than an argument.",
-          },
-        ]}
-        footer={
-          <Button href="/prices" variant="outline">
-            How grading works
-          </Button>
-        }
-      />
+          <div className="mt-12 border-y-2 border-graphite">
+            {priceGroups.map((group, index) => (
+              <Link
+                key={group.id}
+                href={`/what-we-buy#${group.id}`}
+                className="group grid gap-3 border-b hair py-7 last:border-b-0 sm:grid-cols-[4rem_0.8fr_1.2fr_auto] sm:items-center sm:gap-8"
+              >
+                <span className="text-sm font-bold t-accent">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-[1.45rem] font-bold">{group.title}</h3>
+                <p className="text-[0.98rem] t-muted">{streamCopy[group.title]}</p>
+                <ArrowRight className="h-6 w-6 transition-transform group-hover:translate-x-1" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* ------------------------------------------------ separation
-          Practical guidance rather than positioning. This is the single
-          highest-return thing a seller can do, it costs them nothing to
-          act on, and explaining it honestly is worth more trust than
-          another paragraph about our values. */}
-      <Essay
-        id="separation"
-        eyebrow="Before you load"
-        title="Sorting is the best-paid hour on any scrap job"
-        lead="Nothing else a seller does moves the return as much, and none of it needs equipment you do not already own."
-        points={[
-          {
-            term: "A mixed load pays the rate of its worst part",
-            detail:
-              "This is the rule that surprises people. Copper thrown in with general non-ferrous does not average out — it is graded as the mix. Pulling the copper into its own pile is the difference between two rates, not a slightly better one.",
-          },
-          {
-            term: "Anything that is not the metal is a deduction",
-            detail:
-              "Steel brackets bolted to aluminium, plastic tanks on radiators, timber packed through steel. It all has to be removed at some point, and it is far cheaper to do it with a spanner at your end than to have it taken off the grade at ours.",
-          },
-          {
-            term: "Cable is priced on what is inside it",
-            detail:
-              "Insulated cable is graded by recoverable copper, so heavy power cable and thin data flex are not the same product. Keeping them apart takes a few minutes and stops the good cable being graded down to the level of the poor.",
-          },
-          {
-            term: "Ask before you cut anything unusual",
-            detail:
-              "Some items are worth more intact than as metal, and a few are regulated and must not be cut at all. A photo and thirty seconds of a grader's time is the cheapest possible way to find out which one you are holding.",
-          },
-        ]}
-        footer={
-          <Button href="/what-we-buy" variant="outline">
-            Prep guidance
+      <section className="on-light bg-white py-16 lg:py-24">
+        <div className="shell">
+          <div className="max-w-3xl">
+            <Eyebrow>How it works</Eyebrow>
+            <h2>Three steps. No runaround.</h2>
+          </div>
+          <ol className="mt-12 grid border-y-2 border-graphite md:grid-cols-3 md:divide-x md:divide-graphite/20">
+            {steps.map((step) => (
+              <li key={step.number} className="border-b hair py-8 last:border-b-0 md:border-b-0 md:px-8 md:first:pl-0">
+                <span className="text-sm font-bold t-accent">{step.number}</span>
+                <h3 className="mt-8 font-bold">{step.title}</h3>
+                <p className="mt-3 max-w-sm text-[0.98rem] t-muted">{step.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="on-light border-y hair bg-paper py-16 lg:py-24">
+        <div className="shell">
+          <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+            <div>
+              <Eyebrow>Brisbane metal recycling</Eyebrow>
+              <h2>For one-off loads and ongoing scrap programs.</h2>
+            </div>
+            <div className="space-y-5 self-end text-[1.02rem] leading-relaxed t-muted">
+              <p>
+                MetalBase provides scrap metal recycling for Brisbane
+                households, trades, workshops, construction projects and
+                industrial sites. Every load follows the same process: identify
+                the material, agree on the grade, record the weight and issue a
+                clear docket.
+              </p>
+              <p>
+                You can bring metal directly to the weighbridge or arrange a
+                collection when the volume, access and frequency make a bin the
+                better option. Start with a photo if you are unsure which grade
+                or service fits your load.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12 grid border-y-2 border-graphite md:grid-cols-3 md:divide-x md:divide-graphite/20">
+            {audiences.map((audience) => (
+              <article key={audience.title} className="border-b hair py-8 last:border-b-0 md:border-b-0 md:px-8 md:first:pl-0">
+                <h3 className="text-[1.35rem]">{audience.title}</h3>
+                <p className="mt-4 text-[0.96rem] leading-relaxed t-muted">
+                  {audience.body}
+                </p>
+                <Link
+                  href={audience.href}
+                  className="group mt-6 inline-flex items-center gap-2 text-[0.78rem] font-bold uppercase tracking-[0.08em] t-accent"
+                >
+                  {audience.label}
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Split
+        photo="tipper"
+        side="right"
+        tone="deep"
+        eyebrow="For business"
+        title="Drop it off. Or we’ll collect."
+      >
+        <p className="t-lead mt-5">
+          Bins, scheduled collections and project recovery for workshops,
+          construction sites and industrial operators across South-East
+          Queensland.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Button href="/services">Business services</Button>
+          <Button href="/contact" variant="outlineDark">
+            Book an assessment
           </Button>
-        }
-      />
+        </div>
+      </Split>
+
+      <section className="on-light bg-white py-16 lg:py-24">
+        <div className="shell grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+          <div>
+            <Eyebrow>Common questions</Eyebrow>
+            <h2>Before you bring in a load.</h2>
+            <p className="mt-5 max-w-md text-[1rem] leading-relaxed t-muted">
+              Straight answers about identification, payment, minimum loads and
+              how scrap metal is graded in Queensland.
+            </p>
+            <div className="mt-7">
+              <Button href="/faq" variant="outline">
+                Read all questions
+              </Button>
+            </div>
+          </div>
+          <FaqList items={homeFaqs} />
+        </div>
+      </section>
 
       <CtaBand
-        title="Tell us what you've got and we'll price it"
-        body="A grader comes back inside one business day with indicative rates and a collection window. No obligation, no account required."
+        title="Got metal? Start with a photo."
+        body="Send us a photo and a rough weight. A grader will identify the stream and come back with an indicative rate."
         primary={{ label: "Get a quote", href: "/contact" }}
-        secondary={{ label: "See the rate board", href: "/prices" }}
+        secondary={{ label: "View the rate board", href: "/prices" }}
       />
     </>
   );

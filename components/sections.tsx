@@ -25,7 +25,7 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <section className="on-light border-b hair bg-paper">
+    <section className="on-light border-b-2 border-graphite bg-paper">
       {/* BreadcrumbList markup is emitted here, from the SAME trail the
           <Breadcrumb> below renders. Putting it inside PageHeader means
           every page that shows a trail also describes it to crawlers,
@@ -35,7 +35,7 @@ export function PageHeader({
       <div className="shell pt-6">
         <Breadcrumb trail={trail} />
       </div>
-      <div className="shell pb-14 lg:pb-20">
+      <div className="shell pb-14 lg:pb-16">
         <Eyebrow>{eyebrow}</Eyebrow>
         <h1 className="max-w-4xl">{title}</h1>
         {intro && <p className="t-lead mt-6 max-w-2xl t-muted">{intro}</p>}
@@ -152,10 +152,10 @@ export function Steps({
     <ol className={`grid gap-x-10 gap-y-10 sm:grid-cols-2 ${cols}`}>
       {items.map((s, i) => (
         <li key={s.title} className="border-t-2 border-orange pt-5">
-          <span className="t-num text-[0.95rem] font-semibold t-accent">
+          <span className="t-num text-[0.95rem] font-bold t-accent">
             {String(i + 1).padStart(2, "0")}
           </span>
-          <h3 className="mt-2 text-[1.15rem]">{s.title}</h3>
+          <h3 className="mt-2 text-[1.2rem] font-bold">{s.title}</h3>
           <p className="mt-2.5 text-[0.94rem] leading-relaxed t-muted">{s.body}</p>
         </li>
       ))}
@@ -173,71 +173,12 @@ export function DefinitionRows({
     <dl className="divide-y divide-[color:var(--hair)]">
       {items.map((it) => (
         <div key={it.term} className="grid gap-2 py-6 md:grid-cols-[minmax(0,18rem)_1fr] md:gap-10">
-          <dt className="text-[1.1rem] font-semibold">{it.term}</dt>
+          <dt className="text-[1.1rem] font-bold">{it.term}</dt>
           <dd className="text-[0.98rem] leading-relaxed t-muted">
             {it.detail}
           </dd>
         </div>
       ))}
     </dl>
-  );
-}
-
-/* ------------------------------------------------------------------
-   Essay — the editorial long-form block.
-
-   An asymmetric two-column arrangement: the heading holds the left
-   rail and stays put while the argument scrolls past it on the right.
-   That is the whole device. It works because the eye keeps a fixed
-   reference point for what it is reading about, which a stacked
-   heading loses the moment it scrolls away.
-
-   Points are numbered in the margin rather than bulleted inline. A
-   bullet says "here is a list"; a margin figure says "here is step two
-   of four", which is the right signal for a sequence of reasoning.
-
-   The sticky rail is deliberately lg-only. On a phone there is no
-   second column to be sticky against, and a heading pinned over
-   narrow prose eats the screen it is trying to explain.
-   ------------------------------------------------------------------ */
-
-export function Essay({
-  id,
-  eyebrow,
-  title,
-  lead,
-  points,
-  footer,
-}: {
-  id?: string;
-  eyebrow: string;
-  title: string;
-  lead?: string;
-  points: { term: string; detail: string }[];
-  footer?: ReactNode;
-}) {
-  return (
-    <section id={id} className="on-light scroll-mt-20 border-t hair bg-paper py-20 lg:py-32">
-      <div className="shell grid gap-14 lg:grid-cols-[minmax(0,24rem)_1fr] lg:gap-24">
-        <div className="lg:sticky lg:top-28 lg:self-start">
-          <Eyebrow>{eyebrow}</Eyebrow>
-          <h2 className="mt-3">{title}</h2>
-          {lead && <p className="t-lead measure mt-6 t-muted">{lead}</p>}
-          {footer && <div className="mt-8">{footer}</div>}
-        </div>
-
-        <div className="border-t hair">
-          {points.map((p, i) => (
-            <article key={p.term} className="rise border-b hair py-9 first:pt-9">
-              <p className="marker">{String(i + 1).padStart(2, "0")}</p>
-              <h3 className="mt-3">{p.term}</h3>
-              <p className="measure-wide mt-4 leading-relaxed t-muted">
-                {p.detail}
-              </p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
   );
 }
