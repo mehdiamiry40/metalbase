@@ -36,41 +36,80 @@ disappearing, so you can see what's outstanding.
 
 ## Design system
 
-Built for MetalBase, not borrowed. An earlier version copied Randstad's navy
-`#0F1941` and blue `#2175D9`; carrying two accents made the site read like
-every other corporate-blue trades page, so blue is gone. Orange is now the
-only hue and everything else is a neutral.
+The language is **metrology, not industry**. This business sells a number you
+can trust — weighbridge, XRF gun, grade, docket — so the site is built from
+instruments and spec sheets: hairline rules, tabular figures, monospaced
+labels, numbered sections. Not hi-vis and grit, which is what every other
+yard in the country already looks like.
+
+One structural rule governs every surface decision:
+
+> **Dark is the yard. Light is the record.**
+
+Ink is the default. The light surface is reserved for things that are
+*documents* — the grade ledger, the docket, the glossary, the forms. That is
+why the light/dark rhythm reads as intentional rather than stripey.
 
 | Token | Value |
 |---|---|
-| Paper | `#F6F4F1` — warm off-white, the default surface |
-| Graphite | `#201E1C` — warm near-black, dark bands and body type |
-| White | `#FFFFFF` — cards and raised panels |
-| Orange | `#FF6A1A` — the accent. **Fill only** — 2.61:1 on paper |
-| Rust | `#A83E0C` — accent *text* on light, 5.69:1 on paper |
-| Orange-warm | `#FF8A45` — accent text on graphite, 7.10:1 |
-| Stone | `#5F5B55` — muted text, 6.14:1 on paper |
-| Display | Hanken Grotesk, weight 400, `-0.05em`, **sentence case** |
-| Buttons | 4px radius, solid or 2px outline |
+| Ink | `#0D0F11` — the page, and the default surface |
+| Slab | `#15181B` — raised panel on dark |
+| Shaft | `#1C2023` — wells and inputs on dark |
+| Chalk | `#F4F2ED` — the document surface |
+| White | `#FFFFFF` — the sheet itself: ledgers, dockets |
+| Mist | `#9AA1A8` — muted text on dark, 7.35 on ink |
+| Stone | `#5E5A54` — muted text on light, 6.12 on chalk |
+| Copper | `#D9823F` — the only hue. Text on dark (6.60), **fill only** on light |
+| Copper-hi | `#E89A5C` — brighter on dark (8.42), fill hover |
+| Copper-deep | `#8A431A` — accent *text* on light, 6.48 on chalk |
+| Display | Archivo, weight 500, `-0.035em`, sentence case |
+| Instrument | IBM Plex Mono, tabular figures |
+| Buttons | 2px radius, solid or 2px outline, mono label |
 
-The accent splits in two because `#FF6A1A` cannot carry text on a light
-surface. On paper and white it is fills, rules and keylines; rust does the
-typographic work there, and orange-warm does it on the dark bands. For the
-same reason orange fills carry *graphite* labels, never white (white on
-orange is 2.87:1 and can never pass).
+Copper splits in two because `#D9823F` measures 2.60 on chalk and can never
+carry type there — on light surfaces it is rules, fills and keylines only,
+and copper-deep does the typographic work. For the same reason copper fills
+carry **ink** labels, never white (2.91, unfixable).
 
-One hue. No drop shadows, no rounded cards, no hover lifts. The dominant
-layout unit is a full-bleed 50/50 split. Everything composes from
-`components/sections.tsx` so pages can't drift apart.
+The primary button derives its fill from the surface (`--btn-fill`): copper
+on dark, ink on light. One rule, and a whole class of "the button vanished"
+bugs cannot happen.
 
-Focus rings are surface-aware (`--focus`): graphite on light, orange-warm on
-the dark bands, white over photographs. A single fixed ring colour cannot
-clear 3:1 against both surfaces.
+The mono is a semantic, not a texture: if a value could appear on a printout
+— a grade code, a weight, a unit, a section index, a figure number — it is
+mono and tabular. Prose never is.
 
-**Base styles live in `@layer base`.** Tailwind v4 emits utilities inside a
-cascade layer, and unlayered rules beat layered ones regardless of specificity —
-an unlayered `h2 { font-size }` silently overrides every `text-[…]` utility.
-Keep new element rules inside the layer.
+No drop shadows, no rounded cards, no hover lifts. Everything composes from
+`components/ui.tsx` and `components/sections.tsx` so pages can't drift apart.
+
+Focus rings are surface-aware (`--focus`): copper-hi on dark, ink on light,
+white over photographs. A single fixed ring colour cannot clear 3:1 against
+both surfaces.
+
+### Cascade layers are load-bearing
+
+Tailwind v4 emits utilities inside a cascade layer, and **an unlayered rule
+beats a layered one regardless of specificity**. This has now cost the
+project three separate bugs:
+
+- an unlayered `h2 { font-size }` silently overriding every `text-[…]`
+- an unlayered `.btn { display: inline-flex }` defeating `hidden` on the
+  header's quote button, which rendered it at 390px and gave every page 60px
+  of horizontal overflow on a phone
+- `.t-index` / `.t-spec` letter-spacing quietly beating every `tracking-[…]`
+  written beside them
+
+So: element rules live in `@layer base`, and the hand-written component and
+typography classes live in `@layer components`. Only the surface classes
+(`.on-dark`, `.on-light`, `.over-photo`, `.surface-*`) stay unlayered — they
+carry variables rather than compete with utilities, and they must win.
+
+`lib/theme.test.ts` guards the related failure: Tailwind emits **nothing** for
+a class naming a colour token that doesn't exist, with no build error, so the
+test parses the tokens out of `globals.css` and asserts every colour utility
+in the codebase names a real one. It also asserts the superseded palettes
+(navy/blue, paper/graphite/orange) are gone, since a token that still exists
+but shouldn't is invisible to the rename guard.
 
 ## Enquiry form
 
@@ -128,13 +167,49 @@ Pinned to `next@15.5.22` (React2Shell — CVE-2025-55182 / CVE-2025-66478) plus
 `sharp` and `postcss` overrides. `npm audit`: 0 vulnerabilities. See
 [SECURITY.md](./SECURITY.md) before upgrading Next.js.
 
+## Content
+
+The site's argument is that the useful thing a merchant knows is its *grade
+taxonomy* and its *process*, and that every competitor hides both behind a
+"call for pricing" form. So those are the content, and they live in
+`lib/site.ts`:
+
+| Export | What it drives |
+|---|---|
+| `priceGroups` | 28 grades across three streams, each with the spec that decides it — the `Ledger`, on home and `/prices` |
+| `glossary` | 22 standard trade terms — `/glossary`, plus teasers on `/faq` |
+| `identify` | Field checks for telling metals apart — `/what-we-buy#identify` |
+| `deductions` | What comes off a load and why — `/what-we-buy#deductions` |
+| `merchantQuestions` | Questions worth asking *any* yard — `/about#questions` |
+| `standards` | The legislative framework the trade sits under — `/about#standards` |
+| `serviceAreas` | Collection suburbs — home, `/locations`, `/services` |
+| `audiences` | The home-page router: four ways people arrive |
+| `faqs` | `/faq` page **and** its FAQPage JSON-LD, from one array |
+
+Two rules hold across all of it, and both are load-bearing rather than
+stylistic:
+
+1. **Nothing invents a fact about this business.** Rates, tonnages, licence
+   numbers, diversion percentages and yard addresses are `null` or empty
+   until someone supplies a real one. Generic trade knowledge (what tare
+   means, how HMS grades work, what an XRF gun does) is not a claim about
+   MetalBase and is published freely.
+2. **Payment method is never tied to a legal obligation**, in either
+   direction — see the note in `lib/site.ts`. `lib/site.test.ts` asserts it.
+
 ## Structure
 
 ```
-app/            routes; api/enquiry is the form endpoint
-components/     ui.tsx (primitives) · sections.tsx (page furniture)
-lib/site.ts     all content — nav, grades, services, company details
-lib/photos.ts   photo manifest
+app/                routes; api/enquiry is the form endpoint
+components/ui.tsx        primitives — Button, Callout, Panel, SpecStrip,
+                         ChipList, Index, SectionHead, CtaBand
+components/sections.tsx  page furniture — PageHeader, Essay, Router, Split,
+                         Steps, DefinitionRows, Plate
+components/Ledger.tsx    the grade board
+components/Docket.tsx    the blank weighbridge docket (deliberately empty)
+components/Glossary.tsx  the reference, plus DefinedTermSet markup
+lib/site.ts              all content
+lib/photos.ts            photo manifest
 ```
 
 Almost all copy lives in `lib/site.ts`. Change it there and every page follows.

@@ -31,6 +31,7 @@ const routes: {
   { path: "/prices", priority: 0.8, changeFrequency: "daily" },
   { path: "/services", priority: 0.8, changeFrequency: "monthly" },
   { path: "/locations", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/glossary", priority: 0.6, changeFrequency: "monthly" },
   { path: "/sustainability", priority: 0.6, changeFrequency: "monthly" },
   { path: "/about", priority: 0.6, changeFrequency: "monthly" },
   { path: "/legal", priority: 0.3, changeFrequency: "monthly" },

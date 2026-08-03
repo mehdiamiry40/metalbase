@@ -34,16 +34,22 @@ const volumes = [
   "100+ tonnes / ongoing contract",
 ];
 
+/* The form is a document, so it sits on the light surface — and it says
+   so itself rather than relying on the page to wrap it. It renders
+   inside an ink section on /contact, and a form that inherits `on-dark`
+   is white type in white inputs: legible nowhere, and invisible to
+   every automated check because the colours are inherited rather than
+   declared. */
 const field =
-  "w-full rounded-[4px] border hair bg-paper px-4 py-3 text-[1rem] outline-none transition-colors placeholder:text-stone focus:border-graphite";
-const labelCls = "mb-2 block text-[0.9rem] font-semibold ";
-/* Errors are graphite and bold, not the accent. t-accent resolves to the
+  "w-full rounded-[2px] border hair bg-chalk px-4 py-3 text-[1rem] outline-none transition-colors placeholder:text-stone focus:border-ink";
+const labelCls = "mb-2 block text-[0.9rem] font-semibold";
+/* Errors are ink and bold, not the accent. t-accent resolves to the
    link colour on a light surface, so validation messages were rendering
    in exactly the colour the rest of the site uses for "this is a link" —
-   legible, but saying the wrong thing. A single-accent palette has no red
-   to reach for, so the weight and the orange keyline on the summary do
-   the signalling and the text stays at 15:1. */
-const errCls = "mt-1.5 text-[0.85rem] font-semibold text-graphite";
+   legible, but saying the wrong thing. A single-hue palette has no red
+   to reach for, so the weight and the copper keyline on the summary do
+   the signalling and the text stays at 19:1. */
+const errCls = "mt-1.5 text-[0.85rem] font-semibold text-ink";
 
 type State = "idle" | "sending" | "sent" | "sent-undelivered" | "error";
 
@@ -120,9 +126,11 @@ export default function QuoteForm() {
 
   if (state === "sent" || state === "sent-undelivered") {
     return (
-      <div className="border-2 border-orange bg-white p-10" role="status">
-        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-orange">
-          <Tick className="h-6 w-6 text-white" />
+      <div className="on-light border-2 border-copper bg-white p-10" role="status">
+        {/* Ink on copper, never white: white on this fill measures 2.91
+            and can never pass. Same rule as the primary button. */}
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-copper">
+          <Tick className="h-6 w-6 text-ink" />
         </span>
         <h3 className="mt-5 text-[1.5rem]">Thanks — that&rsquo;s with the trade desk</h3>
         <p className="mt-3 max-w-md leading-relaxed t-muted">
@@ -130,8 +138,8 @@ export default function QuoteForm() {
         </p>
 
         {state === "sent-undelivered" && (
-          <div className="mt-6 border-l-4 border-orange bg-paper p-5">
-            <p className="text-[0.94rem] leading-relaxed ">
+          <div className="callout mt-6">
+            <p className="text-[0.94rem] leading-relaxed">
               <strong className="font-semibold">Heads up:</strong> no email or
               webhook is configured on this deployment yet, so your enquiry was
               logged on the server rather than sent to anyone.
@@ -164,7 +172,7 @@ export default function QuoteForm() {
       ref={formRef}
       onSubmit={onSubmit}
       noValidate
-      className="border hair bg-white p-7 lg:p-9"
+      className="on-light border hair bg-white p-7 lg:p-9"
     >
       {/* Announced to screen readers without stealing focus. */}
       <p aria-live="polite" className="sr-only">
@@ -176,7 +184,7 @@ export default function QuoteForm() {
       </p>
 
       {state === "error" && (
-        <div role="alert" className="mb-6 border-l-4 border-orange bg-paper p-4 text-[0.94rem]">
+        <div role="alert" className="callout mb-6 text-[0.94rem]">
           {message}
         </div>
       )}
@@ -278,10 +286,10 @@ export default function QuoteForm() {
                   type="button"
                   aria-pressed={on}
                   onClick={() => toggle(m)}
-                  className={`min-h-11 rounded-[4px] border px-3.5 py-2 text-[0.88rem] font-medium transition-colors ${
+                  className={`min-h-11 rounded-[2px] border px-3.5 py-2 text-[0.88rem] font-medium transition-colors ${
                     on
-                      ? "border-orange bg-orange text-graphite"
-                      : "hair t-muted hover:border-orange hover:text-[color:var(--accent-text)]"
+                      ? "border-copper bg-copper text-ink"
+                      : "hair t-muted hover:border-copper hover:text-[color:var(--accent-text)]"
                   }`}
                 >
                   {m}
@@ -312,10 +320,13 @@ export default function QuoteForm() {
       </div>
 
       <div className="mt-8 flex flex-wrap items-center gap-5">
+        {/* The shared .btn rather than a bespoke fill: btn-solid derives
+            its colours from the surface, so the submit button cannot
+            lose contrast with the sheet it sits on. */}
         <button
           type="submit"
           disabled={busy}
-          className="inline-flex items-center gap-2 rounded-[4px] border-2 border-orange bg-orange px-7 py-3 text-[1.0625rem] font-normal text-graphite transition-colors hover:bg-orange-deep disabled:cursor-not-allowed disabled:opacity-60"
+          className="btn btn-solid disabled:cursor-not-allowed disabled:opacity-60"
         >
           {busy ? "Sending…" : "Send enquiry"}
           {!busy && <ArrowRight className="h-4 w-4" />}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader } from "@/components/sections";
-import { Pending, Section } from "@/components/ui";
+import { Callout, Pending, Section } from "@/components/ui";
 import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -70,18 +70,15 @@ export default function LegalPage() {
       />
 
       <Section>
-        <div className="border-l-4 border-orange bg-paper p-6">
-          <p className="text-[0.95rem] leading-relaxed ">
-            <strong className="font-semibold">Draft wording.</strong> This is a
-            starting point, not legal advice. Have it reviewed by a lawyer
-            before you rely on it — particularly the terms of trade and the
-            Second-hand Dealers and Pawnbrokers Act references.
-          </p>
-        </div>
+        <Callout label="Draft wording">
+          This is a starting point, not legal advice. Have it reviewed by a
+          lawyer before you rely on it — particularly the terms of trade and
+          the Second-hand Dealers and Pawnbrokers Act references.
+        </Callout>
 
         <div className="mt-14 grid gap-12 lg:grid-cols-[minmax(0,14rem)_1fr] lg:gap-16">
           <nav aria-label="On this page" className="lg:sticky lg:top-24 lg:self-start">
-            <p className="t-eyebrow t-muted">On this page</p>
+            <p className="t-index t-muted">On this page</p>
             <ul className="mt-4 space-y-2.5">
               {sections.map((s) => (
                 <li key={s.id}>

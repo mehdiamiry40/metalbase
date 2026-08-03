@@ -3,18 +3,10 @@ import type { ReactNode } from "react";
 
 /* ------------------------------- icons ----------------------------- */
 
-export function Chevron({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <path d="M9 4.5l7.5 7.5L9 19.5" stroke="currentColor" strokeWidth="1.8" />
-    </svg>
-  );
-}
-
 export function ArrowRight({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <path d="M3 12h17M13.5 5.5L20 12l-6.5 6.5" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M3 12h17M13.5 5.5L20 12l-6.5 6.5" stroke="currentColor" strokeWidth="1.6" />
     </svg>
   );
 }
@@ -28,30 +20,45 @@ export function Tick({ className = "" }: { className?: string }) {
 }
 
 /* ------------------------------- logo ------------------------------
-   Stacked bars — billets on a rack, cut at an angle like sheared
-   section. Nothing borrowed from the reference site.
+   A dimension line beside three stacked sections.
+
+   The old mark was three orange bars — generic enough to belong to any
+   trade business. This one says what the company actually does: the
+   left element is a dimension line lifted straight off an engineering
+   drawing (end ticks, measure rail), and the right is material, in
+   section, being measured by it.
+
+   Copper is on the instrument, not the metal, because measuring is the
+   part being sold.
    ------------------------------------------------------------------ */
 
 /**
- * The mark is orange stepping down into the surface colour. The
- * wordmark takes the surface colour too, so it is graphite on the paper
- * header and white on a graphite footer without needing a variant prop —
- * the variant approach previously shipped an invisible logo.
- *
- * The top bar is the full accent and the second is the same hue lifted,
- * which reads as one colour in two tones on both surfaces. The old mark
- * put blue above orange; with blue out of the palette the bars carry the
- * single accent instead of two competing ones.
+ * The bars take the surface colour via `currentColor`, so the mark is
+ * ink on a light header and white on a dark one with no variant prop.
+ * The variant approach previously shipped an invisible logo, so the
+ * component deliberately has no way to get the surface wrong.
  */
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <svg viewBox="0 0 32 28" className="h-[26px] w-[30px] shrink-0" aria-hidden="true">
-        <path d="M4 4h18l-4 6H0z" fill="#ff6a1a" />
-        <path d="M7 11h18l-4 6H3z" fill="#ff8a45" />
-        <path d="M10 18h18l-4 6H6z" fill="currentColor" opacity="0.35" />
+      <svg
+        viewBox="0 0 30 28"
+        className="h-[26px] w-[28px] shrink-0"
+        aria-hidden="true"
+      >
+        {/* dimension line — the instrument */}
+        <g stroke="#d9823f" strokeWidth="1.6">
+          <path d="M4 5.5v17" />
+          <path d="M1 5.5h6M1 22.5h6" />
+        </g>
+        {/* material in section */}
+        <g fill="currentColor">
+          <rect x="11" y="4.5" width="18" height="5" opacity="0.95" />
+          <rect x="11" y="11.5" width="13" height="5" opacity="0.7" />
+          <rect x="11" y="18.5" width="16" height="5" opacity="0.45" />
+        </g>
       </svg>
-      <span className="text-[1.4rem] font-medium leading-none tracking-[-0.05em]">
+      <span className="text-[1.3rem] font-semibold leading-none tracking-[-0.035em]">
         MetalBase
       </span>
     </span>
@@ -59,27 +66,21 @@ export function Logo({ className = "" }: { className?: string }) {
 }
 
 /* ------------------------------ buttons ----------------------------
-   Square-ish and solid. Industrial rather than corporate-soft.
+   Styling lives in globals.css because the fill is surface-derived —
+   see the .btn block there. This component only picks a variant.
    ------------------------------------------------------------------ */
 
-/* 4px radius, weight 400, 2px border — measured off the reference,
-   which uses quiet rectangular buttons rather than bold pills. */
-const btnBase =
-  "inline-flex items-center justify-center gap-2 rounded-[4px] border-2 px-7 py-3 text-[1.0625rem] font-normal transition-colors duration-150";
-
-const variants: Record<string, string> = {
-  /* The CTA. Orange fill carries graphite at 5.80 — white on orange is
-     2.87 and can never pass, which is why the label is graphite. */
-  primary: "border-orange bg-orange text-graphite hover:border-orange-deep hover:bg-orange-deep",
-  /* Outlines invert on hover so the change is unmistakable. */
-  outline: "border-graphite text-graphite hover:bg-graphite hover:text-white",
-  outlineDark: "border-white text-white hover:bg-white hover:text-graphite",
-};
+const variants = {
+  /** Copper on dark, ink on light. Always contrasts with its band. */
+  solid: "btn-solid",
+  /** Outlined in the surface colour; inverts on hover. */
+  ghost: "btn-ghost",
+} as const;
 
 export function Button({
   href,
   children,
-  variant = "primary",
+  variant = "solid",
   className = "",
 }: {
   href: string;
@@ -88,7 +89,7 @@ export function Button({
   className?: string;
 }) {
   return (
-    <Link href={href} className={`${btnBase} ${variants[variant]} ${className}`}>
+    <Link href={href} className={`btn ${variants[variant]} ${className}`}>
       {children}
     </Link>
   );
@@ -107,48 +108,82 @@ export function ArrowLink({
   tone?: "base" | "accent";
   className?: string;
 }) {
-  const colour = tone === "accent" ? "t-accent" : "";
   return (
     <Link
       href={href}
-      className={`group inline-flex items-baseline gap-2 text-[0.98rem] font-semibold ${colour} ${className}`}
+      className={`group inline-flex items-baseline gap-2 text-[0.95rem] font-semibold ${
+        tone === "accent" ? "t-accent" : ""
+      } ${className}`}
     >
       <span className="u-link">{children}</span>
-      <ArrowRight className="h-[15px] w-[15px] shrink-0 translate-y-[2px] transition-transform duration-200 group-hover:translate-x-1" />
+      <ArrowRight className="h-[14px] w-[14px] shrink-0 translate-y-[2px] transition-transform duration-200 group-hover:translate-x-1" />
     </Link>
   );
 }
 
-/* ------------------------------ layout ----------------------------- */
+/* ------------------------------ surfaces ---------------------------
+   Every band declares which of the two surfaces it is. Dark is the
+   yard; light is the record. See the surface note in globals.css —
+   the light tones are for things that are documents.
+   ------------------------------------------------------------------ */
 
-/**
- * Surface tones. Each sets its own background AND the text colours
- * that go with it, via .on-light / .on-dark. Body and muted colours
- * are never set per element — doing that is precisely how the
- * dark-on-dark bugs got in last time.
- */
-const tones: Record<string, string> = {
-  base: "on-light bg-paper", // the page
-  raised: "on-light border-y hair bg-white", // cards / lifted bands
-  deep: "on-dark bg-graphite", // the dark band
-  accent: "on-light bg-orange", // orange band, graphite type
-};
+const tones = {
+  ink: "on-dark bg-ink", // the page
+  slab: "on-dark bg-slab", // raised panel on dark
+  chalk: "on-light bg-chalk", // a document
+  sheet: "on-light bg-white", // the sheet itself — ledgers, dockets
+} as const;
+
+export type Tone = keyof typeof tones;
+
+export function toneClass(tone: Tone) {
+  return tones[tone];
+}
 
 export function Section({
   children,
   className = "",
-  tone = "base",
+  tone = "ink",
   id,
 }: {
   children: ReactNode;
   className?: string;
-  tone?: keyof typeof tones;
+  tone?: Tone;
   id?: string;
 }) {
   return (
-    <section id={id} className={`${tones[tone]} py-20 lg:py-32 ${className}`}>
+    <section
+      id={id}
+      className={`${tones[tone]} scroll-mt-20 border-t hair py-20 lg:py-28 ${className}`}
+    >
       <div className="shell">{children}</div>
     </section>
+  );
+}
+
+/* ------------------------------ headings ---------------------------
+   The section index is the device that ties the whole site together:
+   every major band is numbered like a clause in a spec, in mono, above
+   a full-width hairline. It costs nothing and it is most of the reason
+   the pages read as one document rather than a stack of templates.
+   ------------------------------------------------------------------ */
+
+export function Index({
+  n,
+  label,
+  className = "",
+}: {
+  /** Section number. Rendered zero-padded. */
+  n: number;
+  label: string;
+  className?: string;
+}) {
+  return (
+    <p className={`t-index flex items-center gap-3 ${className}`}>
+      <span className="t-accent">§&nbsp;{String(n).padStart(2, "0")}</span>
+      <span aria-hidden="true" className="h-px w-6 bg-[color:var(--hair)]" />
+      <span className="t-muted">{label}</span>
+    </p>
   );
 }
 
@@ -160,27 +195,36 @@ export function Eyebrow({
   tone?: "accent" | "muted";
 }) {
   return (
-    <p className={`t-eyebrow mb-3 ${tone === "muted" ? "t-muted" : "t-accent"}`}>
+    <p className={`t-index mb-4 ${tone === "muted" ? "t-muted" : "t-accent"}`}>
       {children}
     </p>
   );
 }
 
 export function SectionHead({
+  index,
   eyebrow,
   title,
   intro,
-
+  className = "",
 }: {
+  index?: number;
   eyebrow?: string;
   title: string;
   intro?: string;
+  className?: string;
 }) {
   return (
-    <div className="mb-12 max-w-3xl">
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <h2>{title}</h2>
-      {intro && <p className="t-lead mt-5 t-muted">{intro}</p>}
+    <div className={`mb-12 ${className}`}>
+      {index !== undefined && eyebrow ? (
+        <div className="mb-8 border-b hair pb-4">
+          <Index n={index} label={eyebrow} />
+        </div>
+      ) : (
+        eyebrow && <Eyebrow>{eyebrow}</Eyebrow>
+      )}
+      <h2 className="max-w-3xl">{title}</h2>
+      {intro && <p className="t-lead measure-wide mt-6 t-muted">{intro}</p>}
     </div>
   );
 }
@@ -197,8 +241,8 @@ export function StatBand({
   return (
     <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
       {items.map((s) => (
-        <div key={s.label} className="border-t-2 border-orange pt-5">
-          <p className="t-num text-[2.5rem] font-medium leading-none ">
+        <div key={s.label} className="border-t-2 border-copper pt-5">
+          <p className="mono text-[2.5rem] font-medium leading-none tracking-[-0.04em]">
             {s.value}
           </p>
           <p className="mt-3 text-[0.92rem] leading-snug t-muted">{s.label}</p>
@@ -208,9 +252,136 @@ export function StatBand({
   );
 }
 
-export function Breadcrumb({ trail }: { trail: { label: string; href?: string }[] }) {
+/* ------------------------------------------------------------------
+   Instrument strip.
+
+   Three or four measurements set as readouts, divided by the hairline
+   grid rather than boxed as cards. This started life inline in the
+   hero; it is a component because it is the site's clearest single
+   gesture — facts stated as instrument output — and it belongs on more
+   than one page.
+
+   `surface` names the band the strip is sitting on, because the cells
+   paint themselves with it. Getting it wrong is visible immediately
+   rather than silently wrong, which is the point of naming it.
+   ------------------------------------------------------------------ */
+
+const surfaces = {
+  ink: "",
+  slab: "surface-slab",
+  shaft: "surface-shaft",
+  chalk: "",
+  sheet: "surface-sheet",
+} as const;
+
+export function SpecStrip({
+  items,
+  surface = "ink",
+  className = "",
+}: {
+  items: { k: string; v: string }[];
+  surface?: keyof typeof surfaces;
+  className?: string;
+}) {
+  const cols =
+    items.length % 3 === 0
+      ? "grid-cols-1 sm:grid-cols-3"
+      : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4";
   return (
-    <nav aria-label="Breadcrumb" className="mb-7 text-[0.85rem]">
+    <dl className={`ruled ${surfaces[surface]} ${cols} ${className}`}>
+      {items.map((s) => (
+        <div key={s.k} className="px-4 py-4">
+          <dt className="t-spec uppercase tracking-[0.1em] t-muted">{s.k}</dt>
+          <dd className="mono mt-2 text-[0.95rem] font-medium leading-tight">
+            {s.v}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+/* ------------------------------------------------------------------
+   Callout.
+
+   Replaces four separate hand-rolled "left border and a tinted box"
+   panels that had drifted into three different colours and two
+   different paddings. The keyline is copper on both surfaces because
+   it carries no text — see the contrast note in globals.css.
+   ------------------------------------------------------------------ */
+
+export function Callout({
+  label,
+  children,
+  className = "",
+}: {
+  /** Optional mono label above the text. */
+  label?: string;
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`callout ${className}`}>
+      {label && (
+        <p className="t-spec mb-2 uppercase tracking-[0.12em] t-accent">
+          {label}
+        </p>
+      )}
+      <div className="text-[0.95rem] leading-relaxed t-muted">{children}</div>
+    </div>
+  );
+}
+
+/** A bordered box. Square, hairline, no shadow — the site has none. */
+export function Panel({
+  children,
+  id,
+  className = "",
+}: {
+  children: ReactNode;
+  id?: string;
+  className?: string;
+}) {
+  return (
+    <div id={id} className={`border hair p-7 ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+/**
+ * Bordered labels. Used for yard features and suburb lists — sets of
+ * short strings where a bulleted column would be four times the height
+ * and no clearer.
+ */
+export function ChipList({
+  items,
+  className = "",
+}: {
+  items: string[];
+  className?: string;
+}) {
+  return (
+    <ul className={`flex flex-wrap gap-2 ${className}`}>
+      {items.map((i) => (
+        <li
+          key={i}
+          className="border hair px-3 py-1.5 text-[0.86rem] leading-snug t-muted"
+        >
+          {i}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export function Breadcrumb({
+  trail,
+}: {
+  trail: { label: string; href?: string }[];
+}) {
+  return (
+    <nav aria-label="Breadcrumb" className="t-spec mb-8">
       <ol className="flex flex-wrap items-center gap-2 t-muted">
         {trail.map((t, i) => (
           <li key={t.label} className="flex items-center gap-2">
@@ -220,7 +391,7 @@ export function Breadcrumb({ trail }: { trail: { label: string; href?: string }[
                 {t.label}
               </Link>
             ) : (
-              <span className="">{t.label}</span>
+              <span>{t.label}</span>
             )}
           </li>
         ))}
@@ -241,27 +412,31 @@ export function CtaBand({
   secondary?: { label: string; href: string };
 }) {
   return (
-    <section className="on-dark bg-graphite">
-      <div className="shell py-20 lg:py-32">
-        <div className="rule" />
-        <h2 className="max-w-3xl">{title}</h2>
-        <p className="t-lead mt-5 max-w-2xl t-muted">{body}</p>
-        <div className="mt-9 flex flex-wrap gap-4">
-          <Button href={primary.href} variant="primary">
-            {primary.label}
-          </Button>
-          {secondary && (
-            <Button href={secondary.href} variant="outlineDark">
-              {secondary.label}
-            </Button>
-          )}
+    <section className="on-dark border-t hair bg-slab">
+      <div className="shell py-20 lg:py-28">
+        <div className="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-20">
+          <div>
+            <span aria-hidden="true" className="mb-8 block h-[3px] w-9 bg-copper" />
+            <h2>{title}</h2>
+          </div>
+          <div>
+            <p className="measure t-muted">{body}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href={primary.href}>{primary.label}</Button>
+              {secondary && (
+                <Button href={secondary.href} variant="ghost">
+                  {secondary.label}
+                </Button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/** A bulleted list with orange ticks — used across service and info pages. */
+/** A bulleted list with copper ticks. */
 export function TickList({
   items,
   className = "",
@@ -273,8 +448,8 @@ export function TickList({
     <ul className={`space-y-3 ${className}`}>
       {items.map((i) => (
         <li key={i} className="flex items-start gap-3">
-          <Tick className="mt-1 h-4 w-4 shrink-0 t-accent" />
-          <span className="">{i}</span>
+          <Tick className="mt-1.5 h-3.5 w-3.5 shrink-0 t-accent" />
+          <span>{i}</span>
         </li>
       ))}
     </ul>
@@ -283,15 +458,12 @@ export function TickList({
 
 /**
  * Shown where real data has not been supplied yet. Honest, not fake.
- * The badge takes its colours from the surface (t-muted plus the orange
- * keyline), so one skin covers paper, white and graphite alike — the
- * muted tone clears AA on the lightest of the three (6.7:1 on white).
+ * Development only — see DataRow below for why.
  */
 export function Pending({ children }: { children: ReactNode }) {
-  // Development only. See DataRow below for why.
   if (process.env.NODE_ENV === "production") return null;
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-[4px] border border-dashed border-orange px-2 py-0.5 text-[0.82rem] t-muted">
+    <span className="t-spec inline-flex items-center gap-1.5 rounded-[2px] border border-dashed border-copper px-2 py-0.5 t-muted">
       {children}
     </span>
   );
@@ -326,8 +498,8 @@ export function DataRow({
   if (!value) {
     return process.env.NODE_ENV === "production" ? null : (
       <div>
-        <dt className="t-muted">{label}</dt>
-        <dd className="mt-0.5">
+        <dt className="t-spec t-muted">{label}</dt>
+        <dd className="mt-1">
           <Pending>{label} — not set</Pending>
         </dd>
       </div>
@@ -335,8 +507,8 @@ export function DataRow({
   }
   return (
     <div>
-      <dt className="t-muted">{label}</dt>
-      <dd className="mt-0.5">{children}</dd>
+      <dt className="t-spec t-muted">{label}</dt>
+      <dd className="mt-1">{children}</dd>
     </div>
   );
 }

@@ -6,18 +6,17 @@ import { company, nav } from "@/lib/site";
 import { Logo } from "@/components/ui";
 
 /* ------------------------------------------------------------------
-   This was a mega-menu: five disclosure panels holding 74 links, with
-   aria-expanded/aria-controls wiring, Escape handling, click-outside
-   and focus-out listeners, plus a parallel mobile accordion with its
-   own id scheme.
+   Four plain links, so there is no disclosure state to manage — no
+   aria-expanded wiring, no click-outside listener, no parallel mobile
+   accordion. The mobile menu is a list.
 
-   All of that machinery existed to manage a problem the site did not
-   need to have. Four plain links need no disclosure state, so the
-   state, the three document-level listeners and both id schemes are
-   gone with it. The mobile menu is now a list, not an accordion.
+   Two behaviours are worth the client component:
 
-   The one behaviour worth keeping: the header sits flush at rest and
-   only separates itself from the page once you have scrolled.
+   1. The header sits flush at rest and only draws its hairline once
+      you have scrolled, so the page opens without a line across it.
+   2. The phone number is the primary action on a trade site and sits
+      in the bar at every width above 380px. Someone standing next to
+      a pile of copper wants to call, not to browse.
    ------------------------------------------------------------------ */
 
 export default function Header() {
@@ -43,16 +42,16 @@ export default function Header() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, []);
 
+  const tel = company.phone?.replace(/\s/g, "");
+
   return (
-    <header className="on-light sticky top-0 z-50 bg-paper">
+    <header className="on-dark sticky top-0 z-50 bg-ink/95 backdrop-blur">
       <div
-        className={`bg-paper transition-shadow duration-200 ${
-          scrolled
-            ? "border-b hair"
-            : "border-b border-transparent"
+        className={`transition-colors duration-200 ${
+          scrolled ? "border-b hair" : "border-b border-transparent"
         }`}
       >
-        <div className="shell flex h-[70px] items-center justify-between gap-8">
+        <div className="shell flex h-[68px] items-center justify-between gap-6">
           <Link
             href="/"
             aria-label="MetalBase home"
@@ -61,30 +60,36 @@ export default function Header() {
             <Logo />
           </Link>
 
-          <nav aria-label="Main" className="hidden items-center gap-9 lg:flex">
+          <nav aria-label="Main" className="hidden items-center gap-8 lg:flex">
             {nav.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className="whitespace-nowrap text-[0.95rem] hover:text-[color:var(--accent-text)]"
+                className="whitespace-nowrap text-[0.94rem] hover:text-[color:var(--accent-text)]"
               >
                 {item.label}
               </Link>
             ))}
           </nav>
 
-          <div className="flex items-center gap-5">
-            {company.phone && (
+          <div className="flex items-center gap-3">
+            {tel && (
               <a
-                href={`tel:${company.phone.replace(/\s/g, "")}`}
-                className="hidden whitespace-nowrap text-[0.95rem] font-medium hover:text-[color:var(--accent-text)] sm:inline"
+                href={`tel:${tel}`}
+                className="mono hidden min-h-11 items-center whitespace-nowrap px-1 text-[0.95rem] font-medium tracking-[-0.01em] hover:text-[color:var(--accent-text)] min-[380px]:inline-flex"
               >
                 {company.phoneLabel ?? company.phone}
               </a>
             )}
+            {/* The `!` prefixes these three utilities used to carry were
+                a symptom, not a fix: .btn was unlayered and beating
+                every utility on the element, `hidden` included, so the
+                button rendered at 390px and shoved the phone number off
+                the screen. .btn sits in @layer components now, so plain
+                utilities win and `hidden` does what it says. */}
             <Link
               href="/contact"
-              className="hidden min-h-11 items-center rounded-[4px] bg-orange px-5 py-2.5 text-[0.9rem] font-semibold text-graphite transition-colors hover:bg-orange-deep sm:inline-flex"
+              className="btn btn-solid hidden min-h-[2.6rem] px-5 py-2 text-[0.75rem] sm:inline-flex"
             >
               Get a quote
             </Link>
@@ -97,13 +102,13 @@ export default function Header() {
               className="-mr-1 flex h-11 w-11 flex-col items-center justify-center gap-[6px] lg:hidden"
             >
               <span
-                className={`block h-[2px] w-6 bg-graphite transition ${mobileOpen ? "translate-y-2 rotate-45" : ""}`}
+                className={`block h-[2px] w-6 bg-white transition ${mobileOpen ? "translate-y-2 rotate-45" : ""}`}
               />
               <span
-                className={`block h-[2px] w-6 bg-graphite transition ${mobileOpen ? "opacity-0" : ""}`}
+                className={`block h-[2px] w-6 bg-white transition ${mobileOpen ? "opacity-0" : ""}`}
               />
               <span
-                className={`block h-[2px] w-6 bg-graphite transition ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`}
+                className={`block h-[2px] w-6 bg-white transition ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`}
               />
             </button>
           </div>
@@ -113,7 +118,7 @@ export default function Header() {
       <div
         id={`${uid}-mobile`}
         hidden={!mobileOpen}
-        className="border-b hair bg-paper lg:hidden"
+        className="border-b hair bg-ink lg:hidden"
       >
         <nav aria-label="Main, mobile" className="shell py-2">
           {nav.map((item) => (
@@ -121,15 +126,18 @@ export default function Header() {
               key={item.label}
               href={item.href}
               onClick={() => setMobileOpen(false)}
-              className="block border-b hair py-4 text-[1.05rem]"
+              className="flex items-center justify-between border-b hair py-4 text-[1.05rem]"
             >
               {item.label}
+              <span aria-hidden="true" className="t-spec t-accent">
+                →
+              </span>
             </Link>
           ))}
           <Link
             href="/contact"
             onClick={() => setMobileOpen(false)}
-            className="my-6 inline-block rounded-[4px] bg-orange px-7 py-3.5 font-semibold text-graphite"
+            className="btn btn-solid my-6 w-full"
           >
             Get a quote
           </Link>

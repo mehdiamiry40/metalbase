@@ -1,20 +1,73 @@
 import type { Metadata } from "next";
-import { PageHeader, Split, Steps } from "@/components/sections";
-import { Button, CtaBand, Eyebrow, Section, TickList } from "@/components/ui";
-import { company, locations } from "@/lib/site";
+import { DefinitionRows, PageHeader, Split, Steps } from "@/components/sections";
+import {
+  ArrowLink,
+  Button,
+  Callout,
+  ChipList,
+  CtaBand,
+  Panel,
+  Section,
+  SectionHead,
+  TickList,
+} from "@/components/ui";
+import { locations, serviceAreas } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/locations" },
   title: "Yards & How to Sell Your Scrap — Brisbane",
   description:
-    "How a weigh-in works at MetalBase, what ID to bring, how you get paid in cash on the spot, and where to find us.",
+    "How a weigh-in works at MetalBase, what ID to bring, what a working yard is like, how you get paid in cash on the spot, and where we collect across Brisbane.",
 };
 
 const steps = [
-  { title: "Drive on", body: "Follow the line to the weighbridge. No appointment, no booking, no minimum load. Keep your window down and a spotter will direct you." },
-  { title: "Weigh in", body: "Gross weight recorded, photo ID scanned, vehicle registration logged. About ninety seconds." },
-  { title: "Get graded", body: "A grader inspects the load and tells you the grade before you tip. If you disagree, ask for the XRF gun — that's what it's there for." },
-  { title: "Tip and weigh out", body: "Unload in the bay you're directed to. Tare on the way out, docket printed with net weight, grade and rate." },
+  {
+    title: "Drive on",
+    body: "Follow the line to the weighbridge. No appointment, no booking, no minimum load. Keep your window down and a spotter will direct you.",
+  },
+  {
+    title: "Weigh in",
+    body: "Gross weight recorded, photo ID scanned, vehicle registration logged. About ninety seconds.",
+  },
+  {
+    title: "Get graded",
+    body: "A grader inspects the load and tells you the grade before you tip. If you disagree, ask for the XRF gun — that's what it's there for.",
+  },
+  {
+    title: "Tip and weigh out",
+    body: "Unload in the bay you're directed to. Tare on the way out, docket printed with net weight, grade and rate.",
+  },
+];
+
+/* Written for someone who has never driven into an industrial site.
+   Most first-time sellers are nervous about exactly this and ask none
+   of it out loud, which is a good reason to answer it in writing. */
+const onSite = [
+  {
+    term: "Stay in the vehicle until someone waves you on",
+    detail:
+      "The weighbridge queue shares ground with material handlers and trucks that cannot see a person standing beside a ute. A spotter will bring you forward and tell you where to stop.",
+  },
+  {
+    term: "Closed shoes, and cover your legs",
+    detail:
+      "Thongs and shorts are the one thing that will genuinely get you turned around at the gate. Hi-vis and eye protection are provided if you do not have your own.",
+  },
+  {
+    term: "Passengers, kids and dogs stay in the vehicle",
+    detail:
+      "Not a formality. A yard has suspended loads, moving plant and sharp material at ankle height, and none of it is fenced off the way a retail site would be.",
+  },
+  {
+    term: "You unload your own load",
+    detail:
+      "In the bay you are directed to, at your own pace. If it is too heavy to handle by hand, say so at the bridge and we will put a machine on it rather than watch you hurt yourself.",
+  },
+  {
+    term: "Ask before you photograph anything",
+    detail:
+      "Other people's vehicles, loads and paperwork are on site. Your own load, your own docket and your own material are entirely your business.",
+  },
 ];
 
 export default function LocationsPage() {
@@ -23,7 +76,7 @@ export default function LocationsPage() {
       <PageHeader
         eyebrow="Sell your scrap"
         title="Drive on, weigh in, get paid"
-        intro="No appointment and no minimum load. Here is exactly how it works, what to bring, and how the money reaches you."
+        intro="No appointment and no minimum load. Here is exactly how it works, what to bring, what a working yard is actually like, and how the money reaches you."
         trail={[{ label: "Home", href: "/" }, { label: "Sell your scrap" }]}
       >
         {/* Second button was an in-page anchor to #id. */}
@@ -32,28 +85,24 @@ export default function LocationsPage() {
 
       {/* yards -------------------------------------------------------- */}
       <Section>
-        <div className="rule max-w-3xl">
-          <h2>Where to find us</h2>
-        </div>
+        <SectionHead index={1} eyebrow="Yards" title="Where to find us" />
         {locations.length > 0 ? (
-          <div className="mt-10 divide-y divide-[color:var(--hair)] border-y hair">
+          <div className="divide-y divide-[color:var(--hair)] border-y hair">
             {locations.map((l) => (
-              <div key={l.id} id={l.id} className="grid scroll-mt-20 gap-4 py-8 md:grid-cols-[minmax(0,18rem)_1fr] md:gap-12">
+              <div
+                key={l.id}
+                id={l.id}
+                className="grid scroll-mt-20 gap-4 py-8 md:grid-cols-[minmax(0,18rem)_1fr] md:gap-12"
+              >
                 <div>
                   <h3>{l.name}</h3>
-                  <p className="t-eyebrow mt-2 t-accent">{l.role}</p>
+                  <p className="t-index mt-2 t-accent">{l.role}</p>
                 </div>
                 <div className="space-y-3">
                   {l.address && <p className="text-[1.02rem]">{l.address}</p>}
                   {l.hours && <p className="t-muted">{l.hours}</p>}
                   {l.features.length > 0 && (
-                    <ul className="flex flex-wrap gap-2 pt-1">
-                      {l.features.map((f) => (
-                        <li key={f} className="border hair px-3 py-1 text-[0.86rem] t-muted">
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
+                    <ChipList className="pt-1" items={l.features} />
                   )}
                   {l.address && (
                     <a
@@ -70,15 +119,15 @@ export default function LocationsPage() {
             ))}
           </div>
         ) : (
-          <div className="mt-10 border-2 border-dashed hair p-8">
-            <p className="t-eyebrow t-accent">Not yet published</p>
-            <p className="mt-3 max-w-2xl text-[0.98rem] leading-relaxed t-muted">
+          <div className="border-2 border-dashed hair p-8">
+            <p className="t-index t-accent">Not yet published</p>
+            <p className="measure-wide mt-3 text-[0.98rem] leading-relaxed t-muted">
               Yard addresses and opening hours will be listed here once sites are
               confirmed. We&rsquo;d rather leave this blank than send someone to an
               address that isn&rsquo;t ours.
             </p>
             <div className="mt-6">
-              <Button href="/contact" variant="outline">
+              <Button href="/contact" variant="ghost">
                 Ask where to bring a load
               </Button>
             </div>
@@ -87,28 +136,27 @@ export default function LocationsPage() {
       </Section>
 
       {/* how it works ------------------------------------------------- */}
-      <section id="how-it-works" className="scroll-mt-20 bg-paper py-20 lg:py-32">
-        <div className="shell">
-          <div className="rule max-w-3xl">
-            <h2>How a weigh-in works</h2>
-            <p className="t-lead mt-5 t-muted">
-              About fifteen minutes end to end for a ute or trailer load.
-            </p>
-          </div>
-          <div className="mt-12">
-            <Steps items={steps} />
-          </div>
-        </div>
-      </section>
+      <Section id="how-it-works" tone="slab" className="scroll-mt-20">
+        <SectionHead
+          index={2}
+          eyebrow="The weigh-in"
+          title="How a weigh-in works"
+          intro="About fifteen minutes end to end for a ute or trailer load."
+        />
+        <Steps items={steps} />
+      </Section>
 
       {/* id ----------------------------------------------------------- */}
       <Section id="id" className="scroll-mt-20">
+        <SectionHead
+          index={3}
+          eyebrow="Before you come in"
+          title="What to bring with you"
+          className="mb-10"
+        />
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           <div>
-            <Eyebrow>Before you come in</Eyebrow>
-            <h2>What to bring with you</h2>
             <TickList
-              className="mt-7"
               items={[
                 "Current photo ID — an Australian driver licence is ideal",
                 "Your BSB and account number, only if you'd prefer EFT to cash",
@@ -116,20 +164,21 @@ export default function LocationsPage() {
                 "Registration papers, if you're selling a vehicle for scrap",
               ]}
             />
-            <p className="mt-6 text-[0.95rem] leading-relaxed t-muted">
-              ID is scanned at the bridge. It is a licensing requirement, not a
-              preference.
+            <p className="measure-wide mt-6 text-[0.95rem] leading-relaxed t-muted">
+              ID is scanned at the bridge. It is a licence condition rather than
+              a preference, it applies to every seller and every load, and it is
+              the main control that keeps stolen metal out of the trade.
             </p>
           </div>
 
-          <div id="payment" className="scroll-mt-20 border-2 border-orange p-8">
-            <Eyebrow>Getting paid</Eyebrow>
-            <h2 className="text-[1.6rem]">Cash before you drive out</h2>
+          <Panel id="payment" className="scroll-mt-20 border-2">
+            <p className="t-index t-accent">Getting paid</p>
+            <h3 className="mt-2 text-[1.6rem]">Cash before you drive out</h3>
             <div className="mt-5 space-y-4 text-[0.97rem] leading-relaxed t-muted">
               <p>
                 Once the tare weight is recorded the docket is printed and you
                 are paid on the spot, in cash, against the grade on that docket.
-                No waiting on a transfer to clear.
+                No waiting on a payment run.
               </p>
               <p>
                 If you would rather have it in the bank, say so at the bridge
@@ -138,27 +187,73 @@ export default function LocationsPage() {
                 preference.
               </p>
               <p>
-                Either way the load is documented the same. Photo ID is scanned
-                and the docket is retained — that part is a licensing
-                requirement under Queensland&rsquo;s second-hand dealer
-                legislation and applies to every seller and every load,
-                whichever way you take the money.
+                Either way the load is documented identically — photo ID
+                recorded, docket retained. Which way the money moves is our
+                commercial policy and changes nothing about the paperwork.
               </p>
             </div>
-          </div>
+          </Panel>
         </div>
+      </Section>
+
+      {/* --------------------------------------------------- on the site
+          New section. A scrap yard is an industrial site that members
+          of the public drive into, which is an unusual combination, and
+          nobody explains it to them. First-timers arrive worried about
+          getting it wrong; five short paragraphs fix that, and they are
+          the same five things a spotter would otherwise have to say at
+          the gate. */}
+      <Section id="on-site" tone="chalk" className="scroll-mt-20">
+        <SectionHead
+          index={4}
+          eyebrow="On the site"
+          title="What a working yard is actually like"
+          intro="If you have never driven into one, this is what to expect. None of it is meant to put you off — it is a heavy industrial site with a public weighbridge in the middle of it, and that combination has rules."
+        />
+        <DefinitionRows items={onSite} />
+      </Section>
+
+      {/* ------------------------------------------------- service area
+          New section. The most common question that never gets asked
+          out loud is simply "do you come to my end of town?" — and it
+          is faster to answer with a list of names than with a sentence
+          about South-East Queensland. */}
+      <Section id="collection" className="scroll-mt-20">
+        <SectionHead
+          index={5}
+          eyebrow="Collection"
+          title="Or we come to you"
+          intro="Bins, hook lifts and crane trucks run standing routes through these areas, and project work travels further than the standing routes do."
+        />
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          {serviceAreas.map((area) => (
+            <div key={area.region} className="border-t-2 border-copper pt-5">
+              <h3 className="text-[1.1rem]">{area.region}</h3>
+              <ChipList className="mt-4" items={area.places} />
+            </div>
+          ))}
+        </div>
+        <Callout className="mt-12" label="Not listed">
+          Ask anyway. A one-off lift out of a regional site is a different
+          question from a weekly bin swap, and the answer is often yes.{" "}
+          <ArrowLink href="/services" tone="accent">
+            Collection and bin hire
+          </ArrowLink>
+        </Callout>
       </Section>
 
       <Split
         photo="tipper"
         side="right"
-        tone="deep"
+        tone="slab"
+        n={2}
+        caption="Tipper discharging at the processing bay"
         eyebrow="Weighbridge"
         title="Certified, calibrated and open to inspection"
       >
         <p className="t-lead mt-5">
-          Weighbridges used for trade must be verified under the National
-          Measurement Act and recalibrated on a set cycle. Calibration
+          Weighbridges used for trade must be verified under national trade
+          measurement law and recalibrated on a set cycle. Calibration
           certificates are available on request and included in the audit pack.
         </p>
         <TickList

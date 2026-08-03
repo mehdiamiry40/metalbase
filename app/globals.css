@@ -1,200 +1,298 @@
 @import "tailwindcss";
 
 /* ==================================================================
-   MetalBase design system — orange on graphite
+   MetalBase design system — "the yard and the paperwork"
 
-   One chromatic colour. Orange is the brand; everything else is a
-   neutral. The previous system carried blue AND orange, which split
-   the accent work in two and made the site read like every other
-   corporate-blue trades page. Blue is gone: the dark bands are a warm
-   near-black, the page is warm paper, and orange is the only hue on
-   the site.
-
-   Light-dominant. The page is paper; graphite carries the type and
-   the dark bands; orange is the single accent.
-
-     page background   #F6F4F1   the dominant surface
-     dark band         #201E1C   warm near-black
-     cards             #FFFFFF
-     accent            #FF6A1A   fills, rules, CTA
-     h1/h2             60px · weight 400 · tracking -3px · lh 1.0
-     h3                26px · weight 400 · tracking -1px
-     body              18px
-     container         1240px
-     button radius     4px · weight 400
-
-   The weight-400 headings at -3px tracking are the single most
-   characteristic thing about this design. Bold headings are what made
-   the earlier attempts read as generic; that has not changed.
+   A ground-up replacement for the orange-on-paper system. That one was
+   competent and completely unremarkable: safety orange on a light page
+   is what every scrap, skip-bin and demolition site in the country
+   already looks like, and it leaned on stock photography to carry the
+   visual interest.
 
    ------------------------------------------------------------------
-   Contrast, computed rather than assumed. This is where earlier
-   attempts kept failing, so the whole matrix is written down:
+   THE IDEA
 
-     on paper     graphite 15.13 PASS | rust 5.69 PASS | orange 2.61 FAIL
-     on white     graphite 16.62 PASS | rust 6.25 PASS | orange 2.87 FAIL
-     on graphite  white 16.62 PASS | orange-warm 7.10 PASS | orange 5.80 PASS
-     on orange    graphite 5.80 PASS | white 2.87 FAIL
+   This business sells one thing: a number you can trust. Weighbridge,
+   XRF gun, grade, docket. The whole pitch is "we measured it in front
+   of you and here is the paperwork."
 
-   Three consequences that drive the whole system:
+   So the design language is metrology, not industry. Instruments, spec
+   sheets and engineering drawings — hairline rules, tabular figures,
+   monospaced labels, numbered sections — rather than hi-vis and grit.
 
-   1. #FF6A1A can never be text on a light surface (2.61). On paper
-      and white it is fills, rules and keylines only. So there are two
-      oranges on light: #FF6A1A fills, and a deep #A83E0C "rust"
-      (5.69) for accent text and links.
-   2. Orange becomes available as text on the graphite bands (5.80),
-      and #FF8A45 is brighter still there (7.10) — that is where the
-      accent does its typographic work.
-   3. White can never sit on an orange fill (2.87). Orange fills carry
-      graphite labels, which is why the CTA button is dark-on-orange
-      rather than white-on-orange.
+   From that follows one structural rule that governs every surface
+   decision on the site:
+
+       DARK IS THE YARD.  LIGHT IS THE RECORD.
+
+   Ink is the default surface: metal is dark, and a dark site is
+   instantly distinct from every competitor. The light surface is
+   reserved for things that are *documents* — the grade ledger, the
+   docket, the price board, the forms. Light means "this is the paper
+   you leave with." It is a rule, not decoration, which is why the
+   light/dark rhythm reads as intentional instead of stripey.
+
+   ------------------------------------------------------------------
+   COLOUR
+
+   One hue: copper. It is the highest-value material on the price list,
+   the thing sellers actually care about, and — unlike safety orange —
+   nobody else in the trade uses it. Named after the material, like
+   every other token here.
+
+   Contrast is computed, never eyeballed. This project has shipped
+   invisible text twice, so the whole matrix is written down:
+
+     on ink #0D0F11    white 19.20 · mist 7.35 · copper 6.60 · copper-hi 8.42
+     on slab #15181B   white 17.82 · mist 6.82 · copper 6.12 · copper-hi 7.81
+     on chalk #F4F2ED  ink 17.16 · stone 6.12 · copper-deep 6.48 · copper 3.31
+     on white          ink 19.20 · stone 6.85 · copper-deep 7.25 · copper 3.70
+     on copper fill    ink 6.60 · white 2.91 FAIL
+
+   Four consequences that drive everything:
+
+   1. #D9823F is text ONLY on the dark surfaces (6.60/6.12). On chalk
+      it is 2.60 and can never carry type — there it is rules, fills
+      and keylines. Accent TEXT on light is #8A431A copper-deep (6.48).
+   2. White can never sit on a copper fill (2.91). Copper fills carry
+      ink labels. That is why the CTA is dark-on-copper.
+   3. A copper fill against chalk is 2.60 — under the 3:1 that WCAG
+      wants for a UI component's own boundary. So the primary button
+      inverts by surface: copper fill on dark, ink fill on light. One
+      rule, and a whole class of "the button vanished" bugs cannot
+      happen.
+   4. Muted text is surface-specific and always has been the thing that
+      breaks: mist on dark, stone on light, carried by .on-* rather
+      than set per element.
+
+   ------------------------------------------------------------------
+   TYPE
+
+   Two families with strict, non-overlapping jobs.
+
+     Archivo       everything you read as language.
+     IBM Plex Mono everything you read as a measurement.
+
+   The mono is not decoration. It marks the instrument layer — section
+   indices, grade codes, weights, units, table headers, docket fields,
+   figure captions. If a value could appear on a printout, it is mono
+   and tabular-figured. That single rule is most of what makes the site
+   look engineered rather than styled.
+
+   The previous system's signature was weight 400 at -0.052em tracking,
+   which suited Hanken Grotesk's narrow cut. Archivo is a wider, more
+   squarely-drawn grotesque built for signage; it wants more weight and
+   less negative tracking, so the display voice here is 500 at -0.035em.
+   Copying the old numbers onto the new face would just look loose.
    ================================================================== */
 
 @theme {
-  /* surfaces */
-  --color-paper: #f6f4f1; /* the page */
-  --color-white: #ffffff; /* cards, raised panels */
-  --color-graphite: #201e1c; /* dark bands, and the body type colour */
+  /* --- surfaces: dark is the yard ------------------------------- */
+  --color-ink: #0d0f11; /* the page */
+  --color-slab: #15181b; /* raised panel on dark */
+  --color-shaft: #1c2023; /* wells, inputs, table zebra on dark */
 
-  /* type */
-  --color-stone: #5f5b55; /* muted on light · 6.14 paper, 6.74 white */
+  /* --- surfaces: light is the record ---------------------------- */
+  --color-chalk: #f4f2ed; /* the document surface */
+  --color-white: #ffffff; /* the sheet itself — ledgers, dockets */
 
-  /* orange — the only hue on the site */
-  --color-orange: #ff6a1a; /* FILL, carries graphite · 5.80 · and rules */
-  --color-rust: #a83e0c; /* TEXT/links on light · 5.69 paper, 6.25 white */
-  --color-orange-warm: #ff8a45; /* TEXT on graphite only · 7.10 */
-  --color-orange-deep: #e85c12; /* hover · 4.72 graphite-on-fill */
+  /* --- muted type, one per surface ------------------------------ */
+  --color-mist: #9aa1a8; /* on dark  · 7.35 ink, 6.82 slab */
+  --color-stone: #5e5a54; /* on light · 6.12 chalk, 6.85 white */
 
-  /* hairlines */
-  --color-line: rgba(32, 30, 28, 0.14); /* on light */
-  --color-line-dark: rgba(255, 255, 255, 0.2); /* on graphite */
+  /* --- copper: the only hue on the site ------------------------- */
+  --color-copper: #d9823f; /* TEXT on dark 6.60 · FILL carrying ink */
+  --color-copper-hi: #e89a5c; /* brighter on dark 8.42 · fill hover */
+  --color-copper-deep: #8a431a; /* TEXT on light · 6.48 chalk, 7.25 white */
 
-  /* Supplied by next/font (self-hosted, metric-adjusted fallback). The
-     literal stack stays as a guard in case the variable is ever absent. */
-  --font-sans: var(--font-hanken), "Hanken Grotesk", -apple-system,
+  /* --- functional, not brand ------------------------------------
+     Form success only. Deliberately not a second brand colour: the
+     previous system carried blue AND orange with no rule about which
+     did what, and the accent work split in two. */
+  --color-verdigris: #4fb08c; /* 7.24 on ink — status text on dark */
+  --color-verdigris-deep: #1f6a4f; /* 6.50 on white — status text on light */
+
+  /* --- hairlines ------------------------------------------------ */
+  --color-line-dark: rgba(255, 255, 255, 0.13);
+  --color-line-light: rgba(13, 15, 17, 0.14);
+
+  /* Supplied by next/font (self-hosted, metric-adjusted fallbacks).
+     The literal stacks stay as a guard in case a variable is absent. */
+  --font-sans: var(--font-archivo), "Archivo", -apple-system,
     BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace,
+    SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 /* ------------------------------------------------------------------
    base
 
-   MUST stay in @layer base. Tailwind v4 layers its utilities, and
-   unlayered rules beat layered ones regardless of specificity — an
-   unlayered `h2 { font-size }` silently defeats every text-[…]
-   utility, which cost a full debugging round earlier in this build.
+   MUST stay in @layer base. Tailwind v4 layers its utilities, and an
+   unlayered rule beats a layered one regardless of specificity — an
+   unlayered `h2 { font-size }` silently defeats every text-[…] utility.
+   That cost a full debugging round in the previous build; the note is
+   kept because the trap is identical in this one.
    ------------------------------------------------------------------ */
 
 @layer base {
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    background: var(--color-paper);
+    background: var(--color-ink);
   }
 
   body {
-    background: var(--color-paper);
-    color: var(--color-graphite);
+    background: var(--color-ink);
+    color: #ffffff;
     font-family: var(--font-sans);
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: 17px;
+    line-height: 1.65;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 
-    /* The light surface is the default for the whole document, so a
-       section that forgets its surface class still renders correctly.
-       Only .on-dark has to be declared explicitly, which means the
-       failure mode is a missing dark band rather than invisible text. */
-    --muted: var(--color-stone);
-    --hair: var(--color-line);
-    --accent-text: var(--color-rust);
-    --focus: var(--color-graphite);
+    /* The DARK surface is the document default now, so a section that
+       forgets its surface class still renders correctly. Only .on-light
+       has to be declared, which means the failure mode is a missing
+       light band rather than invisible text. */
+    --muted: var(--color-mist);
+    --hair: var(--color-line-dark);
+    --accent-text: var(--color-copper);
+    --focus: var(--color-copper-hi);
+    --status: var(--color-verdigris);
   }
 
   ::selection {
-    background: var(--color-orange);
-    color: var(--color-graphite);
+    background: var(--color-copper);
+    color: var(--color-ink);
   }
 
-  /* The ring is surface-aware for the same reason the type is. A single
-     fixed ring colour cannot clear 3:1 against both paper and graphite
-     once blue — which used to split the difference, badly, at 3.73 on
-     navy — is out of the palette. Graphite rings on light (15.13),
-     orange-warm on the dark bands (7.10). */
+  /* Surface-aware for the same reason the type is: no single fixed ring
+     colour clears 3:1 against both ink and chalk. Copper-hi on the dark
+     surfaces (8.42), ink on the light ones (17.16). */
   :focus-visible {
-    outline: 3px solid var(--focus, var(--color-graphite));
+    outline: 2px solid var(--focus, var(--color-copper-hi));
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 1px;
   }
 
-  /* Weight 400 at tight negative tracking — the reference's signature.
-     Bold headings are what made the earlier drafts look generic. */
-  /* The scale was set when the page had nine sections competing for
-     attention, so headings stayed modest to avoid shouting over each
-     other. With fewer, longer sections a heading can carry its own
-     block, and editorial layouts want the jump between levels to be
-     obvious rather than polite. Every step up here is paired with more
-     surrounding space, not less — big type in a tight box reads
-     cramped, which is the opposite of the intent. */
+  /* Archivo is wide and squarely drawn — it carries weight 500 at
+     display sizes where a narrower face would need 400, and it breaks
+     down under the heavy negative tracking the old face wanted. */
   h1 {
-    font-size: clamp(3rem, 1.5rem + 5.8vw, 4.75rem);
-    font-weight: 400;
-    line-height: 0.98;
-    letter-spacing: -0.052em;
+    font-size: clamp(2.75rem, 1.2rem + 6.2vw, 5.25rem);
+    font-weight: 500;
+    line-height: 0.94;
+    letter-spacing: -0.035em;
     text-wrap: balance;
   }
 
   h2 {
-    font-size: clamp(2.25rem, 1.35rem + 3.6vw, 4rem);
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: -0.05em;
+    font-size: clamp(2rem, 1.1rem + 3.4vw, 3.5rem);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
     text-wrap: balance;
   }
 
   h3 {
-    font-size: 1.75rem;
-    font-weight: 400;
-    line-height: 1.15;
-    letter-spacing: -0.038em;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.022em;
   }
 
   h4 {
     font-size: 1.0625rem;
     font-weight: 600;
-    line-height: 1.35;
-    letter-spacing: -0.015em;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+
+  /* Tabular figures everywhere a number can appear in a column. A
+     proportional 1 in a weight column is the tell that a table was
+     styled rather than typeset. */
+  th,
+  td {
+    font-variant-numeric: tabular-nums;
   }
 }
 
 /* ------------------------------------------------------------------
    surfaces
 
-   The same markup appears on paper, on white and on graphite, so body and
-   muted text colours are carried by the surface rather than set on
-   every element. Setting them per-element is exactly how the
-   dark-on-dark bugs happened in the previous iteration.
+   Body, muted, hairline and accent colours are carried BY THE SURFACE,
+   never set per element. Setting them per element is precisely how the
+   dark-on-dark bugs got in last time, and the failure is silent.
    ------------------------------------------------------------------ */
-
-.on-light {
-  color: var(--color-graphite);
-  --muted: var(--color-stone);
-  --hair: var(--color-line);
-  --accent-text: var(--color-rust);
-  --focus: var(--color-graphite);
-}
 
 .on-dark {
   color: #ffffff;
-  --muted: rgba(255, 255, 255, 0.78); /* 10.6:1 on graphite */
+  --muted: var(--color-mist);
   --hair: var(--color-line-dark);
-  --accent-text: var(--color-orange-warm);
-  --focus: var(--color-orange-warm);
+  --accent-text: var(--color-copper);
+  --focus: var(--color-copper-hi);
+  --status: var(--color-verdigris);
+  --surface: var(--color-ink);
+  /* Copper fill, ink label (6.60). White on copper is 2.91 and can
+     never be used. */
+  --btn-fill: var(--color-copper);
+  --btn-fill-hover: var(--color-copper-hi);
+  --btn-label: var(--color-ink);
+}
+
+.on-light {
+  color: var(--color-ink);
+  --muted: var(--color-stone);
+  --hair: var(--color-line-light);
+  --accent-text: var(--color-copper-deep);
+  --focus: var(--color-ink);
+  --status: var(--color-verdigris-deep);
+  --surface: var(--color-chalk);
+  /* Copper fill against chalk is 2.60 — below the 3:1 WCAG wants for a
+     component's own boundary — so the primary button inverts to ink
+     here rather than going invisible. This is the whole reason the fill
+     is a surface variable instead of a fixed colour. */
+  --btn-fill: var(--color-ink);
+  --btn-fill-hover: #000000;
+  --btn-label: var(--color-chalk);
+}
+
+/* `--surface` is the band's own background, declared so a child can
+   paint with it rather than hardcoding a colour it cannot verify. Only
+   .ruled needs it today, but the point is that a component dropped onto
+   an unexpected band cannot end up painting ink cells onto chalk.
+   The two bands that are not the surface default say so. */
+.surface-slab {
+  --surface: var(--color-slab);
+}
+
+.surface-shaft {
+  --surface: var(--color-shaft);
+}
+
+.surface-sheet {
+  --surface: #ffffff;
+}
+
+/* Text over a photograph can only guarantee contrast for white. A
+   scrim fixes the DARKEST the background can be, not the lightest, so
+   a mid-tone accent has no floor — the old orange eyebrow measured
+   2.93:1 against a white pixel in the yard shot. axe reports these
+   nodes as "incomplete" rather than failing, so nothing automated
+   catches it. Over a photo, everything is white. */
+.over-photo {
+  color: #ffffff;
+  --muted: rgba(255, 255, 255, 0.82);
+  --accent-text: #ffffff;
+  --focus: #ffffff;
+  --hair: rgba(255, 255, 255, 0.28);
 }
 
 /* These must sit in @layer utilities, not unlayered. An unlayered rule
    beats a layered one regardless of specificity, so an unlayered
    .t-accent would win over hover:text-* on the same element and the
-   hover state would silently never apply. */
+   hover would silently never apply. */
 @layer utilities {
   .t-muted {
     color: var(--muted);
@@ -204,112 +302,255 @@
     color: var(--accent-text);
   }
 
+  .t-status {
+    color: var(--status);
+  }
+
   .hair {
+    border-color: var(--hair);
+  }
+
+  .divide-hair > * + * {
     border-color: var(--hair);
   }
 }
 
+/* ==================================================================
+   EVERYTHING BELOW SITS IN @layer components.
+
+   This is not tidiness, it is a correctness requirement, and getting
+   it wrong shipped a visible bug: an UNLAYERED rule beats a layered
+   one regardless of specificity, and Tailwind emits its utilities into
+   a layer. So an unlayered `.btn { display: inline-flex }` silently
+   defeated `hidden` on the header's quote button — the button rendered
+   at every width, pushed the phone number and the hamburger past the
+   right edge, and gave every page 60px of horizontal overflow on a
+   phone. Nothing caught it: the markup reads correctly, the class is
+   present in the DOM, and the build is clean.
+
+   The same trap was quietly costing every `tracking-[…]` written
+   alongside `.t-index` or `.t-spec`, which both set letter-spacing.
+
+   Inside @layer components these all sit BELOW utilities, so a utility
+   in the markup wins — which is what anyone reading the markup expects.
+   The surface classes above stay unlayered on purpose: they carry
+   variables rather than compete with utilities, and they must win.
+   ================================================================== */
+
+@layer components {
+
 /* ------------------------------------------------------------------
-   type utilities
+   the instrument layer
+
+   Monospace is a semantic here, not a texture. If a value could appear
+   on a printout — a grade code, a weight, a unit, a section index, a
+   figure number — it is mono and tabular. Prose never is.
    ------------------------------------------------------------------ */
 
-/* Text over a photograph can only guarantee contrast for white. The
-   scrim fixes the DARKEST the background can be, not the lightest, so
-   a mid-tone accent has no floor: the orange eyebrow measured 2.93:1
-   against a white pixel in the yard shot. axe reports these nodes as
-   "incomplete" rather than failing, because it cannot evaluate text
-   over an image — so nothing automated catches it. */
-.over-photo {
-  --accent-text: #ffffff;
-  --focus: #ffffff;
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
 }
 
-.t-eyebrow {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+/* Section index: "§ 02" in the margin. The device that makes the site
+   read as one continuous spec document rather than a stack of pages. */
+.t-index {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Small mono label — table headers, field names, figure captions. */
+.t-spec {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
 }
 
 .t-lead {
-  font-size: 1.3125rem;
-  line-height: 1.5;
-  letter-spacing: -0.02em;
+  font-size: 1.25rem;
+  line-height: 1.55;
+  letter-spacing: -0.014em;
 }
 
-/* Editorial measure. Long-form prose past ~68 characters per line gets
-   noticeably harder to track back to the next line, and the 1240px
-   shell is far wider than that. Applied to the new explainer sections
-   rather than globally, because tables and grids want the full width. */
+/* Editorial measure. Prose past ~68 characters per line gets hard to
+   track back to the next line, and the shell is far wider than that.
+   Applied per block rather than globally — tables want full width. */
 .measure {
-  max-width: 34rem;
+  max-width: 33rem;
 }
 
 .measure-wide {
-  max-width: 44rem;
-}
-
-/* A numbered editorial marker: the figure sits in the margin rather
-   than inline, which is what makes a list of points read as a
-   considered sequence instead of a bulleted dump. */
-.marker {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum";
-  font-size: 0.8rem;
-  letter-spacing: 0.16em;
-  color: var(--accent-text);
-}
-
-.t-num {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum";
-  letter-spacing: -0.05em;
+  max-width: 42rem;
 }
 
 /* ------------------------------------------------------------------
-   layout — 1240px, measured off the reference
+   layout — a 1280px shell with a visible gutter rail
    ------------------------------------------------------------------ */
 
 :root {
-  --shell: 1240px;
-  --gutter: max(1.5rem, calc((100vw - var(--shell)) / 2));
+  --shell: 1280px;
+  --gutter: max(1.25rem, calc((100vw - var(--shell)) / 2));
 }
 
 .shell {
   width: 100%;
   max-width: var(--shell);
   margin-inline: auto;
-  padding-inline: 1.5rem;
+  padding-inline: 1.25rem;
 }
 
-@media (min-width: 1340px) {
+@media (min-width: 1360px) {
   .shell {
     padding-inline: 0;
   }
 }
 
-.split-l {
+/* Full-bleed half that still aligns its type to the shell. */
+.bleed-l {
   padding-left: var(--gutter);
-  padding-right: 1.5rem;
+  padding-right: 1.25rem;
 }
 
-.split-r {
+.bleed-r {
   padding-right: var(--gutter);
-  padding-left: 1.5rem;
+  padding-left: 1.25rem;
 }
 
 @media (min-width: 1024px) {
-  .split-l {
-    padding-right: 5rem;
+  .bleed-l {
+    padding-right: 4.5rem;
   }
-  .split-r {
-    padding-left: 5rem;
+  .bleed-r {
+    padding-left: 4.5rem;
   }
+}
+
+/* ------------------------------------------------------------------
+   drawn rules
+
+   The engineering-drawing device: hairlines that are deliberately
+   visible structure rather than incidental borders.
+   ------------------------------------------------------------------ */
+
+/* A short copper tick above a heading — the one place copper appears
+   on a light surface, where it is decoration and carries no text. */
+.tick::before {
+  content: "";
+  display: block;
+  width: 2.25rem;
+  height: 3px;
+  background: var(--color-copper);
+  margin-bottom: 1.25rem;
+}
+
+/* Vertical hairline between grid columns, drawn only where there is a
+   column to divide. */
+@media (min-width: 768px) {
+  .rail > * + * {
+    border-left: 1px solid var(--hair);
+    padding-left: 2rem;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Ruled grid — the gap IS the rule.
+
+   A one-pixel gap over a hairline-coloured background draws every
+   internal division at once, so cells carry no borders and there are no
+   `last:border-r-0` exceptions to get wrong when the column count
+   changes at a breakpoint. That pattern is why the hero's instrument
+   strip looks like a panel of readouts rather than a row of cards.
+
+   Cells paint with --surface rather than a literal colour, so the same
+   strip works on ink, slab and chalk without a variant prop.
+   ------------------------------------------------------------------ */
+.ruled {
+  display: grid;
+  gap: 1px;
+  background: var(--hair);
+  border: 1px solid var(--hair);
+}
+
+.ruled > * {
+  background: var(--surface);
+}
+
+/* A note set against a copper keyline. Copper is a rule here, never
+   type, so this is legal on both surfaces — see the contrast matrix. */
+.callout {
+  border-left: 3px solid var(--color-copper);
+  padding-left: 1.5rem;
 }
 
 /* ------------------------------------------------------------------
    components
    ------------------------------------------------------------------ */
+
+/* Buttons. Square, 2px rule, mono label in small caps — a switch on a
+   machine rather than a pill on a landing page.
+
+   `.btn-solid` reads its fill and label from the surface, so a primary
+   CTA cannot lose contrast with the band it happens to sit on. That is
+   not theoretical: it is why the previous system's orange button had to
+   be hand-checked on every surface it appeared on. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.625rem;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition:
+    background-color 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease;
+}
+
+.btn-solid {
+  background: var(--btn-fill);
+  border-color: var(--btn-fill);
+  color: var(--btn-label);
+}
+
+.btn-solid:hover {
+  background: var(--btn-fill-hover);
+  border-color: var(--btn-fill-hover);
+}
+
+/* Outline. Border sits at full surface colour rather than the hairline
+   tint, so it clears 3:1 as a UI boundary on both surfaces. */
+.btn-ghost {
+  border-color: currentColor;
+  color: inherit;
+}
+
+/* Inverts on hover, so the state change is unmistakable. Both halves
+   must be stated per surface: `background: currentColor` would resolve
+   against the same `color` the hover is flipping, painting the label
+   and the fill the same shade. */
+.on-dark .btn-ghost:hover,
+.over-photo .btn-ghost:hover {
+  background: #ffffff;
+  color: var(--color-ink);
+}
+
+.on-light .btn-ghost:hover {
+  background: var(--color-ink);
+  color: var(--color-chalk);
+}
 
 .u-link {
   background-image: linear-gradient(currentColor, currentColor);
@@ -325,27 +566,36 @@
 
 /* Row lists: the whole row is the affordance, not just the text. */
 .row-link {
-  transition: background-color 0.16s ease, padding-left 0.16s ease;
+  transition:
+    background-color 0.16s ease,
+    padding-left 0.16s ease;
 }
 
 .row-link:hover {
-  background-color: rgba(32, 30, 28, 0.05);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
-.on-dark .row-link:hover {
-  background-color: rgba(255, 255, 255, 0.06);
+.on-light .row-link:hover {
+  background-color: rgba(13, 15, 17, 0.04);
 }
 
 @media (min-width: 768px) {
   .row-link:hover {
-    padding-left: 0.75rem;
+    padding-left: 0.625rem;
   }
 }
+
+} /* end @layer components */
+
+/* ------------------------------------------------------------------
+   motion — scroll-driven, progressively enhanced, and off by default
+   for anyone who asked for that.
+   ------------------------------------------------------------------ */
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -357,19 +607,8 @@
   .rise {
     animation: rise 0.5s cubic-bezier(0.2, 0.6, 0.2, 1) both;
     animation-timeline: view();
-    animation-range: entry 0% cover 22%;
+    animation-range: entry 0% cover 20%;
   }
-}
-
-/* The orange rule above a heading — the one place orange appears on a
-   light surface, where it is decoration and carries no text. */
-.rule::before {
-  content: "";
-  display: block;
-  width: 48px;
-  height: 4px;
-  background: var(--color-orange);
-  margin-bottom: 1.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

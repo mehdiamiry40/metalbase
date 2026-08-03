@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
 import { DefinitionRows, PageHeader, Split } from "@/components/sections";
-import { Button, CtaBand, Section, StatBand, TickList } from "@/components/ui";
-import { stats } from "@/lib/site";
+import {
+  ArrowLink,
+  Callout,
+  CtaBand,
+  Section,
+  SectionHead,
+  StatBand,
+  TickList,
+} from "@/components/ui";
+import { merchantQuestions, standards, stats } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
   title: "About MetalBase",
   description:
-    "How MetalBase operates, how we approach safety, and the rules the yards run on.",
+    "How MetalBase operates, the rules the yards run on, the legislation the trade sits under, and the questions worth asking any scrap merchant before you sell to them.",
 };
 
 const values = [
@@ -59,7 +67,9 @@ export default function AboutPage() {
       <Split
         photo="yard-wide"
         side="right"
-        tone="base"
+        tone="ink"
+        n={1}
+        caption="Wide view across a metal recovery yard"
         eyebrow="Our story"
         title="Built around the weighbridge"
         priority
@@ -76,32 +86,80 @@ export default function AboutPage() {
         </p>
       </Split>
 
-      <Section id="operate" tone="deep" className="scroll-mt-20">
-        <div className="rule max-w-3xl">
-          <h2>Four rules the yards run on</h2>
-          <p className="t-lead mt-5 t-muted">
-            They sound obvious. The reason people switch merchants is that they
-            are not universal.
-          </p>
-        </div>
-        <div className="mt-10 border-t hair">
-          <DefinitionRows items={values} />
-        </div>
+      <Section id="operate" tone="slab" className="scroll-mt-20">
+        <SectionHead
+          index={1}
+          eyebrow="How we operate"
+          title="Four rules the yards run on"
+          intro="They sound obvious. The reason people switch merchants is that they are not universal."
+        />
+        <DefinitionRows items={values} />
       </Section>
 
-      <section id="safety" className="scroll-mt-20 bg-paper py-20 lg:py-32">
-        <div className="shell grid gap-12 lg:grid-cols-2">
-          <div className="rule">
-            <h2>A scrap yard is a heavy industrial site</h2>
-            <p className="t-lead mt-5 t-muted">
-              Material handlers, mobile shears, moving trucks and unpredictable
-              loads. We treat every visitor as somebody who has never been in one
-              before, because most of them haven&rsquo;t.
-            </p>
-          </div>
+      {/* --------------------------------------------- asking questions
+          New section, and deliberately the most useful thing on the
+          page. Everything else here is a claim about ourselves, which
+          is worth exactly what any company's self-description is worth.
+          This is a checklist that works on any merchant, including us,
+          and it is genuinely better for a seller than another paragraph
+          asserting that we are the honest one.
+
+          On the light surface because it is a reference someone might
+          actually take with them. */}
+      <Section id="questions" tone="chalk" className="scroll-mt-20">
+        <SectionHead
+          index={2}
+          eyebrow="Choosing a merchant"
+          title="Six questions worth asking any scrap yard"
+          intro="Including this one. Every question below has a short factual answer, and how readily a yard gives it tells you more than any amount of copy on a website — this page included."
+        />
+        <DefinitionRows items={merchantQuestions} />
+        <Callout className="mt-10" label="Our answers">
+          Before tipping. Gross, tare, net and grade. On request, with the
+          certificate. Named on the docket. Yes, immediately, at no cost. Photo
+          identification and vehicle registration, every load, no exceptions.{" "}
+          <ArrowLink href="/locations#how-it-works" tone="accent">
+            Watch it happen
+          </ArrowLink>
+        </Callout>
+      </Section>
+
+      {/* ------------------------------------------------- the framework
+          New section. The trade is more regulated than most people
+          assume, and describing the framework is useful without
+          claiming a single credential — the licence and authority
+          numbers themselves stay unpublished until they are issued,
+          which /sustainability says in as many words. */}
+      <Section id="standards" className="scroll-mt-20">
+        <SectionHead
+          index={3}
+          eyebrow="The framework"
+          title="What the trade sits under"
+          intro="Four bodies of rule shape how any Queensland yard operates. Knowing they exist is most of what you need to judge whether a merchant is working inside them."
+        />
+        <DefinitionRows items={standards} />
+        <p className="measure-wide mt-10 t-muted">
+          Our own licence number, environmental authority reference and
+          certification details are published on the{" "}
+          <ArrowLink href="/sustainability#compliance" tone="accent">
+            compliance section
+          </ArrowLink>{" "}
+          as they are issued, and not before.
+        </p>
+      </Section>
+
+      <Section id="safety" tone="slab" className="scroll-mt-20">
+        <div className="grid gap-12 lg:grid-cols-2">
+          <SectionHead
+            index={4}
+            eyebrow="Safety"
+            title="A scrap yard is a heavy industrial site"
+            intro="Material handlers, mobile shears, moving trucks and unpredictable loads. We treat every visitor as somebody who has never been in one before, because most of them haven't."
+            className="mb-0"
+          />
           <TickList items={safety} className="lg:pt-4" />
         </div>
-      </section>
+      </Section>
 
       <CtaBand
         title="Come and have a look"

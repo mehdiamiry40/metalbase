@@ -76,26 +76,48 @@ describe("theme tokens", () => {
 
   it("declares the tokens the design system documents", () => {
     for (const t of [
-      "paper",
+      // surfaces — dark is the yard, light is the record
+      "ink",
+      "slab",
+      "shaft",
+      "chalk",
       "white",
-      "graphite",
+      // muted type, one per surface
+      "mist",
       "stone",
-      "orange",
-      "rust",
-      "orange-warm",
-      "orange-deep",
+      // the single hue, split by the surface it has to carry text on
+      "copper",
+      "copper-hi",
+      "copper-deep",
     ]) {
       expect(tokens.has(t)).toBe(true);
     }
   });
 
-  /* Blue was removed when the palette collapsed to a single accent. The
-     rename guard below only catches utilities naming a token that does
-     not exist — it cannot catch a token that still exists but shouldn't,
-     so a half-finished revert that re-added `--color-blue` would go
-     unnoticed until the site quietly had two accents again. */
-  it("has no blue left in the palette", () => {
-    for (const t of ["blue", "blue-text", "blue-deep", "navy", "cream", "slate"]) {
+  /* Each palette this project has shipped left tokens behind. Blue went
+     when the accent collapsed to one hue; paper/graphite/orange went
+     when the surface rule inverted to dark-by-default.
+
+     The rename guard below only catches utilities naming a token that
+     does NOT exist — it cannot catch a token that still exists but
+     shouldn't, so a half-finished revert that re-added `--color-orange`
+     alongside copper would go unnoticed until the site quietly had two
+     accents again. Hence asserting the absences directly. */
+  it("has no superseded palette left", () => {
+    for (const t of [
+      "blue",
+      "blue-text",
+      "blue-deep",
+      "navy",
+      "cream",
+      "slate",
+      "paper",
+      "graphite",
+      "orange",
+      "orange-warm",
+      "orange-deep",
+      "rust",
+    ]) {
       expect(tokens.has(t)).toBe(false);
     }
   });
