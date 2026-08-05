@@ -6,16 +6,20 @@ real customers.
 
 ---
 
-## 0. Replace the stale production deployment — urgent
+## 0. Verify the active deployment before launch
 
-The live domain was checked on 4 August 2026 and still served the superseded,
-indexable build. It did not contain the current launch gate, redirect, copy or
-security headers. Deploy the reviewed tree, then verify the live HTML,
-`robots.txt`, legacy redirect, form fallback and response headers before
-sharing the domain.
+The public FAQ and contact content matched the current tree when checked on
+6 August 2026. That does not prove the environment variables, response headers
+or enquiry delivery path. After every launch-related deploy, verify the live
+HTML, `robots.txt`, `sitemap.xml`, quote delivery, attachment delivery and
+response headers.
 
-Do not flip `LAUNCH_READY` during that deployment. The current tree intentionally
-ships `noindex, nofollow` and an empty sitemap until the facts below are supplied.
+Do not flip `LAUNCH_READY` until the facts below are supplied. The current tree
+intentionally ships `noindex, nofollow` and an empty sitemap.
+
+Before investing further in the brand, confirm ASIC business-name availability
+and search IP Australia for conflicting trade marks. An existing company with a
+similar name is a reason to check, not proof that the brand is unavailable.
 
 ## 1. Business facts — blocks launch
 
@@ -67,8 +71,10 @@ ENQUIRY_FROM     noreply@yourdomain
 
 Alternatively, set `ENQUIRY_WEBHOOK_URL` for a Zapier, Make or CRM endpoint.
 
-Redeploy, submit a real test enquiry, confirm it arrives at the intended
-destination and verify the reply path before enabling launch mode.
+Redeploy, submit one email-only, one phone-only and one photo enquiry, confirm
+all three arrive at the intended destination and verify the reply path before
+enabling launch mode. Photo enquiries carry up to three compressed attachments,
+so also confirm the configured provider accepts them.
 
 Optional but recommended: `UPSTASH_REDIS_REST_URL` and
 `UPSTASH_REDIS_REST_TOKEN` for durable rate limiting. Without them the
@@ -136,6 +142,9 @@ convincing one:
 
 ## Known limitations
 
+- **Business identity is incomplete**, so launch mode remains blocked until the
+  registered entity, ABN, applicable licence, email and operating model are
+  verified.
 - **`locations` is empty**, so the locations page has no yard list. It
   renders without one rather than inventing an address.
 - **Photography is stock**, so it cannot prove the real yard, team or
