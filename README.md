@@ -1,6 +1,6 @@
 # MetalBase — Brisbane scrap metal quotes
 
-Next.js 15 marketing site. App Router, TypeScript, Tailwind v4.
+Next.js 16.3 marketing site. App Router, TypeScript, Tailwind v4.
 
 ```bash
 npm install
@@ -8,7 +8,7 @@ cp .env.example .env.local  # optional local delivery configuration
 npm run dev        # http://localhost:3000
 ```
 
-Node 18.18+. Verified on Node 22 with a clean production build.
+Node 20.9+. Verified on Node 22 with a clean production build.
 
 ## ⚠️ Before this goes live
 
