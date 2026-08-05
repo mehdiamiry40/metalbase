@@ -16,7 +16,7 @@ const originalEnv = Object.fromEntries(
 
 function enquiryRequest(
   ip: string,
-  overrides: Record<string, string> = {},
+  overrides: Record<string, unknown> = {},
 ) {
   return new Request("http://localhost/api/enquiry", {
     method: "POST",
@@ -82,6 +82,39 @@ describe("POST /api/enquiry", () => {
     expect(error.mock.calls.flat().join(" ")).not.toContain(
       "sensitive provider diagnostic",
     );
+  });
+
+  it("delivers photo attachments without adding their content to the summary", async () => {
+    for (const key of ENV_KEYS) delete process.env[key];
+    process.env.RESEND_API_KEY = "re_test";
+    process.env.ENQUIRY_TO = "quotes@example.com";
+
+    let providerBody: Record<string, unknown> = {};
+    const providerFetch: typeof fetch = async (_input, init) => {
+      providerBody = JSON.parse(String(init?.body));
+      return new Response(JSON.stringify({ id: "email_photo" }), { status: 200 });
+    };
+    vi.stubGlobal("fetch", providerFetch);
+
+    const photoContent = Buffer.from("photo").toString("base64");
+    const response = await POST(
+      enquiryRequest("test-photo", {
+        photos: [
+          {
+            name: "copper-load.jpg",
+            type: "image/jpeg",
+            content: photoContent,
+          },
+        ],
+      }),
+    );
+
+    expect(response.status).toBe(200);
+    expect(providerBody.attachments).toEqual([
+      { filename: "copper-load.jpg", content: photoContent },
+    ]);
+    expect(String(providerBody.text)).toContain("Photos attached: 1");
+    expect(String(providerBody.text)).not.toContain(photoContent);
   });
 
   it("delivers a phone-only enquiry without an empty email reply address", async () => {
