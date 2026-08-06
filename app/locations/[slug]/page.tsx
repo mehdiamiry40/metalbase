@@ -164,9 +164,10 @@ export default async function RegionPage({ params }: RegionPageProps) {
           </div>
         </div>
         <Callout className="mt-10" label="Before anything moves">
-          Confirm the receiving location, accepted material and current
-          instructions. For collection, equipment, minimum volume and timing
-          are assessed for the proposed site.{" "}
+          MetalBase has no public customer drop-off location. When drop-off is
+          suitable, the receiving destination and arrival instructions are
+          arranged per enquiry. For collection, equipment, minimum volume and
+          timing are confirmed for the proposed site.{" "}
           <ArrowLink href="/contact" tone="accent">
             Send the details
           </ArrowLink>

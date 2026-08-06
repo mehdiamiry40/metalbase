@@ -1,4 +1,4 @@
-import { LAUNCH_READY, SITE, company, serviceHref } from "@/lib/site";
+import { SITE, company, operations, serviceHref } from "@/lib/site";
 
 /** Stable identity shared by every schema node that refers to MetalBase. */
 export const ORGANIZATION_ID = `${SITE}/#organization`;
@@ -106,9 +106,9 @@ export function areaGuideSchemaData({
 /**
  * Service schema for a single service page.
  *
- * `areaServed` is Brisbane rather than a fabricated radius, and
- * `provider` points at the same organisation described in the root
- * layout so the graph stays consistent.
+ * `areaServed` mirrors the verified mobile service regions, and `provider`
+ * points at the same organisation described in the root layout. A physical
+ * RecyclingCenter is deliberately not claimed because customers cannot visit.
  */
 export function ServiceSchema({
   name,
@@ -139,12 +139,8 @@ export function serviceSchemaData(
     slug: string;
     verified: boolean;
   },
-  launchReady = LAUNCH_READY,
 ): Record<string, unknown> | null {
-  /* A Service node is a commercial capability claim. Until the operator has
-     verified the business facts, omitting it is more accurate than attaching
-     cautious prose to an unverified offer. */
-  if (!launchReady || !verified) return null;
+  if (!verified) return null;
 
   return (
     {
@@ -154,9 +150,12 @@ export function serviceSchemaData(
       description,
       serviceType: name,
       url: `${SITE}${serviceHref({ slug })}`,
-      areaServed: { "@type": "City", name: "Brisbane" },
+      areaServed: operations.serviceRegions.map((name) => ({
+        "@type": "AdministrativeArea",
+        name,
+      })),
       provider: {
-        "@type": "RecyclingCenter",
+        "@type": "Organization",
         "@id": ORGANIZATION_ID,
         name: company.name,
         ...(company.legal ? { legalName: company.legal } : {}),

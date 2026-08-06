@@ -14,9 +14,9 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   path: "/scrap-metal-brisbane",
-  title: "Scrap Metal Brisbane: Quote & Drop-Off Guide",
+  title: "Scrap Metal Brisbane: Quotes & Collection Guide",
   description:
-    "Scrap metal Brisbane guide: identify common metal categories, prepare quote details, understand pricing factors and confirm receiving before travelling.",
+    "Request scrap metal quotes and customer-site collection across Brisbane, with material, pricing and arranged receiving guidance.",
 });
 
 const materialGroups: {
@@ -151,7 +151,7 @@ const receivingSteps = [
   },
   {
     title: "Confirm the destination",
-    body: "Get the current receiving address, hours, identification, PPE and unloading instructions for that enquiry.",
+    body: "MetalBase confirms the arranged receiving destination, hours, identification, PPE and unloading instructions for that enquiry.",
   },
   {
     title: "Confirm the terms",
@@ -174,11 +174,11 @@ const pageFaqs = [
   },
   {
     q: "Where can I drop off scrap metal in Brisbane?",
-    a: "Do not infer a receiving yard from the Brisbane suburb examples on this page. Confirm the current receiving address, hours, accepted material, identification requirements and unloading instructions for your enquiry before travelling.",
+    a: "MetalBase does not operate a public customer drop-off location. When drop-off is suitable, MetalBase arranges and confirms the receiving destination, hours, accepted material, identification requirements and unloading instructions before you travel.",
   },
   {
     q: "Does a scrap metal quote include removal from my property?",
-    a: "No. A material quote does not by itself confirm collection or removal. Removal availability, minimum volume, equipment, timing, access responsibilities and commercial terms are assessed separately for the proposed address and load.",
+    a: "A material quote does not itself book collection. MetalBase provides customer-site removal, with minimum volume, equipment, timing, access responsibilities and commercial terms confirmed separately for the proposed address and load.",
   },
 ];
 
@@ -191,7 +191,7 @@ export default function ScrapMetalBrisbanePage() {
         eyebrow="Scrap metal Brisbane"
         photo="copper-sheets"
         title="Scrap metal Brisbane: prepare a clearer quote"
-        intro="Identify the metal, show its condition and confirm the next step before anything moves. This guide covers material, pricing and receiving; site removal is assessed separately."
+        intro="Identify the metal, show its condition and choose customer-site collection or an arranged receiving destination. MetalBase has no public customer drop-off location."
         trail={[
           { label: "Home", href: "/" },
           { label: "Scrap metal Brisbane" },
@@ -307,7 +307,7 @@ export default function ScrapMetalBrisbanePage() {
           index={4}
           eyebrow="Brisbane context"
           title="Name the suburb where the metal is now"
-          intro="Brisbane suburb details help identify the enquiry and the practical next step. They do not change the alloy grade or prove that a receiving site or collection service exists there."
+          intro="MetalBase provides collection across Brisbane. The exact suburb and address help confirm access, timing and the practical next step; they do not change the alloy grade."
         />
 
         <div className="ruled grid-cols-1 lg:grid-cols-3">
@@ -322,7 +322,7 @@ export default function ScrapMetalBrisbanePage() {
         <Callout className="mt-10" label="What the place names mean">
           These suburbs are examples for describing where material is located,
           not branch or yard listings. Use the exact suburb in your quote
-          request and confirm all receiving or removal arrangements separately.{" "}
+          request so the collection or arranged receiving details can be confirmed.{" "}
           <ArrowLink href="/locations" tone="accent">
             See Brisbane and regional guides
           </ArrowLink>
@@ -334,8 +334,8 @@ export default function ScrapMetalBrisbanePage() {
           <SectionHead
             index={5}
             eyebrow="Receiving guidance"
-            title="Confirm before you travel"
-            intro="A suburb list is not a drop-off address. Get the load-specific receiving details before metal leaves its current location."
+            title="Arranged drop-off only"
+            intro="MetalBase has no public customer drop-off location. When drop-off suits a load, get the arranged receiving details before the metal leaves its current location."
             className="mb-0"
           />
           <Steps items={receivingSteps} />
@@ -343,8 +343,8 @@ export default function ScrapMetalBrisbanePage() {
 
         <Callout className="mt-10" label="Before loading a vehicle">
           Availability and terms are confirmed per enquiry. Ask about unusual or
-          regulated material, and do not assume that a quote confirms a yard,
-          licence detail, opening hours or acceptance.{" "}
+          regulated material, and do not assume that a quote confirms a public
+          location, receiving hours or acceptance.{" "}
           <ArrowLink href="/contact" tone="accent">
             Confirm the current instructions
           </ArrowLink>
@@ -357,14 +357,14 @@ export default function ScrapMetalBrisbanePage() {
             index={6}
             eyebrow="A different enquiry"
             title="Need scrap removed from a Brisbane site?"
-            intro="A scrap metal quote identifies the material and commercial assumptions. Removal asks whether that material can be moved from a specific address with its access and loading constraints."
+            intro="MetalBase drivers collect from customer sites across Brisbane. A removal scope confirms how the material can be moved from the specific address with its access and loading constraints."
             className="mb-0"
           />
           <div className="border-y hair py-7">
             <p className="leading-relaxed t-muted">
-              A quote does not by itself include collection. Removal
-              availability, minimum volume, equipment, timing, responsibilities
-              and terms are confirmed for the proposed load and address.
+              A quote does not itself book collection. Minimum volume,
+              equipment, timing, responsibilities and terms are confirmed for
+              the proposed load and address.
             </p>
             <ArrowLink href="/scrap-removal-brisbane" tone="accent" className="mt-6">
               Prepare a scrap removal Brisbane enquiry

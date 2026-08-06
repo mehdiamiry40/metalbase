@@ -16,7 +16,7 @@ import {
 } from "@/components/Schema";
 import { pageMetadata } from "@/lib/metadata";
 import { regionHref, regions } from "@/lib/regions";
-import { SITE, serviceHref, services } from "@/lib/site";
+import { SITE, operations, serviceHref, services } from "@/lib/site";
 
 const EXPECTED_REGION_SLUGS = [
   "brisbane",
@@ -281,6 +281,12 @@ describe("Brisbane search landing pages", () => {
     expect(targets[1].source).toContain("/scrap-metal-brisbane");
   });
 
+  it("states that MetalBase has no public customer location", () => {
+    for (const target of targets) {
+      expect(target.source).toContain("no public customer drop-off location");
+    }
+  });
+
   it("permanently consolidates the superseded overlapping URLs", () => {
     const config = readFileSync(join(root, "next.config.mjs"), "utf8");
     expect(config).toContain('source: "/locations/brisbane"');
@@ -291,7 +297,7 @@ describe("Brisbane search landing pages", () => {
   });
 });
 
-describe("service schema launch guard", () => {
+describe("verified mobile service schema", () => {
   const input = {
     name: "Collection",
     description: "Collection options.",
@@ -299,24 +305,27 @@ describe("service schema launch guard", () => {
     verified: true,
   };
 
-  it("emits no unverified Service claim before launch", () => {
-    expect(serviceSchemaData(input, false)).toBeNull();
-  });
-
   it("emits no Service claim for a capability that is not verified", () => {
-    expect(serviceSchemaData({ ...input, verified: false }, true)).toBeNull();
+    expect(serviceSchemaData({ ...input, verified: false })).toBeNull();
   });
 
-  it("connects a verified service to the stable organisation identity", () => {
-    const data = serviceSchemaData(input, true);
+  it("connects the verified service to the organisation and service regions", () => {
+    const data = serviceSchemaData(input);
     expect(data).toMatchObject({
       "@type": "Service",
       url: `${SITE}/scrap-removal-brisbane`,
       provider: {
-        "@type": "RecyclingCenter",
+        "@type": "Organization",
         "@id": ORGANIZATION_ID,
       },
+      areaServed: operations.serviceRegions.map((name) => ({
+        "@type": "AdministrativeArea",
+        name,
+      })),
     });
+    expect(JSON.stringify(data)).not.toMatch(
+      /LocalBusiness|RecyclingCenter|PostalAddress|openingHours|aggregateRating/,
+    );
   });
 });
 

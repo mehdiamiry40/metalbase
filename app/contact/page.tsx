@@ -100,10 +100,10 @@ export default function ContactPage() {
               </ol>
             </div>
 
-            <Callout label="Before you visit">
-              Do not travel with a load until the yard location, opening hours,
-              accepted material and required identification have been confirmed.
-              Vehicle and regulated-material paperwork can vary by load.
+            <Callout label="Before anything moves">
+              MetalBase has no public customer drop-off location. If drop-off
+              suits the load, wait until the receiving destination, hours,
+              accepted material and arrival instructions have been confirmed.
             </Callout>
           </aside>
         </div>
