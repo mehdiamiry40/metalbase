@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { regions } from "@/lib/regions";
+import { regionHref, regions } from "@/lib/regions";
 import { company } from "@/lib/site";
 import { Logo } from "@/components/ui";
 
@@ -7,6 +7,7 @@ const columns = [
   {
     title: "Explore",
     links: [
+      { label: "Scrap metal Brisbane", href: "/scrap-metal-brisbane" },
       { label: "What we buy", href: "/what-we-buy" },
       { label: "How pricing works", href: "/prices" },
       { label: "Area & drop-off guide", href: "/locations" },
@@ -16,8 +17,8 @@ const columns = [
   {
     title: "For business",
     links: [
+      { label: "Scrap removal Brisbane", href: "/scrap-removal-brisbane" },
       { label: "Commercial services", href: "/services" },
-      { label: "Collection & bins", href: "/services/collection-and-bins" },
       { label: "Industrial scrap", href: "/services/industrial" },
       { label: "Demolition steel", href: "/services/demolition" },
     ],
@@ -26,7 +27,7 @@ const columns = [
     title: "Areas",
     links: regions.map((region) => ({
       label: region.name,
-      href: `/locations/${region.slug}`,
+      href: regionHref(region),
     })),
   },
   {
@@ -56,8 +57,8 @@ export default function Footer() {
           <div className="max-w-sm">
             <Logo />
             <p className="mt-7 text-base leading-relaxed t-muted">
-              Clearer scrap metal quote requests across South East
-              Queensland.
+              Scrap metal quote and removal enquiries in Brisbane and across
+              South East Queensland.
             </p>
             {tel && (
               <a

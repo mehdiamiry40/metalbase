@@ -3,6 +3,8 @@ import { join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { createRobots } from "@/app/robots";
 import { createSitemap } from "@/app/sitemap";
+import { metadata as scrapMetalBrisbaneMetadata } from "@/app/scrap-metal-brisbane/page";
+import { metadata as scrapRemovalBrisbaneMetadata } from "@/app/scrap-removal-brisbane/page";
 import {
   generateMetadata as generateRegionMetadata,
   generateStaticParams as generateRegionStaticParams,
@@ -13,8 +15,8 @@ import {
   serviceSchemaData,
 } from "@/components/Schema";
 import { pageMetadata } from "@/lib/metadata";
-import { regions } from "@/lib/regions";
-import { SITE, services } from "@/lib/site";
+import { regionHref, regions } from "@/lib/regions";
+import { SITE, serviceHref, services } from "@/lib/site";
 
 const EXPECTED_REGION_SLUGS = [
   "brisbane",
@@ -115,13 +117,19 @@ describe("sitemap and robots", () => {
     );
     for (const service of services) {
       expect(sitemap).toContainEqual(
-        expect.objectContaining({ url: `${SITE}/services/${service.slug}` }),
+        expect.objectContaining({ url: `${SITE}${serviceHref(service)}` }),
       );
     }
-    for (const slug of EXPECTED_REGION_SLUGS) {
-      const url = `${SITE}/locations/${slug}`;
+    for (const region of regions) {
+      const url = `${SITE}${regionHref(region)}`;
       expect(sitemap.filter((entry) => entry.url === url)).toHaveLength(1);
     }
+    expect(sitemap).not.toContainEqual(
+      expect.objectContaining({ url: `${SITE}/locations/brisbane` }),
+    );
+    expect(sitemap).not.toContainEqual(
+      expect.objectContaining({ url: `${SITE}/services/collection-and-bins` }),
+    );
   });
 });
 
@@ -139,7 +147,7 @@ describe("regional search pages", () => {
 
     for (const slug of EXPECTED_REGION_SLUGS) {
       const region = regions.find((item) => item.slug === slug)!;
-      const path = `/locations/${slug}`;
+      const path = regionHref(region);
       const metadata = await generateRegionMetadata({
         params: Promise.resolve({ slug }),
       });
@@ -229,6 +237,60 @@ describe("page metadata", () => {
   });
 });
 
+describe("Brisbane search landing pages", () => {
+  const targets = [
+    {
+      path: "/scrap-metal-brisbane",
+      phrase: "Scrap Metal Brisbane",
+      metadata: scrapMetalBrisbaneMetadata,
+      source: readFileSync(
+        join(root, "app/scrap-metal-brisbane/page.tsx"),
+        "utf8",
+      ),
+    },
+    {
+      path: "/scrap-removal-brisbane",
+      phrase: "Scrap Removal Brisbane",
+      metadata: scrapRemovalBrisbaneMetadata,
+      source: readFileSync(
+        join(root, "app/scrap-removal-brisbane/page.tsx"),
+        "utf8",
+      ),
+    },
+  ] as const;
+
+  it("assigns one self-canonical page to each keyword intent", () => {
+    for (const target of targets) {
+      expect(target.metadata.alternates?.canonical).toBe(target.path);
+      expect(String(target.metadata.openGraph?.url)).toBe(`${SITE}${target.path}`);
+      expect(String(target.metadata.title)).toContain(target.phrase);
+      expect(target.source.match(/<PageHeader\b/g)).toHaveLength(1);
+      expect(target.source).toContain(`path: "${target.path}"`);
+    }
+  });
+
+  it("links the two distinct intents to each other and to conversion pages", () => {
+    for (const target of targets) {
+      for (const href of ["/contact", "/what-we-buy"]) {
+        expect(target.source, `${target.path} does not link to ${href}`).toContain(
+          href,
+        );
+      }
+    }
+    expect(targets[0].source).toContain("/scrap-removal-brisbane");
+    expect(targets[1].source).toContain("/scrap-metal-brisbane");
+  });
+
+  it("permanently consolidates the superseded overlapping URLs", () => {
+    const config = readFileSync(join(root, "next.config.mjs"), "utf8");
+    expect(config).toContain('source: "/locations/brisbane"');
+    expect(config).toContain('destination: "/scrap-metal-brisbane"');
+    expect(config).toContain('source: "/services/collection-and-bins"');
+    expect(config).toContain('destination: "/scrap-removal-brisbane"');
+    expect(config.match(/permanent: true/g)).toHaveLength(2);
+  });
+});
+
 describe("service schema launch guard", () => {
   const input = {
     name: "Collection",
@@ -249,7 +311,7 @@ describe("service schema launch guard", () => {
     const data = serviceSchemaData(input, true);
     expect(data).toMatchObject({
       "@type": "Service",
-      url: `${SITE}/services/collection-and-bins`,
+      url: `${SITE}/scrap-removal-brisbane`,
       provider: {
         "@type": "RecyclingCenter",
         "@id": ORGANIZATION_ID,
@@ -264,7 +326,7 @@ describe("homepage search intent", () => {
   it("has one descriptive H1 and unique homepage metadata", () => {
     expect(homepage.match(/<h1\b/g)?.length).toBe(1);
     expect(homepage).toContain(
-      "Scrap Metal Quotes South East Queensland | MetalBase",
+      "MetalBase | Scrap Metal Quotes Across Brisbane & SEQ",
     );
     expect(homepage).toContain("description: homeDescription");
     expect(homepage).toMatch(/pageMetadata\s*\(/);
@@ -279,6 +341,8 @@ describe("homepage search intent", () => {
       "/locations",
       "/glossary",
       "/faq",
+      "/scrap-metal-brisbane",
+      "/scrap-removal-brisbane",
     ]) {
       expect(homepage, `homepage does not link to ${href}`).toContain(href);
     }

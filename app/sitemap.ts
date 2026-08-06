@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
-import { regions } from "@/lib/regions";
+import { regionHref, regions } from "@/lib/regions";
 import {
   PUBLISH_RATES,
   SEARCH_INDEXING_ENABLED,
   SITE,
+  serviceHref,
   services,
 } from "@/lib/site";
 
@@ -24,6 +25,7 @@ import {
  */
 
 const CONTENT_REVIEWED = new Date("2026-08-03");
+const BRISBANE_SEARCH_PAGES_REVIEWED = new Date("2026-08-07");
 
 const routes: {
   path: string;
@@ -55,19 +57,26 @@ export function createSitemap(
   return [
     ...routes.map((r) => ({
       url: `${SITE}${r.path}`,
-      lastModified: CONTENT_REVIEWED,
+      lastModified:
+        r.path === "" ? BRISBANE_SEARCH_PAGES_REVIEWED : CONTENT_REVIEWED,
       changeFrequency: r.changeFrequency,
       priority: r.priority,
     })),
     ...services.map((s) => ({
-      url: `${SITE}/services/${s.slug}`,
-      lastModified: CONTENT_REVIEWED,
+      url: `${SITE}${serviceHref(s)}`,
+      lastModified:
+        s.slug === "collection-and-bins"
+          ? BRISBANE_SEARCH_PAGES_REVIEWED
+          : CONTENT_REVIEWED,
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
     ...regions.map((region) => ({
-      url: `${SITE}/locations/${region.slug}`,
-      lastModified: new Date(region.reviewedAt),
+      url: `${SITE}${regionHref(region)}`,
+      lastModified:
+        region.slug === "brisbane"
+          ? BRISBANE_SEARCH_PAGES_REVIEWED
+          : new Date(region.reviewedAt),
       changeFrequency: "monthly" as const,
       priority: 0.75,
     })),

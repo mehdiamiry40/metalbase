@@ -8,8 +8,8 @@ import {
   SectionHead,
   TickList,
 } from "@/components/ui";
-import { regions } from "@/lib/regions";
-import { services } from "@/lib/site";
+import { regionHref, regions } from "@/lib/regions";
+import { serviceHref, services } from "@/lib/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
@@ -37,7 +37,7 @@ export default function ServicesPage() {
           {services.map((s) => (
             <Link
               key={s.slug}
-              href={`/services/${s.slug}`}
+              href={serviceHref(s)}
               className="row-link group grid gap-6 py-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-14"
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-slab lg:aspect-[4/3]">
@@ -91,7 +91,7 @@ export default function ServicesPage() {
               {regions.map((region) => (
                 <li key={region.slug} className="border-b hair last:border-b-0">
                   <Link
-                    href={`/locations/${region.slug}`}
+                    href={regionHref(region)}
                     className="group flex min-h-14 items-center justify-between gap-4 py-2 font-semibold transition-colors duration-[160ms] ease-out hover:text-signal"
                   >
                     {region.name}

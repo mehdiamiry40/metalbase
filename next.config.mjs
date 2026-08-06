@@ -21,6 +21,20 @@ const securityHeaders = [
 const nextConfig = {
   reactStrictMode: true,
   outputFileTracingRoot: projectRoot,
+  async redirects() {
+    return [
+      {
+        source: "/locations/brisbane",
+        destination: "/scrap-metal-brisbane",
+        permanent: true,
+      },
+      {
+        source: "/services/collection-and-bins",
+        destination: "/scrap-removal-brisbane",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },

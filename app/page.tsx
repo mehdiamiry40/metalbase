@@ -12,9 +12,9 @@ import type { PhotoKey } from "@/lib/photos";
 import { company } from "@/lib/site";
 import { pageMetadata } from "@/lib/metadata";
 
-const homeTitle = "Scrap Metal Quotes South East Queensland | MetalBase";
+const homeTitle = "MetalBase | Scrap Metal Quotes Across Brisbane & SEQ";
 const homeDescription =
-  "Request a scrap metal quote across Brisbane, the Gold Coast, Logan, Ipswich and the Redlands, with practical grading and preparation guidance.";
+  "Request a scrap metal quote or prepare a scrap removal enquiry in Brisbane, with practical guidance on grades, quantity, pricing and site access.";
 
 export const metadata = pageMetadata({
   path: "/",
@@ -55,8 +55,8 @@ const serviceLinks: {
   icon: YardIconName;
 }[] = [
   {
-    title: "Collection & bin enquiries",
-    href: "/services/collection-and-bins",
+    title: "Scrap removal Brisbane",
+    href: "/scrap-removal-brisbane",
     icon: "bin",
   },
   {
@@ -133,6 +133,10 @@ const homeFaqs = [
     q: "What if my load contains mixed metals?",
     a: "Separate obvious grades where practical and describe anything you cannot identify.",
   },
+  {
+    q: "Is scrap removal available in Brisbane?",
+    a: "Removal is assessed from the material, quantity, exact address, access, handling needs and timing. Send those details so the available options can be confirmed.",
+  },
 ];
 
 export default function Home() {
@@ -153,12 +157,14 @@ export default function Home() {
 
         <div className="shell relative z-10 py-24 text-center lg:py-32">
           <p className="t-index mx-auto mb-6 w-fit border-b border-white/70 pb-3">
-            Scrap metal quotes · South East Queensland
+            Quote guidance · Brisbane + South East Queensland
           </p>
-          <h1 className="mx-auto max-w-[13ch]">Scrap metal quotes, made clear.</h1>
+          <h1 className="mx-auto max-w-[15ch]">
+            Clearer scrap metal quotes across Brisbane.
+          </h1>
           <p className="t-lead mx-auto mt-7 max-w-[56ch] t-muted">
             Tell us the metal, quantity, condition and suburb for an indicative
-            quote.
+            quote or removal assessment.
           </p>
           <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
             <Button href="/contact">Get a quote</Button>
@@ -187,13 +193,13 @@ export default function Home() {
           condition and location.
         </p>
         <p className="mt-5 leading-relaxed">
-          MetalBase helps South East Queensland sellers prepare those details
-          before the next step. Final grade, receiving instructions,
+          MetalBase helps Brisbane and South East Queensland sellers prepare
+          those details before the next step. Final grade, receiving instructions,
           collection availability and commercial terms are confirmed for each
           enquiry.
         </p>
-        <ArrowLink href="/about" className="mt-8">
-          How MetalBase works
+        <ArrowLink href="/scrap-metal-brisbane" className="mt-8">
+          Scrap metal Brisbane guide
         </ArrowLink>
       </Split>
 

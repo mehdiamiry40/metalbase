@@ -116,7 +116,31 @@ logic.
 
 ---
 
-## 5. Content that would move the needle
+## 5. Brisbane search landing pages and indexing
+
+The two preferred organic-search pages are:
+
+- `https://www.metalbase.com.au/scrap-metal-brisbane`
+- `https://www.metalbase.com.au/scrap-removal-brisbane`
+
+`/locations/brisbane` and `/services/collection-and-bins` permanently redirect
+to those pages. Do not restore them as separate indexable pages or retarget the
+homepage to the same exact query; that would split one search intent across
+competing URLs.
+
+After deployment, submit `sitemap.xml` in the verified Google Search Console
+property, inspect both preferred URLs, request indexing and confirm Google's
+selected canonical after the redirects are crawled. Sitemap submission is a
+discovery hint, not a ranking or indexing guarantee.
+
+The removal page intentionally qualifies minimum quantity, equipment, timing,
+coverage, fees, payment and receiving instructions. Replace those cautions only
+with verified operating details; generic transactional claims cannot substitute
+for a real service.
+
+---
+
+## 6. Content that would move the needle
 
 Not blocking, but this is the gap between a competent site and a
 convincing one:
@@ -132,10 +156,17 @@ convincing one:
 
 ---
 
-## Verified in the current worktree — 6 August 2026
+## Verified in the current worktree — 7 August 2026
 
-- Production build, ESLint and TypeScript clean; 76 tests passing
+- Production build, ESLint and TypeScript clean; 79 tests passing
 - `npm audit --audit-level=high`: zero known vulnerabilities
+- Both Brisbane target pages prerender as static HTML with unique titles,
+  descriptions, H1s and self-canonicals
+- Superseded overlapping URLs return `308` redirects and are absent from the
+  sitemap
+- Every canonical sitemap URL returns `200` in a production-mode local crawl
+- Desktop and 390 px mobile browser checks show no horizontal overflow or
+  runtime console errors on either target page
 - Every public route crawled without broken links, console errors, duplicate
   IDs, missing image alternatives or heading skips in normal states
 - Zero horizontal overflow down to 320 px

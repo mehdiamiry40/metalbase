@@ -451,3 +451,14 @@ export const regions: RegionGuide[] = [
 export function getRegion(slug: string): RegionGuide | undefined {
   return regions.find((region) => region.slug === slug);
 }
+
+/**
+ * Brisbane has a dedicated search-intent page. The remaining entries stay
+ * under the regional-guide hub, while old Brisbane links are redirected at
+ * the framework level.
+ */
+export function regionHref(region: Pick<RegionGuide, "slug">): string {
+  return region.slug === "brisbane"
+    ? "/scrap-metal-brisbane"
+    : `/locations/${region.slug}`;
+}
