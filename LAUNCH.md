@@ -14,14 +14,16 @@ or enquiry delivery path. After every launch-related deploy, verify the live
 HTML, `robots.txt`, `sitemap.xml`, quote delivery, attachment delivery and
 response headers.
 
-Do not flip `LAUNCH_READY` until the facts below are supplied. The current tree
-intentionally ships `noindex, nofollow` and an empty sitemap.
+Search indexing is enabled through `SEARCH_INDEXING_ENABLED`, so the current
+tree publishes indexable page directives and a complete sitemap. Keep
+`LAUNCH_READY` disabled until the verified business facts below are supplied;
+that flag controls business and service claims, not search visibility.
 
 Before investing further in the brand, confirm ASIC business-name availability
 and search IP Australia for conflicting trade marks. An existing company with a
 similar name is a reason to check, not proof that the brand is unavailable.
 
-## 1. Business facts — blocks launch
+## 1. Business facts — blocks verified business schema
 
 Every unstruck value below is still `null` in `lib/site.ts`. Nothing is invented, so
 the UI omits whatever is missing rather than printing a placeholder. That
@@ -134,8 +136,8 @@ convincing one:
   IDs, missing image alternatives or heading skips in normal states
 - Zero horizontal overflow down to 320 px
 - All interactive controls ≥ 44 px
-- Every page self-canonicalises; unfinished pages are `noindex, nofollow`
-- Empty pre-launch sitemap and no sitemap advertisement in `robots.txt`
+- Every page self-canonicalises and is indexable
+- Complete sitemap published and advertised in `robots.txt`
 - Security headers present in the production-mode local response
 - Mobile navigation Escape/focus return, skip link, accordions, form errors,
   success focus and sticky action bar verified with keyboard checks
