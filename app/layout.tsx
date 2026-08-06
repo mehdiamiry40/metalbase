@@ -52,11 +52,11 @@ const barlow = Barlow({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: {
-    default: "MetalBase | South East Queensland Scrap Metal Quotes",
+    default: "MetalBase | Scrap Metal Brisbane Quotes & Removal",
     template: "%s | MetalBase",
   },
   description:
-    "Request a South East Queensland scrap-metal quote and find practical guidance on grading, preparation, pricing and site details to confirm.",
+    "Prepare a Brisbane scrap metal quote or removal enquiry with practical guidance on grading, quantity, pricing, location and site access.",
   /* No canonical here. A canonical in the root layout CASCADES to every
      page that does not override it, so setting "/" made nine inner pages
      declare the homepage as their canonical — telling Google they were
@@ -69,9 +69,9 @@ export const metadata: Metadata = {
     locale: "en_AU",
     siteName: "MetalBase",
     url: SITE,
-    title: "MetalBase | South East Queensland Scrap Metal Quotes",
+    title: "MetalBase | Scrap Metal Brisbane Quotes & Removal",
     description:
-      "South East Queensland scrap-metal quote requests and practical guidance on grades, preparation and pricing.",
+      "Brisbane scrap-metal quote and removal enquiries, with practical guidance on grades, preparation, pricing and site access.",
   },
   twitter: { card: "summary_large_image" },
   robots: SEARCH_INDEXING_ENABLED
@@ -92,7 +92,7 @@ function structuredData() {
     name: company.name,
     url: SITE,
     description:
-      "South East Queensland scrap-metal quote requests and practical grade guidance.",
+      "Brisbane scrap-metal quote and removal enquiries with practical grade guidance.",
   };
   if (company.legal) data.legalName = company.legal;
   if (company.abn) data.taxID = company.abn;

@@ -151,6 +151,11 @@ Harry Dona, Johnny Sanchez, Evan Demicoli, Pavel Neznanov.
 ## SEO & accessibility
 
 - Launch-gated organisation and service JSON-LD that omits unverified claims
+- One canonical page per core Brisbane intent:
+  `/scrap-metal-brisbane` for material, quote, pricing and receiving guidance;
+  `/scrap-removal-brisbane` for site collection assessment
+- Permanent redirects consolidate the superseded Brisbane region and
+  collection-service URLs, and the sitemap lists only the preferred pages
 - Favicon and OG image generated at build (`app/icon.tsx`, `app/opengraph-image.tsx`)
 - Indexable pages, a published `sitemap.xml` and an advertised sitemap in
   `robots.txt`; verified business schema remains separately launch-gated

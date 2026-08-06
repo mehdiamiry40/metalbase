@@ -8,7 +8,7 @@ import {
   Section,
   SectionHead,
 } from "@/components/ui";
-import { services } from "@/lib/site";
+import { serviceHref, services } from "@/lib/site";
 import type { PhotoKey } from "@/lib/photos";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -35,7 +35,7 @@ export async function generateMetadata({
     description: "The requested MetalBase service page could not be found.",
   });
   return pageMetadata({
-    path: `/services/${service.slug}`,
+    path: serviceHref(service),
     title: service.seoTitle,
     description: service.seoDescription,
   });
@@ -108,7 +108,7 @@ export default async function ServiceDetail({
           {others.map((o) => (
             <Link
               key={o.slug}
-              href={`/services/${o.slug}`}
+              href={serviceHref(o)}
               className="row-link group grid gap-3 py-7 md:grid-cols-[minmax(0,20rem)_1fr] md:gap-12"
             >
               <h3 className="group-hover:text-[color:var(--accent-text)]">

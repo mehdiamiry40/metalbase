@@ -263,6 +263,16 @@ export const services: Service[] = [
   },
 ];
 
+/**
+ * Collection/removal has a dedicated public landing page. Other commercial
+ * service guides remain grouped below /services.
+ */
+export function serviceHref(service: Pick<Service, "slug">): string {
+  return service.slug === "collection-and-bins"
+    ? "/scrap-removal-brisbane"
+    : `/services/${service.slug}`;
+}
+
 /* --------------------------- service areas -------------------------
    Areas useful for collection enquiries. A place appearing here does
    not promise coverage, equipment, minimum volume or timing; those are

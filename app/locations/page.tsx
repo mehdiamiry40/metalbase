@@ -10,7 +10,7 @@ import {
   YardIcon,
   type YardIconName,
 } from "@/components/ui";
-import { regions } from "@/lib/regions";
+import { regionHref, regions } from "@/lib/regions";
 import { company, locations } from "@/lib/site";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -73,7 +73,7 @@ export default function LocationsPage() {
           {regions.map((region, index) => (
             <li key={region.slug} className="border-b hair last:border-b-0">
               <Link
-                href={`/locations/${region.slug}`}
+                href={regionHref(region)}
                 className="group grid min-h-24 items-center gap-4 py-5 transition-colors duration-[160ms] ease-out hover:text-signal sm:grid-cols-[3rem_minmax(0,15rem)_1fr_auto] sm:gap-6"
               >
                 <YardIcon name="pin" className="hidden h-8 w-8 sm:block" />
@@ -95,8 +95,8 @@ export default function LocationsPage() {
           A regional guide does not guarantee collection. Send the exact
           address, material, approximate volume and site access so current
           equipment, minimum volume and timing can be assessed.{" "}
-          <ArrowLink href="/services/collection-and-bins" tone="accent">
-            Collection and container guide
+          <ArrowLink href="/scrap-removal-brisbane" tone="accent">
+            Brisbane scrap removal guide
           </ArrowLink>
         </Callout>
       </Section>

@@ -15,7 +15,7 @@ import {
   YardIcon,
 } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
-import { getRegion, regions } from "@/lib/regions";
+import { getRegion, regionHref, regions } from "@/lib/regions";
 
 type RegionPageProps = {
   params: Promise<{ slug: string }>;
@@ -35,7 +35,7 @@ export async function generateMetadata({
   if (!region) notFound();
 
   return pageMetadata({
-    path: `/locations/${region.slug}`,
+    path: regionHref(region),
     title: region.seoTitle,
     description: region.seoDescription,
   });
@@ -121,8 +121,8 @@ export default async function RegionPage({ params }: RegionPageProps) {
       >
         <p className="mt-5 leading-relaxed">{region.focusBody}</p>
         <TickList items={region.focusPoints} className="mt-8" />
-        <ArrowLink href="/services/collection-and-bins" className="mt-8">
-          Collection and container guide
+        <ArrowLink href="/scrap-removal-brisbane" className="mt-8">
+          Brisbane scrap removal guide
         </ArrowLink>
       </Split>
 
@@ -191,7 +191,7 @@ export default async function RegionPage({ params }: RegionPageProps) {
             {otherRegions.map((item) => (
               <li key={item.slug}>
                 <Link
-                  href={`/locations/${item.slug}`}
+                  href={regionHref(item)}
                   className="inline-flex min-h-11 items-center font-semibold u-link"
                 >
                   {item.name}

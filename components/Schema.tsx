@@ -1,4 +1,4 @@
-import { LAUNCH_READY, SITE, company } from "@/lib/site";
+import { LAUNCH_READY, SITE, company, serviceHref } from "@/lib/site";
 
 /** Stable identity shared by every schema node that refers to MetalBase. */
 export const ORGANIZATION_ID = `${SITE}/#organization`;
@@ -153,7 +153,7 @@ export function serviceSchemaData(
       name,
       description,
       serviceType: name,
-      url: `${SITE}/services/${slug}`,
+      url: `${SITE}${serviceHref({ slug })}`,
       areaServed: { "@type": "City", name: "Brisbane" },
       provider: {
         "@type": "RecyclingCenter",
