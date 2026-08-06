@@ -22,7 +22,7 @@ export default function ContactPage() {
         eyebrow="Get in touch"
         photo="mixed-parts"
         title="Tell us what you have"
-        intro="Send the material type, rough quantity, condition and suburb. Add access details if collection may be needed."
+        intro="Send the material type, rough quantity, condition and suburb. Attach clear photos and add access details if collection may be needed."
         trail={[{ label: "Home", href: "/" }, { label: "Contact" }]}
       />
 

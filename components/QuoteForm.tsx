@@ -3,6 +3,12 @@
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { ArrowRight, Tick } from "@/components/ui";
+import {
+  ACCEPTED_PHOTO_TYPES,
+  MAX_PHOTO_BYTES,
+  MAX_PHOTOS,
+  type AcceptedPhotoType,
+} from "@/lib/enquiry-config";
 import { company } from "@/lib/site";
 
 const enquiryTypes = [
@@ -53,6 +59,91 @@ const errCls = "mt-1.5 text-sm font-semibold text-ink";
 
 type State = "idle" | "sending" | "sent" | "error";
 
+type PreparedPhoto = {
+  name: string;
+  type: AcceptedPhotoType;
+  content: string;
+};
+
+const acceptedPhotoTypes = new Set<string>(ACCEPTED_PHOTO_TYPES);
+
+function canvasBlob(
+  canvas: HTMLCanvasElement,
+  quality: number,
+): Promise<Blob | null> {
+  return new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", quality));
+}
+
+function toBase64(buffer: ArrayBuffer): string {
+  const bytes = new Uint8Array(buffer);
+  const chunkSize = 0x8000;
+  let binary = "";
+  for (let offset = 0; offset < bytes.length; offset += chunkSize) {
+    binary += String.fromCharCode(
+      ...bytes.subarray(offset, offset + chunkSize),
+    );
+  }
+  return btoa(binary);
+}
+
+async function preparePhoto(file: File): Promise<PreparedPhoto> {
+  if (!acceptedPhotoTypes.has(file.type)) {
+    throw new Error("Use JPEG, PNG or WebP images.");
+  }
+
+  const objectUrl = URL.createObjectURL(file);
+  try {
+    const image = new Image();
+    image.src = objectUrl;
+    await new Promise<void>((resolve, reject) => {
+      image.onload = () => resolve();
+      image.onerror = () => reject(new Error("That image could not be read."));
+    });
+
+    const maxDimension = 1600;
+    const scale = Math.min(
+      1,
+      maxDimension / Math.max(image.naturalWidth, image.naturalHeight),
+    );
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+    canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+
+    const context = canvas.getContext("2d");
+    if (!context) throw new Error("That image could not be prepared.");
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+    let quality = 0.82;
+    let blob = await canvasBlob(canvas, quality);
+    while (blob && blob.size > MAX_PHOTO_BYTES && quality > 0.42) {
+      quality -= 0.1;
+      blob = await canvasBlob(canvas, quality);
+    }
+
+    if (!blob || blob.size > MAX_PHOTO_BYTES) {
+      throw new Error(
+        "One photo is still too large after compression. Try a closer crop.",
+      );
+    }
+
+    const base = file.name
+      .replace(/\.[^.]+$/, "")
+      .replace(/[^a-zA-Z0-9._ -]/g, "")
+      .trim()
+      .slice(0, 80) || "scrap-photo";
+
+    return {
+      name: `${base}.jpg`,
+      type: "image/jpeg",
+      content: toBase64(await blob.arrayBuffer()),
+    };
+  } finally {
+    URL.revokeObjectURL(objectUrl);
+  }
+}
+
 export default function QuoteForm() {
   const uid = useId();
   const typeRef = useRef<HTMLSelectElement>(null);
@@ -61,6 +152,9 @@ export default function QuoteForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [message, setMessage] = useState("");
   const [picked, setPicked] = useState<string[]>([]);
+  const [photos, setPhotos] = useState<PreparedPhoto[]>([]);
+  const [photoError, setPhotoError] = useState("");
+  const [preparingPhotos, setPreparingPhotos] = useState(false);
   const tel = company.phone?.replace(/\s/g, "");
 
   useEffect(() => {
@@ -71,8 +165,35 @@ export default function QuoteForm() {
     setPicked((p) => (p.includes(m) ? p.filter((x) => x !== m) : [...p, m]));
   }
 
+  async function onPhotoChange(
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) {
+    const files = Array.from(event.target.files ?? []);
+    setPhotoError("");
+
+    if (files.length > MAX_PHOTOS) {
+      setPhotoError(`Choose no more than ${MAX_PHOTOS} photos.`);
+      event.target.value = "";
+      return;
+    }
+
+    setPreparingPhotos(true);
+    try {
+      setPhotos(await Promise.all(files.map(preparePhoto)));
+    } catch (error) {
+      setPhotos([]);
+      setPhotoError(
+        error instanceof Error ? error.message : "Those photos could not be prepared.",
+      );
+      event.target.value = "";
+    } finally {
+      setPreparingPhotos(false);
+    }
+  }
+
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (preparingPhotos) return;
     setState("sending");
     setErrors({});
     setMessage("");
@@ -89,6 +210,7 @@ export default function QuoteForm() {
       detail: String(fd.get("detail") ?? ""),
       website: String(fd.get("website") ?? ""),
       materials: picked,
+      photos,
     };
 
     try {
@@ -176,6 +298,8 @@ export default function QuoteForm() {
           onClick={() => {
             setState("idle");
             setPicked([]);
+            setPhotos([]);
+            setPhotoError("");
             requestAnimationFrame(() => typeRef.current?.focus());
           }}
           className="mt-6 font-semibold underline decoration-1 underline-offset-4 transition-colors duration-[160ms] ease-out hover:text-steel"
@@ -197,8 +321,10 @@ export default function QuoteForm() {
     >
       {/* Announced to screen readers without stealing focus. */}
       <p aria-live="polite" className="sr-only">
-        {busy
-          ? "Sending your enquiry"
+        {preparingPhotos
+          ? "Preparing your photos"
+          : busy
+            ? "Sending your enquiry"
           : errorCount > 0
             ? `${errorCount} ${errorCount === 1 ? "field needs" : "fields need"} attention`
             : ""}
@@ -363,6 +489,41 @@ export default function QuoteForm() {
         </fieldset>
 
         <div className="sm:col-span-2">
+          <label className={labelCls} htmlFor={`${uid}-photos`}>
+            Photos <span className="font-normal t-muted">(optional, up to {MAX_PHOTOS})</span>
+          </label>
+          <input
+            id={`${uid}-photos`}
+            name="photos"
+            type="file"
+            accept={ACCEPTED_PHOTO_TYPES.join(",")}
+            multiple
+            disabled={busy || preparingPhotos}
+            onChange={onPhotoChange}
+            aria-invalid={!!photoError}
+            aria-describedby={`${uid}-photos-help${photoError ? ` ${uid}-photos-err` : ""}`}
+            className={`${field} file:mr-4 file:border-0 file:bg-furnace file:px-3 file:py-2 file:font-semibold file:text-white`}
+          />
+          <p id={`${uid}-photos-help`} className="mt-2 text-sm t-muted">
+            Clear photos of the full load and any labels help us assess the material.
+            Images are compressed before sending.
+          </p>
+          {preparingPhotos && (
+            <p className="mt-2 text-sm font-semibold">Preparing photos…</p>
+          )}
+          {photos.length > 0 && !preparingPhotos && (
+            <p className="mt-2 text-sm font-semibold">
+              {photos.length} {photos.length === 1 ? "photo" : "photos"} ready
+            </p>
+          )}
+          {photoError && (
+            <p id={`${uid}-photos-err`} className={errCls}>
+              {photoError}
+            </p>
+          )}
+        </div>
+
+        <div className="sm:col-span-2">
           <label className={labelCls} htmlFor={`${uid}-detail`}>
             Anything else we should know?
           </label>
@@ -388,10 +549,10 @@ export default function QuoteForm() {
             lose contrast with the sheet it sits on. */}
         <button
           type="submit"
-          disabled={busy}
+          disabled={busy || preparingPhotos}
           className="btn btn-solid disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {busy ? "Sending…" : "Send enquiry"}
+          {preparingPhotos ? "Preparing photos…" : busy ? "Sending…" : "Send enquiry"}
           {!busy && <ArrowRight className="h-6 w-6" />}
         </button>
         <p className="max-w-sm text-sm t-muted">

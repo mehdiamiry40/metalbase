@@ -1,3 +1,10 @@
+import {
+  ACCEPTED_PHOTO_TYPES,
+  MAX_PHOTO_BASE64_CHARS,
+  MAX_PHOTOS,
+  type AcceptedPhotoType,
+} from "@/lib/enquiry-config";
+
 /* ------------------------------------------------------------------
    Pure enquiry logic — no framework, no I/O, so it can be unit tested.
    The route handler is a thin shell around this.
@@ -13,8 +20,15 @@ export type RawEnquiry = {
   volume?: unknown;
   materials?: unknown;
   detail?: unknown;
+  photos?: unknown;
   /** Honeypot: must be empty. */
   website?: unknown;
+};
+
+export type EnquiryPhoto = {
+  name: string;
+  type: AcceptedPhotoType;
+  content: string;
 };
 
 export type CleanEnquiry = {
@@ -27,6 +41,7 @@ export type CleanEnquiry = {
   volume: string;
   materials: string[];
   detail: string;
+  photos: EnquiryPhoto[];
 };
 
 const LIMITS = {
@@ -40,7 +55,38 @@ const LIMITS = {
   detail: 4000,
   material: 60,
   materialCount: 20,
+  photoName: 100,
 } as const;
+
+const acceptedPhotoTypes = new Set<string>(ACCEPTED_PHOTO_TYPES);
+const BASE64 = /^[A-Za-z0-9+/]+={0,2}$/;
+
+function sanitisePhoto(value: unknown): EnquiryPhoto | null {
+  if (!value || typeof value !== "object") return null;
+
+  const candidate = value as Record<string, unknown>;
+  const name = clean(candidate.name, LIMITS.photoName)
+    .replace(/[^a-zA-Z0-9._ -]/g, "")
+    .replace(/\s+/g, " ");
+  const type =
+    typeof candidate.type === "string" && acceptedPhotoTypes.has(candidate.type)
+      ? (candidate.type as AcceptedPhotoType)
+      : null;
+  const content =
+    typeof candidate.content === "string" ? candidate.content : "";
+
+  if (
+    !name ||
+    !type ||
+    content.length === 0 ||
+    content.length > MAX_PHOTO_BASE64_CHARS ||
+    !BASE64.test(content)
+  ) {
+    return null;
+  }
+
+  return { name, type, content };
+}
 
 /** Trim, cap length, and strip control characters. */
 export function clean(value: unknown, max: number): string {
@@ -74,6 +120,12 @@ export function sanitise(raw: RawEnquiry): CleanEnquiry {
           .filter(Boolean)
       : [],
     detail: clean(raw.detail, LIMITS.detail),
+    photos: Array.isArray(raw.photos)
+      ? raw.photos
+          .slice(0, MAX_PHOTOS)
+          .map(sanitisePhoto)
+          .filter((photo): photo is EnquiryPhoto => photo !== null)
+      : [],
   };
 }
 
@@ -99,6 +151,8 @@ export function formatSummary(data: CleanEnquiry): string {
     data.suburb && `Suburb: ${data.suburb}`,
     data.volume && `Volume: ${data.volume}`,
     data.materials.length > 0 && `Materials: ${data.materials.join(", ")}`,
+    data.photos.length > 0 &&
+      `Photos attached: ${data.photos.length}`,
     data.detail && `\n${data.detail}`,
   ]
     .filter(Boolean)

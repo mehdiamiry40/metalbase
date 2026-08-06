@@ -1,6 +1,6 @@
 # MetalBase — Brisbane scrap metal quotes
 
-Next.js 15 marketing site. App Router, TypeScript, Tailwind v4.
+Next.js 16.3 marketing site. App Router, TypeScript, Tailwind v4.
 
 ```bash
 npm install
@@ -8,7 +8,7 @@ cp .env.example .env.local  # optional local delivery configuration
 npm run dev        # http://localhost:3000
 ```
 
-Node 18.18+. Verified on Node 22 with a clean production build.
+Node 20.9+. Verified on Node 22 with a clean production build.
 
 ## ⚠️ Before this goes live
 
@@ -39,8 +39,8 @@ software landing page: galvanised neutrals, square edges, visible rules,
 condensed yard-signage headings and tabular figures. Layouts read as continuous
 editorial records instead of collections of floating cards.
 
-There are two type families. IBM Plex Sans carries body copy, controls and
-tabular data; Barlow Condensed carries display headings. Signal rust is reserved
+There are two type families. Open Sans carries body copy, controls and tabular
+data; Barlow carries display headings. Signal rust is reserved
 for primary actions and light-surface focus. It is never used as decoration.
 
 | Token | Value |
@@ -51,8 +51,8 @@ for primary actions and light-surface focus. It is never used as decoration.
 | Yard fog | `#EDEFE9` — alternate bands and hover states |
 | Scale paper | `#FAFAF6` — primary page surface and text on dark |
 | Signal rust | `#C24724` — primary action and light-surface focus only |
-| Display | Barlow Condensed, weight 600 |
-| Body / data | IBM Plex Sans, tabular figures where required |
+| Display | Barlow, weights 500–700 |
+| Body / data | Open Sans, weights 400–600 |
 | Type scale | `12 / 14 / 16 / 20 / 32 / 44 / 64px` |
 | Spacing | `4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 96px` |
 | Buttons | Square, 52px minimum height, 160ms colour transition |
@@ -93,7 +93,9 @@ but shouldn't is invisible to the rename guard.
 ## Enquiry form
 
 `components/QuoteForm.tsx` → `POST /api/enquiry`. Server-side validation,
-honeypot and rate limiting. Delivery is configured by environment:
+honeypot and rate limiting. Customers can attach up to three JPEG, PNG or WebP
+photos; the browser resizes and compresses them before delivery. Delivery is
+configured by environment:
 
 ```bash
 RESEND_API_KEY=...
@@ -153,9 +155,9 @@ Harry Dona, Johnny Sanchez, Evan Demicoli, Pavel Neznanov.
 
 ## Security
 
-Pinned to `next@15.5.22` (React2Shell — CVE-2025-55182 / CVE-2025-66478) plus
-`sharp` and `postcss` overrides. `npm audit`: 0 vulnerabilities. See
-[SECURITY.md](./SECURITY.md) before upgrading Next.js.
+Pinned to `next@16.3.0` with matching ESLint tooling. The earlier React2Shell
+remediation is retained in project history; current verification and header
+policy are documented in [SECURITY.md](./SECURITY.md).
 
 ## Content
 

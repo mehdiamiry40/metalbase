@@ -16,7 +16,7 @@ const sections = [
     id: "privacy",
     h: "Privacy",
     p: [
-      "The enquiry form collects your name and at least one reply method—email address or phone number—plus any company, suburb, material and load details you add. Do not include identification documents or bank details in the website form.",
+      "The enquiry form collects your name and at least one reply method—email address or phone number—plus any company, suburb, material and load details you add. Optional photos are compressed in your browser and passed to the configured email or workflow provider with the enquiry. Do not include identification documents, bank details or images containing unrelated personal information.",
       "Some transactions may require identity, ownership, vehicle or transaction records. Confirm what is needed before you travel and provide sensitive documents only through an agreed secure process.",
       "Personal information is used to respond to enquiries, prepare proposed trade arrangements and meet applicable record-keeping obligations. Form submissions are processed by the website host and the configured email or workflow delivery provider, which may process data outside Australia. Personal information is not sold.",
       "Enquiry data may remain in the configured delivery system and business records while the enquiry is handled and for any period required by applicable record-keeping obligations.",

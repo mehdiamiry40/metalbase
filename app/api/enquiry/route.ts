@@ -76,6 +76,14 @@ export async function POST(request: Request) {
           ...(data.email ? { reply_to: data.email } : {}),
           subject: `Quote enquiry — ${data.enquiryType} — ${data.name}`,
           text: summary,
+          ...(data.photos.length > 0
+            ? {
+                attachments: data.photos.map((photo) => ({
+                  filename: photo.name,
+                  content: photo.content,
+                })),
+              }
+            : {}),
         }),
         signal: AbortSignal.timeout(DELIVERY_TIMEOUT_MS),
       });

@@ -94,6 +94,32 @@ describe("sanitise", () => {
     const many = Array.from({ length: 50 }, (_, i) => `m${i}`);
     expect(sanitise({ materials: many }).materials).toHaveLength(20);
   });
+
+  it("keeps only valid, bounded photo attachments", () => {
+    const valid = {
+      name: " copper-load.jpg ",
+      type: "image/jpeg",
+      content: Buffer.from("photo").toString("base64"),
+    };
+    const photos = sanitise({
+      photos: [
+        valid,
+        { ...valid, type: "image/svg+xml" },
+        { ...valid, content: "not base64!" },
+      ],
+    }).photos;
+
+    expect(photos).toEqual([{ ...valid, name: "copper-load.jpg" }]);
+  });
+
+  it("caps photo attachments at three", () => {
+    const photo = {
+      name: "load.jpg",
+      type: "image/jpeg",
+      content: Buffer.from("photo").toString("base64"),
+    };
+    expect(sanitise({ photos: Array(10).fill(photo) }).photos).toHaveLength(3);
+  });
 });
 
 describe("isBot", () => {
@@ -118,6 +144,18 @@ describe("formatSummary", () => {
   it("includes materials when present", () => {
     const out = formatSummary(sanitise({ ...good, materials: ["Copper", "Lead"] }));
     expect(out).toContain("Materials: Copper, Lead");
+  });
+
+  it("reports the attachment count without including photo content", () => {
+    const content = Buffer.from("photo").toString("base64");
+    const out = formatSummary(
+      sanitise({
+        ...good,
+        photos: [{ name: "load.jpg", type: "image/jpeg", content }],
+      }),
+    );
+    expect(out).toContain("Photos attached: 1");
+    expect(out).not.toContain(content);
   });
 });
 
