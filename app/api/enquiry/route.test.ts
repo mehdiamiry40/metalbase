@@ -56,9 +56,31 @@ describe("POST /api/enquiry", () => {
       ok: false,
       error: "Online enquiries are temporarily unavailable.",
     });
-    expect(warning.mock.calls.flat().join(" ")).not.toContain(
-      "customer@example.com",
-    );
+    const logged = warning.mock.calls.flat().join(" ");
+    expect(logged).not.toContain("Test Customer");
+    expect(logged).not.toContain("customer@example.com");
+    expect(logged).not.toContain("0400 000 000");
+  });
+
+  it("uses the verified inbox by default and permits an environment override", async () => {
+    for (const key of ENV_KEYS) delete process.env[key];
+    process.env.RESEND_API_KEY = "re_test";
+
+    const providerBodies: Record<string, unknown>[] = [];
+    const providerFetch: typeof fetch = async (_input, init) => {
+      providerBodies.push(JSON.parse(String(init?.body)));
+      return new Response(JSON.stringify({ id: "email_1" }), { status: 200 });
+    };
+    vi.stubGlobal("fetch", providerFetch);
+
+    const defaultResponse = await POST(enquiryRequest("test-default-inbox"));
+    expect(defaultResponse.status).toBe(200);
+    expect(providerBodies[0].to).toEqual(["mehdiamiry40@gmail.com"]);
+
+    process.env.ENQUIRY_TO = "quotes@example.com";
+    const overrideResponse = await POST(enquiryRequest("test-override-inbox"));
+    expect(overrideResponse.status).toBe(200);
+    expect(providerBodies[1].to).toEqual(["quotes@example.com"]);
   });
 
   it("times out provider calls and never logs provider response bodies", async () => {

@@ -67,6 +67,11 @@ export default function Footer() {
                 {company.phoneLabel ?? company.phone}
               </a>
             )}
+            {company.hours && (
+              <p className="mt-3 text-sm t-muted">
+                Contact hours: {company.hours}
+              </p>
+            )}
           </div>
 
           {columns.map((column) => (
@@ -93,7 +98,8 @@ export default function Footer() {
         <div className="mt-14 flex flex-col gap-6 border-t hair pt-7 text-sm t-muted sm:flex-row sm:items-start sm:justify-between">
           <div>
             <p>
-              © {new Date().getFullYear()} {company.legal ?? company.name}
+              © {new Date().getFullYear()} {company.name}
+              {company.legal ? ` · Operated by ${company.legal}` : null}
               {company.abn ? ` · ABN ${company.abn}` : null}
             </p>
             <p className="mt-3 max-w-[58ch] leading-relaxed">

@@ -14,18 +14,20 @@ Node 20.9+. Verified on Node 22 with a clean production build.
 
 Search indexing is enabled through `SEARCH_INDEXING_ENABLED`. Verified
 local-business and service schema remains disabled because `LAUNCH_READY` is
-`false` and several business values are still `null`.
+`false`; the licensing and operating model and all three service capabilities
+remain unverified.
 
-An earlier version carried an invented ABN, dealer licence number, certifications,
-staff, tonnage claims and prices. On a live commercial site those are false
-representations, not harmless placeholder copy.
+An earlier version carried an invented ABN, dealer licence number,
+certifications, staff, tonnage claims and prices. The operator, correct ABN,
+phone and contact hours are now verified; the other claims remain disabled.
 
-They have been removed. Nothing invents a number on your behalf. Fill in:
+Nothing invents a number on your behalf. Current status:
 
 | Where | What |
 |---|---|
-| `company` in `lib/site.ts` | Registered entity, ABN, licence number, email and address |
-| `locations` | Verified receiving addresses and hours (currently empty → page asks visitors to confirm before travelling) |
+| `company` in `lib/site.ts` | Verified operator, ABN, phone and contact hours; licence, public email and street address remain unset |
+| `app/api/enquiry/route.ts` | Server-only verified quote inbox, with an optional environment override |
+| `locations` | No street address is published; the empty list makes the page ask visitors to confirm before travelling |
 | `stats` | Any figure you can defend (currently empty → the band doesn't render) |
 | `priceGroups` | Real rates, then set `PUBLISH_RATES = true` |
 | `/legal` | Have the privacy and trade wording reviewed before launch |
@@ -96,20 +98,21 @@ but shouldn't is invisible to the rename guard.
 `components/QuoteForm.tsx` → `POST /api/enquiry`. Server-side validation,
 honeypot and rate limiting. Customers can attach up to three JPEG, PNG or WebP
 photos; the browser resizes and compresses them before delivery. Delivery is
-configured by environment:
+configured server-side:
 
 ```bash
 RESEND_API_KEY=...
-ENQUIRY_TO=quotes@example.com
+ENQUIRY_TO=quotes@example.com  # optional recipient override
 ENQUIRY_FROM=...          # optional; use a verified sender
 # or
 ENQUIRY_WEBHOOK_URL=...   # Zapier, Make, CRM
 ```
 
-Email delivery requires both `RESEND_API_KEY` and `ENQUIRY_TO`. Webhook delivery
-requires `ENQUIRY_WEBHOOK_URL`. With neither path configured, the endpoint
-returns `503`, logs no customer details and the form shows a click-to-call
-fallback. It never pretends an enquiry was delivered.
+Email delivery requires `RESEND_API_KEY` and defaults to the verified quote
+inbox, `mehdiamiry40@gmail.com`; `ENQUIRY_TO` can override that destination.
+Webhook delivery requires `ENQUIRY_WEBHOOK_URL`. Without a Resend key or webhook,
+the endpoint returns `503`, logs no customer details and the form shows a
+click-to-call fallback. It never pretends an enquiry was delivered.
 
 The rate limiter uses one atomic Upstash transaction and a sliding one-minute
 window when its URL and token are configured, with an in-memory fallback for
