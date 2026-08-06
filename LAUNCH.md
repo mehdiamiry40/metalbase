@@ -16,9 +16,10 @@ response headers.
 
 Search indexing is enabled through `SEARCH_INDEXING_ENABLED`, so the current
 tree publishes indexable page directives and a complete sitemap. Keep
-`LAUNCH_READY` disabled until the licensing and operating model and relevant
-service capabilities are verified; that flag controls business and service
-claims, not search visibility.
+The mobile operating model and collection/bin capability are verified.
+`PUBLIC_LOCATION_ENABLED` remains disabled because customers cannot visit a
+MetalBase location; that flag controls physical-location claims, not search
+visibility or individually verified services.
 
 Before investing further in the brand, confirm ASIC business-name availability
 and search IP Australia for conflicting trade marks. An existing company with a
@@ -37,20 +38,21 @@ does not identify itself as a licensed dealer or publish a street address.
 | ~~`abn`~~ | footer and structured data | ✅ **Set.** `62 351 619 456`. |
 | ~~`hours`~~ | footer and contact | ✅ **Set.** `8am–5pm, 7 days a week`, presented as contact hours rather than yard hours. |
 | `email` | footer, contact, legal | No direct email route |
-| `head` | footer, legal, `PostalAddress` schema | Intentionally unset: no street address is verified for publication |
-| `licence` | footer, sustainability | QLD second-hand dealer licence. See the legal note below. |
+| `head` | footer, legal, `PostalAddress` schema | Intentionally unset: MetalBase has no public customer location |
+| `licence` | nowhere | Intentionally unpublished at the operator's request |
 | `priceDate` | prices | Rate board cannot state when it was set |
 
-Do not flip `LAUNCH_READY`, service `verified` flags or `PUBLISH_RATES` merely
-because the identity fields above are complete. Each still needs its own
-operational evidence.
+Do not enable `PUBLIC_LOCATION_ENABLED`, another service `verified` flag or
+`PUBLISH_RATES` merely because the identity fields above are complete. Each
+still needs its own operational evidence.
 
-### Confirm the operating and licensing model
+### Verified operating model
 
-Before launch, have the operator and a Queensland legal adviser confirm whether
-MetalBase is the licensed merchant, a broker or an enquiry service, which
-licence and record-keeping rules apply, and which entity operates the site.
-Do not publish a licence number or licensed-dealer claim until it is verified.
+MetalBase is a mobile service-area business. Customers cannot visit; truck
+drivers collect from customer sites across Brisbane, Gold Coast, Sunshine
+Coast, Logan and Ipswich. Bins are available, and suitable drop-offs use an
+arranged receiving destination. Do not publish a licence number or a public
+street address.
 
 ---
 
@@ -99,7 +101,7 @@ the current policy. Confirm these before replacing the cautious enquiry wording:
 - the full exclusion list — asbestos, gas bottles, whitegoods with refrigerant
 - end-of-life vehicles: accepted? what paperwork? pickup?
 - whether to publish a public rate board
-- collection radius and minimum volume for a bin
+- bin sizes, placement requirements, minimum volume and hire terms
 
 Record each verified answer in the page or shared content model that renders it.
 Do not restore the removed catch-all FAQ data or publish an operational promise
@@ -133,10 +135,10 @@ property, inspect both preferred URLs, request indexing and confirm Google's
 selected canonical after the redirects are crawled. Sitemap submission is a
 discovery hint, not a ranking or indexing guarantee.
 
-The removal page intentionally qualifies minimum quantity, equipment, timing,
-coverage, fees, payment and receiving instructions. Replace those cautions only
-with verified operating details; generic transactional claims cannot substitute
-for a real service.
+The removal page now states the verified five-region coverage, customer-site
+collection and bin availability directly. It still qualifies minimum quantity,
+equipment, timing, fees, payment and arranged receiving instructions because
+those details remain job-specific.
 
 ---
 
@@ -145,11 +147,12 @@ for a real service.
 Not blocking, but this is the gap between a competent site and a
 convincing one:
 
-- **Real photography.** Every image is stock. One afternoon at the yard
-  with a phone would beat all of it. Drop files into `public/photos/`
+- **Real photography.** Every image is stock. Photograph the trucks, drivers,
+  bins, loading process and team. Drop files into `public/photos/`
   using the existing keys and set `USE_LOCAL = true` in `lib/photos.ts`.
-- **Google Business Profile.** Confirm the operating model and profile
-  eligibility first. Do not publish an unverified street address to create one.
+- **Google Business Profile.** A hidden-address service-area profile is set up
+  with the five verified regions. Google still requires a real private postal
+  address for verification; that address is not shown to customers.
 - **Reviews.** `stats` in `lib/site.ts` is deliberately empty — an
   earlier version claimed 182,000 t recovered, 98.6% diversion and 31
   years trading, all invented. Add real figures and they render.
@@ -158,7 +161,7 @@ convincing one:
 
 ## Verified in the current worktree — 7 August 2026
 
-- Production build, ESLint and TypeScript clean; 79 tests passing
+- Production build, ESLint and TypeScript clean; 80 tests passing
 - `npm audit --audit-level=high`: zero known vulnerabilities
 - Both Brisbane target pages prerender as static HTML with unique titles,
   descriptions, H1s and self-canonicals
@@ -179,10 +182,11 @@ convincing one:
 
 ## Known limitations
 
-- **Licensing and operating model claims remain unverified.** The operator and
-  ABN are now set, but launch mode stays blocked; the public email, street
-  address and licence remain intentionally unset.
-- **`locations` is empty**, so the locations page has no yard list. It
-  renders without one rather than inventing an address.
-- **Photography is stock**, so it cannot prove the real yard, team or
-  equipment. Replace it before relying on imagery as a trust signal.
+- **No public customer location.** `locations` stays empty and physical-location
+  schema stays disabled. Drop-off destinations are arranged per enquiry.
+- **Licence details are intentionally unpublished.** Do not add them to source,
+  visible copy or schema.
+- **Photography is stock**, so it cannot prove the trucks, drivers, bins, team
+  or collection work. Replace it before relying on imagery as a trust signal.
+- **No completed-job proof or reviews yet.** Keep testimonials, ratings, case
+  studies and `stats` empty until real evidence exists.

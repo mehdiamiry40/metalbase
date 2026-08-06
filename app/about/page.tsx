@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
   path: "/about",
   title: "How MetalBase Scrap Enquiries Work",
   description:
-    "MetalBase helps Brisbane sellers prepare clearer scrap metal enquiries with useful material, quantity and condition details.",
+    "MetalBase provides mobile scrap metal collection across Brisbane, Gold Coast, Sunshine Coast, Logan and Ipswich.",
 });
 
 const values = [
@@ -39,9 +39,9 @@ const values = [
 ];
 
 const safety = [
-  "Confirm the current site and arrival instructions before travelling",
-  "Bring closed footwear and follow the PPE directions at the gate",
-  "Stay with the vehicle until a spotter directs you",
+  "Confirm the exact collection address, access route and site contact",
+  "Keep people clear of the proposed loading and vehicle movement area",
+  "Follow the customer site's induction, traffic and PPE requirements",
   "Declare tanks, batteries, fluids and other regulated material in advance",
 ];
 
@@ -52,7 +52,7 @@ export default function AboutPage() {
         eyebrow="About"
         photo="yard-wide"
         title="About MetalBase"
-        intro="Clear load details, grade assumptions and next steps for Brisbane scrap metal enquiries."
+        intro="Mobile customer-site scrap collection, bins and arranged receiving across five South East Queensland regions."
         trail={[{ label: "Home", href: "/" }, { label: "About" }]}
       />
 
@@ -72,12 +72,12 @@ export default function AboutPage() {
         title="Clear details before the next step"
       >
         <p className="t-lead mt-5" id="story">
-          MetalBase is a Brisbane scrap metal enquiry service for ferrous and
-          non-ferrous loads. Useful requests describe the material, quantity,
-          condition and location.
+          MetalBase is a mobile scrap metal collection and removal service for
+          Brisbane, the Gold Coast, Sunshine Coast, Logan and Ipswich. Our truck
+          drivers visit customer sites; customers cannot visit a MetalBase yard.
         </p>
         <p className="mt-4">
-          Current grade, receiving instructions, collection availability and
+          Current grade, collection timing, arranged receiving instructions and
           commercial terms are confirmed for each enquiry.
         </p>
       </Split>
@@ -97,8 +97,8 @@ export default function AboutPage() {
           <SectionHead
             index={2}
             eyebrow="Safety"
-            title="Treat every yard visit as an industrial visit"
-            intro="Requirements vary by site and load. Confirm the location, hours, PPE and unloading instructions before setting out."
+            title="Plan every customer-site collection safely"
+            intro="Requirements vary by site and load. Confirm access, hazards, responsibilities, PPE and the collection method before work starts."
             className="mb-0"
           />
           <TickList items={safety} className="lg:pt-4" />

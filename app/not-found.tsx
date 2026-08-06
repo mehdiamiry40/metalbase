@@ -5,7 +5,7 @@ const links = [
   { label: "What we buy", href: "/what-we-buy" },
   { label: "How pricing works", href: "/prices" },
   { label: "For business", href: "/services" },
-  { label: "Plan a drop-off", href: "/locations" },
+  { label: "Service areas", href: "/locations" },
   { label: "Glossary", href: "/glossary" },
   { label: "Sustainability", href: "/sustainability" },
   { label: "FAQ", href: "/faq" },

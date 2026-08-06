@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FaqList, FaqSchema } from "@/components/Faq";
+import { ServiceSchema } from "@/components/Schema";
 import { DefinitionRows, PageHeader, Steps } from "@/components/sections";
 import {
   ArrowLink,
@@ -12,14 +13,18 @@ import {
   TickList,
 } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
-import { serviceAreas } from "@/lib/site";
+import { operations, serviceAreas, services } from "@/lib/site";
 
 export const metadata = pageMetadata({
   path: "/scrap-removal-brisbane",
   title: "Scrap Removal Brisbane | Site Collection Guide",
   description:
-    "Plan a Brisbane scrap removal enquiry with load, access and safety details. Collection availability, scope and terms are confirmed for each site.",
+    "MetalBase provides scrap removal across Brisbane, with drivers collecting from customer sites and bins available for suitable jobs.",
 });
+
+const removalService = services.find(
+  (service) => service.slug === "collection-and-bins",
+)!;
 
 const assessmentSteps = [
   {
@@ -148,7 +153,7 @@ const removalFaqs = [
   },
   {
     q: "Are bins, lifting equipment or loading labour included?",
-    a: "Do not assume a container, equipment or labour is included. Available handling options, loading responsibilities, placement requirements, minimum quantity and commercial terms are confirmed in the written scope for each enquiry.",
+    a: "Bins are available. Container size, placement, schedule, minimum quantity, loading responsibilities, any other equipment or labour, and commercial terms are confirmed for each job.",
   },
   {
     q: "What should not be loaded for collection?",
@@ -156,20 +161,26 @@ const removalFaqs = [
   },
   {
     q: "Can I take the scrap to a receiving location instead?",
-    a: "Do not travel based on this page. If drop-off is relevant, the receiving location or yard instructions, opening hours, accepted material, identification, paperwork and any applicable licence or permit requirements are confirmed for the enquiry before you travel.",
+    a: "MetalBase has no public customer drop-off location. When drop-off is suitable, the receiving destination, hours, accepted material and arrival instructions are arranged and confirmed for that enquiry before you travel.",
   },
 ];
 
 export default function ScrapRemovalBrisbanePage() {
   return (
     <>
+      <ServiceSchema
+        name={removalService.title}
+        description={removalService.seoDescription}
+        slug={removalService.slug}
+        verified={removalService.verified}
+      />
       <FaqSchema items={removalFaqs} />
 
       <PageHeader
         eyebrow="Collection assessment"
         photo="tipper"
         title="Scrap removal Brisbane"
-        intro="Plan a Brisbane scrap removal enquiry around the actual load and site. Send the material, estimated quantity, address, access and safety constraints so availability, scope and terms can be assessed."
+        intro="MetalBase drivers collect scrap from customer sites across Brisbane. Send the material, estimated quantity, address, access and safety constraints so the job scope, timing and terms can be confirmed."
         trail={[
           { label: "Home", href: "/" },
           { label: "Scrap removal Brisbane" },
@@ -204,7 +215,7 @@ export default function ScrapRemovalBrisbanePage() {
                 {
                   term: "Need the material collected from a site?",
                   detail:
-                    "Continue with the assessment below. The address, access, responsibilities, safety controls and current service options all affect the answer.",
+                    "MetalBase provides customer-site collection. Continue with the assessment below so the address, access, responsibilities, safety controls and job-specific arrangements can be confirmed.",
                 },
                 {
                   term: "Planning an ongoing or project service?",
@@ -311,7 +322,7 @@ export default function ScrapRemovalBrisbanePage() {
                 "Exact coverage, minimum quantity and proposed timing",
                 "Handling method, any available equipment or labour, and loading responsibilities",
                 "Collection cost, whether pickup is free, and any payment or settlement terms",
-                "Required documents, applicable licence or permit checks, and receiving instructions",
+                "Required documents, identification or permit checks, and receiving instructions",
               ]}
             />
           </div>
@@ -352,9 +363,9 @@ export default function ScrapRemovalBrisbanePage() {
       <Section id="coverage" tone="slab" className="scroll-mt-20">
         <SectionHead
           index={6}
-          eyebrow="Coverage examples"
-          title="Brisbane and nearby areas to include in an enquiry"
-          intro="Use the exact address rather than relying on a suburb name. These places are examples for enquiry planning and do not promise collection coverage."
+          eyebrow="Verified service areas"
+          title="Collection across five South East Queensland regions"
+          intro={`MetalBase drivers collect from customer sites across ${operations.serviceRegions.join(", ")}. Send the exact address so access, timing and the load-specific scope can be confirmed.`}
         />
 
         <div className="grid border-y hair lg:grid-cols-2">
@@ -374,11 +385,10 @@ export default function ScrapRemovalBrisbanePage() {
         </div>
 
         <Callout className="mt-10" label="Confirmed for every enquiry">
-          Exact service area, availability, timing—including same-day
-          requests—minimum quantity, equipment, collection cost—including
-          whether pickup is free—payment or settlement terms, applicable
-          licence or permit requirements, and any receiving-location or yard
-          instructions are confirmed for the specific load and address.
+          Timing—including same-day requests—minimum quantity, equipment,
+          collection cost—including whether pickup is free—payment or
+          settlement terms, and any arranged receiving instructions are
+          confirmed for the specific load and address.
         </Callout>
 
         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

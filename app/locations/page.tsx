@@ -4,27 +4,26 @@ import {
   ArrowLink,
   Button,
   Callout,
-  ChipList,
   Section,
   SectionHead,
   YardIcon,
   type YardIconName,
 } from "@/components/ui";
 import { regionHref, regions } from "@/lib/regions";
-import { company, locations } from "@/lib/site";
+import { company, operations } from "@/lib/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   path: "/locations",
-  title: "Scrap Metal Area Guides South East Queensland",
+  title: "Scrap Metal Collection Areas South East Queensland",
   description:
-    "Regional scrap metal enquiry guides for Brisbane, the Gold Coast, Logan, Ipswich and the Redlands, plus practical drop-off preparation.",
+    "MetalBase customer-site scrap collection across Brisbane, Gold Coast, Sunshine Coast, Logan and Ipswich, plus arranged receiving guidance.",
 });
 
 const dropoffChecks: { title: string; body: string; icon: YardIconName }[] = [
   {
     title: "Destination",
-    body: "Confirm the receiving location, hours and accepted material.",
+    body: "Get the arranged receiving destination, hours and accepted material.",
     icon: "pin",
   },
   {
@@ -48,10 +47,10 @@ export default function LocationsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Area + drop-off guide"
+        eyebrow="Service areas + arranged receiving"
         photo="tipper"
-        title="Scrap metal enquiry guides by area"
-        intro="Prepare a clearer enquiry for Brisbane, the Gold Coast, Logan, Ipswich or the Redlands—then confirm the receiving or collection details before anything moves."
+        title="Customer-site collection across South East Queensland"
+        intro={`MetalBase drivers collect across ${operations.serviceRegions.join(", ")}. Customers cannot visit a MetalBase location; suitable drop-offs are arranged per enquiry.`}
         trail={[{ label: "Home", href: "/" }, { label: "Area guides" }]}
       >
         <div className="flex flex-col justify-center gap-3 sm:flex-row">
@@ -92,85 +91,46 @@ export default function LocationsPage() {
           ))}
         </ul>
         <Callout className="mt-10" label="Collection coverage">
-          A regional guide does not guarantee collection. Send the exact
-          address, material, approximate volume and site access so current
-          equipment, minimum volume and timing can be assessed.{" "}
+          Customer-site collection is available across the five listed service
+          regions. Send the exact address, material, approximate volume and site
+          access so equipment, minimum volume, timing and terms can be confirmed.{" "}
           <ArrowLink href="/scrap-removal-brisbane" tone="accent">
             Brisbane scrap removal guide
           </ArrowLink>
         </Callout>
       </Section>
 
-      {/* yards -------------------------------------------------------- */}
       <Section tone="slab">
         <SectionHead
           index={2}
-          eyebrow="Destination"
-          title={locations.length > 0 ? "Where to find us" : "Confirm your receiving location"}
-          intro={
-            locations.length > 0
-              ? undefined
-              : "Call before travelling so the load can be matched to the current receiving instructions."
-          }
+          eyebrow="No customer location"
+          title="MetalBase has no public drop-off yard"
+          intro="Our truck drivers visit customer sites. When drop-off is suitable for a load, MetalBase arranges and confirms the receiving destination and arrival instructions before you travel."
         />
-        {locations.length > 0 ? (
-          <div className="divide-y divide-[color:var(--hair)] border-y hair">
-            {locations.map((l) => (
-              <div
-                key={l.id}
-                id={l.id}
-                className="grid scroll-mt-20 gap-4 py-8 md:grid-cols-[minmax(0,18rem)_1fr] md:gap-12"
+        <div className="flex flex-col gap-6 border-y hair py-7 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.08em] t-muted">
+              Call before anything moves
+            </p>
+            {company.phone ? (
+              <a
+                href={`tel:${company.phone.replace(/\s/g, "")}`}
+                className="mt-2 inline-flex min-h-11 items-center font-mono text-2xl font-semibold u-link"
               >
-                <div>
-                  <h3>{l.name}</h3>
-                  <p className="t-index mt-2 t-accent">{l.role}</p>
-                </div>
-                <div className="space-y-3">
-                  {l.address && <p className="text-base">{l.address}</p>}
-                  {l.hours && <p className="t-muted">{l.hours}</p>}
-                  {l.features.length > 0 && (
-                    <ChipList className="pt-1" items={l.features} />
-                  )}
-                  {l.address && (
-                    <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(l.address)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block pt-2 font-semibold t-accent u-link"
-                    >
-                      Directions
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))}
+                {company.phoneLabel ?? company.phone}
+              </a>
+            ) : (
+              <p className="mt-2 t-muted">Use the enquiry form.</p>
+            )}
           </div>
-        ) : (
-          <div className="flex flex-col gap-6 border-y hair py-7 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.08em] t-muted">
-                Call before you load
-              </p>
-              {company.phone ? (
-                <a
-                  href={`tel:${company.phone.replace(/\s/g, "")}`}
-                  className="mt-2 inline-flex min-h-11 items-center font-mono text-2xl font-semibold u-link"
-                >
-                  {company.phoneLabel ?? company.phone}
-                </a>
-              ) : (
-                <p className="mt-2 t-muted">Use the enquiry form.</p>
-              )}
-            </div>
-            <Button href="/contact">Confirm a drop-off</Button>
-          </div>
-        )}
+          <Button href="/contact">Arrange collection or drop-off</Button>
+        </div>
       </Section>
 
       <Section id="how-it-works" className="scroll-mt-20 pb-20 pt-12 lg:pb-24 lg:pt-16">
         <SectionHead
           index={3}
-          eyebrow="Before you travel"
+          eyebrow="Arranged drop-off"
           title="Four things to confirm"
           intro="Get the current answer for your load before it leaves the site."
         />

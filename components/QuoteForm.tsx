@@ -13,7 +13,7 @@ import { company } from "@/lib/site";
 
 const enquiryTypes = [
   "Scrap metal quote",
-  "Drop-off question",
+  "Arranged drop-off question",
   "Collection or container enquiry",
   "Commercial site enquiry",
   "Something else",

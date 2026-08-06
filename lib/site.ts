@@ -22,9 +22,9 @@
  */
 export const SEARCH_INDEXING_ENABLED = true;
 
-/** Enable verified local-business and service claims only after every required
- * business fact below has a real, defensible value. */
-export const LAUNCH_READY = false;
+/** A public customer location is intentionally disabled. MetalBase operates as
+ * a mobile service-area business and does not invite customers to an address. */
+export const PUBLIC_LOCATION_ENABLED = false;
 
 /** Canonical origin. Single source for metadata, sitemap and schema.
  *  It is referenced by canonicals, Open Graph and every JSON-LD block,
@@ -37,7 +37,7 @@ export const company = {
   /* --- verified identity and contact details ------------------ */
   legal: "Emir Group Pty Ltd" as string | null,
   abn: "62 351 619 456" as string | null,
-  /** QLD second-hand dealer licence. Leave null until issued. */
+  /** Intentionally unpublished at the operator's request. */
   licence: null as string | null,
   /** E.164. This is the machine value: it becomes the `tel:` href and
    *  the JSON-LD `telephone`, both of which want a country code so the
@@ -56,6 +56,23 @@ export const company = {
   /** Date the rate board was last set, e.g. "22 July 2026". */
   priceDate: null as string | null,
   /* -------------------------------------------------------------- */
+};
+
+/** Verified operating model. Keep load-specific commercial details out until
+ * they have also been confirmed by the operator. */
+export const operations = {
+  businessModel: "service-area" as const,
+  customerVisits: false,
+  collections: true,
+  bins: true,
+  arrangedDropOff: true,
+  serviceRegions: [
+    "Brisbane",
+    "Gold Coast",
+    "Sunshine Coast",
+    "Logan",
+    "Ipswich",
+  ] as const,
 };
 
 /* ---------------------------- navigation --------------------------- */
@@ -173,14 +190,14 @@ type Service = {
 export const services: Service[] = [
   {
     slug: "collection-and-bins",
-    verified: false,
-    title: "Collection & bin enquiries",
+    verified: true,
+    title: "Collection & bins",
     seoTitle: "Scrap Metal Collection Enquiries Brisbane",
     seoDescription:
-      "Prepare a Brisbane scrap collection or container enquiry with material, volume and site-access details.",
-    audience: "For sites reviewing collection or container options",
+      "Arrange scrap metal collection or bins across Brisbane and nearby service areas with material, volume and site-access details.",
+    audience: "For sites needing scrap collection or bins",
     blurb:
-      "Use this page to prepare a collection or bin-hire enquiry. Material, volume, access, service area, container options and timing are assessed for each site.",
+      "MetalBase drivers collect from customer sites, and bins are available. Material, volume, access, container requirements, timing and terms are confirmed for each job.",
     photo: "tipper",
     points: [
       {
@@ -274,73 +291,59 @@ export function serviceHref(service: Pick<Service, "slug">): string {
 }
 
 /* --------------------------- service areas -------------------------
-   Areas useful for collection enquiries. A place appearing here does
-   not promise coverage, equipment, minimum volume or timing; those are
-   confirmed for the proposed site and material.
+   Verified collection regions. Equipment, minimum volume, timing and
+   commercial terms are still confirmed for the proposed site and load.
    ------------------------------------------------------------------ */
 
 export const serviceAreas: { region: string; places: string[] }[] = [
   {
-    region: "Brisbane inner & north",
+    region: "Brisbane",
     places: [
+      "All Brisbane suburbs",
       "Brisbane CBD",
-      "Fortitude Valley",
-      "Newstead",
-      "Bowen Hills",
       "Eagle Farm",
-      "Pinkenba",
-      "Geebung",
-      "Virginia",
-      "Northgate",
-    ],
-  },
-  {
-    region: "Brisbane south & east",
-    places: [
       "Rocklea",
-      "Archerfield",
-      "Salisbury",
-      "Coopers Plains",
       "Wacol",
-      "Murarrie",
-      "Hemmant",
-      "Wynnum",
-      "Capalaba",
     ],
   },
   {
-    region: "Ipswich & the western corridor",
+    region: "Gold Coast",
     places: [
-      "Ipswich",
-      "Bundamba",
-      "Carole Park",
-      "Redbank",
-      "Springfield",
-      "Goodna",
-      "Swanbank",
+      "All Gold Coast suburbs",
+      "Southport",
+      "Burleigh Heads",
+      "Nerang",
+      "Yatala",
     ],
   },
   {
-    region: "Logan, Redlands & the Gold Coast corridor",
+    region: "Sunshine Coast",
     places: [
-      "Logan",
+      "All Sunshine Coast areas",
+      "Caloundra",
+      "Maroochydore",
+      "Nambour",
+      "Mooloolaba",
+    ],
+  },
+  {
+    region: "Logan",
+    places: [
+      "All Logan suburbs",
       "Meadowbrook",
       "Berrinba",
-      "Yatala",
       "Beenleigh",
-      "Ormeau",
-      "Redland Bay",
+      "Springwood",
     ],
   },
   {
-    region: "Moreton Bay & north",
+    region: "Ipswich",
     places: [
-      "Brendale",
-      "Strathpine",
-      "North Lakes",
-      "Narangba",
-      "Caboolture",
-      "Redcliffe",
+      "All Ipswich suburbs",
+      "Bundamba",
+      "Redbank",
+      "Goodna",
+      "Springfield",
     ],
   },
 ];

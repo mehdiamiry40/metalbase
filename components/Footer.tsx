@@ -10,7 +10,7 @@ const columns = [
       { label: "Scrap metal Brisbane", href: "/scrap-metal-brisbane" },
       { label: "What we buy", href: "/what-we-buy" },
       { label: "How pricing works", href: "/prices" },
-      { label: "Area & drop-off guide", href: "/locations" },
+      { label: "Service areas & arranged drop-off", href: "/locations" },
       { label: "Scrap glossary", href: "/glossary" },
     ],
   },
@@ -57,8 +57,8 @@ export default function Footer() {
           <div className="max-w-sm">
             <Logo />
             <p className="mt-7 text-base leading-relaxed t-muted">
-              Scrap metal quote and removal enquiries in Brisbane and across
-              South East Queensland.
+              Mobile scrap metal collection, bins and quote enquiries across
+              Brisbane and South East Queensland.
             </p>
             {tel && (
               <a

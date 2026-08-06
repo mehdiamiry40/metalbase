@@ -70,7 +70,7 @@ const serviceLinks: {
     icon: "beam",
   },
   {
-    title: "Area & drop-off guidance",
+    title: "Service areas & arranged drop-off",
     href: "/locations",
     icon: "pin",
   },
@@ -135,7 +135,7 @@ const homeFaqs = [
   },
   {
     q: "Is scrap removal available in Brisbane?",
-    a: "Removal is assessed from the material, quantity, exact address, access, handling needs and timing. Send those details so the available options can be confirmed.",
+    a: "Yes. MetalBase drivers collect from customer sites across Brisbane. Send the material, quantity, exact address, access, handling needs and timing so the job-specific scope can be confirmed.",
   },
 ];
 
@@ -193,10 +193,10 @@ export default function Home() {
           condition and location.
         </p>
         <p className="mt-5 leading-relaxed">
-          MetalBase helps Brisbane and South East Queensland sellers prepare
-          those details before the next step. Final grade, receiving instructions,
-          collection availability and commercial terms are confirmed for each
-          enquiry.
+          MetalBase provides mobile collection across Brisbane, the Gold Coast,
+          Sunshine Coast, Logan and Ipswich. Final grade, collection timing,
+          arranged receiving instructions and commercial terms are confirmed
+          for each enquiry.
         </p>
         <ArrowLink href="/scrap-metal-brisbane" className="mt-8">
           Scrap metal Brisbane guide
@@ -264,7 +264,8 @@ export default function Home() {
       >
         <p className="mt-5 leading-relaxed">
           Tell us what is on site, how much there is and what access looks like.
-          Available options are confirmed for each enquiry.
+          Our drivers collect from customer sites, with bins and job-specific
+          timing, equipment and terms confirmed for each enquiry.
         </p>
         <ul className="mt-8 border-y hair">
           {serviceLinks.map((service) => (

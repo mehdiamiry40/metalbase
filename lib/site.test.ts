@@ -2,20 +2,22 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
-  LAUNCH_READY,
   PUBLISH_RATES,
+  PUBLIC_LOCATION_ENABLED,
   SEARCH_INDEXING_ENABLED,
   company,
   locations,
   nav,
+  operations,
   priceGroups,
+  serviceAreas,
   services,
 } from "./site";
 
 /* ------------------------------------------------------------------
    These guard the thing that actually went wrong on this project: the
    site shipping with invented business credentials. If someone puts a
-   plausible-looking number back in without setting LAUNCH_READY, CI
+   plausible-looking number back in without enabling a public location, CI
    fails.
    ------------------------------------------------------------------ */
 
@@ -30,9 +32,9 @@ describe("launch guards", () => {
     });
   });
 
-  it("keeps unverified operating claims and street addresses unpublished", () => {
+  it("keeps the private address and licence unpublished", () => {
     expect(SEARCH_INDEXING_ENABLED).toBe(true);
-    expect(LAUNCH_READY).toBe(false);
+    expect(PUBLIC_LOCATION_ENABLED).toBe(false);
     expect(PUBLISH_RATES).toBe(false);
     expect(company.licence).toBeNull();
     expect(company.head).toBeNull();
@@ -40,17 +42,29 @@ describe("launch guards", () => {
     expect(locations).toEqual([]);
   });
 
-  it("requires verified business facts before launch mode can be enabled", () => {
-    if (LAUNCH_READY) {
-      expect(company.abn?.trim()).toBeTruthy();
-      expect(company.legal?.trim()).toBeTruthy();
-      expect(company.licence?.trim()).toBeTruthy();
-      expect(company.email?.trim()).toBeTruthy();
+  it("publishes the verified mobile service-area model", () => {
+    expect(operations).toEqual({
+      businessModel: "service-area",
+      customerVisits: false,
+      collections: true,
+      bins: true,
+      arrangedDropOff: true,
+      serviceRegions: [
+        "Brisbane",
+        "Gold Coast",
+        "Sunshine Coast",
+        "Logan",
+        "Ipswich",
+      ],
+    });
+    expect(serviceAreas.map(({ region }) => region)).toEqual(
+      operations.serviceRegions,
+    );
+  });
+
+  it("requires an actual address before a public location can be enabled", () => {
+    if (PUBLIC_LOCATION_ENABLED) {
       expect(company.head?.trim()).toBeTruthy();
-      expect(company.phone?.trim()).toBeTruthy();
-      expect(company.phoneLabel?.trim()).toBeTruthy();
-      expect(company.hours?.trim()).toBeTruthy();
-      expect(company.priceDate?.trim()).toBeTruthy();
       expect(locations.length).toBeGreaterThan(0);
     }
   });
@@ -237,10 +251,10 @@ describe("services", () => {
     }
   });
 
-  it("keeps all three unverified service capabilities disabled", () => {
+  it("enables only the verified collection and bin service", () => {
     expect(services).toHaveLength(3);
     expect(services.map(({ slug, verified }) => ({ slug, verified }))).toEqual([
-      { slug: "collection-and-bins", verified: false },
+      { slug: "collection-and-bins", verified: true },
       { slug: "industrial", verified: false },
       { slug: "demolition", verified: false },
     ]);

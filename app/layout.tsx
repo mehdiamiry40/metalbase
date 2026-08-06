@@ -7,11 +7,12 @@ import Footer from "@/components/Footer";
 import MobileActionBar from "@/components/MobileActionBar";
 import { ORGANIZATION_ID } from "@/components/Schema";
 import {
-  LAUNCH_READY,
+  PUBLIC_LOCATION_ENABLED,
   SEARCH_INDEXING_ENABLED,
   SITE,
   company,
   locations,
+  operations,
 } from "@/lib/site";
 
 /**
@@ -87,7 +88,10 @@ export const metadata: Metadata = {
 function structuredData() {
   const data: Record<string, unknown> = {
     "@context": "https://schema.org",
-    "@type": LAUNCH_READY && company.head ? "RecyclingCenter" : "Organization",
+    "@type":
+      PUBLIC_LOCATION_ENABLED && company.head
+        ? "RecyclingCenter"
+        : "Organization",
     "@id": ORGANIZATION_ID,
     name: company.name,
     url: SITE,
@@ -98,7 +102,11 @@ function structuredData() {
   if (company.abn) data.taxID = company.abn;
   if (company.phone) data.telephone = company.phone;
   if (company.email) data.email = company.email;
-  if (company.head) {
+  data.areaServed = operations.serviceRegions.map((name) => ({
+    "@type": "AdministrativeArea",
+    name,
+  }));
+  if (PUBLIC_LOCATION_ENABLED && company.head) {
     data.address = {
       "@type": "PostalAddress",
       streetAddress: company.head,
@@ -107,7 +115,7 @@ function structuredData() {
       addressCountry: "AU",
     };
   }
-  if (locations.length) {
+  if (PUBLIC_LOCATION_ENABLED && locations.length) {
     data.location = locations
       .filter((l) => l.address)
       .map((l) => ({

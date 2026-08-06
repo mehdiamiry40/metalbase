@@ -10,24 +10,28 @@ npm run dev        # http://localhost:3000
 
 Node 20.9+. Verified on Node 22 with a clean production build.
 
-## ⚠️ Before publishing verified business claims
+## Verified business model and remaining guards
 
-Search indexing is enabled through `SEARCH_INDEXING_ENABLED`. Verified
-local-business and service schema remains disabled because `LAUNCH_READY` is
-`false`; the licensing and operating model and all three service capabilities
-remain unverified.
+Search indexing is enabled through `SEARCH_INDEXING_ENABLED`. MetalBase is a
+verified mobile service-area business: customers cannot visit, drivers collect
+from customer sites, bins are available, and suitable drop-offs are arranged
+per enquiry. `PUBLIC_LOCATION_ENABLED` remains `false`, so no public address or
+physical-location schema can render. Service schema is enabled only for the
+verified collection-and-bin capability.
 
 An earlier version carried an invented ABN, dealer licence number,
 certifications, staff, tonnage claims and prices. The operator, correct ABN,
-phone and contact hours are now verified; the other claims remain disabled.
+phone, contact hours and mobile operating model are now verified. Licence
+details remain intentionally unpublished, and unsupported claims stay disabled.
 
 Nothing invents a number on your behalf. Current status:
 
 | Where | What |
 |---|---|
-| `company` in `lib/site.ts` | Verified operator, ABN, phone and contact hours; licence, public email and street address remain unset |
+| `company` in `lib/site.ts` | Verified operator, ABN, phone and contact hours; licence, public email and street address remain unpublished |
+| `operations` in `lib/site.ts` | No customer visits; collection, bins and arranged drop-off across Brisbane, Gold Coast, Sunshine Coast, Logan and Ipswich |
 | `app/api/enquiry/route.ts` | Server-only verified quote inbox, with an optional environment override |
-| `locations` | No street address is published; the empty list makes the page ask visitors to confirm before travelling |
+| `locations` | Empty by design: MetalBase has no public customer location |
 | `stats` | Any figure you can defend (currently empty → the band doesn't render) |
 | `priceGroups` | Real rates, then set `PUBLISH_RATES = true` |
 | `/legal` | Have the privacy and trade wording reviewed before launch |
@@ -141,7 +145,7 @@ npm run photos            # download into public/photos
 # then set USE_LOCAL = true in lib/photos.ts
 ```
 
-For your own yard photography, keep the keys and drop files in
+For real truck, driver, bin and collection photography, keep the keys and drop files in
 `public/photos/<key>.jpg`.
 
 Credits: Yasin Hemmati, Zoshua Colah, Load It Up Dumpster Rental, Daniel Fazio,
@@ -150,7 +154,8 @@ Harry Dona, Johnny Sanchez, Evan Demicoli, Pavel Neznanov.
 
 ## SEO & accessibility
 
-- Launch-gated organisation and service JSON-LD that omits unverified claims
+- Organisation JSON-LD with verified service areas and no physical-location claim
+- Service JSON-LD only for the verified collection-and-bin capability
 - One canonical page per core Brisbane intent:
   `/scrap-metal-brisbane` for material, quote, pricing and receiving guidance;
   `/scrap-removal-brisbane` for site collection assessment
@@ -158,7 +163,7 @@ Harry Dona, Johnny Sanchez, Evan Demicoli, Pavel Neznanov.
   collection-service URLs, and the sitemap lists only the preferred pages
 - Favicon and OG image generated at build (`app/icon.tsx`, `app/opengraph-image.tsx`)
 - Indexable pages, a published `sitemap.xml` and an advertised sitemap in
-  `robots.txt`; verified business schema remains separately launch-gated
+  `robots.txt`; physical-location schema remains disabled
 - Skip link, visible focus rings on both surfaces, labelled form controls with
   `aria-invalid` / `aria-describedby`, `prefers-reduced-motion` respected
 - Body text and accent both clear WCAG AA on paper
@@ -180,8 +185,8 @@ taxonomy* and its *process*, and that every competitor hides both behind a
 |---|---|
 | `priceGroups` | 28 grades across three streams. Home shows three visual summaries; `/prices` carries the full `Ledger` |
 | `glossary` | Standard trade terms — `/glossary` |
-| `services` | Three business enquiry scopes — `/services` and its detail pages |
-| `serviceAreas` | Areas listed for collection enquiries — `/locations`, `/services` |
+| `services` | Three business scopes; collection and bins are verified, while industrial and demolition remain enquiry guides |
+| `serviceAreas` | The five verified customer-site collection regions — `/locations`, `/scrap-removal-brisbane` |
 
 The cautious customer FAQ copy lives beside the route in `app/faq/page.tsx`,
 and the homepage carries its own shorter quote-focused subset. Do not restore

@@ -10,9 +10,9 @@ import {
 import { glossary } from "@/lib/site";
 import { pageMetadata } from "@/lib/metadata";
 
-/* These answers are intentionally limited to guidance that does not depend on
-   an unpublished yard address, operating hour, minimum load, payment policy,
-   collection radius, licence detail or material-acceptance decision. */
+/* These answers are intentionally limited to verified service-area facts and
+   guidance that does not depend on a minimum load, payment policy or
+   material-acceptance decision. */
 const publishedFaqs = [
   {
     q: "What should I send for a useful quote?",
@@ -79,10 +79,10 @@ export default function FaqPage() {
               </div>
             </Panel>
 
-            <Callout label="Bringing a load">
-              Confirm the current yard, opening hours, accepted material and
-              identification requirements before travelling. Vehicle and
-              regulated-material paperwork can vary.
+            <Callout label="Arranged drop-off only">
+              MetalBase has no public customer drop-off location. If drop-off
+              suits the load, the receiving destination, hours, accepted
+              material and arrival instructions are confirmed before travel.
             </Callout>
           </aside>
         </div>

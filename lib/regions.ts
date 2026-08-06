@@ -50,9 +50,9 @@ export type RegionGuide = {
 /**
  * Regional enquiry guides, not branch listings.
  *
- * Place names help a customer describe a job. They do not state that
- * MetalBase has a yard in that suburb or guarantee collection there; every
- * page repeats that distinction in visible copy beside the place list.
+ * Place names help a customer describe a job. They never state that MetalBase
+ * has a public yard in that suburb. Collection coverage is verified separately
+ * from the load-specific timing, equipment, minimums and commercial terms.
  */
 export const regions: RegionGuide[] = [
   {
@@ -123,11 +123,11 @@ export const regions: RegionGuide[] = [
       "Hemmant",
     ],
     placeNote:
-      "These are examples commonly used to describe a Brisbane enquiry. Send the exact address; a listed suburb does not confirm collection.",
+      "MetalBase provides customer-site collection across Brisbane. Send the exact address so access, timing, equipment and terms can be confirmed for the load.",
     faqs: [
       {
         q: "Is scrap collection available across Brisbane?",
-        a: "Collection depends on the exact address, material, volume, access, equipment and timing. Send those details for assessment; a suburb name alone does not guarantee availability.",
+        a: "Yes. MetalBase drivers collect across Brisbane. Send the exact address, material, volume, access and timing so the job-specific equipment, schedule and terms can be confirmed.",
       },
       {
         q: "What should I include for a managed Brisbane site?",
@@ -201,11 +201,11 @@ export const regions: RegionGuide[] = [
       "Burleigh Heads",
     ],
     placeNote:
-      "Use your exact Gold Coast suburb and site address. These examples help describe the area and do not guarantee collection or a particular response time.",
+      "MetalBase provides customer-site collection across the Gold Coast. Send the exact address so access, timing, equipment and terms can be confirmed for the load.",
     faqs: [
       {
         q: "Is scrap collection available on the Gold Coast?",
-        a: "Collection is assessed from the address, material, volume, loading access, equipment and timing. Send the full site details so the available options can be confirmed.",
+        a: "Yes. MetalBase drivers collect across the Gold Coast. Send the address, material, volume, loading access and timing so the job-specific equipment, schedule and terms can be confirmed.",
       },
       {
         q: "What helps with a managed-property enquiry?",
@@ -278,7 +278,7 @@ export const regions: RegionGuide[] = [
       "Beenleigh",
     ],
     placeNote:
-      "Include the exact Logan suburb and site address. A place appearing here is an enquiry example, not a promise of collection coverage.",
+      "MetalBase provides customer-site collection across Logan. Include the exact address so access, timing, equipment and terms can be confirmed for the load.",
     faqs: [
       {
         q: "Can I ask about a recurring workshop collection in Logan?",
@@ -356,7 +356,7 @@ export const regions: RegionGuide[] = [
       "Ripley",
     ],
     placeNote:
-      "Send the exact Ipswich address and access notes. These place examples do not confirm equipment, minimum volume, collection or timing.",
+      "MetalBase provides customer-site collection across Ipswich. Send the exact address and access notes so equipment, minimum volume, timing and terms can be confirmed.",
     faqs: [
       {
         q: "What details help with oversize steel in Ipswich?",
