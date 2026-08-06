@@ -1,6 +1,11 @@
 import type { MetadataRoute } from "next";
 import { regions } from "@/lib/regions";
-import { LAUNCH_READY, PUBLISH_RATES, SITE, services } from "@/lib/site";
+import {
+  PUBLISH_RATES,
+  SEARCH_INDEXING_ENABLED,
+  SITE,
+  services,
+} from "@/lib/site";
 
 /**
  * The base URL here used to be hardcoded to https://www.metalbase.com.au
@@ -43,9 +48,9 @@ const routes: {
 ];
 
 export function createSitemap(
-  launchReady = LAUNCH_READY,
+  indexingEnabled = SEARCH_INDEXING_ENABLED,
 ): MetadataRoute.Sitemap {
-  if (!launchReady) return [];
+  if (!indexingEnabled) return [];
 
   return [
     ...routes.map((r) => ({
