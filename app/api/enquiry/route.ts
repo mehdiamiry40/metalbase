@@ -14,18 +14,21 @@ import {
    lib/enquiry.ts so it can be unit tested without a server.
 
    Delivery:
-     RESEND_API_KEY + a destination → email via Resend
+     RESEND_API_KEY                 → email via Resend
      ENQUIRY_WEBHOOK_URL            → POSTs JSON (Zapier, Make, CRM)
      neither                        → fails closed with a clear 503
 
    No customer details are written to server logs. Delivery credentials
-   and destinations belong in deployment environment variables.
+   belong in deployment environment variables. The verified quote inbox is a
+   server-only default; ENQUIRY_TO can override it for a deployment.
 
    Rate limiting uses Upstash when configured, in-memory otherwise.
    ------------------------------------------------------------------ */
 
 export const runtime = "nodejs";
 const DELIVERY_TIMEOUT_MS = 8_000;
+/** This route module is server-only, so the inbox is not sent to browsers. */
+const ENQUIRY_INBOX = "mehdiamiry40@gmail.com";
 
 export async function POST(request: Request) {
   const ip =
@@ -58,7 +61,7 @@ export async function POST(request: Request) {
   }
 
   const summary = formatSummary(data);
-  const to = process.env.ENQUIRY_TO?.trim();
+  const to = process.env.ENQUIRY_TO?.trim() || ENQUIRY_INBOX;
   const resendKey = process.env.RESEND_API_KEY?.trim();
   const webhook = process.env.ENQUIRY_WEBHOOK_URL?.trim();
 
@@ -116,8 +119,8 @@ export async function POST(request: Request) {
   }
 
   console.warn(
-    "[enquiry] Delivery is not configured. Set ENQUIRY_WEBHOOK_URL or both " +
-      "RESEND_API_KEY and ENQUIRY_TO." +
+    "[enquiry] Delivery is not configured. Set ENQUIRY_WEBHOOK_URL or " +
+      "RESEND_API_KEY. ENQUIRY_TO is an optional recipient override." +
       (isDurableLimiterConfigured()
         ? ""
         : " Durable rate limiting is also not configured."),

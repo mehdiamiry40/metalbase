@@ -34,9 +34,9 @@ export const SITE = "https://www.metalbase.com.au";
 export const company = {
   name: "MetalBase",
 
-  /* --- fill these in ------------------------------------------- */
-  legal: null as string | null,
-  abn: null as string | null,
+  /* --- verified identity and contact details ------------------ */
+  legal: "Emir Group Pty Ltd" as string | null,
+  abn: "62 351 619 456" as string | null,
   /** QLD second-hand dealer licence. Leave null until issued. */
   licence: null as string | null,
   /** E.164. This is the machine value: it becomes the `tel:` href and
@@ -47,8 +47,11 @@ export const company = {
   /** What a human reads. Australians recognise the local mobile
    *  grouping, not E.164, so every visible rendering uses this. */
   phoneLabel: "0410 233 335" as string | null,
+  /** Public contact hours, not a claim about an unpublished yard. */
+  hours: "8am–5pm, 7 days a week" as string | null,
+
+  /* --- leave unset until independently verified --------------- */
   email: null as string | null,
-  tradeEmail: null as string | null,
   head: null as string | null,
   /** Date the rate board was last set, e.g. "22 July 2026". */
   priceDate: null as string | null,

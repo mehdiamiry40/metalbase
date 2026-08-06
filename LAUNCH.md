@@ -16,8 +16,9 @@ response headers.
 
 Search indexing is enabled through `SEARCH_INDEXING_ENABLED`, so the current
 tree publishes indexable page directives and a complete sitemap. Keep
-`LAUNCH_READY` disabled until the verified business facts below are supplied;
-that flag controls business and service claims, not search visibility.
+`LAUNCH_READY` disabled until the licensing and operating model and relevant
+service capabilities are verified; that flag controls business and service
+claims, not search visibility.
 
 Before investing further in the brand, confirm ASIC business-name availability
 and search IP Australia for conflicting trade marks. An existing company with a
@@ -25,22 +26,24 @@ similar name is a reason to check, not proof that the brand is unavailable.
 
 ## 1. Business facts — blocks verified business schema
 
-Every unstruck value below is still `null` in `lib/site.ts`. Nothing is invented, so
-the UI omits whatever is missing rather than printing a placeholder. That
-is honest, but it also means the site does not yet identify itself as a
-licensed dealer.
+Verified identity and contact facts are set in `lib/site.ts`. Unverified fields
+remain `null`, so the UI omits them rather than printing a placeholder. The site
+does not identify itself as a licensed dealer or publish a street address.
 
-| Field | Where it appears | Consequence while null |
+| Field | Where it appears | Status |
 |---|---|---|
 | ~~`phone` + `phoneLabel`~~ | header, footer, contact, mobile bar | ✅ **Set.** `+61410233335` / `0410 233 335`. Click-to-call is live everywhere and the mobile bar now shows "Call". |
-| `legal` | footer and structured data | The registered entity name is not published |
+| ~~`legal`~~ | footer and structured data | ✅ **Set.** `Emir Group Pty Ltd`. |
+| ~~`abn`~~ | footer and structured data | ✅ **Set.** `62 351 619 456`. |
+| ~~`hours`~~ | footer and contact | ✅ **Set.** `8am–5pm, 7 days a week`, presented as contact hours rather than yard hours. |
 | `email` | footer, contact, legal | No direct email route |
-| `head` | footer, legal, `PostalAddress` schema | No address in the local-business markup, which is a ranking input for local search |
-| `abn` | footer, legal | Required on Australian commercial material |
+| `head` | footer, legal, `PostalAddress` schema | Intentionally unset: no street address is verified for publication |
 | `licence` | footer, sustainability | QLD second-hand dealer licence. See the legal note below. |
 | `priceDate` | prices | Rate board cannot state when it was set |
 
-Set them, then flip `LAUNCH_READY = true`.
+Do not flip `LAUNCH_READY`, service `verified` flags or `PUBLISH_RATES` merely
+because the identity fields above are complete. Each still needs its own
+operational evidence.
 
 ### Confirm the operating and licensing model
 
@@ -56,18 +59,19 @@ Do not publish a licence number or licensed-dealer claim until it is verified.
 The endpoint validates, sanitises and rate-limits each request. It fails closed
 with `503` when no delivery path is configured and does not log customer data.
 
-For email delivery, set both values in the deployment environment:
+For email delivery, set the Resend key in the deployment environment. The
+server-side recipient defaults to the verified quote inbox:
 
 ```
 RESEND_API_KEY   re_xxxxxxxx
-ENQUIRY_TO       quotes@example.com
 ```
 
 Set it in Vercel → Settings → Environment Variables and redeploy.
 
-Optional sender override:
+Optional recipient and sender overrides:
 
 ```
+ENQUIRY_TO       quotes@example.com
 ENQUIRY_FROM     noreply@yourdomain
 ```
 
@@ -120,17 +124,17 @@ convincing one:
 - **Real photography.** Every image is stock. One afternoon at the yard
   with a phone would beat all of it. Drop files into `public/photos/`
   using the existing keys and set `USE_LOCAL = true` in `lib/photos.ts`.
-- **Google Business Profile.** For a local trade business this outranks
-  almost everything on-site. Needs the address and phone first.
+- **Google Business Profile.** Confirm the operating model and profile
+  eligibility first. Do not publish an unverified street address to create one.
 - **Reviews.** `stats` in `lib/site.ts` is deliberately empty — an
   earlier version claimed 182,000 t recovered, 98.6% diversion and 31
   years trading, all invented. Add real figures and they render.
 
 ---
 
-## Verified in the current worktree — 4 August 2026
+## Verified in the current worktree — 6 August 2026
 
-- Production build, ESLint and TypeScript clean; 66 tests passing
+- Production build, ESLint and TypeScript clean; 76 tests passing
 - `npm audit --audit-level=high`: zero known vulnerabilities
 - Every public route crawled without broken links, console errors, duplicate
   IDs, missing image alternatives or heading skips in normal states
@@ -144,9 +148,9 @@ convincing one:
 
 ## Known limitations
 
-- **Business identity is incomplete**, so launch mode remains blocked until the
-  registered entity, ABN, applicable licence, email and operating model are
-  verified.
+- **Licensing and operating model claims remain unverified.** The operator and
+  ABN are now set, but launch mode stays blocked; the public email, street
+  address and licence remain intentionally unset.
 - **`locations` is empty**, so the locations page has no yard list. It
   renders without one rather than inventing an address.
 - **Photography is stock**, so it cannot prove the real yard, team or

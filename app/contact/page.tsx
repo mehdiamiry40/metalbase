@@ -51,6 +51,11 @@ export default function ContactPage() {
                     {company.phoneLabel ?? company.phone}
                   </a>
                   <p className="mt-3 text-base t-muted">Talk through a load</p>
+                  {company.hours && (
+                    <p className="mt-1 text-sm t-muted">
+                      Contact hours: {company.hours}
+                    </p>
+                  )}
                 </>
               ) : (
                 <>

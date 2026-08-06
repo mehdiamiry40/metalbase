@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import {
   LAUNCH_READY,
   PUBLISH_RATES,
+  SEARCH_INDEXING_ENABLED,
   company,
   locations,
   nav,
@@ -19,11 +20,24 @@ import {
    ------------------------------------------------------------------ */
 
 describe("launch guards", () => {
-  it("does not claim an ABN or dealer licence unless launch-ready", () => {
-    if (!LAUNCH_READY) {
-      expect(company.abn).toBeNull();
-      expect(company.licence).toBeNull();
-    }
+  it("publishes the verified operator and contact facts", () => {
+    expect(company).toMatchObject({
+      legal: "Emir Group Pty Ltd",
+      abn: "62 351 619 456",
+      phone: "+61410233335",
+      phoneLabel: "0410 233 335",
+      hours: "8am–5pm, 7 days a week",
+    });
+  });
+
+  it("keeps unverified operating claims and street addresses unpublished", () => {
+    expect(SEARCH_INDEXING_ENABLED).toBe(true);
+    expect(LAUNCH_READY).toBe(false);
+    expect(PUBLISH_RATES).toBe(false);
+    expect(company.licence).toBeNull();
+    expect(company.head).toBeNull();
+    expect(company.email).toBeNull();
+    expect(locations).toEqual([]);
   });
 
   it("requires verified business facts before launch mode can be enabled", () => {
@@ -35,6 +49,7 @@ describe("launch guards", () => {
       expect(company.head?.trim()).toBeTruthy();
       expect(company.phone?.trim()).toBeTruthy();
       expect(company.phoneLabel?.trim()).toBeTruthy();
+      expect(company.hours?.trim()).toBeTruthy();
       expect(company.priceDate?.trim()).toBeTruthy();
       expect(locations.length).toBeGreaterThan(0);
     }
@@ -222,9 +237,12 @@ describe("services", () => {
     }
   });
 
-  it("does not verify service capabilities before the business launch facts", () => {
-    if (!LAUNCH_READY) {
-      expect(services.filter((service) => service.verified)).toEqual([]);
-    }
+  it("keeps all three unverified service capabilities disabled", () => {
+    expect(services).toHaveLength(3);
+    expect(services.map(({ slug, verified }) => ({ slug, verified }))).toEqual([
+      { slug: "collection-and-bins", verified: false },
+      { slug: "industrial", verified: false },
+      { slug: "demolition", verified: false },
+    ]);
   });
 });

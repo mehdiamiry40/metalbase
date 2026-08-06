@@ -94,7 +94,8 @@ function structuredData() {
     description:
       "South East Queensland scrap-metal quote requests and practical grade guidance.",
   };
-  if (LAUNCH_READY && company.legal) data.legalName = company.legal;
+  if (company.legal) data.legalName = company.legal;
+  if (company.abn) data.taxID = company.abn;
   if (company.phone) data.telephone = company.phone;
   if (company.email) data.email = company.email;
   if (company.head) {
