@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { LAUNCH_READY, SITE } from "@/lib/site";
+import { SEARCH_INDEXING_ENABLED, SITE } from "@/lib/site";
 
 /**
  * The sitemap URL here was hardcoded to www.metalbase.com.au, a host
@@ -12,7 +12,9 @@ import { LAUNCH_READY, SITE } from "@/lib/site";
  * nothing worth crawling; excluding it also stops bots burning through
  * the rate limiter.
  */
-export function createRobots(launchReady = LAUNCH_READY): MetadataRoute.Robots {
+export function createRobots(
+  indexingEnabled = SEARCH_INDEXING_ENABLED,
+): MetadataRoute.Robots {
   const output: MetadataRoute.Robots = {
     rules: {
       userAgent: "*",
@@ -21,10 +23,9 @@ export function createRobots(launchReady = LAUNCH_READY): MetadataRoute.Robots {
     },
   };
 
-  /* Do not block an unfinished site in robots.txt: crawlers must be able to
-     fetch a page to observe its noindex directive. The sitemap invitation,
-     however, is only published once the business is launch-ready. */
-  if (launchReady) output.sitemap = `${SITE}/sitemap.xml`;
+  /* Keep pages crawlable in both modes so crawlers can observe page-level
+     indexing directives. Advertise the sitemap when search visibility is on. */
+  if (indexingEnabled) output.sitemap = `${SITE}/sitemap.xml`;
 
   return output;
 }

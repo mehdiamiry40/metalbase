@@ -6,7 +6,13 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileActionBar from "@/components/MobileActionBar";
 import { ORGANIZATION_ID } from "@/components/Schema";
-import { LAUNCH_READY, SITE, company, locations } from "@/lib/site";
+import {
+  LAUNCH_READY,
+  SEARCH_INDEXING_ENABLED,
+  SITE,
+  company,
+  locations,
+} from "@/lib/site";
 
 /**
  * Barlow gives headings the architectural clarity of the reference site,
@@ -68,7 +74,7 @@ export const metadata: Metadata = {
       "South East Queensland scrap-metal quote requests and practical guidance on grades, preparation and pricing.",
   },
   twitter: { card: "summary_large_image" },
-  robots: LAUNCH_READY
+  robots: SEARCH_INDEXING_ENABLED
     ? { index: true, follow: true }
     : { index: false, follow: false },
 };

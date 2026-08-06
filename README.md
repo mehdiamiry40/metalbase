@@ -10,10 +10,11 @@ npm run dev        # http://localhost:3000
 
 Node 20.9+. Verified on Node 22 with a clean production build.
 
-## ⚠️ Before this goes live
+## ⚠️ Before publishing verified business claims
 
-This site is **not launch-ready**, deliberately. `LAUNCH_READY` in
-`lib/site.ts` is `false` and several values are `null`.
+Search indexing is enabled through `SEARCH_INDEXING_ENABLED`. Verified
+local-business and service schema remains disabled because `LAUNCH_READY` is
+`false` and several business values are still `null`.
 
 An earlier version carried an invented ABN, dealer licence number, certifications,
 staff, tonnage claims and prices. On a live commercial site those are false
@@ -148,7 +149,8 @@ Harry Dona, Johnny Sanchez, Evan Demicoli, Pavel Neznanov.
 
 - Launch-gated organisation and service JSON-LD that omits unverified claims
 - Favicon and OG image generated at build (`app/icon.tsx`, `app/opengraph-image.tsx`)
-- Launch-gated `sitemap.xml`, `robots.txt` and page-level `noindex`
+- Indexable pages, a published `sitemap.xml` and an advertised sitemap in
+  `robots.txt`; verified business schema remains separately launch-gated
 - Skip link, visible focus rings on both surfaces, labelled form controls with
   `aria-invalid` / `aria-describedby`, `prefers-reduced-motion` respected
 - Body text and accent both clear WCAG AA on paper

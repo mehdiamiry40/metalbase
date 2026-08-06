@@ -16,7 +16,14 @@
    number on your behalf.
    ================================================================== */
 
-/** Flip to true only once every `null` below has a real value. */
+/**
+ * Search visibility and verified business claims are separate decisions.
+ * Indexing can be enabled while unknown business fields remain omitted.
+ */
+export const SEARCH_INDEXING_ENABLED = true;
+
+/** Enable verified local-business and service claims only after every required
+ * business fact below has a real, defensible value. */
 export const LAUNCH_READY = false;
 
 /** Canonical origin. Single source for metadata, sitemap and schema.
