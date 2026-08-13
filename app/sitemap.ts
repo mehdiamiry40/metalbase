@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { materialHref, materials } from "@/lib/materials";
 import { regionHref, regions } from "@/lib/regions";
 import {
   PUBLISH_RATES,
@@ -26,6 +27,7 @@ import {
 
 const CONTENT_REVIEWED = new Date("2026-08-03");
 const BRISBANE_SEARCH_PAGES_REVIEWED = new Date("2026-08-07");
+const MATERIAL_GUIDES_REVIEWED = new Date("2026-08-13");
 
 const routes: {
   path: string;
@@ -70,6 +72,12 @@ export function createSitemap(
           : CONTENT_REVIEWED,
       changeFrequency: "monthly" as const,
       priority: 0.7,
+    })),
+    ...materials.map((material) => ({
+      url: `${SITE}${materialHref(material)}`,
+      lastModified: MATERIAL_GUIDES_REVIEWED,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
     })),
     ...regions.map((region) => ({
       url: `${SITE}${regionHref(region)}`,

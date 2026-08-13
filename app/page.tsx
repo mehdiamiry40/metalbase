@@ -83,39 +83,39 @@ const materialTiles: {
   layout: string;
 }[] = [
   {
-    title: "Copper & cable",
-    href: "/what-we-buy#non-ferrous",
+    title: "Scrap copper",
+    href: "/materials/copper",
     photo: "copper-sheets",
     layout: "md:col-span-6 md:min-h-[470px]",
   },
   {
-    title: "Aluminium & alloys",
-    href: "/what-we-buy#non-ferrous",
+    title: "Scrap aluminium",
+    href: "/materials/aluminium",
     photo: "aluminium-cans",
     layout: "md:col-span-3 md:min-h-[470px]",
   },
   {
-    title: "Steel & cast iron",
-    href: "/what-we-buy#ferrous",
+    title: "Scrap steel",
+    href: "/materials/steel",
     photo: "rusty-steel",
     layout: "md:col-span-3 md:min-h-[470px]",
   },
   {
-    title: "Industrial offcuts",
-    href: "/services/industrial",
-    photo: "machine-swarf",
+    title: "Scrap cable",
+    href: "/materials/cable",
+    photo: "cable",
     layout: "md:col-span-4 md:min-h-[430px]",
   },
   {
-    title: "Stainless steel",
-    href: "/what-we-buy#non-ferrous",
+    title: "Scrap stainless steel",
+    href: "/materials/stainless-steel",
     photo: "stainless",
     layout: "md:col-span-4 md:min-h-[430px]",
   },
   {
-    title: "Motors & mixed metal",
-    href: "/what-we-buy#specialty",
-    photo: "mixed-parts",
+    title: "Scrap brass",
+    href: "/materials/brass",
+    photo: "alloy",
     layout: "md:col-span-4 md:min-h-[430px]",
   },
 ];

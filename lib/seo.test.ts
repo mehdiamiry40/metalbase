@@ -10,11 +10,16 @@ import {
   generateStaticParams as generateRegionStaticParams,
 } from "@/app/locations/[slug]/page";
 import {
+  generateMetadata as generateMaterialMetadata,
+  generateStaticParams as generateMaterialStaticParams,
+} from "@/app/materials/[slug]/page";
+import {
   ORGANIZATION_ID,
   areaGuideSchemaData,
   serviceSchemaData,
 } from "@/components/Schema";
 import { pageMetadata } from "@/lib/metadata";
+import { materialHref, materials } from "@/lib/materials";
 import { regionHref, regions } from "@/lib/regions";
 import { SITE, operations, serviceHref, services } from "@/lib/site";
 
@@ -24,6 +29,15 @@ const EXPECTED_REGION_SLUGS = [
   "logan",
   "ipswich",
   "redlands",
+] as const;
+
+const EXPECTED_MATERIAL_SLUGS = [
+  "copper",
+  "cable",
+  "aluminium",
+  "brass",
+  "steel",
+  "stainless-steel",
 ] as const;
 
 /* ------------------------------------------------------------------
@@ -120,6 +134,11 @@ describe("sitemap and robots", () => {
         expect.objectContaining({ url: `${SITE}${serviceHref(service)}` }),
       );
     }
+    for (const material of materials) {
+      expect(sitemap).toContainEqual(
+        expect.objectContaining({ url: `${SITE}${materialHref(material)}` }),
+      );
+    }
     for (const region of regions) {
       const url = `${SITE}${regionHref(region)}`;
       expect(sitemap.filter((entry) => entry.url === url)).toHaveLength(1);
@@ -130,6 +149,66 @@ describe("sitemap and robots", () => {
     expect(sitemap).not.toContainEqual(
       expect.objectContaining({ url: `${SITE}/services/collection-and-bins` }),
     );
+  });
+});
+
+describe("material search guides", () => {
+  it("builds the six high-intent material routes", () => {
+    expect(generateMaterialStaticParams().map(({ slug }) => slug)).toEqual(
+      EXPECTED_MATERIAL_SLUGS,
+    );
+    expect(materials.map(({ slug }) => slug)).toEqual(EXPECTED_MATERIAL_SLUGS);
+  });
+
+  it("gives every material a unique self-canonical search identity", async () => {
+    const titles = new Set<string>();
+    const descriptions = new Set<string>();
+
+    for (const slug of EXPECTED_MATERIAL_SLUGS) {
+      const material = materials.find((item) => item.slug === slug)!;
+      const path = materialHref(material);
+      const metadata = await generateMaterialMetadata({
+        params: Promise.resolve({ slug }),
+      });
+      const openGraph = metadata.openGraph as Record<string, unknown>;
+
+      expect(metadata.alternates?.canonical).toBe(path);
+      expect(String(openGraph.url)).toBe(`${SITE}${path}`);
+      expect(metadata.title).toBe(material.seoTitle);
+      expect(metadata.description).toBe(material.seoDescription);
+      expect(material.seoTitle.toLowerCase()).toContain(
+        material.shortName.toLowerCase(),
+      );
+      expect(path).not.toMatch(/[?#]|\/$/);
+
+      titles.add(material.seoTitle);
+      descriptions.add(material.seoDescription);
+    }
+
+    expect(titles.size).toBe(EXPECTED_MATERIAL_SLUGS.length);
+    expect(descriptions.size).toBe(EXPECTED_MATERIAL_SLUGS.length);
+  });
+
+  it("links every material guide from both discovery pages", () => {
+    const home = readFileSync(join(root, "app/page.tsx"), "utf8");
+    const hub = readFileSync(join(root, "app/what-we-buy/page.tsx"), "utf8");
+
+    for (const material of materials) {
+      expect(home).toContain(materialHref(material));
+    }
+    expect(hub).toContain("materials.map");
+    expect(hub).toContain("materialHref(material)");
+  });
+
+  it("keeps rates and public-yard claims out of the guide template", () => {
+    const page = readFileSync(
+      join(root, "app/materials/[slug]/page.tsx"),
+      "utf8",
+    );
+
+    expect(page).toContain("does not publish a generic rate");
+    expect(page).toContain("no public customer drop-off location");
+    expect(page).toContain("<FaqSchema");
   });
 });
 
