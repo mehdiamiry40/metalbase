@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { DefinitionRows, PageHeader } from "@/components/sections";
 import {
+  ArrowRight,
   Button,
   ChevronDown,
   Section,
@@ -7,6 +9,7 @@ import {
   YardIcon,
   type YardIconName,
 } from "@/components/ui";
+import { materialHref, materials } from "@/lib/materials";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
@@ -163,6 +166,39 @@ export default function WhatWeBuyPage() {
             CTA band both already offer. */}
         <Button href="/prices">How pricing works</Button>
       </PageHeader>
+
+      <Section tone="sheet" className="pb-20 pt-12 lg:pb-24 lg:pt-16">
+        <SectionHead
+          eyebrow="Specific material guides"
+          title="Start with the metal you have"
+          intro="Each guide explains common grades, what changes the assessment and which photos or measurements make a Brisbane quote more useful."
+        />
+        <ul className="grid border-y hair md:grid-cols-2 lg:grid-cols-3">
+          {materials.map((material, index) => (
+            <li
+              key={material.slug}
+              className={`border-b hair ${
+                index % 2 === 0 ? "md:border-r" : ""
+              } ${index % 3 !== 2 ? "lg:border-r" : "lg:border-r-0"}`}
+            >
+              <Link
+                href={materialHref(material)}
+                className="group flex min-h-24 items-center justify-between gap-5 px-5 py-5 transition-colors duration-[160ms] ease-out hover:text-signal lg:px-7"
+              >
+                <span>
+                  <span className="block font-display text-xl font-semibold">
+                    {material.name}
+                  </span>
+                  <span className="mt-1 block text-sm t-muted">
+                    Grades, preparation and quote factors
+                  </span>
+                </span>
+                <ArrowRight className="h-6 w-6 shrink-0 transition-transform duration-[160ms] ease-out group-hover:translate-x-1" />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Section>
 
       {/* Each stream used to open with a full-bleed photo split before
           reaching its grade list — three large photographs of metal

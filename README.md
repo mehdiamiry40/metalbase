@@ -159,6 +159,9 @@ Harry Dona, Johnny Sanchez, Evan Demicoli, Pavel Neznanov.
 - One canonical page per core Brisbane intent:
   `/scrap-metal-brisbane` for material, quote, pricing and receiving guidance;
   `/scrap-removal-brisbane` for site collection assessment
+- Six focused material guides under `/materials/` for copper, cable,
+  aluminium, brass, steel and stainless steel, linked from the homepage and
+  `/what-we-buy`
 - Permanent redirects consolidate the superseded Brisbane region and
   collection-service URLs, and the sitemap lists only the preferred pages
 - Favicon and OG image generated at build (`app/icon.tsx`, `app/opengraph-image.tsx`)
@@ -184,6 +187,7 @@ taxonomy* and its *process*, and that every competitor hides both behind a
 | Export | What it drives |
 |---|---|
 | `priceGroups` | 28 grades across three streams. Home shows three visual summaries; `/prices` carries the full `Ledger` |
+| `materials` | Six search-focused grade, preparation and quote guides under `/materials/[slug]` |
 | `glossary` | Standard trade terms — `/glossary` |
 | `services` | Three business scopes; collection and bins are verified, while industrial and demolition remain enquiry guides |
 | `serviceAreas` | The five verified customer-site collection regions — `/locations`, `/scrap-removal-brisbane` |
@@ -214,6 +218,7 @@ components/sections.tsx  page furniture — PageHeader, Split, Steps,
 components/Ledger.tsx    the grade board
 components/Glossary.tsx  the reference, plus DefinedTermSet markup
 lib/site.ts              all content
+lib/materials.ts         focused material-guide content and route identities
 lib/photos.ts            photo manifest
 ```
 
