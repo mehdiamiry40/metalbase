@@ -104,19 +104,25 @@ const materialTiles: {
     title: "Scrap cable",
     href: "/materials/cable",
     photo: "cable",
-    layout: "md:col-span-4 md:min-h-[430px]",
+    layout: "md:col-span-3 md:min-h-[430px]",
   },
   {
     title: "Scrap stainless steel",
     href: "/materials/stainless-steel",
     photo: "stainless",
-    layout: "md:col-span-4 md:min-h-[430px]",
+    layout: "md:col-span-3 md:min-h-[430px]",
   },
   {
     title: "Scrap brass",
     href: "/materials/brass",
     photo: "alloy",
-    layout: "md:col-span-4 md:min-h-[430px]",
+    layout: "md:col-span-3 md:min-h-[430px]",
+  },
+  {
+    title: "Scrap cast iron",
+    href: "/materials/cast-iron",
+    photo: "gears",
+    layout: "md:col-span-3 md:min-h-[430px]",
   },
 ];
 
