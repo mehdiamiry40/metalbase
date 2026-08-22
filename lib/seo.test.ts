@@ -38,6 +38,7 @@ const EXPECTED_MATERIAL_SLUGS = [
   "brass",
   "steel",
   "stainless-steel",
+  "electric-motors",
 ] as const;
 
 /* ------------------------------------------------------------------
