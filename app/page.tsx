@@ -118,6 +118,12 @@ const materialTiles: {
     photo: "alloy",
     layout: "md:col-span-4 md:min-h-[430px]",
   },
+  {
+    title: "Scrap electric motors",
+    href: "/materials/electric-motors",
+    photo: "mixed-parts",
+    layout: "md:col-span-12 md:min-h-[360px]",
+  },
 ];
 
 const homeFaqs = [

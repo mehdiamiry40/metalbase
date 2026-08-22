@@ -645,6 +645,114 @@ export const materials: MaterialGuide[] = [
       },
     ],
   },
+  {
+    slug: "electric-motors",
+    name: "Scrap electric motors",
+    shortName: "Electric motors",
+    eyebrow: "Scrap electric motors Brisbane",
+    seoTitle: "Scrap Electric Motors Brisbane: Grades & Quote Guide",
+    seoDescription:
+      "Work out what a scrap electric motor is worth before you quote: motor type, copper winding, gearboxes, weight and condition all affect assessment.",
+    h1: "Scrap electric motors Brisbane: separate motors from gearboxes and pumps",
+    intro:
+      "Scrap electric motors vary enormously in copper content depending on their size and type, and a motor still attached to a gearbox or pump changes how it is assessed. Separate what can be safely separated, then send the nameplate details and clear photos for a quote.",
+    photo: "mixed-parts",
+    overview:
+      "Electric motors range from small fractional-horsepower units — a pool pump in the backyard, an exhaust fan in a Brisbane townhouse — to heavy industrial three-phase motors pulled from a Rocklea or Yatala workshop, and the proportion of copper winding to steel lamination and housing changes with size and type. A motor built into a pump, gearbox or compressor housing is typically assessed as a mixed item rather than under a standalone electric motor grade, so separating the housing from the motor, where it can be done safely, gives a clearer picture of what is inside.",
+    examples: [
+      "Pool and spa pump motors",
+      "Air conditioner and exhaust fan motors",
+      "Workshop bench grinder and power tool motors",
+      "Industrial three-phase motors",
+      "Washing machine and dryer motors",
+      "Compressor motors",
+      "Motors still fitted to gearboxes or pumps",
+    ],
+    grades: [
+      {
+        term: "Small appliance and fractional-horsepower motors",
+        detail:
+          "Light motors from pumps, fans, power tools and household appliances. These carry a smaller proportion of copper winding relative to their steel and aluminium housing than larger industrial motors.",
+      },
+      {
+        term: "Single-phase and three-phase industrial motors",
+        detail:
+          "Heavier motors from workshop, HVAC and industrial equipment generally carry a higher copper-to-steel ratio. Send the nameplate — frame size, kW or horsepower and phase — where it is still legible.",
+      },
+      {
+        term: "Motors with a gearbox, pump or compressor housing attached",
+        detail:
+          "These are assessed as a complete mixed item rather than under the standalone motor grade. Separating the motor from the housing, where it can be done safely, lets each part be identified on its own basis.",
+      },
+      {
+        term: "Stripped stators and bare windings",
+        detail:
+          "Copper windings already removed from a motor housing, and bare stator cores with the windings still in place, are assessed differently from an intact motor. Keep the two apart and note whether the windings are copper or aluminium.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Motor size and type",
+        detail:
+          "Frame size, horsepower or kW rating, and single-phase versus three-phase construction all affect the copper-to-steel ratio and how a motor is assessed.",
+      },
+      {
+        term: "Attachments and housings",
+        detail:
+          "Gearboxes, pump bodies, compressor housings, mounting brackets and cabling change whether a motor is treated as a standalone unit or a mixed item.",
+      },
+      {
+        term: "Condition",
+        detail:
+          "A seized or non-working motor is assessed the same as a running one. Recoverable metal content is what matters, not whether the motor still turns.",
+      },
+      {
+        term: "Quantity and measured weight",
+        detail:
+          "Give a realistic count or weight. Final weight-based terms depend on the measured net weight of the material presented.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Separate motors from gearboxes and pumps",
+        body: "Where it can be done safely, unbolt a motor from an attached gearbox, pump or compressor housing rather than presenting the whole assembly as one item.",
+      },
+      {
+        title: "Photograph the nameplate",
+        body: "Show the motor's rating plate — kW or horsepower, phase, frame size and any model details — alongside a photo of the whole motor.",
+      },
+      {
+        title: "Leave winding removal alone",
+        body: "Do not burn insulation or dismantle windings to chase a higher grade. Present the motor intact and let the assessment identify what is recoverable.",
+      },
+      {
+        title: "Estimate count and weight",
+        body: "A rough item count or total weight, plus the Brisbane suburb, is enough to start. Final figures come from the measured load.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Are electric motors worth more than scrap steel?",
+        a: "Value is relative, not fixed. A motor's copper winding typically means it is assessed differently from plain steel, but the actual mix depends on size, type and condition. Request a current assessment for the load presented.",
+      },
+      {
+        q: "Do gearboxes and pumps need to be removed from a motor before a quote?",
+        a: "Not necessarily, but a motor still attached to a gearbox, pump or compressor housing is generally assessed as a mixed item rather than under the standalone motor grade. Separating it where safe can make the assessment clearer.",
+      },
+      {
+        q: "Can a seized or non-working motor still be scrapped?",
+        a: "Yes. Working condition is not required. The assessment is based on the motor's material composition and construction, not whether it still runs.",
+      },
+      {
+        q: "Should I strip the copper windings out myself?",
+        a: "No. Burning insulation or dismantling windings to chase a higher grade is unsafe and unnecessary. Present the motor intact with clear photos of its condition and any attachments.",
+      },
+      {
+        q: "Can MetalBase collect bulk electric motors in Brisbane?",
+        a: "Customer-site collection is available, with minimum volume, access, equipment, timing and terms confirmed for the actual load and address.",
+      },
+    ],
+  },
 ];
 
 export function getMaterial(slug: string): MaterialGuide | undefined {
