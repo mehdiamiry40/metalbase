@@ -124,6 +124,12 @@ const materialTiles: {
     photo: "mixed-parts",
     layout: "md:col-span-12 md:min-h-[360px]",
   },
+  {
+    title: "Scrap radiators",
+    href: "/materials/radiators",
+    photo: "vehicle",
+    layout: "md:col-span-12 md:min-h-[360px]",
+  },
 ];
 
 const homeFaqs = [
