@@ -753,6 +753,114 @@ export const materials: MaterialGuide[] = [
       },
     ],
   },
+  {
+    slug: "radiators",
+    name: "Scrap radiators",
+    shortName: "Radiators",
+    eyebrow: "Scrap radiators Brisbane",
+    seoTitle: "Scrap Radiators Brisbane: Copper vs Aluminium Guide",
+    seoDescription:
+      "Work out whether a scrap radiator is copper/brass or aluminium before requesting a Brisbane quote: grades, attachments and prep explained.",
+    h1: "Scrap radiators Brisbane: tell copper, brass and aluminium apart before you quote",
+    intro:
+      "Radiators are built as copper and brass, aluminium with plastic tanks, or all-aluminium construction, and each has a different recoverable metal mix. Identify the type, drain the coolant and flag any air conditioner coils before requesting a quote.",
+    photo: "vehicle",
+    overview:
+      "A radiator's value comes from what the core and tanks are actually made of, not its size. Older vehicles, industrial equipment and some heavy trucks use copper tube cores with brass header tanks; most cars built since the 1990s use an aluminium core crimped into plastic end tanks; and some performance, heavy-duty and HVAC units are all-aluminium with no plastic at all. Air conditioner and HVAC coils can look similar again but may still hold refrigerant, which changes how they need to be handled before a radiator reaches a scrap quote.",
+    examples: [
+      "Older copper and brass car radiators",
+      "Aluminium radiators with plastic end tanks",
+      "Truck and bus radiators",
+      "Motorcycle and small-engine radiators",
+      "Air conditioner condenser and evaporator coils",
+      "Industrial heat exchanger coils",
+      "Radiators still bolted to a fan shroud or steel frame",
+    ],
+    grades: [
+      {
+        term: "Copper and brass radiators",
+        detail:
+          "Copper tube cores with brass header tanks, common in older vehicles and industrial equipment. Once separated from steel brackets or a frame, these generally carry a higher recoverable non-ferrous content than an aluminium radiator of similar size.",
+      },
+      {
+        term: "Aluminium radiators with plastic tanks",
+        detail:
+          "An aluminium core crimped into nylon or plastic end tanks with rubber seals — the standard construction in most vehicles built since the 1990s. The plastic tank affects how the item is described; it is not treated as a clean aluminium grade.",
+      },
+      {
+        term: "All-aluminium radiators",
+        detail:
+          "Clean aluminium core and tanks with no plastic, found in some performance vehicles, heavy-duty equipment and industrial or HVAC units. Show whether any steel fittings or brackets remain attached.",
+      },
+      {
+        term: "Air conditioner and HVAC coils",
+        detail:
+          "Copper-tube-aluminium-fin or all-aluminium construction, often still connected to refrigerant lines. Refrigerant must be recovered by a licensed technician before one of these reaches a scrap radiator enquiry — say whether that has already happened.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Core and tank material",
+        detail:
+          "Copper/brass, aluminium with plastic tanks, and all-aluminium radiators are assessed differently because their recoverable metal mix differs.",
+      },
+      {
+        term: "Refrigerant content",
+        detail:
+          "Air conditioner and HVAC coils cannot be scrapped with refrigerant still inside. Confirm whether the gas has been recovered by a licensed technician before sending photos.",
+      },
+      {
+        term: "Attachments",
+        detail:
+          "Fan shrouds, hoses, brackets, sensors and steel frames change whether a radiator is assessed as a standalone item or a mixed one.",
+      },
+      {
+        term: "Coolant and residue",
+        detail:
+          "Drained, empty radiators are easier to describe and move than ones still holding coolant or oil.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Sort by construction",
+        body: "Keep copper/brass radiators separate from aluminium radiators with plastic tanks and from all-aluminium units where practical.",
+      },
+      {
+        title: "Drain the coolant",
+        body: "Empty fluid from the radiator before photographing it or arranging transport.",
+      },
+      {
+        title: "Flag refrigerant-bearing units",
+        body: "Note whether an air conditioner or HVAC coil has had its refrigerant recovered by a licensed technician. Do not attempt to release or recover it yourself.",
+      },
+      {
+        title: "Photograph the tanks and markings",
+        body: "Show the header tank material, any stamped part numbers, and whether a fan shroud, brackets or hoses remain attached.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Are copper and brass radiators worth more than aluminium radiators?",
+        a: "Value is relative, not fixed. Copper and brass radiators generally carry a different recoverable metal mix from an aluminium radiator with plastic tanks, but the actual assessment depends on the specific item and condition presented.",
+      },
+      {
+        q: "Do I need to drain the coolant before requesting a quote?",
+        a: "Yes. Send photos of a drained radiator where possible. Residual coolant or oil should be described if the radiator cannot be fully emptied before collection.",
+      },
+      {
+        q: "Can an air conditioner or HVAC coil be included in a scrap radiator enquiry?",
+        a: "Only once the refrigerant has been recovered by a licensed technician — releasing it to the atmosphere is prohibited under Australian ozone protection law. Say whether that has already been done when you enquire.",
+      },
+      {
+        q: "Should I remove the plastic tanks or fan shroud myself?",
+        a: "Not necessarily. Separating clearly removable plastic tanks, hoses and brackets can help identify the radiator, but do not dismantle anything unsafely. Photograph what remains attached.",
+      },
+      {
+        q: "Can MetalBase collect bulk radiators in Brisbane?",
+        a: "Customer-site collection is available, with minimum volume, access, equipment, timing and terms confirmed for the actual load and address.",
+      },
+    ],
+  },
 ];
 
 export function getMaterial(slug: string): MaterialGuide | undefined {
