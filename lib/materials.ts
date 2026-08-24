@@ -861,6 +861,119 @@ export const materials: MaterialGuide[] = [
       },
     ],
   },
+  {
+    slug: "whitegoods",
+    name: "Scrap whitegoods",
+    shortName: "Whitegoods",
+    eyebrow: "Scrap whitegoods Brisbane",
+    seoTitle: "Scrap Whitegoods Brisbane: Removal & Quote Guide",
+    seoDescription:
+      "Scrap whitegoods in Brisbane means dealing with refrigerant, concrete weights and mixed metal first. See what has to happen before collection.",
+    h1: "Scrap whitegoods Brisbane: what has to happen before collection",
+    intro:
+      "A fridge, washing machine or oven is not a single scrap grade — refrigerant status, a bonded concrete counterweight or a missing motor can all change what the load actually is. Confirm those details before requesting a quote.",
+    photo: "crew",
+    overview:
+      "Whitegoods carry mixed steel, copper and aluminium in a single cabinet, and what changes the assessment is rarely the appliance's age. A fridge or freezer cannot move as scrap until its refrigerant has been recovered by a licensed technician. A top-load washing machine, and many front-loaders, carry a concrete block bonded to the drum for stability — that mass is not recoverable metal and needs to be accounted for. A tenancy clean-out in Woolloongabba or a kitchen strip-out in Chermside might land a dishwasher, an oven and two fridges on the same driveway, and each of those is assessed on its own condition rather than as one uniform whitegoods pile.",
+    examples: [
+      "Fridges and freezers",
+      "Front-load and top-load washing machines",
+      "Clothes dryers",
+      "Dishwashers",
+      "Wall ovens, cooktops and rangehoods",
+      "Split-system air conditioner indoor and outdoor units",
+      "Microwaves and small benchtop appliances",
+    ],
+    grades: [
+      {
+        term: "Refrigerant-bearing units",
+        detail:
+          "Fridges, freezers and split-system air conditioners hold refrigerant that must be recovered by a licensed technician before the unit can be collected as scrap. Say whether that has already happened when you enquire.",
+      },
+      {
+        term: "Washing machines and dryers",
+        detail:
+          "A steel drum and cabinet around a copper-wound motor. Many washing machines, especially top-loaders, carry a concrete counterweight bonded to the drum — it stays with the machine and is not part of the recoverable metal weight.",
+      },
+      {
+        term: "Ovens, cooktops and rangehoods",
+        detail:
+          "Mostly steel and some stainless panelling, with glass cooktop or door panels, insulation batting and wiring to identify. Built-in units removed during a kitchen renovation are common across Brisbane.",
+      },
+      {
+        term: "Dishwashers and small appliances",
+        detail:
+          "A mix of steel, plastic and lighter wiring, with a lower proportion of recoverable metal for their size than a fridge or washing machine.",
+      },
+      {
+        term: "Mixed whitegoods loads",
+        detail:
+          "A house or unit clear-out with several appliance types together is assessed as a mixed load rather than one grade. List what is included so each item can be identified.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Refrigerant status",
+        detail:
+          "A fridge, freezer or split-system unit cannot be collected as scrap with refrigerant still inside. Confirm recovery by a licensed technician first.",
+      },
+      {
+        term: "Completeness and condition",
+        detail:
+          "Whether the compressor, motor, elements and internal wiring are still fitted, or have already been removed, changes the recoverable metal content.",
+      },
+      {
+        term: "Concrete and non-metal mass",
+        detail:
+          "A washing machine's counterweight, glass panels and insulation are not recoverable metal and are identified separately from the appliance's total weight.",
+      },
+      {
+        term: "Quantity and site access",
+        detail:
+          "How many appliances, on which level, past how many stairs or through what doorway — bulky whitegoods need a realistic access description before collection can be planned.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Confirm refrigerant recovery",
+        body: "Say whether a licensed technician has already recovered refrigerant from any fridge, freezer or split-system unit. Do not attempt to release or recover it yourself.",
+      },
+      {
+        title: "Group and count",
+        body: "List how many of each appliance type are involved and roughly how large or old they are.",
+      },
+      {
+        title: "Photograph the nameplate and condition",
+        body: "Show the rating plate along with the whole unit, and note any missing panels, cords, motors or compressors.",
+      },
+      {
+        title: "Describe access",
+        body: "Note stairs, lifts, tight doorways or a driveway collection point, plus the Brisbane suburb, so handling can be planned safely.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Can a fridge or freezer be collected before the refrigerant is removed?",
+        a: "No. Refrigerant must be recovered by a licensed technician first — releasing it to the atmosphere is prohibited under Australian ozone protection law. Say whether that has already been done when you enquire.",
+      },
+      {
+        q: "Does the concrete weight in a washing machine affect the quote?",
+        a: "Yes. The counterweight bonded to the drum is not recoverable metal, so it is identified separately rather than counted as part of the appliance's scrap weight.",
+      },
+      {
+        q: "Do whitegoods need to be dismantled before a quote?",
+        a: "No. Present the appliance intact with clear photos. Do not dismantle a sealed unit or attempt to access refrigerant lines yourself.",
+      },
+      {
+        q: "Can several different appliances be collected in one enquiry?",
+        a: "Yes. List each appliance type and roughly how many there are — a mixed clear-out is assessed as a mixed load rather than one grade.",
+      },
+      {
+        q: "Can MetalBase collect whitegoods in Brisbane?",
+        a: "Customer-site collection is available, with quantity, access, equipment, timing and terms confirmed for the actual appliances and address.",
+      },
+    ],
+  },
 ];
 
 export function getMaterial(slug: string): MaterialGuide | undefined {

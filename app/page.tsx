@@ -130,6 +130,12 @@ const materialTiles: {
     photo: "vehicle",
     layout: "md:col-span-12 md:min-h-[360px]",
   },
+  {
+    title: "Scrap whitegoods",
+    href: "/materials/whitegoods",
+    photo: "crew",
+    layout: "md:col-span-12 md:min-h-[360px]",
+  },
 ];
 
 const homeFaqs = [
