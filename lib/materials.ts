@@ -974,6 +974,119 @@ export const materials: MaterialGuide[] = [
       },
     ],
   },
+  {
+    slug: "swarf",
+    name: "Scrap swarf",
+    shortName: "Swarf",
+    eyebrow: "Scrap swarf Brisbane",
+    seoTitle: "Scrap Swarf Brisbane: Turnings & Quote Guide",
+    seoDescription:
+      "Get a Brisbane scrap swarf quote right: sort turnings by metal, drain cutting fluid and photograph the bin before collection is arranged.",
+    h1: "Scrap swarf Brisbane: sort turnings by metal before you quote",
+    intro:
+      "Workshop swarf is graded by metal type and how much cutting fluid it still carries, not by the machine it came off. Separate steel, stainless, aluminium and brass swarf where you can, then send photos of the bin before collection.",
+    photo: "swarf",
+    overview:
+      "Swarf is small, light and often wet, so it behaves differently from a solid offcut of the same metal. A CNC lathe throwing off dense brass turnings looks nothing like the same machine running an aluminium job, and a bin of mixed steel and stainless swarf from a busy Coopers Plains or Salisbury workshop is assessed as mixed material rather than one clean grade. Cutting fluid, tramp metal from tooling, and fine aluminium dust all change how a load can be described before a quote is possible.",
+    examples: [
+      "CNC lathe turnings",
+      "Drill press swarf",
+      "Milling machine chips",
+      "Aluminium extrusion swarf",
+      "Brass bar automatic turnings",
+      "Grinding swarf and fines",
+      "Mixed workshop floor sweepings",
+    ],
+    grades: [
+      {
+        term: "Mild steel turnings and drillings",
+        detail:
+          "Clean, dry ferrous swarf from turning, milling or drilling. Keep it separate from stainless and non-ferrous swarf where the workshop layout allows.",
+      },
+      {
+        term: "Stainless steel swarf",
+        detail:
+          "304, 316 and other stainless turnings mixed with ordinary steel swarf lose their identity as a verified alloy. Keep known stainless jobs in their own bin rather than sweeping everything together.",
+      },
+      {
+        term: "Aluminium swarf and fines",
+        detail:
+          "Lighter and lower density than steel or brass swarf, often carrying more cutting fluid by weight. Fine, dry aluminium swarf is a recognised fire risk and should be kept away from grinding sparks and open flame.",
+      },
+      {
+        term: "Brass and bronze machining swarf",
+        detail:
+          "Dense turnings from bar automatics and similar work, usually smaller in volume than ferrous swarf but easily contaminated with steel from tooling or adjacent jobs.",
+      },
+      {
+        term: "Mixed workshop swarf",
+        detail:
+          "Swarf from several machines or metals combined in one bin is assessed as mixed material rather than a single grade, so separating at the machine is worth more than sorting later.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Metal type and alloy",
+        detail:
+          "Steel, stainless, aluminium and brass swarf recover very differently, so identifying what went into each bin matters more than the total volume.",
+      },
+      {
+        term: "Coolant and cutting fluid content",
+        detail:
+          "How wet the swarf still is affects handling and the net metal content. Describe whether the load has been drained or is still saturated.",
+      },
+      {
+        term: "Contamination",
+        detail:
+          "Tool inserts, drill bits, swept-up floor debris, rags and packaging mixed into a bin change how the swarf is described and assessed.",
+      },
+      {
+        term: "Container and quantity",
+        detail:
+          "Bin size, drum count or an approximate weight, and whether the swarf is loose or briquetted, all help set up a useful enquiry.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Separate by metal at the machine",
+        body: "Keep steel, stainless, aluminium and brass swarf in different bins as it is generated, rather than combining everything at pickup.",
+      },
+      {
+        title: "Let coolant drain and settle",
+        body: "Tip or rack bins to drain excess cutting fluid before requesting a quote, and note how wet the load still is.",
+      },
+      {
+        title: "Keep fine aluminium away from ignition sources",
+        body: "Store dry aluminium swarf away from grinding sparks, welding and open flame rather than beside other bins.",
+      },
+      {
+        title: "Photograph the bin and describe the source",
+        body: "Show the container and the swarf itself, and note roughly how many machines or shifts filled it.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does scrap swarf need to be dry before a quote?",
+        a: "Not necessarily, but draining excess cutting fluid helps. Describe how wet the load still is rather than presenting it as dry when it isn't.",
+      },
+      {
+        q: "Can different metals be mixed in one swarf bin?",
+        a: "They can, but a mixed bin is assessed as mixed swarf rather than a clean single grade. Separating steel, stainless, aluminium and brass at the machine gets a clearer result.",
+      },
+      {
+        q: "Is a bin or skip provided for ongoing workshop swarf?",
+        a: "Container options are confirmed for the site and volume involved rather than assumed in advance. Ask when you enquire about an ongoing arrangement.",
+      },
+      {
+        q: "Is oily cutting fluid a problem for a swarf collection?",
+        a: "Describe the coolant or oil residue in the enquiry rather than assuming it can go out with general waste. It may need to be handled or disposed of separately from the metal.",
+      },
+      {
+        q: "Can MetalBase collect swarf in Brisbane?",
+        a: "Customer-site collection is available, with volume, container arrangements, access, timing and terms confirmed for the actual workshop and address.",
+      },
+    ],
+  },
 ];
 
 export function getMaterial(slug: string): MaterialGuide | undefined {

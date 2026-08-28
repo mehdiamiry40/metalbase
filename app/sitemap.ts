@@ -27,7 +27,7 @@ import {
 
 const CONTENT_REVIEWED = new Date("2026-08-03");
 const BRISBANE_SEARCH_PAGES_REVIEWED = new Date("2026-08-07");
-const MATERIAL_GUIDES_REVIEWED = new Date("2026-08-24");
+const MATERIAL_GUIDES_REVIEWED = new Date("2026-08-28");
 
 const routes: {
   path: string;
