@@ -29,7 +29,7 @@ Nothing invents a number on your behalf. Current status:
 | Where | What |
 |---|---|
 | `company` in `lib/site.ts` | Verified operator, ABN, phone and contact hours; licence, public email and street address remain unpublished |
-| `operations` in `lib/site.ts` | No customer visits; collection, bins and arranged drop-off across Brisbane, Gold Coast, Sunshine Coast, Logan and Ipswich |
+| `operations` in `lib/site.ts` | No customer visits; collection, bins and arranged drop-off across Brisbane, Gold Coast, Sunshine Coast, Logan, Ipswich and Redlands |
 | `app/api/enquiry/route.ts` | Server-only verified quote inbox, with an optional environment override |
 | `locations` | Empty by design: MetalBase has no public customer location |
 | `stats` | Any figure you can defend (currently empty → the band doesn't render) |
@@ -137,7 +137,7 @@ CI runs the same non-interactive checks on pushes and pull requests.
 
 ## Photography
 
-`lib/photos.ts` — 14 free-licence Unsplash photos, keyed, with credits and alt
+`lib/photos.ts` — 18 free-licence Unsplash photos, keyed, with credits and alt
 text. Served from the Unsplash CDN by default.
 
 ```bash
@@ -148,9 +148,10 @@ npm run photos            # download into public/photos
 For real truck, driver, bin and collection photography, keep the keys and drop files in
 `public/photos/<key>.jpg`.
 
-Credits: Yasin Hemmati, Zoshua Colah, Load It Up Dumpster Rental, Daniel Fazio,
-Karthik Srinivas, Jessica Palomo, Pop & Zebra, Jay Alexander, Elena Mozhvilo,
-Harry Dona, Johnny Sanchez, Evan Demicoli, Pavel Neznanov.
+Credits: Yasin Hemmati, Zoshua Colah, Load It Up Dumpster Rental, Émile Dionne,
+Sikwe Scarter, Karthik Srinivas, Jessica Palomo, Pop & Zebra, Jay Alexander,
+Daniel Romero, Elena Mozhvilo, Anneliese Klotz, Harry Dona, Johnny Sanchez,
+Evan Demicoli and Pavel Neznanov.
 
 ## SEO & accessibility
 
@@ -159,9 +160,9 @@ Harry Dona, Johnny Sanchez, Evan Demicoli, Pavel Neznanov.
 - One canonical page per core Brisbane intent:
   `/scrap-metal-brisbane` for material, quote, pricing and receiving guidance;
   `/scrap-removal-brisbane` for site collection assessment
-- Six focused material guides under `/materials/` for copper, cable,
-  aluminium, brass, steel and stainless steel, linked from the homepage and
-  `/what-we-buy`
+- Nine focused material guides under `/materials/` for copper, cable,
+  aluminium, brass, steel, stainless steel, electric motors, radiators and
+  whitegoods, linked from the homepage and `/what-we-buy`
 - Permanent redirects consolidate the superseded Brisbane region and
   collection-service URLs, and the sitemap lists only the preferred pages
 - Favicon and OG image generated at build (`app/icon.tsx`, `app/opengraph-image.tsx`)
@@ -187,10 +188,10 @@ taxonomy* and its *process*, and that every competitor hides both behind a
 | Export | What it drives |
 |---|---|
 | `priceGroups` | 28 grades across three streams. Home shows three visual summaries; `/prices` carries the full `Ledger` |
-| `materials` | Six search-focused grade, preparation and quote guides under `/materials/[slug]` |
+| `materials` | Nine search-focused grade, preparation and quote guides under `/materials/[slug]` |
 | `glossary` | Standard trade terms — `/glossary` |
 | `services` | Three business scopes; collection and bins are verified, while industrial and demolition remain enquiry guides |
-| `serviceAreas` | The five verified customer-site collection regions — `/locations`, `/scrap-removal-brisbane` |
+| `serviceAreas` | The six verified customer-site collection regions — `/locations`, `/scrap-removal-brisbane` |
 
 The cautious customer FAQ copy lives beside the route in `app/faq/page.tsx`,
 and the homepage carries its own shorter quote-focused subset. Do not restore

@@ -5,14 +5,13 @@ import {
   StatBand,
   TickList,
 } from "@/components/ui";
-import { stats } from "@/lib/site";
+import { formatServiceRegions, operations, stats } from "@/lib/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   path: "/about",
   title: "How MetalBase Scrap Enquiries Work",
-  description:
-    "MetalBase provides mobile scrap metal collection across Brisbane, Gold Coast, Sunshine Coast, Logan and Ipswich.",
+  description: `MetalBase provides mobile scrap metal collection across ${formatServiceRegions()}.`,
 });
 
 const values = [
@@ -52,7 +51,7 @@ export default function AboutPage() {
         eyebrow="About"
         photo="yard-wide"
         title="About MetalBase"
-        intro="Mobile customer-site scrap collection, bins and arranged receiving across five South East Queensland regions."
+        intro={`Mobile customer-site scrap collection, bins and arranged receiving across ${operations.serviceRegions.length} South East Queensland regions.`}
         trail={[{ label: "Home", href: "/" }, { label: "About" }]}
       />
 
@@ -72,9 +71,9 @@ export default function AboutPage() {
         title="Clear details before the next step"
       >
         <p className="t-lead mt-5" id="story">
-          MetalBase is a mobile scrap metal collection and removal service for
-          Brisbane, the Gold Coast, Sunshine Coast, Logan and Ipswich. Our truck
-          drivers visit customer sites; customers cannot visit a MetalBase yard.
+          MetalBase is a mobile scrap metal collection and removal service for{" "}
+          {formatServiceRegions()}. Our truck drivers visit customer sites;
+          customers cannot visit a MetalBase yard.
         </p>
         <p className="mt-4">
           Current grade, collection timing, arranged receiving instructions and
