@@ -6,8 +6,8 @@ import {
 } from "@/lib/enquiry-config";
 
 /* ------------------------------------------------------------------
-   Pure enquiry logic — no framework, no I/O, so it can be unit tested.
-   The route handler is a thin shell around this.
+   Core enquiry validation and rate limiting. Provider-bound image decoding is
+   isolated in enquiry-photos.ts so untrusted media has one server boundary.
    ------------------------------------------------------------------ */
 
 export type RawEnquiry = {
@@ -99,6 +99,10 @@ export function isEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
 }
 
+export function isRawEnquiry(value: unknown): value is RawEnquiry {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
 /** True when the honeypot was filled — a bot. */
 export function isBot(raw: RawEnquiry): boolean {
   return clean(raw.website, 100).length > 0;
@@ -171,6 +175,7 @@ export function formatSummary(data: CleanEnquiry): string {
 
 export const WINDOW_MS = 60_000;
 export const MAX_PER_WINDOW = 5;
+export const MAX_LOCAL_RATE_LIMIT_KEYS = 10_000;
 const LIMITER_TIMEOUT_MS = 3_000;
 
 const local = new Map<string, { count: number; resetAt: number }>();
@@ -179,9 +184,24 @@ export function localRateLimit(
   key: string,
   now = Date.now(),
   store = local,
+  maxKeys = MAX_LOCAL_RATE_LIMIT_KEYS,
 ): boolean {
   const entry = store.get(key);
   if (!entry || now > entry.resetAt) {
+    if (entry) store.delete(key);
+
+    if (store.size >= maxKeys) {
+      for (const [storedKey, storedEntry] of store) {
+        if (now > storedEntry.resetAt) store.delete(storedKey);
+      }
+      const boundedMax = Math.max(1, maxKeys);
+      while (store.size >= boundedMax) {
+        const oldestKey = store.keys().next().value;
+        if (oldestKey === undefined) break;
+        store.delete(oldestKey);
+      }
+    }
+
     store.set(key, { count: 1, resetAt: now + WINDOW_MS });
     return false;
   }

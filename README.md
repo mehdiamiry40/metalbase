@@ -101,8 +101,9 @@ but shouldn't is invisible to the rename guard.
 
 `components/QuoteForm.tsx` → `POST /api/enquiry`. Server-side validation,
 honeypot and rate limiting. Customers can attach up to three JPEG, PNG or WebP
-photos; the browser resizes and compresses them before delivery. Delivery is
-configured server-side:
+photos; the browser resizes them sequentially, then the server decodes and
+re-encodes each image with a generated JPEG filename before delivery. Delivery
+is configured server-side:
 
 ```bash
 RESEND_API_KEY=...

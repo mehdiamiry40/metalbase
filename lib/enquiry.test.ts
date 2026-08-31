@@ -8,6 +8,7 @@ import {
   isBot,
   isDurableLimiterConfigured,
   isEmail,
+  isRawEnquiry,
   localRateLimit,
   sanitise,
   validate,
@@ -82,6 +83,16 @@ describe("validate", () => {
   });
 });
 
+describe("isRawEnquiry", () => {
+  it("accepts only non-null, non-array JSON objects", () => {
+    expect(isRawEnquiry({})).toBe(true);
+    expect(isRawEnquiry({ name: "Jordan" })).toBe(true);
+    for (const value of [null, [], "text", 42, true]) {
+      expect(isRawEnquiry(value)).toBe(false);
+    }
+  });
+});
+
 describe("sanitise", () => {
   it("drops non-array materials and empty entries", () => {
     expect(sanitise({ materials: "copper" }).materials).toEqual([]);
@@ -95,7 +106,7 @@ describe("sanitise", () => {
     expect(sanitise({ materials: many }).materials).toHaveLength(20);
   });
 
-  it("keeps only valid, bounded photo attachments", () => {
+  it("keeps only structurally valid, bounded photo candidates", () => {
     const valid = {
       name: " copper-load.jpg ",
       type: "image/jpeg",
@@ -183,6 +194,18 @@ describe("localRateLimit", () => {
     for (let i = 0; i <= MAX_PER_WINDOW; i++) localRateLimit("a", now, store);
     expect(localRateLimit("a", now, store)).toBe(true);
     expect(localRateLimit("b", now, store)).toBe(false);
+  });
+
+  it("prunes expired keys and evicts the oldest key at the local memory bound", () => {
+    const store = new Map<string, { count: number; resetAt: number }>();
+    const now = 1_000_000;
+    expect(localRateLimit("a", now, store, 2)).toBe(false);
+    expect(localRateLimit("b", now, store, 2)).toBe(false);
+    expect(localRateLimit("c", now, store, 2)).toBe(false);
+    expect([...store.keys()]).toEqual(["b", "c"]);
+
+    expect(localRateLimit("d", now + WINDOW_MS + 1, store, 2)).toBe(false);
+    expect([...store.keys()]).toEqual(["d"]);
   });
 });
 

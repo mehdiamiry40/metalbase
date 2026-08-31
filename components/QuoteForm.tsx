@@ -5,6 +5,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { ArrowRight, Tick } from "@/components/ui";
 import {
   ACCEPTED_PHOTO_TYPES,
+  MAX_INPUT_PHOTO_BYTES,
   MAX_PHOTO_BYTES,
   MAX_PHOTOS,
   type AcceptedPhotoType,
@@ -90,6 +91,9 @@ async function preparePhoto(file: File): Promise<PreparedPhoto> {
   if (!acceptedPhotoTypes.has(file.type)) {
     throw new Error("Use JPEG, PNG or WebP images.");
   }
+  if (file.size > MAX_INPUT_PHOTO_BYTES) {
+    throw new Error("Each original photo must be smaller than 12 MB.");
+  }
 
   const objectUrl = URL.createObjectURL(file);
   try {
@@ -170,6 +174,12 @@ export default function QuoteForm() {
   ) {
     const files = Array.from(event.target.files ?? []);
     setPhotoError("");
+    setErrors((current) => {
+      if (!current.photos) return current;
+      const next = { ...current };
+      delete next.photos;
+      return next;
+    });
 
     if (files.length > MAX_PHOTOS) {
       setPhotoError(`Choose no more than ${MAX_PHOTOS} photos.`);
@@ -179,7 +189,9 @@ export default function QuoteForm() {
 
     setPreparingPhotos(true);
     try {
-      setPhotos(await Promise.all(files.map(preparePhoto)));
+      const prepared: PreparedPhoto[] = [];
+      for (const file of files) prepared.push(await preparePhoto(file));
+      setPhotos(prepared);
     } catch (error) {
       setPhotos([]);
       setPhotoError(
@@ -196,6 +208,7 @@ export default function QuoteForm() {
     if (preparingPhotos) return;
     setState("sending");
     setErrors({});
+    setPhotoError("");
     setMessage("");
 
     const fd = new FormData(e.currentTarget);
@@ -224,6 +237,7 @@ export default function QuoteForm() {
       if (!res.ok) {
         if (json.errors) {
           setErrors(json.errors);
+          if (json.errors.photos) setPhotoError(String(json.errors.photos));
           setState("idle");
           // Move the user to the first problem rather than leaving them
           // to hunt for red text somewhere up the page.
@@ -312,6 +326,7 @@ export default function QuoteForm() {
 
   const busy = state === "sending";
   const errorCount = Object.keys(errors).length;
+  const visiblePhotoError = photoError || errors.photos;
 
   return (
     <form
@@ -500,8 +515,8 @@ export default function QuoteForm() {
             multiple
             disabled={busy || preparingPhotos}
             onChange={onPhotoChange}
-            aria-invalid={!!photoError}
-            aria-describedby={`${uid}-photos-help${photoError ? ` ${uid}-photos-err` : ""}`}
+            aria-invalid={!!visiblePhotoError}
+            aria-describedby={`${uid}-photos-help${visiblePhotoError ? ` ${uid}-photos-err` : ""}`}
             className={`${field} file:mr-4 file:border-0 file:bg-furnace file:px-3 file:py-2 file:font-semibold file:text-white`}
           />
           <p id={`${uid}-photos-help`} className="mt-2 text-sm t-muted">
@@ -516,9 +531,9 @@ export default function QuoteForm() {
               {photos.length} {photos.length === 1 ? "photo" : "photos"} ready
             </p>
           )}
-          {photoError && (
+          {visiblePhotoError && (
             <p id={`${uid}-photos-err`} className={errCls}>
-              {photoError}
+              {visiblePhotoError}
             </p>
           )}
         </div>
