@@ -34,13 +34,17 @@ does not identify itself as a licensed dealer or publish a street address.
 | Field | Where it appears | Status |
 |---|---|---|
 | ~~`phone` + `phoneLabel`~~ | header, footer, contact, mobile bar | ✅ **Set.** `+61410233335` / `0410 233 335`. Click-to-call is live everywhere and the mobile bar now shows "Call". |
-| ~~`legal`~~ | footer and structured data | ✅ **Set.** `Emir Group Pty Ltd`. |
+| ~~`legal`~~ | footer and structured data | ✅ **Set.** `Mehdi Emir` (Individual/Sole Trader). |
 | ~~`abn`~~ | footer and structured data | ✅ **Set.** `62 351 619 456`. |
 | ~~`hours`~~ | footer and contact | ✅ **Set.** `8am–5pm, 7 days a week`, presented as contact hours rather than yard hours. |
 | `email` | footer, contact, legal | No direct email route |
 | `head` | footer, legal, `PostalAddress` schema | Intentionally unset: MetalBase has no public customer location |
 | `licence` | nowhere | Intentionally unpublished at the operator's request |
 | `priceDate` | prices | Rate board cannot state when it was set |
+
+The operator and ABN were checked against the
+[official ABN Lookup record](https://abr.business.gov.au/ABN/View?id=62351619456)
+on 31 August 2026. It lists `EMIR, MEHDI` as an Individual/Sole Trader.
 
 Do not enable `PUBLIC_LOCATION_ENABLED`, another service `verified` flag or
 `PUBLISH_RATES` merely because the identity fields above are complete. Each
@@ -50,9 +54,9 @@ still needs its own operational evidence.
 
 MetalBase is a mobile service-area business. Customers cannot visit; truck
 drivers collect from customer sites across Brisbane, Gold Coast, Sunshine
-Coast, Logan and Ipswich. Bins are available, and suitable drop-offs use an
-arranged receiving destination. Do not publish a licence number or a public
-street address.
+Coast, Logan, Ipswich and Redlands. Bins are available, and suitable drop-offs
+use an arranged receiving destination. Do not publish a licence number or a
+public street address.
 
 ---
 
@@ -135,7 +139,7 @@ property, inspect both preferred URLs, request indexing and confirm Google's
 selected canonical after the redirects are crawled. Sitemap submission is a
 discovery hint, not a ranking or indexing guarantee.
 
-The removal page now states the verified five-region coverage, customer-site
+The removal page now states the verified six-region coverage, customer-site
 collection and bin availability directly. It still qualifies minimum quantity,
 equipment, timing, fees, payment and arranged receiving instructions because
 those details remain job-specific.
@@ -151,7 +155,7 @@ convincing one:
   bins, loading process and team. Drop files into `public/photos/`
   using the existing keys and set `USE_LOCAL = true` in `lib/photos.ts`.
 - **Google Business Profile.** A hidden-address service-area profile is set up
-  with the five verified regions. Google still requires a real private postal
+  with the six verified regions. Google still requires a real private postal
   address for verification; that address is not shown to customers.
 - **Reviews.** `stats` in `lib/site.ts` is deliberately empty — an
   earlier version claimed 182,000 t recovered, 98.6% diversion and 31
@@ -159,7 +163,9 @@ convincing one:
 
 ---
 
-## Verified in the current worktree — 7 August 2026
+## Historical verification snapshot — 7 August 2026
+
+The following checks describe the 7 August worktree, not the current head:
 
 - Production build, ESLint and TypeScript clean; 80 tests passing
 - `npm audit --audit-level=high`: zero known vulnerabilities
