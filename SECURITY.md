@@ -51,8 +51,10 @@ production build in a browser.
 ## Enquiry data
 
 The quote endpoint validates and bounds all submitted fields. Optional photos
-are limited to three compressed JPEG, PNG or WebP inputs and are revalidated on
-the server before being passed to the configured email or webhook provider.
+are limited to three compressed JPEG, PNG or WebP inputs. The server decodes
+them with pixel and channel limits, rejects unsupported or damaged content,
+strips metadata, and re-encodes generated JPEG attachments before either
+delivery provider can receive them.
 
 Customer details and provider response bodies must never be written to logs.
 Delivery credentials, recipient addresses and Upstash tokens belong only in

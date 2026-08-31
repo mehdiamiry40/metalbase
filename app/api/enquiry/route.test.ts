@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+import sharp from "sharp";
 import { POST } from "./route";
 
 const ENV_KEYS = [
@@ -34,6 +35,31 @@ function enquiryRequest(
   });
 }
 
+function rawRequest(
+  body: string,
+  headers: Record<string, string> = { "Content-Type": "application/json" },
+) {
+  return new Request("http://localhost/api/enquiry", {
+    method: "POST",
+    headers: { "X-Forwarded-For": `raw-${body.length}`, ...headers },
+    body,
+  });
+}
+
+async function testPng(): Promise<string> {
+  const image = await sharp({
+    create: {
+      width: 12,
+      height: 8,
+      channels: 3,
+      background: "#c24724",
+    },
+  })
+    .png()
+    .toBuffer();
+  return image.toString("base64");
+}
+
 afterEach(() => {
   for (const key of ENV_KEYS) {
     const value = originalEnv[key];
@@ -45,6 +71,52 @@ afterEach(() => {
 });
 
 describe("POST /api/enquiry", () => {
+  it("rejects non-JSON, cross-site and invalid top-level request shapes", async () => {
+    process.env.RESEND_API_KEY = "re_test";
+    const providerFetch = vi.fn<typeof fetch>();
+    vi.stubGlobal("fetch", providerFetch);
+    const validBody = JSON.stringify({
+      enquiryType: "Scrap metal quote",
+      name: "Boundary Test",
+      email: "boundary@example.com",
+    });
+
+    const cases = [
+      { request: rawRequest(validBody, { "Content-Type": "text/plain" }), status: 415 },
+      { request: rawRequest(validBody, {}), status: 415 },
+      {
+        request: rawRequest(validBody, {
+          "Content-Type": "application/json",
+          Origin: "https://attacker.example",
+        }),
+        status: 403,
+      },
+      {
+        request: rawRequest(validBody, {
+          "Content-Type": "application/json",
+          Origin: "null",
+        }),
+        status: 403,
+      },
+      {
+        request: rawRequest(validBody, {
+          "Content-Type": "application/json",
+          "Sec-Fetch-Site": "cross-site",
+        }),
+        status: 403,
+      },
+      { request: rawRequest("null"), status: 400 },
+      { request: rawRequest("[]"), status: 400 },
+      { request: rawRequest("42"), status: 400 },
+    ];
+
+    for (const item of cases) {
+      const response = await POST(item.request);
+      expect(response.status).toBe(item.status);
+    }
+    expect(providerFetch).not.toHaveBeenCalled();
+  });
+
   it("fails closed when delivery is not configured", async () => {
     for (const key of ENV_KEYS) delete process.env[key];
     const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
@@ -118,7 +190,7 @@ describe("POST /api/enquiry", () => {
     };
     vi.stubGlobal("fetch", providerFetch);
 
-    const photoContent = Buffer.from("photo").toString("base64");
+    const photoContent = await testPng();
     const response = await POST(
       enquiryRequest("test-photo", {
         photos: [
@@ -132,11 +204,80 @@ describe("POST /api/enquiry", () => {
     );
 
     expect(response.status).toBe(200);
-    expect(providerBody.attachments).toEqual([
-      { filename: "copper-load.jpg", content: photoContent },
-    ]);
+    const attachments = providerBody.attachments as Array<{
+      filename: string;
+      content: string;
+    }>;
+    expect(attachments).toHaveLength(1);
+    expect(attachments[0].filename).toBe("scrap-photo-1.jpg");
+    expect(attachments[0].content).not.toBe(photoContent);
+    expect(Buffer.from(attachments[0].content, "base64").subarray(0, 3)).toEqual(
+      Buffer.from([0xff, 0xd8, 0xff]),
+    );
     expect(String(providerBody.text)).toContain("Photos attached: 1");
     expect(String(providerBody.text)).not.toContain(photoContent);
+  });
+
+  it("rejects forged photo bytes before either provider is called", async () => {
+    process.env.RESEND_API_KEY = "re_test";
+    const providerFetch = vi.fn<typeof fetch>();
+    vi.stubGlobal("fetch", providerFetch);
+
+    const response = await POST(
+      enquiryRequest("test-forged-photo", {
+        photos: [
+          {
+            name: "quote.html",
+            type: "image/jpeg",
+            content: Buffer.from("<script>alert(1)</script>").toString("base64"),
+          },
+        ],
+      }),
+    );
+
+    expect(response.status).toBe(422);
+    await expect(response.json()).resolves.toMatchObject({
+      ok: false,
+      errors: { photos: expect.stringMatching(/could not be verified/) },
+    });
+    expect(providerFetch).not.toHaveBeenCalled();
+  });
+
+  it("delivers only re-encoded photos to the webhook path", async () => {
+    process.env.ENQUIRY_WEBHOOK_URL = "https://workflow.example/enquiry";
+    let providerBody: Record<string, unknown> = {};
+    const providerFetch: typeof fetch = async (_input, init) => {
+      providerBody = JSON.parse(String(init?.body));
+      return new Response(null, { status: 204 });
+    };
+    vi.stubGlobal("fetch", providerFetch);
+
+    const response = await POST(
+      enquiryRequest("test-webhook-photo", {
+        photos: [
+          {
+            name: "caller-controlled.png",
+            type: "image/png",
+            content: await testPng(),
+          },
+        ],
+      }),
+    );
+
+    expect(response.status).toBe(200);
+    const photos = providerBody.photos as Array<{
+      name: string;
+      type: string;
+      content: string;
+    }>;
+    expect(photos).toHaveLength(1);
+    expect(photos[0]).toMatchObject({
+      name: "scrap-photo-1.jpg",
+      type: "image/jpeg",
+    });
+    expect(Buffer.from(photos[0].content, "base64").subarray(0, 3)).toEqual(
+      Buffer.from([0xff, 0xd8, 0xff]),
+    );
   });
 
   it("delivers a phone-only enquiry without an empty email reply address", async () => {

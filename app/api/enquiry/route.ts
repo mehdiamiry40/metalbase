@@ -1,17 +1,23 @@
+import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";
 import {
   durableRateLimit,
   formatSummary,
   isBot,
   isDurableLimiterConfigured,
+  isRawEnquiry,
   sanitise,
   validate,
-  type RawEnquiry,
+  type CleanEnquiry,
 } from "@/lib/enquiry";
+import {
+  normaliseEnquiryPhotos,
+  PHOTO_VALIDATION_ERROR,
+} from "@/lib/enquiry-photos";
 
 /* ------------------------------------------------------------------
-   Quote enquiry endpoint. A thin shell — all logic lives in
-   lib/enquiry.ts so it can be unit tested without a server.
+   Quote enquiry endpoint. Validation and limiting live in lib/enquiry.ts;
+   provider-bound image enforcement lives in lib/enquiry-photos.ts.
 
    Delivery:
      RESEND_API_KEY                 → email via Resend
@@ -30,21 +36,66 @@ const DELIVERY_TIMEOUT_MS = 8_000;
 /** This route module is server-only, so the inbox is not sent to browsers. */
 const ENQUIRY_INBOX = "mehdiamiry40@gmail.com";
 
-export async function POST(request: Request) {
-  const ip =
-    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+function hasJsonMediaType(request: Request): boolean {
+  return (
+    request.headers.get("content-type")?.split(";", 1)[0]?.trim().toLowerCase() ===
+    "application/json"
+  );
+}
 
-  if (await durableRateLimit(ip)) {
+function isAllowedBrowserOrigin(request: Request): boolean {
+  if (request.headers.get("sec-fetch-site")?.toLowerCase() === "cross-site") {
+    return false;
+  }
+
+  const origin = request.headers.get("origin");
+  if (!origin) return true;
+  try {
+    return new URL(origin).origin === new URL(request.url).origin;
+  } catch {
+    return false;
+  }
+}
+
+function rateLimitKey(request: Request): string {
+  const forwarded =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  return createHash("sha256").update(forwarded).digest("hex");
+}
+
+export async function POST(request: Request) {
+  if (!hasJsonMediaType(request)) {
+    return NextResponse.json(
+      { ok: false, error: "Use an application/json request." },
+      { status: 415 },
+    );
+  }
+
+  if (!isAllowedBrowserOrigin(request)) {
+    return NextResponse.json(
+      { ok: false, error: "Cross-site requests are not accepted." },
+      { status: 403 },
+    );
+  }
+
+  if (await durableRateLimit(rateLimitKey(request))) {
     return NextResponse.json(
       { ok: false, error: "Too many enquiries. Try again shortly, or call us." },
       { status: 429, headers: { "Retry-After": "60" } },
     );
   }
 
-  let raw: RawEnquiry;
+  let raw: unknown;
   try {
     raw = await request.json();
   } catch {
+    return NextResponse.json(
+      { ok: false, error: "Malformed request." },
+      { status: 400 },
+    );
+  }
+
+  if (!isRawEnquiry(raw)) {
     return NextResponse.json(
       { ok: false, error: "Malformed request." },
       { status: 400 },
@@ -60,7 +111,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, errors }, { status: 422 });
   }
 
-  const summary = formatSummary(data);
+  let safeData: CleanEnquiry;
+  try {
+    safeData = { ...data, photos: await normaliseEnquiryPhotos(data.photos) };
+  } catch {
+    return NextResponse.json(
+      { ok: false, errors: { photos: PHOTO_VALIDATION_ERROR } },
+      { status: 422 },
+    );
+  }
+
+  const summary = formatSummary(safeData);
   const to = process.env.ENQUIRY_TO?.trim() || ENQUIRY_INBOX;
   const resendKey = process.env.RESEND_API_KEY?.trim();
   const webhook = process.env.ENQUIRY_WEBHOOK_URL?.trim();
@@ -76,12 +137,12 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           from: process.env.ENQUIRY_FROM ?? "MetalBase <onboarding@resend.dev>",
           to: [to],
-          ...(data.email ? { reply_to: data.email } : {}),
-          subject: `Quote enquiry — ${data.enquiryType} — ${data.name}`,
+          ...(safeData.email ? { reply_to: safeData.email } : {}),
+          subject: `Quote enquiry — ${safeData.enquiryType} — ${safeData.name}`,
           text: summary,
-          ...(data.photos.length > 0
+          ...(safeData.photos.length > 0
             ? {
-                attachments: data.photos.map((photo) => ({
+                attachments: safeData.photos.map((photo) => ({
                   filename: photo.name,
                   content: photo.content,
                 })),
@@ -100,7 +161,10 @@ export async function POST(request: Request) {
       const res = await fetch(webhook, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, receivedAt: new Date().toISOString() }),
+        body: JSON.stringify({
+          ...safeData,
+          receivedAt: new Date().toISOString(),
+        }),
         signal: AbortSignal.timeout(DELIVERY_TIMEOUT_MS),
       });
       if (!res.ok) throw new Error(`webhook_${res.status}`);
