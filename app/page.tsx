@@ -136,6 +136,12 @@ const materialTiles: {
     photo: "crew",
     layout: "md:col-span-12 md:min-h-[360px]",
   },
+  {
+    title: "Scrap lead",
+    href: "/materials/lead",
+    photo: "alloy",
+    layout: "md:col-span-12 md:min-h-[360px]",
+  },
 ];
 
 const homeFaqs = [
