@@ -974,6 +974,114 @@ export const materials: MaterialGuide[] = [
       },
     ],
   },
+  {
+    slug: "lead",
+    name: "Scrap lead",
+    shortName: "Lead",
+    eyebrow: "Scrap lead Brisbane",
+    seoTitle: "Scrap Lead Brisbane: Grades & Quote Guide",
+    seoDescription:
+      "Identify lead flashing, wheel weights, pipe and batteries before requesting a Brisbane scrap lead quote — what's clean, what's mixed and what needs care.",
+    h1: "Scrap lead Brisbane: identify safe, sellable lead before you quote",
+    intro:
+      "Lead turns up as roof flashing, wheel balance weights, old pipe and batteries across Brisbane renovations and workshops, and each form needs different handling before a scrap lead quote. Separate clean lead from contaminated material, and keep any batteries intact rather than draining or dismantling them yourself.",
+    photo: "alloy",
+    overview:
+      "Lead is dense and low-volume next to steel or aluminium, so a modest bucket of flashing or wheel weights can weigh far more than it looks. What drives the assessment is the form and purity — clean sheet, pipe or ingot reads differently from painted, tarred or mixed lead — and whether the load includes anything that needs care rather than casual handling. A stack of flashing pulled from a Queenslander re-roof in Annerley is a different quote to a bucket of wheel balance weights swept up at a Rocklea tyre shop, even though both are scrap lead, and a box of old car batteries is different again.",
+    examples: [
+      "Roof flashing and soundproofing sheet",
+      "Wheel balance weights, clip-on and stick-on",
+      "Old lead water pipe",
+      "Lead cable sheathing",
+      "Dive and fishing sinkers",
+      "Range and ballast lead",
+      "Lead-acid batteries from cars, trucks and forklifts",
+    ],
+    grades: [
+      {
+        term: "Clean lead sheet, flashing and pipe",
+        detail:
+          "Roofing flashing, soundproofing sheet, offcuts and old plumbing pipe without paint, tar, render or other coatings attached. Photograph a clean surface as well as the whole parcel.",
+      },
+      {
+        term: "Wheel balance weights",
+        detail:
+          "Clip-on weights carry a steel clip and stick-on weights carry adhesive tape; many newer weights are zinc or steel rather than lead. Keep the two types separate and say whether they have already been sorted by metal.",
+      },
+      {
+        term: "Lead cable sheathing and mixed lead",
+        detail:
+          "Lead-sheathed telecommunications cable, roofing lead with paint, tar or render attached, and other mixed items are assessed as mixed lead rather than a clean grade.",
+      },
+      {
+        term: "Lead-acid batteries",
+        detail:
+          "Car, truck, forklift and UPS batteries contain sulfuric acid and are handled separately from clean scrap lead. Say whether they are intact, drained or already processed by a battery recycler before including them in an enquiry.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Form and purity",
+        detail:
+          "Clean sheet, pipe, ingot and sorted wheel weights carry a different recoverable yield from painted, tarred or mixed lead.",
+      },
+      {
+        term: "Attachments and contamination",
+        detail:
+          "Steel clips, adhesive tape, paint, tar, render and other metals mixed through a lead parcel change how it is assessed.",
+      },
+      {
+        term: "Battery condition",
+        detail:
+          "Whether batteries are intact, leaking, drained or already processed by a specialist affects how, and whether, they can be included in the same enquiry.",
+      },
+      {
+        term: "Quantity and measured weight",
+        detail:
+          "Lead is dense, so give a realistic estimate by weight rather than volume. Final weight-based terms depend on the measured net weight.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Sort by form",
+        body: "Keep clean sheet and pipe separate from wheel weights, cable sheathing and mixed or painted lead.",
+      },
+      {
+        title: "Separate wheel weight types",
+        body: "Group clip-on and stick-on weights apart where practical, and set aside any that turn out to be zinc or steel rather than lead.",
+      },
+      {
+        title: "Leave batteries intact",
+        body: "Keep batteries upright with terminals protected and do not attempt to drain, crack or dismantle them yourself. Say whether a specialist has already handled them.",
+      },
+      {
+        title: "Estimate weight, not volume",
+        body: "Lead is dense — a small bucket can weigh more than a much larger volume of steel. Give a realistic weight estimate along with the Brisbane suburb.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Are all wheel balance weights made of lead?",
+        a: "No. Many newer wheel weights are zinc or steel rather than lead, and the two can look similar. Keep them separate where possible and note if they have already been sorted.",
+      },
+      {
+        q: "Can lead-acid batteries be included in a scrap lead enquiry?",
+        a: "They need separate handling because of their acid content. Say whether the batteries are intact, drained or already processed by a specialist rather than including them loose with clean lead.",
+      },
+      {
+        q: "Does painted or tarred flashing count as clean lead?",
+        a: "No. Coatings, render and other attachments move the material into a mixed-lead grade. Show the coating in your photos rather than presenting it as clean sheet.",
+      },
+      {
+        q: "Are scrap lead prices published on this page?",
+        a: "No. Form, purity, contamination, battery condition, quantity and market movement can all affect the commercial basis. Request a current assessment for the actual material.",
+      },
+      {
+        q: "Can MetalBase collect scrap lead in Brisbane?",
+        a: "Customer-site collection is available, with material, minimum volume, access, equipment, timing and terms confirmed for the proposed load and address.",
+      },
+    ],
+  },
 ];
 
 export function getMaterial(slug: string): MaterialGuide | undefined {
