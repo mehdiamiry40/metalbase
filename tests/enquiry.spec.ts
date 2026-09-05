@@ -224,7 +224,7 @@ test("changing a failed enquiry deliberately creates a new submission identity",
   await openForm(page);
   await fillEnquiry(page);
   await submit(page);
-  await expect(page.getByRole("alert")).toBeVisible();
+  await expect(page.locator("form").getByRole("alert")).toBeVisible();
   await page.getByLabel("Anything else we should know?", { exact: true }).fill("Changed synthetic enquiry: two loads.");
   await submit(page);
   await expectAccepted(page);

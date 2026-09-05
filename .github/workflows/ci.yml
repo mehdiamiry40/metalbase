@@ -23,6 +23,9 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
 
+      - name: Match the lockfile package manager
+        run: npm install --global npm@10.9.8
+
       - name: Install
         run: npm ci
 
