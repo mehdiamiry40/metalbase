@@ -3,12 +3,13 @@
 Next.js 16.3 marketing site. App Router, TypeScript, Tailwind v4.
 
 ```bash
-npm install
-cp .env.example .env.local  # optional local delivery configuration
+nvm use
+npm ci
+cp .env.example .env.local  # configure an isolated development database
 npm run dev        # http://localhost:3000
 ```
 
-Node 20.9+. Verified on Node 22 with a clean production build.
+Node 24.x, matching CI and Vercel. Use npm 10.9.8 when maintaining the lockfile.
 
 ## Verified business model and remaining guards
 
@@ -30,7 +31,7 @@ Nothing invents a number on your behalf. Current status:
 |---|---|
 | `company` in `lib/site.ts` | Verified operator, ABN, phone and contact hours; licence, public email and street address remain unpublished |
 | `operations` in `lib/site.ts` | No customer visits; collection, bins and arranged drop-off across Brisbane, Gold Coast, Sunshine Coast, Logan, Ipswich and Redlands |
-| `app/api/enquiry/route.ts` | Server-only verified quote inbox, with an optional environment override |
+| `lib/enquiry-delivery.ts` | Server-only verified quote inbox, with an optional environment override |
 | `locations` | Empty by design: MetalBase has no public customer location |
 | `stats` | Any figure you can defend (currently empty → the band doesn't render) |
 | `priceGroups` | Real rates, then set `PUBLISH_RATES = true` |
@@ -99,30 +100,35 @@ but shouldn't is invisible to the rename guard.
 
 ## Enquiry form
 
-`components/QuoteForm.tsx` → `POST /api/enquiry`. Server-side validation,
-honeypot and rate limiting. Customers can attach up to three JPEG, PNG or WebP
-photos; the browser resizes them sequentially, then the server decodes and
-re-encodes each image with a generated JPEG filename before delivery. Delivery
-is configured server-side:
+The browser sends a UUID `Idempotency-Key` to `POST /api/enquiry`. The route
+validates the complete bounded input, decodes and re-encodes photos, then
+atomically records the enquiry and an immutable delivery job in PostgreSQL.
+A successful response means **safely recorded**, not read by a person or delivered
+to an inbox. The honeypot intentionally returns no-op success.
 
-```bash
-RESEND_API_KEY=...
-ENQUIRY_TO=quotes@example.com  # optional recipient override
-ENQUIRY_FROM=...          # optional; use a verified sender
-# or
-ENQUIRY_WEBHOOK_URL=...   # Zapier, Make, CRM
-```
+The same key and content return the same reference; changed content with that key
+returns 409. Missing/invalid keys return 428. Failed storage or shared rate limiting
+returns 503 and never falls back to per-process protection. The form preserves
+identity after an uncertain response and starts a new identity for edited content.
 
-Email delivery requires `RESEND_API_KEY` and defaults to the verified quote
-inbox, `mehdiamiry40@gmail.com`; `ENQUIRY_TO` can override that destination.
-Webhook delivery requires `ENQUIRY_WEBHOOK_URL`. Without a Resend key or webhook,
-the endpoint returns `503`, logs no customer details and the form shows a
-click-to-call fallback. It never pretends an enquiry was delivered.
+One database supplies durable capture and the five-per-minute shared rate limit.
+No Upstash service is needed. Production and preview databases must be separate.
+`RESEND_API_KEY` selects Resend; otherwise a validated HTTPS
+`ENQUIRY_WEBHOOK_URL` selects a webhook. The verified default inbox remains
+server-only and `ENQUIRY_TO` may override it. Blank optional sender configuration
+uses the local default; production builds require a verified sender.
 
-The rate limiter uses one atomic Upstash transaction and a sliding one-minute
-window when its URL and token are configured, with an in-memory fallback for
-local development. Provider calls have bounded timeouts and logs exclude
-customer and provider response bodies.
+A best-effort `after` callback accelerates delivery. The authenticated five-minute
+cron recovers jobs through leases and stable provider keys. Resend retries stop
+before its deduplication window expires. Changed credentials and ambiguous generic
+webhooks require manual reconciliation. Signed Resend events separately record
+inbox-server delivery or failure. Provider acceptance is never claimed as final receipt.
+
+Photos and enquiry text are removed from this site's store after 30 days by the
+retention job; operational metadata and hashes are retained up to 90 days. Monitor
+cron health and resolve old work before retention. See
+[the enquiry operations guide](docs/enquiry-operations.md) for setup, failure
+handling, retention, explicit migrations and release verification.
 
 ## Quality gates
 
@@ -131,6 +137,8 @@ npm run lint
 npm run typecheck
 npm test
 npm run build
+npx playwright install chromium
+npm run test:e2e
 npm audit --audit-level=high
 ```
 

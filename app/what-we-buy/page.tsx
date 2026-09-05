@@ -33,7 +33,7 @@ const streams = [
       {
         term: "Brass & bronze",
         detail:
-          "Taps, valves, fittings, marine hardware and gunmetal. Drain water and identify attached steel, rubber or plastic because it can change the grade.",
+          "Taps, valves, fittings, marine hardware and gunmetal. Describe any water or residue and show attached steel, rubber or plastic before preparing the material.",
       },
       {
         term: "Aluminium",
@@ -43,7 +43,7 @@ const streams = [
       {
         term: "Lead & zinc",
         detail:
-          "Sheet lead, roof flashing, wheel weights, keel and ballast, zinc anodes and die-cast. Confirm quantity, condition and handling requirements before transport.",
+          "Sheet lead, roof flashing, wheel weights, keel and ballast, zinc anodes and die-cast. Describe the condition first; do not sand, grind or heat lead or its coatings to prepare a quote. Confirm handling requirements before transport.",
       },
       {
         term: "Stainless steel",
@@ -75,7 +75,7 @@ const streams = [
       {
         term: "Cast iron",
         detail:
-          "Engine blocks, machine bases, baths, guttering and pipe. Drained of oil and free of steel fasteners where practical.",
+          "Engine blocks, machine bases, baths, guttering and pipe. Describe any oil, residue and attached fasteners so preparation and handling can be confirmed first.",
       },
       {
         term: "End-of-life vehicles",
@@ -97,17 +97,17 @@ const streams = [
       {
         term: "Batteries",
         detail:
-          "Battery chemistry changes the handling method. Identify it first, keep lithium packs out of general bins and confirm acceptance and any charge before transport.",
+          "Battery chemistry and condition change the handling method. Identify them first, keep batteries out of general scrap bins and do not drain, open or dismantle them. Confirm acceptance, handling and any charge before transport.",
       },
       {
         term: "Radiators & heat exchangers",
         detail:
-          "Copper, copper/aluminium and all-aluminium cores from automotive and HVAC. Remove steel frames and plastic tanks to lift the grade.",
+          "Copper, copper/aluminium and all-aluminium cores from automotive and HVAC. Photograph the complete unit, including frames and tanks, and describe any coolant, oil or refrigerant status. Confirm preparation before draining or dismantling anything.",
       },
       {
         term: "Transformers & switchgear",
         detail:
-          "Oil-filled or older equipment may need drain, disposal and PCB evidence. Send the nameplate and test records so acceptance can be confirmed first.",
+          "Oil-filled or older equipment may require specialist handling and PCB evidence. Send the nameplate and any existing test or disposal records; confirm acceptance and the safe next step before opening or draining equipment.",
       },
       {
         term: "E-waste & data media",
@@ -125,13 +125,13 @@ const prep: { title: string; body: string; icon: YardIconName }[] = [
     icon: "sort",
   },
   {
-    title: "Remove attachments",
-    body: "Plastic, timber, rubber and mixed-metal fittings can reduce recoverable yield.",
+    title: "Show attachments",
+    body: "Photograph plastic, timber, rubber and mixed-metal fittings. Ask what preparation is needed before removing them.",
     icon: "tag",
   },
   {
-    title: "Drain fluids",
-    body: "Identify oil, coolant, fuel, water or residue before anything is moved.",
+    title: "Describe fluids and residue",
+    body: "Identify oil, coolant, fuel, water or residue. Confirm handling before draining equipment or moving the load.",
     icon: "bin",
   },
   {

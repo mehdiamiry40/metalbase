@@ -29,10 +29,10 @@ export default function Photo({
       src={photoSrc(name, sourceWidth)}
       alt={alt ?? photos[name].alt}
       fill
-      priority={priority}
-      fetchPriority={priority ? undefined : "low"}
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "low"}
       sizes={sizes}
-      quality={quality}
+      quality={quality ?? (priority ? 70 : 75)}
       className={`site-photo object-cover ${className}`}
     />
   );
