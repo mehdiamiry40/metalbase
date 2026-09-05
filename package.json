@@ -5,22 +5,29 @@
   "description": "MetalBase — Brisbane scrap metal quote website.",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/check-production-config.mjs && next build",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "photos": "node scripts/fetch-photos.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test",
+    "verify": "npm run lint && npm run typecheck && npm test && npm run build && npm run test:e2e",
+    "db:migrate": "node scripts/migrate-enquiries.mjs"
   },
   "dependencies": {
+    "@neondatabase/serverless": "1.1.0",
     "@vercel/analytics": "^2.0.1",
     "next": "16.3.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "sharp": "0.35.3"
+    "sharp": "0.35.3",
+    "svix": "2.3.0"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.5.8",
+    "@playwright/test": "1.63.0",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/node": "^22.15.0",
     "@types/react": "^19.1.0",
@@ -30,5 +37,9 @@
     "tailwindcss": "^4.1.13",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4"
-  }
+  },
+  "engines": {
+    "node": "24.x"
+  },
+  "packageManager": "npm@10.9.8"
 }

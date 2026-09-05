@@ -1,5 +1,6 @@
 import {
   ACCEPTED_PHOTO_TYPES,
+  ENQUIRY_LIMITS,
   MAX_PHOTO_BASE64_CHARS,
   MAX_PHOTOS,
   type AcceptedPhotoType,
@@ -44,19 +45,7 @@ export type CleanEnquiry = {
   photos: EnquiryPhoto[];
 };
 
-const LIMITS = {
-  enquiryType: 120,
-  name: 120,
-  company: 160,
-  email: 200,
-  phone: 40,
-  suburb: 120,
-  volume: 120,
-  detail: 4000,
-  material: 60,
-  materialCount: 20,
-  photoName: 100,
-} as const;
+const LIMITS = ENQUIRY_LIMITS;
 
 const acceptedPhotoTypes = new Set<string>(ACCEPTED_PHOTO_TYPES);
 const BASE64 = /^[A-Za-z0-9+/]+={0,2}$/;
@@ -97,6 +86,38 @@ export function clean(value: unknown, max: number): string {
 
 export function isEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+}
+
+/** Plausibility check, not proof that a number belongs to the submitter. */
+export function isPhone(value: string): boolean {
+  if (!/^[+\d\s().-]+$/.test(value)) return false;
+  const number = value.replace(/[\s().-]/g, "");
+  if (/^\+[1-9]\d{7,14}$/.test(number)) return true;
+  return /^0[23478]\d{8}$/.test(number) || /^(?:13\d{4}|1[38]00\d{6})$/.test(number);
+}
+
+/** Run before sanitise: malformed or excessive data must never be silently dropped. */
+export function validateRaw(raw: RawEnquiry): Record<string, string> {
+  const errors: Record<string, string> = {};
+  const fields = ["enquiryType", "name", "company", "email", "phone", "suburb", "volume", "detail"] as const;
+  for (const field of fields) {
+    const value = raw[field];
+    if (value === undefined) continue;
+    if (typeof value !== "string") {
+      errors[field] = "Use a text value for this field.";
+    } else if (value.length > LIMITS[field]) {
+      errors[field] = `Use no more than ${LIMITS[field].toLocaleString("en-AU")} characters.`;
+    }
+  }
+  if (raw.materials !== undefined && (
+    !Array.isArray(raw.materials) || raw.materials.length > LIMITS.materialCount ||
+    raw.materials.some((value) => typeof value !== "string" || value.length > LIMITS.material)
+  )) errors.materials = "Choose a shorter list of materials.";
+  if (raw.photos !== undefined && (
+    !Array.isArray(raw.photos) || raw.photos.length > MAX_PHOTOS ||
+    raw.photos.some((photo) => !sanitisePhoto(photo))
+  )) errors.photos = "Choose up to 3 valid JPEG, PNG or WebP photos within the size limit.";
+  return errors;
 }
 
 export function isRawEnquiry(value: unknown): value is RawEnquiry {
@@ -141,6 +162,9 @@ export function validate(data: CleanEnquiry): Record<string, string> {
   } else if (data.email && !isEmail(data.email)) {
     errors.email = "That email doesn't look right.";
   }
+  if (data.phone && !isPhone(data.phone)) {
+    errors.phone = "Add a valid phone number, including the area or country code.";
+  }
   if (!data.enquiryType) errors.enquiryType = "Pick what you need.";
   return errors;
 }
@@ -161,123 +185,4 @@ export function formatSummary(data: CleanEnquiry): string {
   ]
     .filter(Boolean)
     .join("\n");
-}
-
-/* ---------------------------- rate limiting ------------------------
-   The first version used a Map in module scope. On serverless that is
-   per-instance, so N concurrent instances give an attacker N× the
-   budget — it is decoration, not a limit.
-
-   If Upstash Redis credentials are present we use a shared counter that
-   actually holds across instances. Otherwise we fall back to in-memory
-   and say so plainly, rather than implying protection that isn't there.
-   ------------------------------------------------------------------ */
-
-export const WINDOW_MS = 60_000;
-export const MAX_PER_WINDOW = 5;
-export const MAX_LOCAL_RATE_LIMIT_KEYS = 10_000;
-const LIMITER_TIMEOUT_MS = 3_000;
-
-const local = new Map<string, { count: number; resetAt: number }>();
-
-export function localRateLimit(
-  key: string,
-  now = Date.now(),
-  store = local,
-  maxKeys = MAX_LOCAL_RATE_LIMIT_KEYS,
-): boolean {
-  const entry = store.get(key);
-  if (!entry || now > entry.resetAt) {
-    if (entry) store.delete(key);
-
-    if (store.size >= maxKeys) {
-      for (const [storedKey, storedEntry] of store) {
-        if (now > storedEntry.resetAt) store.delete(storedKey);
-      }
-      const boundedMax = Math.max(1, maxKeys);
-      while (store.size >= boundedMax) {
-        const oldestKey = store.keys().next().value;
-        if (oldestKey === undefined) break;
-        store.delete(oldestKey);
-      }
-    }
-
-    store.set(key, { count: 1, resetAt: now + WINDOW_MS });
-    return false;
-  }
-  entry.count += 1;
-  return entry.count > MAX_PER_WINDOW;
-}
-
-export function isDurableLimiterConfigured(
-  env: Record<string, string | undefined> = process.env as Record<
-    string,
-    string | undefined
-  >,
-): boolean {
-  return Boolean(
-    env.UPSTASH_REDIS_REST_URL && env.UPSTASH_REDIS_REST_TOKEN,
-  );
-}
-
-type RateLimitOptions = {
-  env?: Record<string, string | undefined>;
-  fetcher?: typeof fetch;
-};
-
-/**
- * Shared counter via one atomic Upstash transaction. Incrementing and setting
- * the expiry in separate requests can leave a permanent key when the second
- * request fails. Refreshing the expiry here creates a simple sliding window:
- * a caller is allowed again WINDOW_MS after their latest attempt.
- *
- * If Redis is unreachable, the per-instance limiter remains as a bounded
- * fallback rather than removing protection entirely.
- */
-export async function durableRateLimit(
-  key: string,
-  options: RateLimitOptions = {},
-): Promise<boolean> {
-  const env = options.env ?? process.env;
-  const fetcher = options.fetcher ?? fetch;
-  const url = env.UPSTASH_REDIS_REST_URL?.replace(/\/$/, "");
-  const token = env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return localRateLimit(key);
-
-  try {
-    const redisKey = `enquiry:${encodeURIComponent(key).slice(0, 180)}`;
-    const res = await fetcher(`${url}/multi-exec`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
-      signal: AbortSignal.timeout(LIMITER_TIMEOUT_MS),
-      body: JSON.stringify([
-        ["INCR", redisKey],
-        ["PEXPIRE", redisKey, WINDOW_MS],
-      ]),
-    });
-    if (!res.ok) throw new Error("limiter_request_failed");
-    const result = (await res.json()) as
-      | [{ result?: number; error?: string }, { result?: number; error?: string }]
-      | { error?: string };
-    if (!Array.isArray(result)) throw new Error("limiter_transaction_failed");
-
-    const [increment, expiry] = result;
-    if (
-      increment.error ||
-      expiry.error ||
-      typeof increment.result !== "number" ||
-      expiry.result !== 1
-    ) {
-      throw new Error("limiter_command_failed");
-    }
-    return increment.result > MAX_PER_WINDOW;
-  } catch {
-    // Do not log the key/IP or provider response body.
-    console.error("[enquiry] durable rate limiter unavailable; using local fallback.");
-    return localRateLimit(key);
-  }
 }

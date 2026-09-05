@@ -60,40 +60,25 @@ public street address.
 
 ---
 
-## 2. Configure and test enquiry delivery
+## 2. Configure and verify durable enquiry delivery
 
-The endpoint validates, sanitises and rate-limits each request. It fails closed
-with `503` when no delivery path is configured and does not log customer data.
+Follow [docs/enquiry-operations.md](docs/enquiry-operations.md). Provision separate
+production and preview PostgreSQL databases, apply the versioned migration and
+configure DATABASE_URL, a strong CRON_SECRET and one delivery provider.
+Production Resend requires a verified sender and signed delivery-event endpoint.
+The database supplies shared rate limiting; there is no production local fallback.
 
-For email delivery, set the Resend key in the deployment environment. The
-server-side recipient defaults to the verified quote inbox:
+Before release, verify the same submission twice produces one enquiry, a lost
+provider response reuses the same key/body, provider outages recover from the
+outbox, signatures and worker authentication fail closed, and retention never
+sends an expired record. Run the production-header browser suite with synthetic
+photos and a mocked provider. Only send a real controlled enquiry when its exact
+recipient and wording are approved; provider acceptance alone is not proof of
+inbox receipt.
 
-```
-RESEND_API_KEY   re_xxxxxxxx
-```
-
-Set it in Vercel → Settings → Environment Variables and redeploy.
-
-Optional recipient and sender overrides:
-
-```
-ENQUIRY_TO       quotes@example.com
-ENQUIRY_FROM     noreply@yourdomain
-```
-
-Alternatively, set `ENQUIRY_WEBHOOK_URL` for a Zapier, Make or CRM endpoint.
-
-Redeploy, submit one email-only, one phone-only and one photo enquiry, confirm
-all three arrive at the intended destination and verify the reply path before
-enabling launch mode. Photo enquiries carry up to three compressed attachments,
-so also confirm the configured provider accepts them.
-
-Optional but recommended: `UPSTASH_REDIS_REST_URL` and
-`UPSTASH_REDIS_REST_TOKEN` for durable rate limiting. Without them the
-limiter is per-instance, so N concurrent serverless instances allow N
-times the intended rate.
-
----
+Enable the staged GitHub/Vercel checks and verify that a failed check cannot
+promote a production build. Confirm the natural cron tick and authenticated health
+monitor after release. No check is complete merely because configuration exists.
 
 ## 3. Confirm unpublished operating details
 

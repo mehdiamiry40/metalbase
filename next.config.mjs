@@ -12,7 +12,7 @@ const securityHeaders = [
   {
     key: "Content-Security-Policy",
     value:
-      `default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src ${scriptSources}; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.unsplash.com; font-src 'self' data:; connect-src 'self'; media-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests`,
+      `default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src ${scriptSources}; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://images.unsplash.com; font-src 'self' data:; connect-src 'self'; media-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests`,
   },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
   { key: "Permissions-Policy", value: "camera=(), geolocation=(), microphone=()" },
@@ -45,6 +45,9 @@ const nextConfig = {
   },
   images: {
     qualities: [64, 70, 75],
+    // Narrow 1x displays can select a source closer to their viewport width.
+    // Keep the existing larger candidates for high-density and desktop use.
+    deviceSizes: [360, 414, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
     ],

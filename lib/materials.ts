@@ -118,7 +118,7 @@ export const materials: MaterialGuide[] = [
       },
       {
         q: "Should I remove brass fittings from copper pipe?",
-        a: "Separating clearly removable brass, steel, plastic and rubber can make the copper easier to assess. Do not dismantle anything unsafely; show the attachments in photographs when they remain.",
+        a: "Show the fittings and other attachments in photographs first. Ask whether separation is needed and confirm safe preparation before dismantling anything.",
       },
       {
         q: "Are scrap copper prices published on this page?",
@@ -269,7 +269,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Cast aluminium",
         detail:
-          "Housings, components and some wheels. Remove oil and show steel inserts, bearings, tyres or other attachments that remain.",
+          "Housings, components and some wheels. Describe any oil or residue and show steel inserts, bearings, tyres or other attachments so preparation can be confirmed first.",
       },
       {
         term: "Mixed or contaminated aluminium",
@@ -309,8 +309,8 @@ export const materials: MaterialGuide[] = [
         body: "Show plastic bridge material inside window and door sections, even when it is not obvious from outside.",
       },
       {
-        title: "Remove safe attachments",
-        body: "Separate glass, rubber, steel screws and other material where practical and safe.",
+        title: "Show attachments first",
+        body: "Photograph glass, rubber, steel screws and other attached material. Confirm any preparation needed before removing it.",
       },
       {
         title: "Send scale and condition",
@@ -343,10 +343,10 @@ export const materials: MaterialGuide[] = [
     eyebrow: "Scrap brass Brisbane",
     seoTitle: "Scrap Brass Brisbane: Fittings & Quote Guide",
     seoDescription:
-      "Prepare a Brisbane scrap brass quote for taps, valves, fittings and mixed brass with guidance on draining, attachments, separation and photos.",
+      "Prepare a Brisbane scrap brass quote for taps, valves, fittings and mixed brass with guidance on condition, attachments, separation and photos.",
     h1: "Scrap brass Brisbane: prepare fittings and mixed brass",
     intro:
-      "Drain taps, valves and fittings, separate obvious attachments and show the whole parcel so brass-bearing material can be assessed clearly.",
+      "Show taps, valves and fittings as they are, including attachments and any liquid or residue, so preparation can be confirmed for the actual parcel.",
     photo: "alloy",
     overview:
       "Brass appears in plumbing fittings, valves, taps, hardware, radiators and machined offcuts. The base alloy, cleanliness and attached steel, plastic, rubber, water or other material determine whether a parcel can be treated as clean brass or a mixed item.",
@@ -367,7 +367,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Taps, valves and fittings",
         detail:
-          "Drain water and identify handles, cartridges, hoses, steel spindles and other attached parts. These items may be assessed as mixed brass rather than clean solids.",
+          "Describe any water or residue and identify handles, cartridges, hoses, steel spindles and other attached parts. These items may be assessed as mixed brass rather than clean solids.",
       },
       {
         term: "Bronze and gunmetal",
@@ -394,7 +394,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Moisture and residue",
         detail:
-          "Drain fittings and describe any oil, scale or process residue before the material is moved.",
+          "Describe any water, oil, scale or process residue before preparation or transport is agreed.",
       },
       {
         term: "Separation and weight",
@@ -404,8 +404,8 @@ export const materials: MaterialGuide[] = [
     ],
     preparation: [
       {
-        title: "Drain fittings",
-        body: "Remove water and identify oil or process residue before transport or collection.",
+        title: "Describe liquids and residue",
+        body: "Say whether fittings contain water, oil or process residue. Confirm handling before opening or draining them.",
       },
       {
         title: "Separate clean solids",
@@ -423,7 +423,7 @@ export const materials: MaterialGuide[] = [
     faqs: [
       {
         q: "Do taps and valves need to be dismantled before a quote?",
-        a: "Not necessarily. Drain them and show the attached handles, cartridges, hoses, steel and plastic. Ask whether further separation is worthwhile before spending time on it.",
+        a: "No dismantling or draining is needed to start an enquiry. Show the attached handles, cartridges, hoses, steel and plastic, and describe any liquid or residue. Confirm preparation and safe handling first.",
       },
       {
         q: "How can I tell brass from bronze?",
@@ -480,7 +480,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Reinforcing steel and cast iron",
         detail:
-          "Show concrete on reo or mesh and identify cast housings, pipe or machine parts. Drain fluids and describe bearings, rubber or other attached material.",
+          "Show concrete on reo or mesh and identify cast housings, pipe or machine parts. Describe any fluids, bearings, rubber or other attached material before preparation is agreed.",
       },
     ],
     quoteFactors: [
@@ -653,12 +653,12 @@ export const materials: MaterialGuide[] = [
     seoTitle: "Scrap Electric Motors Brisbane: Grades & Quote Guide",
     seoDescription:
       "Work out what a scrap electric motor is worth before you quote: motor type, copper winding, gearboxes, weight and condition all affect assessment.",
-    h1: "Scrap electric motors Brisbane: separate motors from gearboxes and pumps",
+    h1: "Scrap electric motors Brisbane: identify the motor and its attachments",
     intro:
-      "Scrap electric motors vary enormously in copper content depending on their size and type, and a motor still attached to a gearbox or pump changes how it is assessed. Separate what can be safely separated, then send the nameplate details and clear photos for a quote.",
+      "Motor size, type and attached gearboxes or pumps affect assessment. Send the nameplate details and photos of the complete assembly first; dismantling is not needed to start a quote.",
     photo: "mixed-parts",
     overview:
-      "Electric motors range from small fractional-horsepower units — a pool pump in the backyard, an exhaust fan in a Brisbane townhouse — to heavy industrial three-phase motors pulled from a Rocklea or Yatala workshop, and the proportion of copper winding to steel lamination and housing changes with size and type. A motor built into a pump, gearbox or compressor housing is typically assessed as a mixed item rather than under a standalone electric motor grade, so separating the housing from the motor, where it can be done safely, gives a clearer picture of what is inside.",
+      "Electric motors range from small fractional-horsepower units to heavy industrial three-phase motors, and the proportion of winding metal, steel and housing changes with their construction. A motor built into a pump, gearbox or compressor housing may be assessed as a mixed item. Photograph the complete assembly and any visible labels so its condition, attachments and handling needs can be assessed before preparation is agreed.",
     examples: [
       "Pool and spa pump motors",
       "Air conditioner and exhaust fan motors",
@@ -682,7 +682,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Motors with a gearbox, pump or compressor housing attached",
         detail:
-          "These are assessed as a complete mixed item rather than under the standalone motor grade. Separating the motor from the housing, where it can be done safely, lets each part be identified on its own basis.",
+          "An attached gearbox, pump or compressor housing can make this a mixed item. Show the complete assembly and describe any oil, liquid or sealed components rather than removing them for a quote.",
       },
       {
         term: "Stripped stators and bare windings",
@@ -714,8 +714,8 @@ export const materials: MaterialGuide[] = [
     ],
     preparation: [
       {
-        title: "Separate motors from gearboxes and pumps",
-        body: "Where it can be done safely, unbolt a motor from an attached gearbox, pump or compressor housing rather than presenting the whole assembly as one item.",
+        title: "Show gearboxes, pumps and housings",
+        body: "Photograph the whole assembly and describe attached equipment. Confirm preparation and safe work responsibilities before disconnecting or dismantling it.",
       },
       {
         title: "Photograph the nameplate",
@@ -737,7 +737,7 @@ export const materials: MaterialGuide[] = [
       },
       {
         q: "Do gearboxes and pumps need to be removed from a motor before a quote?",
-        a: "Not necessarily, but a motor still attached to a gearbox, pump or compressor housing is generally assessed as a mixed item rather than under the standalone motor grade. Separating it where safe can make the assessment clearer.",
+        a: "No. Send photos of the complete assembly and its nameplate first. A gearbox, pump or compressor housing can change the assessment; any separation and safe work responsibilities should be agreed before work begins.",
       },
       {
         q: "Can a seized or non-working motor still be scrapped?",
@@ -763,10 +763,10 @@ export const materials: MaterialGuide[] = [
       "Work out whether a scrap radiator is copper/brass or aluminium before requesting a Brisbane quote: grades, attachments and prep explained.",
     h1: "Scrap radiators Brisbane: tell copper, brass and aluminium apart before you quote",
     intro:
-      "Radiators are built as copper and brass, aluminium with plastic tanks, or all-aluminium construction, and each has a different recoverable metal mix. Identify the type, drain the coolant and flag any air conditioner coils before requesting a quote.",
+      "Radiators are built as copper and brass, aluminium with plastic tanks, or all-aluminium construction, and each has a different recoverable metal mix. Describe the type, attachments and any coolant, oil or refrigerant status when requesting a quote. Draining or dismantling is not needed to start an enquiry.",
     photo: "vehicle",
     overview:
-      "A radiator's value comes from what the core and tanks are actually made of, not its size. Older vehicles, industrial equipment and some heavy trucks use copper tube cores with brass header tanks; most cars built since the 1990s use an aluminium core crimped into plastic end tanks; and some performance, heavy-duty and HVAC units are all-aluminium with no plastic at all. Air conditioner and HVAC coils can look similar again but may still hold refrigerant, which changes how they need to be handled before a radiator reaches a scrap quote.",
+      "A radiator's value comes from the composition of its core and tanks as well as its condition. Copper and brass, aluminium with plastic tanks, and all-aluminium units are assessed differently. Air conditioner and HVAC coils may still hold refrigerant, so identify them in the enquiry and confirm specialist handling before any preparation or transport.",
     examples: [
       "Older copper and brass car radiators",
       "Aluminium radiators with plastic end tanks",
@@ -780,7 +780,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Copper and brass radiators",
         detail:
-          "Copper tube cores with brass header tanks, common in older vehicles and industrial equipment. Once separated from steel brackets or a frame, these generally carry a higher recoverable non-ferrous content than an aluminium radiator of similar size.",
+          "Copper tube cores with brass header tanks, common in older vehicles and industrial equipment. Show any steel brackets or frame because the complete metal mix and attachments affect the assessment.",
       },
       {
         term: "Aluminium radiators with plastic tanks",
@@ -795,7 +795,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Air conditioner and HVAC coils",
         detail:
-          "Copper-tube-aluminium-fin or all-aluminium construction, often still connected to refrigerant lines. Refrigerant must be recovered by a licensed technician before one of these reaches a scrap radiator enquiry — say whether that has already happened.",
+          "Copper-tube-aluminium-fin or all-aluminium construction, which may still be connected to refrigerant lines. Say whether refrigerant recovery has already been completed by a licensed technician, or whether the status is unknown. Keep the unit intact while handling is confirmed.",
       },
     ],
     quoteFactors: [
@@ -807,7 +807,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Refrigerant content",
         detail:
-          "Air conditioner and HVAC coils cannot be scrapped with refrigerant still inside. Confirm whether the gas has been recovered by a licensed technician before sending photos.",
+          "Tell us whether refrigerant may remain and share any existing recovery records. This can be assessed from an enquiry before the appropriate specialist work and transport are agreed.",
       },
       {
         term: "Attachments",
@@ -817,7 +817,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Coolant and residue",
         detail:
-          "Drained, empty radiators are easier to describe and move than ones still holding coolant or oil.",
+          "Describe any coolant, oil or residue and whether the condition is uncertain. This affects preparation and handling arrangements.",
       },
     ],
     preparation: [
@@ -826,8 +826,8 @@ export const materials: MaterialGuide[] = [
         body: "Keep copper/brass radiators separate from aluminium radiators with plastic tanks and from all-aluminium units where practical.",
       },
       {
-        title: "Drain the coolant",
-        body: "Empty fluid from the radiator before photographing it or arranging transport.",
+        title: "Describe fluids first",
+        body: "Say whether coolant, oil or residue remains. Do not open or drain the unit for a photograph; confirm safe handling before preparation or transport.",
       },
       {
         title: "Flag refrigerant-bearing units",
@@ -845,15 +845,15 @@ export const materials: MaterialGuide[] = [
       },
       {
         q: "Do I need to drain the coolant before requesting a quote?",
-        a: "Yes. Send photos of a drained radiator where possible. Residual coolant or oil should be described if the radiator cannot be fully emptied before collection.",
+        a: "No. Describe whether coolant, oil or residue remains and send photos of the unit as it is. Confirm any draining, disposal and safe handling requirements before preparation or collection.",
       },
       {
         q: "Can an air conditioner or HVAC coil be included in a scrap radiator enquiry?",
-        a: "Only once the refrigerant has been recovered by a licensed technician — releasing it to the atmosphere is prohibited under Australian ozone protection law. Say whether that has already been done when you enquire.",
+        a: "Yes. Identify the unit and say whether refrigerant recovery by a licensed technician has already happened or its status is unknown. Acceptance, specialist work and transport must be confirmed for the item. Do not open refrigerant lines or release gas yourself.",
       },
       {
         q: "Should I remove the plastic tanks or fan shroud myself?",
-        a: "Not necessarily. Separating clearly removable plastic tanks, hoses and brackets can help identify the radiator, but do not dismantle anything unsafely. Photograph what remains attached.",
+        a: "No removal is needed to start a quote. Photograph the tanks, shroud, hoses, brackets and complete unit so any preparation and safe handling can be agreed first.",
       },
       {
         q: "Can MetalBase collect bulk radiators in Brisbane?",
@@ -868,13 +868,13 @@ export const materials: MaterialGuide[] = [
     eyebrow: "Scrap whitegoods Brisbane",
     seoTitle: "Scrap Whitegoods Brisbane: Removal & Quote Guide",
     seoDescription:
-      "Scrap whitegoods in Brisbane means dealing with refrigerant, concrete weights and mixed metal first. See what has to happen before collection.",
+      "Request a Brisbane scrap whitegoods quote with appliance photos, refrigerant status, condition and access details. Confirm handling before collection.",
     h1: "Scrap whitegoods Brisbane: what has to happen before collection",
     intro:
-      "A fridge, washing machine or oven is not a single scrap grade — refrigerant status, a bonded concrete counterweight or a missing motor can all change what the load actually is. Confirm those details before requesting a quote.",
+      "A fridge, washing machine or oven is not a single scrap grade. Refrigerant status, counterweights and missing parts can change the assessment. Describe what you know and flag anything uncertain when requesting a quote; keep appliances intact.",
     photo: "crew",
     overview:
-      "Whitegoods carry mixed steel, copper and aluminium in a single cabinet, and what changes the assessment is rarely the appliance's age. A fridge or freezer cannot move as scrap until its refrigerant has been recovered by a licensed technician. A top-load washing machine, and many front-loaders, carry a concrete block bonded to the drum for stability — that mass is not recoverable metal and needs to be accounted for. A tenancy clean-out in Woolloongabba or a kitchen strip-out in Chermside might land a dishwasher, an oven and two fridges on the same driveway, and each of those is assessed on its own condition rather than as one uniform whitegoods pile.",
+      "Whitegoods combine metals with glass, plastics, insulation and other parts. Refrigerant-bearing units need their status and specialist handling requirements confirmed before collection is arranged. Concrete counterweights and other non-metal parts are not recoverable metal, but there is no need to remove them for a quote. List each appliance and send photos of its condition so the proposed load can be assessed.",
     examples: [
       "Fridges and freezers",
       "Front-load and top-load washing machines",
@@ -888,12 +888,12 @@ export const materials: MaterialGuide[] = [
       {
         term: "Refrigerant-bearing units",
         detail:
-          "Fridges, freezers and split-system air conditioners hold refrigerant that must be recovered by a licensed technician before the unit can be collected as scrap. Say whether that has already happened when you enquire.",
+          "Identify fridges, freezers, air conditioners and any other appliances that may contain refrigerant. Say whether a licensed technician has already recovered it, or whether the status is unknown, so specialist work and collection requirements can be confirmed.",
       },
       {
         term: "Washing machines and dryers",
         detail:
-          "A steel drum and cabinet around a copper-wound motor. Many washing machines, especially top-loaders, carry a concrete counterweight bonded to the drum — it stays with the machine and is not part of the recoverable metal weight.",
+          "These combine metal cabinets, drums and motors with other materials. Concrete counterweights, where fitted, are not recoverable metal. Keep the appliance intact and identify its model and any missing parts.",
       },
       {
         term: "Ovens, cooktops and rangehoods",
@@ -915,7 +915,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Refrigerant status",
         detail:
-          "A fridge, freezer or split-system unit cannot be collected as scrap with refrigerant still inside. Confirm recovery by a licensed technician first.",
+          "State whether refrigerant recovery has been completed by a licensed technician, or whether the status is unknown. Confirm acceptance, specialist work and transport requirements before collection.",
       },
       {
         term: "Completeness and condition",
@@ -935,7 +935,7 @@ export const materials: MaterialGuide[] = [
     ],
     preparation: [
       {
-        title: "Confirm refrigerant recovery",
+        title: "Describe refrigerant status",
         body: "Say whether a licensed technician has already recovered refrigerant from any fridge, freezer or split-system unit. Do not attempt to release or recover it yourself.",
       },
       {
@@ -954,11 +954,11 @@ export const materials: MaterialGuide[] = [
     faqs: [
       {
         q: "Can a fridge or freezer be collected before the refrigerant is removed?",
-        a: "No. Refrigerant must be recovered by a licensed technician first — releasing it to the atmosphere is prohibited under Australian ozone protection law. Say whether that has already been done when you enquire.",
+        a: "Ask before arranging collection. Identify the appliance and its refrigerant status, including if that is unknown, so acceptance, licensed technician work and transport requirements can be confirmed. Do not release refrigerant or open the system yourself.",
       },
       {
         q: "Does the concrete weight in a washing machine affect the quote?",
-        a: "Yes. The counterweight bonded to the drum is not recoverable metal, so it is identified separately rather than counted as part of the appliance's scrap weight.",
+        a: "Yes. A concrete counterweight, where fitted, is not recoverable metal and affects the assessment. Leave it in place and provide the appliance model and photos rather than dismantling the machine.",
       },
       {
         q: "Do whitegoods need to be dismantled before a quote?",
@@ -982,12 +982,12 @@ export const materials: MaterialGuide[] = [
     seoTitle: "Scrap Lead Brisbane: Grades & Quote Guide",
     seoDescription:
       "Identify lead flashing, wheel weights, pipe and batteries before requesting a Brisbane scrap lead quote — what's clean, what's mixed and what needs care.",
-    h1: "Scrap lead Brisbane: identify safe, sellable lead before you quote",
+    h1: "Scrap lead Brisbane: describe the form and condition before you quote",
     intro:
-      "Lead turns up as roof flashing, wheel balance weights, old pipe and batteries across Brisbane renovations and workshops, and each form needs different handling before a scrap lead quote. Separate clean lead from contaminated material, and keep any batteries intact rather than draining or dismantling them yourself.",
+      "Lead turns up as roof flashing, wheel balance weights, old pipe and batteries, and each form needs different handling. Describe it as it is without cleaning or removing coatings for a quote. Keep batteries separate and intact rather than draining or dismantling them yourself.",
     photo: "alloy",
     overview:
-      "Lead is dense and low-volume next to steel or aluminium, so a modest bucket of flashing or wheel weights can weigh far more than it looks. What drives the assessment is the form and purity — clean sheet, pipe or ingot reads differently from painted, tarred or mixed lead — and whether the load includes anything that needs care rather than casual handling. A stack of flashing pulled from a Queenslander re-roof in Annerley is a different quote to a bucket of wheel balance weights swept up at a Rocklea tyre shop, even though both are scrap lead, and a box of old car batteries is different again.",
+      "Lead is dense, so a modest bucket of flashing or wheel weights can weigh far more than it looks. Form, coatings and attachments affect assessment, and batteries require separate handling. Lead dust and fumes can cause harm: leave coatings in place, avoid disturbing dust and confirm handling before preparing or transporting the material.",
     examples: [
       "Roof flashing and soundproofing sheet",
       "Wheel balance weights, clip-on and stick-on",
@@ -1001,7 +1001,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Clean lead sheet, flashing and pipe",
         detail:
-          "Roofing flashing, soundproofing sheet, offcuts and old plumbing pipe without paint, tar, render or other coatings attached. Photograph a clean surface as well as the whole parcel.",
+          "Roofing flashing, soundproofing sheet, offcuts and old plumbing pipe without paint, tar, render or other coatings attached. Photograph the existing surface and the whole parcel; do not clean or remove coatings to present it as a higher grade.",
       },
       {
         term: "Wheel balance weights",
@@ -1016,7 +1016,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Lead-acid batteries",
         detail:
-          "Car, truck, forklift and UPS batteries contain sulfuric acid and are handled separately from clean scrap lead. Say whether they are intact, drained or already processed by a battery recycler before including them in an enquiry.",
+          "Car, truck, forklift and UPS batteries contain sulfuric acid and need separate assessment from scrap lead. Describe their chemistry, labels, damage or leaks, and any work already completed by a specialist. Do not drain or open them for an enquiry.",
       },
     ],
     quoteFactors: [
@@ -1033,7 +1033,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Battery condition",
         detail:
-          "Whether batteries are intact, leaking, drained or already processed by a specialist affects how, and whether, they can be included in the same enquiry.",
+          "Battery chemistry, damage, leaks and any work already completed by a specialist affect acceptance and handling. Keep batteries separate from loose lead and confirm the next step before moving them.",
       },
       {
         term: "Quantity and measured weight",
@@ -1047,12 +1047,12 @@ export const materials: MaterialGuide[] = [
         body: "Keep clean sheet and pipe separate from wheel weights, cable sheathing and mixed or painted lead.",
       },
       {
-        title: "Separate wheel weight types",
-        body: "Group clip-on and stick-on weights apart where practical, and set aside any that turn out to be zinc or steel rather than lead.",
+        title: "Avoid dust and fumes",
+        body: "Do not sand, grind, heat or dry-brush lead or its coatings to prepare an enquiry. Avoid disturbing dust and wash your hands before eating, drinking or smoking.",
       },
       {
         title: "Leave batteries intact",
-        body: "Keep batteries upright with terminals protected and do not attempt to drain, crack or dismantle them yourself. Say whether a specialist has already handled them.",
+        body: "Do not drain, crack or dismantle batteries. Describe their condition and any specialist work already completed, and confirm safe handling before moving damaged or leaking batteries.",
       },
       {
         title: "Estimate weight, not volume",
@@ -1066,7 +1066,7 @@ export const materials: MaterialGuide[] = [
       },
       {
         q: "Can lead-acid batteries be included in a scrap lead enquiry?",
-        a: "They need separate handling because of their acid content. Say whether the batteries are intact, drained or already processed by a specialist rather than including them loose with clean lead.",
+        a: "You can describe them in an enquiry, but acceptance and handling must be confirmed separately. Identify the chemistry and condition, including any damage, leaks or previous specialist work. Do not drain or dismantle batteries or mix them loose with scrap lead.",
       },
       {
         q: "Does painted or tarred flashing count as clean lead?",

@@ -1,0 +1,12 @@
+{
+  "name": "MetalBase CI",
+  "requires": "none",
+  "targets": ["production"],
+  "blocks": "deployment-alias",
+  "source": {
+    "kind": "git-provider",
+    "provider": "github",
+    "externalCheckName": "verify"
+  },
+  "timeout": 1800
+}
