@@ -1082,6 +1082,114 @@ export const materials: MaterialGuide[] = [
       },
     ],
   },
+  {
+    slug: "zinc",
+    name: "Scrap zinc",
+    shortName: "Zinc",
+    eyebrow: "Scrap zinc Brisbane",
+    seoTitle: "Scrap Zinc Brisbane: Die-Cast & Quote Guide",
+    seoDescription:
+      "Prepare a Brisbane scrap zinc quote for die-cast, flashing and anodes — grades, galvanised-steel confusion and preparation explained clearly.",
+    h1: "Scrap zinc Brisbane: tell die-cast, flashing and galvanised steel apart",
+    intro:
+      "Zinc turns up as die-cast pot metal, sheet flashing and sacrificial anodes — three different grades, and none of them the same as galvanised steel. Separate what you have and describe attachments before requesting a zinc quote.",
+    photo: "alloy",
+    overview:
+      "Zinc's value depends on which form it takes and how much other metal or coating is mixed through it. Die-cast (Zamak) components carry small steel or brass inserts, springs and fasteners; flashing and box-gutter sheet from older Queenslander roofs can carry solder, paint or timber residue; and spent anodes are pure zinc but heavily corroded by design. Galvanised steel — zinc-coated steel used in roofing, fencing and ducting — is assessed as steel, not as zinc scrap, because the coating is only a thin layer over the base metal.",
+    examples: [
+      "Die-cast carburettor and pump housings",
+      "Door and window hardware from older Queenslanders",
+      "Zinc roof flashing and box gutters",
+      "Boat hull and outboard motor anodes",
+      "Hot water system anodes",
+      "Toy, model and hardware die-cast parts",
+      "Zinc alloy gearbox housings",
+    ],
+    grades: [
+      {
+        term: "Die-cast zinc (Zamak / pot metal)",
+        detail:
+          "Carburettor bodies, door and window hardware, small engine housings and toy or model parts cast in zinc alloy. Steel inserts, springs, bushes and fasteners are common — show them rather than removing them for a quote.",
+      },
+      {
+        term: "Zinc sheet, flashing and box gutter",
+        detail:
+          "Roof flashing, box gutters and weatherproofing capping from older Brisbane roofs, sometimes soldered or painted. Show any coating, solder or timber residue rather than presenting it as clean sheet.",
+      },
+      {
+        term: "Sacrificial anodes",
+        detail:
+          "Zinc anodes from boat hulls, outboard motors and hot water systems arrive heavily corroded by design — that is how they protect other metal from corrosion, not a sign of low quality. Keep them separate from other zinc forms and note any remaining steel fasteners or brackets.",
+      },
+      {
+        term: "Not zinc: galvanised steel",
+        detail:
+          "Galvanised roofing, fencing, ducting and purlins are zinc-coated steel, assessed under scrap steel rather than as a zinc grade. Keep it with steel material instead of mixing it into a zinc parcel.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Alloy and form",
+        detail:
+          "Die-cast, sheet and anode zinc carry different purity and recoverable yield, so keeping them apart makes each easier to assess.",
+      },
+      {
+        term: "Attachments",
+        detail:
+          "Steel inserts, springs, fasteners, solder and coatings reduce the recoverable zinc content of a parcel.",
+      },
+      {
+        term: "Corrosion and condition",
+        detail:
+          "Anodes are meant to corrode — that is not a defect. Other zinc forms with heavy oxidation should still be described honestly rather than presented as clean material.",
+      },
+      {
+        term: "Quantity and measured weight",
+        detail:
+          "Give a realistic estimate by weight or item count. Final weight-based terms depend on the measured net metal weight.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Separate zinc from galvanised steel",
+        body: "Keep die-cast, sheet and anode zinc apart from galvanised roofing, fencing and ducting, which is assessed as steel.",
+      },
+      {
+        title: "Show attachments, don't remove them",
+        body: "Photograph steel inserts, springs, fasteners and solder rather than dismantling parts yourself.",
+      },
+      {
+        title: "Avoid grinding or heating to test it",
+        body: "Grinding, cutting or heating zinc or its coatings can release fume that causes short-term illness. Identify the material visually and by weight instead.",
+      },
+      {
+        title: "Estimate weight and suburb",
+        body: "A rough weight or item count plus the Brisbane suburb is enough to start an enquiry.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is galvanised steel the same as scrap zinc?",
+        a: "No. Galvanised steel is zinc-coated steel and is assessed as steel scrap, not as a zinc grade, because the base metal is steel. Keep it separate from die-cast, sheet or anode zinc.",
+      },
+      {
+        q: "How can I tell zinc die-cast from aluminium die-cast?",
+        a: "Not reliably by eye alone. Zinc alloy (often called Zamak or pot metal) is denser than aluminium die-cast and can carry different casting marks. Send clear photos and any markings rather than guessing the alloy.",
+      },
+      {
+        q: "Should I clean corrosion off zinc before requesting a quote?",
+        a: "No. Do not grind, heat or sand zinc or its coatings to prepare an enquiry — this can release fume that causes short-term illness. Photograph the material as it is and describe the corrosion.",
+      },
+      {
+        q: "Can spent anodes from a boat or hot water system be scrapped?",
+        a: "Yes. Describe them as anodes rather than mixed zinc, and note whether steel fasteners or brackets remain attached. Heavy corrosion is expected and does not need explaining away.",
+      },
+      {
+        q: "Can MetalBase collect bulk zinc in Brisbane?",
+        a: "Customer-site collection is available, with material, minimum volume, access, equipment, timing and terms confirmed for the proposed load and address.",
+      },
+    ],
+  },
 ];
 
 export function getMaterial(slug: string): MaterialGuide | undefined {

@@ -142,6 +142,12 @@ const materialTiles: {
     photo: "alloy",
     layout: "md:col-span-12 md:min-h-[360px]",
   },
+  {
+    title: "Scrap zinc",
+    href: "/materials/zinc",
+    photo: "alloy",
+    layout: "md:col-span-12 md:min-h-[360px]",
+  },
 ];
 
 const homeFaqs = [
