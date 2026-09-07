@@ -43,6 +43,7 @@ const EXPECTED_MATERIAL_SLUGS = [
   "radiators",
   "whitegoods",
   "lead",
+  "zinc",
 ] as const;
 
 /* ------------------------------------------------------------------
