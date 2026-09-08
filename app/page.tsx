@@ -148,6 +148,12 @@ const materialTiles: {
     photo: "alloy",
     layout: "md:col-span-12 md:min-h-[360px]",
   },
+  {
+    title: "Scrap swarf and turnings",
+    href: "/materials/swarf",
+    photo: "machine-swarf",
+    layout: "md:col-span-12 md:min-h-[360px]",
+  },
 ];
 
 const homeFaqs = [

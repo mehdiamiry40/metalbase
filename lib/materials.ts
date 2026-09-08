@@ -1190,6 +1190,124 @@ export const materials: MaterialGuide[] = [
       },
     ],
   },
+  {
+    slug: "swarf",
+    name: "Scrap swarf and turnings",
+    shortName: "Swarf",
+    eyebrow: "Scrap swarf Brisbane",
+    seoTitle: "Scrap Swarf Brisbane: Turnings & Quote Guide",
+    seoDescription:
+      "Swarf is graded on alloy separation, free coolant and what else landed in the bin. See what a Brisbane scrap swarf quote needs before the next fill.",
+    h1: "Scrap swarf Brisbane: keep alloys apart and control the free liquid",
+    intro:
+      "Turnings are judged by what is mixed through them — alloy, cutting fluid, tramp oil and whatever else went in the bin — more than by the metal named on the job docket. Say how wet the material is and which machines fed the bin when you ask for a quote.",
+    photo: "swarf",
+    overview:
+      "A drum of turnings and a drum of solid offcuts cut from the same bar are not the same parcel. Swarf holds cutting fluid and tramp oil, packs at a far lower bulk density than solids, and collects whatever lands in the bin alongside the chips — rags, gloves, broken inserts, chuck jaws, sweepings. Free liquid has to be dealt with before material moves, and it is a separate waste stream from the metal rather than something that travels with it. A bin that took a stainless job and an aluminium job on the same shift is assessed as mixed swarf, not as either alloy, because loose chips cannot be picked over by hand once they are combined. Scrap swarf enquiries from Brisbane machining and fabrication sites are easiest to assess when each machine has a known destination bin and someone can say roughly how fast it fills.",
+    examples: [
+      "Mild steel bar turnings from a CNC lathe",
+      "316 stainless turnings from a food-equipment job",
+      "6061 aluminium milling chips",
+      "Cast iron borings from engine reconditioning",
+      "Brass turnings from valve and fitting work",
+      "Grinding swarf and filter cake from a surface grinder",
+      "Briquetted steel swarf pucks",
+    ],
+    grades: [
+      {
+        term: "Steel turnings and cast iron borings",
+        detail:
+          "Long stringy lathe turnings, short broken chips and fine cast iron borings behave differently in a bin and are usually described separately. Say which machines produced the material and whether borings and turnings share a container.",
+      },
+      {
+        term: "Stainless turnings, kept by alloy",
+        detail:
+          "304, 316 and free-machining 303 are separated at the machine or not at all. Send the job's material markings or certificates where you have them; once alloys are combined the parcel is described as mixed stainless swarf rather than a named grade.",
+      },
+      {
+        term: "Aluminium swarf and fines",
+        detail:
+          "Milling chips, lathe turnings and fine grinding dust from aluminium carry different amounts of oil and pack differently. Identify whether the bin holds one alloy family or offcuts from several jobs.",
+      },
+      {
+        term: "Brass, bronze and copper turnings",
+        detail:
+          "Higher-value chips are the easiest to spoil, because a few handfuls of steel swept into the same pan changes how the whole parcel is described. Keep the machine pan and bin clean and dedicated to one metal.",
+      },
+      {
+        term: "Mixed and wet swarf",
+        detail:
+          "Combined bins, material carrying standing coolant, and swarf with rags, gloves, tooling or floor sweepings through it are assessed as a mixed parcel. Describe honestly what went in rather than naming the alloy you started with.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Free liquid and oil content",
+        detail:
+          "Coolant, cutting oil and tramp oil affect handling, transport and acceptance. A bin that pours when it tips is a different proposition from drained or briquetted material, and drained fluid is managed as a separate liquid waste stream, not with the metal.",
+      },
+      {
+        term: "Alloy separation at the machine",
+        detail:
+          "One bin, one alloy is the only separation that works for loose chips. Bins fed by several machines running different materials are assessed as mixed swarf.",
+      },
+      {
+        term: "Tramp metal and rubbish",
+        detail:
+          "Broken carbide inserts, chuck jaws, hand tools, rags, gloves, drink containers and sweepings all end up in swarf bins. Say what is likely in there instead of leaving it to be found on the weighbridge.",
+      },
+      {
+        term: "Bulk density and container size",
+        detail:
+          "Loose stringy turnings occupy far more volume per tonne than crushed or briquetted swarf. Give bin dimensions or type and a rough fill rate so transport can be planned realistically.",
+      },
+      {
+        term: "Placement and exchange access",
+        detail:
+          "Where the bin sits, whether a forklift or truck can reach it, roller-door and overhead clearance, and the production window for an exchange all shape what can be arranged.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Run a bin per alloy",
+        body: "Set the destination bin at the machine rather than sorting later. Loose chips from two alloys cannot be separated again by hand.",
+      },
+      {
+        title: "Describe the liquid honestly",
+        body: "Say whether the material is dry, damp or holding standing coolant, and which fluids are in use. Confirm draining and disposal responsibilities before a bin is moved.",
+      },
+      {
+        title: "Photograph the chip, not just the bin",
+        body: "Show a handful of chips on a clean surface beside a photo of the full bin, plus any material certificates or job markings.",
+      },
+      {
+        title: "Send bin size, fill rate and access",
+        body: "Give the container type or dimensions, roughly how often it fills, the Brisbane suburb and how a truck or forklift reaches the placement area.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is swarf assessed the same as solid offcuts of the same metal?",
+        a: "No. Turnings carry cutting fluid, pack at a lower bulk density and take a different processing route from solid material of the same alloy, so they are described and assessed separately. Request a current assessment for the actual material.",
+      },
+      {
+        q: "Does coolant have to be drained out of swarf before collection?",
+        a: "Free liquid affects acceptance, handling and transport, and drained coolant or cutting oil is a separate liquid waste stream that is not disposed of with the metal. Say how wet the material is and confirm draining and disposal responsibilities before the bin is moved.",
+      },
+      {
+        q: "Can stainless and aluminium swarf share one bin?",
+        a: "Not if you want each assessed as its alloy. Loose chips cannot be picked apart once combined, so a shared bin is described as mixed swarf. Separation has to happen at the machine.",
+      },
+      {
+        q: "What should I do with magnesium or titanium swarf?",
+        a: "Keep it out of steel and aluminium bins and identify it in the enquiry. Fine magnesium and titanium chips can ignite, and water makes that kind of fire worse rather than better. Acceptance and handling for these materials must be confirmed before anything is moved.",
+      },
+      {
+        q: "Can MetalBase supply a swarf bin in Brisbane?",
+        a: "Bins are available, with material, container type, volume, exchange frequency, site access, timing and terms confirmed for the proposed site and address. MetalBase has no public customer drop-off location.",
+      },
+    ],
+  },
 ];
 
 export function getMaterial(slug: string): MaterialGuide | undefined {
