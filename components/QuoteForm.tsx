@@ -1,14 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 import { ArrowRight, Tick } from "@/components/ui";
 import {
   ACCEPTED_PHOTO_TYPES,
+  ENQUIRY_LIMITS,
+  MAX_INPUT_PHOTO_BYTES,
   MAX_PHOTO_BYTES,
   MAX_PHOTOS,
   type AcceptedPhotoType,
 } from "@/lib/enquiry-config";
+import {
+  acceptedEnquiry,
+  enquiryErrorMessage,
+  enquiryErrors,
+  prepareEnquiryAttempt,
+  submitEnquiryAttempt,
+  trackEnquiryEvent,
+  type EnquiryAttempt,
+} from "@/lib/enquiry-client";
 import { company } from "@/lib/site";
 
 const enquiryTypes = [
@@ -56,6 +67,8 @@ const labelCls = "mb-2 block text-sm font-semibold";
    to reach for, so the weight and the copper keyline on the summary do
    the signalling and the text stays at 19:1. */
 const errCls = "mt-1.5 text-sm font-semibold text-ink";
+const unknownOutcomeMessage =
+  "We couldn't confirm receipt. Your details are still here. Retry without changing them to check the same enquiry, or call us.";
 
 type State = "idle" | "sending" | "sent" | "error";
 
@@ -66,6 +79,21 @@ type PreparedPhoto = {
 };
 
 const acceptedPhotoTypes = new Set<string>(ACCEPTED_PHOTO_TYPES);
+const subscribeToHydration = () => () => {};
+const clientHydrationSnapshot = () => true;
+const serverHydrationSnapshot = () => false;
+const textLimits = {
+  name: ENQUIRY_LIMITS.name,
+  company: ENQUIRY_LIMITS.company,
+  email: ENQUIRY_LIMITS.email,
+  phone: ENQUIRY_LIMITS.phone,
+  suburb: ENQUIRY_LIMITS.suburb,
+  detail: ENQUIRY_LIMITS.detail,
+};
+
+function CharacterCount({ id, length, limit }: { id: string; length: number; limit: number }) {
+  return <p id={id} className="mt-1.5 text-xs t-muted">{length} / {limit} characters</p>;
+}
 
 function canvasBlob(
   canvas: HTMLCanvasElement,
@@ -90,14 +118,17 @@ async function preparePhoto(file: File): Promise<PreparedPhoto> {
   if (!acceptedPhotoTypes.has(file.type)) {
     throw new Error("Use JPEG, PNG or WebP images.");
   }
+  if (file.size > MAX_INPUT_PHOTO_BYTES) {
+    throw new Error("Each original photo must be smaller than 12 MB.");
+  }
 
   const objectUrl = URL.createObjectURL(file);
   try {
     const image = new Image();
-    image.src = objectUrl;
     await new Promise<void>((resolve, reject) => {
       image.onload = () => resolve();
       image.onerror = () => reject(new Error("That image could not be read."));
+      image.src = objectUrl;
     });
 
     const maxDimension = 1600;
@@ -148,6 +179,16 @@ export default function QuoteForm() {
   const uid = useId();
   const typeRef = useRef<HTMLSelectElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
+  const photoInputRef = useRef<HTMLInputElement>(null);
+  const photoGeneration = useRef(0);
+  const sendingRef = useRef(false);
+  const attemptRef = useRef<EnquiryAttempt | null>(null);
+  const pendingErrorFocus = useRef<string | null>(null);
+  const hydrated = useSyncExternalStore(
+    subscribeToHydration,
+    clientHydrationSnapshot,
+    serverHydrationSnapshot,
+  );
   const [state, setState] = useState<State>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [message, setMessage] = useState("");
@@ -155,11 +196,51 @@ export default function QuoteForm() {
   const [photos, setPhotos] = useState<PreparedPhoto[]>([]);
   const [photoError, setPhotoError] = useState("");
   const [preparingPhotos, setPreparingPhotos] = useState(false);
+  const [reference, setReference] = useState<string | null>(null);
+  const [lengths, setLengths] = useState<Record<string, number>>({});
   const tel = company.phone?.replace(/\s/g, "");
 
   useEffect(() => {
     if (state === "sent") successRef.current?.focus();
   }, [state]);
+
+  useEffect(() => () => { photoGeneration.current += 1; }, []);
+
+  useEffect(() => {
+    if (state !== "idle" || !pendingErrorFocus.current) return;
+    const key = pendingErrorFocus.current;
+    pendingErrorFocus.current = null;
+    const map: Record<string, string> = { enquiryType: "type", contact: "email" };
+    const el = document.getElementById(`${uid}-${map[key] ?? key}`);
+    // The committed render has re-enabled the fieldset. A pre-commit frame
+    // could try to focus a still-disabled control and silently lose focus.
+    el?.focus({ preventScroll: true });
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el?.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" });
+  }, [errors, state, uid]);
+
+  function focusField(key: string) {
+    const map: Record<string, string> = { enquiryType: "type", contact: "email" };
+    requestAnimationFrame(() => {
+      const el = document.getElementById(`${uid}-${map[key] ?? key}`);
+      el?.focus();
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      el?.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" });
+    });
+  }
+
+  function clearPhotos() {
+    photoGeneration.current += 1;
+    setPhotos([]);
+    setPhotoError("");
+    setPreparingPhotos(false);
+    if (photoInputRef.current) photoInputRef.current.value = "";
+    setErrors((current) => {
+      const next = { ...current };
+      delete next.photos;
+      return next;
+    });
+  }
 
   function toggle(m: string) {
     setPicked((p) => (p.includes(m) ? p.filter((x) => x !== m) : [...p, m]));
@@ -168,35 +249,53 @@ export default function QuoteForm() {
   async function onPhotoChange(
     event: React.ChangeEvent<HTMLInputElement>,
   ) {
-    const files = Array.from(event.target.files ?? []);
+    const input = event.currentTarget;
+    const files = Array.from(input.files ?? []);
+    const generation = ++photoGeneration.current;
+    setPhotos([]);
     setPhotoError("");
+    setPreparingPhotos(false);
+    setErrors((current) => {
+      if (!current.photos) return current;
+      const next = { ...current };
+      delete next.photos;
+      return next;
+    });
 
     if (files.length > MAX_PHOTOS) {
       setPhotoError(`Choose no more than ${MAX_PHOTOS} photos.`);
-      event.target.value = "";
+      input.value = "";
       return;
     }
+    if (files.length === 0) return;
 
     setPreparingPhotos(true);
     try {
-      setPhotos(await Promise.all(files.map(preparePhoto)));
+      const prepared: PreparedPhoto[] = [];
+      for (const file of files) {
+        prepared.push(await preparePhoto(file));
+        if (generation !== photoGeneration.current) return;
+      }
+      if (generation === photoGeneration.current) setPhotos(prepared);
     } catch (error) {
+      if (generation !== photoGeneration.current) return;
       setPhotos([]);
       setPhotoError(
         error instanceof Error ? error.message : "Those photos could not be prepared.",
       );
-      event.target.value = "";
+      input.value = "";
     } finally {
-      setPreparingPhotos(false);
+      if (generation === photoGeneration.current) setPreparingPhotos(false);
     }
   }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (preparingPhotos) return;
-    setState("sending");
-    setErrors({});
-    setMessage("");
+    if (!hydrated || sendingRef.current || preparingPhotos) return;
+    if (photoError || errors.photos) {
+      focusField("photos");
+      return;
+    }
 
     const fd = new FormData(e.currentTarget);
     const payload = {
@@ -213,58 +312,50 @@ export default function QuoteForm() {
       photos,
     };
 
+    sendingRef.current = true;
+    setState("sending");
+    setErrors({});
+    setMessage("");
     try {
-      const res = await fetch("/api/enquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const json = await res.json();
+      const attempt = prepareEnquiryAttempt(payload, attemptRef.current);
+      attemptRef.current = attempt;
+      trackEnquiryEvent("quote_submit");
+      const { response: res, data: json } = await submitEnquiryAttempt(attempt);
 
       if (!res.ok) {
-        if (json.errors) {
-          setErrors(json.errors);
+        trackEnquiryEvent("quote_failed");
+        const fieldErrors = enquiryErrors(json);
+        if (Object.keys(fieldErrors).length > 0) {
+          setErrors(fieldErrors);
+          if (fieldErrors.photos) setPhotoError(fieldErrors.photos);
           setState("idle");
-          // Move the user to the first problem rather than leaving them
-          // to hunt for red text somewhere up the page.
-          const first = ["enquiryType", "name", "contact", "email"].find(
-            (key) => json.errors[key],
-          ) ?? Object.keys(json.errors)[0];
-          const map: Record<string, string> = {
-            enquiryType: "type",
-            name: "name",
-            contact: "email",
-            email: "email",
-          };
-          requestAnimationFrame(() => {
-            const el = document.getElementById(`${uid}-${map[first] ?? first}`);
-            el?.focus();
-            const reduceMotion = window.matchMedia(
-              "(prefers-reduced-motion: reduce)",
-            ).matches;
-            el?.scrollIntoView({
-              block: "center",
-              behavior: reduceMotion ? "auto" : "smooth",
-            });
-          });
+          const first = ["enquiryType", "name", "contact", "email", "phone"].find(
+            (key) => fieldErrors[key],
+          ) ?? Object.keys(fieldErrors)[0];
+          pendingErrorFocus.current = first;
           return;
         }
-        setMessage(json.error ?? "Something went wrong.");
+        setMessage(enquiryErrorMessage(json) ?? unknownOutcomeMessage);
         setState("error");
         return;
       }
-      if (json.delivered === true) {
+      const accepted = acceptedEnquiry(json);
+      if (accepted) {
+        setReference(accepted.reference);
         setState("sent");
+        trackEnquiryEvent("quote_accepted");
         return;
       }
 
-      setMessage(
-        "We couldn't send that just now. Please call us instead.",
-      );
+      trackEnquiryEvent("quote_failed");
+      setMessage(unknownOutcomeMessage);
       setState("error");
     } catch {
-      setMessage("Couldn't reach the server. Check your connection, or call us.");
+      trackEnquiryEvent("quote_failed");
+      setMessage(unknownOutcomeMessage);
       setState("error");
+    } finally {
+      sendingRef.current = false;
     }
   }
 
@@ -279,7 +370,7 @@ export default function QuoteForm() {
         <span className="flex h-12 w-12 items-center justify-center bg-shaft">
           <Tick className="h-6 w-6 text-furnace" />
         </span>
-        <h2 className="mt-5 text-2xl">Thanks — your enquiry has been sent</h2>
+        <h2 className="mt-5 text-2xl">Thanks — your enquiry has been safely received</h2>
         <p className="mt-3 max-w-md leading-relaxed t-muted">
           We received your details.
           {tel ? (
@@ -292,6 +383,7 @@ export default function QuoteForm() {
             </>
           ) : null}
         </p>
+        {reference && <p className="mt-3 break-words text-sm">Reference: <strong>{reference}</strong></p>}
 
         <button
           type="button"
@@ -300,6 +392,12 @@ export default function QuoteForm() {
             setPicked([]);
             setPhotos([]);
             setPhotoError("");
+            setErrors({});
+            setMessage("");
+            setReference(null);
+            setLengths({});
+            attemptRef.current = null;
+            photoGeneration.current += 1;
             requestAnimationFrame(() => typeRef.current?.focus());
           }}
           className="mt-6 font-semibold underline decoration-1 underline-offset-4 transition-colors duration-[160ms] ease-out hover:text-steel"
@@ -312,13 +410,36 @@ export default function QuoteForm() {
 
   const busy = state === "sending";
   const errorCount = Object.keys(errors).length;
+  const visiblePhotoError = photoError || errors.photos;
 
   return (
     <form
       onSubmit={onSubmit}
+      method="post"
+      action="/api/enquiry"
+      onInput={(event) => {
+        const input = event.target;
+        if (
+          (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) &&
+          Object.hasOwn(textLimits, input.name)
+        ) setLengths((current) => ({ ...current, [input.name]: input.value.length }));
+      }}
       noValidate
+      aria-busy={busy || preparingPhotos}
       className="on-light border border-steel bg-chalk p-6 sm:p-8 lg:p-9"
     >
+      <noscript>
+        <p className="mb-6 font-semibold">
+          JavaScript is needed to send this form.
+          {tel && <> Please call <a className="u-link" href={`tel:${tel}`}>{company.phoneLabel ?? company.phone}</a> to make an enquiry.</>}
+        </p>
+      </noscript>
+      {!hydrated && (
+        <p className="mb-6 text-sm t-muted">
+          This form needs JavaScript before you can enter or send details.
+          {tel && <> You can also <a className="u-link" href={`tel:${tel}`}>call {company.phoneLabel ?? company.phone}</a>.</>}
+        </p>
+      )}
       {/* Announced to screen readers without stealing focus. */}
       <p aria-live="polite" className="sr-only">
         {preparingPhotos
@@ -344,6 +465,7 @@ export default function QuoteForm() {
         </div>
       )}
 
+      <fieldset disabled={!hydrated || busy} aria-label="Enquiry details" className="min-w-0">
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="sm:col-span-2">
           <label className={labelCls} htmlFor={`${uid}-type`}>
@@ -378,11 +500,13 @@ export default function QuoteForm() {
             id={`${uid}-name`}
             name="name"
             required
+            maxLength={textLimits.name}
             autoComplete="name"
             className={field}
             aria-invalid={!!errors.name}
-            aria-describedby={errors.name ? `${uid}-name-err` : undefined}
+            aria-describedby={`${uid}-name-count${errors.name ? ` ${uid}-name-err` : ""}`}
           />
+          <CharacterCount id={`${uid}-name-count`} length={lengths.name ?? 0} limit={textLimits.name} />
           {errors.name && <p id={`${uid}-name-err`} className={errCls}>{errors.name}</p>}
         </div>
 
@@ -390,7 +514,17 @@ export default function QuoteForm() {
           <label className={labelCls} htmlFor={`${uid}-company`}>
             Company <span className="font-normal t-muted">(optional)</span>
           </label>
-          <input id={`${uid}-company`} name="company" autoComplete="organization" className={field} />
+          <input
+            id={`${uid}-company`}
+            name="company"
+            autoComplete="organization"
+            maxLength={textLimits.company}
+            className={field}
+            aria-invalid={!!errors.company}
+            aria-describedby={`${uid}-company-count${errors.company ? ` ${uid}-company-err` : ""}`}
+          />
+          <CharacterCount id={`${uid}-company-count`} length={lengths.company ?? 0} limit={textLimits.company} />
+          {errors.company && <p id={`${uid}-company-err`} className={errCls}>{errors.company}</p>}
         </div>
 
         <fieldset className="sm:col-span-2">
@@ -407,17 +541,13 @@ export default function QuoteForm() {
                 id={`${uid}-email`}
                 name="email"
                 type="email"
+                maxLength={textLimits.email}
                 autoComplete="email"
                 className={field}
                 aria-invalid={!!(errors.email || errors.contact)}
-                aria-describedby={
-                  errors.email
-                    ? `${uid}-email-err`
-                    : errors.contact
-                      ? `${uid}-contact-err`
-                      : undefined
-                }
+                aria-describedby={`${uid}-email-count${errors.email ? ` ${uid}-email-err` : ""}${errors.contact ? ` ${uid}-contact-err` : ""}`}
               />
+              <CharacterCount id={`${uid}-email-count`} length={lengths.email ?? 0} limit={textLimits.email} />
               {errors.email && (
                 <p id={`${uid}-email-err`} className={errCls}>
                   {errors.email}
@@ -433,13 +563,14 @@ export default function QuoteForm() {
                 id={`${uid}-phone`}
                 name="phone"
                 type="tel"
+                maxLength={textLimits.phone}
                 autoComplete="tel"
                 className={field}
-                aria-invalid={!!errors.contact}
-                aria-describedby={
-                  errors.contact ? `${uid}-contact-err` : undefined
-                }
+                aria-invalid={!!(errors.phone || errors.contact)}
+                aria-describedby={`${uid}-phone-count${errors.phone ? ` ${uid}-phone-err` : ""}${errors.contact ? ` ${uid}-contact-err` : ""}`}
               />
+              <CharacterCount id={`${uid}-phone-count`} length={lengths.phone ?? 0} limit={textLimits.phone} />
+              {errors.phone && <p id={`${uid}-phone-err`} className={errCls}>{errors.phone}</p>}
             </div>
           </div>
           {errors.contact && (
@@ -451,20 +582,44 @@ export default function QuoteForm() {
 
         <div>
           <label className={labelCls} htmlFor={`${uid}-suburb`}>Suburb or postcode</label>
-          <input id={`${uid}-suburb`} name="suburb" autoComplete="postal-code" className={field} />
+          <input
+            id={`${uid}-suburb`}
+            name="suburb"
+            autoComplete="postal-code"
+            maxLength={textLimits.suburb}
+            className={field}
+            aria-invalid={!!errors.suburb}
+            aria-describedby={`${uid}-suburb-count${errors.suburb ? ` ${uid}-suburb-err` : ""}`}
+          />
+          <CharacterCount id={`${uid}-suburb-count`} length={lengths.suburb ?? 0} limit={textLimits.suburb} />
+          {errors.suburb && <p id={`${uid}-suburb-err`} className={errCls}>{errors.suburb}</p>}
         </div>
 
         <div>
           <label className={labelCls} htmlFor={`${uid}-volume`}>Estimated volume</label>
-          <select id={`${uid}-volume`} name="volume" defaultValue="" className={field}>
+          <select
+            id={`${uid}-volume`}
+            name="volume"
+            defaultValue=""
+            className={field}
+            aria-invalid={!!errors.volume}
+            aria-describedby={errors.volume ? `${uid}-volume-err` : undefined}
+          >
             <option value="">Choose a range</option>
             {volumes.map((v) => (
               <option key={v}>{v}</option>
             ))}
           </select>
+          {errors.volume && <p id={`${uid}-volume-err`} className={errCls}>{errors.volume}</p>}
         </div>
 
-        <fieldset className="sm:col-span-2">
+        <fieldset
+          id={`${uid}-materials`}
+          tabIndex={-1}
+          className="sm:col-span-2"
+          aria-invalid={!!errors.materials}
+          aria-describedby={errors.materials ? `${uid}-materials-err` : undefined}
+        >
           <legend className={labelCls}>What have you got?</legend>
           <div className="flex flex-wrap gap-2">
             {materials.map((m) => {
@@ -486,6 +641,7 @@ export default function QuoteForm() {
               );
             })}
           </div>
+          {errors.materials && <p id={`${uid}-materials-err`} className={errCls}>{errors.materials}</p>}
         </fieldset>
 
         <div className="sm:col-span-2">
@@ -493,15 +649,16 @@ export default function QuoteForm() {
             Photos <span className="font-normal t-muted">(optional, up to {MAX_PHOTOS})</span>
           </label>
           <input
+            ref={photoInputRef}
             id={`${uid}-photos`}
             name="photos"
             type="file"
             accept={ACCEPTED_PHOTO_TYPES.join(",")}
             multiple
-            disabled={busy || preparingPhotos}
+            disabled={busy}
             onChange={onPhotoChange}
-            aria-invalid={!!photoError}
-            aria-describedby={`${uid}-photos-help${photoError ? ` ${uid}-photos-err` : ""}`}
+            aria-invalid={!!visiblePhotoError}
+            aria-describedby={`${uid}-photos-help${visiblePhotoError ? ` ${uid}-photos-err` : ""}`}
             className={`${field} file:mr-4 file:border-0 file:bg-furnace file:px-3 file:py-2 file:font-semibold file:text-white`}
           />
           <p id={`${uid}-photos-help`} className="mt-2 text-sm t-muted">
@@ -516,10 +673,15 @@ export default function QuoteForm() {
               {photos.length} {photos.length === 1 ? "photo" : "photos"} ready
             </p>
           )}
-          {photoError && (
-            <p id={`${uid}-photos-err`} className={errCls}>
-              {photoError}
+          {visiblePhotoError && (
+            <p id={`${uid}-photos-err`} role="alert" className={errCls}>
+              {visiblePhotoError}
             </p>
+          )}
+          {(photos.length > 0 || preparingPhotos || visiblePhotoError) && (
+            <button type="button" onClick={clearPhotos} className="mt-2 min-h-11 text-sm font-semibold u-link">
+              {visiblePhotoError ? "Clear photo selection" : "Remove photos"}
+            </button>
           )}
         </div>
 
@@ -531,16 +693,21 @@ export default function QuoteForm() {
             id={`${uid}-detail`}
             name="detail"
             rows={4}
+            maxLength={textLimits.detail}
             className={field}
+            aria-invalid={!!errors.detail}
+            aria-describedby={`${uid}-detail-count${errors.detail ? ` ${uid}-detail-err` : ""}`}
             placeholder="Access, timing, bin requirements or material details"
           />
+          <CharacterCount id={`${uid}-detail-count`} length={lengths.detail ?? 0} limit={textLimits.detail} />
+          {errors.detail && <p id={`${uid}-detail-err`} className={errCls}>{errors.detail}</p>}
         </div>
       </div>
 
       {/* honeypot — hidden from people, catnip for bots */}
       <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
         <label htmlFor={`${uid}-website`}>Leave this field empty</label>
-        <input id={`${uid}-website`} name="website" tabIndex={-1} autoComplete="off" />
+        <input id={`${uid}-website`} name="website" tabIndex={-1} autoComplete="off" maxLength={100} />
       </div>
 
       <div className="mt-8 flex flex-wrap items-center gap-5">
@@ -549,7 +716,7 @@ export default function QuoteForm() {
             lose contrast with the sheet it sits on. */}
         <button
           type="submit"
-          disabled={busy || preparingPhotos}
+          disabled={!hydrated || busy || preparingPhotos || !!visiblePhotoError}
           className="btn btn-solid disabled:cursor-not-allowed disabled:opacity-60"
         >
           {preparingPhotos ? "Preparing photos…" : busy ? "Sending…" : "Send enquiry"}
@@ -563,6 +730,7 @@ export default function QuoteForm() {
           .
         </p>
       </div>
+      </fieldset>
     </form>
   );
 }

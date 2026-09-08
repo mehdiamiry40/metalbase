@@ -13,7 +13,12 @@ import {
   TickList,
 } from "@/components/ui";
 import { pageMetadata } from "@/lib/metadata";
-import { operations, serviceAreas, services } from "@/lib/site";
+import {
+  formatServiceRegions,
+  operations,
+  serviceAreas,
+  services,
+} from "@/lib/site";
 
 export const metadata = pageMetadata({
   path: "/scrap-removal-brisbane",
@@ -364,8 +369,8 @@ export default function ScrapRemovalBrisbanePage() {
         <SectionHead
           index={6}
           eyebrow="Verified service areas"
-          title="Collection across five South East Queensland regions"
-          intro={`MetalBase drivers collect from customer sites across ${operations.serviceRegions.join(", ")}. Send the exact address so access, timing and the load-specific scope can be confirmed.`}
+          title={`Collection across ${operations.serviceRegions.length} South East Queensland regions`}
+          intro={`MetalBase drivers collect from customer sites across ${formatServiceRegions()}. Send the exact address so access, timing and the load-specific scope can be confirmed.`}
         />
 
         <div className="grid border-y hair lg:grid-cols-2">

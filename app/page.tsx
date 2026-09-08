@@ -9,7 +9,7 @@ import {
   type YardIconName,
 } from "@/components/ui";
 import type { PhotoKey } from "@/lib/photos";
-import { company } from "@/lib/site";
+import { company, formatServiceRegions } from "@/lib/site";
 import { pageMetadata } from "@/lib/metadata";
 
 const homeTitle = "MetalBase | Scrap Metal Quotes Across Brisbane & SEQ";
@@ -137,7 +137,19 @@ const materialTiles: {
     layout: "md:col-span-12 md:min-h-[360px]",
   },
   {
-    title: "Scrap swarf",
+    title: "Scrap lead",
+    href: "/materials/lead",
+    photo: "alloy",
+    layout: "md:col-span-12 md:min-h-[360px]",
+  },
+  {
+    title: "Scrap zinc",
+    href: "/materials/zinc",
+    photo: "alloy",
+    layout: "md:col-span-12 md:min-h-[360px]",
+  },
+  {
+    title: "Scrap swarf and turnings",
     href: "/materials/swarf",
     photo: "machine-swarf",
     layout: "md:col-span-12 md:min-h-[360px]",
@@ -217,8 +229,8 @@ export default function Home() {
           condition and location.
         </p>
         <p className="mt-5 leading-relaxed">
-          MetalBase provides mobile collection across Brisbane, the Gold Coast,
-          Sunshine Coast, Logan and Ipswich. Final grade, collection timing,
+          MetalBase provides mobile collection across {formatServiceRegions()}.
+          Final grade, collection timing,
           arranged receiving instructions and commercial terms are confirmed
           for each enquiry.
         </p>

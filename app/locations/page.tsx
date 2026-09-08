@@ -10,14 +10,13 @@ import {
   type YardIconName,
 } from "@/components/ui";
 import { regionHref, regions } from "@/lib/regions";
-import { company, operations } from "@/lib/site";
+import { company, formatServiceRegions, operations } from "@/lib/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
   path: "/locations",
   title: "Scrap Metal Collection Areas South East Queensland",
-  description:
-    "MetalBase customer-site scrap collection across Brisbane, Gold Coast, Sunshine Coast, Logan and Ipswich, plus arranged receiving guidance.",
+  description: `MetalBase customer-site scrap collection across ${formatServiceRegions()}, plus arranged receiving guidance.`,
 });
 
 const dropoffChecks: { title: string; body: string; icon: YardIconName }[] = [
@@ -50,7 +49,7 @@ export default function LocationsPage() {
         eyebrow="Service areas + arranged receiving"
         photo="tipper"
         title="Customer-site collection across South East Queensland"
-        intro={`MetalBase drivers collect across ${operations.serviceRegions.join(", ")}. Customers cannot visit a MetalBase location; suitable drop-offs are arranged per enquiry.`}
+        intro={`MetalBase drivers collect across ${formatServiceRegions()}. Customers cannot visit a MetalBase location; suitable drop-offs are arranged per enquiry.`}
         trail={[{ label: "Home", href: "/" }, { label: "Area guides" }]}
       >
         <div className="flex flex-col justify-center gap-3 sm:flex-row">
@@ -91,8 +90,9 @@ export default function LocationsPage() {
           ))}
         </ul>
         <Callout className="mt-10" label="Collection coverage">
-          Customer-site collection is available across the five listed service
-          regions. Send the exact address, material, approximate volume and site
+          Customer-site collection is available across the{" "}
+          {operations.serviceRegions.length} listed service regions. Send the
+          exact address, material, approximate volume and site
           access so equipment, minimum volume, timing and terms can be confirmed.{" "}
           <ArrowLink href="/scrap-removal-brisbane" tone="accent">
             Brisbane scrap removal guide

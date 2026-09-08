@@ -16,10 +16,11 @@ const sections = [
     id: "privacy",
     h: "Privacy",
     p: [
-      "The enquiry form collects your name and at least one reply method—email address or phone number—plus any company, suburb, material and load details you add. Optional photos are compressed in your browser and passed to the configured email or workflow provider with the enquiry. Do not include identification documents, bank details or images containing unrelated personal information.",
+      "The enquiry form collects your name and at least one reply method—email address or phone number—plus any company, suburb, material and load details you add. Optional photos are resized in your browser, then decoded and re-encoded by the website. Do not include identification documents, bank details or images containing unrelated personal information.",
       "Some transactions may require identity, ownership, vehicle or transaction records. Confirm what is needed before you travel and provide sensitive documents only through an agreed secure process.",
-      "Personal information is used to respond to enquiries, prepare proposed trade arrangements and meet applicable record-keeping obligations. Form submissions are processed by the website host and the configured email or workflow delivery provider, which may process data outside Australia. Personal information is not sold.",
-      "Enquiry data may remain in the configured delivery system and business records while the enquiry is handled and for any period required by applicable record-keeping obligations.",
+      "Personal information is used to respond to enquiries, prepare proposed trade arrangements and meet applicable record-keeping obligations. Accepted enquiries and verified photos are saved in the website's enquiry system with restricted access before delivery is attempted through the configured email or workflow provider. A submission confirmation means the enquiry has been safely recorded; it does not mean a staff member has read it. The website host, storage provider and delivery provider process this information and may process it outside Australia. Personal information is not sold.",
+      "The website uses a short-lived request identifier derived from the connection address to limit automated abuse. It is not written to application logs. When a shared rate-limit provider is configured, that provider also processes the identifier for this security purpose.",
+      "The website's stored copy of your enquiry details and photos is removed after 30 days. Operational records, such as delivery status, and hashed references used to prevent duplicate submissions are retained for up to 90 days. Customer enquiry details, photos and provider response bodies are not written to application logs. Copies in the email or workflow delivery system and business records may remain while the enquiry is handled and for any period required by applicable record-keeping obligations.",
       "You can request access to personal information held about you, or ask for a correction, using the contact details published on this site.",
       "This website uses Vercel Web Analytics to measure visits. Vercel states that the service does not use cookies or store analytics tied to an individual or IP address. Anonymous page-view data can include the URL and filtered query parameters, referrer, country, region or city, browser and operating-system versions, and device type. It is used for aggregate statistics.",
     ],
@@ -55,7 +56,7 @@ export default function LegalPage() {
         intro="Privacy, general trade terms and accessibility information in plain language."
         trail={[{ label: "Home", href: "/" }, { label: "Legal" }]}
       >
-        <p className="text-sm t-muted">Last updated 4 August 2026</p>
+        <p className="text-sm t-muted">Last updated 5 September 2026</p>
       </PageHeader>
 
       <Section className="pb-20 pt-10 lg:pb-28 lg:pt-14">

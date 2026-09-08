@@ -3,12 +3,13 @@
 Next.js 16.3 marketing site. App Router, TypeScript, Tailwind v4.
 
 ```bash
-npm install
-cp .env.example .env.local  # optional local delivery configuration
+nvm use
+npm ci
+cp .env.example .env.local  # configure an isolated development database
 npm run dev        # http://localhost:3000
 ```
 
-Node 20.9+. Verified on Node 22 with a clean production build.
+Node 24.x, matching CI and Vercel. Use npm 10.9.8 when maintaining the lockfile.
 
 ## Verified business model and remaining guards
 
@@ -29,8 +30,8 @@ Nothing invents a number on your behalf. Current status:
 | Where | What |
 |---|---|
 | `company` in `lib/site.ts` | Verified operator, ABN, phone and contact hours; licence, public email and street address remain unpublished |
-| `operations` in `lib/site.ts` | No customer visits; collection, bins and arranged drop-off across Brisbane, Gold Coast, Sunshine Coast, Logan and Ipswich |
-| `app/api/enquiry/route.ts` | Server-only verified quote inbox, with an optional environment override |
+| `operations` in `lib/site.ts` | No customer visits; collection, bins and arranged drop-off across Brisbane, Gold Coast, Sunshine Coast, Logan, Ipswich and Redlands |
+| `lib/enquiry-delivery.ts` | Server-only verified quote inbox, with an optional environment override |
 | `locations` | Empty by design: MetalBase has no public customer location |
 | `stats` | Any figure you can defend (currently empty → the band doesn't render) |
 | `priceGroups` | Real rates, then set `PUBLISH_RATES = true` |
@@ -99,29 +100,35 @@ but shouldn't is invisible to the rename guard.
 
 ## Enquiry form
 
-`components/QuoteForm.tsx` → `POST /api/enquiry`. Server-side validation,
-honeypot and rate limiting. Customers can attach up to three JPEG, PNG or WebP
-photos; the browser resizes and compresses them before delivery. Delivery is
-configured server-side:
+The browser sends a UUID `Idempotency-Key` to `POST /api/enquiry`. The route
+validates the complete bounded input, decodes and re-encodes photos, then
+atomically records the enquiry and an immutable delivery job in PostgreSQL.
+A successful response means **safely recorded**, not read by a person or delivered
+to an inbox. The honeypot intentionally returns no-op success.
 
-```bash
-RESEND_API_KEY=...
-ENQUIRY_TO=quotes@example.com  # optional recipient override
-ENQUIRY_FROM=...          # optional; use a verified sender
-# or
-ENQUIRY_WEBHOOK_URL=...   # Zapier, Make, CRM
-```
+The same key and content return the same reference; changed content with that key
+returns 409. Missing/invalid keys return 428. Failed storage or shared rate limiting
+returns 503 and never falls back to per-process protection. The form preserves
+identity after an uncertain response and starts a new identity for edited content.
 
-Email delivery requires `RESEND_API_KEY` and defaults to the verified quote
-inbox, `mehdiamiry40@gmail.com`; `ENQUIRY_TO` can override that destination.
-Webhook delivery requires `ENQUIRY_WEBHOOK_URL`. Without a Resend key or webhook,
-the endpoint returns `503`, logs no customer details and the form shows a
-click-to-call fallback. It never pretends an enquiry was delivered.
+One database supplies durable capture and the five-per-minute shared rate limit.
+No Upstash service is needed. Production and preview databases must be separate.
+`RESEND_API_KEY` selects Resend; otherwise a validated HTTPS
+`ENQUIRY_WEBHOOK_URL` selects a webhook. The verified default inbox remains
+server-only and `ENQUIRY_TO` may override it. Blank optional sender configuration
+uses the local default; production builds require a verified sender.
 
-The rate limiter uses one atomic Upstash transaction and a sliding one-minute
-window when its URL and token are configured, with an in-memory fallback for
-local development. Provider calls have bounded timeouts and logs exclude
-customer and provider response bodies.
+A best-effort `after` callback accelerates delivery. The authenticated five-minute
+cron recovers jobs through leases and stable provider keys. Resend retries stop
+before its deduplication window expires. Changed credentials and ambiguous generic
+webhooks require manual reconciliation. Signed Resend events separately record
+inbox-server delivery or failure. Provider acceptance is never claimed as final receipt.
+
+Photos and enquiry text are removed from this site's store after 30 days by the
+retention job; operational metadata and hashes are retained up to 90 days. Monitor
+cron health and resolve old work before retention. See
+[the enquiry operations guide](docs/enquiry-operations.md) for setup, failure
+handling, retention, explicit migrations and release verification.
 
 ## Quality gates
 
@@ -130,6 +137,8 @@ npm run lint
 npm run typecheck
 npm test
 npm run build
+npx playwright install chromium
+npm run test:e2e
 npm audit --audit-level=high
 ```
 
@@ -137,7 +146,7 @@ CI runs the same non-interactive checks on pushes and pull requests.
 
 ## Photography
 
-`lib/photos.ts` — 14 free-licence Unsplash photos, keyed, with credits and alt
+`lib/photos.ts` — 18 free-licence Unsplash photos, keyed, with credits and alt
 text. Served from the Unsplash CDN by default.
 
 ```bash
@@ -148,9 +157,10 @@ npm run photos            # download into public/photos
 For real truck, driver, bin and collection photography, keep the keys and drop files in
 `public/photos/<key>.jpg`.
 
-Credits: Yasin Hemmati, Zoshua Colah, Load It Up Dumpster Rental, Daniel Fazio,
-Karthik Srinivas, Jessica Palomo, Pop & Zebra, Jay Alexander, Elena Mozhvilo,
-Harry Dona, Johnny Sanchez, Evan Demicoli, Pavel Neznanov.
+Credits: Yasin Hemmati, Zoshua Colah, Load It Up Dumpster Rental, Émile Dionne,
+Sikwe Scarter, Karthik Srinivas, Jessica Palomo, Pop & Zebra, Jay Alexander,
+Daniel Romero, Elena Mozhvilo, Anneliese Klotz, Harry Dona, Johnny Sanchez,
+Evan Demicoli and Pavel Neznanov.
 
 ## SEO & accessibility
 
@@ -159,9 +169,9 @@ Harry Dona, Johnny Sanchez, Evan Demicoli, Pavel Neznanov.
 - One canonical page per core Brisbane intent:
   `/scrap-metal-brisbane` for material, quote, pricing and receiving guidance;
   `/scrap-removal-brisbane` for site collection assessment
-- Six focused material guides under `/materials/` for copper, cable,
-  aluminium, brass, steel and stainless steel, linked from the homepage and
-  `/what-we-buy`
+- Nine focused material guides under `/materials/` for copper, cable,
+  aluminium, brass, steel, stainless steel, electric motors, radiators and
+  whitegoods, linked from the homepage and `/what-we-buy`
 - Permanent redirects consolidate the superseded Brisbane region and
   collection-service URLs, and the sitemap lists only the preferred pages
 - Favicon and OG image generated at build (`app/icon.tsx`, `app/opengraph-image.tsx`)
@@ -187,10 +197,10 @@ taxonomy* and its *process*, and that every competitor hides both behind a
 | Export | What it drives |
 |---|---|
 | `priceGroups` | 28 grades across three streams. Home shows three visual summaries; `/prices` carries the full `Ledger` |
-| `materials` | Six search-focused grade, preparation and quote guides under `/materials/[slug]` |
+| `materials` | Nine search-focused grade, preparation and quote guides under `/materials/[slug]` |
 | `glossary` | Standard trade terms — `/glossary` |
 | `services` | Three business scopes; collection and bins are verified, while industrial and demolition remain enquiry guides |
-| `serviceAreas` | The five verified customer-site collection regions — `/locations`, `/scrap-removal-brisbane` |
+| `serviceAreas` | The six verified customer-site collection regions — `/locations`, `/scrap-removal-brisbane` |
 
 The cautious customer FAQ copy lives beside the route in `app/faq/page.tsx`,
 and the homepage carries its own shorter quote-focused subset. Do not restore

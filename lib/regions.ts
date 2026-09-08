@@ -3,6 +3,7 @@ import type { PhotoKey } from "@/lib/photos";
 export const REGION_SLUGS = [
   "brisbane",
   "gold-coast",
+  "sunshine-coast",
   "logan",
   "ipswich",
   "redlands",
@@ -213,6 +214,84 @@ export const regions: RegionGuide[] = [
       },
     ],
     reviewedAt: "2026-08-04",
+  },
+  {
+    slug: "sunshine-coast",
+    name: "Sunshine Coast",
+    breadcrumbName: "Sunshine Coast",
+    seoTitle: "Scrap Metal Quotes Sunshine Coast",
+    seoDescription:
+      "Prepare a Sunshine Coast scrap metal quote or collection enquiry with the material, quantity, suburb, loading access and timing details.",
+    h1: "Scrap metal quote enquiries on the Sunshine Coast",
+    eyebrow: "Sunshine Coast guide",
+    intro:
+      "Have metal at a Sunshine Coast home, workshop, commercial property or project site? Send the material, rough quantity, condition and exact suburb, plus access details for collection assessment.",
+    heroPhoto: "copper-sheets",
+    hubSummary:
+      "Trade, renovation and commercial loads where distance and access planning matter.",
+    detailTitle: "Describe the load and the collection point together",
+    detailIntro:
+      "Sunshine Coast enquiries are easier to assess when the material, exact location and loading conditions arrive in one clear description.",
+    details: [
+      {
+        title: "Exact location",
+        body: "Include the suburb and street so travel and access can be assessed.",
+        icon: "pin",
+      },
+      {
+        title: "Material and quantity",
+        body: "List the obvious grades and estimate weight, volume or item count.",
+        icon: "scale",
+      },
+      {
+        title: "Loading conditions",
+        body: "Show gates, surfaces, clearances and the distance to the material.",
+        icon: "bin",
+      },
+      {
+        title: "Timing needs",
+        body: "Add the preferred window and any site booking or access constraints.",
+        icon: "trend",
+      },
+    ],
+    focusTitle: "Plan the route before the collection method",
+    focusBody:
+      "Travel distance, site access and the form of the load all affect which collection option can be assessed for a Sunshine Coast address.",
+    focusPhoto: "tipper",
+    focusCaption: "Transport and loading-point planning",
+    focusPoints: [
+      "Photograph the whole load and the route from the gate to the material.",
+      "State whether items are loose, stacked, palletised or fixed in place.",
+      "Flag steep driveways, soft ground, overhead services and restricted turning space.",
+    ],
+    materials: [
+      { label: "Copper, cable and brass", href: "/what-we-buy#non-ferrous" },
+      { label: "Aluminium and stainless", href: "/what-we-buy#non-ferrous" },
+      { label: "Light, structural and mixed steel", href: "/what-we-buy#ferrous" },
+    ],
+    places: [
+      "Caloundra",
+      "Maroochydore",
+      "Kunda Park",
+      "Warana",
+      "Nambour",
+      "Coolum Beach",
+      "Noosaville",
+      "Beerwah",
+    ],
+    placeNote:
+      "MetalBase provides customer-site collection across the Sunshine Coast. Send the exact address so travel, access, timing, equipment and terms can be confirmed for the load.",
+    faqs: [
+      {
+        q: "Is scrap collection available across the Sunshine Coast?",
+        a: "Yes. MetalBase drivers collect from customer sites across the Sunshine Coast. Send the exact address, material, quantity, access and timing so the job-specific scope and terms can be confirmed.",
+      },
+      {
+        q: "What helps with a Sunshine Coast collection enquiry?",
+        a: "Include wide and close-up load photos, the loading point, gate and clearance details, ground conditions, preferred timing and any property or site-access rules.",
+      },
+    ],
+    reviewedAt: "2026-08-31",
   },
   {
     slug: "logan",
@@ -433,7 +512,7 @@ export const regions: RegionGuide[] = [
       "Redland Bay",
     ],
     placeNote:
-      "Name the exact Redlands suburb and address. These examples help identify the area; collection and receiving instructions are confirmed separately.",
+      "MetalBase provides customer-site collection across Redlands. Send the exact address so access, timing, equipment and terms can be confirmed for the load.",
     faqs: [
       {
         q: "Can marine hardware be included in a Redlands enquiry?",
@@ -444,7 +523,7 @@ export const regions: RegionGuide[] = [
         a: "Separate obvious metal groups, keep unsafe items aside and photograph anything uncertain. Final grade and acceptance are confirmed after assessment.",
       },
     ],
-    reviewedAt: "2026-08-04",
+    reviewedAt: "2026-08-31",
   },
 ];
 

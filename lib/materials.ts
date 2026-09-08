@@ -118,7 +118,7 @@ export const materials: MaterialGuide[] = [
       },
       {
         q: "Should I remove brass fittings from copper pipe?",
-        a: "Separating clearly removable brass, steel, plastic and rubber can make the copper easier to assess. Do not dismantle anything unsafely; show the attachments in photographs when they remain.",
+        a: "Show the fittings and other attachments in photographs first. Ask whether separation is needed and confirm safe preparation before dismantling anything.",
       },
       {
         q: "Are scrap copper prices published on this page?",
@@ -269,7 +269,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Cast aluminium",
         detail:
-          "Housings, components and some wheels. Remove oil and show steel inserts, bearings, tyres or other attachments that remain.",
+          "Housings, components and some wheels. Describe any oil or residue and show steel inserts, bearings, tyres or other attachments so preparation can be confirmed first.",
       },
       {
         term: "Mixed or contaminated aluminium",
@@ -309,8 +309,8 @@ export const materials: MaterialGuide[] = [
         body: "Show plastic bridge material inside window and door sections, even when it is not obvious from outside.",
       },
       {
-        title: "Remove safe attachments",
-        body: "Separate glass, rubber, steel screws and other material where practical and safe.",
+        title: "Show attachments first",
+        body: "Photograph glass, rubber, steel screws and other attached material. Confirm any preparation needed before removing it.",
       },
       {
         title: "Send scale and condition",
@@ -343,10 +343,10 @@ export const materials: MaterialGuide[] = [
     eyebrow: "Scrap brass Brisbane",
     seoTitle: "Scrap Brass Brisbane: Fittings & Quote Guide",
     seoDescription:
-      "Prepare a Brisbane scrap brass quote for taps, valves, fittings and mixed brass with guidance on draining, attachments, separation and photos.",
+      "Prepare a Brisbane scrap brass quote for taps, valves, fittings and mixed brass with guidance on condition, attachments, separation and photos.",
     h1: "Scrap brass Brisbane: prepare fittings and mixed brass",
     intro:
-      "Drain taps, valves and fittings, separate obvious attachments and show the whole parcel so brass-bearing material can be assessed clearly.",
+      "Show taps, valves and fittings as they are, including attachments and any liquid or residue, so preparation can be confirmed for the actual parcel.",
     photo: "alloy",
     overview:
       "Brass appears in plumbing fittings, valves, taps, hardware, radiators and machined offcuts. The base alloy, cleanliness and attached steel, plastic, rubber, water or other material determine whether a parcel can be treated as clean brass or a mixed item.",
@@ -367,7 +367,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Taps, valves and fittings",
         detail:
-          "Drain water and identify handles, cartridges, hoses, steel spindles and other attached parts. These items may be assessed as mixed brass rather than clean solids.",
+          "Describe any water or residue and identify handles, cartridges, hoses, steel spindles and other attached parts. These items may be assessed as mixed brass rather than clean solids.",
       },
       {
         term: "Bronze and gunmetal",
@@ -394,7 +394,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Moisture and residue",
         detail:
-          "Drain fittings and describe any oil, scale or process residue before the material is moved.",
+          "Describe any water, oil, scale or process residue before preparation or transport is agreed.",
       },
       {
         term: "Separation and weight",
@@ -404,8 +404,8 @@ export const materials: MaterialGuide[] = [
     ],
     preparation: [
       {
-        title: "Drain fittings",
-        body: "Remove water and identify oil or process residue before transport or collection.",
+        title: "Describe liquids and residue",
+        body: "Say whether fittings contain water, oil or process residue. Confirm handling before opening or draining them.",
       },
       {
         title: "Separate clean solids",
@@ -423,7 +423,7 @@ export const materials: MaterialGuide[] = [
     faqs: [
       {
         q: "Do taps and valves need to be dismantled before a quote?",
-        a: "Not necessarily. Drain them and show the attached handles, cartridges, hoses, steel and plastic. Ask whether further separation is worthwhile before spending time on it.",
+        a: "No dismantling or draining is needed to start an enquiry. Show the attached handles, cartridges, hoses, steel and plastic, and describe any liquid or residue. Confirm preparation and safe handling first.",
       },
       {
         q: "How can I tell brass from bronze?",
@@ -480,7 +480,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Reinforcing steel and cast iron",
         detail:
-          "Show concrete on reo or mesh and identify cast housings, pipe or machine parts. Drain fluids and describe bearings, rubber or other attached material.",
+          "Show concrete on reo or mesh and identify cast housings, pipe or machine parts. Describe any fluids, bearings, rubber or other attached material before preparation is agreed.",
       },
     ],
     quoteFactors: [
@@ -653,12 +653,12 @@ export const materials: MaterialGuide[] = [
     seoTitle: "Scrap Electric Motors Brisbane: Grades & Quote Guide",
     seoDescription:
       "Work out what a scrap electric motor is worth before you quote: motor type, copper winding, gearboxes, weight and condition all affect assessment.",
-    h1: "Scrap electric motors Brisbane: separate motors from gearboxes and pumps",
+    h1: "Scrap electric motors Brisbane: identify the motor and its attachments",
     intro:
-      "Scrap electric motors vary enormously in copper content depending on their size and type, and a motor still attached to a gearbox or pump changes how it is assessed. Separate what can be safely separated, then send the nameplate details and clear photos for a quote.",
+      "Motor size, type and attached gearboxes or pumps affect assessment. Send the nameplate details and photos of the complete assembly first; dismantling is not needed to start a quote.",
     photo: "mixed-parts",
     overview:
-      "Electric motors range from small fractional-horsepower units — a pool pump in the backyard, an exhaust fan in a Brisbane townhouse — to heavy industrial three-phase motors pulled from a Rocklea or Yatala workshop, and the proportion of copper winding to steel lamination and housing changes with size and type. A motor built into a pump, gearbox or compressor housing is typically assessed as a mixed item rather than under a standalone electric motor grade, so separating the housing from the motor, where it can be done safely, gives a clearer picture of what is inside.",
+      "Electric motors range from small fractional-horsepower units to heavy industrial three-phase motors, and the proportion of winding metal, steel and housing changes with their construction. A motor built into a pump, gearbox or compressor housing may be assessed as a mixed item. Photograph the complete assembly and any visible labels so its condition, attachments and handling needs can be assessed before preparation is agreed.",
     examples: [
       "Pool and spa pump motors",
       "Air conditioner and exhaust fan motors",
@@ -682,7 +682,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Motors with a gearbox, pump or compressor housing attached",
         detail:
-          "These are assessed as a complete mixed item rather than under the standalone motor grade. Separating the motor from the housing, where it can be done safely, lets each part be identified on its own basis.",
+          "An attached gearbox, pump or compressor housing can make this a mixed item. Show the complete assembly and describe any oil, liquid or sealed components rather than removing them for a quote.",
       },
       {
         term: "Stripped stators and bare windings",
@@ -714,8 +714,8 @@ export const materials: MaterialGuide[] = [
     ],
     preparation: [
       {
-        title: "Separate motors from gearboxes and pumps",
-        body: "Where it can be done safely, unbolt a motor from an attached gearbox, pump or compressor housing rather than presenting the whole assembly as one item.",
+        title: "Show gearboxes, pumps and housings",
+        body: "Photograph the whole assembly and describe attached equipment. Confirm preparation and safe work responsibilities before disconnecting or dismantling it.",
       },
       {
         title: "Photograph the nameplate",
@@ -737,7 +737,7 @@ export const materials: MaterialGuide[] = [
       },
       {
         q: "Do gearboxes and pumps need to be removed from a motor before a quote?",
-        a: "Not necessarily, but a motor still attached to a gearbox, pump or compressor housing is generally assessed as a mixed item rather than under the standalone motor grade. Separating it where safe can make the assessment clearer.",
+        a: "No. Send photos of the complete assembly and its nameplate first. A gearbox, pump or compressor housing can change the assessment; any separation and safe work responsibilities should be agreed before work begins.",
       },
       {
         q: "Can a seized or non-working motor still be scrapped?",
@@ -763,10 +763,10 @@ export const materials: MaterialGuide[] = [
       "Work out whether a scrap radiator is copper/brass or aluminium before requesting a Brisbane quote: grades, attachments and prep explained.",
     h1: "Scrap radiators Brisbane: tell copper, brass and aluminium apart before you quote",
     intro:
-      "Radiators are built as copper and brass, aluminium with plastic tanks, or all-aluminium construction, and each has a different recoverable metal mix. Identify the type, drain the coolant and flag any air conditioner coils before requesting a quote.",
+      "Radiators are built as copper and brass, aluminium with plastic tanks, or all-aluminium construction, and each has a different recoverable metal mix. Describe the type, attachments and any coolant, oil or refrigerant status when requesting a quote. Draining or dismantling is not needed to start an enquiry.",
     photo: "vehicle",
     overview:
-      "A radiator's value comes from what the core and tanks are actually made of, not its size. Older vehicles, industrial equipment and some heavy trucks use copper tube cores with brass header tanks; most cars built since the 1990s use an aluminium core crimped into plastic end tanks; and some performance, heavy-duty and HVAC units are all-aluminium with no plastic at all. Air conditioner and HVAC coils can look similar again but may still hold refrigerant, which changes how they need to be handled before a radiator reaches a scrap quote.",
+      "A radiator's value comes from the composition of its core and tanks as well as its condition. Copper and brass, aluminium with plastic tanks, and all-aluminium units are assessed differently. Air conditioner and HVAC coils may still hold refrigerant, so identify them in the enquiry and confirm specialist handling before any preparation or transport.",
     examples: [
       "Older copper and brass car radiators",
       "Aluminium radiators with plastic end tanks",
@@ -780,7 +780,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Copper and brass radiators",
         detail:
-          "Copper tube cores with brass header tanks, common in older vehicles and industrial equipment. Once separated from steel brackets or a frame, these generally carry a higher recoverable non-ferrous content than an aluminium radiator of similar size.",
+          "Copper tube cores with brass header tanks, common in older vehicles and industrial equipment. Show any steel brackets or frame because the complete metal mix and attachments affect the assessment.",
       },
       {
         term: "Aluminium radiators with plastic tanks",
@@ -795,7 +795,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Air conditioner and HVAC coils",
         detail:
-          "Copper-tube-aluminium-fin or all-aluminium construction, often still connected to refrigerant lines. Refrigerant must be recovered by a licensed technician before one of these reaches a scrap radiator enquiry — say whether that has already happened.",
+          "Copper-tube-aluminium-fin or all-aluminium construction, which may still be connected to refrigerant lines. Say whether refrigerant recovery has already been completed by a licensed technician, or whether the status is unknown. Keep the unit intact while handling is confirmed.",
       },
     ],
     quoteFactors: [
@@ -807,7 +807,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Refrigerant content",
         detail:
-          "Air conditioner and HVAC coils cannot be scrapped with refrigerant still inside. Confirm whether the gas has been recovered by a licensed technician before sending photos.",
+          "Tell us whether refrigerant may remain and share any existing recovery records. This can be assessed from an enquiry before the appropriate specialist work and transport are agreed.",
       },
       {
         term: "Attachments",
@@ -817,7 +817,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Coolant and residue",
         detail:
-          "Drained, empty radiators are easier to describe and move than ones still holding coolant or oil.",
+          "Describe any coolant, oil or residue and whether the condition is uncertain. This affects preparation and handling arrangements.",
       },
     ],
     preparation: [
@@ -826,8 +826,8 @@ export const materials: MaterialGuide[] = [
         body: "Keep copper/brass radiators separate from aluminium radiators with plastic tanks and from all-aluminium units where practical.",
       },
       {
-        title: "Drain the coolant",
-        body: "Empty fluid from the radiator before photographing it or arranging transport.",
+        title: "Describe fluids first",
+        body: "Say whether coolant, oil or residue remains. Do not open or drain the unit for a photograph; confirm safe handling before preparation or transport.",
       },
       {
         title: "Flag refrigerant-bearing units",
@@ -845,15 +845,15 @@ export const materials: MaterialGuide[] = [
       },
       {
         q: "Do I need to drain the coolant before requesting a quote?",
-        a: "Yes. Send photos of a drained radiator where possible. Residual coolant or oil should be described if the radiator cannot be fully emptied before collection.",
+        a: "No. Describe whether coolant, oil or residue remains and send photos of the unit as it is. Confirm any draining, disposal and safe handling requirements before preparation or collection.",
       },
       {
         q: "Can an air conditioner or HVAC coil be included in a scrap radiator enquiry?",
-        a: "Only once the refrigerant has been recovered by a licensed technician — releasing it to the atmosphere is prohibited under Australian ozone protection law. Say whether that has already been done when you enquire.",
+        a: "Yes. Identify the unit and say whether refrigerant recovery by a licensed technician has already happened or its status is unknown. Acceptance, specialist work and transport must be confirmed for the item. Do not open refrigerant lines or release gas yourself.",
       },
       {
         q: "Should I remove the plastic tanks or fan shroud myself?",
-        a: "Not necessarily. Separating clearly removable plastic tanks, hoses and brackets can help identify the radiator, but do not dismantle anything unsafely. Photograph what remains attached.",
+        a: "No removal is needed to start a quote. Photograph the tanks, shroud, hoses, brackets and complete unit so any preparation and safe handling can be agreed first.",
       },
       {
         q: "Can MetalBase collect bulk radiators in Brisbane?",
@@ -868,13 +868,13 @@ export const materials: MaterialGuide[] = [
     eyebrow: "Scrap whitegoods Brisbane",
     seoTitle: "Scrap Whitegoods Brisbane: Removal & Quote Guide",
     seoDescription:
-      "Scrap whitegoods in Brisbane means dealing with refrigerant, concrete weights and mixed metal first. See what has to happen before collection.",
+      "Request a Brisbane scrap whitegoods quote with appliance photos, refrigerant status, condition and access details. Confirm handling before collection.",
     h1: "Scrap whitegoods Brisbane: what has to happen before collection",
     intro:
-      "A fridge, washing machine or oven is not a single scrap grade — refrigerant status, a bonded concrete counterweight or a missing motor can all change what the load actually is. Confirm those details before requesting a quote.",
+      "A fridge, washing machine or oven is not a single scrap grade. Refrigerant status, counterweights and missing parts can change the assessment. Describe what you know and flag anything uncertain when requesting a quote; keep appliances intact.",
     photo: "crew",
     overview:
-      "Whitegoods carry mixed steel, copper and aluminium in a single cabinet, and what changes the assessment is rarely the appliance's age. A fridge or freezer cannot move as scrap until its refrigerant has been recovered by a licensed technician. A top-load washing machine, and many front-loaders, carry a concrete block bonded to the drum for stability — that mass is not recoverable metal and needs to be accounted for. A tenancy clean-out in Woolloongabba or a kitchen strip-out in Chermside might land a dishwasher, an oven and two fridges on the same driveway, and each of those is assessed on its own condition rather than as one uniform whitegoods pile.",
+      "Whitegoods combine metals with glass, plastics, insulation and other parts. Refrigerant-bearing units need their status and specialist handling requirements confirmed before collection is arranged. Concrete counterweights and other non-metal parts are not recoverable metal, but there is no need to remove them for a quote. List each appliance and send photos of its condition so the proposed load can be assessed.",
     examples: [
       "Fridges and freezers",
       "Front-load and top-load washing machines",
@@ -888,12 +888,12 @@ export const materials: MaterialGuide[] = [
       {
         term: "Refrigerant-bearing units",
         detail:
-          "Fridges, freezers and split-system air conditioners hold refrigerant that must be recovered by a licensed technician before the unit can be collected as scrap. Say whether that has already happened when you enquire.",
+          "Identify fridges, freezers, air conditioners and any other appliances that may contain refrigerant. Say whether a licensed technician has already recovered it, or whether the status is unknown, so specialist work and collection requirements can be confirmed.",
       },
       {
         term: "Washing machines and dryers",
         detail:
-          "A steel drum and cabinet around a copper-wound motor. Many washing machines, especially top-loaders, carry a concrete counterweight bonded to the drum — it stays with the machine and is not part of the recoverable metal weight.",
+          "These combine metal cabinets, drums and motors with other materials. Concrete counterweights, where fitted, are not recoverable metal. Keep the appliance intact and identify its model and any missing parts.",
       },
       {
         term: "Ovens, cooktops and rangehoods",
@@ -915,7 +915,7 @@ export const materials: MaterialGuide[] = [
       {
         term: "Refrigerant status",
         detail:
-          "A fridge, freezer or split-system unit cannot be collected as scrap with refrigerant still inside. Confirm recovery by a licensed technician first.",
+          "State whether refrigerant recovery has been completed by a licensed technician, or whether the status is unknown. Confirm acceptance, specialist work and transport requirements before collection.",
       },
       {
         term: "Completeness and condition",
@@ -935,7 +935,7 @@ export const materials: MaterialGuide[] = [
     ],
     preparation: [
       {
-        title: "Confirm refrigerant recovery",
+        title: "Describe refrigerant status",
         body: "Say whether a licensed technician has already recovered refrigerant from any fridge, freezer or split-system unit. Do not attempt to release or recover it yourself.",
       },
       {
@@ -954,11 +954,11 @@ export const materials: MaterialGuide[] = [
     faqs: [
       {
         q: "Can a fridge or freezer be collected before the refrigerant is removed?",
-        a: "No. Refrigerant must be recovered by a licensed technician first — releasing it to the atmosphere is prohibited under Australian ozone protection law. Say whether that has already been done when you enquire.",
+        a: "Ask before arranging collection. Identify the appliance and its refrigerant status, including if that is unknown, so acceptance, licensed technician work and transport requirements can be confirmed. Do not release refrigerant or open the system yourself.",
       },
       {
         q: "Does the concrete weight in a washing machine affect the quote?",
-        a: "Yes. The counterweight bonded to the drum is not recoverable metal, so it is identified separately rather than counted as part of the appliance's scrap weight.",
+        a: "Yes. A concrete counterweight, where fitted, is not recoverable metal and affects the assessment. Leave it in place and provide the appliance model and photos rather than dismantling the machine.",
       },
       {
         q: "Do whitegoods need to be dismantled before a quote?",
@@ -975,115 +975,336 @@ export const materials: MaterialGuide[] = [
     ],
   },
   {
-    slug: "swarf",
-    name: "Scrap swarf",
-    shortName: "Swarf",
-    eyebrow: "Scrap swarf Brisbane",
-    seoTitle: "Scrap Swarf Brisbane: Turnings & Quote Guide",
+    slug: "lead",
+    name: "Scrap lead",
+    shortName: "Lead",
+    eyebrow: "Scrap lead Brisbane",
+    seoTitle: "Scrap Lead Brisbane: Grades & Quote Guide",
     seoDescription:
-      "Get a Brisbane scrap swarf quote right: sort turnings by metal, drain cutting fluid and photograph the bin before collection is arranged.",
-    h1: "Scrap swarf Brisbane: sort turnings by metal before you quote",
+      "Identify lead flashing, wheel weights, pipe and batteries before requesting a Brisbane scrap lead quote — what's clean, what's mixed and what needs care.",
+    h1: "Scrap lead Brisbane: describe the form and condition before you quote",
     intro:
-      "Workshop swarf is graded by metal type and how much cutting fluid it still carries, not by the machine it came off. Separate steel, stainless, aluminium and brass swarf where you can, then send photos of the bin before collection.",
-    photo: "swarf",
+      "Lead turns up as roof flashing, wheel balance weights, old pipe and batteries, and each form needs different handling. Describe it as it is without cleaning or removing coatings for a quote. Keep batteries separate and intact rather than draining or dismantling them yourself.",
+    photo: "alloy",
     overview:
-      "Swarf is small, light and often wet, so it behaves differently from a solid offcut of the same metal. A CNC lathe throwing off dense brass turnings looks nothing like the same machine running an aluminium job, and a bin of mixed steel and stainless swarf from a busy Coopers Plains or Salisbury workshop is assessed as mixed material rather than one clean grade. Cutting fluid, tramp metal from tooling, and fine aluminium dust all change how a load can be described before a quote is possible.",
+      "Lead is dense, so a modest bucket of flashing or wheel weights can weigh far more than it looks. Form, coatings and attachments affect assessment, and batteries require separate handling. Lead dust and fumes can cause harm: leave coatings in place, avoid disturbing dust and confirm handling before preparing or transporting the material.",
     examples: [
-      "CNC lathe turnings",
-      "Drill press swarf",
-      "Milling machine chips",
-      "Aluminium extrusion swarf",
-      "Brass bar automatic turnings",
-      "Grinding swarf and fines",
-      "Mixed workshop floor sweepings",
+      "Roof flashing and soundproofing sheet",
+      "Wheel balance weights, clip-on and stick-on",
+      "Old lead water pipe",
+      "Lead cable sheathing",
+      "Dive and fishing sinkers",
+      "Range and ballast lead",
+      "Lead-acid batteries from cars, trucks and forklifts",
     ],
     grades: [
       {
-        term: "Mild steel turnings and drillings",
+        term: "Clean lead sheet, flashing and pipe",
         detail:
-          "Clean, dry ferrous swarf from turning, milling or drilling. Keep it separate from stainless and non-ferrous swarf where the workshop layout allows.",
+          "Roofing flashing, soundproofing sheet, offcuts and old plumbing pipe without paint, tar, render or other coatings attached. Photograph the existing surface and the whole parcel; do not clean or remove coatings to present it as a higher grade.",
       },
       {
-        term: "Stainless steel swarf",
+        term: "Wheel balance weights",
         detail:
-          "304, 316 and other stainless turnings mixed with ordinary steel swarf lose their identity as a verified alloy. Keep known stainless jobs in their own bin rather than sweeping everything together.",
+          "Clip-on weights carry a steel clip and stick-on weights carry adhesive tape; many newer weights are zinc or steel rather than lead. Keep the two types separate and say whether they have already been sorted by metal.",
       },
       {
-        term: "Aluminium swarf and fines",
+        term: "Lead cable sheathing and mixed lead",
         detail:
-          "Lighter and lower density than steel or brass swarf, often carrying more cutting fluid by weight. Fine, dry aluminium swarf is a recognised fire risk and should be kept away from grinding sparks and open flame.",
+          "Lead-sheathed telecommunications cable, roofing lead with paint, tar or render attached, and other mixed items are assessed as mixed lead rather than a clean grade.",
       },
       {
-        term: "Brass and bronze machining swarf",
+        term: "Lead-acid batteries",
         detail:
-          "Dense turnings from bar automatics and similar work, usually smaller in volume than ferrous swarf but easily contaminated with steel from tooling or adjacent jobs.",
-      },
-      {
-        term: "Mixed workshop swarf",
-        detail:
-          "Swarf from several machines or metals combined in one bin is assessed as mixed material rather than a single grade, so separating at the machine is worth more than sorting later.",
+          "Car, truck, forklift and UPS batteries contain sulfuric acid and need separate assessment from scrap lead. Describe their chemistry, labels, damage or leaks, and any work already completed by a specialist. Do not drain or open them for an enquiry.",
       },
     ],
     quoteFactors: [
       {
-        term: "Metal type and alloy",
+        term: "Form and purity",
         detail:
-          "Steel, stainless, aluminium and brass swarf recover very differently, so identifying what went into each bin matters more than the total volume.",
+          "Clean sheet, pipe, ingot and sorted wheel weights carry a different recoverable yield from painted, tarred or mixed lead.",
       },
       {
-        term: "Coolant and cutting fluid content",
+        term: "Attachments and contamination",
         detail:
-          "How wet the swarf still is affects handling and the net metal content. Describe whether the load has been drained or is still saturated.",
+          "Steel clips, adhesive tape, paint, tar, render and other metals mixed through a lead parcel change how it is assessed.",
       },
       {
-        term: "Contamination",
+        term: "Battery condition",
         detail:
-          "Tool inserts, drill bits, swept-up floor debris, rags and packaging mixed into a bin change how the swarf is described and assessed.",
+          "Battery chemistry, damage, leaks and any work already completed by a specialist affect acceptance and handling. Keep batteries separate from loose lead and confirm the next step before moving them.",
       },
       {
-        term: "Container and quantity",
+        term: "Quantity and measured weight",
         detail:
-          "Bin size, drum count or an approximate weight, and whether the swarf is loose or briquetted, all help set up a useful enquiry.",
+          "Lead is dense, so give a realistic estimate by weight rather than volume. Final weight-based terms depend on the measured net weight.",
       },
     ],
     preparation: [
       {
-        title: "Separate by metal at the machine",
-        body: "Keep steel, stainless, aluminium and brass swarf in different bins as it is generated, rather than combining everything at pickup.",
+        title: "Sort by form",
+        body: "Keep clean sheet and pipe separate from wheel weights, cable sheathing and mixed or painted lead.",
       },
       {
-        title: "Let coolant drain and settle",
-        body: "Tip or rack bins to drain excess cutting fluid before requesting a quote, and note how wet the load still is.",
+        title: "Avoid dust and fumes",
+        body: "Do not sand, grind, heat or dry-brush lead or its coatings to prepare an enquiry. Avoid disturbing dust and wash your hands before eating, drinking or smoking.",
       },
       {
-        title: "Keep fine aluminium away from ignition sources",
-        body: "Store dry aluminium swarf away from grinding sparks, welding and open flame rather than beside other bins.",
+        title: "Leave batteries intact",
+        body: "Do not drain, crack or dismantle batteries. Describe their condition and any specialist work already completed, and confirm safe handling before moving damaged or leaking batteries.",
       },
       {
-        title: "Photograph the bin and describe the source",
-        body: "Show the container and the swarf itself, and note roughly how many machines or shifts filled it.",
+        title: "Estimate weight, not volume",
+        body: "Lead is dense — a small bucket can weigh more than a much larger volume of steel. Give a realistic weight estimate along with the Brisbane suburb.",
       },
     ],
     faqs: [
       {
-        q: "Does scrap swarf need to be dry before a quote?",
-        a: "Not necessarily, but draining excess cutting fluid helps. Describe how wet the load still is rather than presenting it as dry when it isn't.",
+        q: "Are all wheel balance weights made of lead?",
+        a: "No. Many newer wheel weights are zinc or steel rather than lead, and the two can look similar. Keep them separate where possible and note if they have already been sorted.",
       },
       {
-        q: "Can different metals be mixed in one swarf bin?",
-        a: "They can, but a mixed bin is assessed as mixed swarf rather than a clean single grade. Separating steel, stainless, aluminium and brass at the machine gets a clearer result.",
+        q: "Can lead-acid batteries be included in a scrap lead enquiry?",
+        a: "You can describe them in an enquiry, but acceptance and handling must be confirmed separately. Identify the chemistry and condition, including any damage, leaks or previous specialist work. Do not drain or dismantle batteries or mix them loose with scrap lead.",
       },
       {
-        q: "Is a bin or skip provided for ongoing workshop swarf?",
-        a: "Container options are confirmed for the site and volume involved rather than assumed in advance. Ask when you enquire about an ongoing arrangement.",
+        q: "Does painted or tarred flashing count as clean lead?",
+        a: "No. Coatings, render and other attachments move the material into a mixed-lead grade. Show the coating in your photos rather than presenting it as clean sheet.",
       },
       {
-        q: "Is oily cutting fluid a problem for a swarf collection?",
-        a: "Describe the coolant or oil residue in the enquiry rather than assuming it can go out with general waste. It may need to be handled or disposed of separately from the metal.",
+        q: "Are scrap lead prices published on this page?",
+        a: "No. Form, purity, contamination, battery condition, quantity and market movement can all affect the commercial basis. Request a current assessment for the actual material.",
       },
       {
-        q: "Can MetalBase collect swarf in Brisbane?",
-        a: "Customer-site collection is available, with volume, container arrangements, access, timing and terms confirmed for the actual workshop and address.",
+        q: "Can MetalBase collect scrap lead in Brisbane?",
+        a: "Customer-site collection is available, with material, minimum volume, access, equipment, timing and terms confirmed for the proposed load and address.",
+      },
+    ],
+  },
+  {
+    slug: "zinc",
+    name: "Scrap zinc",
+    shortName: "Zinc",
+    eyebrow: "Scrap zinc Brisbane",
+    seoTitle: "Scrap Zinc Brisbane: Die-Cast & Quote Guide",
+    seoDescription:
+      "Prepare a Brisbane scrap zinc quote for die-cast, flashing and anodes — grades, galvanised-steel confusion and preparation explained clearly.",
+    h1: "Scrap zinc Brisbane: tell die-cast, flashing and galvanised steel apart",
+    intro:
+      "Zinc turns up as die-cast pot metal, sheet flashing and sacrificial anodes — three different grades, and none of them the same as galvanised steel. Separate what you have and describe attachments before requesting a zinc quote.",
+    photo: "alloy",
+    overview:
+      "Zinc's value depends on which form it takes and how much other metal or coating is mixed through it. Die-cast (Zamak) components carry small steel or brass inserts, springs and fasteners; flashing and box-gutter sheet from older Queenslander roofs can carry solder, paint or timber residue; and spent anodes are pure zinc but heavily corroded by design. Galvanised steel — zinc-coated steel used in roofing, fencing and ducting — is assessed as steel, not as zinc scrap, because the coating is only a thin layer over the base metal.",
+    examples: [
+      "Die-cast carburettor and pump housings",
+      "Door and window hardware from older Queenslanders",
+      "Zinc roof flashing and box gutters",
+      "Boat hull and outboard motor anodes",
+      "Hot water system anodes",
+      "Toy, model and hardware die-cast parts",
+      "Zinc alloy gearbox housings",
+    ],
+    grades: [
+      {
+        term: "Die-cast zinc (Zamak / pot metal)",
+        detail:
+          "Carburettor bodies, door and window hardware, small engine housings and toy or model parts cast in zinc alloy. Steel inserts, springs, bushes and fasteners are common — show them rather than removing them for a quote.",
+      },
+      {
+        term: "Zinc sheet, flashing and box gutter",
+        detail:
+          "Roof flashing, box gutters and weatherproofing capping from older Brisbane roofs, sometimes soldered or painted. Show any coating, solder or timber residue rather than presenting it as clean sheet.",
+      },
+      {
+        term: "Sacrificial anodes",
+        detail:
+          "Zinc anodes from boat hulls, outboard motors and hot water systems arrive heavily corroded by design — that is how they protect other metal from corrosion, not a sign of low quality. Keep them separate from other zinc forms and note any remaining steel fasteners or brackets.",
+      },
+      {
+        term: "Not zinc: galvanised steel",
+        detail:
+          "Galvanised roofing, fencing, ducting and purlins are zinc-coated steel, assessed under scrap steel rather than as a zinc grade. Keep it with steel material instead of mixing it into a zinc parcel.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Alloy and form",
+        detail:
+          "Die-cast, sheet and anode zinc carry different purity and recoverable yield, so keeping them apart makes each easier to assess.",
+      },
+      {
+        term: "Attachments",
+        detail:
+          "Steel inserts, springs, fasteners, solder and coatings reduce the recoverable zinc content of a parcel.",
+      },
+      {
+        term: "Corrosion and condition",
+        detail:
+          "Anodes are meant to corrode — that is not a defect. Other zinc forms with heavy oxidation should still be described honestly rather than presented as clean material.",
+      },
+      {
+        term: "Quantity and measured weight",
+        detail:
+          "Give a realistic estimate by weight or item count. Final weight-based terms depend on the measured net metal weight.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Separate zinc from galvanised steel",
+        body: "Keep die-cast, sheet and anode zinc apart from galvanised roofing, fencing and ducting, which is assessed as steel.",
+      },
+      {
+        title: "Show attachments, don't remove them",
+        body: "Photograph steel inserts, springs, fasteners and solder rather than dismantling parts yourself.",
+      },
+      {
+        title: "Avoid grinding or heating to test it",
+        body: "Grinding, cutting or heating zinc or its coatings can release fume that causes short-term illness. Identify the material visually and by weight instead.",
+      },
+      {
+        title: "Estimate weight and suburb",
+        body: "A rough weight or item count plus the Brisbane suburb is enough to start an enquiry.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is galvanised steel the same as scrap zinc?",
+        a: "No. Galvanised steel is zinc-coated steel and is assessed as steel scrap, not as a zinc grade, because the base metal is steel. Keep it separate from die-cast, sheet or anode zinc.",
+      },
+      {
+        q: "How can I tell zinc die-cast from aluminium die-cast?",
+        a: "Not reliably by eye alone. Zinc alloy (often called Zamak or pot metal) is denser than aluminium die-cast and can carry different casting marks. Send clear photos and any markings rather than guessing the alloy.",
+      },
+      {
+        q: "Should I clean corrosion off zinc before requesting a quote?",
+        a: "No. Do not grind, heat or sand zinc or its coatings to prepare an enquiry — this can release fume that causes short-term illness. Photograph the material as it is and describe the corrosion.",
+      },
+      {
+        q: "Can spent anodes from a boat or hot water system be scrapped?",
+        a: "Yes. Describe them as anodes rather than mixed zinc, and note whether steel fasteners or brackets remain attached. Heavy corrosion is expected and does not need explaining away.",
+      },
+      {
+        q: "Can MetalBase collect bulk zinc in Brisbane?",
+        a: "Customer-site collection is available, with material, minimum volume, access, equipment, timing and terms confirmed for the proposed load and address.",
+      },
+    ],
+  },
+  {
+    slug: "swarf",
+    name: "Scrap swarf and turnings",
+    shortName: "Swarf",
+    eyebrow: "Scrap swarf Brisbane",
+    seoTitle: "Scrap Swarf Brisbane: Turnings & Quote Guide",
+    seoDescription:
+      "Swarf is graded on alloy separation, free coolant and what else landed in the bin. See what a Brisbane scrap swarf quote needs before the next fill.",
+    h1: "Scrap swarf Brisbane: keep alloys apart and control the free liquid",
+    intro:
+      "Turnings are judged by what is mixed through them — alloy, cutting fluid, tramp oil and whatever else went in the bin — more than by the metal named on the job docket. Say how wet the material is and which machines fed the bin when you ask for a quote.",
+    photo: "swarf",
+    overview:
+      "A drum of turnings and a drum of solid offcuts cut from the same bar are not the same parcel. Swarf holds cutting fluid and tramp oil, packs at a far lower bulk density than solids, and collects whatever lands in the bin alongside the chips — rags, gloves, broken inserts, chuck jaws, sweepings. Free liquid has to be dealt with before material moves, and it is a separate waste stream from the metal rather than something that travels with it. A bin that took a stainless job and an aluminium job on the same shift is assessed as mixed swarf, not as either alloy, because loose chips cannot be picked over by hand once they are combined. Scrap swarf enquiries from Brisbane machining and fabrication sites are easiest to assess when each machine has a known destination bin and someone can say roughly how fast it fills.",
+    examples: [
+      "Mild steel bar turnings from a CNC lathe",
+      "316 stainless turnings from a food-equipment job",
+      "6061 aluminium milling chips",
+      "Cast iron borings from engine reconditioning",
+      "Brass turnings from valve and fitting work",
+      "Grinding swarf and filter cake from a surface grinder",
+      "Briquetted steel swarf pucks",
+    ],
+    grades: [
+      {
+        term: "Steel turnings and cast iron borings",
+        detail:
+          "Long stringy lathe turnings, short broken chips and fine cast iron borings behave differently in a bin and are usually described separately. Say which machines produced the material and whether borings and turnings share a container.",
+      },
+      {
+        term: "Stainless turnings, kept by alloy",
+        detail:
+          "304, 316 and free-machining 303 are separated at the machine or not at all. Send the job's material markings or certificates where you have them; once alloys are combined the parcel is described as mixed stainless swarf rather than a named grade.",
+      },
+      {
+        term: "Aluminium swarf and fines",
+        detail:
+          "Milling chips, lathe turnings and fine grinding dust from aluminium carry different amounts of oil and pack differently. Identify whether the bin holds one alloy family or offcuts from several jobs.",
+      },
+      {
+        term: "Brass, bronze and copper turnings",
+        detail:
+          "Higher-value chips are the easiest to spoil, because a few handfuls of steel swept into the same pan changes how the whole parcel is described. Keep the machine pan and bin clean and dedicated to one metal.",
+      },
+      {
+        term: "Mixed and wet swarf",
+        detail:
+          "Combined bins, material carrying standing coolant, and swarf with rags, gloves, tooling or floor sweepings through it are assessed as a mixed parcel. Describe honestly what went in rather than naming the alloy you started with.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Free liquid and oil content",
+        detail:
+          "Coolant, cutting oil and tramp oil affect handling, transport and acceptance. A bin that pours when it tips is a different proposition from drained or briquetted material, and drained fluid is managed as a separate liquid waste stream, not with the metal.",
+      },
+      {
+        term: "Alloy separation at the machine",
+        detail:
+          "One bin, one alloy is the only separation that works for loose chips. Bins fed by several machines running different materials are assessed as mixed swarf.",
+      },
+      {
+        term: "Tramp metal and rubbish",
+        detail:
+          "Broken carbide inserts, chuck jaws, hand tools, rags, gloves, drink containers and sweepings all end up in swarf bins. Say what is likely in there instead of leaving it to be found on the weighbridge.",
+      },
+      {
+        term: "Bulk density and container size",
+        detail:
+          "Loose stringy turnings occupy far more volume per tonne than crushed or briquetted swarf. Give bin dimensions or type and a rough fill rate so transport can be planned realistically.",
+      },
+      {
+        term: "Placement and exchange access",
+        detail:
+          "Where the bin sits, whether a forklift or truck can reach it, roller-door and overhead clearance, and the production window for an exchange all shape what can be arranged.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Run a bin per alloy",
+        body: "Set the destination bin at the machine rather than sorting later. Loose chips from two alloys cannot be separated again by hand.",
+      },
+      {
+        title: "Describe the liquid honestly",
+        body: "Say whether the material is dry, damp or holding standing coolant, and which fluids are in use. Confirm draining and disposal responsibilities before a bin is moved.",
+      },
+      {
+        title: "Photograph the chip, not just the bin",
+        body: "Show a handful of chips on a clean surface beside a photo of the full bin, plus any material certificates or job markings.",
+      },
+      {
+        title: "Send bin size, fill rate and access",
+        body: "Give the container type or dimensions, roughly how often it fills, the Brisbane suburb and how a truck or forklift reaches the placement area.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is swarf assessed the same as solid offcuts of the same metal?",
+        a: "No. Turnings carry cutting fluid, pack at a lower bulk density and take a different processing route from solid material of the same alloy, so they are described and assessed separately. Request a current assessment for the actual material.",
+      },
+      {
+        q: "Does coolant have to be drained out of swarf before collection?",
+        a: "Free liquid affects acceptance, handling and transport, and drained coolant or cutting oil is a separate liquid waste stream that is not disposed of with the metal. Say how wet the material is and confirm draining and disposal responsibilities before the bin is moved.",
+      },
+      {
+        q: "Can stainless and aluminium swarf share one bin?",
+        a: "Not if you want each assessed as its alloy. Loose chips cannot be picked apart once combined, so a shared bin is described as mixed swarf. Separation has to happen at the machine.",
+      },
+      {
+        q: "What should I do with magnesium or titanium swarf?",
+        a: "Keep it out of steel and aluminium bins and identify it in the enquiry. Fine magnesium and titanium chips can ignite, and water makes that kind of fire worse rather than better. Acceptance and handling for these materials must be confirmed before anything is moved.",
+      },
+      {
+        q: "Can MetalBase supply a swarf bin in Brisbane?",
+        a: "Bins are available, with material, container type, volume, exchange frequency, site access, timing and terms confirmed for the proposed site and address. MetalBase has no public customer drop-off location.",
       },
     ],
   },

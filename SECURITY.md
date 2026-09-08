@@ -12,8 +12,8 @@ npm run lint
 npm run typecheck
 npm test
 npm run build
+npm run test:e2e
 npm audit --audit-level=high
-npx fix-react2shell-next
 ```
 
 Do not copy version or vulnerability statements into this file from an older
@@ -25,8 +25,9 @@ the installed dependency graph.
 The project was originally created on `next@15.5.4`, which was affected by
 the React Server Components vulnerabilities disclosed in December 2025. It was
 first moved to the patched 15.5 backport line and has since been upgraded to
-Next.js 16.3. Keep `fix-react2shell-next` in the release checks so a later
-dependency change cannot silently reintroduce an affected version.
+Next.js 16.3. CI requires the locked dependency advisory check and browser/unit verification.
+Use the official React2Shell remediation utility when responding to a relevant
+advisory; do not run an unpinned auto-fixer as part of every release.
 
 If any deployment was publicly reachable on an affected version, rotate its
 application secrets and review hosting logs rather than assuming an upgrade
@@ -51,17 +52,32 @@ production build in a browser.
 ## Enquiry data
 
 The quote endpoint validates and bounds all submitted fields. Optional photos
-are limited to three compressed JPEG, PNG or WebP inputs and are revalidated on
-the server before being passed to the configured email or webhook provider.
+are limited to three compressed JPEG, PNG or WebP inputs. The server decodes
+them with pixel and channel limits, rejects unsupported or damaged content,
+strips metadata, and re-encodes generated JPEG attachments before either
+delivery provider can receive them.
 
 Customer details and provider response bodies must never be written to logs.
-Delivery credentials, recipient addresses and Upstash tokens belong only in
-the deployment environment.
+Delivery/database credentials and webhook signing secrets belong only in the
+deployment environment. The configured recipient may override the documented
+server-only default inbox. It is never a client configuration value.
+
+The durable store and shared rate limit fail closed when unavailable. Outbound
+messages are frozen under stable enquiry IDs; leases and provider identity
+fingerprints prevent concurrent dispatch and unsafe credential-switch retries.
+Resend delivery events require a verified raw-body signature and deduplicated
+event ID. Cron and health endpoints require a strong CRON_SECRET bearer token.
+
+Capture is acknowledged only after a database commit. Treat provider acceptance
+and final delivery as separate states. Retention deletes website payloads/photos
+at 30 days and operational metadata at 90 days; the authenticated health endpoint
+alerts before pending records reach retention. Never replay an ambiguous webhook
+or a Resend request outside its safe retry window without reconciling it.
 
 ## Version policy
 
 Upgrade Next.js, React and the matching ESLint configuration together. After an
-upgrade, inspect `npm audit`, rerun the React2Shell checker, run the full CI
+upgrade, inspect current primary advisories and `npm audit`, run the full CI
 suite and verify the production response headers and quote delivery path.
 
 ## References

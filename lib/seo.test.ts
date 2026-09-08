@@ -20,12 +20,13 @@ import {
 } from "@/components/Schema";
 import { pageMetadata } from "@/lib/metadata";
 import { materialHref, materials } from "@/lib/materials";
-import { regionHref, regions } from "@/lib/regions";
+import { REGION_SLUGS, regionHref, regions } from "@/lib/regions";
 import { SITE, operations, serviceHref, services } from "@/lib/site";
 
 const EXPECTED_REGION_SLUGS = [
   "brisbane",
   "gold-coast",
+  "sunshine-coast",
   "logan",
   "ipswich",
   "redlands",
@@ -41,6 +42,8 @@ const EXPECTED_MATERIAL_SLUGS = [
   "electric-motors",
   "radiators",
   "whitegoods",
+  "lead",
+  "zinc",
   "swarf",
 ] as const;
 
@@ -217,7 +220,8 @@ describe("material search guides", () => {
 });
 
 describe("regional search pages", () => {
-  it("builds exactly the five requested region routes", () => {
+  it("builds exactly the six verified region routes", () => {
+    expect(REGION_SLUGS).toEqual(EXPECTED_REGION_SLUGS);
     expect(generateRegionStaticParams().map(({ slug }) => slug)).toEqual(
       EXPECTED_REGION_SLUGS,
     );

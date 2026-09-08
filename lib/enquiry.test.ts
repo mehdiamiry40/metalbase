@@ -1,16 +1,14 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
-  MAX_PER_WINDOW,
-  WINDOW_MS,
   clean,
-  durableRateLimit,
   formatSummary,
   isBot,
-  isDurableLimiterConfigured,
   isEmail,
-  localRateLimit,
+  isPhone,
+  isRawEnquiry,
   sanitise,
   validate,
+  validateRaw,
 } from "./enquiry";
 
 const good = {
@@ -82,6 +80,31 @@ describe("validate", () => {
   });
 });
 
+describe("raw validation and reply methods", () => {
+  it("rejects oversize original fields instead of reporting success with truncated notes", () => {
+    expect(validateRaw({ ...good, detail: "x".repeat(4001) }).detail).toBeDefined();
+    expect(validateRaw({ ...good, detail: "x".repeat(4000) })).toEqual({});
+    expect(validateRaw({ name: 12 }).name).toBeDefined();
+    expect(validateRaw({ materials: Array(21).fill("Copper") }).materials).toBeDefined();
+    expect(validateRaw({ photos: Array(4).fill({}) }).photos).toBeDefined();
+  });
+  it("accepts ordinary Australian and international formats and rejects uncontactable text", () => {
+    for (const number of ["0410 000 001", "(07) 3123 4567", "+61 410 000 001", "+44 20 7946 0000", "1300 123 456", "13 11 14"]) expect(isPhone(number), number).toBe(true);
+    for (const number of ["", "x", "12", "call me", "+", "12345678901234567890", "0410 000 001<script>"]) expect(isPhone(number), number).toBe(false);
+    expect(validate(sanitise({ ...good, phone: "x", email: "" })).phone).toBeDefined();
+  });
+});
+
+describe("isRawEnquiry", () => {
+  it("accepts only non-null, non-array JSON objects", () => {
+    expect(isRawEnquiry({})).toBe(true);
+    expect(isRawEnquiry({ name: "Jordan" })).toBe(true);
+    for (const value of [null, [], "text", 42, true]) {
+      expect(isRawEnquiry(value)).toBe(false);
+    }
+  });
+});
+
 describe("sanitise", () => {
   it("drops non-array materials and empty entries", () => {
     expect(sanitise({ materials: "copper" }).materials).toEqual([]);
@@ -95,7 +118,7 @@ describe("sanitise", () => {
     expect(sanitise({ materials: many }).materials).toHaveLength(20);
   });
 
-  it("keeps only valid, bounded photo attachments", () => {
+  it("keeps only structurally valid, bounded photo candidates", () => {
     const valid = {
       name: " copper-load.jpg ",
       type: "image/jpeg",
@@ -156,109 +179,5 @@ describe("formatSummary", () => {
     );
     expect(out).toContain("Photos attached: 1");
     expect(out).not.toContain(content);
-  });
-});
-
-describe("localRateLimit", () => {
-  it("allows up to the cap then blocks", () => {
-    const store = new Map();
-    const now = 1_000_000;
-    for (let i = 0; i < MAX_PER_WINDOW; i++) {
-      expect(localRateLimit("1.2.3.4", now, store)).toBe(false);
-    }
-    expect(localRateLimit("1.2.3.4", now, store)).toBe(true);
-  });
-
-  it("resets after the window", () => {
-    const store = new Map();
-    const now = 1_000_000;
-    for (let i = 0; i <= MAX_PER_WINDOW; i++) localRateLimit("ip", now, store);
-    expect(localRateLimit("ip", now, store)).toBe(true);
-    expect(localRateLimit("ip", now + WINDOW_MS + 1, store)).toBe(false);
-  });
-
-  it("tracks callers independently", () => {
-    const store = new Map();
-    const now = 1_000_000;
-    for (let i = 0; i <= MAX_PER_WINDOW; i++) localRateLimit("a", now, store);
-    expect(localRateLimit("a", now, store)).toBe(true);
-    expect(localRateLimit("b", now, store)).toBe(false);
-  });
-});
-
-describe("isDurableLimiterConfigured", () => {
-  it("needs both Upstash variables", () => {
-    expect(isDurableLimiterConfigured({})).toBe(false);
-    expect(
-      isDurableLimiterConfigured({ UPSTASH_REDIS_REST_URL: "https://x" }),
-    ).toBe(false);
-    expect(
-      isDurableLimiterConfigured({
-        UPSTASH_REDIS_REST_URL: "https://x",
-        UPSTASH_REDIS_REST_TOKEN: "t",
-      }),
-    ).toBe(true);
-  });
-});
-
-describe("durableRateLimit", () => {
-  const env = {
-    UPSTASH_REDIS_REST_URL: "https://redis.example",
-    UPSTASH_REDIS_REST_TOKEN: "secret",
-  };
-
-  it("increments and refreshes expiry in one transaction", async () => {
-    let calls = 0;
-    let calledUrl = "";
-    let calledInit: RequestInit | undefined;
-    const fetcher: typeof fetch = async (input, init) => {
-      calls += 1;
-      calledUrl = String(input);
-      calledInit = init;
-      return new Response(JSON.stringify([{ result: 1 }, { result: 1 }]), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      });
-    };
-
-    await expect(durableRateLimit("1.2.3.4", { env, fetcher })).resolves.toBe(
-      false,
-    );
-    expect(calls).toBe(1);
-    expect(calledUrl).toBe("https://redis.example/multi-exec");
-    expect(JSON.parse(String(calledInit?.body))).toEqual([
-      ["INCR", "enquiry:1.2.3.4"],
-      ["PEXPIRE", "enquiry:1.2.3.4", WINDOW_MS],
-    ]);
-  });
-
-  it("blocks once the shared counter exceeds the limit", async () => {
-    const fetcher: typeof fetch = async () =>
-      new Response(
-        JSON.stringify([{ result: MAX_PER_WINDOW + 1 }, { result: 1 }]),
-        { status: 200, headers: { "Content-Type": "application/json" } },
-      );
-
-    await expect(durableRateLimit("1.2.3.4", { env, fetcher })).resolves.toBe(
-      true,
-    );
-  });
-
-  it("fails open without exposing the caller key when the transaction fails", async () => {
-    const fetcher: typeof fetch = async () =>
-      new Response(JSON.stringify([{ result: 1 }, { result: 0 }]), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      });
-    const error = vi.spyOn(console, "error").mockImplementation(() => {});
-
-    await expect(
-      durableRateLimit("private-ip", { env, fetcher }),
-    ).resolves.toBe(false);
-    expect(error).toHaveBeenCalledWith(
-      "[enquiry] durable rate limiter unavailable; using local fallback.",
-    );
-    expect(error.mock.calls.flat().join(" ")).not.toContain("private-ip");
-    error.mockRestore();
   });
 });

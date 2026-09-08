@@ -15,6 +15,49 @@ export const metadata = pageMetadata({
     "Send the metal type, estimated quantity, condition and Brisbane suburb for an indicative scrap metal quote.",
 });
 
+function ContactCallPanel() {
+  return (
+    <Panel className="scroll-mt-24 border-2">
+      {company.phone ? (
+        <>
+          <p className="t-index t-accent">Call us</p>
+          <a
+            href={`tel:${company.phone.replace(/\s/g, "")}`}
+            className="mono mt-3 block text-3xl font-medium leading-none tracking-[-0.03em] hover:text-[color:var(--accent-text)]"
+          >
+            {company.phoneLabel ?? company.phone}
+          </a>
+          <p className="mt-3 text-base t-muted">Talk through a load</p>
+          {company.hours && (
+            <p className="mt-1 text-sm t-muted">
+              Contact hours: {company.hours}
+            </p>
+          )}
+        </>
+      ) : (
+        <>
+          <p className="t-index t-accent">What to expect</p>
+          <p className="mt-3 text-xl font-medium leading-tight tracking-[-0.03em]">
+            Send enough detail for a useful reply
+          </p>
+          <p className="mt-3 text-base leading-relaxed t-muted">
+            Send the form with the material condition and rough size or weight.
+            Have a clear photo ready if we request one later.
+          </p>
+        </>
+      )}
+      {company.email && (
+        <a
+          href={`mailto:${company.email}`}
+          className="mt-4 inline-block font-semibold t-accent u-link"
+        >
+          {company.email}
+        </a>
+      )}
+    </Panel>
+  );
+}
+
 export default function ContactPage() {
   return (
     <>
@@ -28,56 +71,16 @@ export default function ContactPage() {
 
       <Section className="pb-20 pt-12 lg:pb-28 lg:pt-16">
         <div className="grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-start">
+          <div className="lg:hidden">
+            <ContactCallPanel />
+          </div>
+
           <QuoteForm />
 
           <aside className="space-y-8 lg:sticky lg:top-24">
-            {/* The panel used to be headed "Fastest route" and then show
-                a dashed "phone to be confirmed" chip — announcing the
-                quickest way to reach us and immediately failing to
-                provide it. On the page whose entire job is capturing an
-                enquiry, that is the worst possible place to look
-                unfinished. With no phone number the form IS the fastest
-                route, so the panel says so and points at it, rather than
-                advertising a gap. It flips back to the phone-first
-                layout automatically the moment company.phone is set. */}
-            <Panel id="call" className="scroll-mt-24 border-2">
-              {company.phone ? (
-                <>
-                  <p className="t-index t-accent">Call us</p>
-                  <a
-                    href={`tel:${company.phone.replace(/\s/g, "")}`}
-                    className="mono mt-3 block text-3xl font-medium leading-none tracking-[-0.03em] hover:text-[color:var(--accent-text)]"
-                  >
-                    {company.phoneLabel ?? company.phone}
-                  </a>
-                  <p className="mt-3 text-base t-muted">Talk through a load</p>
-                  {company.hours && (
-                    <p className="mt-1 text-sm t-muted">
-                      Contact hours: {company.hours}
-                    </p>
-                  )}
-                </>
-              ) : (
-                <>
-                  <p className="t-index t-accent">What to expect</p>
-                  <p className="mt-3 text-xl font-medium leading-tight tracking-[-0.03em]">
-                    Send enough detail for a useful reply
-                  </p>
-                  <p className="mt-3 text-base leading-relaxed t-muted">
-                    Send the form with the material condition and rough size or
-                    weight. Have a clear photo ready if we request one later.
-                  </p>
-                </>
-              )}
-              {company.email && (
-                <a
-                  href={`mailto:${company.email}`}
-                  className="mt-4 inline-block font-semibold t-accent u-link"
-                >
-                  {company.email}
-                </a>
-              )}
-            </Panel>
+            <div className="hidden lg:block">
+              <ContactCallPanel />
+            </div>
 
             <div>
               <h2 className="text-xl">What happens next</h2>
