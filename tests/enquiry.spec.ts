@@ -155,7 +155,7 @@ test("without JavaScript the form cannot collect data or disclose it through a G
     const form = page.locator('form[action="/api/enquiry"]');
     await expect(form).toHaveAttribute("method", "post");
     await expect(form.getByText("This form needs JavaScript before you can enter or send details.", { exact: false })).toBeVisible();
-    await expect(form.locator('a[href="tel:+61410233335"]').first()).toBeVisible();
+    await expect(form.locator('a[href="tel:+61494434509"]').first()).toBeVisible();
     const controls = form.locator("input, select, textarea, button");
     expect(await controls.count()).toBeGreaterThan(10);
     for (const control of await controls.all()) await expect(control).toBeDisabled();

@@ -33,7 +33,7 @@ does not identify itself as a licensed dealer or publish a street address.
 
 | Field | Where it appears | Status |
 |---|---|---|
-| ~~`phone` + `phoneLabel`~~ | header, footer, contact, mobile bar | ✅ **Set.** `+61410233335` / `0410 233 335`. Click-to-call is live everywhere and the mobile bar now shows "Call". |
+| ~~`phone` + `phoneLabel`~~ | header, footer, contact, mobile bar | ✅ **Set.** `+61494434509` / `0494 434 509`. Click-to-call is live everywhere and the mobile bar now shows "Call". |
 | ~~`legal`~~ | footer and structured data | ✅ **Set.** `Mehdi Emir` (Individual/Sole Trader). |
 | ~~`abn`~~ | footer and structured data | ✅ **Set.** `62 351 619 456`. |
 | ~~`hours`~~ | footer and contact | ✅ **Set.** `8am–5pm, 7 days a week`, presented as contact hours rather than yard hours. |

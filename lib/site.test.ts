@@ -28,8 +28,8 @@ describe("launch guards", () => {
     expect(company).toMatchObject({
       legal: "Mehdi Emir",
       abn: "62 351 619 456",
-      phone: "+61410233335",
-      phoneLabel: "0410 233 335",
+      phone: "+61494434509",
+      phoneLabel: "0494 434 509",
       hours: "8am–5pm, 7 days a week",
     });
   });
