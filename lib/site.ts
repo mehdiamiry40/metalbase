@@ -45,10 +45,10 @@ export const company = {
    *  the JSON-LD `telephone`, both of which want a country code so the
    *  number dials from outside Australia and resolves unambiguously to
    *  a search engine. Never put the local 04… form here. */
-  phone: "+61410233335" as string | null,
+  phone: "+61494434509" as string | null,
   /** What a human reads. Australians recognise the local mobile
    *  grouping, not E.164, so every visible rendering uses this. */
-  phoneLabel: "0410 233 335" as string | null,
+  phoneLabel: "0494 434 509" as string | null,
   /** Public contact hours, not a claim about an unpublished yard. */
   hours: "8am–5pm, 7 days a week" as string | null,
 
