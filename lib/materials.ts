@@ -1308,6 +1308,124 @@ export const materials: MaterialGuide[] = [
       },
     ],
   },
+  {
+    slug: "hot-water-systems",
+    name: "Scrap hot water systems",
+    shortName: "Hot water systems",
+    eyebrow: "Scrap hot water systems Brisbane",
+    seoTitle: "Scrap Hot Water Systems Brisbane: Tank Guide",
+    seoDescription:
+      "The inner cylinder decides how an old hot water system is assessed — enamelled steel, copper or stainless. What a Brisbane scrap quote needs first.",
+    h1: "Scrap hot water systems Brisbane: work out what the cylinder is made of",
+    intro:
+      "An old tank's metal sits in the inner cylinder rather than the painted case around it, and the two are rarely the same. Say whether the unit is electric, gas, solar or heat pump, what the data plate reads, and whether it has been drained and disconnected yet.",
+    photo: "yard-grab",
+    overview:
+      "A storage tank is one item holding several materials: a light-gauge steel jacket, polyurethane foam bonded to the cylinder inside it, and the cylinder itself, which may be enamel-lined steel, copper or stainless. That cylinder is what a scrap hot water system enquiry turns on, and it cannot be read from the outside — the data plate, the pressure rating and the age of the installation say far more than the paint does. Solar systems add a copper-and-glass roof collector and its mounting frame, and heat pumps add a sealed refrigerant circuit that has to be dealt with before anything is dismantled. Plumbers replacing tanks out of Acacia Ridge, Coopers Plains and Geebung usually have several banked up at once, which is a different conversation from one unit standing on a driveway in Bracken Ridge.",
+    examples: [
+      "Mains-pressure electric storage tank, 250 to 315 litres",
+      "Gas storage unit with the burner assembly and flue cowl still fitted",
+      "Older low-pressure tank pulled out of a Queenslander roof space",
+      "Roof-mounted solar collector panels with copper risers",
+      "Close-coupled solar tank and its roof mounting frame",
+      "Heat pump unit with compressor, fan and finned coil",
+      "Loose tempering valves, elements and sacrificial anodes",
+    ],
+    grades: [
+      {
+        term: "Enamel-lined steel cylinders",
+        detail:
+          "The standard mains-pressure electric or gas tank: a mild steel cylinder with a glass-lined interior, foam insulation around it and a painted or Colorbond steel jacket over that. Copper and brass appear only at the fittings and, on an electric unit, the element boss. Photograph the data plate rather than cutting the jacket open to look.",
+      },
+      {
+        term: "Copper inner cylinders",
+        detail:
+          "Older low-pressure and gravity-feed tanks — the roof-space and stand-mounted units still coming out of pre-1980s houses around Ashgrove, Paddington and Wynnum — often carry a copper cylinder inside a steel case that looks identical to any other. Capacity, manufacture date and a low-pressure rating on the plate are better evidence than the outside of the unit.",
+      },
+      {
+        term: "Stainless cylinders",
+        detail:
+          "Stainless tanks turn up in newer domestic installations and in unit-block plant rooms. The alloy is rarely stamped anywhere you can read it, so send the model number and any visible markings and let identification be confirmed on the actual cylinder instead of assumed from a brochure.",
+      },
+      {
+        term: "Solar collectors and close-coupled systems",
+        detail:
+          "A roof collector is an aluminium-framed box holding a copper absorber sheet and copper riser tubes under glass, and the tank sitting above it on a close-coupled system is a separate item again. Glass, framing, insulation and the roof mounting frame all come down with it, so describe the whole system rather than the panel alone.",
+      },
+      {
+        term: "Heat pump units",
+        detail:
+          "A heat pump tank carries a compressor, a fan and a finned coil, and the sealed circuit holds refrigerant. Say what the nameplate lists — some units run a fluorocarbon refrigerant, others carbon dioxide or a hydrocarbon — and whether recovery by a licensed technician has already happened or the status is unknown. Keep the unit intact while handling is confirmed.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Cylinder metal, not the outer case",
+        detail:
+          "Every one of these units has a light-gauge steel jacket, so photographs of the outside change very little. Anything that identifies the cylinder — the data plate, model number, pressure rating, installation age — changes the description a great deal.",
+      },
+      {
+        term: "Retained water and non-metal mass",
+        detail:
+          "A 315 litre tank still holding water carries more than 300 kilograms of water on its own, and foam insulation, solar collector glass and plastic trim are not recoverable metal. Say whether the unit has been drained and roughly what capacity it is.",
+      },
+      {
+        term: "Fittings still attached",
+        detail:
+          "Tempering and relief valves, the element and thermostat, the sacrificial anode, copper tails and flexible connectors are often still on the unit or already in a separate bucket. Say which, because they are assessed differently from the tank itself.",
+      },
+      {
+        term: "Refrigerant status on heat pumps",
+        detail:
+          "State whether a licensed technician has recovered the refrigerant or whether the status is unknown. Acceptance, specialist work and transport are confirmed for the unit before it is moved. Do not open the sealed circuit yourself.",
+      },
+      {
+        term: "Where the unit sits and how many",
+        detail:
+          "A tank on a roof, on a second-storey landing or in a plant room is a different job from one already at ground level, and a run of units off a Chermside unit-block refit is different again. Describe the position, the route out and the count.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Have it disconnected properly",
+        body: "In Queensland the water and gas connections are licensed plumbing and gas work, and a hard-wired electric unit needs a licensed electrician. Arrange that before the tank comes out rather than finishing the job with a hacksaw.",
+      },
+      {
+        title: "Drain it before it moves",
+        body: "A full tank holds its rated capacity in water and is unsafe to lift or tip. Drain it after isolation and say in the enquiry whether that has been done.",
+      },
+      {
+        title: "Photograph the data plate",
+        body: "The plate carries capacity, model, pressure rating and manufacture date, and identifies the cylinder better than any photo of the tank. Add one shot of the fitting end and one of the whole unit where it stands.",
+      },
+      {
+        title: "Send position, count and suburb",
+        body: "Note whether the unit is on a roof, upstairs or already at ground level, how many there are, how a vehicle reaches them, and the Brisbane suburb.",
+      },
+    ],
+    faqs: [
+      {
+        q: "How do I tell whether the cylinder is copper or enamelled steel?",
+        a: "Not from the outside — the jacket is steel either way. Send the data plate, the model number and the approximate age of the installation. Low-pressure and gravity-feed tanks from older houses are the ones most likely to hold copper, but identification is confirmed on the actual cylinder. Do not cut the case open to check.",
+      },
+      {
+        q: "Does the tank have to be drained and disconnected before collection?",
+        a: "Yes to draining — a full tank is heavy and unsafe to handle. Disconnection is licensed plumbing, gas and electrical work in Queensland, so it is arranged through the relevant trade rather than done on the day. Say what has already been completed when you send the enquiry.",
+      },
+      {
+        q: "Can a heat pump hot water unit be included in the enquiry?",
+        a: "Describe it in the enquiry and identify the refrigerant listed on the nameplate, along with whether a licensed technician has already recovered it. Acceptance, specialist work and transport are then confirmed for the unit. Do not open the sealed circuit or release refrigerant yourself.",
+      },
+      {
+        q: "Can the LPG bottle from a gas system go with the tank?",
+        a: "No. A gas bottle is a pressure vessel, not part of the appliance, and many bottles remain the supplier's property and go back through an exchange or return arrangement. Keep it out of the load and raise it separately if you need one dealt with.",
+      },
+      {
+        q: "Can MetalBase collect hot water systems in Brisbane?",
+        a: "Customer-site collection is available, with material, quantity, access, equipment, timing and terms confirmed for the actual units and address.",
+      },
+    ],
+  },
 ];
 
 export function getMaterial(slug: string): MaterialGuide | undefined {

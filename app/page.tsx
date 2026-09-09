@@ -154,6 +154,12 @@ const materialTiles: {
     photo: "machine-swarf",
     layout: "md:col-span-12 md:min-h-[360px]",
   },
+  {
+    title: "Scrap hot water systems",
+    href: "/materials/hot-water-systems",
+    photo: "yard-grab",
+    layout: "md:col-span-12 md:min-h-[360px]",
+  },
 ];
 
 const homeFaqs = [
