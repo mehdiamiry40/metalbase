@@ -154,6 +154,12 @@ const materialTiles: {
     photo: "machine-swarf",
     layout: "md:col-span-12 md:min-h-[360px]",
   },
+  {
+    title: "Scrap car bodies",
+    href: "/materials/car-bodies",
+    photo: "vehicle",
+    layout: "md:col-span-12 md:min-h-[360px]",
+  },
 ];
 
 const homeFaqs = [
