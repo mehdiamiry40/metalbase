@@ -154,6 +154,12 @@ const materialTiles: {
     photo: "machine-swarf",
     layout: "md:col-span-12 md:min-h-[360px]",
   },
+  {
+    title: "Scrap transformers",
+    href: "/materials/transformers",
+    photo: "mixed-parts",
+    layout: "md:col-span-12 md:min-h-[360px]",
+  },
 ];
 
 const homeFaqs = [
