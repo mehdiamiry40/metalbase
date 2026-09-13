@@ -1308,6 +1308,124 @@ export const materials: MaterialGuide[] = [
       },
     ],
   },
+  {
+    slug: "batteries",
+    name: "Scrap batteries",
+    shortName: "Batteries",
+    eyebrow: "Scrap batteries Brisbane",
+    seoTitle: "Scrap Batteries Brisbane: Lead-Acid & Lithium Guide",
+    seoDescription:
+      "Identify lead-acid, AGM and lithium scrap batteries before you ask for a Brisbane quote — what to tape, separate, photograph and flag as damaged.",
+    h1: "Scrap batteries Brisbane: identify the chemistry before anything moves",
+    intro:
+      "A car starter battery, a UPS cabinet string and a cordless tool pack are three different propositions, and the difference decides how each one can be handled. Read the chemistry off the label, tape the terminals and keep damaged cells apart from everything else before a scrap batteries enquiry goes in.",
+    photo: "mixed-parts",
+    overview:
+      "What is recoverable from a battery comes down to its chemistry, its construction and its condition, and none of those is safe to guess from the outside. Flooded starter batteries, sealed AGM strings out of a comms cabinet and a forklift traction tray are all lead-acid, yet they differ enormously in weight, casing and how they have to be lifted. Lithium packs are a separate proposition again: they are not assessed alongside lead-acid, they do not travel loose with it, and a swollen or crushed cell changes what can be moved at all. The most useful thing in a scrap batteries enquiry is a photo of the top label, where chemistry, voltage and rating are printed, followed by an honest note on damage. Traction and standby batteries coming out of warehouses around Acacia Ridge, Rocklea and Eagle Farm usually need mechanical lifting rather than two people and a trolley, so say how the battery comes out as well as what it is.",
+    examples: [
+      "Car, ute and 4WD starter batteries",
+      "Truck, bus and tractor batteries",
+      "Forklift traction battery trays",
+      "UPS and comms cabinet battery strings",
+      "Deep-cycle marine and caravan batteries",
+      "Alarm panel and emergency lighting cells",
+      "Power tool, e-bike and solar storage lithium packs",
+    ],
+    grades: [
+      {
+        term: "Flooded lead-acid starter batteries",
+        detail:
+          "Car, ute, truck, tractor and marine starter batteries with vented or sealed caps over liquid electrolyte. These make up most battery enquiries. Keep them upright, show any cracked case, bulged side or dried residue around the terminals, and do not open or tip them to inspect the cells.",
+      },
+      {
+        term: "Sealed lead-acid: AGM, gel and VRLA",
+        detail:
+          "The same chemistry in a sealed case — UPS and data cabinet strings, alarm panels, emergency lighting, mobility scooters and stop-start vehicle batteries. They are often wired in series with link bars and cable still attached. Say whether the string has been disconnected and whether the interconnects are staying on.",
+      },
+      {
+        term: "Industrial traction and standby cells",
+        detail:
+          "Forklift traction batteries in a steel tray and stationary telecom or switchroom banks. Weight is the defining feature: a single traction tray can run to several hundred kilograms or more, so these are described by tray dimensions, cell count and how a forklift or crane reaches them rather than by an item count.",
+      },
+      {
+        term: "Lithium-ion and lithium-iron-phosphate packs",
+        detail:
+          "Power tool packs, e-bike and e-scooter batteries, solar storage modules and electric vehicle packs. Identify them separately and never bulk them in with lead-acid. Swollen, punctured, heat-damaged or water-affected lithium cells carry a fire risk and have to be flagged in the enquiry before anything is moved.",
+      },
+      {
+        term: "Handheld cells: alkaline, NiCd and NiMH",
+        detail:
+          "Loose AA, AAA, button and older cordless-phone cells hold little recoverable metal for their handling effort and are not usefully described as a scrap parcel. A bucket of them suits the B-cycle handheld-battery drop-off network better than a metal enquiry.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Confirmed chemistry",
+        detail:
+          "Lead-acid, lithium and nickel chemistries are assessed and handled differently, and a sealed AGM block can look much like a lithium module from a metre away. Send the label rather than a best guess — a battery nobody can identify has to be treated as unknown until it is confirmed.",
+      },
+      {
+        term: "Damage and leaks",
+        detail:
+          "Cracked cases, weeping electrolyte, corroded terminals, swelling and heat or water damage all change what can be accepted, how it is packed and whether it can travel with other batteries.",
+      },
+      {
+        term: "Weight and lifting method",
+        detail:
+          "Batteries are dense, so a small pallet weighs more than it looks and a traction tray needs mechanical lifting. Give a realistic weight or cell count and say what plant is available on site.",
+      },
+      {
+        term: "Casing, racking and attachments",
+        detail:
+          "Steel trays, cabinet frames, racking, link bars, cabling and battery boxes are identified separately from the cells themselves because they are not part of the battery's recoverable content.",
+      },
+      {
+        term: "Transport and site access",
+        detail:
+          "Lead-acid and lithium batteries are dangerous goods for road transport in Australia — the acid in one, the fire risk in the other — so transport is arranged to suit the chemistry and condition rather than loaded like loose metal. Note the floor, lift, dock or basement comms room involved.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Tape the terminals",
+        body: "Cover exposed posts and terminals with insulating tape before anything is stacked or moved. A terminal shorting against an adjacent case or a steel tray is the common way a battery parcel starts a fire.",
+      },
+      {
+        title: "Keep chemistries apart and upright",
+        body: "Sort lead-acid from lithium and handheld cells, keep every battery the right way up, and isolate damaged or swollen units away from other batteries and anything combustible.",
+      },
+      {
+        title: "Photograph the label, not just the battery",
+        body: "The chemistry, voltage and rating are printed on the top or side of almost every battery. Send that close photo alongside a wide shot of the whole parcel and any damage.",
+      },
+      {
+        title: "Say how it comes out and what it weighs",
+        body: "Give a rough weight, pallet or cell count, the Brisbane suburb, and how the battery is reached — stairs, a lift, a dock, or a forklift that can take a traction tray.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Are car batteries worth anything as scrap?",
+        a: "A lead-acid battery is assessed on its recoverable content and condition rather than as plain steel, so it is described differently from a general metal load. The actual basis depends on chemistry, weight, damage and market movement, so request a current assessment for the batteries you have.",
+      },
+      {
+        q: "Do I need to drain the acid out of a battery first?",
+        a: "No, and do not try. The electrolyte in a lead-acid battery is sulfuric acid. Leave the case sealed and upright, describe any leak or crack you can see, and confirm handling before the battery is moved.",
+      },
+      {
+        q: "Can batteries go in a wheelie bin or a scrap metal bin?",
+        a: "No. Batteries crushed in a collection truck or at a sorting facility start fires, which is why they are kept out of general bins and out of mixed scrap. Keep them separate with the terminals taped and identify them in the enquiry.",
+      },
+      {
+        q: "What should I do with a swollen or damaged lithium battery?",
+        a: "Isolate it from other batteries and from anything that can burn, leave it uncharged, and do not puncture, crush or dismantle it. Flag it specifically in your enquiry — acceptance, packaging and transport for damaged lithium cells are confirmed before anything is collected.",
+      },
+      {
+        q: "Can MetalBase collect batteries in Brisbane?",
+        a: "Customer-site collection is available, with chemistry, condition, minimum volume, access, equipment, timing and terms confirmed for the actual batteries and address. MetalBase has no public customer drop-off location.",
+      },
+    ],
+  },
 ];
 
 export function getMaterial(slug: string): MaterialGuide | undefined {
