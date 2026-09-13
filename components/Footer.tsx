@@ -51,7 +51,7 @@ export default function Footer() {
   const tel = company.phone?.replace(/\s/g, "");
 
   return (
-    <footer className="on-dark border-t hair bg-furnace">
+    <footer className="site-footer on-dark border-t hair bg-furnace">
       <div className="shell py-16 lg:py-20">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.2fr_0.75fr_0.9fr_0.65fr_0.7fr] lg:gap-10">
           <div className="max-w-sm">

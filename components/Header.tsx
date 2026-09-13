@@ -54,11 +54,11 @@ export default function Header() {
     pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <header className="on-light sticky top-0 z-50 bg-white">
+    <header className="site-header on-light sticky top-0 z-50 bg-white">
       <div
         className={scrolled ? "border-b hair" : "border-b border-transparent"}
       >
-        <div className="shell flex h-[72px] items-center justify-between gap-4 lg:h-24 lg:gap-8">
+        <div className="shell flex h-[72px] items-center justify-between gap-4 lg:h-[88px] lg:gap-8">
           <Link
             href="/"
             aria-label="MetalBase home"
@@ -76,7 +76,7 @@ export default function Header() {
                 className={`inline-flex min-h-12 items-center whitespace-nowrap border-b text-sm transition-colors duration-[160ms] ease-out hover:border-signal hover:text-signal ${
                   isSectionActive(item.href)
                     ? "border-signal font-semibold text-signal"
-                    : "border-transparent font-medium"
+                    : "border-transparent font-semibold"
                 }`}
               >
                 {item.label}
@@ -101,7 +101,7 @@ export default function Header() {
                 utilities win and `hidden` does what it says. */}
             <Link
               href="/contact"
-              className="btn btn-solid hidden min-h-[3rem] px-6 py-2 text-sm sm:inline-flex"
+              className="btn btn-solid header-quote hidden min-h-[3rem] px-6 py-2 text-sm sm:inline-flex"
             >
               Get a quote
             </Link>
@@ -127,7 +127,7 @@ export default function Header() {
       <div
         id={`${uid}-mobile`}
         hidden={!mobileOpen}
-        className="border-b hair bg-white lg:hidden"
+        className="max-h-[calc(100dvh-72px)] overflow-y-auto border-b hair bg-white lg:hidden"
       >
         <nav aria-label="Main, mobile" className="shell py-2">
           {nav.map((item) => (
