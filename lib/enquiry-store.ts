@@ -234,63 +234,16 @@ export async function settleEnquiry(
   options: EnquiryStoreOptions = {},
 ): Promise<boolean> {
   const db = options.db ?? getSql();
-  const statement = { text: `UPDATE metalbase_enquiry_outbox SET
-      state = CASE WHEN $3 = 'provider_accepted' AND $4::text IS NOT NULL THEN
-        CASE WHEN EXISTS (SELECT 1 FROM metalbase_enquiry_provider_events
-            WHERE provider_id = $4 AND outcome = 'failed') THEN 'failed'
-          WHEN EXISTS (SELECT 1 FROM metalbase_enquiry_provider_events
-            WHERE provider_id = $4 AND outcome = 'delivered') THEN 'delivered'
-          ELSE 'provider_accepted' END ELSE $3 END,
+  const rows = await db.query(`UPDATE metalbase_enquiry_outbox SET
+      state = $3,
       provider_id = COALESCE($4, provider_id),
-      last_error = CASE WHEN $3 = 'provider_accepted' AND EXISTS (
-        SELECT 1 FROM metalbase_enquiry_provider_events WHERE provider_id = $4 AND outcome = 'failed'
-      ) THEN 'provider_delivery_failed' ELSE $5 END,
+      last_error = $5,
       next_attempt_at = now() + ($6::integer * interval '1 second'),
       lease_token = NULL, lease_until = NULL, updated_at = now()
     WHERE enquiry_id = $1::uuid AND state = 'leased' AND lease_token = $2::uuid
-    RETURNING enquiry_id`, params: [input.reference, input.leaseToken, input.state,
-    input.providerId ?? null, input.code ?? null, input.retryAfterSeconds ?? 0] };
-  // Acceptance and an incoming event serialize on the same opaque provider
-  // identifier, including when the event arrives before provider_id is saved.
-  const rows = input.providerId
-    ? (await db.transaction([
-        { text: "SELECT pg_advisory_xact_lock(hashtext($1))", params: [input.providerId] },
-        statement,
-      ]))[1]
-    : await db.query(statement.text, statement.params);
+    RETURNING enquiry_id`, [input.reference, input.leaseToken, input.state,
+    input.providerId ?? null, input.code ?? null, input.retryAfterSeconds ?? 0]);
   return rows.length === 1;
-}
-
-export async function recordEnquiryProviderEvent(
-  input: { providerId: string; eventId: string; outcome: "delivered" | "failed" },
-  options: EnquiryStoreOptions = {},
-): Promise<{ recorded: boolean; matched: number }> {
-  if (!/^[A-Za-z0-9_-]{1,200}$/.test(input.providerId) ||
-      !/^[A-Za-z0-9_-]{1,200}$/.test(input.eventId)) {
-    throw new TypeError("Invalid provider event reference.");
-  }
-  const db = options.db ?? getSql();
-  const statements: EnquiryStatement[] = [
-    { text: "SELECT pg_advisory_xact_lock(hashtext($1))", params: [input.providerId] },
-    { text: `WITH inserted AS (
-      INSERT INTO metalbase_enquiry_provider_events (event_id, provider_id, outcome)
-      VALUES ($1, $2, $3) ON CONFLICT (event_id) DO NOTHING RETURNING event_id
-    ), updated AS (
-      UPDATE metalbase_enquiry_outbox SET state = $3,
-        last_error = CASE WHEN $3 = 'failed' THEN 'provider_delivery_failed' ELSE NULL END,
-        updated_at = now()
-      WHERE provider = 'resend' AND provider_id = $2
-        AND state IN ('provider_accepted', 'delivered', 'failed')
-        AND (state <> 'failed' OR $3 = 'failed')
-        AND EXISTS (SELECT 1 FROM inserted)
-      RETURNING enquiry_id
-    ) SELECT (SELECT count(*) FROM inserted)::integer AS recorded,
-      (SELECT count(*) FROM updated)::integer AS matched`,
-      params: [input.eventId, input.providerId, input.outcome] },
-  ];
-  const results = await db.transaction(statements);
-  const rows = results[1];
-  return { recorded: Number(rows[0]?.recorded) === 1, matched: Number(rows[0]?.matched ?? 0) };
 }
 
 export async function purgeEnquiryData(options: EnquiryStoreOptions = {}): Promise<{
@@ -307,8 +260,7 @@ export async function purgeEnquiryData(options: EnquiryStoreOptions = {}): Promi
           lease_until = NULL, updated_at = now()
         FROM metalbase_enquiries e WHERE e.id = o.enquiry_id
           AND e.created_at <= now() - interval '30 days'
-          AND (o.state IN ('pending', 'leased') OR
-            (o.state = 'provider_accepted' AND o.provider = 'resend'))
+          AND o.state IN ('pending', 'leased')
           AND e.payload IS NOT NULL RETURNING o.enquiry_id`,
       params: [],
     },
@@ -329,10 +281,6 @@ export async function purgeEnquiryData(options: EnquiryStoreOptions = {}): Promi
       params: [],
     },
     {
-      text: "DELETE FROM metalbase_enquiry_provider_events WHERE received_at <= now() - interval '90 days' RETURNING event_id",
-      params: [],
-    },
-    {
       text: "DELETE FROM metalbase_enquiry_rate_limits WHERE reset_at <= now() RETURNING key",
       params: [],
     },
@@ -347,7 +295,7 @@ export async function purgeEnquiryData(options: EnquiryStoreOptions = {}): Promi
     agedUnresolved: Number(results[0]?.[0]?.count ?? 0),
     payloadsPurged: Number(results[2]?.[0]?.count ?? 0),
     metadataDeleted: Number(results[3]?.[0]?.count ?? 0),
-    limiterKeysDeleted: Number(results[5]?.[0]?.count ?? 0),
+    limiterKeysDeleted: Number(results[4]?.[0]?.count ?? 0),
   };
 }
 
@@ -359,8 +307,6 @@ export type EnquiryHealth = {
   failed: number;
   manualReview: number;
   oldestPendingSeconds: number;
-  /** Email receipt lag only; webhook 2xx is the completed workflow handoff. */
-  oldestProviderAcceptedSeconds: number;
   expiredLeases: number;
   pendingNearRetention: number;
 };
@@ -375,13 +321,10 @@ export async function getEnquiryHealth(options: EnquiryStoreOptions = {}): Promi
       count(*) FILTER (WHERE state = 'failed')::integer AS failed,
       count(*) FILTER (WHERE state = 'manual_review')::integer AS manual_review,
       count(*) FILTER (WHERE state = 'leased' AND lease_until <= now())::integer AS expired_leases,
-      count(*) FILTER (WHERE (state IN ('pending', 'leased') OR
-        (state = 'provider_accepted' AND provider = 'resend'))
+      count(*) FILTER (WHERE state IN ('pending', 'leased')
         AND e.created_at <= now() - interval '29 days')::integer AS pending_near_retention,
       GREATEST(0, COALESCE(MAX(CASE WHEN state IN ('pending', 'leased')
-        THEN EXTRACT(EPOCH FROM (now() - e.created_at)) END), 0))::integer AS oldest_pending_seconds,
-      GREATEST(0, COALESCE(MAX(CASE WHEN state = 'provider_accepted' AND provider = 'resend'
-        THEN EXTRACT(EPOCH FROM (now() - o.updated_at)) END), 0))::integer AS oldest_provider_accepted_seconds
+        THEN EXTRACT(EPOCH FROM (now() - e.created_at)) END), 0))::integer AS oldest_pending_seconds
     FROM metalbase_enquiry_outbox o JOIN metalbase_enquiries e ON e.id = o.enquiry_id`);
   const row = rows[0] ?? {};
   return {
@@ -389,7 +332,6 @@ export async function getEnquiryHealth(options: EnquiryStoreOptions = {}): Promi
     providerAccepted: Number(row.provider_accepted ?? 0), delivered: Number(row.delivered ?? 0),
     failed: Number(row.failed ?? 0), manualReview: Number(row.manual_review ?? 0),
     oldestPendingSeconds: Number(row.oldest_pending_seconds ?? 0),
-    oldestProviderAcceptedSeconds: Number(row.oldest_provider_accepted_seconds ?? 0),
     expiredLeases: Number(row.expired_leases ?? 0),
     pendingNearRetention: Number(row.pending_near_retention ?? 0),
   };
