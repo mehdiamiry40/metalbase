@@ -68,7 +68,11 @@ Create a Resend webhook targeting
 `https://www.metalbase.com.au/api/webhooks/resend` for `email.delivered`,
 `email.bounced`, `email.complained`, `email.failed`, and `email.suppressed`.
 Store its signing secret as `RESEND_WEBHOOK_SECRET`; do not store the API key in
-the database. Incoming events verify the exact raw body before parsing, enforce
+the database. The build does not require this secret, so production can ship
+before the webhook exists. Until it is set, the route answers every callback
+with a 503 and enquiries stay at `provider_accepted`: nothing is mis-reported,
+but a bounced enquiry reads the same as a delivered one. Treat it as launch
+work, not optional. Incoming events verify the exact raw body before parsing, enforce
 signature freshness, retain only event/provider identifiers and an outcome, and
 deduplicate event IDs. Early delivery events and send-state persistence serialize
 through a PostgreSQL advisory lock.
