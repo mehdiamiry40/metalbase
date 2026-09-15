@@ -11,6 +11,7 @@ const columns = [
       { label: "What we buy", href: "/what-we-buy" },
       { label: "How pricing works", href: "/prices" },
       { label: "Service areas & arranged drop-off", href: "/locations" },
+      { label: "Articles & guides", href: "/blog" },
       { label: "Scrap glossary", href: "/glossary" },
     ],
   },

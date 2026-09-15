@@ -14,11 +14,16 @@ import {
   generateStaticParams as generateMaterialStaticParams,
 } from "@/app/materials/[slug]/page";
 import {
+  generateMetadata as generatePostMetadata,
+  generateStaticParams as generatePostStaticParams,
+} from "@/app/blog/[slug]/page";
+import {
   ORGANIZATION_ID,
   areaGuideSchemaData,
   serviceSchemaData,
 } from "@/components/Schema";
 import { pageMetadata } from "@/lib/metadata";
+import { postHref, posts } from "@/lib/blog";
 import { materialHref, materials } from "@/lib/materials";
 import { REGION_SLUGS, regionHref, regions } from "@/lib/regions";
 import { SITE, operations, serviceHref, services } from "@/lib/site";
@@ -30,6 +35,12 @@ const EXPECTED_REGION_SLUGS = [
   "logan",
   "ipswich",
   "redlands",
+] as const;
+
+const EXPECTED_POST_SLUGS = [
+  "what-changes-a-scrap-metal-quote",
+  "sorting-scrap-metal-on-site",
+  "scrap-metal-paperwork-queensland",
 ] as const;
 
 const EXPECTED_MATERIAL_SLUGS = [
@@ -151,6 +162,13 @@ describe("sitemap and robots", () => {
       const url = `${SITE}${regionHref(region)}`;
       expect(sitemap.filter((entry) => entry.url === url)).toHaveLength(1);
     }
+    expect(sitemap).toContainEqual(
+      expect.objectContaining({ url: `${SITE}/blog` }),
+    );
+    for (const post of posts) {
+      const url = `${SITE}${postHref(post)}`;
+      expect(sitemap.filter((entry) => entry.url === url)).toHaveLength(1);
+    }
     expect(sitemap).not.toContainEqual(
       expect.objectContaining({ url: `${SITE}/locations/brisbane` }),
     );
@@ -217,6 +235,62 @@ describe("material search guides", () => {
     expect(page).toContain("does not publish a generic rate");
     expect(page).toContain("no public customer drop-off location");
     expect(page).toContain("<FaqSchema");
+  });
+});
+
+describe("articles", () => {
+  it("builds exactly the published article routes", () => {
+    expect(generatePostStaticParams().map(({ slug }) => slug)).toEqual(
+      EXPECTED_POST_SLUGS,
+    );
+    expect(posts.map(({ slug }) => slug)).toEqual(EXPECTED_POST_SLUGS);
+  });
+
+  it("gives every article a unique self-canonical search identity", async () => {
+    const titles = new Set<string>();
+    const descriptions = new Set<string>();
+
+    for (const slug of EXPECTED_POST_SLUGS) {
+      const post = posts.find((item) => item.slug === slug)!;
+      const path = postHref(post);
+      const metadata = await generatePostMetadata({
+        params: Promise.resolve({ slug }),
+      });
+      const openGraph = metadata.openGraph as Record<string, unknown>;
+
+      expect(metadata.alternates?.canonical).toBe(path);
+      expect(String(openGraph.url)).toBe(`${SITE}${path}`);
+      expect(metadata.title).toBe(post.seoTitle);
+      expect(metadata.description).toBe(post.seoDescription);
+      expect(path).not.toMatch(/[?#]|\/$/);
+
+      titles.add(post.seoTitle);
+      descriptions.add(post.seoDescription);
+    }
+
+    expect(titles.size).toBe(EXPECTED_POST_SLUGS.length);
+    expect(descriptions.size).toBe(EXPECTED_POST_SLUGS.length);
+  });
+
+  it("carries a sortable publication date the sitemap can reuse", () => {
+    for (const post of posts) {
+      expect(post.published).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(Number.isNaN(Date.parse(post.published))).toBe(false);
+    }
+  });
+
+  it("links every article from the index", () => {
+    const index = readFileSync(join(root, "app/blog/page.tsx"), "utf8");
+    expect(index).toContain("posts.map");
+    expect(index).toContain("postHref(post)");
+  });
+
+  it("keeps rates and public-yard claims out of the article template", () => {
+    const page = readFileSync(join(root, "app/blog/[slug]/page.tsx"), "utf8");
+
+    expect(page).toContain("No published rate on this article");
+    expect(page).toContain("<FaqSchema");
+    expect(page).not.toMatch(/\$\d|per tonne|per kilo/i);
   });
 });
 
