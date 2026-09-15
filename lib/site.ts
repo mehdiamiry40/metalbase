@@ -100,6 +100,7 @@ export const nav: NavItem[] = [
   { label: "Pricing", href: "/prices" },
   { label: "For business", href: "/services" },
   { label: "Area guides", href: "/locations" },
+  { label: "Articles", href: "/blog" },
 ];
 
 /* ------------------------------ prices -----------------------------
