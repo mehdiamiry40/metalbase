@@ -29,6 +29,7 @@ const moreMaterials = [
   { title: "Swarf & turnings", href: "/materials/swarf" },
   { title: "Gas bottles", href: "/materials/gas-bottles" },
   { title: "Cast iron", href: "/materials/cast-iron" },
+  { title: "Hot water systems", href: "/materials/hot-water-systems" },
 ];
 const serviceCards: { title: string; body: string; href: string; icon: YardIconName; label: string }[] = [
   { title: "Collection & bins", body: "Tell us what is on site and how much you have. We will confirm collection, bin options and access requirements.", href: "/scrap-removal-brisbane", icon: "bin", label: "Explore collection" },
