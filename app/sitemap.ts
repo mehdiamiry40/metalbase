@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { postHref, posts } from "@/lib/blog";
 import { materialHref, materials } from "@/lib/materials";
 import { regionHref, regions } from "@/lib/regions";
 import {
@@ -27,7 +28,7 @@ import {
 
 const CONTENT_REVIEWED = new Date("2026-08-03");
 const BRISBANE_SEARCH_PAGES_REVIEWED = new Date("2026-08-07");
-const MATERIAL_GUIDES_REVIEWED = new Date("2026-09-13");
+const MATERIAL_GUIDES_REVIEWED = new Date("2026-09-15");
 const SERVICE_AREAS_REVIEWED = new Date("2026-08-31");
 const SERVICE_AREA_ROUTES = new Set(["", "/about", "/locations"]);
 
@@ -47,6 +48,7 @@ const routes: {
   },
   { path: "/services", priority: 0.8, changeFrequency: "monthly" },
   { path: "/locations", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/blog", priority: 0.7, changeFrequency: "monthly" },
   { path: "/glossary", priority: 0.6, changeFrequency: "monthly" },
   { path: "/sustainability", priority: 0.6, changeFrequency: "monthly" },
   { path: "/about", priority: 0.6, changeFrequency: "monthly" },
@@ -82,6 +84,12 @@ export function createSitemap(
       lastModified: MATERIAL_GUIDES_REVIEWED,
       changeFrequency: "monthly" as const,
       priority: 0.8,
+    })),
+    ...posts.map((post) => ({
+      url: `${SITE}${postHref(post)}`,
+      lastModified: new Date(`${post.published}T00:00:00Z`),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
     ...regions.map((region) => ({
       url: `${SITE}${regionHref(region)}`,

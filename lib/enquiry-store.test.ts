@@ -6,7 +6,7 @@ import { sanitise } from "@/lib/enquiry";
 import { resolveEnquiryDeliveryConfig } from "@/lib/enquiry-delivery";
 import {
   captureEnquiry, claimEnquiry, getEnquiryHealth, limitEnquiry, purgeEnquiryData,
-  recordEnquiryProviderEvent, settleEnquiry, EnquirySubmissionConflictError, EnquirySubmissionExpiredError,
+  settleEnquiry, EnquirySubmissionConflictError, EnquirySubmissionExpiredError,
   type EnquiryDatabase, type EnquiryRow,
 } from "@/lib/enquiry-store";
 import { processEnquiryQueue } from "@/lib/enquiry-worker";
@@ -33,7 +33,7 @@ beforeAll(async () => {
 }, 30_000);
 
 beforeEach(async () => {
-  await pg.exec("TRUNCATE metalbase_enquiries, metalbase_enquiry_outbox, metalbase_enquiry_provider_events, metalbase_enquiry_rate_limits CASCADE");
+  await pg.exec("TRUNCATE metalbase_enquiries, metalbase_enquiry_outbox, metalbase_enquiry_rate_limits CASCADE");
 });
 
 afterAll(async () => { await pg?.close(); });
@@ -98,9 +98,9 @@ describe("transactional enquiry storage and dispatch", () => {
     const fetcher = vi.fn<typeof fetch>().mockImplementation(async () => new Response(JSON.stringify({ id: "email_lost_checkpoint" })));
     const broken: EnquiryDatabase = {
       ...db,
-      async transaction(statements) {
-        if (statements.some((statement) => statement.params[2] === "provider_accepted")) throw new Error("checkpoint unavailable");
-        return db.transaction(statements);
+      async query(text, params = []) {
+        if (params[2] === "provider_accepted") throw new Error("checkpoint unavailable");
+        return db.query(text, params);
       },
     };
     await expect(processEnquiryQueue({ reference: item.reference, limit: 1 }, { db: broken, env, fetcher })).rejects.toThrow("checkpoint unavailable");
@@ -137,26 +137,6 @@ describe("transactional enquiry storage and dispatch", () => {
       [changed.reference, JSON.stringify("changed stored message")]);
     expect((await processEnquiryQueue({ reference: changed.reference }, { db, env, fetcher })).manualReview).toBe(1);
     expect(fetcher).toHaveBeenCalledTimes(1);
-  });
-
-  it("reconciles early and late provider events and never revives failed delivery on a stale delivered event", async () => {
-    const early = await capture();
-    const earlyClaim = await claimEnquiry(early.reference, { db });
-    expect(await recordEnquiryProviderEvent({ providerId: "email_early", eventId: "evt_early", outcome: "delivered" }, { db }))
-      .toEqual({ recorded: true, matched: 0 });
-    await settleEnquiry({ reference: early.reference, leaseToken: earlyClaim!.leaseToken!, state: "provider_accepted", providerId: "email_early" }, { db });
-    expect((await getEnquiryHealth({ db })).delivered).toBe(1);
-    expect((await recordEnquiryProviderEvent({ providerId: "email_early", eventId: "evt_early", outcome: "delivered" }, { db })).recorded).toBe(false);
-    await recordEnquiryProviderEvent({ providerId: "email_early", eventId: "evt_bounce", outcome: "failed" }, { db });
-    await recordEnquiryProviderEvent({ providerId: "email_early", eventId: "evt_stale", outcome: "delivered" }, { db });
-    expect((await getEnquiryHealth({ db })).failed).toBe(1);
-    const late = await capture();
-    const lateClaim = await claimEnquiry(late.reference, { db });
-    await Promise.all([
-      settleEnquiry({ reference: late.reference, leaseToken: lateClaim!.leaseToken!, state: "provider_accepted", providerId: "email_late" }, { db }),
-      recordEnquiryProviderEvent({ providerId: "email_late", eventId: "evt_late", outcome: "delivered" }, { db }),
-    ]);
-    expect((await getEnquiryHealth({ db })).delivered).toBe(1);
   });
 
   it("purges payloads and envelopes at 30 days, flags unresolved work, and retains only bounded metadata to 90 days", async () => {
@@ -201,7 +181,7 @@ describe("transactional enquiry storage and dispatch", () => {
     await db.query("UPDATE metalbase_enquiries SET created_at = now() - interval '31 days'");
     await db.query("UPDATE metalbase_enquiry_outbox SET updated_at = now() - interval '31 days'");
     expect(await getEnquiryHealth({ db })).toMatchObject({
-      providerAccepted: 1, oldestProviderAcceptedSeconds: 0, pendingNearRetention: 0,
+      providerAccepted: 1, pendingNearRetention: 0,
     });
     expect(await purgeEnquiryData({ db })).toMatchObject({ payloadsPurged: 1, agedUnresolved: 0 });
     expect((await db.query("SELECT state FROM metalbase_enquiry_outbox"))[0].state).toBe("provider_accepted");

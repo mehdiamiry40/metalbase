@@ -363,7 +363,7 @@ export default function QuoteForm() {
     return (
       <div
         ref={successRef}
-        className="on-light border border-steel bg-chalk p-8 sm:p-10"
+        className="quote-success on-light border border-steel bg-chalk p-8 sm:p-10"
         role="status"
         tabIndex={-1}
       >
@@ -426,7 +426,7 @@ export default function QuoteForm() {
       }}
       noValidate
       aria-busy={busy || preparingPhotos}
-      className="on-light border border-steel bg-chalk p-6 sm:p-8 lg:p-9"
+      className="quote-form on-light border border-steel bg-chalk p-6 sm:p-8 lg:p-9"
     >
       <noscript>
         <p className="mb-6 font-semibold">
