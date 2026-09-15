@@ -1765,6 +1765,124 @@ export const materials: MaterialGuide[] = [
         a: "Customer-site collection is available, with material, access, equipment, timing and terms confirmed for the actual vehicle and address. MetalBase has no public customer drop-off location.",
       },
     ],
+  },
+  {
+    slug: "e-waste",
+    name: "Scrap e-waste",
+    shortName: "E-waste",
+    eyebrow: "Scrap e-waste Brisbane",
+    seoTitle: "E-Waste Brisbane: Scrap Metal & IT Quote Guide",
+    seoDescription:
+      "Before you scrap e-waste in Brisbane: which IT and office gear carries recoverable metal, what has to come out first, and how to describe the load.",
+    h1: "E-waste Brisbane: identify recoverable metal and separate the batteries",
+    intro:
+      "An office or workshop clear-out of computers, servers and electrical gear is a mixed load, not a single grade. Pull the lithium batteries out, set the screens aside, and list what you have by type and rough count before you ask about e-waste.",
+    photo: "mixed-parts",
+    overview:
+      "Two pallets of e-waste at the same weight can hold completely different amounts of recoverable metal. A rack of server chassis, switchgear and power supplies is largely steel with copper windings and aluminium heatsinks through it; a pallet of laptops and consumer set-top boxes is mostly plastic, glass and adhesive by weight. What decides whether a load can move at all is usually not the metal but what is still fitted to it — lithium-ion cells, sealed lead-acid strings in a UPS, CRT screens, backlit LCD panels and toner. Those are identified and kept separate rather than bulked into the metal. A CBD tower fitout, an Eagle Farm or Murarrie office relocation and a single household TV are three different propositions, and only the first two are usefully described as a scrap enquiry.",
+    examples: [
+      "Server racks, rack rails and blanking panels",
+      "Desktop towers and workstation cases",
+      "Switch-mode power supplies and PSU banks",
+      "Network switches, routers and patch panels",
+      "UPS cabinets with the battery string removed",
+      "Laser printers and floor-standing photocopiers",
+      "CRT monitors and older flat-panel televisions",
+    ],
+    grades: [
+      {
+        term: "Steel-cased equipment and rack hardware",
+        detail:
+          "Server chassis, rack frames, rails, tower cases and photocopier frames are mostly light-gauge steel with a smaller non-ferrous fraction through them. Describe them by unit count and rack size rather than trying to estimate a metal percentage.",
+      },
+      {
+        term: "Copper-bearing components",
+        detail:
+          "Power supplies, transformers, printer and copier motors, heatsinks, patch leads and internal looms carry the recoverable copper in most electronic equipment. Say whether these are still fitted or have already been pulled out, because that changes the whole load.",
+      },
+      {
+        term: "Populated circuit boards",
+        detail:
+          "Motherboards, backplanes, graphics and network cards are described by how densely they are populated and what type of equipment they came out of, not by weight alone. Keep boards from telecoms and server hardware separate from consumer boards where you can.",
+      },
+      {
+        term: "Aluminium and mixed housings",
+        detail:
+          "Laptop and tablet chassis, heatsink stacks and hard drive castings are aluminium mixed with steel fasteners, plastic and adhesive. A pallet of these is a mixed item rather than a clean aluminium grade.",
+      },
+      {
+        term: "Not metal scrap: screens, batteries and consumables",
+        detail:
+          "CRT monitors and televisions contain leaded glass, older flat panels can use mercury-bearing fluorescent backlights, and lithium-ion and sealed lead-acid batteries are a separate stream again. Identify these in the enquiry and keep them apart from the metal; toner cartridges and printer drums are not metal scrap either.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Metal fraction of the equipment",
+        detail:
+          "Rack and industrial gear carries far more recoverable metal for its size than consumer equipment of the same weight. List the equipment types rather than a single pallet weight.",
+      },
+      {
+        term: "Batteries still fitted",
+        detail:
+          "Laptop packs, UPS battery strings, alarm and emergency lighting batteries and board-mounted cells all have to be identified. Lithium cells are dangerous goods for road transport in Australia, and damaged or swollen cells change what can be moved and how.",
+      },
+      {
+        term: "Screens and sealed display units",
+        detail:
+          "CRT and backlit flat-panel screens need identifying separately because of the leaded glass and mercury-bearing lamps inside them. Count them and keep them off the metal pallet.",
+      },
+      {
+        term: "Data-bearing devices",
+        detail:
+          "Hard drives, solid-state drives, tapes and equipment with onboard storage are the owner's responsibility to wipe or destroy before handover. MetalBase does not provide data destruction, certificates of erasure or secure-chain custody.",
+      },
+      {
+        term: "Quantity, packaging and site access",
+        detail:
+          "Loose gear, shrink-wrapped pallets and stillage cages are handled differently. Say how it is packaged, which floor it is on, and whether a lift, loading dock or basement ramp is involved.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Pull the batteries first",
+        body: "Remove laptop packs, UPS strings and any accessible cells, tape the terminals and keep them away from the metal. Do not put batteries in a wheelie bin or a scrap bin — they start fires in collection trucks.",
+      },
+      {
+        title: "Set the screens aside",
+        body: "Stack CRT monitors, televisions and flat panels separately from the rest and count them. Do not break, stack face-down under load or attempt to dismantle a CRT.",
+      },
+      {
+        title: "Photograph a pallet and a single unit",
+        body: "Send one wide shot of the whole lot and one close photo of a representative unit with its rating label, so the equipment type can be identified.",
+      },
+      {
+        title: "Count by type and describe access",
+        body: "Give a rough count for each equipment type, the Brisbane suburb, the floor or dock the gear sits on and how a truck reaches it.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is e-waste worth anything as scrap metal?",
+        a: "It depends almost entirely on the equipment type. Rack hardware, power supplies and industrial control gear carry a different recoverable metal mix from consumer electronics of the same weight, and screens, batteries and toner carry none of it. Request a current assessment for the actual equipment.",
+      },
+      {
+        q: "Where can I drop off a single old TV or laptop in Brisbane?",
+        a: "Brisbane City Council accepts e-waste and batteries free from residents at its four resource recovery centres — Willawong, Chandler, Ferny Grove and Nudgee — and the National Television and Computer Recycling Scheme provides free drop-off for televisions and computers through participating sites. MetalBase has no public customer drop-off location, so a scrap enquiry suits a commercial quantity rather than one household item.",
+      },
+      {
+        q: "Do laptop and UPS batteries have to come out before collection?",
+        a: "Identify every battery in the load and keep it separate from the metal. Lithium-ion cells in particular are a fire risk once gear is stacked or bulked, and they are dangerous goods for road transport. Confirm what can be included and how it must be presented before anything is moved.",
+      },
+      {
+        q: "Can MetalBase wipe or destroy data on hard drives?",
+        a: "No. Data destruction, erasure certificates and secure chain of custody are not offered. Remove or destroy drives, tapes and any equipment with onboard storage before it leaves your site, and treat the metal enquiry as a separate step.",
+      },
+      {
+        q: "Can MetalBase collect e-waste in Brisbane?",
+        a: "Customer-site collection is available, with material, minimum volume, access, equipment, timing and terms confirmed for the proposed load and address. Batteries, screens and other separated streams need their acceptance confirmed individually.",
+      },
+    ],
   }
 ];
 
