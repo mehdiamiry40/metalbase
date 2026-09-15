@@ -1647,6 +1647,124 @@ export const materials: MaterialGuide[] = [
         a: "Customer-site collection is available, with material, quantity, access, equipment, timing and terms confirmed for the actual units and address.",
       },
     ],
+  },
+  {
+    slug: "car-bodies",
+    name: "Scrap car bodies",
+    shortName: "Car bodies",
+    eyebrow: "Scrap car bodies Brisbane",
+    seoTitle: "Scrap Car Bodies Brisbane: Prep & Quote Guide",
+    seoDescription:
+      "A scrap car bodies quote turns on de-pollution status, what is still bolted in and how the shell gets lifted out. Sort the Brisbane paperwork first.",
+    h1: "Scrap car bodies Brisbane: what comes off the vehicle before it is assessed",
+    intro:
+      "A car body is assessed on what is left in it rather than on what it used to be. Say what has happened to the fluids, battery, tyres, air conditioning gas and any LPG tank, and where the registration stands, when you ask for a scrap car bodies quote.",
+    photo: "vehicle",
+    overview:
+      "Most of a vehicle's weight is steel, so what separates one shell from another is everything that is not steel and everything that has to be dealt with before the body can be handled. A complete car still holding fuel, oil, coolant, a battery, tyres, undeployed airbags and a charged air conditioning system is a de-pollution job first and a scrap parcel second. A shell that has already lost its engine and gearbox has lost its heaviest single component along with most of the aluminium and copper that came with it, so it is assessed on the steel that remains. Glass, seats, carpet, sound deadening, bumpers and trim add weight on the weighbridge without adding recoverable metal, and a flood car can carry silt and standing water on top of that. Scrap car bodies enquiries around Brisbane tend to come from three situations — a project that never got finished on a suburban driveway, a workshop around Rocklea, Acacia Ridge or Wacol clearing write-offs off its hardstand, or a rural block out past Ipswich where vehicles have sat for years — and each one is a different access problem before it is a different parcel.",
+    examples: [
+      "Sedan and hatchback body shells",
+      "Ute and 4WD bodies with the tray removed",
+      "Van and light truck cabs",
+      "Rolled, burnt or flood-damaged write-offs",
+      "Stripped shells with the engine and gearbox already out",
+      "Cut body sections, doors and panel offcuts",
+      "Paddock vehicles that have not moved in years",
+    ],
+    grades: [
+      {
+        term: "De-polluted body shells",
+        detail:
+          "Fluids drained, battery out, tyres off, refrigerant recovered by a licensed technician and any LPG tank removed and made safe by a suitably qualified person. Say who completed each step and what records exist, because a shell described as de-polluted is assessed on that basis.",
+      },
+      {
+        term: "Complete vehicles with nothing removed",
+        detail:
+          "Everything still fitted and still full. These are assessed as a de-pollution job before they are assessed as metal, and acceptance, handling and timing are confirmed before the vehicle is moved. Do not start draining or cutting to present it as something cleaner.",
+      },
+      {
+        term: "Stripped shells and rolling bodies",
+        detail:
+          "Drivetrain, loom, seats and often the glass already gone. Lighter than a complete car and mostly body steel, so the assessment turns on what remains rather than on the make and model.",
+      },
+      {
+        term: "Cut sections, panels and body offcuts",
+        detail:
+          "Doors, quarter panels, roof skins and cut floor pans from a restoration or a repair shop. Light-gauge steel that takes up a lot of room per tonne, and it commonly carries filler, seam sealer, sound deadening, glass and trim.",
+      },
+      {
+        term: "Vehicles with non-ferrous still fitted",
+        detail:
+          "Alloy wheels, aluminium engine and gearbox cases, the radiator, wiring loom, starter, alternator and catalytic converter are identified separately from the shell steel. List what is still on the car and what has already been pulled off it.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "De-pollution status",
+        detail:
+          "Fuel, engine oil, coolant, brake fluid, the battery, refrigerant, undeployed airbags and any LPG cylinder. Say which have been dealt with, by whom, and which are simply unknown — an honest unknown is more useful than a guess.",
+      },
+      {
+        term: "What is still bolted in",
+        detail:
+          "Engine, gearbox, diff, wheels, converter and loom change both the weight and the recoverable metal mix. A car sold as complete and a car with the drivetrain gone are two different parcels.",
+      },
+      {
+        term: "Non-metal mass",
+        detail:
+          "Glass, seats, carpet, sound deadening, plastics and bumpers weigh but do not yield, and silt or water left in a flood-damaged vehicle adds more of the same.",
+      },
+      {
+        term: "Access and how it is lifted",
+        detail:
+          "Whether the body rolls and steers, driveway width and slope, gate and kerb clearance, overhead wires and branches, and where a truck can legally stand. A tight street in Paddington or West End is a different job from an open industrial hardstand.",
+      },
+      {
+        term: "Ownership and registration paperwork",
+        detail:
+          "Who the registered operator is, whether registration has been cancelled, what has happened to the plates, and whether the vehicle carries a written-off status. Identification and paperwork requirements are confirmed before a vehicle changes hands.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Sort the paperwork first",
+        body: "Be ready to show you are entitled to dispose of the vehicle, and check the Department of Transport and Main Roads' current requirements for cancelling registration, notifying disposal and returning number plates. Do that before the car leaves, not afterwards.",
+      },
+      {
+        title: "List what has been done and what has not",
+        body: "Go through fluids, battery, tyres, refrigerant, airbags and any LPG tank and mark each one done, not done or unknown. Do not drain fluids onto the ground or into a stormwater drain, and do not cut into an airbag, fuel tank or gas cylinder.",
+      },
+      {
+        title: "Photograph all four corners and the VIN",
+        body: "Add the engine bay, interior, boot floor and the compliance or VIN plate, and show clearly whether the engine and gearbox are still in it.",
+      },
+      {
+        title: "Describe the access path",
+        body: "Give the Brisbane suburb, the driveway surface, width and slope, whether the body rolls and steers, and anything overhead or in the way between the vehicle and the street.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Does the car have to run or still be registered?",
+        a: "No. A vehicle is assessed on what it is made of and what is still fitted, not on whether it starts. Registration matters for the paperwork rather than the assessment — check the Department of Transport and Main Roads' current requirements for cancelling it and dealing with the plates.",
+      },
+      {
+        q: "Do I need to drain the fuel and remove the battery before a quote?",
+        a: "No, and do not improvise it. Describe what has already been removed and by whom, and say what you are unsure about. Never drain fluids onto the ground or into a stormwater drain. Handling and preparation responsibilities are confirmed before the vehicle is moved.",
+      },
+      {
+        q: "What happens to the tyres?",
+        a: "Tyres are not recoverable metal and are handled as a separate waste stream from the body. Say whether they are still on the vehicle and whether the rims are steel or alloy, and confirm what will and will not be taken before collection is arranged.",
+      },
+      {
+        q: "The car runs on LPG and the air conditioning was never emptied. Does that matter?",
+        a: "Yes, so identify both in the enquiry. An LPG cylinder is a pressurised vessel and has to be removed and made safe by a suitably qualified person, and refrigerant is recovered by a technician holding the appropriate licence. Do not cut, drill or vent either one yourself.",
+      },
+      {
+        q: "Can MetalBase collect a car body in Brisbane?",
+        a: "Customer-site collection is available, with material, access, equipment, timing and terms confirmed for the actual vehicle and address. MetalBase has no public customer drop-off location.",
+      },
+    ],
   }
 ];
 
