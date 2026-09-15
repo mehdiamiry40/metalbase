@@ -202,7 +202,7 @@ export function Logo({ className = "" }: { className?: string }) {
     <span className={`inline-flex items-center gap-2.5 sm:gap-3 ${className}`}>
       <svg
         viewBox="0 0 48 48"
-        className="h-9 w-9 shrink-0 sm:h-11 sm:w-11"
+        className="site-logo-mark h-9 w-9 shrink-0 sm:h-11 sm:w-11"
         aria-hidden="true"
         focusable="false"
       >
@@ -210,7 +210,7 @@ export function Logo({ className = "" }: { className?: string }) {
           <path key={path} d={path} fill="currentColor" />
         ))}
       </svg>
-      <span className="font-display text-xl font-semibold uppercase leading-none tracking-[0.025em]">
+      <span className="font-display text-xl font-bold leading-none tracking-[-0.04em]">
         MetalBase
       </span>
     </span>
@@ -487,7 +487,7 @@ export function Callout({
   );
 }
 
-/** A bordered box. Square, hairline, no shadow — the site has none. */
+/** A shared card surface for contact information and supporting content. */
 export function Panel({
   children,
   id,
@@ -498,7 +498,7 @@ export function Panel({
   className?: string;
 }) {
   return (
-    <div id={id} className={`border hair bg-chalk p-7 ${className}`}>
+    <div id={id} className={`panel border hair bg-chalk p-7 ${className}`}>
       {children}
     </div>
   );

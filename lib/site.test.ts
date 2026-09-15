@@ -6,6 +6,7 @@ import {
   PUBLIC_LOCATION_ENABLED,
   SEARCH_INDEXING_ENABLED,
   company,
+  formatServiceRegions,
   locations,
   nav,
   operations,
@@ -13,6 +14,7 @@ import {
   serviceAreas,
   services,
 } from "./site";
+import { regions } from "./regions";
 
 /* ------------------------------------------------------------------
    These guard the thing that actually went wrong on this project: the
@@ -24,10 +26,10 @@ import {
 describe("launch guards", () => {
   it("publishes the verified operator and contact facts", () => {
     expect(company).toMatchObject({
-      legal: "Emir Group Pty Ltd",
+      legal: "Mehdi Emir",
       abn: "62 351 619 456",
-      phone: "+61410233335",
-      phoneLabel: "0410 233 335",
+      phone: "+61494434509",
+      phoneLabel: "0494 434 509",
       hours: "8am–5pm, 7 days a week",
     });
   });
@@ -55,10 +57,17 @@ describe("launch guards", () => {
         "Sunshine Coast",
         "Logan",
         "Ipswich",
+        "Redlands",
       ],
     });
+    expect(operations.serviceRegions).toEqual(
+      regions.map(({ name }) => name),
+    );
     expect(serviceAreas.map(({ region }) => region)).toEqual(
       operations.serviceRegions,
+    );
+    expect(formatServiceRegions()).toBe(
+      "Brisbane, Gold Coast, Sunshine Coast, Logan, Ipswich and Redlands",
     );
   });
 

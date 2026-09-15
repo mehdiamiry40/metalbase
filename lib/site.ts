@@ -1,3 +1,5 @@
+import { regions } from "@/lib/regions";
+
 /* ==================================================================
    Single source of truth for MetalBase content.
 
@@ -35,7 +37,7 @@ export const company = {
   name: "MetalBase",
 
   /* --- verified identity and contact details ------------------ */
-  legal: "Emir Group Pty Ltd" as string | null,
+  legal: "Mehdi Emir" as string | null,
   abn: "62 351 619 456" as string | null,
   /** Intentionally unpublished at the operator's request. */
   licence: null as string | null,
@@ -43,10 +45,10 @@ export const company = {
    *  the JSON-LD `telephone`, both of which want a country code so the
    *  number dials from outside Australia and resolves unambiguously to
    *  a search engine. Never put the local 04… form here. */
-  phone: "+61410233335" as string | null,
+  phone: "+61494434509" as string | null,
   /** What a human reads. Australians recognise the local mobile
    *  grouping, not E.164, so every visible rendering uses this. */
-  phoneLabel: "0410 233 335" as string | null,
+  phoneLabel: "0494 434 509" as string | null,
   /** Public contact hours, not a claim about an unpublished yard. */
   hours: "8am–5pm, 7 days a week" as string | null,
 
@@ -66,14 +68,19 @@ export const operations = {
   collections: true,
   bins: true,
   arrangedDropOff: true,
-  serviceRegions: [
-    "Brisbane",
-    "Gold Coast",
-    "Sunshine Coast",
-    "Logan",
-    "Ipswich",
-  ] as const,
+  serviceRegions: regions.map(({ name }) => name),
 };
+
+/** Human-readable rendering of the same verified region data used by routes,
+ * sitemap entries and structured data. */
+export function formatServiceRegions(
+  regionNames: readonly string[] = operations.serviceRegions,
+): string {
+  const last = regionNames[regionNames.length - 1];
+  if (!last) return "";
+  if (regionNames.length === 1) return last;
+  return `${regionNames.slice(0, -1).join(", ")} and ${last}`;
+}
 
 /* ---------------------------- navigation --------------------------- */
 
@@ -93,6 +100,7 @@ export const nav: NavItem[] = [
   { label: "Pricing", href: "/prices" },
   { label: "For business", href: "/services" },
   { label: "Area guides", href: "/locations" },
+  { label: "Articles", href: "/blog" },
 ];
 
 /* ------------------------------ prices -----------------------------
@@ -295,58 +303,10 @@ export function serviceHref(service: Pick<Service, "slug">): string {
    commercial terms are still confirmed for the proposed site and load.
    ------------------------------------------------------------------ */
 
-export const serviceAreas: { region: string; places: string[] }[] = [
-  {
-    region: "Brisbane",
-    places: [
-      "All Brisbane suburbs",
-      "Brisbane CBD",
-      "Eagle Farm",
-      "Rocklea",
-      "Wacol",
-    ],
-  },
-  {
-    region: "Gold Coast",
-    places: [
-      "All Gold Coast suburbs",
-      "Southport",
-      "Burleigh Heads",
-      "Nerang",
-      "Yatala",
-    ],
-  },
-  {
-    region: "Sunshine Coast",
-    places: [
-      "All Sunshine Coast areas",
-      "Caloundra",
-      "Maroochydore",
-      "Nambour",
-      "Mooloolaba",
-    ],
-  },
-  {
-    region: "Logan",
-    places: [
-      "All Logan suburbs",
-      "Meadowbrook",
-      "Berrinba",
-      "Beenleigh",
-      "Springwood",
-    ],
-  },
-  {
-    region: "Ipswich",
-    places: [
-      "All Ipswich suburbs",
-      "Bundamba",
-      "Redbank",
-      "Goodna",
-      "Springfield",
-    ],
-  },
-];
+export const serviceAreas = regions.map(({ name, places }) => ({
+  region: name,
+  places,
+}));
 
 /* ------------------------------- glossary --------------------------
    Trade vocabulary. Every term here is standard industry language, not

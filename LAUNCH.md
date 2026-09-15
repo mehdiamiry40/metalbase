@@ -33,14 +33,18 @@ does not identify itself as a licensed dealer or publish a street address.
 
 | Field | Where it appears | Status |
 |---|---|---|
-| ~~`phone` + `phoneLabel`~~ | header, footer, contact, mobile bar | ✅ **Set.** `+61410233335` / `0410 233 335`. Click-to-call is live everywhere and the mobile bar now shows "Call". |
-| ~~`legal`~~ | footer and structured data | ✅ **Set.** `Emir Group Pty Ltd`. |
+| ~~`phone` + `phoneLabel`~~ | header, footer, contact, mobile bar | ✅ **Set.** `+61494434509` / `0494 434 509`. Click-to-call is live everywhere and the mobile bar now shows "Call". |
+| ~~`legal`~~ | footer and structured data | ✅ **Set.** `Mehdi Emir` (Individual/Sole Trader). |
 | ~~`abn`~~ | footer and structured data | ✅ **Set.** `62 351 619 456`. |
 | ~~`hours`~~ | footer and contact | ✅ **Set.** `8am–5pm, 7 days a week`, presented as contact hours rather than yard hours. |
 | `email` | footer, contact, legal | No direct email route |
 | `head` | footer, legal, `PostalAddress` schema | Intentionally unset: MetalBase has no public customer location |
 | `licence` | nowhere | Intentionally unpublished at the operator's request |
 | `priceDate` | prices | Rate board cannot state when it was set |
+
+The operator and ABN were checked against the
+[official ABN Lookup record](https://abr.business.gov.au/ABN/View?id=62351619456)
+on 31 August 2026. It lists `EMIR, MEHDI` as an Individual/Sole Trader.
 
 Do not enable `PUBLIC_LOCATION_ENABLED`, another service `verified` flag or
 `PUBLISH_RATES` merely because the identity fields above are complete. Each
@@ -50,46 +54,31 @@ still needs its own operational evidence.
 
 MetalBase is a mobile service-area business. Customers cannot visit; truck
 drivers collect from customer sites across Brisbane, Gold Coast, Sunshine
-Coast, Logan and Ipswich. Bins are available, and suitable drop-offs use an
-arranged receiving destination. Do not publish a licence number or a public
-street address.
+Coast, Logan, Ipswich and Redlands. Bins are available, and suitable drop-offs
+use an arranged receiving destination. Do not publish a licence number or a
+public street address.
 
 ---
 
-## 2. Configure and test enquiry delivery
+## 2. Configure and verify durable enquiry delivery
 
-The endpoint validates, sanitises and rate-limits each request. It fails closed
-with `503` when no delivery path is configured and does not log customer data.
+Follow [docs/enquiry-operations.md](docs/enquiry-operations.md). Provision separate
+production and preview PostgreSQL databases, apply the versioned migration and
+configure DATABASE_URL, a strong CRON_SECRET and one delivery provider.
+Production Resend requires a verified sender and signed delivery-event endpoint.
+The database supplies shared rate limiting; there is no production local fallback.
 
-For email delivery, set the Resend key in the deployment environment. The
-server-side recipient defaults to the verified quote inbox:
+Before release, verify the same submission twice produces one enquiry, a lost
+provider response reuses the same key/body, provider outages recover from the
+outbox, signatures and worker authentication fail closed, and retention never
+sends an expired record. Run the production-header browser suite with synthetic
+photos and a mocked provider. Only send a real controlled enquiry when its exact
+recipient and wording are approved; provider acceptance alone is not proof of
+inbox receipt.
 
-```
-RESEND_API_KEY   re_xxxxxxxx
-```
-
-Set it in Vercel → Settings → Environment Variables and redeploy.
-
-Optional recipient and sender overrides:
-
-```
-ENQUIRY_TO       quotes@example.com
-ENQUIRY_FROM     noreply@yourdomain
-```
-
-Alternatively, set `ENQUIRY_WEBHOOK_URL` for a Zapier, Make or CRM endpoint.
-
-Redeploy, submit one email-only, one phone-only and one photo enquiry, confirm
-all three arrive at the intended destination and verify the reply path before
-enabling launch mode. Photo enquiries carry up to three compressed attachments,
-so also confirm the configured provider accepts them.
-
-Optional but recommended: `UPSTASH_REDIS_REST_URL` and
-`UPSTASH_REDIS_REST_TOKEN` for durable rate limiting. Without them the
-limiter is per-instance, so N concurrent serverless instances allow N
-times the intended rate.
-
----
+Enable the staged GitHub/Vercel checks and verify that a failed check cannot
+promote a production build. Confirm the natural cron tick and authenticated health
+monitor after release. No check is complete merely because configuration exists.
 
 ## 3. Confirm unpublished operating details
 
@@ -135,7 +124,7 @@ property, inspect both preferred URLs, request indexing and confirm Google's
 selected canonical after the redirects are crawled. Sitemap submission is a
 discovery hint, not a ranking or indexing guarantee.
 
-The removal page now states the verified five-region coverage, customer-site
+The removal page now states the verified six-region coverage, customer-site
 collection and bin availability directly. It still qualifies minimum quantity,
 equipment, timing, fees, payment and arranged receiving instructions because
 those details remain job-specific.
@@ -151,7 +140,7 @@ convincing one:
   bins, loading process and team. Drop files into `public/photos/`
   using the existing keys and set `USE_LOCAL = true` in `lib/photos.ts`.
 - **Google Business Profile.** A hidden-address service-area profile is set up
-  with the five verified regions. Google still requires a real private postal
+  with the six verified regions. Google still requires a real private postal
   address for verification; that address is not shown to customers.
 - **Reviews.** `stats` in `lib/site.ts` is deliberately empty — an
   earlier version claimed 182,000 t recovered, 98.6% diversion and 31
@@ -159,7 +148,9 @@ convincing one:
 
 ---
 
-## Verified in the current worktree — 7 August 2026
+## Historical verification snapshot — 7 August 2026
+
+The following checks describe the 7 August worktree, not the current head:
 
 - Production build, ESLint and TypeScript clean; 80 tests passing
 - `npm audit --audit-level=high`: zero known vulnerabilities
