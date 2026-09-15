@@ -62,6 +62,7 @@ const EXPECTED_MATERIAL_SLUGS = [
   "car-bodies",
   "e-waste",
   "transformers",
+  "batteries",
 ] as const;
 
 /* ------------------------------------------------------------------
