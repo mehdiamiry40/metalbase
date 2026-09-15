@@ -28,7 +28,7 @@ import {
 
 const CONTENT_REVIEWED = new Date("2026-08-03");
 const BRISBANE_SEARCH_PAGES_REVIEWED = new Date("2026-08-07");
-const MATERIAL_GUIDES_REVIEWED = new Date("2026-09-14");
+const MATERIAL_GUIDES_REVIEWED = new Date("2026-09-15");
 const SERVICE_AREAS_REVIEWED = new Date("2026-08-31");
 const SERVICE_AREA_ROUTES = new Set(["", "/about", "/locations"]);
 

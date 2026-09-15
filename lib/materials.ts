@@ -1426,6 +1426,110 @@ export const materials: MaterialGuide[] = [
       },
     ],
   },
+  {
+    slug: "cast-iron",
+    name: "Scrap cast iron",
+    shortName: "Cast iron",
+    eyebrow: "Scrap cast iron Brisbane",
+    seoTitle: "Scrap Cast Iron Brisbane: Grades & Quote Guide",
+    seoDescription:
+      "Identify bathtubs, engine blocks and machine bases before requesting a Brisbane scrap cast iron quote, with grading, contamination and prep guidance.",
+    h1: "Scrap cast iron Brisbane: identify what's worth quoting",
+    intro:
+      "Cast iron differs from mild and structural steel in weight, brittleness and casting residue, so separate clean cast iron from attached steel, bronze and contamination before requesting a quote.",
+    photo: "gears",
+    overview:
+      "Cast iron is denser and more brittle than mild or structural steel, and it often carries casting sand, engine oil, bearing bronze or enamel coating from its original use. Bathtubs, engine blocks, machine bases, pipe fittings and stove bodies are all cast iron, but each carries different attachments that change how a load is assessed.",
+    examples: [
+      "Cast iron bathtubs",
+      "Engine blocks and cylinder heads",
+      "Machine bases and lathe beds",
+      "Cast iron pipe and fittings",
+      "Cast iron cookware",
+      "Wood heater and stove bodies",
+      "Sash weights",
+    ],
+    grades: [
+      {
+        term: "Clean cast iron",
+        detail:
+          "Machine bases, pipe, cookware and other cast components without significant steel, bronze or non-metal attachments. Show the whole piece and any casting marks.",
+      },
+      {
+        term: "Enamelled and coated cast iron",
+        detail:
+          "Bathtubs, sinks and some stove bodies carry an enamel or porcelain coating over the cast iron. Identify the coating rather than presenting the item as bare iron.",
+      },
+      {
+        term: "Engine and mechanical cast iron",
+        detail:
+          "Blocks, heads and housings often retain bearings, sensors, studs, gaskets and residual oil. Drain fluids and photograph what remains attached before an enquiry.",
+      },
+      {
+        term: "Cast iron with bronze or non-ferrous attachments",
+        detail:
+          "Pumps, valves and older fittings can include bearing bronze, brass unions or lead joints. Note these separately rather than assuming the whole item is one grade.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Density and section thickness",
+        detail:
+          "Cast iron is heavier for its size than mild steel, which changes handling, transport and how a realistic weight is estimated.",
+      },
+      {
+        term: "Attachments and contamination",
+        detail:
+          "Bronze bearings, brass fittings, steel bolts, casting sand and enamel coating can all move an item away from a clean cast-iron grade.",
+      },
+      {
+        term: "Fluids and residue",
+        detail:
+          "Engine oil, coolant and grease need to be drained and described before an engine block, gearbox housing or similar item is moved.",
+      },
+      {
+        term: "Site access and handling",
+        detail:
+          "Bathtubs, machine bases and engine blocks are awkward and heavy. Note stairs, doorways, ground conditions and whether mechanical lifting is needed.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Drain fluids first",
+        body: "Remove engine oil, coolant and grease from blocks, housings and mechanical items before transport or collection.",
+      },
+      {
+        title: "Separate obvious attachments",
+        body: "Where safe and practical, note or remove steel fasteners, bronze bushings and non-ferrous fittings rather than leaving them unidentified.",
+      },
+      {
+        title: "Photograph the whole item",
+        body: "Show the complete piece, any casting marks or model plates, and close detail of coatings or attached material.",
+      },
+      {
+        title: "Describe size and access",
+        body: "Give approximate weight and dimensions, and mention stairs, doorways or ground conditions that affect how a heavy item can be moved.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is cast iron worth more than mild steel?",
+        a: "Value is relative, not fixed. Cast iron is assessed differently from mild and structural steel because of its density, brittleness and typical attachments, and depends on the actual load presented.",
+      },
+      {
+        q: "Do enamelled bathtubs count as scrap cast iron?",
+        a: "Yes, most older bathtubs are cast iron under an enamel coating. Identify the coating in the enquiry rather than describing the item as bare iron.",
+      },
+      {
+        q: "Should engine oil be drained before requesting a quote?",
+        a: "Yes. Drain oil, coolant and other fluids from blocks, heads and housings, and describe any residue that remains before the item is moved.",
+      },
+      {
+        q: "Can MetalBase collect heavy cast iron items in Brisbane?",
+        a: "Customer-site collection can be assessed, with access, equipment, minimum volume, timing and terms confirmed for the actual item and address.",
+      },
+    ],
+  }
 ];
 
 export function getMaterial(slug: string): MaterialGuide | undefined {
