@@ -1309,6 +1309,346 @@ export const materials: MaterialGuide[] = [
     ],
   },
   {
+    slug: "gas-bottles",
+    name: "Scrap gas bottles",
+    shortName: "Gas bottles",
+    eyebrow: "Scrap gas bottles Brisbane",
+    seoTitle: "Scrap Gas Bottles Brisbane: Cylinder Quote Guide",
+    seoDescription:
+      "A sealed cylinder is not scrap metal yet. See what has to happen to scrap gas bottles in Brisbane first, and who is allowed to do it.",
+    h1: "Scrap gas bottles Brisbane: what makes a cylinder safe to assess",
+    intro:
+      "Gas bottles are steel or aluminium under the paint, but a sealed cylinder is a pressure vessel first and scrap second. Say what was in it, whether the valve has been removed and who did that work, and keep it out of the general steel pile until the next step is agreed.",
+    photo: "yard-grab",
+    overview:
+      "Only one thing decides whether a cylinder can be treated as metal at all: whether it has been depressurised and permanently opened by someone competent to do it. A sealed vessel that reaches a shear, baler or shredder can fail violently, which is why scrap gas bottles are handled as their own stream rather than thrown in with light-gauge steel. Two questions come before the metal. What was in the bottle, because acetylene, refrigerant and chemical gases each have their own pathway. And who owns it, because industrial cylinders from the trade suppliers around Rocklea, Acacia Ridge and Eagle Farm are commonly rented rather than sold, stay the gas company's property, and go back on exchange instead of going to scrap.",
+    examples: [
+      "9kg BBQ swap bottles",
+      "45kg LPG household cylinders",
+      "Forklift LPG cylinders",
+      "Oxygen and acetylene welding cylinders",
+      "Argon and CO2 welding cylinders",
+      "Aluminium dive and breathing-apparatus cylinders",
+      "Dry powder and CO2 fire extinguishers",
+    ],
+    grades: [
+      {
+        term: "Decommissioned cylinder shells",
+        detail:
+          "A cylinder with the valve removed and the wall cut or drilled through, so it cannot hold pressure or residual gas again, is the only form assessed as ordinary scrap steel or aluminium. Photograph the opening and the valve boss, and say who carried out the work.",
+      },
+      {
+        term: "LPG bottles — BBQ, household and forklift",
+        detail:
+          "Steel bottles carrying a stamped test date, tare weight and owner markings on the collar. An LPG bottle that will not run a burner is not empty; liquid and vapour remain inside. Keep them upright, separate and sealed, and treat exchange through an LPG swap program as the first option for anything still in test.",
+      },
+      {
+        term: "Supplier-owned industrial cylinders",
+        detail:
+          "Oxygen, acetylene, argon and CO2 cylinders usually carry the gas supplier's name on the neck ring or collar because they are rented, not owned. These return to the supplier. Acetylene cylinders in particular hold a porous filler soaked in acetone and must never be cut, drilled or vented by anyone else.",
+      },
+      {
+        term: "Aluminium cylinders",
+        detail:
+          "Dive, breathing-apparatus, medical and beverage-gas cylinders are aluminium alloy rather than steel, so the recovered metal differs — but the decommissioning requirement is identical. Say which it is; a painted aluminium cylinder and a painted steel one look the same on a pallet.",
+      },
+      {
+        term: "Fire extinguishers and pressurised canisters",
+        detail:
+          "Extinguisher bodies are steel or aluminium, charged with dry powder, CO2, foam or water under pressure. They need discharging and depressurising by a service technician before the shell is metal. Body corporate and workshop changeovers usually produce a pallet of them at once, so count them in the enquiry.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Decommissioning status",
+        detail:
+          "Sealed, vented but still closed, valve removed, or valve removed and shell opened are four different propositions. Say which one applies and who did the work, and share any paperwork the gas supplier or test station provided.",
+      },
+      {
+        term: "Previous contents",
+        detail:
+          "LPG, oxygen, inert welding gas, refrigerant and chemical gases are not interchangeable. Refrigerant-bearing cylinders need recovery by a licensed technician, and an unlabelled or unknown cylinder is described as unknown rather than guessed at.",
+      },
+      {
+        term: "Ownership markings",
+        detail:
+          "A supplier name stamped or cast into the collar means the cylinder is almost certainly leased and is not the site's to sell. Photograph the collar before anything else so this is settled early.",
+      },
+      {
+        term: "Shell metal and remaining fittings",
+        detail:
+          "Steel and aluminium cylinders are assessed separately, and brass valves, plastic foot rings, collars, gauges and hoses are not part of the shell. Removed valves are brass and can be described as their own parcel.",
+      },
+      {
+        term: "Quantity, condition and access",
+        detail:
+          "One backyard BBQ bottle and a workshop clear-out of forty are different jobs. Give a count, note heavy corrosion or damage, and describe the Brisbane suburb and where the cylinders are standing.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Keep cylinders out of the steel",
+        body: "Stand them separately from general scrap and never load a sealed cylinder into a bin. A bottle buried in a pile of light-gauge steel is found at the shear, which is the worst possible place to find it.",
+      },
+      {
+        title: "Photograph the collar and the stamps",
+        body: "The neck ring or collar carries the gas type, owner's name, test dates and tare weight. Send that alongside a photo of the whole cylinder and the valve end.",
+      },
+      {
+        title: "Leave the opening to a competent person",
+        body: "Do not cut, drill, heat or vent a cylinder to prove it is empty. Depressurising and valve removal are for the gas supplier or a cylinder test station, not a site angle grinder.",
+      },
+      {
+        title: "Describe the batch honestly",
+        body: "Say how many cylinders, roughly what sizes, which are sealed and which are already decommissioned, and whether any are unlabelled or of unknown contents.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Can an empty gas bottle go in a scrap bin?",
+        a: "No. A cylinder that has not been depressurised and permanently opened is still a sealed pressure vessel, and an LPG bottle that will not light a burner still holds vapour. Keep it separate, upright and out of any bin, and confirm the pathway before it is moved.",
+      },
+      {
+        q: "Who can remove a gas bottle valve?",
+        a: "A gas supplier or a cylinder test station — someone competent to depressurise a vessel and equipped for it. It is not a site job, and a cylinder that has been opened by anyone else cannot be assumed safe.",
+      },
+      {
+        q: "What happens to a BBQ bottle that is out of test date?",
+        a: "Cylinders carry a stamped test date and cannot be refilled once it has lapsed, so an out-of-test bottle is retired rather than exchanged. It becomes scrap metal only after it has been decommissioned; until then it is a sealed cylinder like any other.",
+      },
+      {
+        q: "Are the oxy and acetylene bottles in my workshop mine to scrap?",
+        a: "Usually not. Industrial cylinders are commonly rented and stay the gas supplier's property, with their name on the collar. Check the markings and return them to the supplier. Acetylene cylinders must never be cut open — they hold a porous filler soaked in acetone.",
+      },
+      {
+        q: "Can MetalBase collect decommissioned cylinders in Brisbane?",
+        a: "Customer-site collection is available, with material, decommissioning status, minimum volume, access, equipment, timing and terms confirmed for the proposed load and address.",
+      },
+    ],
+  },
+  {
+    slug: "cast-iron",
+    name: "Scrap cast iron",
+    shortName: "Cast iron",
+    eyebrow: "Scrap cast iron Brisbane",
+    seoTitle: "Scrap Cast Iron Brisbane: Grades & Quote Guide",
+    seoDescription:
+      "Identify bathtubs, engine blocks and machine bases before requesting a Brisbane scrap cast iron quote, with grading, contamination and prep guidance.",
+    h1: "Scrap cast iron Brisbane: identify what's worth quoting",
+    intro:
+      "Cast iron differs from mild and structural steel in weight, brittleness and casting residue, so separate clean cast iron from attached steel, bronze and contamination before requesting a quote.",
+    photo: "gears",
+    overview:
+      "Cast iron is denser and more brittle than mild or structural steel, and it often carries casting sand, engine oil, bearing bronze or enamel coating from its original use. Bathtubs, engine blocks, machine bases, pipe fittings and stove bodies are all cast iron, but each carries different attachments that change how a load is assessed.",
+    examples: [
+      "Cast iron bathtubs",
+      "Engine blocks and cylinder heads",
+      "Machine bases and lathe beds",
+      "Cast iron pipe and fittings",
+      "Cast iron cookware",
+      "Wood heater and stove bodies",
+      "Sash weights",
+    ],
+    grades: [
+      {
+        term: "Clean cast iron",
+        detail:
+          "Machine bases, pipe, cookware and other cast components without significant steel, bronze or non-metal attachments. Show the whole piece and any casting marks.",
+      },
+      {
+        term: "Enamelled and coated cast iron",
+        detail:
+          "Bathtubs, sinks and some stove bodies carry an enamel or porcelain coating over the cast iron. Identify the coating rather than presenting the item as bare iron.",
+      },
+      {
+        term: "Engine and mechanical cast iron",
+        detail:
+          "Blocks, heads and housings often retain bearings, sensors, studs, gaskets and residual oil. Drain fluids and photograph what remains attached before an enquiry.",
+      },
+      {
+        term: "Cast iron with bronze or non-ferrous attachments",
+        detail:
+          "Pumps, valves and older fittings can include bearing bronze, brass unions or lead joints. Note these separately rather than assuming the whole item is one grade.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Density and section thickness",
+        detail:
+          "Cast iron is heavier for its size than mild steel, which changes handling, transport and how a realistic weight is estimated.",
+      },
+      {
+        term: "Attachments and contamination",
+        detail:
+          "Bronze bearings, brass fittings, steel bolts, casting sand and enamel coating can all move an item away from a clean cast-iron grade.",
+      },
+      {
+        term: "Fluids and residue",
+        detail:
+          "Engine oil, coolant and grease need to be drained and described before an engine block, gearbox housing or similar item is moved.",
+      },
+      {
+        term: "Site access and handling",
+        detail:
+          "Bathtubs, machine bases and engine blocks are awkward and heavy. Note stairs, doorways, ground conditions and whether mechanical lifting is needed.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Drain fluids first",
+        body: "Remove engine oil, coolant and grease from blocks, housings and mechanical items before transport or collection.",
+      },
+      {
+        title: "Separate obvious attachments",
+        body: "Where safe and practical, note or remove steel fasteners, bronze bushings and non-ferrous fittings rather than leaving them unidentified.",
+      },
+      {
+        title: "Photograph the whole item",
+        body: "Show the complete piece, any casting marks or model plates, and close detail of coatings or attached material.",
+      },
+      {
+        title: "Describe size and access",
+        body: "Give approximate weight and dimensions, and mention stairs, doorways or ground conditions that affect how a heavy item can be moved.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is cast iron worth more than mild steel?",
+        a: "Value is relative, not fixed. Cast iron is assessed differently from mild and structural steel because of its density, brittleness and typical attachments, and depends on the actual load presented.",
+      },
+      {
+        q: "Do enamelled bathtubs count as scrap cast iron?",
+        a: "Yes, most older bathtubs are cast iron under an enamel coating. Identify the coating in the enquiry rather than describing the item as bare iron.",
+      },
+      {
+        q: "Should engine oil be drained before requesting a quote?",
+        a: "Yes. Drain oil, coolant and other fluids from blocks, heads and housings, and describe any residue that remains before the item is moved.",
+      },
+      {
+        q: "Can MetalBase collect heavy cast iron items in Brisbane?",
+        a: "Customer-site collection can be assessed, with access, equipment, minimum volume, timing and terms confirmed for the actual item and address.",
+      },
+    ],
+  },
+  {
+    slug: "hot-water-systems",
+    name: "Scrap hot water systems",
+    shortName: "Hot water systems",
+    eyebrow: "Scrap hot water systems Brisbane",
+    seoTitle: "Scrap Hot Water Systems Brisbane: Tank Guide",
+    seoDescription:
+      "The inner cylinder decides how an old hot water system is assessed — enamelled steel, copper or stainless. What a Brisbane scrap quote needs first.",
+    h1: "Scrap hot water systems Brisbane: work out what the cylinder is made of",
+    intro:
+      "An old tank's metal sits in the inner cylinder rather than the painted case around it, and the two are rarely the same. Say whether the unit is electric, gas, solar or heat pump, what the data plate reads, and whether it has been drained and disconnected yet.",
+    photo: "yard-grab",
+    overview:
+      "A storage tank is one item holding several materials: a light-gauge steel jacket, polyurethane foam bonded to the cylinder inside it, and the cylinder itself, which may be enamel-lined steel, copper or stainless. That cylinder is what a scrap hot water system enquiry turns on, and it cannot be read from the outside — the data plate, the pressure rating and the age of the installation say far more than the paint does. Solar systems add a copper-and-glass roof collector and its mounting frame, and heat pumps add a sealed refrigerant circuit that has to be dealt with before anything is dismantled. Plumbers replacing tanks out of Acacia Ridge, Coopers Plains and Geebung usually have several banked up at once, which is a different conversation from one unit standing on a driveway in Bracken Ridge.",
+    examples: [
+      "Mains-pressure electric storage tank, 250 to 315 litres",
+      "Gas storage unit with the burner assembly and flue cowl still fitted",
+      "Older low-pressure tank pulled out of a Queenslander roof space",
+      "Roof-mounted solar collector panels with copper risers",
+      "Close-coupled solar tank and its roof mounting frame",
+      "Heat pump unit with compressor, fan and finned coil",
+      "Loose tempering valves, elements and sacrificial anodes",
+    ],
+    grades: [
+      {
+        term: "Enamel-lined steel cylinders",
+        detail:
+          "The standard mains-pressure electric or gas tank: a mild steel cylinder with a glass-lined interior, foam insulation around it and a painted or Colorbond steel jacket over that. Copper and brass appear only at the fittings and, on an electric unit, the element boss. Photograph the data plate rather than cutting the jacket open to look.",
+      },
+      {
+        term: "Copper inner cylinders",
+        detail:
+          "Older low-pressure and gravity-feed tanks — the roof-space and stand-mounted units still coming out of pre-1980s houses around Ashgrove, Paddington and Wynnum — often carry a copper cylinder inside a steel case that looks identical to any other. Capacity, manufacture date and a low-pressure rating on the plate are better evidence than the outside of the unit.",
+      },
+      {
+        term: "Stainless cylinders",
+        detail:
+          "Stainless tanks turn up in newer domestic installations and in unit-block plant rooms. The alloy is rarely stamped anywhere you can read it, so send the model number and any visible markings and let identification be confirmed on the actual cylinder instead of assumed from a brochure.",
+      },
+      {
+        term: "Solar collectors and close-coupled systems",
+        detail:
+          "A roof collector is an aluminium-framed box holding a copper absorber sheet and copper riser tubes under glass, and the tank sitting above it on a close-coupled system is a separate item again. Glass, framing, insulation and the roof mounting frame all come down with it, so describe the whole system rather than the panel alone.",
+      },
+      {
+        term: "Heat pump units",
+        detail:
+          "A heat pump tank carries a compressor, a fan and a finned coil, and the sealed circuit holds refrigerant. Say what the nameplate lists — some units run a fluorocarbon refrigerant, others carbon dioxide or a hydrocarbon — and whether recovery by a licensed technician has already happened or the status is unknown. Keep the unit intact while handling is confirmed.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Cylinder metal, not the outer case",
+        detail:
+          "Every one of these units has a light-gauge steel jacket, so photographs of the outside change very little. Anything that identifies the cylinder — the data plate, model number, pressure rating, installation age — changes the description a great deal.",
+      },
+      {
+        term: "Retained water and non-metal mass",
+        detail:
+          "A 315 litre tank still holding water carries more than 300 kilograms of water on its own, and foam insulation, solar collector glass and plastic trim are not recoverable metal. Say whether the unit has been drained and roughly what capacity it is.",
+      },
+      {
+        term: "Fittings still attached",
+        detail:
+          "Tempering and relief valves, the element and thermostat, the sacrificial anode, copper tails and flexible connectors are often still on the unit or already in a separate bucket. Say which, because they are assessed differently from the tank itself.",
+      },
+      {
+        term: "Refrigerant status on heat pumps",
+        detail:
+          "State whether a licensed technician has recovered the refrigerant or whether the status is unknown. Acceptance, specialist work and transport are confirmed for the unit before it is moved. Do not open the sealed circuit yourself.",
+      },
+      {
+        term: "Where the unit sits and how many",
+        detail:
+          "A tank on a roof, on a second-storey landing or in a plant room is a different job from one already at ground level, and a run of units off a Chermside unit-block refit is different again. Describe the position, the route out and the count.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Have it disconnected properly",
+        body: "In Queensland the water and gas connections are licensed plumbing and gas work, and a hard-wired electric unit needs a licensed electrician. Arrange that before the tank comes out rather than finishing the job with a hacksaw.",
+      },
+      {
+        title: "Drain it before it moves",
+        body: "A full tank holds its rated capacity in water and is unsafe to lift or tip. Drain it after isolation and say in the enquiry whether that has been done.",
+      },
+      {
+        title: "Photograph the data plate",
+        body: "The plate carries capacity, model, pressure rating and manufacture date, and identifies the cylinder better than any photo of the tank. Add one shot of the fitting end and one of the whole unit where it stands.",
+      },
+      {
+        title: "Send position, count and suburb",
+        body: "Note whether the unit is on a roof, upstairs or already at ground level, how many there are, how a vehicle reaches them, and the Brisbane suburb.",
+      },
+    ],
+    faqs: [
+      {
+        q: "How do I tell whether the cylinder is copper or enamelled steel?",
+        a: "Not from the outside — the jacket is steel either way. Send the data plate, the model number and the approximate age of the installation. Low-pressure and gravity-feed tanks from older houses are the ones most likely to hold copper, but identification is confirmed on the actual cylinder. Do not cut the case open to check.",
+      },
+      {
+        q: "Does the tank have to be drained and disconnected before collection?",
+        a: "Yes to draining — a full tank is heavy and unsafe to handle. Disconnection is licensed plumbing, gas and electrical work in Queensland, so it is arranged through the relevant trade rather than done on the day. Say what has already been completed when you send the enquiry.",
+      },
+      {
+        q: "Can a heat pump hot water unit be included in the enquiry?",
+        a: "Describe it in the enquiry and identify the refrigerant listed on the nameplate, along with whether a licensed technician has already recovered it. Acceptance, specialist work and transport are then confirmed for the unit. Do not open the sealed circuit or release refrigerant yourself.",
+      },
+      {
+        q: "Can the LPG bottle from a gas system go with the tank?",
+        a: "No. A gas bottle is a pressure vessel, not part of the appliance, and many bottles remain the supplier's property and go back through an exchange or return arrangement. Keep it out of the load and raise it separately if you need one dealt with.",
+      },
+      {
+        q: "Can MetalBase collect hot water systems in Brisbane?",
+        a: "Customer-site collection is available, with material, quantity, access, equipment, timing and terms confirmed for the actual units and address.",
+      },
+    ],
+  },
+  {
     slug: "car-bodies",
     name: "Scrap car bodies",
     shortName: "Car bodies",
@@ -1425,7 +1765,7 @@ export const materials: MaterialGuide[] = [
         a: "Customer-site collection is available, with material, access, equipment, timing and terms confirmed for the actual vehicle and address. MetalBase has no public customer drop-off location.",
       },
     ],
-  },
+  }
 ];
 
 export function getMaterial(slug: string): MaterialGuide | undefined {

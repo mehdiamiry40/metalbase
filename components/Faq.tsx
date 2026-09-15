@@ -12,9 +12,9 @@ import { ChevronDown } from "@/components/ui";
  */
 export function FaqList({ items }: { items: Faq[] }) {
   return (
-    <div className="border-t hair">
+    <div className="faq-list">
       {items.map((f) => (
-        <details key={f.q} className="group border-b hair px-1 sm:px-2">
+        <details key={f.q} className="faq-item group">
           <summary className="flex min-h-14 cursor-pointer list-none items-start justify-between gap-6 py-5 font-display text-xl font-semibold leading-tight marker:content-none [&::-webkit-details-marker]:hidden">
             {f.q}
             <ChevronDown className="h-6 w-6 shrink-0 transition-transform duration-[160ms] ease-out group-open:rotate-180" />

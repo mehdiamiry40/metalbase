@@ -1,13 +1,7 @@
 import Link from "next/link";
 import Photo from "@/components/Photo";
 import { FaqList } from "@/components/Faq";
-import { Split } from "@/components/sections";
-import {
-  ArrowLink,
-  Button,
-  YardIcon,
-  type YardIconName,
-} from "@/components/ui";
+import { ArrowLink, ArrowRight, Button, Tick, YardIcon, type YardIconName } from "@/components/ui";
 import type { PhotoKey } from "@/lib/photos";
 import { company, formatServiceRegions } from "@/lib/site";
 import { pageMetadata } from "@/lib/metadata";
@@ -16,400 +10,192 @@ const homeTitle = "MetalBase | Scrap Metal Quotes Across Brisbane & SEQ";
 const homeDescription =
   "Request a scrap metal quote or prepare a scrap removal enquiry in Brisbane, with practical guidance on grades, quantity, pricing and site access.";
 
-export const metadata = pageMetadata({
-  path: "/",
-  title: homeTitle,
-  description: homeDescription,
-});
+export const metadata = pageMetadata({ path: "/", title: homeTitle, description: homeDescription });
 
-const priceFactors: {
-  title: string;
-  body: string;
-  icon: YardIconName;
-}[] = [
-  {
-    title: "Metal grade",
-    body: "Copper, aluminium, brass, cable and steel are assessed differently.",
-    icon: "tag",
-  },
-  {
-    title: "Cleanliness",
-    body: "Attachments and mixed material affect recoverable yield.",
-    icon: "sort",
-  },
-  {
-    title: "Net weight",
-    body: "The measured metal weight excludes containers and vehicles.",
-    icon: "scale",
-  },
-  {
-    title: "Market movement",
-    body: "Commodity prices can change an indicative quote over time.",
-    icon: "trend",
-  },
+const featuredMaterials: { title: string; description: string; href: string; photo: PhotoKey; tag: string }[] = [
+  { title: "Copper", description: "Wire, pipe, sheet and offcuts. Learn what separates the grades.", href: "/materials/copper", photo: "copper-sheets", tag: "Non-ferrous" },
+  { title: "Aluminium", description: "Cans, frames and extrusions. Make more sense of your material.", href: "/materials/aluminium", photo: "aluminium-cans", tag: "Non-ferrous" },
+  { title: "Steel", description: "Structural steel, sheet and mixed scrap. Start with the right details.", href: "/materials/steel", photo: "rusty-steel", tag: "Ferrous" },
 ];
-
-const serviceLinks: {
-  title: string;
-  href: string;
-  icon: YardIconName;
-}[] = [
-  {
-    title: "Scrap removal Brisbane",
-    href: "/scrap-removal-brisbane",
-    icon: "bin",
-  },
-  {
-    title: "Industrial scrap",
-    href: "/services/industrial",
-    icon: "motor",
-  },
-  {
-    title: "Demolition steel",
-    href: "/services/demolition",
-    icon: "beam",
-  },
-  {
-    title: "Service areas & arranged drop-off",
-    href: "/locations",
-    icon: "pin",
-  },
+const moreMaterials = [
+  { title: "Cable", href: "/materials/cable" },
+  { title: "Stainless steel", href: "/materials/stainless-steel" },
+  { title: "Brass", href: "/materials/brass" },
+  { title: "Electric motors", href: "/materials/electric-motors" },
+  { title: "Radiators", href: "/materials/radiators" },
+  { title: "Whitegoods", href: "/materials/whitegoods" },
+  { title: "Lead", href: "/materials/lead" },
+  { title: "Zinc", href: "/materials/zinc" },
+  { title: "Swarf & turnings", href: "/materials/swarf" },
+  { title: "Gas bottles", href: "/materials/gas-bottles" },
+  { title: "Cast iron", href: "/materials/cast-iron" },
+  { title: "Hot water systems", href: "/materials/hot-water-systems" },
+  { title: "Car bodies", href: "/materials/car-bodies" },
 ];
-
-const materialTiles: {
-  title: string;
-  href: string;
-  photo: PhotoKey;
-  layout: string;
-}[] = [
-  {
-    title: "Scrap copper",
-    href: "/materials/copper",
-    photo: "copper-sheets",
-    layout: "md:col-span-6 md:min-h-[470px]",
-  },
-  {
-    title: "Scrap aluminium",
-    href: "/materials/aluminium",
-    photo: "aluminium-cans",
-    layout: "md:col-span-3 md:min-h-[470px]",
-  },
-  {
-    title: "Scrap steel",
-    href: "/materials/steel",
-    photo: "rusty-steel",
-    layout: "md:col-span-3 md:min-h-[470px]",
-  },
-  {
-    title: "Scrap cable",
-    href: "/materials/cable",
-    photo: "cable",
-    layout: "md:col-span-4 md:min-h-[430px]",
-  },
-  {
-    title: "Scrap stainless steel",
-    href: "/materials/stainless-steel",
-    photo: "stainless",
-    layout: "md:col-span-4 md:min-h-[430px]",
-  },
-  {
-    title: "Scrap brass",
-    href: "/materials/brass",
-    photo: "alloy",
-    layout: "md:col-span-4 md:min-h-[430px]",
-  },
-  {
-    title: "Scrap electric motors",
-    href: "/materials/electric-motors",
-    photo: "mixed-parts",
-    layout: "md:col-span-12 md:min-h-[360px]",
-  },
-  {
-    title: "Scrap radiators",
-    href: "/materials/radiators",
-    photo: "vehicle",
-    layout: "md:col-span-12 md:min-h-[360px]",
-  },
-  {
-    title: "Scrap whitegoods",
-    href: "/materials/whitegoods",
-    photo: "crew",
-    layout: "md:col-span-12 md:min-h-[360px]",
-  },
-  {
-    title: "Scrap lead",
-    href: "/materials/lead",
-    photo: "alloy",
-    layout: "md:col-span-12 md:min-h-[360px]",
-  },
-  {
-    title: "Scrap zinc",
-    href: "/materials/zinc",
-    photo: "alloy",
-    layout: "md:col-span-12 md:min-h-[360px]",
-  },
-  {
-    title: "Scrap swarf and turnings",
-    href: "/materials/swarf",
-    photo: "machine-swarf",
-    layout: "md:col-span-12 md:min-h-[360px]",
-  },
-  {
-    title: "Scrap car bodies",
-    href: "/materials/car-bodies",
-    photo: "vehicle",
-    layout: "md:col-span-12 md:min-h-[360px]",
-  },
+const serviceCards: { title: string; body: string; href: string; icon: YardIconName; label: string }[] = [
+  { title: "Collection & bins", body: "Tell us what is on site and how much you have. We will confirm collection, bin options and access requirements.", href: "/scrap-removal-brisbane", icon: "bin", label: "Explore collection" },
+  { title: "Industrial scrap", body: "Offcuts, swarf and production metal. Prepare an enquiry around your material streams and site needs.", href: "/services/industrial", icon: "motor", label: "Industrial enquiries" },
+  { title: "Construction & demolition", body: "Structural steel and strip-out metal. Share your project scope, quantity and timing for assessment.", href: "/services/demolition", icon: "beam", label: "Project enquiries" },
+  { title: "Local collection areas", body: "Find guidance for your region, including site access and any arranged receiving instructions.", href: "/locations", icon: "pin", label: "Find your area" },
 ];
-
+const priceFactors: { title: string; body: string; icon: YardIconName }[] = [
+  { title: "Metal grade", body: "Different metals and alloys are assessed separately.", icon: "tag" },
+  { title: "Condition", body: "Attachments and mixed material affect recoverable metal.", icon: "sort" },
+  { title: "Net weight", body: "The material weight excludes vehicles and containers.", icon: "scale" },
+  { title: "The market", body: "Commodity prices can change an indicative quote over time.", icon: "trend" },
+];
 const homeFaqs = [
-  {
-    q: "What details help with a scrap metal quote?",
-    a: "Send the metal type, approximate weight, exact suburb and condition.",
-  },
-  {
-    q: "Why can the final price change?",
-    a: "Final grading, contamination, attachments and measured net weight can change the price.",
-  },
-  {
-    q: "What if my load contains mixed metals?",
-    a: "Separate obvious grades where practical and describe anything you cannot identify.",
-  },
-  {
-    q: "Is scrap removal available in Brisbane?",
-    a: "Yes. MetalBase drivers collect from customer sites across Brisbane. Send the material, quantity, exact address, access, handling needs and timing so the job-specific scope can be confirmed.",
-  },
+  { q: "What details help with a scrap metal quote?", a: "Send the metal type, approximate weight, exact suburb and condition." },
+  { q: "Why can the final price change?", a: "Final grading, contamination, attachments and measured net weight can change the price." },
+  { q: "What if my load contains mixed metals?", a: "Separate obvious grades where practical and describe anything you cannot identify." },
+  { q: "Is scrap removal available in Brisbane?", a: "Yes. MetalBase drivers collect from customer sites across Brisbane. Send the material, quantity, exact address, access, handling needs and timing so the job-specific scope can be confirmed." },
 ];
 
 export default function Home() {
   const tel = company.phone?.replace(/\s/g, "");
-
   return (
     <>
-      <section className="on-dark over-photo relative flex min-h-[650px] items-center overflow-hidden bg-furnace lg:min-h-[calc(100svh-6rem)]">
-        <Photo
-          name="grab-claw"
-          priority
-          sizes="100vw"
-          sourceWidth={3456}
-          alt="An orange peel grab lifting scrap metal above a yard"
-          className="object-[58%_center]"
-        />
-        <span aria-hidden="true" className="photo-scrim" />
-
-        <div className="shell relative z-10 py-24 text-center lg:py-32">
-          <p className="t-index mx-auto mb-6 w-fit border-b border-white/70 pb-3">
-            Quote guidance · Brisbane + South East Queensland
-          </p>
-          <h1 className="mx-auto max-w-[15ch]">
-            Clearer scrap metal quotes across Brisbane.
-          </h1>
-          <p className="t-lead mx-auto mt-7 max-w-[56ch] t-muted">
-            Tell us the metal, quantity, condition and suburb for an indicative
-            quote or removal assessment.
-          </p>
-          <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-            <Button href="/contact">Get a quote</Button>
-            <Button href="/what-we-buy" variant="ghost">
-              What we buy
-            </Button>
-          </div>
-        </div>
-
-        <p className="t-spec absolute bottom-4 right-5 z-10 bg-furnace/90 px-2 py-1 text-white">
-          Illustrative industry image
-        </p>
-      </section>
-
-      <Split
-        photo="operator"
-        side="right"
-        tone="ink"
-        n={1}
-        caption="Material handling and load preparation"
-        eyebrow="Welcome to MetalBase"
-        title="A clearer way to describe your scrap"
-      >
-        <p className="t-lead mt-6">
-          Useful quotes start with four things: the material, rough quantity,
-          condition and location.
-        </p>
-        <p className="mt-5 leading-relaxed">
-          MetalBase provides mobile collection across {formatServiceRegions()}.
-          Final grade, collection timing,
-          arranged receiving instructions and commercial terms are confirmed
-          for each enquiry.
-        </p>
-        <ArrowLink href="/scrap-metal-brisbane" className="mt-8">
-          Scrap metal Brisbane guide
-        </ArrowLink>
-      </Split>
-
-      <Split
-        photo="yard-grab"
-        side="left"
-        tone="slab"
-        n={2}
-        caption="Sorting mixed metal into recoverable grades"
-        eyebrow="Pricing"
-        title="What shapes a scrap price"
-      >
-        <p className="mt-5 leading-relaxed">
-          An indicative quote depends on the grade described. The final result
-          can change after the material is inspected and weighed.
-        </p>
-        <ul className="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2">
-          {priceFactors.map((factor) => (
-            <li key={factor.title} className="flex items-start gap-4">
-              <YardIcon name={factor.icon} className="mt-0.5 h-8 w-8 shrink-0 text-signal" />
-              <div>
-                <h3 className="text-xl">{factor.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed t-muted">
-                  {factor.body}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <ArrowLink href="/prices" className="mt-9">
-          How pricing works
-        </ArrowLink>
-      </Split>
-
-      <section className="on-dark over-photo relative flex min-h-[520px] items-center overflow-hidden bg-furnace">
-        <Photo
-          name="yard-wide"
-          alt="A wide view across a metal recovery yard"
-          sizes="100vw"
-          sourceWidth={2880}
-        />
-        <span aria-hidden="true" className="photo-scrim" />
-        <div className="shell relative z-10 py-24 text-center">
-          <h2 className="mx-auto max-w-[16ch]">Get a clearer scrap quote.</h2>
-          <p className="t-lead mx-auto mt-6 max-w-[52ch] t-muted">
-            Send the metal type, rough weight, condition and exact suburb.
-          </p>
-          <Button href="/contact" className="mt-8">
-            Start your enquiry
-          </Button>
-        </div>
-      </section>
-
-      <Split
-        photo="tipper"
-        side="left"
-        tone="ink"
-        n={3}
-        caption="Illustrative material transport and site handling"
-        eyebrow="Regional services"
-        title="Match the service to the load"
-      >
-        <p className="mt-5 leading-relaxed">
-          Tell us what is on site, how much there is and what access looks like.
-          Our drivers collect from customer sites, with bins and job-specific
-          timing, equipment and terms confirmed for each enquiry.
-        </p>
-        <ul className="mt-8 border-y hair">
-          {serviceLinks.map((service) => (
-            <li key={service.href} className="border-b hair last:border-b-0">
-              <Link
-                href={service.href}
-                className="group flex min-h-16 items-center justify-between gap-5 py-3 transition-colors duration-[160ms] ease-out hover:text-signal"
-              >
-                <span className="flex items-center gap-4 font-semibold">
-                  <YardIcon name={service.icon} className="h-7 w-7 shrink-0" />
-                  {service.title}
-                </span>
-                <span aria-hidden="true" className="text-xl transition-transform duration-[160ms] ease-out group-hover:translate-x-1">
-                  →
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <ArrowLink href="/services" className="mt-8">
-          View commercial services
-        </ArrowLink>
-      </Split>
-
-      <section className="on-light bg-white py-16 lg:py-24">
-        <div className="shell">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="t-index mb-4 t-accent">Common material groups</p>
-              <h2>Metals we buy.</h2>
+      <section className="home-hero on-light">
+        <div className="shell hero-grid">
+          <div className="hero-copy">
+            <p className="eyebrow-pill">Brisbane & South East Queensland</p>
+            <h1>Your scrap metal.<br /><span>A new beginning.</span></h1>
+            <p className="hero-intro">From copper offcuts to a site full of steel, get a clear scrap metal quote and collection options for your load.</p>
+            <div className="hero-actions">
+              <Button href="/contact">Get a quote</Button>
+              <Button href="/what-we-buy" variant="ghost">Explore metals</Button>
             </div>
-            <ArrowLink href="/what-we-buy">View the full guide</ArrowLink>
+            <p className="hero-note"><Tick className="h-5 w-5" /> Collection & bins available <span aria-hidden="true">·</span> Terms confirmed per load</p>
           </div>
-
-          <ol className="mt-10 grid gap-2 md:grid-cols-12">
-            {materialTiles.map((tile, index) => (
-              <li
-                key={`${tile.title}-${index}`}
-                className={`min-h-[360px] ${tile.layout}`}
-              >
-                <Link
-                  href={tile.href}
-                  className="image-link over-photo group relative flex h-full min-h-[360px] overflow-hidden bg-furnace focus-visible:outline-offset-[-4px]"
-                >
-                  <Photo
-                    name={tile.photo}
-                    alt=""
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    sourceWidth={1600}
-                    quality={70}
-                  />
-                  <span aria-hidden="true" className="photo-scrim-soft" />
-                  <span className="relative z-10 mt-auto flex w-full items-end justify-between gap-5 p-6 lg:p-8">
-                    <span className="font-display text-2xl font-semibold leading-tight">
-                      {tile.title}
-                    </span>
-                    <span className="t-spec shrink-0 border-l border-white/70 pl-4">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ol>
-          <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="t-spec t-muted">
-              Illustrative industry images. Final grade depends on composition
-              and condition.
-            </p>
-            <Link href="/glossary" className="text-sm font-semibold u-link">
-              Scrap glossary
-            </Link>
+          <div className="hero-visual">
+            <figure className="hero-photo">
+              <Photo name="grab-claw" priority sizes="(max-width: 767px) 100vw, 50vw" sourceWidth={1600} alt="An orange peel grab lifting scrap metal at a recycling yard" />
+              <figcaption>Illustrative industry image</figcaption>
+            </figure>
+            <div className="hero-photo-note">
+              <span className="icon-disc"><YardIcon name="bin" className="h-7 w-7" /></span>
+              <span><strong>From your site.</strong><br />On to its next chapter.</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="on-light border-t hair bg-shaft py-16 lg:py-24">
-        <div className="shell grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
-          <div>
-            <p className="t-index mb-4 t-accent">Useful answers</p>
-            <h2>Before you request a quote.</h2>
-            <ArrowLink href="/faq" className="mt-8">
-              See all FAQs
-            </ArrowLink>
+      <section className="region-strip on-light" aria-label="Service coverage">
+        <div className="shell">
+          <p>Local knowledge. A simpler way to recycle.</p>
+          <p className="t-muted">{formatServiceRegions()}.</p>
+          <Link href="/locations" className="u-link">Explore service areas</Link>
+        </div>
+      </section>
+
+      <section className="home-section on-light bg-white">
+        <div className="shell">
+          <div className="section-heading">
+            <p className="section-eyebrow">Good things start with the right material.</p>
+            <h2>What have you got?</h2>
+            <p>Get to know your metal, how it is graded and what to include in your quote.</p>
           </div>
+          <div className="material-cards">
+            {featuredMaterials.map((material) => (
+              <Link key={material.href} href={material.href} className="material-card image-link">
+                <div className="material-card-photo">
+                  <Photo name={material.photo} alt="" sizes="(max-width: 767px) 100vw, 33vw" sourceWidth={900} />
+                  <span>{material.tag}</span>
+                </div>
+                <div className="material-card-copy">
+                  <h3>{material.title}</h3><p>{material.description}</p>
+                  <span className="card-link">Explore {material.title.toLowerCase()} <ArrowRight className="h-5 w-5" /></span>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <p className="image-caption">Illustrative industry images. Final grade depends on composition and condition.</p>
+          <div className="more-materials" aria-label="More material guides">
+            {moreMaterials.map((material) => (
+              <Link href={material.href} key={material.href}>{material.title}<ArrowRight className="h-4 w-4" /></Link>
+            ))}
+          </div>
+          <div className="section-actions">
+            <Button href="/what-we-buy" variant="ghost">See all materials</Button>
+            <Link href="/glossary" className="u-link">New to scrap? Explore the glossary</Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="service-band on-dark">
+        <div className="shell">
+          <div className="section-heading">
+            <p className="section-eyebrow">For your site. For your business.</p>
+            <h2>A service that starts with your load.</h2>
+            <p>One-off clear-outs or ongoing metal streams. Start with the details, and we will work through the options with you.</p>
+          </div>
+          <div className="service-cards">
+            {serviceCards.map((service) => (
+              <Link key={service.href} href={service.href} className="service-card">
+                <span className="service-icon"><YardIcon name={service.icon} className="h-8 w-8" /></span>
+                <h3>{service.title}</h3><p>{service.body}</p>
+                <span className="card-link">{service.label}<ArrowRight className="h-5 w-5" /></span>
+              </Link>
+            ))}
+          </div>
+          <div className="section-actions"><Button href="/services" variant="ghost">View commercial services</Button></div>
+          <p className="service-terms">Availability, equipment, collection timing and commercial terms are confirmed for each enquiry.</p>
+        </div>
+      </section>
+
+      <section className="home-section on-light bg-white">
+        <div className="shell process-layout">
+          <div>
+            <p className="section-eyebrow">Less guesswork. More clarity.</p>
+            <h2>A clearer quote.<br />In three simple steps.</h2>
+            <p className="process-intro">You do not need to know every grade. A few details and clear photos give us a useful place to start.</p>
+            <ArrowLink href="/scrap-metal-brisbane">Your Brisbane scrap guide</ArrowLink>
+          </div>
+          <ol className="process-steps">
+            <li><span className="step-number">1</span><div><h3>Show us your scrap</h3><p>Tell us the material, rough quantity, condition and suburb. Add photos if you can.</p></div></li>
+            <li><span className="step-number">2</span><div><h3>Understand your options</h3><p>We review the details and discuss grade assumptions, pricing and suitable handling.</p></div></li>
+            <li><span className="step-number">3</span><div><h3>Agree on the next step</h3><p>Confirm the scope, location, timing and terms before any material moves.</p></div></li>
+          </ol>
+        </div>
+      </section>
+
+      <section className="pricing-section on-light">
+        <div className="shell pricing-layout">
+          <div>
+            <p className="section-eyebrow">Know what goes into your quote.</p>
+            <h2>The right details<br />make the difference.</h2>
+            <p className="process-intro">A quote is based on the material you describe. Final pricing can change after inspection and weighing.</p>
+            <Button href="/prices" variant="ghost">How pricing works</Button>
+          </div>
+          <ul className="price-factor-grid">
+            {priceFactors.map((factor) => (
+              <li key={factor.title}><YardIcon name={factor.icon} className="h-8 w-8 text-signal" /><h3>{factor.title}</h3><p>{factor.body}</p></li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="home-section on-light bg-white">
+        <div className="shell faq-layout">
+          <div><p className="section-eyebrow">A little clarity goes a long way.</p><h2>Questions?<br />Start here.</h2><ArrowLink href="/faq" className="mt-7">See all FAQs</ArrowLink></div>
           <FaqList items={homeFaqs} />
         </div>
       </section>
 
-      {tel && (
-        <section className="on-light border-t hair bg-white py-8">
-          <div className="shell flex flex-col gap-3 text-sm sm:flex-row sm:items-center sm:justify-between">
-            <p className="t-muted">Prefer to talk through the load?</p>
-            <a
-              href={`tel:${tel}`}
-              className="inline-flex min-h-11 items-center font-semibold u-link"
-            >
-              Call {company.phoneLabel ?? company.phone}
-            </a>
+      <section className="closing-section on-light">
+        <div className="shell">
+          <div className="closing-panel">
+            <p className="section-eyebrow">Let us take it from here.</p>
+            <h2>Give your scrap<br />a new beginning.</h2>
+            <p>Tell us what you have. We will help you work out what comes next.</p>
+            <div className="hero-actions">
+              <Button href="/contact">Get a quote</Button>
+              {tel && <a href={`tel:${tel}`} className="btn btn-ghost">Call {company.phoneLabel ?? company.phone}</a>}
+            </div>
+            {company.hours && <p className="closing-hours">{company.hours}</p>}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
     </>
   );
 }

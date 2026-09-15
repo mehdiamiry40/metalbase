@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Barlow, Open_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Open_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -15,27 +15,7 @@ import {
   operations,
 } from "@/lib/site";
 
-/**
- * Barlow gives headings the architectural clarity of the reference site,
- * while Open Sans keeps longer guidance calm and highly legible. The two
- * families are closely related in proportion without feeling generic.
- *
- * Both are self-hosted rather than linked from fonts.googleapis.com. A
- * stylesheet link is render-blocking and on a third-party origin, so
- * first paint would wait on a DNS lookup, TLS handshake and round trip
- * to Google before a single character could be drawn. next/font builds
- * the files into the deployment, serves them same-origin, and inlines
- * the @font-face — no third-party request on the critical path.
- *
- * It also keeps the site free of external origins on load, which is
- * worth something under GDPR: Google Fonts served from Google's CDN
- * discloses visitor IPs to a third party.
- *
- * `display: swap` keeps text visible during load, and next/font
- * metric-adjusts each fallback to limit the reflow when it swaps.
- *
- * Only the weights used by the interface are included.
- */
+/** Two self-hosted families: an open, friendly display face and legible body text. */
 const openSans = Open_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
@@ -43,11 +23,11 @@ const openSans = Open_Sans({
   variable: "--font-open-sans",
 });
 
-const barlow = Barlow({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
   display: "swap",
-  variable: "--font-barlow",
+  variable: "--font-jakarta",
 });
 
 export const metadata: Metadata = {
@@ -135,10 +115,10 @@ export default function RootLayout({
   return (
     <html
       lang="en-AU"
-      className={`${openSans.variable} ${barlow.variable}`}
+      className={`${openSans.variable} ${jakarta.variable}`}
     >
       <head>
-        <meta name="theme-color" content="#1d2747" />
+        <meta name="theme-color" content="#032d60" />
         <script
           type="application/ld+json"
           // Serialised from a typed object above; no user input reaches this.

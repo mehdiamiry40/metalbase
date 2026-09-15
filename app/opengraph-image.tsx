@@ -17,13 +17,13 @@ export default function OpengraphImage() {
           justifyContent: "space-between",
           background: "#ffffff",
           padding: "72px",
-          color: "#1d2747",
+          color: "#032d60",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <svg width="58" height="58" viewBox="0 0 48 48">
             {METALBASE_MARK_PATHS.map((path) => (
-              <path key={path} d={path} fill="#1d2747" />
+              <path key={path} d={path} fill="#032d60" />
             ))}
           </svg>
           <span style={{ fontSize: 44, fontWeight: 700, letterSpacing: 1.5 }}>
@@ -42,14 +42,14 @@ export default function OpengraphImage() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            borderTop: "2px solid #5f6675",
+            borderTop: "2px solid #425870",
             paddingTop: 24,
           }}
         >
-          <span style={{ color: "#5f6675", fontSize: 26 }}>
+          <span style={{ color: "#425870", fontSize: 26 }}>
             Quotes · grades · preparation
           </span>
-          <span style={{ color: "#5f6675", fontSize: 26 }}>
+          <span style={{ color: "#425870", fontSize: 26 }}>
             Brisbane, QLD
           </span>
         </div>
