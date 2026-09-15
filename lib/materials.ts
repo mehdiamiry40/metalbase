@@ -1883,6 +1883,124 @@ export const materials: MaterialGuide[] = [
         a: "Customer-site collection is available, with material, minimum volume, access, equipment, timing and terms confirmed for the proposed load and address. Batteries, screens and other separated streams need their acceptance confirmed individually.",
       },
     ],
+  },
+  {
+    slug: "transformers",
+    name: "Scrap transformers",
+    shortName: "Transformers",
+    eyebrow: "Scrap transformers Brisbane",
+    seoTitle: "Scrap Transformers Brisbane: Oil & Winding Guide",
+    seoDescription:
+      "Copper or aluminium windings, oil-filled or dry type — the oil decides what can move first. What a Brisbane scrap transformer quote needs.",
+    h1: "Scrap transformers Brisbane: settle the oil before you quote the copper",
+    intro:
+      "Winding metal is only half the question. Whether a unit is oil-filled or dry type, and how old that oil is, decides what can be moved and when. Send the nameplate, the age and whatever you know about the oil — draining or dismantling is not needed to start an enquiry.",
+    photo: "mixed-parts",
+    overview:
+      "Two transformers of the same weight can be very different parcels. Windings may be copper or aluminium and the two are indistinguishable once encapsulated, the core is grain-oriented electrical steel rather than plain mild steel, and an oil-filled unit carries insulating oil that has to be settled before anything else happens. Units built before the mid-1980s can contain PCBs in that oil, which is regulated waste in Queensland and cannot be handled as ordinary waste oil, so the nameplate, the manufacture date and any oil test results do more for a scrap transformer enquiry than another photo of the tank. Most units that come loose around Brisbane are workshop welding transformers, control and ballast transformers out of switchboard and lighting upgrades, and plant or UPS transformers from commercial fitouts. Pole and pad-mounted distribution units on the street generally remain network property, so ownership has to be clear before anything moves.",
+    examples: [
+      "Workshop welding transformers",
+      "Control and ballast transformers from a switchboard upgrade",
+      "Dry-type cast-resin units from a commercial fitout",
+      "Oil-filled units removed from plant",
+      "UPS and rectifier transformers",
+      "Microwave oven transformers",
+      "Transformers still bolted into a steel cabinet",
+    ],
+    grades: [
+      {
+        term: "Oil-filled transformers",
+        detail:
+          "A steel tank, cooling fins, bushings and insulating oil. The oil is the first question, not the last: its age, volume and any test results decide what can be arranged. Do not drain, sample or tip a unit to find out — describe what the nameplate says and flag where the status is unknown.",
+      },
+      {
+        term: "Dry-type and cast-resin transformers",
+        detail:
+          "No oil to settle. Windings are varnished or encapsulated in epoxy, which stays attached to the metal and affects how the unit is described. Common in commercial buildings and switchrooms, and usually mounted in a ventilated steel enclosure.",
+      },
+      {
+        term: "Copper-wound and aluminium-wound units",
+        detail:
+          "Both are standard manufacture and neither can be identified by eye once the windings are encapsulated or taped. Many nameplates state the winding metal; where the plate is gone or unreadable, say so rather than assuming copper.",
+      },
+      {
+        term: "Core steel and clamping frame",
+        detail:
+          "The laminated core is grain-oriented electrical steel and is described separately from the mild-steel frame, bolts and tank around it. Core mass is a large share of a transformer's total weight, which is why weight alone says little about the winding metal.",
+      },
+      {
+        term: "Small transformers and built-in assemblies",
+        detail:
+          "Welding, ballast, control and microwave oven transformers are often still bolted into a frame, cabinet or appliance. Leave them where they are and photograph the assembly — these are assessed as mixed items rather than as winding metal.",
+      },
+    ],
+    quoteFactors: [
+      {
+        term: "Oil status and unit age",
+        detail:
+          "Insulating oil from units built before the mid-1980s can contain PCBs, which are regulated waste in Queensland and cannot be treated as ordinary waste oil. Share the manufacture date and any oil test results, and say plainly when the status is unknown.",
+      },
+      {
+        term: "Winding metal",
+        detail:
+          "Copper and aluminium windings carry different recoverable value, and the nameplate is usually the only honest way to tell them apart without cutting into the unit.",
+      },
+      {
+        term: "Ownership",
+        detail:
+          "Pole and pad-mounted distribution equipment on the network is the distributor's property, not the site's. Ownership needs to be clear before a unit is described in an enquiry or moved.",
+      },
+      {
+        term: "Enclosure and attachments",
+        detail:
+          "Cabinets, mounting frames, bushings, tap changers, terminal blocks and tails still attached change whether a unit is assessed as a transformer or a mixed assembly.",
+      },
+      {
+        term: "Weight, lifting and access",
+        detail:
+          "Transformers are dense for their size and often sit in switchrooms, plant rooms or basements. Send the weight from the nameplate, whether lifting lugs are fitted, and how a forklift or crane reaches the unit.",
+      },
+    ],
+    preparation: [
+      {
+        title: "Photograph the nameplate",
+        body: "Show the rating, manufacture date, weight, oil type and volume, and the winding metal where it is stated. This identifies the unit without opening anything.",
+      },
+      {
+        title: "Say what you know about the oil",
+        body: "State whether the unit is oil-filled, whether it has been tested, and whether the result is unknown. Do not drain, sample or decant oil to prepare an enquiry, and report any existing leak or spill rather than cleaning it up first.",
+      },
+      {
+        title: "Leave the unit assembled",
+        body: "Do not cut, burn or chisel windings out of a core to chase a higher grade. Present the transformer intact and let the assessment identify what is recoverable.",
+      },
+      {
+        title: "Send weight, access and suburb",
+        body: "Give the nameplate weight or a realistic estimate, describe the lift, stairs, doorways or switchroom the unit has to come out of, and include the Brisbane suburb.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Are transformer windings copper or aluminium?",
+        a: "Both are used, and once windings are taped or encapsulated the two look alike. The nameplate often states the winding metal. Total weight is not a reliable test either, because the laminated core makes up much of the mass regardless of the winding.",
+      },
+      {
+        q: "What are PCBs and why do they matter on an old transformer?",
+        a: "PCBs are compounds used in insulating oil in older equipment. They are regulated waste in Queensland and cannot be handled as ordinary waste oil, so the age of a unit and any oil test results change what can be arranged and when. Do not drain or sample oil yourself to check.",
+      },
+      {
+        q: "Can an oil-filled transformer be collected before the oil is dealt with?",
+        a: "Ask before arranging anything. Identify the unit, its manufacture date and its oil status, including where that status is unknown, so acceptance, specialist work and transport requirements can be confirmed for the actual unit.",
+      },
+      {
+        q: "Is a microwave oven transformer worth scrapping on its own?",
+        a: "Not usually on its own — it is small and much of its weight is core steel. Include it with other material rather than as a single item. If it is still fitted inside the oven, leave it there: the capacitor beside it can hold a charge after the appliance is unplugged.",
+      },
+      {
+        q: "Can MetalBase collect transformers in Brisbane?",
+        a: "Customer-site collection is available, with material, oil status, quantity, access, equipment, timing and terms confirmed for the actual units and address.",
+      },
+    ],
   }
 ];
 
