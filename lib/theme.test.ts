@@ -57,12 +57,15 @@ const NOT_COLOURS = new Set([
 ]);
 
 const CANONICAL_COLOURS = [
-  "#1d2747", // furnace
-  "#5f6675", // steel
-  "#d8dce4", // galvanised
-  "#f1f3f6", // yard fog
+  "#032d60", // furnace
+  "#425870", // steel
+  "#d8e4ee", // galvanised
+  "#edf6ff", // yard fog
   "#ffffff", // scale paper
-  "#44527e", // signal indigo
+  "#0067b9", // signal blue; readable on white, yard fog and sky
+  "#cdeaff", // sky
+  "#2e7d46", // leaf
+  "#215c34", // leaf hover
 ] as const;
 
 describe("theme tokens", () => {
@@ -72,7 +75,7 @@ describe("theme tokens", () => {
     ...sourceFiles(join(root, "components")),
   ];
 
-  it("declares the six canonical MetalBase colours", () => {
+  it("declares the semantic MetalBase colours", () => {
     for (const t of [
       "furnace",
       "steel",
@@ -105,7 +108,7 @@ describe("theme tokens", () => {
     }
   });
 
-  it("uses only the six canonical colour literals", () => {
+  it("uses only the semantic colour literals", () => {
     const css = readFileSync(join(root, "app/globals.css"), "utf8");
     const sources = [css, ...files.map((file) => readFileSync(file, "utf8"))];
     const literals = new Set(
@@ -120,7 +123,7 @@ describe("theme tokens", () => {
     expect(css).not.toContain("color-mix(");
   });
 
-  it("keeps the interface square and free of stock landing-page effects", () => {
+  it("avoids broad transitions and distracting interaction effects", () => {
     const offenders: string[] = [];
     for (const file of files) {
       const source = stripComments(readFileSync(file, "utf8"));
@@ -189,7 +192,7 @@ describe("theme tokens", () => {
 
   it("loads no more than the two documented font families", () => {
     const layout = readFileSync(join(root, "app/layout.tsx"), "utf8");
-    expect(layout).toContain("Barlow");
+    expect(layout).toContain("Plus_Jakarta_Sans");
     expect(layout).toContain("Open_Sans");
     for (const retired of ["Poppins", "DM_Serif_Display", "Archivo", "IBM_Plex_Mono"]) {
       expect(layout).not.toContain(retired);
