@@ -20,7 +20,7 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/",
     display: "browser",
     background_color: "#ffffff",
-    theme_color: "#1d2747",
+    theme_color: "#032d60",
     lang: "en-AU",
     categories: ["business", "utilities"],
     icons: [

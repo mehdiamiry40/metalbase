@@ -28,39 +28,23 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <section className="on-dark over-photo relative min-h-[430px] overflow-hidden bg-furnace lg:min-h-[500px]">
-      {/* BreadcrumbList markup is emitted here from the SAME trail the
-          <Breadcrumb> below renders. Putting it inside PageHeader means
-          every page that shows a trail also describes it to crawlers,
-          and the two physically cannot disagree — there is no second
-          array to forget to update. */}
+    <section className="page-header on-light">
       <Breadcrumbs trail={trail} />
-      <Photo
-        name={photo}
-        priority
-        sizes="100vw"
-        sourceWidth={2880}
-        alt=""
-      />
-      <span aria-hidden="true" className="photo-scrim" />
-      <div className="shell relative z-10 flex min-h-[430px] flex-col pb-16 pt-7 lg:min-h-[500px] lg:pb-20 lg:pt-8">
+      <div className="shell">
         <Breadcrumb trail={trail} />
-        <div className="my-auto mx-auto max-w-4xl py-10 text-center lg:py-14">
-          <p className="t-index mb-5 t-muted">{eyebrow}</p>
-          <h1>{title}</h1>
-          {intro && (
-            <p className="t-lead mx-auto mt-6 max-w-[62ch] t-muted">{intro}</p>
-          )}
-          {children && (
-            <div className="mx-auto mt-8 max-w-3xl [&_.btn]:w-full sm:[&_.btn]:w-auto">
-              {children}
-            </div>
-          )}
+        <div className="page-header-grid">
+          <div>
+            <p className="section-eyebrow">{eyebrow}</p>
+            <h1>{title}</h1>
+            {intro && <p className="t-lead mt-6 max-w-[62ch] t-muted">{intro}</p>}
+            {children && <div className="mt-7 [&_.btn]:w-full sm:[&_.btn]:w-auto">{children}</div>}
+          </div>
+          <figure className="page-header-visual">
+            <Photo name={photo} sizes="(max-width: 767px) 1px, 33vw" sourceWidth={900} alt="" />
+            <figcaption>Illustrative industry image</figcaption>
+          </figure>
         </div>
       </div>
-      <p className="t-spec absolute bottom-4 right-5 z-10 bg-furnace/90 px-2 py-1 text-white">
-        Illustrative industry image
-      </p>
     </section>
   );
 }
