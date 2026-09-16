@@ -248,6 +248,94 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "scrap-metal-recycling-process-brisbane",
+    title: "Where your scrap metal goes after it leaves your site",
+    shortTitle: "After collection",
+    eyebrow: "Recycling",
+    seoTitle: "The Scrap Metal Recycling Process, Step by Step",
+    seoDescription:
+      "Follow the scrap metal recycling process after a Brisbane collection — weighbridge, sorting floor, shear and furnace — and why your sorting still counts.",
+    published: "2026-09-16",
+    readingMinutes: 6,
+    photo: "tipper",
+    summary:
+      "A collected load is weighed, sorted again, cut down and split into streams that leave Brisbane by very different routes. Following the scrap metal recycling process explains why grade and contamination matter so much before the truck arrives.",
+    intro:
+      "A collected load does not go straight into a furnace. The scrap metal recycling process runs through a weighbridge, a sorting floor, a shear or a shredder, and then out to several unrelated markets — and every step of it is decided by what the metal arrived mixed with. Knowing the sequence explains most of what an assessment is actually measuring.",
+    sections: [
+      {
+        heading: "The weighbridge settles quantity and nothing else",
+        body: [
+          "The first thing that happens to a collected load is that it is weighed. A truck crosses a weighbridge loaded and again empty, and the difference — gross less tare — is the quantity that goes on the docket. That figure is precise, auditable, and completely silent about what the load is made of.",
+          "Grade is settled separately, by inspection, and the two are recorded against each other. This is why a docket showing a healthy weight alongside a modest assessment is not a contradiction. Water, timber pallets, concrete in reinforcing bar and dirt in swarf all cross a weighbridge exactly the way metal does, and only one of them is recoverable.",
+        ],
+      },
+      {
+        heading:
+          "Every stage of the scrap metal recycling process is a sorting decision",
+        body: [
+          "Sorting does not stop when a load is tipped. It is repeated with equipment no domestic site has: overhead magnets and magnetic drums pull ferrous out of a moving stream, eddy current separators throw non-ferrous metals off the end of a belt, density and float separation split light alloys from heavy ones, and a handheld XRF analyser reads the actual alloy of a piece in seconds.",
+          "None of that makes the sorting you did on site redundant. Downstream separation recovers metal from a mixed stream at a cost, and it recovers less of it. A parcel that arrives already separated enters the correct stream intact; the same metal buried in a mixed pile enters as a recovery problem, and whatever ends up in the residue fraction does not come back.",
+          "Hand picking still does the work machines cannot. Alloy-specific aluminium, the various stainless grades, and anything plated or coated so that the surface hides what is underneath come off the belt by eye and by analyser rather than by magnet.",
+        ],
+      },
+      {
+        heading: "Size reduction is what makes a load saleable, not just smaller",
+        body: [
+          "A furnace takes a charge of a particular size and density, and getting there is mechanical. Hydraulic shears cut heavy structural steel into furnace-length pieces. Balers compress light-gauge sheet and can stock into dense blocks. Hammer mills and shredders reduce mixed light iron and car bodies to fist-sized fragments. Cable granulators chop insulated cable so the copper can be separated from the plastic by density.",
+          "This is the unglamorous reason bulky material is a different proposition from solid section at the same weight. Loose sheet, offcuts and turnings take up space on the truck first, then take up processing time before they are dense enough to charge. Solid, cut, already-dense material skips most of that queue.",
+        ],
+      },
+      {
+        heading: "Each metal leaves on a different route out of Brisbane",
+        body: [
+          "Once separated and sized, the streams part company. Ferrous scrap feeds electric arc furnace steelmaking, which runs on scrap rather than iron ore, and a large share of Australian ferrous scrap is exported rather than melted here — for south-east Queensland that means bulk and container movements through the Port of Brisbane at Fisherman Islands.",
+          "Non-ferrous takes narrower paths. Aluminium goes to secondary smelters that remelt to specified alloy chemistries, which is precisely why keeping alloys apart is worth the effort rather than blending them. Copper goes to refineries, domestic and offshore, where cleaner grades need less refining and soldered, tinned or insulated material needs more. Lead, zinc, brass and stainless each have their own processors and their own preparation expectations.",
+          "Processing capacity in south-east Queensland clusters where heavy transport already runs — Rocklea, Acacia Ridge, Wacol, Eagle Farm and the corridors feeding the Gateway Motorway. That is also why heavy-vehicle routes, not straight-line distance, tend to shape how a collection is planned.",
+        ],
+      },
+      {
+        heading: "Part of every load never becomes metal again",
+        body: [
+          "Recycling is not lossless. Paint, galvanised coatings, insulation, plastic housings, rubber, glass and dirt all arrive with the metal and leave as residue. Shredding a mixed stream produces a light fluff fraction that is largely non-metallic, and although recovery from it keeps improving, some of it is simply not recovered.",
+          "That residue is a real cost carried somewhere in the chain, which is the plain reason contamination shows up in an assessment at all. It is not a penalty applied to you. It is the separation and disposal work the parcel brings with it.",
+        ],
+      },
+      {
+        heading: "Recycled metal is the same metal, not a downgrade",
+        body: [
+          "Steel, aluminium, copper and lead can be remelted repeatedly without the metal itself degrading. A structural beam recovered from a Fortitude Valley strip-out and a beam rolled from ore are metallurgically the same product. What differs is that the recycled route skips mining, ore beneficiation and primary reduction entirely, and uses a fraction of the energy doing it.",
+          "The one genuine constraint is chemistry rather than quality. Unwanted elements — copper in steel, iron in aluminium, tin and lead in copper — are difficult or impossible to remove once they are melted in. That is the whole reason the trade cares so much about grades, and the reason an accurately described parcel is worth the few minutes it takes to describe.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Separate before collection: downstream recovery costs more and yields less.",
+      "Keep alloys apart rather than blending — remelters buy to a chemistry.",
+      "Expect the weighbridge to settle quantity and inspection to settle grade.",
+      "Declare coatings, insulation and plastic; they leave the process as residue.",
+      "Flatten or cut bulky light-gauge material where you can do it safely.",
+    ],
+    faqs: [
+      {
+        q: "Does metal lose quality each time it is recycled?",
+        a: "No. Steel, aluminium, copper and lead can be remelted repeatedly without the metal degrading, which is why recycled and primary metal are the same product. The limit is chemistry: unwanted elements mixed in before melting are difficult to remove afterwards, so separation matters more than the number of times a metal has been through the cycle.",
+      },
+      {
+        q: "Where does Brisbane scrap metal actually end up?",
+        a: "Ferrous scrap either feeds electric arc furnace steelmaking or is exported, and for south-east Queensland export moves through the Port of Brisbane at Fisherman Islands. Non-ferrous metals go to their own processors — aluminium to secondary smelters, copper to refineries — each with different preparation expectations.",
+      },
+      {
+        q: "If a processor sorts everything again, why should I sort it myself?",
+        a: "Because mechanical separation recovers less than clean segregation does, and it costs more to run. Metal that arrives already separated enters the correct stream intact, while the same metal in a mixed pile is a recovery job, and the portion lost to residue is not recovered at all.",
+      },
+      {
+        q: "What happens to the non-metal parts of a load?",
+        a: "Plastics, rubber, glass, insulation, coatings and dirt are separated out as residue during the scrap metal recycling process. Recovery from that fraction continues to improve, but some of it is disposed of rather than recycled, which is why contamination affects how a parcel is assessed.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {

@@ -41,6 +41,7 @@ const EXPECTED_POST_SLUGS = [
   "what-changes-a-scrap-metal-quote",
   "sorting-scrap-metal-on-site",
   "scrap-metal-paperwork-queensland",
+  "scrap-metal-recycling-process-brisbane",
 ] as const;
 
 const EXPECTED_MATERIAL_SLUGS = [
