@@ -336,6 +336,97 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "scrap-metal-bin-hire-brisbane",
+    title: "When a scrap metal bin earns its place on site",
+    shortTitle: "Bins or collection",
+    eyebrow: "Logistics",
+    seoTitle: "Scrap Metal Bin Hire Brisbane: Bin or Collection?",
+    seoDescription:
+      "Scrap metal bin hire in Brisbane turns on access, not bin size. What decides between a bin, a one-off collection and an arranged drop-off.",
+    published: "2026-09-17",
+    readingMinutes: 6,
+    photo: "crew",
+    summary:
+      "A bin is a storage decision before it is a collection one. What scrap metal bin hire actually turns on, and when a single collection or an arranged drop-off does the job better.",
+    intro:
+      "The question people ask is what size bin they need. The question that decides it is where a bin can physically sit, and for how long. Scrap metal bin hire is really a choice between three ways of moving the same metal — a container that waits on site, a truck that comes once, or a drop-off you arrange yourself — and site access rules one or two of them out before volume is even discussed.",
+    sections: [
+      {
+        heading: "A bin buys time on site, not a better assessment",
+        body: [
+          "A bin does one thing the other options cannot: it sits there. Material generated over a fortnight of strip-out, a production run or a renovation goes in as it comes off, instead of piling up in a corner and being handled twice. That is the whole value, and it is a storage benefit rather than a grading one.",
+          "The metal is assessed the same way whatever container it arrived in. A bin does not improve a grade, and it does not protect a parcel from contamination — on an open site it makes contamination easier, because a bin collects whatever anyone walking past decides is rubbish.",
+        ],
+      },
+      {
+        heading: "Site access decides scrap metal bin hire before volume does",
+        body: [
+          "A bin is rolled or lifted off a truck, sits somewhere level that will carry the weight, and is lifted off again full. That needs headroom above the placement point, a clear path in, and a surface that will not sink. Overhead power lines, carport roofs, awnings and mature figs are the usual blockers, and none of them move for the delivery.",
+          "This is where Brisbane's housing stock gets specific. A Queenslander in Paddington, Bardon or Red Hill with a steep narrow driveway and cars parked both sides of the street is a different proposition from a hardstand yard at Darra, Wacol or Northgate with room to turn a rigid truck. Apartment and townhouse sites around Newstead, Bowen Hills and Woolloongabba usually have a height bar over the basement entry, which settles the question on the spot: the container goes at street level or not at all.",
+          "Send the gate or entry width, the overhead clearance, the ground surface, and a photograph of the spot you have in mind with whatever is above it in frame. Those four things resolve most of the conversation in a single exchange.",
+        ],
+      },
+      {
+        heading: "A bin outside your boundary is a council matter",
+        body: [
+          "Putting a bin on your own driveway or hardstand is your decision. Putting it on the footpath, the verge or the road is not. Occupying public land is regulated by the local council, and inside the city that is Brisbane City Council, so check what approval applies before the container is delivered rather than after a ranger has walked past it.",
+          "Neighbouring councils set their own rules for their own areas, so a job at Springwood, Ipswich or Capalaba is a question for Logan, Ipswich or Redland City rather than for Brisbane. The lead time on an approval is the part that catches people out; ask early enough that it does not sit on the critical path of the job.",
+        ],
+      },
+      {
+        heading: "One bin means one parcel, so grades need separate homes",
+        body: [
+          "Everything in a container arrives together. Clean copper offcuts, galvanised sheet, cable and general steel in the same bin arrive as a mixed load and are handled as one, and the separation you did at the bench is undone by whoever tipped the last barrow in.",
+          "Where a site generates more than one stream, the workable answers are a container per stream or a disciplined staging area where grades are kept apart and only loaded once collection is arranged. Which of those is possible comes back to how much room you have, which is the access question again in a different form.",
+        ],
+      },
+      {
+        heading: "A finished pile wants a collection; a running stream wants a bin",
+        body: [
+          "That is close to the whole decision rule. A renovation that is done, a shed that has been cleared, a single machine that has come out — the material exists, it is not growing, and one collection moves it. A container sitting beside a pile that is not changing does nothing the pile was not already doing.",
+          "A fabrication shop dropping offcuts every shift, a strip-out running across three weeks, a plumbing or electrical business accumulating copper and cable between jobs — those are streams, and something has to hold the material while it builds. Frequency, suitable container options and terms are confirmed for the actual site rather than assumed in advance.",
+        ],
+      },
+      {
+        heading: "Taking it yourself is a real option with real rules",
+        body: [
+          "For a small, clean, finished parcel — a ute tray of copper, a trailer of clean steel — moving it yourself can be the shortest path. MetalBase has no public customer drop-off location, so a drop-off is arranged per enquiry rather than turned up to, and that arrangement is worth settling before you load rather than after.",
+          "Restraint is what gets overlooked on a small load. How a load must be secured on a vehicle in Queensland is set by the Department of Transport and Main Roads, and it applies to a ute and a box trailer exactly as it applies to a truck. Loose sheet, pipe and offcuts on an unsheeted trailer at highway speed on the Gateway is the failure mode, and it is an enforcement problem before it is a safety one for whoever is behind you.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Decide by how the material accumulates, not by how much there is.",
+      "Measure gate width and overhead clearance before discussing bin size.",
+      "Photograph the proposed placement spot with whatever is above it.",
+      "Settle council approval early if the container will sit on public land.",
+      "Give each grade its own container or its own marked staging area.",
+      "Restrain and sheet anything you move yourself, trailer loads included.",
+    ],
+    faqs: [
+      {
+        q: "Do I need a bin, or is one collection enough?",
+        a: "It depends on whether the material is finished or still accumulating. A cleared shed or a completed renovation is a fixed pile, and a single collection moves it. A workshop, a strip-out or a trade business generating metal week after week needs something on site to hold it, which is what a bin is for.",
+      },
+      {
+        q: "What is needed before a bin can be placed?",
+        a: "The address, the gate or entry width, the overhead clearance above the placement point, the ground surface, and whether the spot sits inside your property boundary. A photograph of the intended position answers most of it. Suitability, container options and terms are confirmed for the actual site.",
+      },
+      {
+        q: "Can a bin sit on the footpath or the street?",
+        a: "Occupying public land is a council matter rather than something a scrap business can authorise. Inside the city that is Brisbane City Council, while Logan, Ipswich and Redland City set the rules for their own areas. Check what approval applies before delivery and allow time for it.",
+      },
+      {
+        q: "Can everything go in the one bin?",
+        a: "It can, but it then arrives as a mixed load and is handled as one, which undoes any sorting done beforehand. Where a site produces more than one grade, separate containers or separate marked staging areas keep the parcels distinct and easier to assess.",
+      },
+      {
+        q: "Can I drop scrap off myself instead?",
+        a: "Drop-offs are arranged per enquiry. MetalBase has no public customer drop-off location, so the arrangement is settled before you load rather than on arrival. If you are moving a load yourself, how it must be restrained on a ute or trailer is regulated by the Department of Transport and Main Roads in Queensland.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
