@@ -655,6 +655,39 @@
   .region-strip p:first-child { font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; }
   .region-strip p + p { margin-top: 7px; font-size: 0.875rem; }
   .region-strip a { display: inline-flex; align-items: center; min-height: 44px; margin-top: 2px; color: var(--color-signal); font-size: 0.875rem; font-weight: 600; }
+
+  /* ------------------------------------------------ the estimate band
+     Sits directly under the hero, because the question it asks — what
+     have you got, and how much — is the one a visitor arrives already
+     knowing the answer to. Putting it here means the first interactive
+     thing on the page is the thing they came to do, and the enquiry
+     form receives a load that is already described. */
+  .estimate-band { padding-block: 64px 56px; border-bottom: 1px solid var(--color-galvanised); background: var(--color-yard-fog); }
+  .estimate-grid { display: grid; gap: 36px; align-items: start; }
+  .estimate-intro h2 { font-size: clamp(1.9rem, 3vw, 2.5rem); letter-spacing: -0.03em; }
+  .estimate-intro p { max-width: 42ch; margin-top: 16px; font-size: 1.0625rem; line-height: 1.7; }
+  .estimate-card { padding: 28px; border: 1px solid var(--color-galvanised); border-radius: var(--card-radius); background: var(--color-scale-paper); box-shadow: 0 8px 32px rgb(3 45 96 / 6%); }
+  .estimate-inputs { display: grid; gap: 18px; }
+  .estimate-label { display: block; margin-bottom: 8px; font-size: 0.875rem; font-weight: 600; }
+  .estimate-weight-row { display: grid; grid-template-columns: 1fr 7.5rem; gap: 10px; }
+  .estimate-result { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--color-galvanised); }
+  .estimate-placeholder { font-size: 0.9375rem; }
+  .estimate-figure { display: flex; flex-direction: column; gap: 4px; margin-bottom: 20px; }
+  .estimate-amount { font-family: var(--font-display); font-size: clamp(2.25rem, 5vw, 3rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.04em; color: var(--color-signal); }
+  .estimate-figure span:last-child { font-size: 0.875rem; }
+  .estimate-rows { display: grid; gap: 1px; background: var(--color-galvanised); border: 1px solid var(--color-galvanised); border-radius: var(--edge-radius); overflow: hidden; }
+  .estimate-rows > div { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 20px; padding: 12px 16px; background: var(--color-scale-paper); }
+  .estimate-rows dt { font-size: 0.8125rem; font-weight: 600; color: var(--color-steel); }
+  .estimate-rows dd { font-size: 0.9375rem; text-align: right; }
+  .estimate-note { margin-top: 16px; font-size: 0.8125rem; line-height: 1.6; }
+  .estimate-cta { width: 100%; margin-top: 20px; gap: 10px; }
+  .estimate-factors { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 44px; }
+  .estimate-factor { display: flex; align-items: flex-start; gap: 12px; }
+  .estimate-factor svg { flex-shrink: 0; margin-top: 2px; color: var(--color-signal); }
+  .estimate-factor p { display: flex; flex-direction: column; gap: 2px; }
+  .estimate-factor strong { font-size: 0.9375rem; }
+  .estimate-factor span { font-size: 0.8125rem; line-height: 1.5; }
+  @media (min-width: 900px) { .estimate-grid { grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: center; } }
   .home-section { padding-block: 96px; }
   .home-section h2, .pricing-section h2, .service-band h2, .closing-panel h2 { font-size: clamp(2rem, 3.7vw, 3rem); line-height: 1.2; letter-spacing: -0.04em; }
   .section-heading { max-width: 760px; margin-inline: auto; text-align: center; }
@@ -731,6 +764,9 @@
     .hero-note { justify-content: center; font-size: 0.75rem; }
     .hero-note > span { display: none; }
     .hero-visual { max-width: 480px; width: 100%; margin-inline: auto; padding-left: 12px; }
+    .estimate-band { padding-block: 44px 40px; }
+    .estimate-card { padding: 20px; }
+    .estimate-factors { grid-template-columns: repeat(2, 1fr); margin-top: 32px; gap: 16px; }
     .hero-photo { aspect-ratio: 1.3; border-radius: 70px 20px 70px 20px; }
     .hero-photo-note { padding: 13px 18px; gap: 12px; }
     .hero-photo-note .icon-disc { width: 44px; height: 44px; }

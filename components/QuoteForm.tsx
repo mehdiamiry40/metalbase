@@ -1,16 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useId, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { ArrowRight, Tick } from "@/components/ui";
 import {
   ACCEPTED_PHOTO_TYPES,
+  DEFAULT_ENQUIRY_TYPE,
   ENQUIRY_LIMITS,
+  ENQUIRY_TYPES,
+  MATERIAL_CHIPS,
   MAX_INPUT_PHOTO_BYTES,
   MAX_PHOTO_BYTES,
   MAX_PHOTOS,
+  VOLUME_OPTIONS,
   type AcceptedPhotoType,
 } from "@/lib/enquiry-config";
+import { findOption, materialChip, volumeBand } from "@/lib/estimate";
 import {
   acceptedEnquiry,
   enquiryErrorMessage,
@@ -22,34 +27,9 @@ import {
 } from "@/lib/enquiry-client";
 import { company } from "@/lib/site";
 
-const enquiryTypes = [
-  "Scrap metal quote",
-  "Arranged drop-off question",
-  "Collection or container enquiry",
-  "Commercial site enquiry",
-  "Something else",
-];
-
-const materials = [
-  "Copper & cable",
-  "Aluminium",
-  "Brass & bronze",
-  "Stainless steel",
-  "Heavy melting steel",
-  "Light gauge / mixed steel",
-  "Cast iron",
-  "Batteries",
-  "E-waste",
-  "Not sure yet",
-];
-
-const volumes = [
-  "Under 200kg — ute or trailer load",
-  "200kg – 1 tonne",
-  "1 – 10 tonnes",
-  "10+ tonnes",
-  "Not sure yet",
-];
+const enquiryTypes = ENQUIRY_TYPES;
+const materials = MATERIAL_CHIPS;
+const volumes = VOLUME_OPTIONS;
 
 /* The form is a document, so it sits on the light surface — and it says
    so itself rather than relying on the page to wrap it. It renders
@@ -82,6 +62,13 @@ const acceptedPhotoTypes = new Set<string>(ACCEPTED_PHOTO_TYPES);
 const subscribeToHydration = () => () => {};
 const clientHydrationSnapshot = () => true;
 const serverHydrationSnapshot = () => false;
+/* The query string never changes while the form is mounted, so the
+   subscribe above (which never fires) is the correct store. Reading it
+   through useSyncExternalStore rather than in an effect is what keeps
+   the server render and the hydration render identical — the same
+   reason `hydrated` is read this way. */
+const clientSearchSnapshot = () => window.location.search;
+const serverSearchSnapshot = () => "";
 const textLimits = {
   name: ENQUIRY_LIMITS.name,
   company: ENQUIRY_LIMITS.company,
@@ -178,6 +165,7 @@ async function preparePhoto(file: File): Promise<PreparedPhoto> {
 export default function QuoteForm() {
   const uid = useId();
   const typeRef = useRef<HTMLSelectElement>(null);
+  const volumeRef = useRef<HTMLSelectElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
   const photoInputRef = useRef<HTMLInputElement>(null);
   const photoGeneration = useRef(0);
@@ -189,10 +177,15 @@ export default function QuoteForm() {
     clientHydrationSnapshot,
     serverHydrationSnapshot,
   );
+  const search = useSyncExternalStore(
+    subscribeToHydration,
+    clientSearchSnapshot,
+    serverSearchSnapshot,
+  );
   const [state, setState] = useState<State>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [message, setMessage] = useState("");
-  const [picked, setPicked] = useState<string[]>([]);
+  const [pickedOverride, setPickedOverride] = useState<string[] | null>(null);
   const [photos, setPhotos] = useState<PreparedPhoto[]>([]);
   const [photoError, setPhotoError] = useState("");
   const [preparingPhotos, setPreparingPhotos] = useState(false);
@@ -203,6 +196,42 @@ export default function QuoteForm() {
   useEffect(() => {
     if (state === "sent") successRef.current?.focus();
   }, [state]);
+
+  /* ------------------------------------------------------------------
+     Arriving from the home page estimate.
+
+     The estimate already asked which grade and how much, so the form
+     does not ask again: `?grade=&kg=` carries that across. An unknown
+     grade or an unparseable weight prefills nothing, because a bad
+     query string must never stand between someone and the form.
+
+     This is derived during render rather than written by an effect, so
+     there is no second render and nothing to keep in sync. The volume
+     select is the one exception below — it stays uncontrolled, and a
+     DOM write is the honest way to seed an uncontrolled input.
+     ------------------------------------------------------------------ */
+  const prefill = useMemo(() => {
+    const params = new URLSearchParams(search);
+    const option = findOption(params.get("grade") ?? "");
+    if (!option) return null;
+    const kg = Number(params.get("kg"));
+    return {
+      grade: option.grade,
+      chip: materialChip(option),
+      volume: Number.isFinite(kg) && kg > 0 ? volumeBand(kg) : null,
+    };
+  }, [search]);
+
+  /* `picked` is the prefilled chip until the customer touches the list,
+     and their explicit selection from then on — including an empty one,
+     which is why the override is null rather than []. */
+  const picked = pickedOverride ?? (prefill?.chip ? [prefill.chip] : []);
+
+  useEffect(() => {
+    if (prefill?.volume && volumeRef.current) {
+      volumeRef.current.value = prefill.volume;
+    }
+  }, [prefill]);
 
   useEffect(() => () => { photoGeneration.current += 1; }, []);
 
@@ -243,7 +272,10 @@ export default function QuoteForm() {
   }
 
   function toggle(m: string) {
-    setPicked((p) => (p.includes(m) ? p.filter((x) => x !== m) : [...p, m]));
+    setPickedOverride((current) => {
+      const from = current ?? picked;
+      return from.includes(m) ? from.filter((x) => x !== m) : [...from, m];
+    });
   }
 
   async function onPhotoChange(
@@ -389,7 +421,9 @@ export default function QuoteForm() {
           type="button"
           onClick={() => {
             setState("idle");
-            setPicked([]);
+            // An explicit empty selection, not "untouched": the estimate
+            // that seeded this form was for the load just sent.
+            setPickedOverride([]);
             setPhotos([]);
             setPhotoError("");
             setErrors({});
@@ -466,6 +500,13 @@ export default function QuoteForm() {
       )}
 
       <fieldset disabled={!hydrated || busy} aria-label="Enquiry details" className="min-w-0">
+      {/* Fields filling themselves in is alarming without a reason for it. */}
+      {prefill && (
+        <p className="callout mb-6 text-sm">
+          Carried over from your estimate: <strong>{prefill.grade}</strong>. Change
+          anything below that is not right.
+        </p>
+      )}
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="sm:col-span-2">
           <label className={labelCls} htmlFor={`${uid}-type`}>
@@ -476,13 +517,15 @@ export default function QuoteForm() {
             ref={typeRef}
             id={`${uid}-type`}
             name="enquiryType"
-            defaultValue=""
+            defaultValue={DEFAULT_ENQUIRY_TYPE}
             required
             className={field}
             aria-invalid={!!errors.enquiryType}
             aria-describedby={errors.enquiryType ? `${uid}-type-err` : undefined}
           >
-            <option value="">Choose an enquiry type</option>
+            {/* No "Choose an enquiry type" placeholder. Nearly everyone
+                here wants a quote, and an empty required select just
+                makes them state the obvious before they can start. */}
             {enquiryTypes.map((t) => (
               <option key={t}>{t}</option>
             ))}
@@ -598,6 +641,7 @@ export default function QuoteForm() {
         <div>
           <label className={labelCls} htmlFor={`${uid}-volume`}>Estimated volume</label>
           <select
+            ref={volumeRef}
             id={`${uid}-volume`}
             name="volume"
             defaultValue=""
