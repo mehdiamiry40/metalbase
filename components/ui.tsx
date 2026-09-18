@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { METALBASE_MARK_PATHS } from "@/lib/brand";
+import { METALBASE_MARK_PATH } from "@/lib/brand";
 
 /* ------------------------------- icons ----------------------------- */
 
@@ -186,18 +186,19 @@ export function YardIcon({
 }
 
 /* ------------------------------- logo ------------------------------
-   A sheared-plate M standing on a tapered base plinth — see lib/brand
-   for the geometry and why it is cut the way it is. The stems join the
-   chevron rather than floating beside it, so the counters stay open and
-   the silhouette holds its shape down to favicon size instead of
-   filling in as a square.
+   A plate badge with the M cut out of it — see lib/brand for the
+   geometry, and for why it has to be one path under `evenodd` rather
+   than a list of filled shapes. The silhouette is a solid block, which
+   is what lets it hold at favicon size.
    ------------------------------------------------------------------ */
 
 /**
- * The bars take the surface colour via `currentColor`, so the mark is
+ * The plate takes the surface colour via `currentColor`, so the mark is
  * ink on a light header and white on a dark one with no variant prop.
  * The variant approach previously shipped an invisible logo, so the
- * component deliberately has no way to get the surface wrong.
+ * component deliberately has no way to get the surface wrong. The M
+ * needs no colour at all — it is a hole, so it is whatever the page
+ * behind it is, and it cannot go wrong either.
  */
 export function Logo({ className = "" }: { className?: string }) {
   return (
@@ -208,9 +209,7 @@ export function Logo({ className = "" }: { className?: string }) {
         aria-hidden="true"
         focusable="false"
       >
-        {METALBASE_MARK_PATHS.map((path) => (
-          <path key={path} d={path} fill="currentColor" />
-        ))}
+        <path d={METALBASE_MARK_PATH} fill="currentColor" fillRule="evenodd" />
       </svg>
       <span className="font-display text-xl font-bold leading-none tracking-[-0.04em]">
         MetalBase

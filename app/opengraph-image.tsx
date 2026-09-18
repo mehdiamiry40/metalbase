@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { METALBASE_MARK_PATHS } from "@/lib/brand";
+import { METALBASE_MARK_PATH } from "@/lib/brand";
 
 export const alt = "MetalBase — Brisbane scrap metal quote and grade guidance";
 export const size = { width: 1200, height: 630 };
@@ -22,9 +22,7 @@ export default function OpengraphImage() {
       >
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <svg width="58" height="58" viewBox="0 0 48 48">
-            {METALBASE_MARK_PATHS.map((path) => (
-              <path key={path} d={path} fill="#032d60" />
-            ))}
+            <path d={METALBASE_MARK_PATH} fill="#032d60" fillRule="evenodd" />
           </svg>
           <span style={{ fontSize: 44, fontWeight: 700, letterSpacing: 1.5 }}>
             METALBASE
