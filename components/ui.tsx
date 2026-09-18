@@ -186,9 +186,11 @@ export function YardIcon({
 }
 
 /* ------------------------------- logo ------------------------------
-   Three solid steel plates fold into an M above a grounded base. The
-   compact silhouette reads clearly at favicon size and feels materially
-   stronger than the previous thin outline.
+   A sheared-plate M standing on a tapered base plinth — see lib/brand
+   for the geometry and why it is cut the way it is. The stems join the
+   chevron rather than floating beside it, so the counters stay open and
+   the silhouette holds its shape down to favicon size instead of
+   filling in as a square.
    ------------------------------------------------------------------ */
 
 /**
