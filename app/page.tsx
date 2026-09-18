@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Photo from "@/components/Photo";
+import QuoteEstimate from "@/components/QuoteEstimate";
 import { FaqList } from "@/components/Faq";
 import { ArrowLink, ArrowRight, Button, Tick, YardIcon, type YardIconName } from "@/components/ui";
 import type { PhotoKey } from "@/lib/photos";
@@ -91,6 +92,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <QuoteEstimate />
 
       <section className="region-strip on-light" aria-label="Service coverage">
         <div className="shell">
