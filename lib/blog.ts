@@ -427,6 +427,102 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "demolition-metal-recovery-brisbane",
+    title: "Getting the metal off a demolition job in the right order",
+    shortTitle: "Demolition recovery",
+    eyebrow: "Demolition",
+    seoTitle: "Demolition Metal Recovery: Sequencing a Strip-Out",
+    seoDescription:
+      "Demolition metal recovery is decided before the excavator starts. Salvage rights, soft strip, staging and Brisbane site access, in the order they matter.",
+    published: "2026-09-18",
+    readingMinutes: 7,
+    photo: "yard-grab",
+    summary:
+      "Demolition metal recovery is a sequencing problem before it is a collection one. What to settle about salvage, soft strip and site access before the machines arrive.",
+    intro:
+      "Demolition metal recovery is mostly settled on paper, weeks before anything is cut. Who owns the salvage, what is stripped by hand before the excavator starts, where separated material can sit, and when a truck can physically reach it are all programme questions. The metal never changes; what changes is how much of it is still separable by the time anyone looks at it.",
+    sections: [
+      {
+        heading: "Salvage belongs to whoever the contract says it belongs to",
+        body: [
+          "The first question on a demolition job is not what the metal is, it is whose it is. The principal may retain salvage, the demolition contractor may have priced the job assuming the recovery, and on a tenancy strip-out the split between landlord fixtures and tenant fit-out is a lease question before it is a scrap one. Air conditioning plant, switchboards and kitchen stainless are the items that most often sit on the wrong side of an assumption.",
+          "Settle it in writing before anything is cut. Whoever offers material for collection is the party the transaction is recorded against, so entitlement to sell scrap coming off a site you do not own is worth confirming in advance rather than on the day the truck is booked.",
+        ],
+      },
+      {
+        heading: "Soft strip is the only stage where grades separate cheaply",
+        body: [
+          "Machine demolition turns everything it touches into mixed rubble with metal in it. Cable runs, copper pipe, brass fittings and valves, stainless benches and splashbacks, aluminium window frames and louvres, motors, air handling units, switchgear and roof sheeting all come out by hand during soft strip, while they are still identifiable and reachable.",
+          "After the excavator starts, that same non-ferrous is inside the pile rather than beside it. It does not vanish, but it arrives as a recovery job instead of a described parcel, and whatever ends up under slab or wrapped in insulation is the part nobody separates a second time.",
+          "Soft strip is also when each stream can be given a home. Stillages, cages or marked bays for copper, cable, aluminium, stainless and general steel keep a fortnight of careful stripping from being undone by whoever tips the last barrow in on the final afternoon.",
+        ],
+      },
+      {
+        heading:
+          "Demolition metal recovery is planned against the programme, not after it",
+        body: [
+          "A demolition site changes shape weekly. The hardstand a truck could stand on in week one may be under scaffold, hoarding or a crane pad by week three, and the last load out is usually the one with the least room to move. Metal movements deserve the same place in the programme as muck-away and skip exchanges rather than being treated as a tidy-up at the end.",
+          "Staging is the practical half of that. A defined area on firm ground, outside the drop zone, off the traffic route and still reachable by the vehicle that will eventually take it, is what keeps separated material separated. Anything stored inside the structure being demolished is material that has to be handled twice.",
+          "Raise the dates early, particularly the ones that fall around a slab break or a crane week when nothing else can move. Suitable container options, collection timing and frequency are confirmed for the actual site rather than assumed from a programme.",
+        ],
+      },
+      {
+        heading: "Clearance work gates the metal, so book it as its own task",
+        body: [
+          "Demolition brings materials that stop being a metals question and become a licensing one. Asbestos is the obvious case in Brisbane's older commercial and industrial stock, and licensed removal and clearance are regulated by Workplace Health and Safety Queensland. That work runs ahead of the metal around it, not alongside it.",
+          "Plant carries its own requirements. Refrigerant in air conditioning, chillers and cold rooms is recovered by an appropriately licensed person under the national refrigerant handling scheme administered by the Australian Refrigeration Council before a unit is cut. Oil-filled equipment, gas cylinders, fire suppression bottles, battery banks in UPS and solar installations, and discharge lighting each carry handling and transport rules set by the relevant transport and workplace-safety regulators rather than by any scrap business.",
+          "None of that is a reason to leave the metal in place. It is a reason to give the clearance work its own line on the programme, because the parts of the building it sits in cannot be released until it is done.",
+        ],
+      },
+      {
+        heading: "Mixed waste and recovered metal are two different streams",
+        body: [
+          "A mixed demolition container and a metals parcel go to different places for different reasons. Concrete, brick, timber, plasterboard and insulation are a waste stream. Steel, copper, aluminium and stainless are a materials stream, and the moment they share a container they are all handled as the first one.",
+          "There is a cost signal behind the distinction. The Queensland Government applies a waste disposal levy to material sent to landfill in a zone covering the populated south-east, so mixed waste carries a disposal cost that recovered metal does not. Pulling metal out at the point it comes off the building is the cheapest separation available on the job.",
+          "Reinforcing bar is where the two streams genuinely overlap. Rebar cut out of concrete arrives with concrete still attached, and how much is attached is what decides whether it reads as a steel parcel or as concrete with steel in it.",
+        ],
+      },
+      {
+        heading: "Where the job sits decides how the metal leaves it",
+        body: [
+          "A strip-out in a Fortitude Valley, Woolloongabba or Milton building with a basement height bar and a booked loading dock is a different movement problem from a warehouse demolition at Wacol, Darra or Acacia Ridge with room to turn a rigid truck on site. Sending the entry width, the overhead clearance, the ground surface and the dock or lift constraints early settles most of the conversation in one exchange.",
+          "Inner-suburb jobs usually involve the street. Standing a vehicle on the road, occupying a footpath with a hoarding or a container, and traffic management for a loading movement are council matters — Brisbane City Council inside the city, and Logan, Ipswich or Redland City for jobs in their areas. The approval lead time, not the approval itself, is what catches programmes out.",
+          "Heavy vehicle routes shape the rest. Processing capacity in south-east Queensland clusters along the Gateway and Ipswich Motorway corridors and out towards the Port of Brisbane, so the useful distance is the route a loaded truck is allowed to take rather than the straight line. How a load must be restrained is set by the Department of Transport and Main Roads, and it applies to the ute carrying the last of the copper exactly as it applies to a hook truck.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Confirm in writing who owns the salvage before demolition starts.",
+      "Strip non-ferrous and plant out by hand before the machines go in.",
+      "Give each grade its own stillage, cage or marked bay.",
+      "Book asbestos, refrigerant and cylinder clearance as separate tasks.",
+      "Stage metal on firm ground that stays reachable as the site changes.",
+      "Check council approval early for any street or footpath occupation.",
+    ],
+    faqs: [
+      {
+        q: "Who owns the scrap metal on a demolition job?",
+        a: "Whoever the contract says owns it. Salvage can be retained by the principal, priced into the demolition contractor's rate, or — on a tenancy strip-out — split between landlord fixtures and tenant fit-out under the lease. It is a contractual question rather than one a scrap business can settle, so resolve it in writing before material is cut or moved.",
+      },
+      {
+        q: "When should metal come off a demolition site?",
+        a: "During soft strip, before machine demolition begins. That is the only stage where cable, copper, brass, stainless and aluminium can be separated by hand at low cost. Once an excavator has been through the structure, the same metal is inside mixed rubble and is recovered less completely.",
+      },
+      {
+        q: "What has to be cleared before demolition metal recovery can start?",
+        a: "Anything that is a licensing question rather than a metals one. Asbestos removal and clearance are regulated by Workplace Health and Safety Queensland; refrigerant is recovered by a licensed person under the national scheme administered by the Australian Refrigeration Council; gas cylinders, oil-filled equipment and battery banks carry transport and handling rules set by the relevant transport and workplace-safety regulators. Suitability and timing for the actual load are confirmed per enquiry.",
+      },
+      {
+        q: "Can metal go in the general demolition waste container?",
+        a: "It can, but the whole container is then handled as mixed waste. Queensland applies a waste disposal levy to material sent to landfill in a zone covering the south-east, so mixed waste carries a disposal cost that separated metal does not, and the grades that were worth keeping apart arrive blended.",
+      },
+      {
+        q: "How does a truck reach an inner-Brisbane strip-out?",
+        a: "Usually through a loading dock or a street standing position rather than onto the site itself. Basement height bars, dock booking windows and lift limits decide what can physically come out, and occupying the road or footpath is a council approval with its own lead time. Send the access constraints with the enquiry so the movement is planned around them.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
