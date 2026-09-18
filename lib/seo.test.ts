@@ -20,6 +20,7 @@ import {
 import {
   ORGANIZATION_ID,
   areaGuideSchemaData,
+  rootOrganizationSchemaData,
   serviceSchemaData,
 } from "@/components/Schema";
 import { pageMetadata } from "@/lib/metadata";
@@ -467,6 +468,43 @@ describe("Brisbane search landing pages", () => {
   });
 });
 
+describe("root organization schema", () => {
+  it("describes a service-area LocalBusiness with verified contact hours", () => {
+    const data = rootOrganizationSchemaData();
+    const serialised = JSON.stringify(data);
+
+    expect(data).toMatchObject({
+      "@type": "LocalBusiness",
+      "@id": ORGANIZATION_ID,
+      taxID: "62 351 619 456",
+      telephone: "+61494434509",
+      areaServed: operations.serviceRegions.map((name) => ({
+        "@type": "AdministrativeArea",
+        name,
+      })),
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+          ],
+          opens: "08:00",
+          closes: "17:00",
+        },
+      ],
+    });
+    expect(serialised).not.toMatch(
+      /RecyclingCenter|PostalAddress|aggregateRating|priceRange|sameAs/,
+    );
+  });
+});
+
 describe("verified mobile service schema", () => {
   const input = {
     name: "Collection",
@@ -509,6 +547,18 @@ describe("homepage search intent", () => {
     );
     expect(homepage).toContain("description: homeDescription");
     expect(homepage).toMatch(/pageMetadata\s*\(/);
+  });
+
+  it("keeps one primary hero CTA and front-loads verified trust signals", () => {
+    expect(homepage).toContain('<Button href="/contact">Get a quote</Button>');
+    expect(homepage).toContain(
+      '<ArrowLink href="/what-we-buy">Explore metals</ArrowLink>',
+    );
+    expect(homepage).not.toContain(
+      '<Button href="/what-we-buy" variant="ghost">Explore metals</Button>',
+    );
+    expect(homepage).toContain("ABN {company.abn}");
+    expect(homepage).toContain("Brisbane &amp; SEQ service area");
   });
 
   it("links to every core customer-intent guide", () => {

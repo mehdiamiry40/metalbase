@@ -66,9 +66,18 @@ export default function Home() {
             <p className="hero-intro">From copper offcuts to a site full of steel, get a clear scrap metal quote and collection options for your load.</p>
             <div className="hero-actions">
               <Button href="/contact">Get a quote</Button>
-              <Button href="/what-we-buy" variant="ghost">Explore metals</Button>
+              <ArrowLink href="/what-we-buy">Explore metals</ArrowLink>
             </div>
-            <p className="hero-note"><Tick className="h-5 w-5" /> Collection & bins available <span aria-hidden="true">·</span> Terms confirmed per load</p>
+            <p className="hero-note">
+              <Tick className="h-5 w-5" />
+              {company.abn ? <>ABN {company.abn}</> : null}
+              {company.abn ? <span aria-hidden="true">·</span> : null}
+              Brisbane &amp; SEQ service area
+              <span aria-hidden="true">·</span>
+              Collection &amp; bins available
+              <span aria-hidden="true">·</span>
+              Terms confirmed per load
+            </p>
           </div>
           <div className="hero-visual">
             <figure className="hero-photo">

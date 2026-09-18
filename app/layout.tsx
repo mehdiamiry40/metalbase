@@ -5,15 +5,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileActionBar from "@/components/MobileActionBar";
-import { ORGANIZATION_ID } from "@/components/Schema";
-import {
-  PUBLIC_LOCATION_ENABLED,
-  SEARCH_INDEXING_ENABLED,
-  SITE,
-  company,
-  locations,
-  operations,
-} from "@/lib/site";
+import { rootOrganizationSchemaData } from "@/components/Schema";
+import { SEARCH_INDEXING_ENABLED, SITE } from "@/lib/site";
 
 /** Two self-hosted families: an open, friendly display face and legible body text. */
 const openSans = Open_Sans({
@@ -60,53 +53,6 @@ export const metadata: Metadata = {
     : { index: false, follow: false },
 };
 
-/**
- * LocalBusiness structured data. Fields that have no real value are
- * omitted rather than filled with a plausible-looking invention —
- * Google penalises structured data that contradicts the page.
- */
-function structuredData() {
-  const data: Record<string, unknown> = {
-    "@context": "https://schema.org",
-    "@type":
-      PUBLIC_LOCATION_ENABLED && company.head
-        ? "RecyclingCenter"
-        : "Organization",
-    "@id": ORGANIZATION_ID,
-    name: company.name,
-    url: SITE,
-    description:
-      "Brisbane scrap-metal quote and removal enquiries with practical grade guidance.",
-  };
-  if (company.legal) data.legalName = company.legal;
-  if (company.abn) data.taxID = company.abn;
-  if (company.phone) data.telephone = company.phone;
-  if (company.email) data.email = company.email;
-  data.areaServed = operations.serviceRegions.map((name) => ({
-    "@type": "AdministrativeArea",
-    name,
-  }));
-  if (PUBLIC_LOCATION_ENABLED && company.head) {
-    data.address = {
-      "@type": "PostalAddress",
-      streetAddress: company.head,
-      addressLocality: "Brisbane",
-      addressRegion: "QLD",
-      addressCountry: "AU",
-    };
-  }
-  if (PUBLIC_LOCATION_ENABLED && locations.length) {
-    data.location = locations
-      .filter((l) => l.address)
-      .map((l) => ({
-        "@type": "Place",
-        name: l.name,
-        address: { "@type": "PostalAddress", streetAddress: l.address },
-      }));
-  }
-  return data;
-}
-
 export default function RootLayout({
   children,
 }: {
@@ -122,7 +68,9 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           // Serialised from a typed object above; no user input reaches this.
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData()) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(rootOrganizationSchemaData()),
+          }}
         />
       </head>
       <body>
