@@ -1,4 +1,11 @@
-import { SITE, company, operations, serviceHref } from "@/lib/site";
+import {
+  PUBLIC_LOCATION_ENABLED,
+  SITE,
+  company,
+  locations,
+  operations,
+  serviceHref,
+} from "@/lib/site";
 
 /** Stable identity shared by every schema node that refers to MetalBase. */
 export const ORGANIZATION_ID = `${SITE}/#organization`;
@@ -19,6 +26,71 @@ export const ORGANIZATION_ID = `${SITE}/#organization`;
    priceRange appear nowhere: both are commonly faked to win rich
    results, and there is no honest value for either yet.
    ------------------------------------------------------------------ */
+
+/**
+ * Root LocalBusiness (or RecyclingCenter when a public yard exists).
+ * Contact hours and service regions mirror the visible site; address
+ * and location are omitted until a public customer location is enabled.
+ */
+export function rootOrganizationSchemaData(): Record<string, unknown> {
+  const data: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type":
+      PUBLIC_LOCATION_ENABLED && company.head
+        ? "RecyclingCenter"
+        : "LocalBusiness",
+    "@id": ORGANIZATION_ID,
+    name: company.name,
+    url: SITE,
+    description:
+      "Brisbane scrap-metal quote and removal enquiries with practical grade guidance.",
+  };
+  if (company.legal) data.legalName = company.legal;
+  if (company.abn) data.taxID = company.abn;
+  if (company.phone) data.telephone = company.phone;
+  if (company.email) data.email = company.email;
+  data.areaServed = operations.serviceRegions.map((name) => ({
+    "@type": "AdministrativeArea",
+    name,
+  }));
+  if (company.hours) {
+    data.openingHoursSpecification = [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: "08:00",
+        closes: "17:00",
+      },
+    ];
+  }
+  if (PUBLIC_LOCATION_ENABLED && company.head) {
+    data.address = {
+      "@type": "PostalAddress",
+      streetAddress: company.head,
+      addressLocality: "Brisbane",
+      addressRegion: "QLD",
+      addressCountry: "AU",
+    };
+  }
+  if (PUBLIC_LOCATION_ENABLED && locations.length) {
+    data.location = locations
+      .filter((l) => l.address)
+      .map((l) => ({
+        "@type": "Place",
+        name: l.name,
+        address: { "@type": "PostalAddress", streetAddress: l.address },
+      }));
+  }
+  return data;
+}
 
 function Ld({ data }: { data: Record<string, unknown> }) {
   return (
