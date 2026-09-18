@@ -1,30 +1,39 @@
 /**
- * MetalBase's monogram: a sheared-plate M standing on a base plinth.
+ * MetalBase's monogram: a plate badge with the M cut out of it.
  *
- * Three ideas carry the mark, and all three survive to 16px:
- *
- * 1. The M is a real letterform — two stems joined to a chevron that
- *    lands on the baseline — rather than a chevron floating between two
- *    detached slabs. The counters stay open, so the silhouette does not
- *    collapse into a square at favicon size.
- * 2. The top corners are cut back at 45°, the way plate comes off a
- *    guillotine. It is the one detail that makes the mark ours.
- * 3. The plinth tapers, so it reads as something bearing weight — the
- *    "Base" half of the name, and the weighbridge the business runs on.
+ * The plate is a square with two opposite corners cut back at 45°, the way
+ * plate comes off a guillotine. The M is not drawn on top of it — it is a
+ * void through it, so the page shows through the letter. That is what makes
+ * the mark hold at favicon size: the silhouette is a solid block, and a
+ * block survives 16px where an open letterform softens into a smudge.
  *
  * Geometry is shared by the site wordmark, favicon and social image so the
- * brand never drifts between surfaces. Every path is a closed polygon that
- * touches its neighbours edge-to-edge and never overlaps them, which keeps
- * the mark correct under a plain `fill` with no fill-rule — `next/og`
- * rasterises these as-is for the icon and OG routes.
+ * brand never drifts between surfaces.
+ *
+ * ── Why this is one path, not four ──
+ *
+ * The voids only exist under `fill-rule: evenodd`, and a fill rule applies
+ * within a single path — four separate <path> elements would each fill
+ * solid and the badge would render as a blank plate. So the pieces are
+ * joined here rather than exported as a list: there is exactly one exported
+ * value and exactly one correct way to draw it. Render it as
+ *
+ *     <path d={METALBASE_MARK_PATH} fill="currentColor" fillRule="evenodd" />
+ *
+ * The pieces below never overlap — the stems only touch the chevron along
+ * x=16, edge to edge — because two overlapping voids would cancel back to
+ * ink under evenodd. The M's counters are not voids at all: they are simply
+ * uncut plate, which is why they carry the plate's colour.
  */
-export const METALBASE_MARK_PATHS = [
-  /** Left stem, top-left corner sheared. */
-  "M8 5h4v33H4V9z",
-  /** Right stem, top-right corner sheared. */
-  "M36 5h4l4 4v29h-8z",
-  /** Centre chevron, joined to both stems and pointed to the baseline. */
-  "M12 5l12 19 12-19v14L24 38 12 19z",
-  /** Tapered base plinth. */
-  "M2 41h44l-2 5H4z",
+const MARK_PIECES = [
+  /** The plate. Top-left and bottom-right corners sheared. */
+  "M12 3H45V36l-9 9H3V12z",
+  /** Void: left stem. */
+  "M11 12h5v22h-5z",
+  /** Void: right stem. */
+  "M32 12h5v22h-5z",
+  /** Void: centre chevron, joined to both stems, pointed to the baseline. */
+  "M16 12l8 12 8-12v10l-8 12-8-12z",
 ] as const;
+
+export const METALBASE_MARK_PATH = MARK_PIECES.join(" ");
