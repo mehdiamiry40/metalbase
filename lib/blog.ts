@@ -523,6 +523,98 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "scrap-metal-collection-tradies-brisbane",
+    title: "What a trade business should do with metal between jobs",
+    shortTitle: "Trade workflow",
+    eyebrow: "Trades",
+    seoTitle: "Scrap Metal Collection for Tradies: Brisbane Guide",
+    seoDescription:
+      "Copper offcuts in the ute, cable in the lock-up. How to organise scrap metal collection for tradies around a Brisbane workload without losing grades.",
+    published: "2026-09-22",
+    readingMinutes: 7,
+    photo: "cable",
+    summary:
+      "Metal leaves a trade business a few kilos at a time and arrives at the lock-up as one mixed pile. How to keep the streams apart across jobs, store them safely, and time a scrap metal collection for tradies around the space you actually have.",
+    intro:
+      "The call to have metal collected is the easy part. What decides how it goes is the six weeks before it — which container the offcut went in, what rode around in the ute, and whether the old unit you pulled out of a client's roof space was yours to remove in the first place. Scrap metal collection for tradies is a housekeeping habit long before it is a logistics question.",
+    sections: [
+      {
+        heading: "The ute is the most expensive place to store scrap",
+        body: [
+          "Offcuts ride around because there is nowhere else to put them, and they keep riding around because unloading is never the most urgent job of the day. Every kilo of that is payload carried to every call, and a tray of loose pipe and sheet with the gear stacked on top is a restraint question as well as a fuel one. Load restraint and the mass limits on a light vehicle and trailer are set by the Department of Transport and Main Roads, and they apply to a ute on Kingsford Smith Drive exactly as they apply to a truck.",
+          "The larger cost is invisible. A tray is one container, so a fortnight of careful work — clean tube, soldered tube, offcut cable, brass fittings, a bit of galvanised sheet — ends the fortnight as a single mixed heap, and whoever tips it out cannot tell you which job anything came off. The habit that fixes it is dull: containers waiting at the lock-up, and the tray emptied at the end of the day rather than the end of the month.",
+        ],
+      },
+      {
+        heading: "Separation is decided at the point of cutting, not at the depot",
+        body: [
+          "The cheapest sort in the trade happens while the offcut is still in your hand. You know whether that length of tube has solder on the joint, whether the cable is single-insulated house wiring or double-insulated mains, whether the bracket that came off with it is steel or aluminium. Nobody knows any of it once the piece is in a pile, so the piece gets described as whatever the pile is.",
+          "The splits worth making are few and specific to what you do. An electrician generally wants clean bright wire apart from insulated cable, and both apart from the steel of conduit, trunking and switchboard enclosures. A plumber wants clean copper tube apart from soldered tube and brass fittings, with cylinders and hot water tanks kept to one side as their own item. A fabrication or sheet metal shop is separating alloys rather than metals, because secondary smelters remelt to a chemistry, and extrusion, sheet and stainless offcuts that get blended in one bin are blended for good.",
+          "Label the containers rather than relying on everyone remembering the system. An apprentice sorts accurately to a label and inaccurately to an explanation given once in February.",
+        ],
+      },
+      {
+        heading:
+          "Scrap metal collection for tradies is timed by space, not by value",
+        body: [
+          "The useful trigger is a container that is full or a rack that has stopped being usable, not a guess about whether there is enough to be worth the trip. Waiting to accumulate something impressive is exactly how a tidy set of separated streams becomes one heap in the corner: the containers overflow, the overflow gets stacked on the nearest flat surface, and the sorting is undone by the storage.",
+          "Keeping the description current costs almost nothing if you do it as you go. A photograph of each container when it fills, a rough weight or a count of drums, and a note of anything unusual sitting beside them is enough to turn the enquiry into a five-minute job rather than an afternoon in the shed with a phone camera. Frequency, suitable container options, access and terms are confirmed for the actual site rather than assumed in advance.",
+        ],
+      },
+      {
+        heading: "Copper you can see from the street is a risk you are carrying",
+        body: [
+          "Copper and cable are the streams that get stolen, and a trade lock-up is a predictable place to find both. The exposures are ordinary: a trailer left loaded on the driveway overnight, a roller door in Geebung or Salisbury standing open while the ute is unloaded, an unsecured bin on an unfenced site over a long weekend. Keeping the non-ferrous out of sight and behind a lock does more than any alarm, and it costs nothing but the habit.",
+          "Recording who supplied what is one of the main reasons stolen metal is hard to convert, which is why identification is part of every transaction and payment is electronic rather than cash. That works in your favour twice: it makes your stream a poor target, and if something does go missing, your own photographs, counts and dockets are what you give the police and your insurer. Keep them against the job or the month, not loose on a phone.",
+        ],
+      },
+      {
+        heading: "Metal off a client's site is not automatically yours",
+        body: [
+          "The old hot water system, the air conditioner you replaced, the switchboard you stripped, the roof sheets off a re-clad — each of those belonged to the client until the job said otherwise. On a small job it is a one-line item in the quote, settled while everyone is still cheerful, rather than a conversation two weeks later about a tank that has already gone. Whoever offers material for collection is the party the transaction is recorded against, so entitlement is worth having in writing.",
+          "Some of what you remove is a licensing question before it is a metals one. Refrigerant in an air conditioner or a heat pump is recovered by an appropriately licensed person under the national scheme administered by the Australian Refrigeration Council. Disconnection of hard-wired equipment is licensed electrical work in Queensland under the Electrical Safety Act, administered by the Electrical Safety Office. Older switchboard backing panels and some building materials around them can contain asbestos, which is regulated by Workplace Health and Safety Queensland. None of that stops the metal being recovered; it just means the clearance work is its own task with its own person attached.",
+        ],
+      },
+      {
+        heading: "One account and one vocabulary beat six ad-hoc enquiries",
+        body: [
+          "A business supplying scrap regularly is generally dealing with account details, ABN, a nominated contact and agreed terms set up once, rather than presenting identification at every collection. Getting that in place before the first load means the paperwork stops being an event, and the contact on file is the person who actually knows what is in the bins.",
+          "Consistency in how you describe the streams is the other half. Calling the same material the same thing every time makes each collection comparable with the last, so you can see whether a change in the assessment came from the metal, the contamination or the market. Terms and handling are confirmed for the actual load each time, and a stable description is what makes that confirmation quick.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Empty the ute at the end of the day, not the end of the month.",
+      "Label a container per stream and sort at the point of cutting.",
+      "Book a collection when a container fills, not when the pile annoys you.",
+      "Store copper and cable out of sight and behind a lock.",
+      "Settle ownership of a removed unit in the quote, before you remove it.",
+      "Set up account, ABN and a nominated contact before the first load.",
+    ],
+    faqs: [
+      {
+        q: "What should a tradie do with copper offcuts between jobs?",
+        a: "Get them out of the vehicle daily and into a labelled container at the lock-up, kept apart from soldered tube, brass fittings and cable. Clean material that has stayed separate is straightforward to describe and photograph; the same metal tipped into a general heap is assessed as whatever the heap is.",
+      },
+      {
+        q: "How often should a trade business have scrap collected?",
+        a: "As often as the containers fill, which depends on the work rather than on any general rule. The point to avoid is the one where material overflows its container and starts being stacked wherever there is room, because that is where the separation is lost. Frequency, container options and terms are confirmed for the actual site.",
+      },
+      {
+        q: "Is the old unit I removed from a client's property mine to sell?",
+        a: "Only if the job says so. The removed hot water system, air conditioner or switchboard belonged to the client, so put the arrangement in the quote before the work starts. Whoever offers material for collection is the party the transaction is recorded against, which is why entitlement is settled beforehand rather than on collection day.",
+      },
+      {
+        q: "Does cable need separating from the rest of the load?",
+        a: "Yes, and by type where you can. Insulated cable carries a recovery step that bare wire does not, and cable types differ in how much metal is actually in them, so they are described and handled separately. Cable left mixed through general steel is the most common way a trade load loses its better grades.",
+      },
+      {
+        q: "Do I need an ABN to supply scrap as a business?",
+        a: "Commercial suppliers generally set up an account with ABN details, a nominated contact and agreed terms, rather than being identified at each collection like a personal seller. Payment is electronic in either case. Confirm what is required for your situation when the account is opened.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
