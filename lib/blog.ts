@@ -615,6 +615,103 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "solar-panel-recycling-brisbane",
+    title: "What happens to an old solar system after it comes off the roof",
+    shortTitle: "Old solar systems",
+    eyebrow: "Recycling",
+    seoTitle: "Solar Panel Recycling Brisbane: Where Each Part Goes",
+    seoDescription:
+      "Solar panel recycling and scrap metal are separate streams. What happens to the modules, aluminium racking, cable and inverter off a Brisbane roof.",
+    published: "2026-09-23",
+    readingMinutes: 7,
+    photo: "alloy",
+    summary:
+      "A rooftop system that comes down is four disposal questions at once. Solar panel recycling covers one of them; the racking, the cable and the inverter are a metals parcel.",
+    intro:
+      "Queensland roofs carry a great deal of rooftop solar, and the systems put up in the early 2010s are now being replaced rather than repaired. What comes down is not one item. The modules, the aluminium rails bolted through the roof, the cable in the roof space and the inverter on the wall leave the site by different routes, and only the modules are a solar panel recycling question.",
+    sections: [
+      {
+        heading: "A removed system is four items, not one",
+        body: [
+          "Strip the job back and there are four things coming off the property. The modules themselves: a glass laminate with the cells bonded inside it and an aluminium frame clamped around the edge. The mounting system: extruded aluminium rails, module clamps, and the feet or tile brackets that fix them through the battens, usually with stainless fasteners. The wiring: double-insulated DC string cable running through the roof space to an isolator, then an AC run down to the switchboard. And the inverter, a boxed unit on a garage or external wall.",
+          "Those four have almost nothing in common as disposal problems. Three of them are ordinary metal in an unusual arrangement. The fourth, the module, is not a metals parcel at all, and treating it as one is where most of these jobs go wrong.",
+        ],
+      },
+      {
+        heading:
+          "Solar panel recycling is a different stream from the scrap metal",
+        body: [
+          "A module is a bonded laminate: glass, encapsulant, cells, a polymer backsheet and a junction box, with the aluminium frame sealed around the outside. The frame is recoverable metal. The laminate is not, and the two do not come apart with a rattle gun on a driveway. Separating them is a processing step that belongs to a facility set up for it.",
+          "That is why solar panel recycling is arranged as its own stream rather than tipped into a metals load. Where the modules can go depends on where the job is: Brisbane City Council, Logan, Ipswich and Redland City each run their own resource recovery arrangements, and specialist processors take modules on their own terms. Settle that question before anything is loaded, because the answer decides whether the modules travel on the same vehicle as the rest of the system.",
+          "Broken modules are their own problem. A cracked laminate is sharp, still bonded together, and awkward to stack, so flag it rather than letting it ride loose on top of a pile.",
+        ],
+      },
+      {
+        heading:
+          "Disconnection is licensed electrical work, and the array is live in daylight",
+        body: [
+          "A grid-connected solar system is fixed electrical wiring. Disconnecting and removing one is electrical work under the Electrical Safety Act 2002, administered in Queensland by the Electrical Safety Office, which makes it a job for a licensed electrician rather than for whoever owns the ladder.",
+          "The reason matters as much as the rule. A module generates DC voltage whenever light falls on it. Switching the inverter off and pulling the main switch does not make the array dead — the strings on the roof are still producing, and modules wired in series add up to a voltage that is dangerous to work on. Throwing a tarp over the panels is a partial measure, not an isolation method.",
+          "The rest of the job stacks on top of that. Working at height on a roof carries duties under Queensland's work health and safety laws, administered by Workplace Health and Safety Queensland. If the system has battery storage, the lithium pack is identified and handled as its own item rather than bundled in with anything else, and a swollen, damaged or water-affected pack is flagged before it is moved at all.",
+        ],
+      },
+      {
+        heading: "The racking is the biggest metal item and the easiest to mix up",
+        body: [
+          "The rails are extruded aluminium, generally in long lengths, and they come off the roof still wearing the clamps, bolts and washers that held the modules on. Those fasteners are usually stainless, and the feet or tile brackets underneath them are often a different metal again. One person pulling a system down drops the lot in a single heap, and that heap is then three metals held together by a fourth.",
+          "The fix is a habit rather than a task. Rails in one bundle, fixings in a bucket, feet and roof brackets in their own pile as they come off. Everything is already separated on the way down; the only question is whether anyone keeps it that way once it reaches the ground.",
+          "Long rail is also a restraint problem. Four-metre extrusion on a ute tray or an unsheeted box trailer needs strapping, and how a load must be secured and marked in Queensland is set by the Department of Transport and Main Roads. Bundle it in the driveway, not at the lights on Gympie Road.",
+        ],
+      },
+      {
+        heading: "Cable left in the roof space is cable nobody recovers",
+        body: [
+          "After the racking, the DC run between the array and the inverter is usually the metal worth the most on a domestic system, and it is the part most often abandoned. Once the modules are off, the cable is clipped along rafters and threaded through conduit where nobody wants to crawl, so it stays there and the job gets called finished.",
+          "If it is coming out, coil it as it comes and keep it clear of the general steel. Solar cable is double insulated and built differently from the house wiring around it, so it is described as its own item rather than as cable in the abstract. Isolators, their enclosures and any metal conduit are small pieces that quietly vanish into a mixed pile; keep them with the electrical items instead.",
+        ],
+      },
+      {
+        heading:
+          "Removing a system is a retailer question before it is a scrap one",
+        body: [
+          "Two things are worth settling before the array comes down. The first is the feed-in tariff. Systems connected under Queensland's closed Solar Bonus Scheme carry conditions about changing the installation, and whether a replacement affects eligibility is a question for your electricity retailer and the Queensland Government rather than for anyone in the metals trade. Ask beforehand, because it cannot be unwound afterwards.",
+          "The second is ownership. On an investment property at Redbank Plains or Ormeau, or a house bought with a system already on the roof, the array is part of the premises and belongs to whoever the sale or the lease says it belongs to. Systems put up under a finance or supply arrangement can carry their own terms. Whoever offers material for collection is the party the transaction is recorded against, so entitlement is worth settling first.",
+          "Most replacements are carried out by the installer doing the upgrade, and whether removal of the old system is included varies by quote. Ask before you plan to handle the metal yourself. If the installer is taking it, the disposal question is theirs and there is nothing left on site to arrange.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Use a licensed electrician: the array is live whenever there is daylight.",
+      "Confirm where the modules are going before anything is loaded.",
+      "Bundle the aluminium rails and keep brackets and fixings apart from them.",
+      "Coil the DC and AC cable out of the roof space while access is open.",
+      "List the inverter, isolators and any battery storage as separate items.",
+      "Check the feed-in tariff position with your retailer before removal.",
+    ],
+    faqs: [
+      {
+        q: "Can old solar panels go in with a scrap metal load?",
+        a: "A module is a bonded laminate of glass, cells and backsheet with an aluminium frame sealed around the outside, so it is not a metals parcel the way racking or cable is. The frame is separated from the laminate at a facility set up for it, not on site. Raise the modules as their own question in the enquiry, separately from the rest of the system.",
+      },
+      {
+        q: "Who is allowed to remove a rooftop solar system in Queensland?",
+        a: "Disconnecting a grid-connected system is electrical work under the Electrical Safety Act 2002, administered by the Electrical Safety Office, so it is done by a licensed electrician. Working at height on the roof carries separate duties administered by Workplace Health and Safety Queensland. The array also produces DC voltage in daylight whether or not the inverter is switched off.",
+      },
+      {
+        q: "Which parts of a removed solar system are actually scrap metal?",
+        a: "The mounting system — aluminium rails, clamps, feet and roof brackets — together with the DC and AC cable, metal conduit, isolator enclosures and the inverter itself. Each is assessed on the actual material rather than as a package, so list them as separate items with photographs and an approximate quantity.",
+      },
+      {
+        q: "Does removing my solar system affect the feed-in tariff?",
+        a: "That is a question for your electricity retailer and the Queensland Government, not for a scrap business. Systems connected under the closed Solar Bonus Scheme carry conditions about changing the installation, and the time to check is before the array comes down rather than after.",
+      },
+      {
+        q: "What should I do with a cracked or water-damaged panel?",
+        a: "Flag it in the enquiry and keep it apart from the intact modules. A cracked laminate is sharp and still bonded together, so it does not stack safely, and it does not become a metals item just because it is broken. Handling is confirmed for the actual material before anything is moved.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
