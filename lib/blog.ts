@@ -712,6 +712,98 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "storm-damage-scrap-metal-brisbane",
+    title: "Clearing storm-damaged metal without undoing your insurance claim",
+    shortTitle: "Storm clean-up",
+    eyebrow: "Clean-up",
+    seoTitle: "Storm Damage Scrap Metal: A Brisbane Clean-Up Guide",
+    seoDescription:
+      "Storm damage scrap metal can wait until the assessor has seen it. What to photograph, what to leave alone, and how to clear fencing, sheds and roofing.",
+    published: "2026-09-24",
+    readingMinutes: 8,
+    photo: "crew",
+    summary:
+      "After a storm, the fastest way to lose a claim is to tidy up too early. How to handle storm damage scrap metal in the right order, from making safe to the last sheet of fencing.",
+    intro:
+      "The urge after a storm is to get the wreckage off the lawn. Hold it for a few days. Storm damage scrap metal is evidence before it is scrap: the insurer's assessor needs to see what came down, some of it is not safe to touch, and a flattened shed or fence line is usually more than one kind of material once you look closely.",
+    sections: [
+      {
+        heading: "The assessor sees it before the scrap truck does",
+        body: [
+          "Insurers generally want to see damage before it is cleared, or at least be satisfied that you recorded it properly first. Ask your insurer before anything leaves the property, and follow what they say rather than a general rule, because a crumpled carport that has already gone cannot be inspected and a claim built on photographs you did not take is a hard one to argue.",
+          "Photograph everything in place, wide and close, with something in frame for scale. Get the roof sheet in the neighbour's yard where it landed, the fence panels where they fell, the shed from all four sides, and any serial plates or brand labels on garden sheds, carports, hot water systems and air conditioning units. Measurements of panels and structures help too, since that is what a replacement is priced from.",
+          "Making safe and clearing are different jobs. Weighting a loose sheet so it cannot take off in the next gust, or dragging a panel off the driveway so the car can get out, is making safe. Cutting up the shed for scrap is clearing, and that is the part to hold until the claim says otherwise.",
+        ],
+      },
+      {
+        heading: "Fallen lines and loose sheets come before any sorting",
+        body: [
+          "Treat any fallen power line as live, including a line touching a metal fence, a carport or a pile of roofing. Metal carries it. Keep everyone well clear and report it to Energex, which runs the electricity network across south-east Queensland, then leave it alone until they have dealt with it. A service line pulled off the house is the same problem at a smaller size.",
+          "Wind-lifted roofing iron is sharp on every edge and acts as a sail, which is why a sheet that has come loose once will move again when the next storm cell comes through. The south-east's thunderstorm season runs through the warmer months, so a pile left loose in October may be moving again by November. Stack sheets flat, weight them, and keep them away from windows and the fence line.",
+          "Stay off the roof. Emergency temporary repairs such as tarping are what the State Emergency Service helps with after severe weather, and working at height on a damaged structure is a job for someone equipped to do it. The metal on the ground is not going anywhere once it is secured.",
+        ],
+      },
+      {
+        heading: "Older sheds and fences can hide an asbestos job inside a metal one",
+        body: [
+          "A great deal of Brisbane's older housing stock, and many of the garden sheds and fences built alongside it, used fibre cement sheeting that may contain asbestos. A steel-framed shed with fibre cement cladding, a patio with a corrugated fibre cement roof, or an old fence panel that is not actually metal all tend to arrive in a storm pile looking like one heap of wreckage.",
+          "Do not break, cut or water-blast anything you suspect is fibre cement, and do not let it go into a metals load. Storm damage has usually already broken it, which is the reason to leave it be rather than make it worse. Who may remove asbestos and how it must be handled are set by Workplace Health and Safety Queensland, and the Queensland Government publishes guidance for homeowners on identifying it and what to do next.",
+          "The metal sitting in or on that material can still be recovered, but only once the asbestos question has been settled. Steel framing from a shed with suspect cladding is a parcel whose status has to be confirmed before it is collected, not one that can be sorted out on the day.",
+        ],
+      },
+      {
+        heading: "Floodwater changes what an appliance is",
+        body: [
+          "Rain through a broken roof and a flood through the ground floor are different problems. After the 2011 and 2022 floods, suburbs along the Brisbane River and Oxley Creek, from Rocklea and Oxley to Milton and Goodna, put out entire households of water-affected whitegoods at once, and much of it had refrigerant, compressor oil or a battery inside.",
+          "A fridge, freezer or air conditioner still holds its refrigerant after it has been under water, and that refrigerant is recovered by an appropriately licensed person under the national scheme administered by the Australian Refrigeration Council before the unit is cut or crushed. Flood-affected home batteries, including the lithium storage beside a solar inverter, are kept away from the house and flagged to the installer, never switched back on to see if they still work.",
+          "Anything hard-wired that has been wet needs a licensed electrician before it is disconnected, removed or re-energised, and the Electrical Safety Office publishes guidance on water-affected electrical installations. Silt and water left in a machine add weight without adding metal, so draining and a rough clean before collection make the parcel easier to describe accurately.",
+        ],
+      },
+      {
+        heading: "Storm damage scrap metal sorts into the same streams as any other load",
+        body: [
+          "Once it is released and safe, storm debris is ordinary scrap in awkward shapes. Colorbond fencing, roofing, guttering, carports, shed panels and steel framing are painted or galvanised steel and go together as light steel. Aluminium patio frames, louvres, screen doors, pool fencing and window frames are a separate non-ferrous stream, and they are worth keeping out of the steel pile rather than lost in it.",
+          "Smaller items hide in the mess. A hot water system dislodged from its stand, an air conditioner's outdoor unit knocked off its bracket, copper pipe torn out with a fallen tree, a trampoline frame or a shade sail post all belong in their own group, photographed separately. Timber, green waste, insulation and broken glass are a waste stream, not a metals one, and they come out before collection rather than after.",
+          "Bulky, twisted sheet is where the space goes. Flatten roofing and fence panels where you can safely do it and stack them by type, because a jumble of crumpled sheet takes up far more room on a truck than its weight suggests.",
+        ],
+      },
+      {
+        heading: "When a whole street clears at once, access and ownership decide the order",
+        body: [
+          "A major storm or flood hits a suburb, not a property. After an event like the 2020 hailstorm across Springfield and Ipswich, a whole estate is clearing the same week, the verges fill up, and roads can be blocked by fallen trees or closed for repairs. Councils sometimes announce their own clean-up arrangements after a significant event, so check what Brisbane City Council, or Logan, Ipswich or Redland City for jobs in their areas, has actually announced rather than assuming it.",
+          "A boundary fence is rarely yours alone. Dividing fences in Queensland are a shared matter between neighbours under the state's dividing fences legislation, so the fallen panels belong to both properties, and it is worth agreeing with next door who is claiming, who is clearing and where the old panels are going before anyone loads them. Whoever offers material for collection is the party the transaction is recorded against.",
+          "Collection timing, container options and suitability are confirmed for the actual load and site. Send photographs of each group, an approximate quantity, the suburb, and anything about access that the storm has changed, such as a blocked driveway, a tree across the side gate or a closed street.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Ask your insurer before any damaged metal leaves the property.",
+      "Photograph everything in place, with labels and measurements.",
+      "Treat fallen power lines as live and report them to Energex.",
+      "Leave suspected fibre cement unbroken and out of the metals pile.",
+      "Keep flood-affected fridges, air conditioners and batteries separate.",
+      "Agree dividing-fence clearing with your neighbour before loading.",
+    ],
+    faqs: [
+      {
+        q: "Can I get rid of storm-damaged metal before the insurance assessor comes?",
+        a: "Ask your insurer first and follow their instructions. Insurers generally want to inspect damage or see thorough photographs of it before anything is disposed of. Making a site safe, such as weighting loose sheets or clearing a driveway, is different from disposing of the damaged items themselves.",
+      },
+      {
+        q: "Is a storm-damaged Colorbond fence scrap metal?",
+        a: "Yes. Colorbond fencing is painted galvanised steel and is handled as light steel once it is released from any insurance claim. Remove timber, concrete footings and any fibre cement panels mixed in with it. If the fence divides two properties, agree the clearing with your neighbour, because it is a shared fence.",
+      },
+      {
+        q: "What should I do with a fridge or freezer damaged by floodwater?",
+        a: "Keep it upright and separate, and do not cut or crush it. It still contains refrigerant, which must be recovered by an appropriately licensed person under the national scheme administered by the Australian Refrigeration Council. Mention that it has been under water when you describe it.",
+      },
+      {
+        q: "How can I tell if an old shed or fence contains asbestos?",
+        a: "You often cannot tell by eye. Fibre cement sheeting in older Brisbane sheds, patios and fences may contain asbestos, so treat suspect material as if it does and leave it unbroken. Workplace Health and Safety Queensland sets the rules for removal, and the Queensland Government publishes guidance for homeowners on identifying it and what to do.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {

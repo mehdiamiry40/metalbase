@@ -47,6 +47,7 @@ const EXPECTED_POST_SLUGS = [
   "demolition-metal-recovery-brisbane",
   "scrap-metal-collection-tradies-brisbane",
   "solar-panel-recycling-brisbane",
+  "storm-damage-scrap-metal-brisbane",
 ] as const;
 
 const EXPECTED_MATERIAL_SLUGS = [
