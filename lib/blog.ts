@@ -804,6 +804,97 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "deceased-estate-scrap-metal-brisbane",
+    title: "Clearing the metal from a deceased estate without clearing too much",
+    shortTitle: "Deceased estates",
+    eyebrow: "Estates",
+    seoTitle: "Deceased Estate Scrap Metal: A Brisbane Clean-Out Guide",
+    seoDescription:
+      "Deceased estate scrap metal has to wait for the right signature. Who can authorise it, what stays with the house, and what never goes in the pile.",
+    published: "2026-09-25",
+    readingMinutes: 8,
+    photo: "mixed-parts",
+    summary:
+      "An estate clean-out is a sequence, not a skip bin. Who can release deceased estate scrap metal, what belongs to the house or to someone else, and what has to be pulled out before anything is loaded.",
+    intro:
+      "The metal is usually the last decision in a deceased estate, not the first. Before any deceased estate scrap metal leaves a Brisbane house, someone with authority has to release it, anything with resale or sentimental value has to be pulled out, and a handful of items in the shed or under the house need their own handling that has nothing to do with scrap.",
+    sections: [
+      {
+        heading: "Only the executor or administrator can release the estate's metal",
+        body: [
+          "A deceased person's belongings are part of their estate, and the person who deals with the estate is the executor named in the will, or an administrator appointed where there is no will or no executor able to act. A family member with a key to the house is not automatically that person, and neither is the neighbour who has been minding the place.",
+          "Whether an executor can deal with a particular asset before probate is granted, and what has to wait, is a question for the estate's solicitor or, where it is involved, the Public Trustee of Queensland. A scrap business cannot answer it and should not be asked to. What it will need is to know who is offering the material, because that is the person the transaction is recorded against.",
+          "Payment should follow the same logic. Proceeds from the estate's property belong to the estate, so payment is normally made to an account the executor controls for the estate rather than to whoever happened to organise the clean-out. Keep the record with the rest of the estate's paperwork, since the executor has to account for what came in.",
+        ],
+      },
+      {
+        heading: "Anything with a resale or family value comes out before the metal",
+        body: [
+          "A shed in Stafford, Salisbury or Wynnum that has been filled over forty years holds more than scrap. Working hand tools, a drill press, a welder, a restorable bicycle, cast-iron garden furniture or brass fittings off an old boat can all be worth more to a buyer, or to a grandchild, than they are by weight. Once they are in a metals load they are simply metal.",
+          "Walk the property with the beneficiaries, or with the executor's agreement on what is being kept, before anyone starts a scrap pile. Tag or move the keep items somewhere separate. Disagreements between family members are far easier to settle over an intact toolbox than over one that has already gone.",
+          "What is left after that is a scrap question, and it sorts the way any other household load does: steel together, copper and brass kept out of it, aluminium in its own group, and electrical items separate. Photographing each group once it is sorted is what makes the load quick to describe accurately.",
+        ],
+      },
+      {
+        heading: "A house being sold keeps its fixtures",
+        body: [
+          "If the property is going to market, the hot water system, fixed air conditioners, copper plumbing, roof sheeting, gates and the clothesline are generally part of what is being sold. Fixtures normally pass with the land, and a buyer is entitled to the house as it was when the contract was signed, so the time to decide what stays is before the listing, with the agent and the estate's solicitor, rather than on clean-out day.",
+          "The old hot water tank sitting beside the new one, the stack of spare roofing iron under the house, and a disconnected air conditioner in the garage are a different matter. They are loose items belonging to the estate, and they can go once the executor has released them. The distinction is between what is attached to the house and what is merely stored at it.",
+          "Brisbane's highset Queenslanders and post-war homes make this easy to get wrong, because so much ends up stored under the house. Clear the under-house area as its own job, and leave anything still plumbed, wired or bolted in place unless the contract and the executor both say otherwise.",
+        ],
+      },
+      {
+        heading: "Some things in the shed were never the estate's to scrap",
+        body: [
+          "Welding and cutting gas cylinders are usually rented rather than owned. The cylinder belongs to the gas supplier and carries a rental account in the deceased's name, so the right move is to find the supplier from the label or the paperwork, close the account and arrange the return. A rented cylinder in a scrap pile is somebody else's property, and a charged cylinder of any kind is a dangerous-goods question before it is a metals one.",
+          "Barbecue and camping LPG bottles that were owned outright still need to be kept upright, closed, out of the sun and apart from the rest of the load, and flagged in the enquiry. Whether and how a particular cylinder can be handled is confirmed for the actual item rather than assumed. The same applies to car and mower batteries, a home battery beside a solar inverter, and any fridge, freezer or air conditioner that still holds refrigerant, which must be recovered by an appropriately licensed person before the unit is cut or crushed.",
+          "Firearms and ammunition turn up in estate sheds more often than people expect. They are never scrap and should not be moved into any pile. Contact the Queensland Police Service about what to do with a deceased person's firearms, and leave them secured where they are until you have.",
+        ],
+      },
+      {
+        heading: "Vehicles, trailers and a rented home each bring their own clock",
+        body: [
+          "An old car, boat trailer or ride-on mower still registered in the deceased's name is not ready for collection just because it no longer runs. The Queensland Department of Transport and Main Roads sets the process for dealing with a deceased person's registration, and that needs to be settled by the executor before a registered vehicle is disposed of. Unregistered machinery still needs its fuel and oil dealt with and its battery removed and kept separate.",
+          "Where the deceased was renting, the Residential Tenancies Authority explains what happens to a tenancy when a sole tenant dies, and the timeframes involved can decide how quickly the clean-out has to happen. A retirement village or an aged care room will have its own arrangements with the operator. Knowing the real deadline early stops a rushed clean-out from sweeping keep items into the scrap.",
+          "A sale settlement date works the same way. Vacant possession means the buyer expects the loose contents gone, so book the metal collection for after the family walk-through and before the final inspection, not the day before settlement.",
+        ],
+      },
+      {
+        heading: "Access at an older Brisbane house decides how deceased estate scrap metal leaves",
+        body: [
+          "Estate clean-outs rarely happen at a site built for trucks. Steep driveways in Paddington, Red Hill and The Gap, narrow inner-city streets, a shed at the back of a long Holland Park block, or an under-house area with a low beam all change how material gets from where it sits to a vehicle. Older homes can also have fibre cement sheds, eaves or linings that may contain asbestos, and suspect material is left unbroken and kept out of the metals load entirely, with removal rules set by Workplace Health and Safety Queensland.",
+          "Whether a single collection, several loads or a bin suits the job depends on quantity, the site and how long the clean-out will run. Those are confirmed for the actual property rather than promised in advance. Send photographs of each sorted group, an approximate quantity, the suburb, who is authorising the collection, and anything about access that matters, such as a locked gate, a key held by the agent, or a driveway a truck cannot use.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Confirm who the executor or administrator is before anything is removed.",
+      "Pull out keep items and saleable tools before starting a scrap pile.",
+      "Leave fixtures in place if the house is being sold.",
+      "Return rented gas cylinders to the supplier and report firearms to police.",
+      "Settle vehicle registration and tenancy timeframes early.",
+      "Have payment made to an account the executor controls for the estate.",
+    ],
+    faqs: [
+      {
+        q: "Who can sell scrap metal from a deceased estate?",
+        a: "The executor named in the will, or an administrator appointed where there is no will or no executor able to act. Whether a particular asset can be dealt with before probate is granted is a question for the estate's solicitor or the Public Trustee of Queensland. The person offering the material is the party the transaction is recorded against.",
+      },
+      {
+        q: "Can I remove the hot water system and copper pipes before selling a deceased estate house?",
+        a: "Generally not. Fixtures such as the hot water system, plumbing and fixed air conditioning normally pass with the property, so removing them before a sale can put the estate in breach of what the buyer is entitled to. Loose items stored at the house, such as a spare tank or disconnected unit, are different. Check with the agent and the estate's solicitor.",
+      },
+      {
+        q: "What should I do with gas cylinders found in a deceased person's shed?",
+        a: "Welding and cutting gas cylinders are usually rented, so find the supplier from the label, close the rental account and arrange the return. Owned LPG bottles should be kept upright, closed, shaded and separate from other material, and flagged when you describe the load. Handling is confirmed for the actual cylinder.",
+      },
+      {
+        q: "Where should the money from an estate's scrap metal go?",
+        a: "Proceeds from the estate's property belong to the estate, so payment is normally made electronically to an account the executor controls for the estate rather than to an individual family member. Keep the transaction record with the estate's other paperwork.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
