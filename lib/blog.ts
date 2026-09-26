@@ -895,6 +895,98 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "acreage-scrap-metal-removal-brisbane",
+    title: "Clearing decades of metal off an acreage block",
+    shortTitle: "Acreage clean-ups",
+    eyebrow: "Clean-up",
+    seoTitle: "Acreage Scrap Metal Removal: Brisbane Block Guide",
+    seoDescription:
+      "Acreage scrap metal removal starts with the ground, not the pile. What a truck can reach, what to pull out first, and how to stage wire, tanks and sheds.",
+    published: "2026-09-26",
+    readingMinutes: 8,
+    photo: "rusty-steel",
+    summary:
+      "On a rural block, acreage scrap metal removal is rarely held up by the metal. The hard part is getting a truck to it, finding what is buried in the long grass, and keeping fuel tanks, chemical drums and snakes out of the load.",
+    intro:
+      "Acreage scrap metal removal is decided by the ground before it is decided by the metal. On a five-acre block at Greenbank or Pine Mountain, the question is whether a loaded truck can reach the pile without bogging, and whether the pile has been gathered somewhere it can. Get that right and the rest of the clean-up is ordinary sorting; get it wrong and a straightforward collection becomes a recovery job.",
+    sections: [
+      {
+        heading: "The collection point matters more than the pile",
+        body: [
+          "Scrap on an acreage block is usually scattered: an old ute body behind the dam, a stack of roofing iron against the fence line, a tangle of wire down the back paddock, a shed full of whatever the last owner kept. None of that is where a truck can safely go. The single most useful thing you can do is pick one collection point on firm, level ground close to the driveway and bring the material to it.",
+          "Hardstand beside the shed, a gravel turning area or the house pad are the usual candidates. A paddock that looks solid in August can be soft for days after a summer storm, and heavy clay soils around parts of Logan and Ipswich holds water well after the surface has dried. Plan the clean-up for a dry spell, and move the material in with the tractor or a trailer while the ground is still firm rather than asking a heavier vehicle to follow it out.",
+          "Check the route in as well as the spot. Gate widths, overhanging branches along the driveway, a cattle grid, a causeway or a timber bridge built for a ute and a horse float can all decide what can come in. What vehicle suits a particular block, and whether a bin or a collection is the better fit, is confirmed for that property rather than assumed.",
+        ],
+      },
+      {
+        heading: "Walk the block before anyone starts lifting",
+        body: [
+          "Long grass hides more than people remember putting there. Star pickets, a harrow, the frame of an old trailer and loops of barbed wire all sit low enough to disappear, and they are the things that punch a tyre or wrap around a mower blade. Walk the whole block, mark what you find, and photograph each item where it lies. That walk also tells you roughly how much there is, which is the first thing anyone assessing the load will ask.",
+          "Piles that have sat undisturbed for years are shelter. In south-east Queensland that means snakes, including eastern browns, under sheet iron and in stacked timber, plus spiders and wasps in hollow sections and machinery. Wear boots, long trousers and heavy gloves, lift sheets from the far edge so the gap opens away from you, and leave anything you disturb a clear path out.",
+          "Old sheet iron is also sharp, often rusted thin along the edges, and heavier in a stack than it looks. Two people per sheet on anything longer than a couple of metres is a sensible default.",
+        ],
+      },
+      {
+        heading: "Fuel tanks, chemical drums and gas bottles come out before the steel",
+        body: [
+          "Older properties often have an overhead or skid-mounted diesel or petrol tank, sometimes still holding fuel. A tank that has held fuel keeps flammable vapour long after it looks empty, so it is never cut, ground or crushed as ordinary steel. Leave it in place, note what it held, and flag it separately when you describe the load. How a particular tank can be dealt with is confirmed for that tank.",
+          "Drums that held farm chemicals are a separate stream entirely. Cleaned, eligible agricultural and veterinary chemical containers can go through drumMUSTER, the national program for them, which sets its own rules on what is eligible and how containers are rinsed. A drum with unknown residue in it is not scrap until someone knows what it is. The same applies to old sump oil drums: drain them properly and keep them apart.",
+          "LPG bottles, old welding cylinders, tractor and ute batteries, and any fridge, freezer or air conditioner still holding refrigerant each carry their own handling. Welding cylinders are often rented, so check the label for a supplier before assuming they belong to the property. Refrigerant has to be recovered by an appropriately licensed person before a unit is cut or crushed. Pull all of these out, keep them upright and shaded where it applies, and list them in the enquiry.",
+        ],
+      },
+      {
+        heading: "Fencing wire and star pickets are worth handling on their own terms",
+        body: [
+          "Old fencing is the most common acreage scrap and the most awkward. Barbed wire and plain wire pulled off a fence line want to spring back into a tangle, and a tangle is hard to lift, hard to load and hard to describe. Roll wire into coils as it comes off, tie them, and stack them together. Keep it out of the sheet iron and machinery, where it snags everything.",
+          "Star pickets bundle neatly and are easy to count, so bundle them. Timber posts, wire strainers set in concrete and any post with a lump of footing still attached are either separated or described honestly, because concrete and timber add weight without adding metal. Galvanised mesh, gates and old yard panels form their own group.",
+          "If you are replacing a fence rather than removing it, agree with your fencing contractor who takes the old wire before the job starts. It is far easier to coil it as it comes off than to untangle a pile that has sat in the grass for a season.",
+        ],
+      },
+      {
+        heading: "Machinery and vehicles need a decision before they need a truck",
+        body: [
+          "A dead tractor, a slasher, an old header front or a car shell in the back paddock is often the largest single item on the block. Before it goes anywhere, decide whether it is scrap at all. Older tractors, stationary engines, cast-iron implements and some old vehicles have buyers who value them as restorations or parts, and once one is in a scrap load it is simply metal.",
+          "Anything registered needs its registration dealt with through the Queensland Department of Transport and Main Roads before it is disposed of. Anything with fuel, oil, coolant or a battery still in it needs those dealt with and the battery kept separate. Machinery belonging to a neighbour, an agistment tenant or a previous owner who left it with permission is not yours to offer; if the property was bought with the contents, the contract of sale is where that answer lives.",
+          "How a large item comes out depends on where it sits and what it weighs. A vehicle that has sunk into the ground, or a piece of machinery wedged between trees, may need to be dragged to the collection point first. Describe where it is and what is still attached so the right approach can be confirmed.",
+        ],
+      },
+      {
+        heading: "Old sheds decide whether acreage scrap metal removal is a metals job or two jobs",
+        body: [
+          "Many rural sheds around Samford, Brookfield, Mount Cotton and Jimboomba were built or patched with fibre cement sheeting, and older ones may contain asbestos. Suspect sheeting is not broken, cut or pulled down as part of a metals clean-up. Removal rules are set by Workplace Health and Safety Queensland, and where asbestos is present that part of the job is separate work for the right people before any metal around it is loaded.",
+          "An all-steel shed is simpler. Steel frames, purlins and roofing iron sort as ordinary steel, but whoever takes the structure down is doing construction work, with the safety obligations that carries, and a shed that has lost its bracing can come down in ways nobody planned. Take the shed down as its own task, then sort the material into the same groups as the rest of the block.",
+          "Once everything has been walked, sorted and staged at the collection point, the enquiry itself is short: photographs of each group, an approximate quantity, the suburb, how a vehicle reaches the collection point, and a list of anything flagged separately, such as a fuel tank, drums or gas bottles.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Pick one firm, level collection point near the driveway and bring everything to it.",
+      "Plan the clean-up for a dry spell and check gates, grids and bridges on the way in.",
+      "Walk the whole block in boots and gloves before lifting anything.",
+      "Pull out fuel tanks, chemical drums, gas bottles and batteries before the steel.",
+      "Coil fencing wire as it comes off and bundle star pickets.",
+      "Decide which machinery is worth more whole, and settle any registration first.",
+    ],
+    faqs: [
+      {
+        q: "Can a scrap truck drive across my paddock to collect metal?",
+        a: "Sometimes, but it is the part most likely to go wrong. A loaded truck is far heavier than a ute or tractor, and paddocks that look firm can be soft after rain. Gathering material at a firm, level point near the driveway is usually safer, and what vehicle suits the property is confirmed for that site.",
+      },
+      {
+        q: "What should I do with an old diesel tank on my property?",
+        a: "Leave it in place and do not cut or grind it, because a tank that held fuel keeps flammable vapour long after it looks empty. Note what it held and flag it separately when you describe the load; how that particular tank can be handled is confirmed for the actual item.",
+      },
+      {
+        q: "Is old barbed wire and fencing wire worth collecting as scrap?",
+        a: "It is steel and can go with a steel load, but tangled wire is hard to handle. Coiling and tying it as it comes off the fence, and keeping timber posts and concrete footings out of it, makes it far easier to describe and load.",
+      },
+      {
+        q: "Where do empty farm chemical drums go?",
+        a: "Cleaned, eligible agricultural and veterinary chemical containers can go through drumMUSTER, which sets its own eligibility and rinsing rules. Drums with unknown residue should not go into a scrap load until someone knows what they held.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
