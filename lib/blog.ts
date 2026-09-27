@@ -987,6 +987,97 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "old-roofing-iron-removal-brisbane",
+    title: "What to do with the old roof when the new one goes on",
+    shortTitle: "Re-roof scrap",
+    eyebrow: "Renovation",
+    seoTitle: "Old Roofing Iron Removal: A Brisbane Re-Roof Guide",
+    seoDescription:
+      "Old roofing iron removal starts before the first screw comes out: who owns the sheets, what the paint hides, and how to stack iron so it leaves cleanly.",
+    published: "2026-09-27",
+    readingMinutes: 8,
+    photo: "crew",
+    summary:
+      "A re-roof puts a whole roof's worth of metal on the ground in a day or two. Old roofing iron removal goes smoothly when ownership, old paint and the stack are settled before the sheets come down.",
+    intro:
+      "The most useful thing to settle about old roofing iron removal is who the iron belongs to once it is off the roof, because on most re-roofs that is decided in the quote from the roofer, not afterwards. After that, the job is mostly about what is on and under the old sheets, and where they land. A tin roof on a Queenslander at Wilston or Annerley comes down as several different materials, some of which need care, and the difference between a clean collection and a mess on the lawn is set in the first hour.",
+    sections: [
+      {
+        heading: "The roofing quote usually decides who keeps the old iron",
+        body: [
+          "Many re-roofing quotes include taking the old roof away, and some roofers price the job partly on what they recover from it. Read the quote for a line about removal or disposal. If it is there, the old sheets, gutters and flashings are generally part of the roofer's job, and offering them to anyone else creates a dispute nobody needs.",
+          "If you would rather deal with the old material yourself, say so before the quote is accepted, not when the scaffold goes up. The roofer may price the job differently, and they need to know where to put the sheets as they come off. Agree it in writing, even as a line in an email, so the crew on the day knows the pile by the side fence is not theirs to load.",
+          "The same applies in the other direction. A roofer, builder or handyman removing a client's roof has not automatically acquired it. Whoever is holding the old iron should be able to say where the agreement came from.",
+        ],
+      },
+      {
+        heading: "Old paint and fibro come before any question about the metal",
+        body: [
+          "Brisbane's older houses have often been painted many times, and paint applied before the 1970s can contain lead. That matters on a roof because the old sheets, barge boards and flashings are scraped, cut and walked on during removal, and lead dust ends up in the yard, the ceiling cavity and the gutters. The Australian Government publishes lead-safe guidance for renovators; read it before the job starts if the house predates the 1970s, and do not sand, grind or cut painted sheets on site to make them easier to stack.",
+          "Fibre cement is the other check. Plenty of older Brisbane roofs are part metal and part fibro — a corrugated fibre cement verandah or carport roof, flat sheeting under the eaves, or a patched section where someone ran out of iron. Material installed before the ban on asbestos products may contain it. Removal rules are set by Workplace Health and Safety Queensland, and any suspect sheeting is dealt with as its own job by the right people before metal around it is loaded, not mixed into the iron.",
+          "Working on the roof itself is a separate matter again. Falls from roofs are a known hazard on renovation jobs, and the safety duties for work at height are administered by Workplace Health and Safety Queensland. A metals collection starts once the material is on the ground.",
+        ],
+      },
+      {
+        heading: "A roof comes down as five or six materials, not one",
+        body: [
+          "The sheets are the bulk of it. Old galvanised corrugated iron, zinc-aluminium coated sheet and pre-painted steel all sort together as steel. Gutters, fascia and downpipes usually follow, though older houses often have PVC downpipes that are not metal at all, and some have a length of copper or a zinc box gutter that is worth keeping apart.",
+          "Flashings are where the value and the care concentrate. Older roofs often carry lead flashing around chimneys, vent pipes and wall junctions. Lead is heavy, easy to lose in a pile of steel, and a material with its own handling considerations, so fold it and keep it in a separate container rather than letting it ride down with the sheets. The old TV antenna, most whirlybirds and some gutter guard mesh are aluminium, and they belong with each other rather than with the steel.",
+          "Some of what comes off is not a metals question. Sarking foil looks like aluminium but is a laminate bonded to paper or plastic. Insulation blankets, timber battens full of nails, old bird nests and ceiling debris belong in the builder's waste, not the scrap. Steel battens, if the roof had them, sort with the sheets.",
+        ],
+      },
+      {
+        heading: "Long sheets are a stacking problem before they are a transport problem",
+        body: [
+          "Roof sheets often run the full length of the pitch, and on a long verandah they can be longer than anyone expects. Stack them flat, all facing the same way, on timber bearers so they can be lifted from underneath, and pull any screws or nails that are still standing proud. A neat stack is quicker to assess from a photo and quicker to load; a heap of sheets dropped in whatever direction they fell is neither.",
+          "Old iron is sharp, frequently rusted thin at the laps, and it cuts through ordinary gloves. Two people per long sheet is a sensible default, and nobody should be carrying sheets across a sloping yard in a breeze. A loose sheet caught by wind behaves like a sail.",
+          "That last point is local. From late spring through summer, south-east Queensland gets storms that arrive fast, and a pile of loose roofing iron in a front yard is exactly what those storms throw into the neighbour's house. Weigh the stack down with something heavy, or tie it, from the moment the first sheets land.",
+        ],
+      },
+      {
+        heading: "Hillside Queenslanders decide how old roofing iron removal leaves the site",
+        body: [
+          "Brisbane's inner suburbs are full of high-set houses on steep, narrow blocks. At Paddington, Red Hill, Bardon or Highgate Hill the roof may be two storeys above the only level ground, and the only route to the street is a side path or a set of stairs. Plan where sheets are lowered and stacked with that route in mind, not simply where it is easiest to drop them from the roof.",
+          "Check the street end as well. Narrow streets with parked cars on both sides, overhead power lines running close to the front boundary and mature street trees all affect what vehicle can load where. A bin placed on the footpath or road rather than inside the property is a council matter, and Brisbane City Council sets its own requirements for that.",
+          "What vehicle suits a particular house, and whether a bin during the job or a single collection at the end is the better fit, is confirmed for that property. Describe the slope, the route from the stack to the street and any overhead lines when you ask.",
+        ],
+      },
+      {
+        heading: "Timing the pickup to the roof crew beats a pile left on the lawn",
+        body: [
+          "A re-roof tends to strip one side at a time so the house is never left open. That means old material arrives in waves over a few days, and a stack that grows on the lawn for a fortnight kills the grass, collects rainwater and becomes a place for snakes and spiders to shelter.",
+          "Sort as it comes down: sheets on the stack, gutters and downpipes beside it, lead in its own container, aluminium in another, and everything non-metal straight into the builder's waste. When the last sheet is off, photograph each group with something in frame for scale, estimate the number and length of sheets, and note the suburb and the access. That is enough for an assessment, and it avoids a revision on the day.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Read the roofing quote for removal and agree in writing who keeps the old iron.",
+      "Check for old lead paint and fibre cement before any sheet is lifted.",
+      "Keep lead flashing and aluminium out of the steel from the start.",
+      "Stack sheets flat, one direction, on bearers, and weigh the stack down.",
+      "Plan the route from stack to street, including stairs, slopes and overhead lines.",
+      "Photograph each group and count the sheets once the roof is off.",
+    ],
+    faqs: [
+      {
+        q: "Is old corrugated roofing iron worth anything as scrap?",
+        a: "It is steel and can go into a steel load, but light-gauge sheet is bulky for its weight, so how it is prepared and stacked matters. Lead flashings and aluminium parts from the same roof are assessed separately and are worth keeping apart from the sheets.",
+      },
+      {
+        q: "Does my roofer get to keep the old roof?",
+        a: "It depends on the agreement. Many re-roofing quotes include removing the old roof, and in that case the material is generally part of the roofer's job. If you want to keep and deal with it yourself, agree that before the quote is accepted and put it in writing.",
+      },
+      {
+        q: "What should I do if the old roof paint might contain lead?",
+        a: "Assume paint applied before the 1970s may contain lead and avoid sanding, grinding or cutting painted sheets. The Australian Government publishes lead-safe guidance for home renovators, and it is worth reading before any work starts on an older house.",
+      },
+      {
+        q: "Can asbestos roof sheeting go in with the metal?",
+        a: "No. Fibre cement sheeting that may contain asbestos is kept completely separate from metal. Removal rules are set by Workplace Health and Safety Queensland, and that part of the job is done by the appropriate people before any surrounding metal is loaded.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
