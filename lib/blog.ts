@@ -1078,6 +1078,95 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "workshop-clearance-brisbane",
+    title: "Clearing a leased workshop before the keys go back",
+    shortTitle: "Workshop clearance",
+    eyebrow: "Industrial",
+    seoTitle: "Workshop Clearance Brisbane: Emptying a Leased Unit",
+    seoDescription:
+      "A workshop clearance is run to a lease-end date. What to sell whole, what to scrap, and what must be isolated or drained before a Brisbane unit goes back.",
+    published: "2026-09-28",
+    readingMinutes: 8,
+    photo: "gears",
+    summary:
+      "Closing or moving a fabrication shop, machine shop or service workshop leaves a unit full of machinery, stock and offcuts, and a date by which it all has to be gone. A workshop clearance goes to plan when ownership, sale and isolation are settled before any metal is loaded.",
+    intro:
+      "The date that runs a workshop clearance is the lease handover, and the document that runs it is the make-good clause. Everything else — which machines are sold, which are scrapped, what has to be disconnected and drained first — is worked backwards from those two. Metal collection is usually the last step on that list, and it goes smoothly only when the steps before it have actually happened.",
+    sections: [
+      {
+        heading: "Workshop clearance runs backwards from the handover date",
+        body: [
+          "Read the make-good clause before deciding anything. Some leases require the unit returned to the condition it was handed over in, which can mean removing the compressed air lines, three-phase outlets, mezzanine and crane rails the business added over the years. Others require some of those fixtures to stay. What belongs to the landlord and what belongs to the tenant is a lease question, and it is worth having the answer in writing before anything bolted to the slab or the wall is cut out.",
+          "Then set the order. Machinery that might sell needs weeks, not days, to find a buyer and be collected. Electricians, fluid contractors and machinery movers each need to be booked. Scrap is what is left after all of that, so planning the metal first and discovering a saleable lathe in the scrap pile on the last Friday is the expensive way round.",
+        ],
+      },
+      {
+        heading: "Financed, hired and customer-owned items are not yours to scrap",
+        body: [
+          "Workshops accumulate equipment on finance or under hire: forklifts, compressors, CNC machines, welders and the gas cylinders beside them. Anything still under a finance arrangement may be subject to a security interest, and a search of the Personal Property Securities Register, run by the Australian Financial Security Authority, shows whether one is registered against a serial-numbered item. Settle that with the financier before a machine is sold or offered as scrap.",
+          "Cylinders are the most common mistake. Oxy-acetylene, argon mix and other welding gases are usually supplied on rental, and the label or collar names the supplier. Those go back to the supplier, not into a steel load. The same caution applies to jigs, patterns, dies and tooling that a customer paid for; if it was made for a customer's job, it may be the customer's.",
+        ],
+      },
+      {
+        heading: "A machine that still runs is worth deciding on before it is weighed",
+        body: [
+          "A working lathe, mill, press brake, guillotine or band saw often has a buyer who values it as a machine: another shop, a used machinery dealer or an industrial auction. Once it is cut up or dropped into a scrap load, it is only metal, and there is no reversing that. Give each machine an honest look, and a photograph of its nameplate, before deciding which list it goes on.",
+          "Tooling deserves its own look too. Chucks, vices, collets, cutters and tool holders often move with a machine or sell as a lot. Carbide inserts and worn carbide tooling are a separate material from the steel around them and are best kept in their own container rather than tipped into a bin.",
+          "Stock is the part that sorts easiest while the racks are still standing. Bar, plate, sheet and tube offcuts can be grouped by metal and, where the shop knows it, by alloy, straight off the rack. Once the racks are dismantled and everything is on the floor, the same material becomes one mixed pile.",
+        ],
+      },
+      {
+        heading: "Fluids, power and pressure are cleared before anything moves",
+        body: [
+          "Disconnecting a three-phase machine from the switchboard is electrical work, and in Queensland electrical work is done by a licensed electrical worker under rules administered by the Electrical Safety Office. Book the electrician to isolate and make safe everything that is leaving, and to deal with any supply points the make-good clause requires removed.",
+          "Machines hold more fluid than people expect. Hydraulic tanks on presses, gearbox and slideway oil, and coolant sumps under lathes and mills all need draining before a machine is tipped, dragged or lifted. Used oil, coolant and oily water are regulated waste in Queensland, and how they can be transported is set under the state's environmental protection rules, so they go to a contractor authorised for that waste rather than riding out inside the steel. Swarf bins should be drained and kept apart for the same reason.",
+          "Air receivers on compressors are pressure vessels. Drain and depressurise them, and leave the drain valve open. Water chillers, cool rooms and split systems in the office still hold refrigerant, which is recovered by an appropriately licensed person under the national scheme administered by the Australian Refrigeration Council before any unit is cut. Forklift traction batteries and UPS battery banks are their own stream with their own transport rules, set by the relevant transport and workplace-safety regulators.",
+        ],
+      },
+      {
+        heading: "Getting machinery out of an estate unit is a rigging job first",
+        body: [
+          "A heavy machine is rarely a scrap question until it is outside. Anchors into the slab, a roller door lower than the machine, and a floor that cannot take a large forklift all decide how it leaves. Operating a forklift or crane above the relevant thresholds needs a high risk work licence issued under Workplace Health and Safety Queensland rules, and heavy or awkward lifts are properly the work of a machinery mover or rigger, not whoever happens to be on site on the last day.",
+          "Brisbane's older industrial estates add their own constraints. Strata unit complexes around Rocklea, Salisbury, Geebung and Brendale often share a single common driveway and hardstand, with body corporate rules about when trucks can stand there and how long for. Some units open onto a narrow internal road where a rigid truck cannot turn. Check the by-laws, warn the neighbouring units and give the loading area a time, rather than blocking the driveway on a weekday morning.",
+          "Which vehicle suits the unit, and whether a bin during the clear-out or a single collection at the end works better, is confirmed for that site. Send the roller door height, the driveway width, any body corporate time restrictions and the heaviest single item with the enquiry.",
+        ],
+      },
+      {
+        heading: "The metal should leave before the cleaners arrive",
+        body: [
+          "Stage the metal by stream in one part of the unit, clear of the doorway and the route machinery takes out: steel and cast iron in one group, aluminium, stainless, copper and brass in others, electric motors and cable apart from both. Keep anything flagged — drained tanks, batteries, sealed or pressurised items — to one side and listed.",
+          "Leave time between the metal going and the handover. Make-good usually means a clean floor, and swarf in expansion joints, oil staining under machines and offcuts behind racking are only visible once everything else has gone. A clearance timed so the collection happens the day before the keys go back leaves no room for a delay, so aim for a clear week between the last metal leaving and the handover inspection.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Read the make-good clause and confirm in writing what fixtures stay.",
+      "Check finance and hire on every machine, forklift and gas cylinder.",
+      "Decide which machines sell whole before any metal is planned.",
+      "Book an electrician to isolate, and drain every tank and sump.",
+      "Engage a rigger or machinery mover for anything heavy or anchored.",
+      "Stage metal by stream and leave a week before the handover.",
+    ],
+    faqs: [
+      {
+        q: "Should old workshop machinery be sold or scrapped?",
+        a: "If it still works, it is worth offering as a machine first, through another workshop, a used machinery dealer or an industrial auction. Once a machine goes into a scrap load it is assessed only as metal. Machinery that is worn out, obsolete or damaged beyond repair is where scrap makes sense.",
+      },
+      {
+        q: "Can I scrap a machine that is still on finance?",
+        a: "Not without dealing with the financier. Equipment under finance may carry a security interest registered on the Personal Property Securities Register, run by the Australian Financial Security Authority. Search the register by serial number and settle anything registered before the machine is sold or offered as scrap.",
+      },
+      {
+        q: "Who disconnects three-phase machinery when a workshop closes?",
+        a: "A licensed electrical worker. Disconnecting equipment from the supply is electrical work, and in Queensland it is regulated by the Electrical Safety Office. Book the isolation before the machinery movers, so each machine is safe to handle when they arrive.",
+      },
+      {
+        q: "What happens to the oil and coolant in old machines?",
+        a: "It is drained before the machine is moved and handled as its own stream. Used oil, coolant and oily water are regulated waste in Queensland, and their transport is controlled under the state's environmental protection rules, so they go to a contractor authorised for that waste rather than staying inside metal sent for recycling.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
