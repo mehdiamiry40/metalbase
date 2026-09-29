@@ -1167,6 +1167,92 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "old-boat-disposal-brisbane",
+    title: "An old boat is three disposal jobs: hull, motor and trailer",
+    shortTitle: "Old boat disposal",
+    eyebrow: "Household",
+    seoTitle: "Old Boat Disposal Brisbane: Hull, Motor and Trailer",
+    seoDescription:
+      "Old boat disposal starts with the hull. What to sell, what to scrap, and the fuel, flares and beacon that come out first, for Brisbane boat owners.",
+    published: "2026-09-29",
+    readingMinutes: 7,
+    photo: "alloy",
+    summary:
+      "A boat that has sat under a tarp for years is really three items with three different futures. Old boat disposal goes cleanly when the hull, the motor and the trailer are each decided on their own, and the hazards come out before anything is loaded.",
+    intro:
+      "The first question in old boat disposal is what the hull is made of, because it decides whether most of the boat is metal at all. An aluminium tinnie on a galvanised trailer is largely recoverable; a fibreglass half-cabin on the same trailer is mostly a waste question with a metal trailer and motor attached. Settle that first, then decide the motor and the trailer on their own merits.",
+    sections: [
+      {
+        heading: "The hull material decides whether old boat disposal is a metals job",
+        body: [
+          "Tinnies, punts, pontoon boats and many centre consoles are pressed or plate aluminium, riveted or welded. The hull is metal, but it is rarely only metal. Timber or composite floors, buoyancy foam packed underneath them, marine carpet, vinyl seats, plastic consoles and a mix of stainless and galvanised steel fittings all come with it. How much of that is still attached is what separates one aluminium boat from another when it is assessed, so list it and photograph it rather than describing the boat as simply aluminium.",
+          "Fibreglass, timber and plastic hulls are not scrap metal. The rails, cleats, windscreen frame, motor and trailer on them are recoverable, but the hull itself is a disposal question for a waste facility or a boat disposal operator. Ask your council which of its facilities will take one, in what form and whether it has to be cut down first, and get that answer before anything is unbolted. Stripping the metal off a fibreglass boat and then discovering nobody will move the bare hull is the most common way these jobs stall.",
+        ],
+      },
+      {
+        heading: "A running outboard and a sound trailer are usually worth more whole",
+        body: [
+          "South-east Queensland has a busy second-hand market for outboards, including old two-strokes that someone is keeping a matching motor alive with. A motor that starts on the muffs will often find a buyer as a motor or for parts. Once it goes into a scrap load it is assessed only as an aluminium assembly with steel, copper windings and oil inside it. Run it, photograph the model plate, and decide before it comes off the transom.",
+          "The trailer is often the easiest part to sell, and sometimes worth keeping until the end because it is how the boat gets moved. If any part has value, try selling the boat on its trailer first, then the motor on its own, and scrap only what is left. A boat or trailer bought on finance may carry a security interest on the Personal Property Securities Register, run by the Australian Financial Security Authority, so check that before offering either for sale or as scrap.",
+        ],
+      },
+      {
+        heading: "Fuel, flares, batteries and the beacon come out before anything is weighed",
+        body: [
+          "Fuel is the first hazard. Portable tanks, underfloor tanks and the lines between them can hold stale petrol and vapour for years, and a tank with vapour in it is a hazard for anyone cutting near it. Drain what can be drained, take portable tanks out of the boat, and flag any sealed underfloor tank in the enquiry rather than attempting to cut it out. Gear oil in the lower unit, sump oil in a four-stroke and the oil reservoir on an older two-stroke are drained as well. Ask your council where its facilities accept old fuel and used oil.",
+          "Out-of-date marine distress flares are explosives. They never go in a metal load or a household bin. Maritime Safety Queensland, part of the Department of Transport and Main Roads, publishes where expired flares can be handed in. Any gas bottle for a cooker or barbecue on board comes out and is handled as a gas bottle.",
+          "Cranking batteries and any lithium house battery are their own stream, with transport rules set by the relevant transport and workplace-safety regulators. An EPIRB carries a battery too. Before it goes anywhere, update its registration with the Australian Maritime Safety Authority, which keeps the beacon register, so an accidental activation from a disposal pile does not send searchers looking for a boat that no longer exists.",
+        ],
+      },
+      {
+        heading: "Registration ends with a form, not with the collection",
+        body: [
+          "In Queensland, powered recreational boats above a set engine power are registered, and trailers are registered as vehicles; both are handled by the Department of Transport and Main Roads. Cancel the registrations or record the disposal with TMR when the boat and trailer go, keep the receipt, and ask TMR what it needs done with the trailer plates. The scrap collection does not do this for you.",
+          "A trailer whose registration lapsed years ago cannot simply be hitched up and towed down the road. TMR sets the rules for moving an unregistered vehicle on a public road, including the permits it issues for some one-off trips, so check with TMR before planning the move around towing it.",
+          "Keep the registration papers or a purchase receipt with the boat. A boat that came with a house purchase, or was abandoned on your land by someone else, is not automatically yours to dispose of, and ownership needs settling before it is sold or scrapped.",
+        ],
+      },
+      {
+        heading: "Side-yard boats in bayside suburbs are an access problem first",
+        body: [
+          "Around Wynnum, Manly, Sandgate, Redcliffe, Cleveland and Victoria Point, plenty of boats went down the side of the house on their trailer ten or twenty years ago. Since then a fence, a carport, a water tank or an air-conditioning unit has gone in beside them, the tyres have gone flat, the wheel bearings have seized and the jockey wheel has rusted solid. Whether the trailer can still roll out on its own wheels decides more about the job than the metal does.",
+          "Measure the gate or gap the boat has to come through, note any carport or eave it has to clear, and say whether the hull is on its trailer, on blocks or on the ground. Photographs of the path from the boat to the street are worth more than a description. Which vehicle suits the site, and whether anything has to be cut down before it can leave, is confirmed for that property.",
+          "A boat still on a mooring in Moreton Bay or in a marina berth has to come out of the water before any of this applies. That is a job for a boatyard, a slipway or a marine salvage operator, and it is worth arranging where the boat will land before booking its retrieval.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Identify the hull material before planning anything else.",
+      "Test the motor and check the trailer before deciding to scrap either.",
+      "Drain fuel and oil, and remove batteries, gas bottles and the beacon.",
+      "Hand expired flares in where Maritime Safety Queensland directs.",
+      "Cancel or record the disposal of both registrations with TMR.",
+      "Photograph the path from the boat to the street and send it with the enquiry.",
+    ],
+    faqs: [
+      {
+        q: "Is an old aluminium boat worth anything as scrap?",
+        a: "An aluminium hull is recoverable metal, so it is usually assessed as scrap rather than treated as waste. How it is assessed depends on how much non-metal is still attached, such as floors, buoyancy foam, seats and carpet, and on whether the motor and fittings are included. Photographs of the hull inside and out give the most useful answer.",
+      },
+      {
+        q: "Can a fibreglass boat be scrapped for metal?",
+        a: "The hull cannot, because fibreglass is not metal. The motor, trailer, rails and other metal fittings can be recovered, but the hull is a disposal question for a waste facility or boat disposal operator. Ask your council which facility accepts one, and in what form, before removing the metal parts.",
+      },
+      {
+        q: "What do I do with out-of-date marine flares in Queensland?",
+        a: "Expired flares are explosives and must not go into a metal load or household waste. Maritime Safety Queensland, part of the Department of Transport and Main Roads, publishes the locations where out-of-date flares can be handed in.",
+      },
+      {
+        q: "Do I need to cancel my boat registration before it is scrapped?",
+        a: "Boat and trailer registrations in Queensland are handled by the Department of Transport and Main Roads, and the owner deals with them, not the scrap collector. Cancel the registrations or record the disposal with TMR, keep the receipt, and ask TMR what it needs done with the trailer plates.",
+      },
+      {
+        q: "Can an old outboard motor be scrapped?",
+        a: "Yes, once its fuel and oil have been drained. It is worth test-running it first, because an old outboard that still starts can often be sold as a motor or for parts, and that option is gone once it is in a scrap load.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
