@@ -1253,6 +1253,98 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "kitchen-bathroom-renovation-scrap-metal-brisbane",
+    title: "Keeping the metal out of the skip on a kitchen or bathroom renovation",
+    shortTitle: "Renovation scrap metal",
+    eyebrow: "Renovation",
+    seoTitle: "Renovation Scrap Metal: Kitchen and Bathroom Guide",
+    seoDescription:
+      "Renovation scrap metal goes in the skip unless someone decides otherwise. Keep the sink, tapware, copper and cast iron bath out on a Brisbane job.",
+    published: "2026-09-30",
+    readingMinutes: 7,
+    photo: "mixed-parts",
+    summary:
+      "A kitchen or bathroom strip-out produces a small, mixed pile of metal that disappears into the skip unless it has somewhere else to go. Renovation scrap metal is worth keeping apart when the decision is made before demolition day, not during it.",
+    intro:
+      "Most renovation scrap metal is lost in the first two hours of demolition, when the old kitchen or bathroom comes out in a hurry and everything goes in the same skip. Decide beforehand who keeps the metal, what has to be disconnected by a licensed trade, and where the sink, tapware, pipe and appliances will sit until they are collected. The rest follows from those three answers.",
+    sections: [
+      {
+        heading: "Renovation scrap metal needs a decision before demolition day",
+        body: [
+          "A typical kitchen strip-out yields a stainless sink, a steel oven and cooktop, a rangehood, a dishwasher, drawer runners, hinges and a few metres of copper pipe. A bathroom adds tapware, a shower rose and arm, towel rails, sometimes a steel or cast iron bath, and the copper behind the walls. None of it is a large quantity, which is exactly why it ends up under broken tiles and cabinet carcasses in a skip that is priced and handled as mixed waste.",
+          "The fix is a spot and a plan. Pick a place outside the work area, such as a carport corner or a patch of driveway that is not needed for the skip or the tradies' vehicles, and tell everyone on the job that metal goes there. Agree it before the first cabinet comes off the wall, because nobody on a demolition day stops to fish a mixer tap out of a skip.",
+        ],
+      },
+      {
+        heading: "Who keeps the offcuts is a line in the quote, not an assumption",
+        body: [
+          "Plumbers and builders often treat old copper and brass as part of how they price a job. That is a legitimate arrangement, but it should be one you know about. If you want to keep the old metal, say so when the quotes come in, so the trade can price accordingly and knows not to load it into the ute at the end of the day.",
+          "The same goes for a kitchen company that removes the old kitchen as part of installing the new one. Removal may include taking the appliances and sink away, or it may mean putting them in your skip. Ask which, and get it written into the quote so there is no argument at the end of the job.",
+          "If you are project-managing the renovation yourself, the choice is simpler but the timing is still yours to set. The metal has to be out of the way before the plasterer and tiler need the space.",
+        ],
+      },
+      {
+        heading: "Disconnection is licensed work, and removal comes after it",
+        body: [
+          "A sink, a mixer or a hot water connection comes out only after the water is isolated and the pipework is capped. In Queensland most plumbing work has to be done by a licensed plumber, and the Queensland Building and Construction Commission licenses plumbers and drainers. Pulling tapware off the wall without that step is how a renovation becomes a burst pipe in the neighbour's unit.",
+          "Wired-in ovens, cooktops, rangehoods and dishwashers are disconnected by a licensed electrician, under rules set by the Electrical Safety Office. A gas cooktop or gas oven is gasfitting work, and Resources Safety and Health Queensland issues the licences for it. Ask for the disconnection to happen before demolition starts, and keep appliances whole once they are out. A cooktop with its gas fitting cut off with an angle grinder is a hazard, not a head start.",
+        ],
+      },
+      {
+        heading: "Older bathrooms can hide asbestos behind the tiles",
+        body: [
+          "Many Brisbane bathrooms and laundries built before the 1990s were lined with fibre cement sheeting, and some fibre cement from that era contains asbestos. The sheet behind the tiles, the wall around the bath, the eaves outside the bathroom window and the old laundry wall are all places it turns up, especially in the post-war and 1970s houses across suburbs like Stafford, Chermside, Holland Park and Mount Gravatt.",
+          "You cannot tell by looking at it. Treat suspect sheeting as though it contains asbestos until it has been tested, and do not break, drill or sand it to get at the pipe behind. The Queensland Government's asbestos guidance explains what a homeowner may and may not do, and Workplace Health and Safety Queensland regulates licensed removal. Metal that has been in contact with broken asbestos sheeting is a clearance question before it is a scrap one, so settle the asbestos first and pull the metal after.",
+        ],
+      },
+      {
+        heading: "Sort by what it is while it comes out, not afterwards",
+        body: [
+          "The metal separates naturally if it is sorted as it is removed. Keep copper pipe in one pile, tapware and brass fittings in a bucket, the stainless sink on its own, and steel items such as the oven, rangehood, drawer runners and steel bath in another. A mixer tap is brass with plastic cartridges and flexible hoses attached; unscrew the hoses and leave the rest intact.",
+          "Some items belong in a different stream. A fridge that is being replaced holds refrigerant and is handled as a refrigerant-bearing unit, not as sheet steel. An electric hot water system that comes out during a bathroom renovation is disconnected by the plumber and electrician and drained before it joins the pile. A sensor tap carries a battery, and the battery comes out before the tap goes in with the brass.",
+          "Laminate, particleboard, stone offcuts and broken tiles are not metal and should not be mixed through it. A photograph of each pile, with the items identified, gives a far more useful assessment than a list that reads \"kitchen scrap\".",
+        ],
+      },
+      {
+        heading: "A cast iron bath out of a Queenslander is a stairs problem first",
+        body: [
+          "The heaviest item on a bathroom renovation is often an old cast iron bath, and in a high-set Queenslander in Paddington, Red Hill, Annerley or Wilston it usually sits upstairs, down a hallway, through a narrow door and above a flight of timber stairs. Weight and access matter more than the metal. Whether it can be carried out whole, needs more people, or is broken up in place by the builder is a decision for the people doing the lifting.",
+          "Measure the bathroom door, the hallway and the stairs, note any tight turns, and photograph the route to the street. A bath lying on a driveway is a straightforward pick-up; one still on the first floor is a different conversation, and what vehicle and how many hands the job needs is confirmed for that house.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Decide who keeps the metal before accepting the trade quotes.",
+      "Have water, power and gas disconnected by licensed trades first.",
+      "Test suspect fibre cement sheeting before anyone breaks into a wall.",
+      "Set up a metal spot away from the skip and tell everyone on the job.",
+      "Sort copper, brass, stainless and steel as each piece comes out.",
+      "Photograph the route to the street for anything heavy, especially a bath.",
+    ],
+    faqs: [
+      {
+        q: "Can I put old tapware and copper pipe in my renovation skip?",
+        a: "You can, but the skip is handled as mixed waste, so any metal in it goes with everything else. Keeping tapware, copper pipe, the sink and steel appliances in a separate pile lets them be collected and recovered as scrap metal instead.",
+      },
+      {
+        q: "Does my plumber get to keep the old copper from a renovation?",
+        a: "Only if that is what you have agreed. Some plumbers allow for old copper and brass in how they price a job. If you want to keep it, say so when you ask for quotes and have it written into the one you accept.",
+      },
+      {
+        q: "Who can disconnect an oven, cooktop or sink in Queensland?",
+        a: "Plumbing disconnections are done by a licensed plumber, and plumbers are licensed by the Queensland Building and Construction Commission. Hard-wired appliances are disconnected by a licensed electrician under the Electrical Safety Office's rules. Gas appliances are gasfitting work, licensed by Resources Safety and Health Queensland.",
+      },
+      {
+        q: "Is an old cast iron bath worth keeping out of the skip?",
+        a: "It is recoverable metal, so it is usually worth keeping separate rather than sending to landfill as mixed waste. The practical question is getting it out, particularly from an upstairs bathroom in a high-set house, so measure the doors and stairs and photograph the route before arranging a collection.",
+      },
+      {
+        q: "What if the bathroom wall sheeting might contain asbestos?",
+        a: "Treat it as though it does until it has been tested, and leave it unbroken. The Queensland Government publishes asbestos guidance for homeowners, and Workplace Health and Safety Queensland regulates licensed removal. Deal with the asbestos before pulling metal from behind or around it.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
