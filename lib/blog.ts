@@ -1253,6 +1253,100 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "pool-removal-scrap-metal-brisbane",
+    title: "Filling in the pool: what happens to the fence, the pump and the frame",
+    shortTitle: "Pool removal scrap",
+    eyebrow: "Renovation",
+    seoTitle: "Pool Removal Brisbane: The Fence, Pump and Frame",
+    seoDescription:
+      "Pool removal in Brisbane is building work first. Why the fence stays until the certifier signs off, and how to clear the metal without a second trip.",
+    published: "2026-10-01",
+    readingMinutes: 8,
+    photo: "alloy",
+    summary:
+      "In a pool removal, most of the material is concrete, fibreglass, paving and soil. The fence, the pump, the heat pump and an above-ground pool's frame are the metal, and the order you clear them in matters more than how much there is.",
+    intro:
+      "The pool fence is usually the last thing to come down in a pool removal, not the first, because in Queensland the barrier rules keep applying until the pool has been lawfully decommissioned. Once that is understood, the rest falls into place: chemicals and water first, plant and equipment next, the fence after sign-off, and the metal off the block before the fill goes in.",
+    sections: [
+      {
+        heading: "Pool removal is building work, and the fence stays until it is signed off",
+        body: [
+          "Decommissioning a regulated pool is treated as building work in Queensland and generally needs building approval, usually through a private building certifier. The finished pool must no longer be able to hold more than 300 millimetres of water. Until the certifier confirms that, it is still a pool under the pool safety rules, and the barrier has to stay compliant. If the permanent fence has to come out early to get machinery in, any temporary fencing is a matter for the certifier to approve, not something to improvise with a roll of mesh.",
+          "Once the pool has gone, the Queensland Building and Construction Commission, which keeps the pool safety register, asks for a written request to take the pool off the register. That is the owner's job. A pool contractor may offer to handle it, but nobody collecting the old fence does it for you.",
+          "Read the pool removal quote for what it includes. Some contractors take the fence, the pump and the filter as part of the job, and that settles who deals with them. If you want to keep or dispose of any of it yourself, say so before the quote is accepted, so the crew knows which pile is not theirs.",
+        ],
+      },
+      {
+        heading: "Chemicals and water are dealt with before any metal moves",
+        body: [
+          "Most pool sheds hold a few half-used buckets and drums: chlorine granules, liquid chlorine, acid, stabiliser, algaecide. Some of these react dangerously with each other, so they are never tipped together, never poured out on the lawn and never left in a drum that goes into a metal load. Brisbane City Council takes pool chemicals at its free household hazardous waste drop-off days at the resource recovery centres, and asks for them to stay in their original containers. Logan, Ipswich, Redland City and Moreton Bay run their own arrangements, so check with your council if you are outside Brisbane.",
+          "The water is its own question. Where pool water can be drained to, and how fast, is set by your water utility and council, which in most of greater Brisbane means Urban Utilities, and Unitywater across Moreton Bay. Chlorinated or salty water run down the driveway reaches a stormwater drain and then a creek, so ask before the pump goes on.",
+          "A heat pump pool heater is the other early item. It holds refrigerant, and refrigerant is recovered by an appropriately licensed person under the national scheme administered by the Australian Refrigeration Council before the unit is cut, crushed or loaded with other metal. Leave it upright and intact until that has been done.",
+        ],
+      },
+      {
+        heading: "Most of a pool is not metal, but the fence, the plant and the frame are",
+        body: [
+          "Concrete and fibreglass shells are not scrap metal. A concrete pool has reinforcing steel through it, but when the floor is broken for drainage and the shell is filled or crushed, that steel goes with the concrete rather than into a scrap load. Pavers, coping, the sand bed and any timber decking belong to the builder's waste as well.",
+          "The recoverable metal is above the ground. Most Brisbane pool fences from the last few decades are powder-coated aluminium panels and gates, and some older ones are galvanised steel tube. Frameless glass fences are mostly glass, with the metal in the spigots, hinges, latches and clamps, which are often stainless steel. Ladders, grab rails and handrails are usually stainless too. Keep aluminium, steel and stainless in separate piles from the start, because a mixed pile has to be sorted again before it can be described accurately.",
+          "Then there is the plant. Pump motors are electric motors and are assessed as motors. Filter housings and most chlorinator bodies are largely plastic with metal fittings, so they are worth less as scrap than they look. Above-ground pools are the exception to everything above: the wall is often steel sheet on a steel or resin frame, and once the liner, the sand and any plastic trim are off, most of what is left is metal.",
+        ],
+      },
+      {
+        heading: "Fence panels come out cleaner when the footings stay behind",
+        body: [
+          "Pool fence posts are usually set in concrete or core-drilled into the paving. Pulling a post with its concrete footing still attached turns a light aluminium panel into a heavy, awkward lump of mixed material, and the concrete has to come off before the metal is anything other than contaminated. Unbolt the panels from the posts, cut the posts off at ground level, and leave the footings to be broken out with the paving or buried under the fill, as the pool contractor directs.",
+          "Take glass out of a frameless fence in whole panels, without breaking it, and keep it well away from the metal. It is heavy and dangerous to handle, and glass fragments in a load of spigots and hinges spoil the whole pile. Stack aluminium panels flat and in one direction, gates on top, with latches and hinges left on or bagged together rather than scattered on the grass.",
+        ],
+      },
+      {
+        heading: "A running pump or a near-new heat pump is worth selling first",
+        body: [
+          "South-east Queensland has a lot of pools and a steady trade in second-hand pool gear. A pump that primes and runs, a filter that holds pressure, a chlorinator with a working cell or a heat pump only a few years old will often find a buyer as equipment. Once any of them is in a scrap load it is assessed only for the metal in it, which is a small part of what it was worth working.",
+          "Run the equipment before the pool is drained, photograph the model plates, and decide what to sell before the pool contractor arrives. The same goes for a good aluminium fence: panels and gates in decent condition can suit someone fencing a new pool or a dog run, and they can only be sold while they are still whole.",
+        ],
+      },
+      {
+        heading: "Backyard access in established suburbs decides the order of the job",
+        body: [
+          "Many of the pools now being filled in went into the back yards of 1970s and 1980s houses in suburbs like Aspley, Carindale, Kenmore, Chapel Hill and Sunnybank Hills. Since then the side of the house has gained a fence, a water tank, an air-conditioning unit and a garden bed, and the only way to the pool may be a side path or a set of steps on a sloping block. The pool contractor's machinery needs that same route.",
+          "That is the reason to have the metal gone before the fill arrives. Once trucks are tipping soil and a small loader is working the yard, a pile of fence panels and pump housings is in the way and gets buried, bent or driven over. Plan a short window between the fence coming down and the fill going in, and put the metal near the street end of the access route.",
+          "Measure the narrowest point between the back yard and the street, note any steps, slopes or low eaves, and say whether there is space to stage material inside the property. A bin on the footpath or road is a matter for Brisbane City Council or your own council. Which vehicle suits the site, and whether a single collection or something else works better, is confirmed for that property.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Get the certifier engaged before any part of the pool fence comes out.",
+      "Take pool chemicals, unmixed, to your council's hazardous waste drop-off.",
+      "Ask your water utility before draining, and have any heat pump degassed.",
+      "Sell working pumps, heat pumps and good fence panels before scrapping them.",
+      "Cut fence posts off at ground level and keep glass well away from the metal.",
+      "Clear the metal before the fill arrives, then ask QBCC to update the register.",
+    ],
+    faqs: [
+      {
+        q: "Can I take my pool fence down before the pool is removed?",
+        a: "Not without arrangement. In Queensland a pool stays a regulated pool until it has been lawfully decommissioned, and its barrier must remain compliant until the building certifier confirms the work is complete. If the fence has to come out earlier, any temporary fencing needs the certifier's approval.",
+      },
+      {
+        q: "Is an old aluminium pool fence worth anything as scrap?",
+        a: "Aluminium fence panels and gates are recoverable metal. How they are assessed depends on what is still attached, such as concrete footings, glass, steel fixings or plastic caps, and on how they are stacked. Panels in good condition may be worth more sold whole than scrapped.",
+      },
+      {
+        q: "How do I get rid of old pool chemicals in Brisbane?",
+        a: "Keep them in their original containers and never mix them. Brisbane City Council accepts pool chemicals at its free household hazardous waste drop-off days at the resource recovery centres. Other south-east Queensland councils run their own arrangements, so check with yours.",
+      },
+      {
+        q: "Do I need to tell anyone once the pool has been removed?",
+        a: "Yes. The Queensland Building and Construction Commission keeps the pool safety register and asks for a written request to remove a pool once it is no longer on the property. That is the owner's responsibility, separate from the certifier's sign-off.",
+      },
+      {
+        q: "Can an above-ground pool be scrapped?",
+        a: "Often most of it can. The wall and frame are commonly steel, sometimes with resin parts, and they are recoverable once the liner, sand and plastic trim are removed. Drain it to wherever your water utility and council allow, and ask before you start.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
