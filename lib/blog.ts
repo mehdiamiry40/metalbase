@@ -1253,6 +1253,92 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "commercial-kitchen-equipment-disposal-brisbane",
+    title: "Closing a commercial kitchen: what gets sold, returned, disconnected and scrapped",
+    shortTitle: "Commercial kitchen disposal",
+    eyebrow: "Hospitality",
+    seoTitle: "Commercial Kitchen Equipment Disposal: Brisbane Guide",
+    seoDescription:
+      "Commercial kitchen equipment disposal starts with gas, refrigerant and leased gear, not the stainless. The order a Brisbane café or restaurant clears in.",
+    published: "2026-10-02",
+    readingMinutes: 7,
+    photo: "stainless",
+    summary:
+      "When a café, restaurant or takeaway closes or refits, the stainless is the easy part. Commercial kitchen equipment disposal goes cleanly when leased gear, gas, refrigeration and grease are dealt with before any metal is loaded.",
+    intro:
+      "Most of a commercial kitchen is not the operator's to scrap on day one. Some of it is leased or on loan, some of it is connected to gas or holding refrigerant, and some of it is worth more to the next café than it is as metal. Commercial kitchen equipment disposal is mostly about settling those three questions in the right order, so the stainless that is genuinely left over can go in one clean collection.",
+    sections: [
+      {
+        heading: "Leased, loaned and landlord-owned gear has to be identified first",
+        body: [
+          "Hospitality kitchens carry more equipment that belongs to someone else than almost any other business. Coffee machines and grinders are often supplied on loan by the roaster under a supply agreement. Commercial dishwashers and glasswashers are frequently provided by the chemical supplier. Post-mix systems, drink fridges and ice cream freezers often carry a brand because the brand owns them. Walk the kitchen and the front counter with the supply agreements in hand and list everything that has to go back, along with who collects it.",
+          "Then read the lease. On a tenancy that was taken over as a going concern, the canopy, cool room, grease arrestor and even the benches may have been part of the original fit-out and belong to the landlord, or the make-good clause may require some of them removed. Equipment bought on finance may carry a security interest on the Personal Property Securities Register, run by the Australian Financial Security Authority. Settle all of that in writing before anything is offered for sale or as scrap.",
+        ],
+      },
+      {
+        heading: "Working equipment is worth more to the next kitchen than as metal",
+        body: [
+          "Brisbane has a steady turnover of cafés and restaurants, and a matching second-hand market. Combi ovens, salamanders, fryers, upright fridges, under-bench freezers, mixers and stainless benches in good order are regularly bought by used catering equipment dealers, through auction houses or by the operator taking over the next lease. Once a working oven goes into a scrap load, it is assessed only for its metal content, and there is no undoing that.",
+          "Give each item a fair test and photograph its compliance and model plates before deciding which list it belongs on. The scrap list should be what is worn out, obsolete, damaged or simply not worth the effort of selling, not everything in the room because the handover date is close.",
+        ],
+      },
+      {
+        heading: "Gas appliances are disconnected by a licensed gas fitter, not unbolted",
+        body: [
+          "Ranges, woks, chargrills, fryers and many ovens are connected to gas, and disconnecting them is gas work. In Queensland, gas work licences and authorisations are issued by Resources Safety and Health Queensland, so book a licensed gas fitter to isolate the supply and cap each point before anything is dragged away from the wall. The same visit can deal with any supply points the make-good clause says must be removed.",
+          "Electrical equipment hard-wired into the switchboard, such as three-phase ovens, dishwashers and canopy fans, is disconnected by a licensed electrical worker under the rules administered by Queensland's Electrical Safety Office. Booking both trades for the same day, early in the clearance, means every appliance is safe to move when the people moving it arrive.",
+        ],
+      },
+      {
+        heading: "Refrigeration and grease are separate jobs from the metal",
+        body: [
+          "Cool rooms, freezer rooms, display fridges, ice machines and every self-contained fridge and freezer hold refrigerant in a sealed circuit. Recovering it is work for an appropriately licensed technician under the national scheme administered by the Australian Refrigeration Council, and it happens before a unit is cut, crushed or dismantled. Say in the enquiry which units have had their refrigerant recovered and which have not; a fridge that has been degassed and one that has not are different items to handle.",
+          "Fryer oil is drained and collected by a used cooking oil service rather than left in the vat. The grease arrestor under the floor or out the back is a trade waste matter: in Brisbane and Ipswich, trade waste approvals are held with Urban Utilities, and Logan, Redland and the Gold Coast run their own. Have the arrestor pumped out by a liquid waste contractor, and ask the trade waste provider what it needs before the unit is removed or the approval ends. Canopy filters and ductwork carry a heavy grease film and are best cleaned or at least kept separate from clean stainless.",
+        ],
+      },
+      {
+        heading: "Not everything that looks like stainless is stainless",
+        body: [
+          "A commercial kitchen is mostly stainless steel to look at, but the scrap pile rarely is. Bench tops are often stainless sheet glued over a chipboard or particleboard core. Under-shelves and legs may be galvanised or painted steel. Fridges and ovens are stainless panels around insulation, glass, wiring, compressors and controls. A canopy is light-gauge sheet with filters, fans and lighting attached. Each of those is assessed differently from a clean stainless bench frame, so group them as you strip the room rather than stacking everything that shines in one corner.",
+          "Copper and brass turn up in the gas lines, water lines, mixer taps and pre-rinse sprays; compressors and fan motors are their own stream. Keep those apart from the stainless, and keep obvious rubbish, food waste and packaging out of the metal entirely. A short list of what is in the pile, with photographs, gives a far more useful answer than describing it all as kitchen stainless.",
+        ],
+      },
+      {
+        heading: "Getting it out of a Valley laneway or a shopping centre is the hard part",
+        body: [
+          "Brisbane's hospitality sites are rarely easy to load from. A restaurant in a Fortitude Valley or West End laneway, a café on Given Terrace or James Street with no off-street access, or a food court tenancy at a centre such as Chermside or Carindale each has its own constraint. Shopping centres usually run a loading dock booking system with set hours, and street loading zones are signposted with their own time limits. Check those rules with centre management or the signage before choosing a day.",
+          "Measure the doorways, the corridor and any lift a cool room panel or combi oven has to pass through, and note any stairs between the kitchen and the street. Which vehicle suits the site, and whether a single collection after hours or a bin during a longer strip-out works better, is confirmed for that tenancy. Send the measurements, the loading arrangements and photographs of the route with the enquiry.",
+        ],
+      },
+    ],
+    takeaways: [
+      "List leased, loaned and landlord-owned equipment and return it first.",
+      "Check finance on anything that might be sold or scrapped.",
+      "Offer working equipment to dealers or the next tenant before scrapping it.",
+      "Book a licensed gas fitter and electrician to disconnect appliances.",
+      "Have refrigerant recovered, fryer oil collected and the grease arrestor pumped.",
+      "Sort the metal by stream and confirm loading dock or loading zone rules.",
+    ],
+    faqs: [
+      {
+        q: "How do I dispose of commercial kitchen equipment in Brisbane?",
+        a: "Return anything leased or on loan, settle what the landlord owns, and offer working equipment for sale first. Have gas appliances disconnected by a licensed gas fitter, refrigerant recovered by a licensed technician, and oil and grease removed by the relevant services. What remains can be sorted by metal and collected as scrap.",
+      },
+      {
+        q: "Can I scrap a commercial fridge or cool room?",
+        a: "Yes, once its refrigerant has been recovered by an appropriately licensed technician under the national scheme administered by the Australian Refrigeration Council. The insulation, glass, wiring and compressor mean a fridge is assessed differently from clean stainless sheet, so describe the unit accurately and say whether it has been degassed.",
+      },
+      {
+        q: "Who disconnects a gas cooktop or fryer in a commercial kitchen?",
+        a: "A licensed gas fitter. Disconnecting a gas appliance is gas work, and in Queensland gas work licences are issued by Resources Safety and Health Queensland. The fitter isolates the supply and caps the connection so the appliance is safe to move.",
+      },
+      {
+        q: "Is stainless steel kitchen equipment worth more sold or scrapped?",
+        a: "Equipment that still works is usually worth offering to a used catering equipment dealer, an auction or the incoming tenant first, because once it is scrapped it is assessed only for its metal. Worn out or damaged items, and benches with no resale interest, are where scrap makes sense.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
