@@ -53,6 +53,7 @@ const EXPECTED_POST_SLUGS = [
   "old-roofing-iron-removal-brisbane",
   "workshop-clearance-brisbane",
   "old-boat-disposal-brisbane",
+  "commercial-kitchen-equipment-disposal-brisbane",
 ] as const;
 
 const EXPECTED_MATERIAL_SLUGS = [
