@@ -1252,6 +1252,89 @@ export const posts: BlogPost[] = [
         a: "Yes, once its fuel and oil have been drained. It is worth test-running it first, because an old outboard that still starts can often be sold as a motor or for parts, and that option is gone once it is in a scrap load.",
       },
     ],
+  },  {
+    slug: "pool-fence-removal-brisbane",
+    title: "Replacing a pool fence without leaving the pool open",
+    shortTitle: "Pool fence removal",
+    eyebrow: "Renovation",
+    seoTitle: "Pool Fence Removal Brisbane: Old Panels and the Rules",
+    seoDescription:
+      "Pool fence removal has a rule that comes before the scrap: the pool must stay fenced. What to arrange first and what happens to the old panels.",
+    published: "2026-10-03",
+    readingMinutes: 7,
+    photo: "alloy",
+    summary:
+      "Old pool fencing is mostly metal, but the pool cannot sit open while it comes down. Pool fence removal goes smoothly when the temporary barrier, the installer and the old panels are each sorted before the first post is cut.",
+    intro:
+      "The hard part of pool fence removal in Queensland is not the metal. It is that a pool needs a compliant barrier around it the whole time, so the old fence can only come down as fast as something approved goes up in its place. Settle the barrier first, then who takes the old fence, then how the panels are prepared and stacked.",
+    sections: [
+      {
+        heading: "Pool fence removal starts with the temporary barrier, not the panels",
+        body: [
+          "Queensland's pool safety laws, administered by the Queensland Building and Construction Commission, apply while a fence is being replaced, not just once it is finished. Where the permanent barrier is removed or partly removed during the work, a temporary fence has to go up while it proceeds, and that temporary fence has to be inspected and approved by a building certifier or a licensed pool safety inspector. Approval for temporary fencing is also limited in time, so a job that drifts past its window needs the fence looked at again.",
+          "Whether the new fence itself needs building approval, or can be signed off by a pool safety inspector, depends on the pool and the work. Ask your certifier or pool safety inspector before booking anything, and let their answer set the order of the job. A fence that comes down on a Saturday because the panels were easy to unbolt, with the temporary barrier not arriving until Tuesday, is the scenario the rules exist to prevent.",
+          "None of this is a scrap question, and the collection does not change it. It is the reason old pool fencing is usually removed in stages, a run at a time, rather than cleared in one go.",
+        ],
+      },
+      {
+        heading: "Decide who keeps the old fence before the installer quotes",
+        body: [
+          "Most pool fence replacements in Brisbane are done by a fencing contractor, and many of their quotes include taking the old fence away. That is often the simplest arrangement, especially when the old fence comes down the same day the new one goes up and nobody wants a pile of panels in the yard.",
+          "If you would rather keep the old metal and arrange its collection yourself, say so when you ask for the quote, not on the day. The installer then knows to stack it on site instead of loading it, and the quote can reflect that. Agree where the stack will go and who is responsible for it until it is collected.",
+          "Either way, decide before the work starts. Arguments about old fencing almost always come from an assumption on both sides that the other person was dealing with it.",
+        ],
+      },
+      {
+        heading: "Aluminium, steel and glass fences break down into different streams",
+        body: [
+          "Most modern pool fences are powder-coated aluminium tube, in panels between posts. Older fences, still standing around plenty of established houses from Carindale to Aspley, are often painted or galvanised steel tube. A magnet settles which one you have in seconds. The two are assessed as different metals, so if a property has both, say an aluminium run along the pool and a steel section on the boundary side, keep them in separate stacks.",
+          "Frameless and semi-frameless glass fences are mostly glass by weight. The stainless or aluminium spigots, hinges, clamps and rails are recoverable metal; the toughened glass panels are not, and need their own disposal path. Ask the glazier or fencing contractor what they do with removed panels, or ask your council which facility accepts toughened glass, before any of it is lifted out.",
+          "Where a Colorbond or timber boundary fence forms part of the pool barrier, it is part of the compliance question as well as the scrap one. Treat any change to it the same way as the pool fence itself.",
+        ],
+      },
+      {
+        heading: "Concrete, hinges and latches are what change how old pool fencing is assessed",
+        body: [
+          "Pool fence posts are usually set in concrete, core-drilled into the pool surround or bolted down on base plates. Posts pulled out with a lump of footing still on the end carry concrete into the load, and concrete is weight that is not metal. Cutting posts off at ground level, or knocking the concrete away, keeps the metal clean. Leave anything that has to be cut out of the pool surround to whoever is doing the fencing work, because damage to the coping or the pool shell is a far bigger cost than any difference in the metal.",
+          "Self-closing hinges and latches are a mix of aluminium, stainless steel, zinc, springs and plastic housings. They come off easily with a drill and are worth bagging separately rather than leaving on the gate, so the gate panel is assessed as the tube it is made of. Screws, brackets and base-plate bolts go in the same bag.",
+          "Powder coat stays on. Nobody expects a fence to be stripped, but it should be described as coated aluminium rather than simply aluminium, alongside a photograph, so the assessment starts from what is actually there.",
+        ],
+      },
+      {
+        heading: "A stack of old panels can make the new fence non-compliant",
+        body: [
+          "The pool barrier standard treats objects near the outside of a fence that a child could climb as a compliance problem in their own right. A pile of old panels leaning against the new fence, or a stack of posts beside it, can be exactly that. Stage the old fencing well away from the barrier, ideally out the front near the street, not along the pool fence line or against the boundary fence.",
+          "Lay the panels flat, all facing the same way, with the posts bundled beside them and the hardware bag on top. A neat stack is quicker to photograph, quicker to estimate and quicker to load. On sloping blocks in The Gap, Ashgrove or Chapel Hill, where the pool is often several flights of steps below the street, getting the panels up to a level spot near the road is most of the job, so plan that carry before the fence comes down.",
+          "If the pool pump or filter is being replaced at the same time, any electrical disconnection is work for a licensed electrician. Pool chemicals never go into a metal load; ask your council where its facilities take household chemicals. When the old fencing is staged, send photographs of each stack, a rough count of panels and posts, the suburb, and where a vehicle can stop. What can be collected, and how, is confirmed for that load.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Ask a certifier or pool safety inspector what the replacement needs before booking it.",
+      "Have an approved temporary barrier in place before any of the old fence comes down.",
+      "Tell the fencing contractor up front if you want to keep the old metal.",
+      "Separate aluminium, steel and glass, and cut posts free of their concrete.",
+      "Bag hinges, latches and fasteners instead of leaving them on the panels.",
+      "Stack the old fencing away from the pool barrier, then photograph and send it.",
+    ],
+    faqs: [
+      {
+        q: "Can I take my pool fence down while I wait for the new one?",
+        a: "Not without a replacement barrier. Queensland's pool safety laws, administered by the Queensland Building and Construction Commission, require a temporary fence where the permanent barrier is removed during the work, and that temporary fence must be inspected and approved by a building certifier or a pool safety inspector. Ask one of them before the old fence comes down.",
+      },
+      {
+        q: "Is an old aluminium pool fence worth anything as scrap?",
+        a: "Aluminium pool fencing is recoverable metal, so it is assessed as scrap rather than treated as waste. The powder coat, any concrete still on the posts, and hinges, latches and steel fittings left attached all affect how it is assessed. Photographs of the panels, the posts and the hardware give the most useful answer.",
+      },
+      {
+        q: "What happens to the glass from a frameless pool fence?",
+        a: "Toughened glass panels are not scrap metal. The stainless or aluminium spigots, clamps and hinges can be recovered, but the glass needs its own disposal path. Ask the glazier or fencing contractor what they do with removed panels, or ask your council which facility accepts toughened glass.",
+      },
+      {
+        q: "Will the fencing contractor take the old pool fence away?",
+        a: "Many Brisbane fencing contractors include removal of the old fence in their quote, but it varies. Ask when you request the quote, and say then if you would rather keep the old metal so it is stacked on site instead of loaded.",
+      },
+    ],
   },
 ];
 
