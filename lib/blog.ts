@@ -1253,6 +1253,101 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "shed-removal-brisbane",
+    title: "Taking down an old shed without wrecking what is worth keeping",
+    shortTitle: "Shed removal",
+    eyebrow: "Household",
+    seoTitle: "Shed Removal Brisbane: Taking an Old Shed Down",
+    seoDescription:
+      "Shed removal goes wrong at the roller door spring and the first gusty afternoon. The order to empty, isolate and dismantle a Brisbane backyard shed.",
+    published: "2026-10-04",
+    readingMinutes: 9,
+    photo: "crew",
+    summary:
+      "A backyard or garage shed that is coming down on purpose is a different job from one a storm flattened. Shed removal goes cleanly when the contents, the power and the roller door are dealt with before a single screw comes out of the roof.",
+    intro:
+      "The most useful decision in shed removal is made before anything is unscrewed: whether the shed is worth more standing up somewhere else. A bolted steel kit shed that is still square often has a buyer who will dismantle and take it away. Only once that has been ruled out does the shed become a metals job, and then the order it comes apart in decides whether it leaves as clean, stacked sheet or as a tangled pile.",
+    sections: [
+      {
+        heading: "A kit shed that still stands square is often worth more re-erected",
+        body: [
+          "Most garden and garage sheds put up across Brisbane in the last few decades are kits: galvanised C-section frame, coated steel sheeting, tek screws and a roller door, all bolted together. They were designed to be assembled, so they can be disassembled, and there is a steady second-hand market of people wanting a shed for a farm, a horse paddock or a new block who will do the dismantling themselves. A shed with straight portals, intact sheets and a working roller door is worth offering whole before anything else happens to it.",
+          "Photograph it from each side, measure the footprint and the wall height, note the roller door size and any rust along the bottom of the wall sheets, then give it a reasonable time to find a buyer. If someone else is dismantling and moving it, agree in writing what they take, what they leave and who deals with the hold-down bolts, so the yard is not left half-finished.",
+          "Old corrugated iron on a timber frame, a shed with rusted-through sheets, or one that has been patched and extended so many times it no longer resembles a kit is where scrap makes sense. That shed is a recovery job, and the rest of this article is about doing it in the right order.",
+        ],
+      },
+      {
+        heading: "Shed removal starts with the contents, and the contents are the slow part",
+        body: [
+          "An empty shed comes down in a day or two. Emptying a shed that has collected thirty years of a household can take weeks, so start there. Sort as it comes out: anything worth selling or keeping, metal for the scrap pile, general waste, and a separate, clearly marked group for anything hazardous.",
+          "That last group is what slows everything down if it is left until the end. Mowers, whipper snippers and outboards still holding fuel, half-full jerry cans, pool chlorine and acid, old paint tins, garden chemicals, car and mower batteries, and any gas bottle for a barbecue or heater all come out and are kept apart from the metal. Batteries and gas bottles have their own transport rules, set by the relevant transport and workplace-safety regulators. Ask your council which of its facilities take household chemicals, paint and used oil, and in what quantities, before loading anything into a car.",
+          "Metal that comes out of the shed is easier to sort now than later. Steel shelving and old tools in one place, copper, brass and aluminium off-cuts in their own containers, and any electric motor, compressor or old extension lead set aside together rather than dropped into the steel.",
+        ],
+      },
+      {
+        heading: "Power, the roller door spring and the roof are where people get hurt",
+        body: [
+          "Plenty of Brisbane sheds have power run out to them: a sub-board, lights, a few outlets, sometimes a feed for a welder or a pool pump. Disconnecting that supply and making the cable safe is electrical work, and in Queensland electrical work is done by a licensed electrical worker under rules administered by the Electrical Safety Office. Book the electrician before anyone starts on the walls, because the cable is usually clipped to the frame that is about to come apart.",
+          "A roller door is held up by a spring wound around its axle, and that spring is under tension even when the door is shut. Unbolting the drum brackets without releasing it first is how people get hurt badly enough to need a hospital. Release of the tension is a job for a garage door technician, or for someone who has done it before and has the right tools. If the door has a motor, it comes off with the electrician's isolation and goes with the other motors.",
+          "Working on the roof is working at height, and Workplace Health and Safety Queensland publishes guidance on managing the risk of falls. Older sheds with fibre cement wall or roof sheeting may contain asbestos if the material was installed before the national ban on asbestos products. Removal rules are set by Workplace Health and Safety Queensland, and the Queensland Government publishes guidance for homeowners. Any suspect sheeting is dealt with first, by the right people, and kept entirely apart from the metal.",
+        ],
+      },
+      {
+        heading: "Coming down in reverse order keeps the sheet flat and the frame standing",
+        body: [
+          "A shed is safest taken apart in roughly the opposite order to how it went up. Doors, gutters, flashings and barge cappings come off first. Roof sheets follow, unscrewed rather than levered off, stacked flat and kept in long runs. Wall sheets come next, then the purlins and girts, and the portal frames last, while they are still braced by whatever is left. A frame that has lost all its sheeting and bracing can move in a way nobody standing under it expects.",
+          "The timing matters more in Brisbane than in a lot of places. Storm season runs through the warmer months, and an afternoon change can arrive with very little warning. Loose roof and wall sheets act like sails. Stack them as they come off, strap or weight the stack, and do not leave a half-sheeted roof overnight when storms are forecast. Plan the roof for a calm morning and have it finished by lunchtime.",
+          "Keep screws, rivets and brackets out of the sheet stack. A bucket for fixings costs nothing, and a stack of clean sheets without screws through them is a tidier parcel than one with fixings wedged between every layer.",
+        ],
+      },
+      {
+        heading: "A dismantled shed is several parcels, and the slab is not one of them",
+        body: [
+          "Once it is down, a shed is mostly light steel: coated or galvanised sheeting, galvanised frame, purlins, roller door curtain and fixings. That is one stream, and it goes together. Do not assume a shed is aluminium because it looks silver. Many 'silver' sheds are zinc-aluminium coated steel, and a magnet will tell you in a second; true aluminium garden sheds, whirlybirds and some door tracks go in their own pile.",
+          "The non-metal parts are worth separating as they come off: polycarbonate skylight sheets, foil-faced insulation blanket stuck to the roof sheets, timber framing and window frames, and any plastic or fibreglass panels. The more of that is removed before collection, the cleaner the steel parcel, and how much is still attached is part of how the load is assessed.",
+          "The concrete slab or footings are not scrap metal, even with reinforcing mesh inside them. Cut the hold-down bolts flush and treat slab removal as its own job for a concreter or an excavation contractor, if it needs doing at all. Many people keep the slab as a pad for a new shed, a carport or a vegetable garden.",
+        ],
+      },
+      {
+        heading: "The side passage decides how the metal leaves a Brisbane backyard",
+        body: [
+          "The shed at the back of a post-war block in Stafford, Carina or Mount Gravatt usually went in before the pool fence, the extension and the side gate narrowed the way out. Long roof sheets that were carried in flat now have to come out past a hot water system, an air-conditioning unit and a narrow gate. On sloping blocks in The Gap, Ashgrove or Bardon, they may also have to come up a set of steps.",
+          "Measure the narrowest point between the shed and the street, note any steps or tight corners, and photograph the path. Say roughly how long the longest sheets are and whether everything is already down and stacked or still standing. Which vehicle suits the property, whether a bin during the job or one collection at the end works better, and anything that needs cutting down before it can leave, is confirmed for that site.",
+        ],
+      },
+    ],
+    takeaways: [
+      "Offer a sound kit shed for sale whole before planning to scrap it.",
+      "Empty the shed first and keep fuel, chemicals, batteries and gas bottles apart.",
+      "Book an electrician to isolate the power before work starts on the walls.",
+      "Have the roller door spring released by someone who knows how.",
+      "Dismantle in reverse order on a calm morning and stack sheets flat.",
+      "Measure and photograph the path from the shed to the street for the enquiry.",
+    ],
+    faqs: [
+      {
+        q: "Can I sell an old shed instead of scrapping it?",
+        a: "Often, yes. Steel kit sheds were built to be bolted together, so a shed with a straight frame, sound sheets and a working roller door can usually be dismantled and re-erected elsewhere, and second-hand buyers will sometimes take one down themselves. Scrap makes more sense for rusted-through sheds, old iron on timber frames or heavily modified ones.",
+      },
+      {
+        q: "Do I need an electrician to remove a shed with power?",
+        a: "Yes. Disconnecting the supply to a shed and making the cable safe is electrical work, and in Queensland it is done by a licensed electrical worker under rules administered by the Electrical Safety Office. Book the isolation before anyone starts taking the walls or frame apart.",
+      },
+      {
+        q: "Is it dangerous to remove a roller door?",
+        a: "It can be. A roller door is held up by a spring wound around its axle, and that spring stays under tension with the door closed. Releasing it safely needs the right tools and some experience, so it is a job for a garage door technician rather than something to work out halfway up a ladder.",
+      },
+      {
+        q: "Is a Colorbond shed steel or aluminium?",
+        a: "Colorbond and other coated shed sheeting is steel with a metallic coating and paint, and shed frames are usually galvanised steel. A magnet sticks to both. Aluminium garden sheds exist, but they are a minority, so check with a magnet rather than going by colour.",
+      },
+      {
+        q: "What happens to the concrete slab when a shed is removed?",
+        a: "It stays unless it is removed as a separate job. A slab is not scrap metal, even with reinforcing inside it. The hold-down bolts can be cut flush and the slab reused, or a concreter or excavation contractor can break it out and take it away.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
