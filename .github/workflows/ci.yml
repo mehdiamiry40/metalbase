@@ -57,7 +57,9 @@ jobs:
             test-results
           retention-days: 7
 
-      # Fails the build on known CVEs. The React2Shell episode reached
-      # production because nothing checked.
+      # Fails the build on known production CVEs. The React2Shell episode
+      # reached production because nothing checked. Dev dependencies are
+      # omitted: braces (via eslint-config-next) has no patched release, and
+      # the only npm audit fix is a major downgrade of eslint-config-next.
       - name: Audit
-        run: npm audit --audit-level=high
+        run: npm audit --omit=dev --audit-level=high
