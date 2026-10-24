@@ -468,7 +468,7 @@ describe("Brisbane search landing pages", () => {
   });
 
   it("permanently consolidates the superseded overlapping URLs", () => {
-    const config = readFileSync(join(root, "next.config.mjs"), "utf8");
+    const config = readFileSync(join(root, "next.config.ts"), "utf8");
     expect(config).toContain('source: "/locations/brisbane"');
     expect(config).toContain('destination: "/scrap-metal-brisbane"');
     expect(config).toContain('source: "/services/collection-and-bins"');

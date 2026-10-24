@@ -1,19 +1,23 @@
+import type { NextConfig } from "next";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { buildContentSecurityPolicy, buildDevContentSecurityPolicy } from "./lib/csp-policy";
 
 const projectRoot = path.dirname(fileURLToPath(import.meta.url));
-const scriptSources = [
-  "'self'",
-  "'unsafe-inline'",
-  ...(process.env.NODE_ENV === "development" ? ["'unsafe-eval'"] : []),
-].join(" ");
+
+// Production script hashes are unknown until prerender finishes. The placeholder is
+// replaced in the build output by scripts/csp-hashes.ts. On Vercel that is too late
+// for the header the CDN serves: the Next adapter copies it into
+// `.next/output/config.json` during onBuildComplete, while `next build` is still
+// running. scripts/csp-adapter.mjs wraps that adapter and writes the hashes first.
+// Development cannot use those hashes. style-src stays 'unsafe-inline' because
+// next/font and next/image emit style attributes. There is no nonce: a nonce would
+// make every HTML response unique and stop the CDN from caching it.
+const contentSecurityPolicy =
+  process.env.NODE_ENV === "development" ? buildDevContentSecurityPolicy() : buildContentSecurityPolicy([]);
 
 const securityHeaders = [
-  {
-    key: "Content-Security-Policy",
-    value:
-      `default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src ${scriptSources}; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://images.unsplash.com; font-src 'self' data:; connect-src 'self'; media-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests`,
-  },
+  { key: "Content-Security-Policy", value: contentSecurityPolicy },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
   { key: "Permissions-Policy", value: "camera=(), geolocation=(), microphone=()" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -22,10 +26,12 @@ const securityHeaders = [
   { key: "X-Frame-Options", value: "DENY" },
 ];
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   reactStrictMode: true,
   outputFileTracingRoot: projectRoot,
+  // Vercel sets NEXT_ADAPTER_PATH to its own adapter. Wrap it so the routing
+  // object it serialises already contains the real script hashes.
+  ...(process.env.NEXT_ADAPTER_PATH ? { adapterPath: path.join(process.cwd(), "scripts/csp-adapter.mjs") } : {}),
   async redirects() {
     return [
       {
