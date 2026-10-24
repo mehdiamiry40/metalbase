@@ -67,7 +67,13 @@ test("a PNG prepares under the real CSP and submits as a generated JPEG", async 
   page.on("pageerror", (error) => pageErrors.push(error.message));
   await page.route(enquiryUrl, (route) => route.fulfill({ status: 202, json: accepted }));
   const response = await openForm(page);
-  expect(response?.headers()["content-security-policy"]).toMatch(/(?:^|;)\s*img-src\s/);
+  const csp = response?.headers()["content-security-policy"] ?? "";
+  expect(csp).toMatch(/(?:^|;)\s*img-src\s/);
+  expect(csp).toMatch(/script-src[^;]*'sha256-/);
+  expect(csp).not.toMatch(/script-src[^;]*'unsafe-inline'/);
+  expect(csp).not.toMatch(/script-src[^;]*'unsafe-eval'/);
+  expect(csp).not.toContain("vercel.live");
+  expect(csp).not.toContain("__CSP_INLINE_HASHES__");
   await fillEnquiry(page);
 
   const original = await syntheticPhoto();

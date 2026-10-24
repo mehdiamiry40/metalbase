@@ -35,7 +35,7 @@ alone removes the exposure.
 
 ## Browser response policy
 
-`next.config.mjs` applies the following controls to all routes:
+`next.config.ts` applies the following controls to all routes:
 
 - a Content Security Policy with same-origin defaults and explicit image,
   font, connection, worker and form destinations
@@ -44,10 +44,18 @@ alone removes the exposure.
 - disabled camera, geolocation and microphone permissions
 - cross-origin opener isolation
 
-The CSP deliberately permits inline scripts and styles because Next.js emits
-bootstrap and style content that requires them. Tightening this further needs a
-nonce-based deployment test; do not remove the allowances without verifying a
-production build in a browser.
+Production `script-src` is `'self'` plus the sha256 of every executable inline
+script in the prerendered HTML. There is no `'unsafe-inline'`, no `'unsafe-eval'`,
+and no nonce. A nonce would make each response unique and force dynamic
+rendering, which stops the CDN from caching the page. `application/ld+json` is
+not executed and is not hashed. `style-src` stays `'unsafe-inline'` because
+Next.js emits style attributes for fonts and images. `https://images.unsplash.com`
+stays on `img-src`. Production Web Analytics loads `/_vercel/insights/script.js`
+and beacons to `/_vercel/insights`, so it needs no extra host. Development still
+allows `'unsafe-inline'`, `'unsafe-eval'`, and `https://va.vercel-scripts.com`
+for the debug analytics script. `vercel.live` is not allowlisted. The build
+fails if the hash placeholder remains or any prerendered inline script has no
+hash.
 
 ## Enquiry data
 
